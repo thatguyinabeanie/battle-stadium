@@ -1,9 +1,10 @@
 class JwtAuthenticate
   def self.jwt_bearer_token(request:)
-    auth_header = request.headers["Authorization"]
-    raise ::Auth::Session::InvalidTokenOrExpiredSession, "Missing token" unless auth_header
+    Rails.logger.debug "Authorization header: #{request.headers['Authorization']}"
 
-    token = auth_header.split.last.gsub(/^["']|["']$/, "")
+    token = request.headers["Authorization"]&.split(" ")&.last
+    Rails.logger.debug "Extracted token: #{token}"
+
     JsonWebToken.decrypt(token)
   end
 

@@ -1,69 +1,74 @@
 #!/bin/sh
 
-# Generate a 64-byte secret
-SECRET=$(openssl rand -base64 48)
+# Generate backend keys
+openssl genpkey -algorithm RSA -out config/keys/backend_private.pem -pkeyopt rsa_keygen_bits:4096
+openssl rsa -pubout -in config/keys/backend_private.pem -out config/keys/backend_public.pem
 
-# Exit with nonzero status if no arguments are passed in
-if [ $# -eq 0 ]; then
-  echo "No arguments provided. Using default values...\n"
-  postgres_user="postgres"
-  postgres_password="postgres"
-  postgres_db="fuecoco-db-dev"
-  postgres_port="5432"
-else
-  postgres_user=$1
-  postgres_password=$2
-  postgres_db=$3
-  postgres_port=$4
-fi
+# Generate frontend keys
+openssl genpkey -algorithm RSA -out config/keys/frontend_private.pem -pkeyopt rsa_keygen_bits:4096
+openssl rsa -pubout -in config/keys/frontend_private.pem -out config/keys/frontend_public.pem
 
-echo "POSTGRES_USER=$postgres_user"
-echo "POSTGRES_PASSWORD=$postgres_password"
-echo "POSTGRES_DB=$postgres_db"
-echo "POSTGRES_PORT=$postgres_port\n"
+# # Exit with nonzero status if no arguments are passed in
+# if [ $# -eq 0 ]; then
+#   echo "No arguments provided. Using default values...\n"
+#   postgres_user="postgres"
+#   postgres_password="postgres"
+#   postgres_db="fuecoco-db-dev"
+#   postgres_port="5432"
+# else
+#   postgres_user=$1
+#   postgres_password=$2
+#   postgres_db=$3
+#   postgres_port=$4
+# fi
 
-# POSTGRES ENV FILE SETUP
-if [ -f .env.postgres ]; then
-  echo ".env.postgres exists. skipping...\n"
-else
-  echo ".Creating .env.postgres ..."
-  touch .env.postgres
-  echo "POSTGRES_USER=$postgres_user" >> .env.postgres
-  echo "POSTGRES_PASSWORD=$postgres_password" >> .env.postgres
-  echo "POSTGRES_DB=$postgres_db" >> .env.postgres
-  echo "POSTGRES_PORT=5432" >> .env.postgres
-  echo "done creating .env.postgres\n"
-fi
+# echo "POSTGRES_USER=$postgres_user"
+# echo "POSTGRES_PASSWORD=$postgres_password"
+# echo "POSTGRES_DB=$postgres_db"
+# echo "POSTGRES_PORT=$postgres_port\n"
 
-# FRONTEND ENV FILE SETUP
-if [ -f frontend/.env ]; then
-  echo "frontend/.env.postgres exists. skipping...\n"
-else
-  echo "Creating frontend/.env ..."
-  touch frontend/.env
-  echo "AUTH_TWITTER_ID=" >> frontend/.env
-  echo "AUTH_TWITTER_SECRET=" >> frontend/.env
+# # POSTGRES ENV FILE SETUP
+# if [ -f .env.postgres ]; then
+#   echo ".env.postgres exists. skipping...\n"
+# else
+#   echo ".Creating .env.postgres ..."
+#   touch .env.postgres
+#   echo "POSTGRES_USER=$postgres_user" >> .env.postgres
+#   echo "POSTGRES_PASSWORD=$postgres_password" >> .env.postgres
+#   echo "POSTGRES_DB=$postgres_db" >> .env.postgres
+#   echo "POSTGRES_PORT=5432" >> .env.postgres
+#   echo "done creating .env.postgres\n"
+# fi
 
-  echo "AUTH_DISCORD_ID=" >> frontend/.env
-  echo "AUTH_DISCORD_SECRET=" >> frontend/.env
+# # FRONTEND ENV FILE SETUP
+# if [ -f frontend/.env ]; then
+#   echo "frontend/.env.postgres exists. skipping...\n"
+# else
+#   echo "Creating frontend/.env ..."
+#   touch frontend/.env
+#   echo "AUTH_TWITTER_ID=" >> frontend/.env
+#   echo "AUTH_TWITTER_SECRET=" >> frontend/.env
 
-  echo "AUTH_GITHUB_ID=" >> frontend/.env
-  echo "AUTH_GITHUB_SECRET=" >> frontend/.env
+#   echo "AUTH_DISCORD_ID=" >> frontend/.env
+#   echo "AUTH_DISCORD_SECRET=" >> frontend/.env
 
-  echo "AUTH_TWITCH_ID=" >> frontend/.env
-  echo "AUTH_TWITCH_SECRET=" >> frontend/.env
-  echo "AUTH_SECRET='$SECRET'" >> frontend/.env
-  echo "done creating frontend/.env\n"
-fi
+#   echo "AUTH_GITHUB_ID=" >> frontend/.env
+#   echo "AUTH_GITHUB_SECRET=" >> frontend/.env
 
-# BACKEND ENV FILE SETUP
-if [ -f backend/.env ]; then
-  echo "backend/.env exists. skipping...\n"
-else
-  echo "Creating backend/.env ..."
-  touch backend/.env
-  echo "AUTH_SECRET='$SECRET'" >> backend/.env
-  echo "done creating backend/.env"
-fi
+#   echo "AUTH_TWITCH_ID=" >> frontend/.env
+#   echo "AUTH_TWITCH_SECRET=" >> frontend/.env
+#   echo "AUTH_SECRET='$SECRET'" >> frontend/.env
+#   echo "done creating frontend/.env\n"
+# fi
+
+# # BACKEND ENV FILE SETUP
+# if [ -f backend/.env ]; then
+#   echo "backend/.env exists. skipping...\n"
+# else
+#   echo "Creating backend/.env ..."
+#   touch backend/.env
+#   echo "AUTH_SECRET='$SECRET'" >> backend/.env
+#   echo "done creating backend/.env"
+# fi
 
 
