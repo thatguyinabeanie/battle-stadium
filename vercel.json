@@ -1,15 +1,17 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "backend/config.ru",
-      "use": "@vercel/ruby"
-    }
+    { "src": "frontend/package.json", "use": "@vercel/next" },
+    { "src": "backend/config.ru", "use": "@vercel/ruby" }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
       "dest": "backend/config.ru"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "frontend/$1"
     }
   ]
 }
