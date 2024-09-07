@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "build.sh",
+      "use": "@vercel/ruby",
+      "config": { "bundle": "false" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "config.ru"
+    }
+  ]
+}
