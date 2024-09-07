@@ -32,7 +32,7 @@ function UserInfo() {
     <div className={cn("flex max-w-full flex-col", { hidden: isCompact })}>
       {!session && (
         <p className="truncate text-tiny text-default-400">
-          <Link aria-label="Log In" href="/login">
+          <Link aria-label="Log In" href="/sign-in">
             Log in
           </Link>
         </p>
@@ -65,7 +65,7 @@ export default function UserAvatar() {
   if (!session) {
     return (
       <div className="flex items-center gap-3 px-3">
-        <Link href="/login">
+        <Link href="/sign-in">
           <DefaultAvatar isBordered aria-label="User Avatar Not Signed In" icon={<AvatarIcon />} size="sm" />
         </Link>
         <UserInfo />

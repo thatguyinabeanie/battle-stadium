@@ -20,7 +20,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth(async () => {
     adapter: RailsAdapter(apiClient),
     secret: process.env.AUTH_SECRET,
     pages: {
-      signIn: "/login",
+      signIn: "/sign-in",
       signOut: "/logout",
       error: "/",
     },

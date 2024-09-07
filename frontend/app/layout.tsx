@@ -1,14 +1,15 @@
 import "@/styles/globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 import { AppProps } from "next/app";
 
+import Providers from "./providers";
+
 import { siteConfig } from "@/config/site";
 import { ChildrenProps } from "@/types";
-
-import Providers from "./providers";
 
 export const metadata: Metadata = {
   title: {
@@ -30,18 +31,20 @@ export const viewport: Viewport = {
 
 async function RootLayout({ children }: ChildrenProps & AppProps) {
   return (
-    <html suppressHydrationWarning lang="en">
-      <head />
-      <body className={clsx("min-h-screen bg-background font-sans antialiased overflow-hidden")}>
-        <Providers>
-          <main className="flex h-full w-full">
-            {children}
-            <Analytics />
-            <SpeedInsights />
-          </main>
-        </Providers>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html suppressHydrationWarning lang="en">
+        <head />
+        <body className={clsx("min-h-screen bg-background font-sans antialiased overflow-hidden")}>
+          <Providers>
+            <main className="flex h-full w-full">
+              {children}
+              <Analytics />
+              <SpeedInsights />
+            </main>
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
 
