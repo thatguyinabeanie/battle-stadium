@@ -42,7 +42,7 @@ jobs:
           target: development
           platforms: linux/amd64
           push: true
-          cache-from: type=registry,ref=${{ github.repository }}:dev-latest
+          cache-from: type=registry,ref=${{ github.repository }}:dev-cache-latest
           tags: |
             ${{ github.repository }}:${{ github.head_ref}}
             ghcr.io/${{ github.repository }}:${{ github.head_ref}}
