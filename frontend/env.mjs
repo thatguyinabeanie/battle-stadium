@@ -22,6 +22,15 @@ export const env = createEnv({
       required_error:
         "AUTH_SECRET  is required. This is a secret key used to sign and verify JWT tokens. It should be a long, seemingly random string.",
     }),
+    DISCORD_CLIENT_ID: z
+      .string({
+        required_error:
+          "DISCORD_CLIENT_ID is required. Visit https://discord.com/developers/applications -> General information -> CLIENT ID",
+      })
+      .min(
+        1,
+        "DISCORD_CLIENT_ID is required. Visit https://discord.com/developers/applications -> General information -> CLIENT ID",
+      ),
     DISCORD_APP_TOKEN: z
       .string({
         required_error:
@@ -49,6 +58,7 @@ export const env = createEnv({
         1,
         "DISCORD_APP_PUBLIC_KEY is required. Visit https://discord.com/developers/applications -> General information -> PUBLIC KEY",
       ),
+    DISCORD_GUILD_ID: z.string(),
     // DISCORD_BOT_TOKEN: z
     //   .string({
     //     required_error:

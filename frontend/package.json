@@ -19,7 +19,8 @@
     "check:unused": "depcheck",
     "prisma:generate": "prisma generate",
     "prisma:pull": "prisma db pull",
-    "vercel:pull": "vercel env pull .env.vercel.local"
+    "vercel:pull": "vercel env pull .env.vercel.local",
+    "register-commands": "node --loader ts-node/esm ./scripts/register-commands.mts"
   },
   "dependencies": {
     "@aws-sdk/credential-provider-web-identity": "^3.662.0",
