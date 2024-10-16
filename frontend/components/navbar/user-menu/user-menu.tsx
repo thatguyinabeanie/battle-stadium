@@ -20,7 +20,7 @@ async function SmartAvatar() {
 export default async function UserMenu({ me }: Readonly<UserMenuProps>) {
   return (
     <NavbarItem className="px-2">
-      <Dropdown placement="bottom">
+      <Dropdown className="border-small border-neutral-500/40 rounded-3xl p-2" placement="bottom">
         <DropdownTrigger>
           <button className="h-8 w-8 transition-transform align-top">
             <SmartAvatar />

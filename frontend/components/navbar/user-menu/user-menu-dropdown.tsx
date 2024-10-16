@@ -14,7 +14,13 @@ export default function UserMenuDropDown({ me }: Readonly<UserMenuDropDownProps>
   const isSignedIn = !!me;
 
   return (
-    <DropdownMenu aria-label="Profile Actions" variant="bordered">
+    <DropdownMenu
+      aria-label="Profile Actions"
+      classNames={{
+        base: "border-neutral-500/40 rounded-3xl p-2",
+      }}
+      variant="bordered"
+    >
       <DropdownItem
         key="profile"
         aria-label="dashboard"

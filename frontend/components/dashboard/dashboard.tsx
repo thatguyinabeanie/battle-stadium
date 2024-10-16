@@ -12,31 +12,12 @@ interface DashboardProps extends DashboardLayoutProps {
   me: components["schemas"]["AccountMe"] | null | undefined;
 }
 
-const tabs = ["dashboard", "profiles", "tournament_history", "settings", "admin"];
+const tabs = ["dashboard", "profiles", "tournament_history", "settings", "organizations", "admin"];
 
 export default function Dashboard(props: Readonly<DashboardProps>) {
-  const { me, children, admin, profiles, settings, tournament_history } = props;
+  const { me, children, profiles, settings, tournament_history, organizations, admin } = props;
 
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const tabStr = searchParams.get("tab");
-  const [activeTab, setActiveTab] = React.useState((tabs.includes(`${tabStr}`) && tabStr) || "dashboard");
-
-  const updateSearchParams = React.useCallback(
-    (newParams: Record<string, string>) => {
-      const params = new URLSearchParams(searchParams.toString());
-
-      Object.entries(newParams).forEach(([key, value]) => {
-        if (value) {
-          params.set(key, value);
-        } else {
-          params.delete(key);
-        }
-      });
-      router.push(`?${params.toString()}`);
-    },
-    [searchParams, router],
-  );
+  const { activeTab, onSelectionChange } = useDeepLinkQueryParamTabState();
 
   return (
     <div className="w-full h-full flex flex-col items-center">
@@ -49,12 +30,12 @@ export default function Dashboard(props: Readonly<DashboardProps>) {
         }}
         radius="full"
         selectedKey={activeTab}
-        onSelectionChange={(key: React.Key) => {
-          setActiveTab(key.toString());
-          updateSearchParams({ tab: key.toString() });
-          updateSearchParams({ tab: key.toString() });
-        }}
+        onSelectionChange={onSelectionChange}
       >
+        <Tab key="dashboard" title="Dashboard">
+          {children}
+        </Tab>
+
         <Tab key="profiles" title="Profiles">
           {profiles}
         </Tab>
@@ -63,8 +44,8 @@ export default function Dashboard(props: Readonly<DashboardProps>) {
           {tournament_history}
         </Tab>
 
-        <Tab key="dashboard" title="Dashboard">
-          {children}
+        <Tab key="organizations" title="Organizations">
+          {organizations}
         </Tab>
 
         <Tab key="settings" title="Settings">
@@ -86,3 +67,38 @@ export default function Dashboard(props: Readonly<DashboardProps>) {
     </div>
   );
 }
+
+const useDeepLinkQueryParamTabState = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const tabStr = searchParams.get("tab");
+  const [activeTab, setActiveTab] = React.useState((tabs.includes(`${tabStr}`) && tabStr) || "dashboard");
+
+  const updateSearchParams = React.useCallback(
+    (newParams: Record<string, string>) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      Object.entries(newParams).forEach(([key, value]) => {
+        if (value) {
+          params.set(key, value);
+        } else {
+          params.delete(key);
+        }
+      });
+
+      router.push(`?${params.toString()}`);
+    },
+    [searchParams, router],
+  );
+
+  const onSelectionChange = React.useCallback(
+    (key: React.Key) => {
+      setActiveTab(key.toString());
+      updateSearchParams({ tab: key.toString() });
+    },
+    [setActiveTab, updateSearchParams],
+  );
+
+  return { activeTab, onSelectionChange };
+};
