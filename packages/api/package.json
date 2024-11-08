@@ -21,9 +21,11 @@
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
-    "@battle-stadium/auth": "workspace:*",
     "@battle-stadium/db": "workspace:*",
     "@battle-stadium/validators": "workspace:*",
+    "@clerk/backend": "catalog:",
+    "@clerk/clerk-react": "catalog:",
+    "@clerk/nextjs": "catalog:",
     "@trpc/server": "catalog:",
     "superjson": "2.2.1",
     "zod": "catalog:"

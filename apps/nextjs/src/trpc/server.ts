@@ -1,12 +1,13 @@
+import type { Session } from "@clerk/nextjs/server";
 import { cache } from "react";
 import { headers } from "next/headers";
 import { createHydrationHelpers } from "@trpc/react-query/rsc";
 
 import type { AppRouter } from "@battle-stadium/api";
 import { createCaller, createTRPCContext } from "@battle-stadium/api";
-import { auth } from "@battle-stadium/auth";
 
 import { createQueryClient } from "./query-client";
+
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -17,7 +18,17 @@ const createContext = cache(async () => {
   heads.set("x-trpc-source", "rsc");
 
   return createTRPCContext({
-    session: await auth(),
+    session: {
+      id: "1",
+      clientId: "1",
+      userId: "1",
+      status: "hello",
+      lastActiveAt: 1,
+      expireAt: 1,
+      abandonAt: 1,
+      createdAt: 1,
+      updatedAt: 1,
+    } as Session,
     headers: heads,
   });
 });

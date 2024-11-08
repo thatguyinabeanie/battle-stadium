@@ -10,9 +10,12 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-import type { Session } from "@battle-stadium/auth";
-import { auth, validateToken } from "@battle-stadium/auth";
+// import type { Session } from "@battle-stadium/auth";
+// import { auth, validateToken } from "@battle-stadium/auth";
 import { db } from "@battle-stadium/db/client";
+import type { Session } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
+
 
 /**
  * Isomorphic Session getter for API requests
@@ -21,7 +24,10 @@ import { db } from "@battle-stadium/db/client";
  */
 const isomorphicGetSession = async (headers: Headers) => {
   const authToken = headers.get("Authorization") ?? null;
-  if (authToken) return validateToken(authToken);
+  if (authToken) {
+    // return validateToken(authToken);
+  }
+  // return auth();
   return auth();
 };
 
@@ -45,7 +51,7 @@ export const createTRPCContext = async (opts: {
   const session = await isomorphicGetSession(opts.headers);
 
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
-  console.log(">>> tRPC Request from", source, "by", session?.user);
+  console.log(">>> RPC Request from", source, "by", session.userId);
 
   return {
     session,
@@ -133,13 +139,13 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
 export const protectedProcedure = t.procedure
   .use(timingMiddleware)
   .use(({ ctx, next }) => {
-    if (!ctx.session?.user) {
+    if (!ctx.session.userId) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
     return next({
       ctx: {
         // infers the `session` as non-nullable
-        session: { ...ctx.session, user: ctx.session.user },
+        session: { ...ctx.session, user: ctx.session.userId },
       },
     });
   });

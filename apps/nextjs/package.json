@@ -17,7 +17,6 @@
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "@battle-stadium/api": "workspace:*",
-    "@battle-stadium/auth": "workspace:*",
     "@battle-stadium/db": "workspace:*",
     "@battle-stadium/ui": "workspace:*",
     "@battle-stadium/validators": "workspace:*",

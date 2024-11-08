@@ -2,19 +2,20 @@
   "name": "@battle-stadium/tailwind-config",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "exports": {
     "./native": "./native.ts",
     "./web": "./web.ts"
   },
-  "license": "MIT",
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
-    "sort-packages": "pnpx sort-package-json"
+    "sort-packages": "pnpx sort-package-json",
+    "typecheck": "tsc --noEmit"
   },
+  "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "postcss": "^8.4.47",
     "tailwindcss": "catalog:",
@@ -27,6 +28,5 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": "@battle-stadium/prettier-config"
+  }
 }

@@ -27,10 +27,14 @@
   ],
   "typescript.tsdk": "node_modules/typescript/lib",
   "cSpell.words": [
+    "articifial",
     "compat",
     "ianvs",
     "jiti",
     "nitropack",
-    "prettiercache"
+    "Pressable",
+    "prettiercache",
+    "subrouters",
+    "unauthed"
   ]
 }

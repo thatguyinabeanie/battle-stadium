@@ -7,6 +7,7 @@
     "target": "ES2022",
     "lib": ["ES2022"],
     "allowJs": true,
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
