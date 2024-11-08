@@ -1,7 +1,7 @@
 import type {
   DefaultSession,
   Session as NextAuthSession,
-  AuthOptions,
+  NextAuthOptions
 } from "next-auth";
 import { skipCSRFCheck } from "@auth/core";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
@@ -28,7 +28,7 @@ const adapter = DrizzleAdapter(db, {
 
 export const isSecureContext = env.NODE_ENV !== "development";
 
-export const authConfig: AuthOptions = {
+export const authConfig: NextAuthOptions = {
   adapter,
   // In development, we need to skip checks to allow Expo to work
   ...(!isSecureContext
