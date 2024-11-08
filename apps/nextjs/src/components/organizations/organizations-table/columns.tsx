@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import * as React from "react";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
-import { Button } from "@battle-stadium/ui/button";
+import { Button } from "@battle-stadium/ui";
 import { Checkbox } from "@battle-stadium/ui/checkbox";
 import {
   DropdownMenu,
@@ -26,14 +26,14 @@ export const columns: ColumnDef<Payment>[] = [
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={ (value) => table.toggleAllPageRowsSelected(!!value) }
         aria-label="Select all"
       />
     ),
     cell: ({ row }) => (
       <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        checked={ row.getIsSelected() }
+        onCheckedChange={ (value) => row.toggleSelected(!!value) }
         aria-label="Select row"
       />
     ),
@@ -44,7 +44,7 @@ export const columns: ColumnDef<Payment>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div className="capitalize">{ row.getValue("status") }</div>
     ),
   },
   {
@@ -53,14 +53,14 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={ () => column.toggleSorting(column.getIsSorted() === "asc") }
         >
           Email
           <ArrowUpDown />
         </Button>
       );
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="lowercase">{ row.getValue("email") }</div>,
   },
   {
     accessorKey: "amount",
@@ -74,7 +74,7 @@ export const columns: ColumnDef<Payment>[] = [
         currency: "USD",
       }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>;
+      return <div className="text-right font-medium">{ formatted }</div>;
     },
   },
   {
@@ -94,7 +94,7 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={ () => navigator.clipboard.writeText(payment.id) }
             >
               Copy payment ID
             </DropdownMenuItem>

@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 import { Badge } from "@battle-stadium/ui/badge";
-import { Button } from "@battle-stadium/ui/button";
+import { Button } from "@battle-stadium/ui";
 import {
   Popover,
   PopoverContent,
@@ -14,7 +14,7 @@ import {
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import UserMenu from "./user-menu/user-menu";
 
-export default async function RightMenu() {
+export default async function RightMenu () {
   const clerkAuth = await auth();
   const me = (await getAccountMe())?.data;
 
@@ -24,7 +24,7 @@ export default async function RightMenu() {
         <Icon
           className="text-default-500"
           icon="solar:magnifer-linear"
-          width={22}
+          width={ 22 }
         />
       </Button>
 
@@ -33,7 +33,7 @@ export default async function RightMenu() {
           <Icon
             className="text-default-500"
             icon="solar:settings-linear"
-            width={24}
+            width={ 24 }
           />
         </Button>
 
@@ -43,7 +43,7 @@ export default async function RightMenu() {
               <Icon
                 className="text-default-500"
                 icon="solar:bell-linear"
-                width={22}
+                width={ 22 }
               />
             </Badge>
           </PopoverTrigger>
@@ -54,7 +54,7 @@ export default async function RightMenu() {
           </PopoverContent>
         </Popover>
 
-        <UserMenu isSignedIn={!!clerkAuth.sessionId} me={me} />
+        <UserMenu isSignedIn={ !!clerkAuth.sessionId } me={ me } />
       </Link>
     </div>
   );
