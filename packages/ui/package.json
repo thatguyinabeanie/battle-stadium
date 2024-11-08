@@ -1,7 +1,8 @@
 {
-  "name": "@acme/ui",
-  "private": true,
+  "name": "@battle-stadium/ui",
   "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
   "type": "module",
   "exports": {
     ".": {
@@ -16,16 +17,17 @@
       ]
     }
   },
-  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "dev": "tsc",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
+    "sort-packages": "pnpx sort-package-json",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "ui-add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
   },
+  "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-dropdown-menu": "^2.1.2",
@@ -39,10 +41,10 @@
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
-    "@acme/eslint-config": "workspace:*",
-    "@acme/prettier-config": "workspace:*",
-    "@acme/tailwind-config": "workspace:*",
-    "@acme/tsconfig": "workspace:*",
+    "@battle-stadium/eslint-config": "workspace:*",
+    "@battle-stadium/prettier-config": "workspace:*",
+    "@battle-stadium/tailwind-config": "workspace:*",
+    "@battle-stadium/tsconfig": "workspace:*",
     "@types/react": "catalog:react18",
     "eslint": "catalog:",
     "prettier": "catalog:",
@@ -53,6 +55,5 @@
   "peerDependencies": {
     "react": "catalog:react18",
     "zod": "catalog:"
-  },
-  "prettier": "@acme/prettier-config"
+  }
 }

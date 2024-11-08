@@ -1,5 +1,5 @@
 {
-  "name": "@acme/prettier-config",
+  "name": "@battle-stadium/prettier-config",
   "private": true,
   "version": "0.1.0",
   "type": "module",
@@ -9,7 +9,8 @@
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sort-packages": "pnpx sort-package-json"
   },
   "dependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
@@ -17,8 +18,8 @@
     "prettier-plugin-tailwindcss": "^0.6.8"
   },
   "devDependencies": {
-    "@acme/tsconfig": "workspace:*",
+    "@battle-stadium/tsconfig": "workspace:*",
     "typescript": "catalog:"
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@battle-stadium/prettier-config"
 }

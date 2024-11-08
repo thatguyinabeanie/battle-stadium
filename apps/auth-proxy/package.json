@@ -1,5 +1,5 @@
 {
-  "name": "@acme/auth-proxy",
+  "name": "@battle-stadium/auth-proxy",
   "private": true,
   "type": "module",
   "scripts": {
@@ -7,16 +7,17 @@
     "clean": "git clean -xdf .cache .nitro .output .turbo .vercel node_modules",
     "lint": "eslint",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sort-packages": "pnpx sort-package-json"
   },
   "dependencies": {
-    "@auth/core": "0.34.2"
+    "@auth/core": "catalog:"
   },
   "devDependencies": {
-    "@acme/eslint-config": "workspace:*",
-    "@acme/prettier-config": "workspace:*",
-    "@acme/tailwind-config": "workspace:*",
-    "@acme/tsconfig": "workspace:*",
+    "@battle-stadium/eslint-config": "workspace:*",
+    "@battle-stadium/prettier-config": "workspace:*",
+    "@battle-stadium/tailwind-config": "workspace:*",
+    "@battle-stadium/tsconfig": "workspace:*",
     "@types/node": "^20.16.11",
     "eslint": "catalog:",
     "h3": "^1.13.0",
@@ -24,5 +25,5 @@
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@battle-stadium/prettier-config"
 }

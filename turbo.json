@@ -43,6 +43,9 @@
     "ui-add": {
       "cache": false,
       "interactive": true
+    },
+    "sort-packages": {
+      "cache": false
     }
   },
   "globalEnv": [

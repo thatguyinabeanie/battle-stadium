@@ -1,7 +1,7 @@
 {
-  "name": "@acme/eslint-config",
-  "private": true,
+  "name": "@battle-stadium/eslint-config",
   "version": "0.3.0",
+  "private": true,
   "type": "module",
   "exports": {
     "./base": "./base.js",
@@ -11,8 +11,10 @@
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
+    "sort-packages": "pnpx sort-package-json",
     "typecheck": "tsc --noEmit"
   },
+  "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "@eslint/compat": "^1.2.0",
     "@next/eslint-plugin-next": "^14.2.15",
@@ -24,12 +26,11 @@
     "typescript-eslint": "^8.9.0"
   },
   "devDependencies": {
-    "@acme/prettier-config": "workspace:*",
-    "@acme/tsconfig": "workspace:*",
+    "@battle-stadium/prettier-config": "workspace:*",
+    "@battle-stadium/tsconfig": "workspace:*",
     "@types/eslint__js": "8.42.3",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
-  },
-  "prettier": "@acme/prettier-config"
+  }
 }
