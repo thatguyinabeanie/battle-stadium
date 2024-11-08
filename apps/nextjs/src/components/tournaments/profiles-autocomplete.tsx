@@ -8,7 +8,7 @@ interface ProfilesAutocompleteProps {
   profiles: Profile[];
 }
 
-export default function ProfilesAutocomplete ({
+export default function ProfilesAutocomplete({
   profiles,
 }: Readonly<ProfilesAutocompleteProps>) {
   console.log("profiles", profiles);

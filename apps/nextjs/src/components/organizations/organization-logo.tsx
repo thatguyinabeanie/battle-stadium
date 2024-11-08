@@ -16,7 +16,7 @@ interface OrganizationLogoProps {
 
 const DEFAULT_BLUR_DATA_URL = "/pokemon/vgc.png";
 
-export default function OrganizationLogo ({
+export default function OrganizationLogo({
   alt,
   priority,
   placeholder,
@@ -27,15 +27,15 @@ export default function OrganizationLogo ({
 }: Readonly<OrganizationLogoProps>) {
   return (
     <Image
-      alt={ alt ?? organization.name }
-      aria-label={ organization.name }
-      blurDataURL={ blurDataURL ?? DEFAULT_BLUR_DATA_URL }
-      className={ className }
-      height={ logoSize }
-      placeholder={ placeholder ?? "blur" }
-      priority={ priority ?? false }
-      src={ organization.logo_url ?? DEFAULT_BLUR_DATA_URL }
-      width={ logoSize }
+      alt={alt ?? organization.name}
+      aria-label={organization.name}
+      blurDataURL={blurDataURL ?? DEFAULT_BLUR_DATA_URL}
+      className={className}
+      height={logoSize}
+      placeholder={placeholder ?? "blur"}
+      priority={priority ?? false}
+      src={organization.logo_url ?? DEFAULT_BLUR_DATA_URL}
+      width={logoSize}
     />
   );
 }

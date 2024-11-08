@@ -1,5 +1,5 @@
 import { createEnv } from "@t3-oss/env-nextjs";
-import { vercel, uploadthing } from "@t3-oss/env-nextjs/presets";
+import { uploadthing, vercel } from "@t3-oss/env-nextjs/presets";
 import { z } from "zod";
 
 import { env as authEnv } from "@battle-stadium/auth/env";

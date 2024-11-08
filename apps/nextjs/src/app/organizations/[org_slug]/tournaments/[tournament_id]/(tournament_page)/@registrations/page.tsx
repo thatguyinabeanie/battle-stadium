@@ -1,6 +1,6 @@
 // import PlayersTable from "~/app/players/players-table";
+import type { OrganizationTournamentProps } from "~/types";
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
-import type {OrganizationTournamentProps} from "~/types";
 
 // const columns = [
 //   {

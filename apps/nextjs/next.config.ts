@@ -1,6 +1,5 @@
-import type { NextConfig } from "next";
-
 import { fileURLToPath } from "url";
+import type { NextConfig } from "next";
 import createJiti from "jiti";
 
 // Import env files to validate at build time. Use jiti so we can load .ts files in here.
@@ -53,8 +52,6 @@ const config: NextConfig = {
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-
-
 };
 
 export default config;

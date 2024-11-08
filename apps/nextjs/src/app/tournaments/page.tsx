@@ -48,9 +48,9 @@ export default async function Tournaments() {
     (tour) => tour.start_at && new Date(tour.start_at) >= rightNow,
   );
 
-  console.log("columns", columns);  
-  console.log("pastTours", pastTours);  
-  console.log("upcomingTours", upcomingTours);  
+  console.log("columns", columns);
+  console.log("pastTours", pastTours);
+  console.log("upcomingTours", upcomingTours);
 
   // return <TournamentsTable columns={columns} data={[...pastTours, ...upcomingTours]} />;
   return (

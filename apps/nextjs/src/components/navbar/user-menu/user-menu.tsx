@@ -1,7 +1,9 @@
 import { currentUser } from "@clerk/nextjs/server";
 
 import {
-  Avatar, AvatarFallback, AvatarImage,
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
@@ -14,13 +16,13 @@ interface UserMenuProps {
   isSignedIn: boolean;
 }
 
-async function SmartAvatar () {
+async function SmartAvatar() {
   const user = await currentUser();
 
   if (user?.imageUrl) {
     return (
       <Avatar aria-label="User's profile image" className="bg-transparent">
-        <AvatarImage src={ user.imageUrl } />
+        <AvatarImage src={user.imageUrl} />
         <AvatarFallback>X</AvatarFallback>
       </Avatar>
     );
@@ -31,13 +33,13 @@ async function SmartAvatar () {
   );
 }
 
-export default function UserMenu ({ ...rest }: Readonly<UserMenuProps>) {
+export default function UserMenu({ ...rest }: Readonly<UserMenuProps>) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <SmartAvatar />
       </DropdownMenuTrigger>
-      <UserMenuDropDown { ...rest } />
+      <UserMenuDropDown {...rest} />
     </DropdownMenu>
   );
 }

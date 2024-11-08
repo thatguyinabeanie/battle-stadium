@@ -11,7 +11,7 @@ export interface OrganizationsPageProps {
   orgs: Tournament[];
 }
 
-export default function OrganizationsPage () {
+export default function OrganizationsPage() {
   return (
     <>
       <PartneredOrganizations />

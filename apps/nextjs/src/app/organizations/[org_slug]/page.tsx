@@ -4,7 +4,6 @@ import {
   getOrganizations,
 } from "~/app/server-actions/organizations/actions";
 import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
-
 import OrganizationHeader from "~/components/organizations/organization-header";
 
 export const revalidate = 200;

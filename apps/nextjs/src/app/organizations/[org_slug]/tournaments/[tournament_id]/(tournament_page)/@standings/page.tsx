@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader } from "@battle-stadium/ui/card";
 
-export default function Standings () {
+export default function Standings() {
   return (
     <Card>
       <CardHeader>Standings</CardHeader>

@@ -1,32 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { SpeedInsights as VercelSpeedInsights } from "@vercel/speed-insights/next";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+
+import { cn, ThemeProvider, ThemeToggle } from "@battle-stadium/ui";
+
 import { env } from "~/env.ts";
-
-import { ThemeProvider, ThemeToggle, cn } from "@battle-stadium/ui";
-
 import { TRPCReactProvider } from "~/trpc/react";
 
 import "~/app/globals.css";
 
 import { StrictMode } from "react";
+import dynamic from "next/dynamic";
 import { ClerkProvider } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
-import { UploadThingRouter } from "./api/uploadthing/core";
-import dynamic from "next/dynamic";
-import { auth } from "@clerk/nextjs/server";
-import { siteConfig } from "~/lib/config/site";
+
 import type { ChildrenProps } from "~/types";
-import Navbar from "~/components/navbar/navbar";
 import Footer from "~/components/footer";
+import Navbar from "~/components/navbar/navbar";
+import { siteConfig } from "~/lib/config/site";
+import { UploadThingRouter } from "./api/uploadthing/core";
 
 const Cookies = dynamic(() => import("~/components/cookies/cookies"));
 // const AwesomeParticles = dynamic(() => import("~/components/awesome-particles"));
-
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -65,54 +65,55 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function RootLayout (
-  { children }: Readonly<ChildrenProps>,
-) {
+export default async function RootLayout({
+  children,
+}: Readonly<ChildrenProps>) {
   const { userId, sessionId } = await auth();
 
   return (
     <StrictMode>
       <ClerkProvider>
         <html lang="en" suppressHydrationWarning>
-
           <body
-            className={ cn(
-              "min-h-screen bg-background font-sans text-foreground overflow-y-scroll antialiased",
+            className={cn(
+              "min-h-screen overflow-y-scroll bg-background font-sans text-foreground antialiased",
               GeistSans.variable,
               GeistMono.variable,
-            ) }
+            )}
           >
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               <TRPCReactProvider>
-                <NextSSRPlugin routerConfig={ extractRouterConfig(UploadThingRouter) } />
-                <div className="flex flex-col items-center min-h-screen ">
-                  {/* <AwesomeParticles /> */ }
+                <NextSSRPlugin
+                  routerConfig={extractRouterConfig(UploadThingRouter)}
+                />
+                <div className="flex min-h-screen flex-col items-center">
+                  {/* <AwesomeParticles /> */}
 
-                  <div className="flex flex-col items-center min-h-screen backdrop-blur shadow-2xl dark:shadow-white w-5/6 ">
+                  <div className="flex min-h-screen w-5/6 flex-col items-center shadow-2xl backdrop-blur dark:shadow-white">
                     <Navbar />
 
-                    <main className="flex flex-col min-h-screen items-center w-full">
-                      <section className="flex flex-col gap-4 w-full items-center z-0">{ children }</section>
+                    <main className="flex min-h-screen w-full flex-col items-center">
+                      <section className="z-0 flex w-full flex-col items-center gap-4">
+                        {children}
+                      </section>
                     </main>
 
                     <Footer />
                   </div>
                 </div>
-
               </TRPCReactProvider>
 
               <div className="absolute bottom-4 right-4">
                 <ThemeToggle />
               </div>
 
-
-              <Cookies isSignedIn={ !!sessionId } userId={ userId } />
+              <Cookies isSignedIn={!!sessionId} userId={userId} />
 
               <VercelAnalytics />
 
-              { env.VERCEL_ENV === "production" && <VercelSpeedInsights /> }
+              {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
 
-              <GoogleAnalytics gaId={ env.MEASUREMENT_ID } />
+              <GoogleAnalytics gaId={env.MEASUREMENT_ID} />
             </ThemeProvider>
           </body>
         </html>

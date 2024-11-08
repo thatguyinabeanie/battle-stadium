@@ -11,6 +11,12 @@ export const ArrowUpIcon = (props: IconSvgProps) => (
     width="1em"
     {...props}
   >
-    <path d="M3 7.5L6 4.5L9 7.5" stroke="#71717A" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+    <path
+      d="M3 7.5L6 4.5L9 7.5"
+      stroke="#71717A"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+    />
   </svg>
 );

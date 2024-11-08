@@ -32,7 +32,19 @@ export const DeleteFilledIcon = (props: IconSvgProps) => (
       strokeLinejoin="round"
       strokeWidth="1.35"
     />
-    <path d="M7.74756 12.875H10.245" stroke="#71717A" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.35" />
-    <path d="M7.125 9.875H10.875" stroke="#71717A" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.35" />
+    <path
+      d="M7.74756 12.875H10.245"
+      stroke="#71717A"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.35"
+    />
+    <path
+      d="M7.125 9.875H10.875"
+      stroke="#71717A"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.35"
+    />
   </svg>
 );
