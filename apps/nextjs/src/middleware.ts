@@ -1,5 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+
 import { env } from "./env.ts";
+
 // Or like this if you need to do something here.
 // export default auth((req) => {
 //   console.log(req.auth) //  { session: { user: { ... } } }
@@ -19,7 +21,10 @@ export const config = {
 const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
-  if ([env.NODE_ENV, env.VERCEL_ENV].includes("production") && !isPublicRoute(request)) {
+  if (
+    [env.NODE_ENV, env.VERCEL_ENV].includes("production") &&
+    !isPublicRoute(request)
+  ) {
     await auth.protect();
   }
 });

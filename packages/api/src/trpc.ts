@@ -6,6 +6,8 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
+import type { Session } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
@@ -13,9 +15,6 @@ import { ZodError } from "zod";
 // import type { Session } from "@battle-stadium/auth";
 // import { auth, validateToken } from "@battle-stadium/auth";
 import { db } from "@battle-stadium/db/client";
-import type { Session } from "@clerk/nextjs/server";
-import { auth } from "@clerk/nextjs/server";
-
 
 /**
  * Isomorphic Session getter for API requests
