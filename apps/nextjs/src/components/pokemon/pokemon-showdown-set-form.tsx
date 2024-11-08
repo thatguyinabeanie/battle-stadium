@@ -1,6 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 
-import { Button, TextArea } from "@battle-stadium/ui";
+import { Button, Textarea } from "@battle-stadium/ui";
 
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
 import { postPokemonTeam } from "~/app/server-actions/pokemon/actions";
@@ -31,7 +31,7 @@ export function PokemonShowdownSetForm ({
         name="pokepaste"
         placeholder="Paste your Showdown Set here"
         value={ input }
-        onChange={ (e) => setInput(e.target.value) }
+        onChange={ (e: { target: { value: SetStateAction<string>; }; }) => setInput(e.target.value) }
       />
 
       <div className="flex flex-row items-center justify-center gap-4 pt-2">

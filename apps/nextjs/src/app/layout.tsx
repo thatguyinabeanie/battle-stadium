@@ -25,7 +25,7 @@ import Navbar from "~/components/navbar/navbar";
 import Footer from "~/components/footer";
 
 const Cookies = dynamic(() => import("~/components/cookies/cookies"));
-const AwesomeParticles = dynamic(() => import("~/components/awesome-particles"));
+// const AwesomeParticles = dynamic(() => import("~/components/awesome-particles"));
 
 
 export const metadata: Metadata = {

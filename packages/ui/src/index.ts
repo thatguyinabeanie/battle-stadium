@@ -29,6 +29,7 @@ export * from "./sheet";
 export * from "./separator";
 export * from "./select";
 export * from "./scroll-area";
+export * from "./textarea";
 export * from "./tooltip";
 export * from "./toggle";
 export * from "./theme";
