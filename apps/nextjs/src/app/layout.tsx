@@ -82,7 +82,7 @@ export default async function RootLayout (
               GeistMono.variable,
             ) }
           >
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               <TRPCReactProvider>
                 <NextSSRPlugin routerConfig={ extractRouterConfig(UploadThingRouter) } />
                 <div className="flex flex-col items-center min-h-screen ">
