@@ -33,7 +33,7 @@
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
-    "@vercel/postgres": "^0.10.0",
+    "@neondatabase/serverless": "^0.10.3",
     "drizzle-orm": "^0.35.1",
     "drizzle-zod": "^0.5.1",
     "zod": "catalog:"

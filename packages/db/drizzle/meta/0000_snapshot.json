@@ -86,8 +86,12 @@
           "tableFrom": "formats",
           "tableTo": "games",
           "schemaTo": "public",
-          "columnsFrom": ["game_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -171,8 +175,12 @@
           "tableFrom": "organization_staff_members",
           "tableTo": "organizations",
           "schemaTo": "public",
-          "columnsFrom": ["organization_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "organization_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -181,8 +189,12 @@
           "tableFrom": "organization_staff_members",
           "tableTo": "accounts",
           "schemaTo": "public",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -279,8 +291,12 @@
           "tableFrom": "phase_players",
           "tableTo": "players",
           "schemaTo": "public",
-          "columnsFrom": ["player_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "player_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -424,8 +440,12 @@
           "tableFrom": "phases",
           "tableTo": "tournaments",
           "schemaTo": "public",
-          "columnsFrom": ["tournament_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "tournament_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -434,8 +454,12 @@
           "tableFrom": "phases",
           "tableTo": "rounds",
           "schemaTo": "public",
-          "columnsFrom": ["current_round_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "current_round_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -573,8 +597,12 @@
           "tableFrom": "organizations",
           "tableTo": "accounts",
           "schemaTo": "public",
-          "columnsFrom": ["owner_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -819,8 +847,12 @@
           "tableFrom": "matches",
           "tableTo": "players",
           "schemaTo": "public",
-          "columnsFrom": ["loser_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "loser_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -829,8 +861,12 @@
           "tableFrom": "matches",
           "tableTo": "players",
           "schemaTo": "public",
-          "columnsFrom": ["player_one_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "player_one_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -839,8 +875,12 @@
           "tableFrom": "matches",
           "tableTo": "players",
           "schemaTo": "public",
-          "columnsFrom": ["player_two_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "player_two_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -849,8 +889,12 @@
           "tableFrom": "matches",
           "tableTo": "players",
           "schemaTo": "public",
-          "columnsFrom": ["winner_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "winner_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -859,8 +903,12 @@
           "tableFrom": "matches",
           "tableTo": "rounds",
           "schemaTo": "public",
-          "columnsFrom": ["round_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "round_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -869,8 +917,12 @@
           "tableFrom": "matches",
           "tableTo": "tournaments",
           "schemaTo": "public",
-          "columnsFrom": ["tournament_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "tournament_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -879,8 +931,12 @@
           "tableFrom": "matches",
           "tableTo": "phases",
           "schemaTo": "public",
-          "columnsFrom": ["phase_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "phase_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -889,8 +945,12 @@
           "tableFrom": "matches",
           "tableTo": "accounts",
           "schemaTo": "public",
-          "columnsFrom": ["reset_by_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "reset_by_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1068,8 +1128,12 @@
           "tableFrom": "tournament_formats",
           "tableTo": "formats",
           "schemaTo": "public",
-          "columnsFrom": ["format_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "format_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1078,8 +1142,12 @@
           "tableFrom": "tournament_formats",
           "tableTo": "tournaments",
           "schemaTo": "public",
-          "columnsFrom": ["tournament_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "tournament_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1319,8 +1387,12 @@
           "tableFrom": "tournaments",
           "tableTo": "games",
           "schemaTo": "public",
-          "columnsFrom": ["game_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1329,8 +1401,12 @@
           "tableFrom": "tournaments",
           "tableTo": "organizations",
           "schemaTo": "public",
-          "columnsFrom": ["organization_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "organization_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1339,8 +1415,12 @@
           "tableFrom": "tournaments",
           "tableTo": "phases",
           "schemaTo": "public",
-          "columnsFrom": ["current_phase_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "current_phase_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1585,8 +1665,12 @@
           "tableFrom": "pokemon",
           "tableTo": "pokemon_teams",
           "schemaTo": "public",
-          "columnsFrom": ["pokemon_team_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "pokemon_team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1701,8 +1785,12 @@
           "tableFrom": "pokemon_teams",
           "tableTo": "formats",
           "schemaTo": "public",
-          "columnsFrom": ["format_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "format_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1711,8 +1799,12 @@
           "tableFrom": "pokemon_teams",
           "tableTo": "games",
           "schemaTo": "public",
-          "columnsFrom": ["game_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "game_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1721,8 +1813,12 @@
           "tableFrom": "pokemon_teams",
           "tableTo": "profiles",
           "schemaTo": "public",
-          "columnsFrom": ["profile_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "profile_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1957,8 +2053,12 @@
           "tableFrom": "match_games",
           "tableTo": "matches",
           "schemaTo": "public",
-          "columnsFrom": ["match_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "match_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1967,8 +2067,12 @@
           "tableFrom": "match_games",
           "tableTo": "players",
           "schemaTo": "public",
-          "columnsFrom": ["loser_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "loser_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1977,8 +2081,12 @@
           "tableFrom": "match_games",
           "tableTo": "players",
           "schemaTo": "public",
-          "columnsFrom": ["winner_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "winner_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1987,8 +2095,12 @@
           "tableFrom": "match_games",
           "tableTo": "profiles",
           "schemaTo": "public",
-          "columnsFrom": ["reporter_profile_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "reporter_profile_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -2072,8 +2184,12 @@
           "tableFrom": "clerk_users",
           "tableTo": "accounts",
           "schemaTo": "public",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -2243,8 +2359,12 @@
           "tableFrom": "accounts",
           "tableTo": "profiles",
           "schemaTo": "public",
-          "columnsFrom": ["default_profile_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "default_profile_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -2431,8 +2551,12 @@
           "tableFrom": "players",
           "tableTo": "pokemon_teams",
           "schemaTo": "public",
-          "columnsFrom": ["pokemon_team_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "pokemon_team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -2441,8 +2565,12 @@
           "tableFrom": "players",
           "tableTo": "tournaments",
           "schemaTo": "public",
-          "columnsFrom": ["tournament_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "tournament_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -2451,8 +2579,12 @@
           "tableFrom": "players",
           "tableTo": "accounts",
           "schemaTo": "public",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -2461,8 +2593,12 @@
           "tableFrom": "players",
           "tableTo": "profiles",
           "schemaTo": "public",
-          "columnsFrom": ["profile_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "profile_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -2718,8 +2854,12 @@
           "tableFrom": "profiles",
           "tableTo": "accounts",
           "schemaTo": "public",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -2815,8 +2955,12 @@
           "tableFrom": "chat_messages",
           "tableTo": "matches",
           "schemaTo": "public",
-          "columnsFrom": ["match_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "match_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -2825,8 +2969,12 @@
           "tableFrom": "chat_messages",
           "tableTo": "accounts",
           "schemaTo": "public",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "account_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -2835,8 +2983,12 @@
           "tableFrom": "chat_messages",
           "tableTo": "profiles",
           "schemaTo": "public",
-          "columnsFrom": ["profile_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "profile_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

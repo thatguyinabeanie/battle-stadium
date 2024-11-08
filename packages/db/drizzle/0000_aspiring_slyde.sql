@@ -2,286 +2,286 @@
 -- If you want to run this migration please uncomment this code before executing migrations
 /*
 CREATE TABLE IF NOT EXISTS "formats" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "name" varchar,
-  "game_id" bigint,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"name" varchar,
+	"game_id" bigint,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "organization_staff_members" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "organization_id" bigint NOT NULL,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "account_id" bigint
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"organization_id" bigint NOT NULL,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"account_id" bigint
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "phase_players" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "player_id" bigint NOT NULL,
-  "phase_type" varchar NOT NULL,
-  "phase_id" bigint NOT NULL,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"player_id" bigint NOT NULL,
+	"phase_type" varchar NOT NULL,
+	"phase_id" bigint NOT NULL,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "phases" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "tournament_id" bigint NOT NULL,
-  "number_of_rounds" integer,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "type" varchar NOT NULL,
-  "name" varchar,
-  "best_of" integer DEFAULT 3 NOT NULL,
-  "started_at" timestamp(6),
-  "ended_at" timestamp(6),
-  "order" integer DEFAULT 0 NOT NULL,
-  "current_round_id" bigint
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"tournament_id" bigint NOT NULL,
+	"number_of_rounds" integer,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"type" varchar NOT NULL,
+	"name" varchar,
+	"best_of" integer DEFAULT 3 NOT NULL,
+	"started_at" timestamp(6),
+	"ended_at" timestamp(6),
+	"order" integer DEFAULT 0 NOT NULL,
+	"current_round_id" bigint
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "organizations" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "name" varchar,
-  "description" text,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "logo_url" varchar,
-  "partner" boolean DEFAULT false NOT NULL,
-  "hidden" boolean DEFAULT false NOT NULL,
-  "slug" varchar,
-  "limitless_org_id" bigint,
-  "owner_id" bigint
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"name" varchar,
+	"description" text,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"logo_url" varchar,
+	"partner" boolean DEFAULT false NOT NULL,
+	"hidden" boolean DEFAULT false NOT NULL,
+	"slug" varchar,
+	"limitless_org_id" bigint,
+	"owner_id" bigint
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "matches" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "round_id" bigint NOT NULL,
-  "table_number" integer,
-  "player_one_id" bigint,
-  "player_two_id" bigint,
-  "winner_id" bigint,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "player_one_check_in" timestamp(6),
-  "player_two_check_in" timestamp(6),
-  "loser_id" bigint,
-  "ended_at" timestamp(6),
-  "tournament_id" bigint,
-  "phase_id" bigint,
-  "bye" boolean DEFAULT false NOT NULL,
-  "reset_by_id" bigint
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"round_id" bigint NOT NULL,
+	"table_number" integer,
+	"player_one_id" bigint,
+	"player_two_id" bigint,
+	"winner_id" bigint,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"player_one_check_in" timestamp(6),
+	"player_two_check_in" timestamp(6),
+	"loser_id" bigint,
+	"ended_at" timestamp(6),
+	"tournament_id" bigint,
+	"phase_id" bigint,
+	"bye" boolean DEFAULT false NOT NULL,
+	"reset_by_id" bigint
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "rounds" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "phase_id" bigint NOT NULL,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "round_number" integer DEFAULT 1 NOT NULL,
-  "started_at" timestamp(6),
-  "ended_at" timestamp(6)
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"phase_id" bigint NOT NULL,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"round_number" integer DEFAULT 1 NOT NULL,
+	"started_at" timestamp(6),
+	"ended_at" timestamp(6)
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "tournament_formats" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "tournament_id" bigint NOT NULL,
-  "format_id" bigint NOT NULL,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"tournament_id" bigint NOT NULL,
+	"format_id" bigint NOT NULL,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "tournaments" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "name" varchar,
-  "start_at" timestamp(6),
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "organization_id" bigint,
-  "check_in_start_at" timestamp(6),
-  "game_id" bigint,
-  "format_id" bigint,
-  "ended_at" timestamp(6),
-  "registration_start_at" timestamp(6),
-  "registration_end_at" timestamp(6),
-  "player_cap" integer,
-  "autostart" boolean DEFAULT false NOT NULL,
-  "started_at" timestamp(6),
-  "late_registration" boolean DEFAULT true NOT NULL,
-  "teamlists_required" boolean DEFAULT true NOT NULL,
-  "open_team_sheets" boolean DEFAULT true NOT NULL,
-  "end_at" timestamp(6),
-  "limitless_id" bigint,
-  "published" boolean DEFAULT false NOT NULL,
-  "current_phase_id" bigint
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"name" varchar,
+	"start_at" timestamp(6),
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"organization_id" bigint,
+	"check_in_start_at" timestamp(6),
+	"game_id" bigint,
+	"format_id" bigint,
+	"ended_at" timestamp(6),
+	"registration_start_at" timestamp(6),
+	"registration_end_at" timestamp(6),
+	"player_cap" integer,
+	"autostart" boolean DEFAULT false NOT NULL,
+	"started_at" timestamp(6),
+	"late_registration" boolean DEFAULT true NOT NULL,
+	"teamlists_required" boolean DEFAULT true NOT NULL,
+	"open_team_sheets" boolean DEFAULT true NOT NULL,
+	"end_at" timestamp(6),
+	"limitless_id" bigint,
+	"published" boolean DEFAULT false NOT NULL,
+	"current_phase_id" bigint
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "pokemon" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "species" varchar,
-  "ability" varchar,
-  "tera_type" varchar,
-  "nature" varchar,
-  "item" varchar,
-  "move1" varchar,
-  "move2" varchar,
-  "move3" varchar,
-  "move4" varchar,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "nickname" varchar,
-  "pokemon_team_id" bigint DEFAULT 0 NOT NULL,
-  "form" varchar,
-  "position" integer DEFAULT 0 NOT NULL,
-  "gender" integer DEFAULT 2 NOT NULL,
-  "shiny" boolean DEFAULT false NOT NULL,
-  "ev_hp" integer,
-  "ev_atk" integer,
-  "ev_def" integer,
-  "ev_spa" integer,
-  "ev_spd" integer,
-  "ev_spe" integer,
-  "iv_hp" integer,
-  "iv_atk" integer,
-  "iv_def" integer,
-  "iv_spa" integer,
-  "iv_spd" integer,
-  "iv_spe" integer
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"species" varchar,
+	"ability" varchar,
+	"tera_type" varchar,
+	"nature" varchar,
+	"item" varchar,
+	"move1" varchar,
+	"move2" varchar,
+	"move3" varchar,
+	"move4" varchar,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"nickname" varchar,
+	"pokemon_team_id" bigint DEFAULT 0 NOT NULL,
+	"form" varchar,
+	"position" integer DEFAULT 0 NOT NULL,
+	"gender" integer DEFAULT 2 NOT NULL,
+	"shiny" boolean DEFAULT false NOT NULL,
+	"ev_hp" integer,
+	"ev_atk" integer,
+	"ev_def" integer,
+	"ev_spa" integer,
+	"ev_spd" integer,
+	"ev_spe" integer,
+	"iv_hp" integer,
+	"iv_atk" integer,
+	"iv_def" integer,
+	"iv_spa" integer,
+	"iv_spd" integer,
+	"iv_spe" integer
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "pokemon_teams" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "published" boolean DEFAULT true NOT NULL,
-  "name" varchar,
-  "format_id" bigint NOT NULL,
-  "game_id" bigint NOT NULL,
-  "archived_at" timestamp(6),
-  "pokepaste_id" varchar,
-  "profile_id" bigint
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"published" boolean DEFAULT true NOT NULL,
+	"name" varchar,
+	"format_id" bigint NOT NULL,
+	"game_id" bigint NOT NULL,
+	"archived_at" timestamp(6),
+	"pokepaste_id" varchar,
+	"profile_id" bigint
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "games" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "name" varchar,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"name" varchar,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "schema_migrations" (
-  "version" varchar PRIMARY KEY NOT NULL
+	"version" varchar PRIMARY KEY NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "ar_internal_metadata" (
-  "key" varchar PRIMARY KEY NOT NULL,
-  "value" varchar,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL
+	"key" varchar PRIMARY KEY NOT NULL,
+	"value" varchar,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "match_games" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "match_id" bigint NOT NULL,
-  "winner_id" bigint,
-  "loser_id" bigint,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "game_number" integer DEFAULT 1 NOT NULL,
-  "ended_at" timestamp(6),
-  "started_at" timestamp(6),
-  "reporter_profile_id" bigint
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"match_id" bigint NOT NULL,
+	"winner_id" bigint,
+	"loser_id" bigint,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"game_number" integer DEFAULT 1 NOT NULL,
+	"ended_at" timestamp(6),
+	"started_at" timestamp(6),
+	"reporter_profile_id" bigint
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "clerk_users" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "clerk_user_id" varchar NOT NULL,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "account_id" bigint
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"clerk_user_id" varchar NOT NULL,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"account_id" bigint
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "accounts" (
-  "email" varchar DEFAULT '' NOT NULL,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "unlock_token" varchar,
-  "first_name" varchar,
-  "last_name" varchar,
-  "pronouns" varchar DEFAULT '' NOT NULL,
-  "jti" varchar DEFAULT 'invalid' NOT NULL,
-  "name" varchar,
-  "image_url" text,
-  "admin" boolean DEFAULT false NOT NULL,
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "default_profile_id" bigint,
-  "archived_at" timestamp(6),
-  "country" varchar,
-  "timezone" varchar
+	"email" varchar DEFAULT '' NOT NULL,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"unlock_token" varchar,
+	"first_name" varchar,
+	"last_name" varchar,
+	"pronouns" varchar DEFAULT '' NOT NULL,
+	"jti" varchar DEFAULT 'invalid' NOT NULL,
+	"name" varchar,
+	"image_url" text,
+	"admin" boolean DEFAULT false NOT NULL,
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"default_profile_id" bigint,
+	"archived_at" timestamp(6),
+	"country" varchar,
+	"timezone" varchar
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "players" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "tournament_id" bigint NOT NULL,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "team_sheet_submitted" boolean DEFAULT false NOT NULL,
-  "checked_in_at" timestamp,
-  "in_game_name" varchar DEFAULT '' NOT NULL,
-  "pokemon_team_id" bigint,
-  "dropped" boolean DEFAULT false NOT NULL,
-  "disqualified" boolean DEFAULT false NOT NULL,
-  "round_wins" integer DEFAULT 0 NOT NULL,
-  "round_losses" integer DEFAULT 0 NOT NULL,
-  "game_wins" integer DEFAULT 0 NOT NULL,
-  "game_losses" integer DEFAULT 0 NOT NULL,
-  "resistance" numeric(5, 2),
-  "account_id" bigint,
-  "profile_id" bigint NOT NULL,
-  "show_country_flag" boolean DEFAULT true NOT NULL
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"tournament_id" bigint NOT NULL,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"team_sheet_submitted" boolean DEFAULT false NOT NULL,
+	"checked_in_at" timestamp,
+	"in_game_name" varchar DEFAULT '' NOT NULL,
+	"pokemon_team_id" bigint,
+	"dropped" boolean DEFAULT false NOT NULL,
+	"disqualified" boolean DEFAULT false NOT NULL,
+	"round_wins" integer DEFAULT 0 NOT NULL,
+	"round_losses" integer DEFAULT 0 NOT NULL,
+	"game_wins" integer DEFAULT 0 NOT NULL,
+	"game_losses" integer DEFAULT 0 NOT NULL,
+	"resistance" numeric(5, 2),
+	"account_id" bigint,
+	"profile_id" bigint NOT NULL,
+	"show_country_flag" boolean DEFAULT true NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "friendly_id_slugs" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "slug" varchar NOT NULL,
-  "sluggable_id" integer NOT NULL,
-  "sluggable_type" varchar(50),
-  "scope" varchar,
-  "created_at" timestamp(6)
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"slug" varchar NOT NULL,
+	"sluggable_id" integer NOT NULL,
+	"sluggable_type" varchar(50),
+	"scope" varchar,
+	"created_at" timestamp(6)
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "profiles" (
-  "username" varchar NOT NULL,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL,
-  "image_url" varchar,
-  "slug" varchar,
-  "account_id" bigint,
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "archived_at" timestamp(6),
-  "default" boolean DEFAULT false NOT NULL,
-  "type" varchar DEFAULT 'Profile' NOT NULL
+	"username" varchar NOT NULL,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL,
+	"image_url" varchar,
+	"slug" varchar,
+	"account_id" bigint,
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"archived_at" timestamp(6),
+	"default" boolean DEFAULT false NOT NULL,
+	"type" varchar DEFAULT 'Profile' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "chat_messages" (
-  "match_id" bigint NOT NULL,
-  "content" text,
-  "message_type" varchar,
-  "sent_at" timestamp(6),
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "account_id" bigint,
-  "profile_id" bigint NOT NULL
+	"match_id" bigint NOT NULL,
+	"content" text,
+	"message_type" varchar,
+	"sent_at" timestamp(6),
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"account_id" bigint,
+	"profile_id" bigint NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "rk9_tournaments" (
-  "id" bigserial PRIMARY KEY NOT NULL,
-  "rk9_id" varchar NOT NULL,
-  "name" varchar NOT NULL,
-  "start_date" date NOT NULL,
-  "end_date" date NOT NULL,
-  "created_at" timestamp(6) NOT NULL,
-  "updated_at" timestamp(6) NOT NULL
+	"id" bigserial PRIMARY KEY NOT NULL,
+	"rk9_id" varchar NOT NULL,
+	"name" varchar NOT NULL,
+	"start_date" date NOT NULL,
+	"end_date" date NOT NULL,
+	"created_at" timestamp(6) NOT NULL,
+	"updated_at" timestamp(6) NOT NULL
 );
 --> statement-breakpoint
 DO $$ BEGIN
