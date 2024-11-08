@@ -11,6 +11,7 @@
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo run clean",
     "db:push": "turbo -F @battle-stadium/db push",
+    "db:pull": "turbo -F @battle-stadium/db pull",
     "db:studio": "turbo -F @battle-stadium/db studio",
     "dev": "turbo watch dev --continue",
     "dev:next": "turbo watch dev -F @battle-stadium/nextjs...",

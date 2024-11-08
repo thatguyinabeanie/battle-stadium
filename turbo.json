@@ -36,6 +36,10 @@
       "cache": false,
       "interactive": true
     },
+    "pull": {
+      "cache": false,
+      "interactive": true
+    },
     "studio": {
       "cache": false,
       "persistent": true
