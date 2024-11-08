@@ -2,7 +2,7 @@ import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import * as cookie from "cookie";
 
-import { env } from "~/env.ts";
+import { env } from "~/env";
 
 function getCookieDomain() {
   if (env.NODE_ENV === "production") {

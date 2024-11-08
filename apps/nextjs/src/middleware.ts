@@ -1,6 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-import { env } from "./env.ts";
+import { env } from "./env";
 
 // Or like this if you need to do something here.
 // export default auth((req) => {

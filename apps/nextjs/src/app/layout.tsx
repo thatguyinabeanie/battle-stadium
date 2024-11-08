@@ -7,7 +7,7 @@ import { GeistSans } from "geist/font/sans";
 
 import { cn, ThemeProvider, ThemeToggle } from "@battle-stadium/ui";
 
-import { env } from "~/env.ts";
+import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 
 import "~/app/globals.css";

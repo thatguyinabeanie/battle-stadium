@@ -1,4 +1,3 @@
-import type { Session } from "@clerk/nextjs/server";
 import { cache } from "react";
 import { headers } from "next/headers";
 import { createHydrationHelpers } from "@trpc/react-query/rsc";
@@ -17,17 +16,6 @@ const createContext = cache(async () => {
   heads.set("x-trpc-source", "rsc");
 
   return createTRPCContext({
-    session: {
-      id: "1",
-      clientId: "1",
-      userId: "1",
-      status: "hello",
-      lastActiveAt: 1,
-      expireAt: 1,
-      abandonAt: 1,
-      createdAt: 1,
-      updatedAt: 1,
-    } as Session,
     headers: heads,
   });
 });

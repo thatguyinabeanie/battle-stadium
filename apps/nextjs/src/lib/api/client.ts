@@ -4,7 +4,7 @@ import { getVercelOidcToken } from "@vercel/functions/oidc";
 import createFetchClient from "openapi-fetch";
 
 import type { paths } from "~/lib/api/openapi-v1";
-import { env } from "~/env.ts";
+import { env } from "~/env";
 
 export const DEFAULT_CACHE_TIMEOUT = 300;
 

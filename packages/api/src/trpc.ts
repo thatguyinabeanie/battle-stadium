@@ -12,8 +12,6 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
-// import type { Session } from "@battle-stadium/auth";
-// import { auth, validateToken } from "@battle-stadium/auth";
 import { db } from "@battle-stadium/db/client";
 
 /**
@@ -24,9 +22,9 @@ import { db } from "@battle-stadium/db/client";
 const isomorphicGetSession = async (headers: Headers) => {
   const authToken = headers.get("Authorization") ?? null;
   if (authToken) {
+    console.log(">>> tRPC Request with token", authToken);
     // return validateToken(authToken);
   }
-  // return auth();
   return await auth();
 };
 

@@ -1,4 +1,4 @@
-import { env } from "~/env.ts";
+import { env } from "~/env";
 
 const DEFAULT_WS_PORT = "10000";
 const DEFAULT_WS_PATH = "/cable";
