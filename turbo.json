@@ -67,7 +67,8 @@
     "CLERK_PUBLIC_JWKS_URL",
     "CLERK_PUBLISHABLE_KEY",
     "PROD_API_BASE_URL",
-    "COOKIE_DOMAIN"
+    "COOKIE_DOMAIN",
+    "UPLOADTHING_SECRET"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",
