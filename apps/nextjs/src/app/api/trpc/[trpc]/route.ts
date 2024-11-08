@@ -1,6 +1,7 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
 import { appRouter, createTRPCContext } from "@battle-stadium/api";
+
 import { auth } from "@battle-stadium/auth";
 
 export const runtime = "edge";
@@ -24,7 +25,7 @@ export const OPTIONS = () => {
   return response;
 };
 
-const handler = auth(async (req) => {
+const handler = auth(async (req: Request & { auth: any }) => {
   const response = await fetchRequestHandler({
     endpoint: "/api/trpc",
     router: appRouter,

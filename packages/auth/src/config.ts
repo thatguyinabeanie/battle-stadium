@@ -1,7 +1,7 @@
 import type {
   DefaultSession,
-  NextAuthConfig,
   Session as NextAuthSession,
+  AuthOptions,
 } from "next-auth";
 import { skipCSRFCheck } from "@auth/core";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
@@ -28,7 +28,7 @@ const adapter = DrizzleAdapter(db, {
 
 export const isSecureContext = env.NODE_ENV !== "development";
 
-export const authConfig = {
+export const authConfig: AuthOptions = {
   adapter,
   // In development, we need to skip checks to allow Expo to work
   ...(!isSecureContext
@@ -38,9 +38,14 @@ export const authConfig = {
     }
     : {}),
   secret: env.AUTH_SECRET,
-  providers: [Discord],
+  providers: [
+    Discord({
+      clientId: env.AUTH_DISCORD_ID,
+      clientSecret: env.AUTH_DISCORD_SECRET,
+    }),
+  ],
   callbacks: {
-    session: (opts) => {
+    session: (opts: { session: DefaultSession, user: { id: string } }) => {
       if (!("user" in opts))
         throw new Error("unreachable with session strategy");
 
@@ -53,7 +58,7 @@ export const authConfig = {
       };
     },
   },
-} satisfies NextAuthConfig;
+};
 
 export const validateToken = async (
   token: string,
