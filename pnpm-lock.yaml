@@ -245,6 +245,9 @@ importers:
       '@battle-stadium/api':
         specifier: workspace:*
         version: link:../../packages/api
+      '@battle-stadium/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
       '@battle-stadium/db':
         specifier: workspace:*
         version: link:../../packages/db
