@@ -52,7 +52,6 @@
     "jose": "^5.9.6",
     "js-cookie": "^3.0.5",
     "next": "catalog:",
-    "next-themes": "catalog:",
     "openapi-fetch": "^0.13.0",
     "openapi-typescript-helpers": "^0.0.15",
     "react": "catalog:react18",

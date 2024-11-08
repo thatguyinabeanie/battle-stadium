@@ -2,9 +2,9 @@
 
 import type { ISourceOptions } from "@tsparticles/engine";
 import { MoveDirection } from "@tsparticles/engine";
-import { useTheme } from "next-themes";
+import { useTheme } from "@battle-stadium/ui";
 
-export default function useParticlesOptions(): ISourceOptions {
+export default function useParticlesOptions (): ISourceOptions {
   const { theme } = useTheme();
 
   const isLight = theme?.includes("light");

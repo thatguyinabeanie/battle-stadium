@@ -42,9 +42,6 @@ catalogs:
     next:
       specifier: ^15
       version: 15.0.3
-    next-themes:
-      specifier: ^0
-      version: 0.4.3
     prettier:
       specifier: ^3.3.3
       version: 3.3.3
@@ -359,9 +356,6 @@ importers:
       next:
         specifier: 'catalog:'
         version: 15.0.3(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      next-themes:
-        specifier: 'catalog:'
-        version: 0.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openapi-fetch:
         specifier: ^0.13.0
         version: 0.13.0
@@ -682,7 +676,7 @@ importers:
         specifier: ^0.454.0
         version: 0.454.0(react@18.3.1)
       next-themes:
-        specifier: 'catalog:'
+        specifier: ^0
         version: 0.4.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-hook-form:
         specifier: ^7.53.1
