@@ -4,8 +4,6 @@ import { appRouter, createTRPCContext } from "@battle-stadium/api";
 
 import { auth } from "@battle-stadium/auth";
 
-export const runtime = "nodejs";
-
 /**
  * Configure basic CORS headers
  * You should extend this to match your needs

@@ -6,8 +6,6 @@ import { authConfig } from "./config";
 
 export type { Session } from "next-auth";
 
-export const runtime = 'nodejs' // Add this line
-
 const { handlers, auth: defaultAuth, signIn, signOut } = NextAuth(authConfig);
 
 /**
