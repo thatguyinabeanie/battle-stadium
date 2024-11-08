@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "~/components/ui/card";
+import { Card, CardContent, CardHeader } from "@battle-stadium/ui/card";
 
 const Pairings = () => {
   return (

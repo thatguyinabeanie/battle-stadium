@@ -7,12 +7,12 @@ import OrganizationHeader from "~/components/organizations/organization-header";
 import { type OrganizationTournamentProps } from "~/types";
 
 import Link from "next/link";
-import Chip from "~/components/ui/chip";
+import Chip from "@battle-stadium/ui/chip";
 
 export const revalidate = 300;
 export const dynamicParams = true;
 
-export async function generateMetadata(
+export async function generateMetadata (
   props: Readonly<OrganizationTournamentProps>,
 ) {
   const params = await props.params;
@@ -21,7 +21,7 @@ export async function generateMetadata(
   return { title: tournament?.name ?? "Tournament" };
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams () {
   const tournaments = (await getTournaments()).data?.data ?? [];
 
   return tournaments.map(({ organization, id }) => ({
@@ -30,7 +30,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function OrganizationTournament(
+export default async function OrganizationTournament (
   props: Readonly<OrganizationTournamentProps>,
 ) {
   const params = await props.params;
@@ -46,19 +46,19 @@ export default async function OrganizationTournament(
   return (
     <>
       <div className="pt-2" />
-      <OrganizationHeader organization={organization}>
+      <OrganizationHeader organization={ organization }>
         <div className="mx-4 flex h-full flex-col items-center justify-between text-center">
-          <h1 className="text-2xl font-semibold">{tournament.name}</h1>
+          <h1 className="text-2xl font-semibold">{ tournament.name }</h1>
           <h2 className="flex flex-row gap-1">
             <p className="font-bold">Presented By: </p>
-            {organization?.name}
+            { organization?.name }
           </h2>
 
           <div className="pt-2" />
 
-          <p>Registration: {tournament.registration_start_at}</p>
-          <p>Starts: {tournament.start_at}</p>
-          <p>Check in opens: {tournament.check_in_start_at} </p>
+          <p>Registration: { tournament.registration_start_at }</p>
+          <p>Starts: { tournament.start_at }</p>
+          <p>Check in opens: { tournament.check_in_start_at } </p>
 
           <div className="pt-2" />
         </div>
@@ -66,13 +66,13 @@ export default async function OrganizationTournament(
         <div className="pt-2" />
 
         <TournamentDetailChips
-          org_slug={org_slug}
-          tournament_id={tournament_id}
+          org_slug={ org_slug }
+          tournament_id={ tournament_id }
         />
       </OrganizationHeader>
 
       <div className="pt-2" />
-      {/* <Divider /> */}
+      {/* <Divider /> */ }
       <div>
         <h2>TODO: Divider component</h2>
       </div>
@@ -85,7 +85,7 @@ interface TournamentDetailChipsProps {
   org_slug: string;
   tournament_id: number;
 }
-function TournamentDetailChips(props: Readonly<TournamentDetailChipsProps>) {
+function TournamentDetailChips (props: Readonly<TournamentDetailChipsProps>) {
   const { org_slug, tournament_id } = props;
 
   return (
@@ -95,7 +95,7 @@ function TournamentDetailChips(props: Readonly<TournamentDetailChipsProps>) {
       <Chip variant="light">Light</Chip>
       <Chip variant="flat">Flat</Chip>
       <Link
-        href={`/organizations/${org_slug}/tournaments/${tournament_id}/register`}
+        href={ `/organizations/${org_slug}/tournaments/${tournament_id}/register` }
       >
         <Chip>Register</Chip>
       </Link>
