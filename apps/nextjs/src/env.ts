@@ -5,7 +5,7 @@ import { z } from "zod";
 import { env as authEnv } from "@battle-stadium/auth/env";
 
 export const env = createEnv({
-  extends: [authEnv, vercel()],
+  extends: [authEnv, vercel(), uploadthing()],
   shared: {
     NODE_ENV: z
       .enum(["development", "production", "test"])
@@ -23,6 +23,7 @@ export const env = createEnv({
     POSTGRES_URL: z.string().url(),
     WEBSOCKET_URL: z.string().optional(),
     MEASUREMENT_ID: z.string().default("G-XXXXXXXXXX"),
+    UPLOADTHING_SECRET: z.string(),
   },
 
   /**
@@ -37,7 +38,6 @@ export const env = createEnv({
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
    */
   experimental__runtimeEnv: {
-
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
