@@ -1,8 +1,7 @@
 import type { IconProps } from "@iconify/react";
-
 import Link from "next/link";
-
 import { Icon } from "@iconify/react";
+
 import BattleStadium from "./battle-stadium";
 
 type SocialIconProps = Omit<IconProps, "icon">;

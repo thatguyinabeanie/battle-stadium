@@ -1,10 +1,7 @@
-import {
-  convertToParsedPokemon
-  
-  
-} from "./common";
-import type {ParsedPokemon, ParsedTeam} from "./common";
 import { Sets } from "@pkmn/sets";
+
+import type { ParsedPokemon, ParsedTeam } from "./common";
+import { convertToParsedPokemon } from "./common";
 
 export function parseShowdownFormat(input: string): ParsedTeam {
   const lines = input.split("\n");

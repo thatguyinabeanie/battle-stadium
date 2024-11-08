@@ -1,8 +1,9 @@
 "use server";
 
+import type { FetchOptions } from "openapi-fetch";
+
+import type { paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
-import type {paths} from "~/lib/api/openapi-v1";
-import type {FetchOptions} from "openapi-fetch";
 
 export async function getOrganizationTournaments(
   slug: string,

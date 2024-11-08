@@ -1,9 +1,10 @@
 "use server";
 
-import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
-import type {paths} from "~/lib/api/openapi-v1";
+import type { FetchOptions } from "openapi-fetch";
 import { revalidateTag } from "next/cache";
-import type {FetchOptions} from "openapi-fetch";
+
+import type { paths } from "~/lib/api/openapi-v1";
+import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
 export async function getProfiles(
   options?: FetchOptions<paths["/profiles"]["get"]>,

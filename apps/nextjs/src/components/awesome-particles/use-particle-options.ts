@@ -1,7 +1,7 @@
 "use client";
 
-import {  MoveDirection } from "@tsparticles/engine";
-import type {ISourceOptions} from "@tsparticles/engine";
+import type { ISourceOptions } from "@tsparticles/engine";
+import { MoveDirection } from "@tsparticles/engine";
 import { useTheme } from "next-themes";
 
 export default function useParticlesOptions(): ISourceOptions {

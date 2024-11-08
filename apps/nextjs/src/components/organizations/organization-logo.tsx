@@ -1,6 +1,7 @@
-import type {Organization} from "~/lib/api";
-import type {PlaceholderValue} from "next/dist/shared/lib/get-img-props";
+import type { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
+
+import type { Organization } from "~/lib/api";
 
 interface OrganizationLogoProps {
   alt?: string;

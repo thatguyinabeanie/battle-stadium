@@ -1,6 +1,6 @@
+import type { FileRouter } from "uploadthing/next";
 import { auth } from "@clerk/nextjs/server";
 import { createUploadthing } from "uploadthing/next";
-import type { FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
 const uploadThing = createUploadthing();

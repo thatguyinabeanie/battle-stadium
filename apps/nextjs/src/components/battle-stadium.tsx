@@ -1,7 +1,7 @@
-import type { IconSvgProps } from "~/types";
-
-import type {FC} from "react";
+import type { FC } from "react";
 import Link from "next/link";
+
+import type { IconSvgProps } from "~/types";
 
 export const BattleStadiumIcon: FC<IconSvgProps> = ({
   size = 32,

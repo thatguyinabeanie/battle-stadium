@@ -1,9 +1,10 @@
 "use server";
 
+import type { FetchOptions } from "openapi-fetch";
+
+import type { paths } from "~/lib/api/openapi-v1";
+import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
-import type {paths} from "~/lib/api/openapi-v1";
-import type {ValidatedPokemon, PokePasteMetadata} from "~/lib/pokemon/common";
-import type {FetchOptions} from "openapi-fetch";
 
 interface PostPokemonTeamBody {
   pokepaste_id?: string;

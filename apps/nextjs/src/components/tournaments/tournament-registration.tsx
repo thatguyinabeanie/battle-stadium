@@ -1,6 +1,7 @@
+import { redirect } from "next/navigation";
+
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import { getProfilesByAccountId } from "~/app/server-actions/profiles/actions";
-import { redirect } from "next/navigation";
 import RegistrationCard from "./registration-card";
 
 interface TournamentRegisterProps {

@@ -1,11 +1,6 @@
-import { useRef, useState, useCallback, useEffect } from "react";
-import {
-  createConsumer
-  
-  
-  
-} from "@rails/actioncable";
-import type {Consumer, Subscription, Mixin} from "@rails/actioncable";
+import type { Consumer, Mixin, Subscription } from "@rails/actioncable";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createConsumer } from "@rails/actioncable";
 
 type SubscriptionConnection<M> = Subscription<Consumer> &
   Mixin & {
@@ -64,7 +59,7 @@ export function useActionCableConnection<M extends object, S extends object>(
       shouldReconnect = true,
     ) => {
       if (!channelName || !roomName) {
-        console.warn("Channel or room not set");  
+        console.warn("Channel or room not set");
 
         return;
       }
@@ -81,24 +76,24 @@ export function useActionCableConnection<M extends object, S extends object>(
         { channel: channelName, room: roomName },
         {
           connected() {
-            console.info("Connected to the chat channel");  
+            console.info("Connected to the chat channel");
           },
           rejected() {
-            console.info("Rejected from the chat channel");  
+            console.info("Rejected from the chat channel");
           },
           disconnected() {
-            console.info("Disconnected from the chat channel");  
+            console.info("Disconnected from the chat channel");
             // Attempt to reconnect after a delay, but only if it's not a reconnect attempt
             if (shouldReconnect) {
               const attemptReconnect = () => {
                 if (reconnectAttempts < maxReconnectAttempts) {
                   reconnectAttempts++;
                   setTimeout(() => {
-                    console.info(`Reconnect attempt ${reconnectAttempts}`);  
+                    console.info(`Reconnect attempt ${reconnectAttempts}`);
                     connectToCable(channelName, roomName, false);
                   }, 5000);
                 } else {
-                  console.warn("Max reconnect attempts reached");  
+                  console.warn("Max reconnect attempts reached");
                 }
               };
 
@@ -106,7 +101,7 @@ export function useActionCableConnection<M extends object, S extends object>(
             }
           },
           received(data: M) {
-            console.info("Received message", data);  
+            console.info("Received message", data);
             setMessages((prevMessages) => [...prevMessages, data]);
           },
         },

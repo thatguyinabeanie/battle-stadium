@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import type {Organization} from "~/lib/api";
+import type { Organization } from "~/lib/api";
 import { cn } from "~/lib/utils";
 import OrganizationLogo from "./organization-logo";
 

@@ -1,9 +1,15 @@
 "use client";
-import { useState, useCallback } from "react";
 
-import type {ParsedPokemon, ParsedTeam, PokePasteMetadata, ValidatedPokemon} from "./common";
-import { parseShowdownFormat } from "./parse-showdown-format";
+import { useCallback, useState } from "react";
+
+import type {
+  ParsedPokemon,
+  ParsedTeam,
+  PokePasteMetadata,
+  ValidatedPokemon,
+} from "./common";
 import { parsePokePasteHTML } from "./parse-pokepaste-html";
+import { parseShowdownFormat } from "./parse-showdown-format";
 
 async function fetchAndParse(input: string): Promise<ParsedTeam> {
   if (input.startsWith("https://pokepast.es/")) {

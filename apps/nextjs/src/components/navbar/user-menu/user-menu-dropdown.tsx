@@ -1,22 +1,23 @@
 "use client";
 
+import Link from "next/link";
 import { SignInButton, SignOutButton } from "@clerk/nextjs";
 
-import { cn } from "~/lib/utils";
-import type {components} from "~/lib/api/openapi-v1";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@battle-stadium/ui/dropdown-menu";
-import Link from "next/link";
+
+import type { components } from "~/lib/api/openapi-v1";
+import { cn } from "~/lib/utils";
 
 interface UserMenuDropDownProps {
   me?: components["schemas"]["AccountMe"];
   isSignedIn: boolean;
 }
 
-export default function UserMenuDropDown ({
+export default function UserMenuDropDown({
   me,
   isSignedIn,
 }: Readonly<UserMenuDropDownProps>) {
@@ -26,13 +27,13 @@ export default function UserMenuDropDown ({
         <DropdownMenuItem
           key="profile"
           aria-label="dashboard"
-          className={ cn("hidden", { "sm:flex": me && isSignedIn }) }
+          className={cn("hidden", { "sm:flex": me && isSignedIn })}
           color="primary"
         >
           <Link aria-label="dashboard" href="/dashboard">
             <span>
               <p className="text-default-400 font-normal">Signed in as</p>
-              <p className="truncate font-semibold">{ `${me?.first_name} ${me?.last_name}` }</p>{ " " }
+              <p className="truncate font-semibold">{`${me?.first_name} ${me?.last_name}`}</p>{" "}
             </span>
           </Link>
         </DropdownMenuItem>
@@ -40,9 +41,9 @@ export default function UserMenuDropDown ({
         <DropdownMenuItem
           key="sign-in"
           aria-label="sign-in"
-          className={ cn("", {
+          className={cn("", {
             hidden: isSignedIn,
-          }) }
+          })}
           color="success"
         >
           <SignInButton>
@@ -53,9 +54,9 @@ export default function UserMenuDropDown ({
         <DropdownMenuItem
           key="admin"
           aria-label="Admin"
-          className={ cn("", {
+          className={cn("", {
             hidden: !(me && isSignedIn) || !me.admin,
-          }) }
+          })}
         >
           <Link href="/dashboard?tab=admin">Admin</Link>
         </DropdownMenuItem>
@@ -63,9 +64,9 @@ export default function UserMenuDropDown ({
         <DropdownMenuItem
           key="settings"
           aria-label="Settings"
-          className={ cn("", {
+          className={cn("", {
             hidden: !(me && isSignedIn),
-          }) }
+          })}
         >
           <Link href="/dashboard?tab=settings">Settings</Link>
         </DropdownMenuItem>
@@ -77,9 +78,9 @@ export default function UserMenuDropDown ({
         <DropdownMenuItem
           key="logout"
           aria-label="Sign Out"
-          className={ cn("", {
+          className={cn("", {
             hidden: !(me && isSignedIn),
-          }) }
+          })}
           color="danger"
         >
           <SignOutButton>Sign out</SignOutButton>

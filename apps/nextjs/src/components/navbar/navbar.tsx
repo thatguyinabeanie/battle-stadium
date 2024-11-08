@@ -1,10 +1,11 @@
 import { auth } from "@clerk/nextjs/server";
 
 import BattleStadium from "~/components/battle-stadium";
-import MobileMenu from "~/components/navbar/navbar-mobile-menu";
-import RightMenu from "~/components/navbar/navbar-right-menu";
 import NavbarContainer from "~/components/navbar/navbar-container";
 import NavbarLinks from "~/components/navbar/navbar-links";
+import MobileMenu from "~/components/navbar/navbar-mobile-menu";
+import RightMenu from "~/components/navbar/navbar-right-menu";
+
 export default async function Navbar() {
   const clerkAuth = await auth();
 

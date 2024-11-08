@@ -1,5 +1,5 @@
-import { cn } from "~/lib/utils";
 import { NavbarItemsConfigs } from "~/lib/config/site";
+import { cn } from "~/lib/utils";
 import NavbarLink from "./navbar-link";
 
 interface NavbarLinksProps {

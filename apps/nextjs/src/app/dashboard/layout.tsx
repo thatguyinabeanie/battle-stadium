@@ -1,4 +1,4 @@
-import type {DashboardLayoutProps} from "~/types";
+import type { DashboardLayoutProps } from "~/types";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 
 export default async function DashboardLayout({

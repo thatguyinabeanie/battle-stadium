@@ -1,8 +1,9 @@
 // import "swagger-ui-react/swagger-ui.css";
 // import SwaggerUI from "swagger-ui-react"
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
+
+import { getAccountMe } from "~/app/server-actions/accounts/actions";
 
 export default async function OpenApiDocs() {
   const { sessionId } = await auth();

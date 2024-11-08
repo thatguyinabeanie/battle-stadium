@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
-import { Button } from "@battle-stadium/ui/button";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import Cookies from "js-cookie";
+
+import { Button } from "@battle-stadium/ui/button";
 
 const cookieAttributes = (
   attrs: Partial<Cookies.CookieAttributes>,
@@ -21,14 +22,14 @@ interface CookiesComponentProps {
   isSignedIn: boolean;
   userId: string | null | undefined;
 }
-export default function CookiesComponent ({
+export default function CookiesComponent({
   isSignedIn,
   userId,
 }: Readonly<CookiesComponentProps>) {
   const cookieConsent = Cookies.get(COOKIE_CONSENT);
   const [showConsent, setShowConsent] = useState(false);
 
-  function handleAccept () {
+  function handleAccept() {
     Cookies.set(COOKIE_CONSENT, "accepted", cookieAttributes({ expires: 365 }));
 
     if (isSignedIn && userId) {
@@ -38,7 +39,7 @@ export default function CookiesComponent ({
     setShowConsent(false);
   }
 
-  function handleReject () {
+  function handleReject() {
     Cookies.set(COOKIE_CONSENT, "rejected", cookieAttributes({ expires: 1 }));
     setShowConsent(false);
   }
@@ -61,7 +62,7 @@ export default function CookiesComponent ({
     }
   }, [isSignedIn, cookieConsent, userId]);
 
-  async function callApiToSetUserId (userId: string) {
+  async function callApiToSetUserId(userId: string) {
     try {
       await fetch("/api/cookies/user-id", {
         method: "POST",
@@ -71,7 +72,7 @@ export default function CookiesComponent ({
         body: JSON.stringify({ userId }),
       });
     } catch (error) {
-      console.error("Error setting userId cookie:", error);  
+      console.error("Error setting userId cookie:", error);
     }
   }
 
@@ -95,12 +96,12 @@ export default function CookiesComponent ({
           <Button
             className="px-4 font-medium"
             // radius="lg"
-            style={ {
+            style={{
               border: "solid 2px transparent",
               backgroundOrigin: "border-box",
               backgroundClip: "padding-box, border-box",
-            } }
-            onClick={ handleAccept }
+            }}
+            onClick={handleAccept}
           >
             Accept All
           </Button>
@@ -109,7 +110,7 @@ export default function CookiesComponent ({
             className="font-medium"
             // radius="lg"
             // variant="light"
-            onClick={ handleReject }
+            onClick={handleReject}
           >
             Reject
           </Button>

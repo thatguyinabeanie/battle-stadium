@@ -1,9 +1,10 @@
 import type { Dispatch, SetStateAction } from "react";
-import { postPokemonTeam } from "~/app/server-actions/pokemon/actions";
-import type { ValidatedPokemon, PokePasteMetadata } from "~/lib/pokemon/common";
 
 import { Button } from "@battle-stadium/ui/button";
 import { Textarea } from "@battle-stadium/ui/textarea";
+
+import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
+import { postPokemonTeam } from "~/app/server-actions/pokemon/actions";
 
 interface PokemonShowdownSetFormProps {
   validatedTeam: ValidatedPokemon[] | null;
@@ -13,7 +14,7 @@ interface PokemonShowdownSetFormProps {
   metaData: PokePasteMetadata | null;
 }
 
-export function PokemonShowdownSetForm ({
+export function PokemonShowdownSetForm({
   validatedTeam,
   handleSubmit,
   input,
@@ -21,17 +22,17 @@ export function PokemonShowdownSetForm ({
   metaData,
 }: Readonly<PokemonShowdownSetFormProps>) {
   return (
-    <form action={ handleSubmit } className="grid grid-cols-1">
+    <form action={handleSubmit} className="grid grid-cols-1">
       <div className="mb-4">
         <h1 className="flex items-center justify-center text-2xl font-bold">
-          { "Showdown Set" }
+          {"Showdown Set"}
         </h1>
       </div>
       <Textarea
         name="pokepaste"
         placeholder="Paste your Showdown Set here"
-        value={ input }
-        onChange={ (e) => setInput(e.target.value) }
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
       />
 
       <div className="flex flex-row items-center justify-center gap-4 pt-2">
@@ -40,8 +41,8 @@ export function PokemonShowdownSetForm ({
         </Button>
         <Button
           color="primary"
-          disabled={ !validatedTeam || !metaData }
-          onClick={ () =>
+          disabled={!validatedTeam || !metaData}
+          onClick={() =>
             validatedTeam &&
             metaData &&
             postPokemonTeam(validatedTeam, metaData)

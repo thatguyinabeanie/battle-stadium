@@ -1,6 +1,7 @@
 import React from "react";
 import { X } from "lucide-react";
-import { cn } from ".";
+
+import { cn } from "./utils";
 
 // Type definitions
 type ChipVariant = "solid" | "bordered" | "light" | "flat";
@@ -65,26 +66,26 @@ const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
             : "rounded-sm",
 
       // Disabled state
-      "disabled:opacity-50 disabled:pointer-events-none",
+      "disabled:pointer-events-none disabled:opacity-50",
 
       className,
     );
 
     return (
-      <div ref={ ref } className={ baseStyles } { ...props }>
-        { children }
-        { onClose && (
+      <div ref={ref} className={baseStyles} {...props}>
+        {children}
+        {onClose && (
           <button
-            onClick={ (e: React.MouseEvent<HTMLButtonElement>) => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
               onClose(e);
-            } }
+            }}
             className="inline-flex items-center justify-center rounded-full hover:bg-black/20 focus:outline-none focus:ring-2 focus:ring-ring"
-            style={ { padding: size === "sm" ? "2px" : "4px" } }
+            style={{ padding: size === "sm" ? "2px" : "4px" }}
           >
-            <X size={ size === "sm" ? 14 : size === "md" ? 16 : 18 } />
+            <X size={size === "sm" ? 14 : size === "md" ? 16 : 18} />
           </button>
-        ) }
+        )}
       </div>
     );
   },

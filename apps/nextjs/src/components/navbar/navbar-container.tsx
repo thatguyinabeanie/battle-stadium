@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
 import { cn } from "~/lib/utils";
 
 interface NavbarContainerProps {

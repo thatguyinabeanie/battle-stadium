@@ -1,4 +1,7 @@
-import type {APIChatInputApplicationCommandInteraction, APIPingInteraction} from "discord-api-types/v10";
+import type {
+  APIChatInputApplicationCommandInteraction,
+  APIPingInteraction,
+} from "discord-api-types/v10";
 import nacl from "tweetnacl";
 
 interface VerifyWithNaclArgs {

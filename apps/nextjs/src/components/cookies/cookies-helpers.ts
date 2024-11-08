@@ -1,9 +1,10 @@
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 import * as cookie from "cookie";
-import { env } from "~/env.ts";
-import { headers } from "next/headers";
 
-function getCookieDomain () {
+import { env } from "~/env.ts";
+
+function getCookieDomain() {
   if (env.NODE_ENV === "production") {
     return env.COOKIE_DOMAIN;
   }
@@ -21,10 +22,10 @@ const defaultCookieOptions: cookie.SerializeOptions = {
   maxAge,
 };
 
-export function setResponseCookies () {
+export function setResponseCookies() {
   const response = NextResponse.json({ message: "Cookie set successfully" });
 
-  async function setCookies (
+  async function setCookies(
     key: string,
     value: string | number,
   ): Promise<void> {
@@ -47,7 +48,7 @@ export function setResponseCookies () {
   return [response, setCookies] as const;
 }
 
-export async function generateSignature (
+export async function generateSignature(
   value: string | number,
 ): Promise<string> {
   const encoder = new TextEncoder();
@@ -69,6 +70,6 @@ export async function generateSignature (
     .join("");
 }
 
-export async function getCookie (cookie: string) {
+export async function getCookie(cookie: string) {
   return (await headers()).get(cookie) ?? "";
 }

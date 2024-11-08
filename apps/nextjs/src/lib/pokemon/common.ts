@@ -1,4 +1,4 @@
-import type {PokemonSet, StatsTable} from "@pkmn/types";
+import type { PokemonSet, StatsTable } from "@pkmn/types";
 
 export interface OptionalStatsPokemonSet
   extends Omit<PokemonSet, "evs" | "ivs"> {
