@@ -19,7 +19,7 @@ import {
   rounds,
   tournamentFormats,
   tournaments,
-} from "./schema";
+} from "./schemas";
 
 export const formatsRelations = relations(formats, ({ one, many }) => ({
   game: one(games, {

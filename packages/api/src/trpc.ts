@@ -6,7 +6,7 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
-import type { Session } from "@clerk/nextjs/server";
+import type { AuthObject } from "@clerk/backend";
 import { auth } from "@clerk/nextjs/server";
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
@@ -27,7 +27,7 @@ const isomorphicGetSession = async (headers: Headers) => {
     // return validateToken(authToken);
   }
   // return auth();
-  return auth();
+  return await auth();
 };
 
 /**
@@ -44,8 +44,11 @@ const isomorphicGetSession = async (headers: Headers) => {
  */
 export const createTRPCContext = async (opts: {
   headers: Headers;
-  session: Session | null;
-}) => {
+}): Promise<{
+  session: AuthObject | null;
+  db: typeof db;
+  token: string | null;
+}> => {
   const authToken = opts.headers.get("Authorization") ?? null;
   const session = await isomorphicGetSession(opts.headers);
 
@@ -138,7 +141,7 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
 export const protectedProcedure = t.procedure
   .use(timingMiddleware)
   .use(({ ctx, next }) => {
-    if (!ctx.session.userId) {
+    if (!ctx.session?.userId) {
       throw new TRPCError({ code: "UNAUTHORIZED" });
     }
     return next({
