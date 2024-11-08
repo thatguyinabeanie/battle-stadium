@@ -86,7 +86,7 @@ export default async function RootLayout (
               <TRPCReactProvider>
                 <NextSSRPlugin routerConfig={ extractRouterConfig(UploadThingRouter) } />
                 <div className="flex flex-col items-center min-h-screen ">
-                  <AwesomeParticles />
+                  {/* <AwesomeParticles /> */ }
 
                   <div className="flex flex-col items-center min-h-screen backdrop-blur shadow-2xl dark:shadow-white w-5/6 ">
                     <Navbar />
