@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from "@battle-stadium/ui/input";
+import { Input } from "@battle-stadium/ui";
 
 import type { Profile } from "~/lib/api";
 
@@ -8,7 +8,7 @@ interface ProfilesAutocompleteProps {
   profiles: Profile[];
 }
 
-export default function ProfilesAutocomplete({
+export default function ProfilesAutocomplete ({
   profiles,
 }: Readonly<ProfilesAutocompleteProps>) {
   console.log("profiles", profiles);

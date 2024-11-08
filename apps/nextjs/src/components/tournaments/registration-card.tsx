@@ -1,5 +1,4 @@
-import { Button } from "@battle-stadium/ui";
-import { Input } from "@battle-stadium/ui/input";
+import { Button, Input } from "@battle-stadium/ui";
 
 import type { Profile } from "~/lib/api";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";

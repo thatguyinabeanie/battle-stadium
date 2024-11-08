@@ -4,16 +4,16 @@ import type { ColumnDef } from "@tanstack/react-table";
 import * as React from "react";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
-import { Button } from "@battle-stadium/ui";
-import { Checkbox } from "@battle-stadium/ui/checkbox";
 import {
+  Button,
+  Checkbox,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@battle-stadium/ui/dropdown-menu";
+} from "@battle-stadium/ui";
 
 import type { Payment } from "./types";
 

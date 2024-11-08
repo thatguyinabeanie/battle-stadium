@@ -1,7 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 
-import { Button } from "@battle-stadium/ui";
-import { Textarea } from "@battle-stadium/ui/textarea";
+import { Button, TextArea } from "@battle-stadium/ui";
 
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
 import { postPokemonTeam } from "~/app/server-actions/pokemon/actions";

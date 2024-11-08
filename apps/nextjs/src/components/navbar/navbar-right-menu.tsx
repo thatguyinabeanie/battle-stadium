@@ -3,13 +3,12 @@ import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
-import { Badge } from "@battle-stadium/ui/badge";
-import { Button } from "@battle-stadium/ui";
+import { Button, Badge } from "@battle-stadium/ui";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@battle-stadium/ui/popover";
+} from "@battle-stadium/ui";
 
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import UserMenu from "./user-menu/user-menu";

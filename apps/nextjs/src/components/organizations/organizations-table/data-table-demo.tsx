@@ -22,16 +22,16 @@ import {
 } from "@tanstack/react-table";
 import { ChevronDown } from "lucide-react";
 
-import { Button } from "@battle-stadium/ui";
-import { Input } from "@battle-stadium/ui/input";
 import {
+  Button,
+  Input,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-} from "@battle-stadium/ui/table";
+} from "@battle-stadium/ui";
 
 import { columns } from "./columns";
 import { data } from "./data";
