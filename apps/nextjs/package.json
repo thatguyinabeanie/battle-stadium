@@ -12,8 +12,8 @@
     "sort-packages": "pnpx sort-package-json",
     "start": "pnpm with-env next start",
     "typecheck": "tsc --noEmit",
-    "with-env": "dotenv -e ../../.env --",
-    "vercel:pull": "vercel env pull .env.development.local"
+    "vercel:pull": "vercel env pull .env.development.local",
+    "with-env": "dotenv -e ../../.env --"
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
@@ -22,6 +22,9 @@
     "@battle-stadium/db": "workspace:*",
     "@battle-stadium/ui": "workspace:*",
     "@battle-stadium/validators": "workspace:*",
+    "@clerk/backend": "^1.15.1",
+    "@clerk/clerk-react": "^5.13.1",
+    "@clerk/nextjs": "^6.0.2",
     "@t3-oss/env-nextjs": "^0.11.1",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
