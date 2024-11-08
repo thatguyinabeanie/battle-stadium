@@ -22,7 +22,8 @@
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
     "ui-add": "turbo run ui-add",
-    "sort-packages": "turbo run sort-packages"
+    "sort-packages": "turbo run sort-packages",
+    "vercel:pull": "turbo run vercel:pull"
   },
   "devDependencies": {
     "@battle-stadium/prettier-config": "workspace:*",

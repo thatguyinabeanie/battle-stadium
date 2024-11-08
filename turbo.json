@@ -46,6 +46,9 @@
     },
     "sort-packages": {
       "cache": false
+    },
+    "vercel:pull": {
+      "cache": false
     }
   },
   "globalEnv": [
