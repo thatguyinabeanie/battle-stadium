@@ -22,7 +22,7 @@ const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
   if (
-    [env.NODE_ENV, env.VERCEL_ENV].includes("production") &&
+    [env.NODE_ENV, env.VERCEL_ENV].includes("development") &&
     !isPublicRoute(request)
   ) {
     await auth.protect();
