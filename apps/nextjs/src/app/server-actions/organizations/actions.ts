@@ -1,8 +1,8 @@
 "use server";
 
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
-import { type paths } from "~/lib/api/openapi-v1";
-import { type FetchOptions } from "openapi-fetch";
+import type {paths} from "~/lib/api/openapi-v1";
+import type {FetchOptions} from "openapi-fetch";
 
 export async function getOrganizations(
   options?: FetchOptions<paths["/organizations"]["get"]>,
@@ -12,8 +12,8 @@ export async function getOrganizations(
     ...options,
     params: {
       query: {
-        page: options?.params?.query?.page ?? 0,
-        per_page: options?.params?.query?.per_page ?? 20,
+        page: options?.params.query.page ?? 0,
+        per_page: options?.params.query.per_page ?? 20,
       },
     },
   };
@@ -23,8 +23,8 @@ export async function getOrganizations(
     await BattleStadiumApiClient(skipClerkAuth)
   ).GET("/organizations", organizationsOptions);
   const allOrgs = resp.data?.data;
-  const partnerOrgs = (allOrgs ?? [])?.filter((org) => org.partner);
-  const nonPartnerOrgs = (allOrgs ?? [])?.filter((org) => !org.partner);
+  const partnerOrgs = (allOrgs ?? []).filter((org) => org.partner);
+  const nonPartnerOrgs = (allOrgs ?? []).filter((org) => !org.partner);
 
   return {
     partners: partnerOrgs,

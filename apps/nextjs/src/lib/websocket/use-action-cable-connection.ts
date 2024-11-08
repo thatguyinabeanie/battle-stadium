@@ -1,10 +1,11 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import {
-  createConsumer,
-  type Consumer,
-  type Subscription,
-  type Mixin,
+  createConsumer
+  
+  
+  
 } from "@rails/actioncable";
+import type {Consumer, Subscription, Mixin} from "@rails/actioncable";
 
 type SubscriptionConnection<M> = Subscription<Consumer> &
   Mixin & {
@@ -63,7 +64,7 @@ export function useActionCableConnection<M extends object, S extends object>(
       shouldReconnect = true,
     ) => {
       if (!channelName || !roomName) {
-        console.warn("Channel or room not set"); // eslint-disable-line no-console
+        console.warn("Channel or room not set");  
 
         return;
       }
@@ -80,24 +81,24 @@ export function useActionCableConnection<M extends object, S extends object>(
         { channel: channelName, room: roomName },
         {
           connected() {
-            console.info("Connected to the chat channel"); // eslint-disable-line no-console
+            console.info("Connected to the chat channel");  
           },
           rejected() {
-            console.info("Rejected from the chat channel"); // eslint-disable-line no-console
+            console.info("Rejected from the chat channel");  
           },
           disconnected() {
-            console.info("Disconnected from the chat channel"); // eslint-disable-line no-console
+            console.info("Disconnected from the chat channel");  
             // Attempt to reconnect after a delay, but only if it's not a reconnect attempt
             if (shouldReconnect) {
               const attemptReconnect = () => {
                 if (reconnectAttempts < maxReconnectAttempts) {
                   reconnectAttempts++;
                   setTimeout(() => {
-                    console.info(`Reconnect attempt ${reconnectAttempts}`); // eslint-disable-line no-console
+                    console.info(`Reconnect attempt ${reconnectAttempts}`);  
                     connectToCable(channelName, roomName, false);
                   }, 5000);
                 } else {
-                  console.warn("Max reconnect attempts reached"); // eslint-disable-line no-console
+                  console.warn("Max reconnect attempts reached");  
                 }
               };
 
@@ -105,7 +106,7 @@ export function useActionCableConnection<M extends object, S extends object>(
             }
           },
           received(data: M) {
-            console.info("Received message", data); // eslint-disable-line no-console
+            console.info("Received message", data);  
             setMessages((prevMessages) => [...prevMessages, data]);
           },
         },

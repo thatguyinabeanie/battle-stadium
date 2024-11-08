@@ -24,7 +24,7 @@
     "@auth/drizzle-adapter": "1.4.2",
     "@battle-stadium/db": "workspace:*",
     "@t3-oss/env-nextjs": "catalog:",
-    "next": "^14.2.15",
+    "next": "catalog:",
     "react": "catalog:react18",
     "react-dom": "catalog:react18",
     "zod": "catalog:"

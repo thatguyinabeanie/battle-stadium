@@ -1,12 +1,7 @@
 "use client";
 import { useState, useCallback } from "react";
 
-import {
-  type ParsedPokemon,
-  type ParsedTeam,
-  type PokePasteMetadata,
-  type ValidatedPokemon,
-} from "./common";
+import type {ParsedPokemon, ParsedTeam, PokePasteMetadata, ValidatedPokemon} from "./common";
 import { parseShowdownFormat } from "./parse-showdown-format";
 import { parsePokePasteHTML } from "./parse-pokepaste-html";
 

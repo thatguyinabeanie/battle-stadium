@@ -1,4 +1,4 @@
-import { type PokemonSet, type StatsTable } from "@pkmn/types";
+import type {PokemonSet, StatsTable} from "@pkmn/types";
 
 export interface OptionalStatsPokemonSet
   extends Omit<PokemonSet, "evs" | "ivs"> {
@@ -57,7 +57,7 @@ export function cleanImageUrl(url: string): string {
     url = "/" + url;
   }
 
-  if (url?.startsWith("/img/pokemon/0-0.png")) {
+  if (url.startsWith("/img/pokemon/0-0.png")) {
     return "";
   }
 

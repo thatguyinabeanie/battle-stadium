@@ -1,12 +1,10 @@
 import {
-  type ParsedTeam,
-  type PokePasteMetadata,
-  type ParsedPokemon,
   cleanImageUrl,
-  parseStats,
+  parseStats
 } from "./common";
+import type { ParsedTeam, PokePasteMetadata, ParsedPokemon } from "./common";
 
-export function parsePokePasteHTML(html: string, url: string): ParsedTeam {
+export function parsePokePasteHTML (html: string, url: string): ParsedTeam {
   if (typeof window === "undefined")
     return { metadata: { title: "", author: "", format: "" }, pokemon: [] };
 
@@ -73,11 +71,9 @@ export function parsePokePasteHTML(html: string, url: string): ParsedTeam {
         } else if (line.startsWith("Tera Type:")) {
           currentPokemon.teraType = line.split(":")[1]?.trim() ?? "";
         } else if (line.startsWith("EVs:")) {
-          currentPokemon.evs =
-            parseStats(line.split(":")[1]?.trim() ?? "") ?? currentPokemon.evs;
+          currentPokemon.evs = parseStats(line.split(":")[1]?.trim() ?? "");
         } else if (line.startsWith("IVs:")) {
-          currentPokemon.ivs =
-            parseStats(line.split(":")[1]?.trim() ?? "") ?? currentPokemon.ivs;
+          currentPokemon.ivs = parseStats(line.split(":")[1]?.trim() ?? "");
         } else if (line.includes("Nature")) {
           currentPokemon.nature = line.split(" ")[0] ?? "";
         } else if (line.startsWith("-")) {
@@ -101,21 +97,21 @@ export function parsePokePasteHTML(html: string, url: string): ParsedTeam {
   return { metadata, pokemon };
 }
 
-function parseNameSpeciesItem(line: string): {
+function parseNameSpeciesItem (line: string): {
   name: string;
   species: string;
   item: string;
   gender?: string;
   remainingDetails: string;
 } {
-  console.log("Parsing line:", line); // eslint-disable-line no-console
+  console.log("Parsing line:", line);
 
   const [nameSpecies, itemAndRest] = line.split("@").map((s) => s.trim());
 
   let nameSpeciesLet = nameSpecies;
 
   if (!nameSpeciesLet) {
-    console.warn("Unable to parse Pokemon name/species from line:", line); // eslint-disable-line no-console
+    console.warn("Unable to parse Pokemon name/species from line:", line);
 
     return { name: "", species: "Unknown", item: "", remainingDetails: "" };
   }
@@ -123,7 +119,7 @@ function parseNameSpeciesItem(line: string): {
   // Handle gender separately
   let gender: string | undefined;
 
-  if (nameSpeciesLet.endsWith(" (M)") ?? nameSpeciesLet.endsWith(" (F)")) {
+  if (nameSpeciesLet.endsWith(" (M)") || nameSpeciesLet.endsWith(" (F)")) {
     gender = nameSpeciesLet.slice(-2, -1);
     nameSpeciesLet = nameSpeciesLet.slice(0, -4);
   }
@@ -155,7 +151,7 @@ function parseNameSpeciesItem(line: string): {
     remainingDetails,
   };
 
-  console.log("Parsed result:", obj); // eslint-disable-line no-console
+  console.log("Parsed result:", obj);
 
   return obj;
 }

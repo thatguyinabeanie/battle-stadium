@@ -1,9 +1,9 @@
 "use server";
 
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
-import { type paths } from "~/lib/api/openapi-v1";
+import type {paths} from "~/lib/api/openapi-v1";
 import { auth } from "@clerk/nextjs/server";
-import { type FetchOptions } from "openapi-fetch";
+import type {FetchOptions} from "openapi-fetch";
 
 export async function getAccounts(
   options?: FetchOptions<paths["/accounts"]["get"]>,

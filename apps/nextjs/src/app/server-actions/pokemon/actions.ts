@@ -1,14 +1,11 @@
 "use server";
 
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
-import { type paths } from "~/lib/api/openapi-v1";
-import {
-  type ValidatedPokemon,
-  type PokePasteMetadata,
-} from "~/lib/pokemon/common";
-import { type FetchOptions } from "openapi-fetch";
+import type {paths} from "~/lib/api/openapi-v1";
+import type {ValidatedPokemon, PokePasteMetadata} from "~/lib/pokemon/common";
+import type {FetchOptions} from "openapi-fetch";
 
-type PostPokemonTeamBody = {
+interface PostPokemonTeamBody {
   pokepaste_id?: string;
   profile_id: number | null;
   name: string;
@@ -29,7 +26,7 @@ type PostPokemonTeamBody = {
     move4: string | null;
     pokemon_team_id?: number;
   }[];
-};
+}
 
 export async function getPokemonTeams(
   options?: FetchOptions<paths["/pokemon_teams"]["get"]>,

@@ -1,15 +1,12 @@
-import {
-  type APIChatInputApplicationCommandInteraction,
-  type APIPingInteraction,
-} from "discord-api-types/v10";
+import type {APIChatInputApplicationCommandInteraction, APIPingInteraction} from "discord-api-types/v10";
 import nacl from "tweetnacl";
 
-type VerifyWithNaclArgs = {
+interface VerifyWithNaclArgs {
   appPublicKey: string;
   rawBody: string;
   signature: string;
   timestamp: string;
-};
+}
 
 const verifyWithNacl = ({
   appPublicKey,

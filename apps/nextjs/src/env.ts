@@ -16,7 +16,12 @@ export const env = createEnv({
    * This way you can ensure the app isn't built with invalid env vars.
    */
   server: {
+    COOKIE_DOMAIN: z.string(),
+    PROD_API_BASE_URL: z.string().url(),
+    LOCAL_DEV_BACKEND_HOST: z.string().optional().default("localhost"),
+    LOCAL_DEV_BACKEND_PORT: z.string().optional().default("10000"),
     POSTGRES_URL: z.string().url(),
+    WEBSOCKET_URL: z.string().optional(),
   },
 
   /**
