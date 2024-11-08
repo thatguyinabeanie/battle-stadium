@@ -10,6 +10,8 @@ export const env = createEnv({
         ? z.string().min(1)
         : z.string().min(1).optional(),
     NODE_ENV: z.enum(["development", "production"]).optional(),
+    CLERK_PUBLISHABLE_KEY: z.string().min(1),
+    CLERK_SECRET_KEY: z.string().min(1),
   },
   client: {},
   experimental__runtimeEnv: {},
