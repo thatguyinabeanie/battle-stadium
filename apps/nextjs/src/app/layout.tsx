@@ -15,7 +15,7 @@ import { env } from "~/env";
 export const metadata: Metadata = {
   metadataBase: new URL(
     env.VERCEL_ENV === "production"
-      ? "https://turbo.t3.gg"
+      ? "https://battlestadium.gg"
       : "http://localhost:3000",
   ),
   title: "Create T3 Turbo",
@@ -40,20 +40,20 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout(
+export default function RootLayout (
   props: Readonly<{ children: React.ReactNode }>,
 ) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(
+        className={ cn(
           "min-h-screen bg-background font-sans text-foreground antialiased",
           GeistSans.variable,
           GeistMono.variable,
-        )}
+        ) }
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TRPCReactProvider>{props.children}</TRPCReactProvider>
+          <TRPCReactProvider>{ props.children }</TRPCReactProvider>
           <div className="absolute bottom-4 right-4">
             <ThemeToggle />
           </div>
