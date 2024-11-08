@@ -4,7 +4,7 @@ import {
 } from "~/app/server-actions/tournaments/actions";
 
 import OrganizationHeader from "~/components/organizations/organization-header";
-import { type OrganizationTournamentProps } from "~/types";
+import type {OrganizationTournamentProps} from "~/types";
 
 import Link from "next/link";
 import Chip from "@battle-stadium/ui/chip";
@@ -51,7 +51,7 @@ export default async function OrganizationTournament (
           <h1 className="text-2xl font-semibold">{ tournament.name }</h1>
           <h2 className="flex flex-row gap-1">
             <p className="font-bold">Presented By: </p>
-            { organization?.name }
+            { organization.name }
           </h2>
 
           <div className="pt-2" />

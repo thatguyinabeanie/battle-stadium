@@ -4,7 +4,7 @@
 
 // import Link from "next/link";
 
-import { type Profile } from "~/lib/api";
+import type {Profile} from "~/lib/api";
 
 export interface PlayersTableProps {
   players: Profile[];
@@ -15,8 +15,8 @@ export default function PlayersTable({
   players,
   columns,
 }: Readonly<PlayersTableProps>) {
-  console.log("columns", columns); // eslint-disable-line no-console
-  console.log("players", players); // eslint-disable-line no-console
+  console.log("columns", columns);  
+  console.log("players", players);  
   return (
     <div className="h-90 w-90 flex flex-col items-center justify-center">
       <h2>TODO: Players Table</h2>

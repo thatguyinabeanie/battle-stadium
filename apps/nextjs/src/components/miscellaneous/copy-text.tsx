@@ -1,5 +1,6 @@
 import { Button, Tooltip } from "@nextui-org/react";
-import { HTMLAttributes, forwardRef, memo, useMemo, useState } from "react";
+import type { HTMLAttributes} from "react";
+import { forwardRef, memo, useMemo, useState } from "react";
 import { Icon } from "@iconify/react";
 import { cn } from "@nextui-org/react";
 
