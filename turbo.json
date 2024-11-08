@@ -55,7 +55,11 @@
     "AUTH_DISCORD_SECRET",
     "AUTH_REDIRECT_PROXY_URL",
     "AUTH_SECRET",
-    "PORT"
+    "PORT",
+    "CLERK_SECRET_KEY",
+    "CLERK_PUBLIC_JWKS_URL",
+    "CLERK_PUBLISHABLE_KEY",
+    "PROD_API_BASE_URL"
   ],
   "globalPassThroughEnv": [
     "NODE_ENV",
