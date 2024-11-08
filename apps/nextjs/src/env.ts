@@ -22,6 +22,7 @@ export const env = createEnv({
     LOCAL_DEV_BACKEND_PORT: z.string().optional().default("10000"),
     POSTGRES_URL: z.string().url(),
     WEBSOCKET_URL: z.string().optional(),
+    MEASUREMENT_ID: z.string().default("G-XXXXXXXXXX"),
   },
 
   /**

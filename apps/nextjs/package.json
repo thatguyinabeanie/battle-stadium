@@ -26,6 +26,7 @@
     "@clerk/clerk-react": "^5.13.1",
     "@clerk/nextjs": "^6.0.2",
     "@iconify/react": "^5.0.2",
+    "@next/third-parties": "^15.0.3",
     "@pkmn/sets": "^5.1.2",
     "@pkmn/types": "^4.0.0",
     "@rails/actioncable": "^7.2.200",
