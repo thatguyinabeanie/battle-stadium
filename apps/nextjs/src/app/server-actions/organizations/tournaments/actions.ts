@@ -20,9 +20,10 @@ export async function getOrganizationTournaments(
 
   const tours =
     (
-      await (
-        await BattleStadiumApiClient()
-      ).GET("/organizations/{slug}/tournaments", organizationTournamentsOptions)
+      await BattleStadiumApiClient().GET(
+        "/organizations/{slug}/tournaments",
+        organizationTournamentsOptions,
+      )
     ).data ?? [];
   return tours;
 }

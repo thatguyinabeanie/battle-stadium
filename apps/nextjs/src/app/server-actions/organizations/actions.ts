@@ -20,9 +20,10 @@ export async function getOrganizations(
   };
   const skipClerkAuth = true;
 
-  const resp = await (
-    await BattleStadiumApiClient(skipClerkAuth)
-  ).GET("/organizations", organizationsOptions);
+  const resp = await BattleStadiumApiClient(skipClerkAuth).GET(
+    "/organizations",
+    organizationsOptions,
+  );
   const allOrgs = resp.data?.data;
   const partnerOrgs = (allOrgs ?? []).filter((org) => org.partner);
   const nonPartnerOrgs = (allOrgs ?? []).filter((org) => !org.partner);
@@ -43,7 +44,7 @@ export async function getOrganization(
     params: { path: { slug } },
   };
 
-  return (await BattleStadiumApiClient()).GET(
+  return BattleStadiumApiClient().GET(
     "/organizations/{slug}",
     organizationOptions,
   );

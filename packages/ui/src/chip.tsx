@@ -1,7 +1,7 @@
 import React from "react";
 import { X } from "lucide-react";
 
-import { cn } from "./utils";
+import { cn } from "@battle-stadium/ui";
 
 // Type definitions
 type ChipVariant = "solid" | "bordered" | "light" | "flat";

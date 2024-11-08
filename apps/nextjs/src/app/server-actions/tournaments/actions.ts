@@ -15,7 +15,7 @@ export async function getTournament(
     params: { path: { tournament_id } },
   };
 
-  return (await BattleStadiumApiClient()).GET(
+  return BattleStadiumApiClient().GET(
     "/tournaments/{tournament_id}",
     tournamentOptions,
   );
@@ -34,7 +34,7 @@ export async function getTournaments(
 
   const skipClerkAuth = true;
 
-  return (await BattleStadiumApiClient(skipClerkAuth)).GET(
+  return BattleStadiumApiClient(skipClerkAuth).GET(
     "/tournaments",
     tournamentsOptions,
   );
@@ -72,9 +72,10 @@ export async function postTournamentRegistration(
     },
   };
 
-  await (
-    await BattleStadiumApiClient()
-  ).POST("/tournaments/{tournament_id}/players", registrationOptions);
+  await BattleStadiumApiClient().POST(
+    "/tournaments/{tournament_id}/players",
+    registrationOptions,
+  );
 }
 
 export async function getTournamentPlayers(
@@ -87,9 +88,10 @@ export async function getTournamentPlayers(
     params: { path: { tournament_id } },
   };
 
-  const resp = await (
-    await BattleStadiumApiClient()
-  ).GET("/tournaments/{tournament_id}/players", tournamentPlayersOptions);
+  const resp = await BattleStadiumApiClient().GET(
+    "/tournaments/{tournament_id}/players",
+    tournamentPlayersOptions,
+  );
 
   return {
     players: resp.data,

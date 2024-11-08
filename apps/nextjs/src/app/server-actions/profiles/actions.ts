@@ -14,7 +14,7 @@ export async function getProfiles(
     ...options,
   };
 
-  return (await BattleStadiumApiClient()).GET("/profiles", profilesOptions);
+  return BattleStadiumApiClient().GET("/profiles", profilesOptions);
 }
 
 export async function getProfilesByAccountId(
@@ -32,8 +32,8 @@ export async function getProfilesByAccountId(
   };
 
   const profiles =
-    (await (await BattleStadiumApiClient()).GET("/profiles", profileOptions))
-      .data ?? [];
+    (await BattleStadiumApiClient().GET("/profiles", profileOptions)).data ??
+    [];
 
   return profiles;
 }
@@ -54,7 +54,7 @@ export async function createProfile(
   };
 
   const resp = (
-    await (await BattleStadiumApiClient()).POST("/profiles", profileOptions)
+    await BattleStadiumApiClient().POST("/profiles", profileOptions)
   ).data;
 
   revalidateTag(`getPlayerProfileByAccountId-${accountId}`);

@@ -1,4 +1,4 @@
-import { cn } from "./utils";
+import { cn } from "@battle-stadium/ui";
 
 function Skeleton({
   className,
