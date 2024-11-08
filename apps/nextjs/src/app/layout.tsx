@@ -2,8 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
-import { cn } from "@battle-stadium/ui/utils";
-import { ThemeProvider, ThemeToggle } from "@battle-stadium/ui/theme";
+import { ThemeProvider, ThemeToggle, cn } from "@battle-stadium/ui";
 
 import { TRPCReactProvider } from "~/trpc/react";
 
