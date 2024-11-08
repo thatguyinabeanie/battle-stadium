@@ -1,6 +1,6 @@
-import type {Metadata} from "next";
+import type { Metadata } from "next";
 
-import type {Tournament} from "~/lib/api";
+import type { Tournament } from "~/lib/api";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export interface OrganizationsPageProps {
   orgs: Tournament[];
 }
 
-export default async function OrganizationsPage() {
+export default function OrganizationsPage () {
   return (
     <>
       <PartneredOrganizations />

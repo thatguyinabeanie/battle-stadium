@@ -4,10 +4,10 @@ import {
 } from "~/app/server-actions/tournaments/actions";
 
 import OrganizationHeader from "~/components/organizations/organization-header";
-import type {OrganizationTournamentProps} from "~/types";
+import type { OrganizationTournamentProps } from "~/types";
 
 import Link from "next/link";
-import Chip from "@battle-stadium/ui/chip";
+import { Chip } from "@battle-stadium/ui";
 
 export const revalidate = 300;
 export const dynamicParams = true;
