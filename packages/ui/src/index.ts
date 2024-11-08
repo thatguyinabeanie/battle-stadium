@@ -33,3 +33,4 @@ export * from "./hover-card";
 export * from "./dropdown-menu";
 export * from "./collapsible";
 export * from "./utils";
+export * from "./input";
