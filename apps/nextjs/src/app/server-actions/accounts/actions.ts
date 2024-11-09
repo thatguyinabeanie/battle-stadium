@@ -6,7 +6,7 @@ import { auth } from "@clerk/nextjs/server";
 import type { paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
-export async function getAccounts (
+export async function getAccounts(
   options?: FetchOptions<paths["/accounts"]["get"]>,
 ) {
   const usersOptions = {
@@ -18,7 +18,7 @@ export async function getAccounts (
   return BattleStadiumApiClient(skipClerkAuth).GET("/accounts", usersOptions);
 }
 
-export async function getAccount (
+export async function getAccount(
   username: string,
   options?: FetchOptions<paths["/accounts/{username}"]["get"]>,
 ) {
@@ -31,7 +31,7 @@ export async function getAccount (
   return BattleStadiumApiClient().GET("/accounts/{username}", userOptions);
 }
 
-export async function getAccountMe (
+export async function getAccountMe(
   options?: FetchOptions<paths["/accounts/me"]["get"]>,
 ) {
   const { userId } = await auth();
