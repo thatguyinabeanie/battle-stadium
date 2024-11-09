@@ -14,7 +14,9 @@ export interface OrganizationsPageProps {
 export default function OrganizationsPage() {
   return (
     <>
-      <PartneredOrganizations />
+      <div className="mt-8 md:mt-20">
+        <PartneredOrganizations />
+      </div>
 
       <div>
         <h2>TODO: Organizations Table</h2>
