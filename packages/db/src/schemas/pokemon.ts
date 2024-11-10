@@ -35,9 +35,8 @@ export const pokemon = pgTable(
       mode: "string",
     }).notNull(),
     nickname: varchar(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    pokemonTeamId: bigint("pokemon_team_id", { mode: "number" })
-      .default(0)
+    pokemonTeamId: bigint("pokemon_team_id", { mode: "bigint" })
+      .default(BigInt(0))
       .notNull(),
     form: varchar(),
     position: integer().default(0).notNull(),

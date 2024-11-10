@@ -26,8 +26,7 @@ export const profiles = pgTable(
     }).notNull(),
     imageUrl: varchar("image_url"),
     slug: varchar(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    accountId: bigint("account_id", { mode: "number" }),
+    accountId: bigint("account_id", { mode: "bigint" }),
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
     default: boolean().default(false).notNull(),

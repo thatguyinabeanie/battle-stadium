@@ -1,72 +1,61 @@
 "use server";
 
-import type { FetchOptions } from "openapi-fetch";
-
-import type { PokemonTeam } from "@battle-stadium/db/schema";
 import { db } from "@battle-stadium/db";
+import { pokemon, pokemonTeams } from "@battle-stadium/db/schema";
 
-import type { paths } from "~/lib/api/openapi-v1";
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
-import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
-interface PostPokemonTeamBody {
-  pokepaste_id?: string;
-  profile_id: number | null;
-  name: string;
-  format_id: number;
-  game_id: number;
-  pokemon: {
-    species: string;
-    item: string;
-    ability: string;
-    tera_type: string;
-    nature: string;
-    form: string | null;
-    nickname?: string | null;
-    gender?: string;
-    move1: string | null;
-    move2: string | null;
-    move3: string | null;
-    move4: string | null;
-    pokemon_team_id?: number;
-  }[];
-}
-
-export async function getPokemonTeams(): Promise<PokemonTeam[] | undefined> {
+export async function getPokemonTeams() {
   return await db.query.pokemonTeams.findMany();
 }
 
 export async function postPokemonTeam(
   validatedTeam: ValidatedPokemon[],
   metadata: PokePasteMetadata,
-  options?: FetchOptions<paths["/pokemon_teams"]["post"]>,
 ) {
-  const body: PostPokemonTeamBody = {
-    pokepaste_id: metadata.id,
-    profile_id: null,
+  const body = {
+    pokepasteId: metadata.id,
+    profileId: null,
     name: metadata.title,
-    format_id: 1,
-    game_id: 1,
-    pokemon: validatedTeam.map(({ pokemon }) => ({
-      nickname: pokemon.name,
-      species: pokemon.species,
-      item: pokemon.item,
-      ability: pokemon.ability,
-      tera_type: pokemon.teraType ?? "",
-      nature: pokemon.nature,
-      form: null,
-      move1: pokemon.moves[0] ?? null,
-      move2: pokemon.moves[1] ?? null,
-      move3: pokemon.moves[2] ?? null,
-      move4: pokemon.moves[3] ?? null,
-    })),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    gameId: BigInt(1),
+    formatId: BigInt(1),
   };
 
-  const pokemonOptions = {
-    ...defaultConfig("postPokemonTeam"),
-    ...options,
-    body,
-  };
+  const pokemonTeamResult = await db
+    .insert(pokemonTeams)
+    .values(body)
+    .returning();
 
-  return BattleStadiumApiClient().POST("/pokemon_teams", pokemonOptions);
+  if (!pokemonTeamResult.length) {
+    throw new Error("Failed to insert Pokemon Team");
+  }
+
+  const pokemonList = validatedTeam.map(({ pokemon }) => ({
+    pokemonTeamId: pokemonTeamResult[0]?.id,
+    nickname: pokemon.name,
+    species: pokemon.species,
+    item: pokemon.item,
+    ability: pokemon.ability,
+    teraType: pokemon.teraType ?? "",
+    nature: pokemon.nature,
+    form: null,
+    move1: pokemon.moves[0] ?? null,
+    move2: pokemon.moves[1] ?? null,
+    move3: pokemon.moves[2] ?? null,
+    move4: pokemon.moves[3] ?? null,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }));
+
+  const pokemonResult = await db
+    .insert(pokemon)
+    .values(pokemonList)
+    .returning();
+
+  return {
+    pokemonTeam: pokemonTeamResult[0],
+    pokemon: pokemonResult,
+  };
 }

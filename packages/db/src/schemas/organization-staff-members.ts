@@ -14,8 +14,7 @@ export const organizationStaffMembers = pgTable(
   "organization_staff_members",
   {
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    organizationId: bigint("organization_id", { mode: "number" }).notNull(),
+    organizationId: bigint("organization_id", { mode: "bigint" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",
@@ -24,8 +23,7 @@ export const organizationStaffMembers = pgTable(
       precision: 6,
       mode: "string",
     }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    accountId: bigint("account_id", { mode: "number" }),
+    accountId: bigint("account_id", { mode: "bigint" }),
   },
   (table) => {
     return {

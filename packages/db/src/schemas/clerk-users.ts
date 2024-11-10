@@ -24,8 +24,7 @@ export const clerkUsers = pgTable(
       precision: 6,
       mode: "string",
     }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    accountId: bigint("account_id", { mode: "number" }),
+    accountId: bigint("account_id", { mode: "bigint" }),
   },
   (table) => {
     return {

@@ -16,16 +16,13 @@ import { profiles } from "./profiles";
 export const chatMessages = pgTable(
   "chat_messages",
   {
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    matchId: bigint("match_id", { mode: "number" }).notNull(),
+    matchId: bigint("match_id", { mode: "bigint" }).notNull(),
     content: text(),
     messageType: varchar("message_type"),
     sentAt: timestamp("sent_at", { precision: 6, mode: "string" }),
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    accountId: bigint("account_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    profileId: bigint("profile_id", { mode: "number" }).notNull(),
+    accountId: bigint("account_id", { mode: "bigint" }),
+    profileId: bigint("profile_id", { mode: "bigint" }).notNull(),
   },
   (table) => {
     return {

@@ -16,8 +16,7 @@ export const formats = pgTable(
   {
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     name: varchar(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    gameId: bigint("game_id", { mode: "number" }),
+    gameId: bigint("game_id", { mode: "bigint" }),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",

@@ -33,8 +33,7 @@ export const accounts = pgTable(
     imageUrl: text("image_url"),
     admin: boolean().default(false).notNull(),
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    defaultProfileId: bigint("default_profile_id", { mode: "number" }),
+    defaultProfileId: bigint("default_profile_id", { mode: "bigint" }),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
     country: varchar(),
     timezone: varchar(),

@@ -27,14 +27,11 @@ export const pokemonTeams = pgTable(
     }).notNull(),
     published: boolean().default(true).notNull(),
     name: varchar(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    formatId: bigint("format_id", { mode: "number" }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    gameId: bigint("game_id", { mode: "number" }).notNull(),
+    formatId: bigint("format_id", { mode: "bigint" }).notNull(),
+    gameId: bigint("game_id", { mode: "bigint" }).notNull(),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
     pokepasteId: varchar("pokepaste_id"),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    profileId: bigint("profile_id", { mode: "number" }),
+    profileId: bigint("profile_id", { mode: "bigint" }),
   },
   (table) => {
     return {
