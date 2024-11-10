@@ -15,7 +15,7 @@ export default function NewProfile({ me }: Readonly<NewProfileProps>) {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
-    await createProfile(formData.get("profile") as string, Number(me.id));
+    await createProfile(formData.get("profile") as string, me.id);
     router.push("/dashboard?tab=profiles");
   };
 

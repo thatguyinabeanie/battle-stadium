@@ -1,8 +1,7 @@
 "use client";
 
+import type { Profile } from "@battle-stadium/db/schema";
 import { Input } from "@battle-stadium/ui";
-
-import type { Profile } from "~/lib/api";
 
 interface ProfilesAutocompleteProps {
   profiles: Profile[];
@@ -11,10 +10,17 @@ interface ProfilesAutocompleteProps {
 export default function ProfilesAutocomplete({
   profiles,
 }: Readonly<ProfilesAutocompleteProps>) {
-  console.log("profiles", profiles);
   return (
     <div>
       <Input type="text" list="profiles" placeholder="Select profile" />
+
+      <div className="pt-4">
+        <datalist id="profiles">
+          {profiles.map((profile) => (
+            <option key={profile.id} value={profile.username} />
+          ))}
+        </datalist>
+      </div>
     </div>
   );
 }

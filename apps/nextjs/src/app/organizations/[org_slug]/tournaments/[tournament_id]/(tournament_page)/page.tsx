@@ -17,9 +17,9 @@ export async function generateMetadata(
   props: Readonly<OrganizationTournamentProps>,
 ) {
   const params = await props.params;
-  const tournament = await getTournament(params.tournament_id);
+  const result = await getTournament(params.tournament_id);
 
-  return { title: tournament?.name ?? "Tournament" };
+  return { title: result?.tournament.name ?? "Tournament" };
 }
 
 export async function generateStaticParams() {

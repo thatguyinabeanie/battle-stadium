@@ -1,12 +1,12 @@
+import type { Profile } from "@battle-stadium/db/schema";
 import { Button, Input } from "@battle-stadium/ui";
 
-import type { Profile } from "~/lib/api";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 import ProfilesAutocomplete from "./profiles-autocomplete";
 
 interface RegistrationCardProps {
   org_slug: string;
-  tournament_id: number;
+  tournament_id: bigint;
   profiles: Profile[];
 }
 
@@ -26,10 +26,10 @@ export default function RegistrationCard({
 
     if (profile_id) {
       await postTournamentRegistration({
-        tournament_id,
-        in_game_name,
-        profile_id,
-        show_country_flag,
+        tournamentId: tournament_id,
+        inGameName: in_game_name,
+        profileId: profile_id,
+        showCountryFlag: show_country_flag,
       });
     }
   };

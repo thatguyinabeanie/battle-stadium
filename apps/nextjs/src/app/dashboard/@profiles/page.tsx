@@ -9,7 +9,7 @@ export default async function Profiles() {
     return null;
   }
 
-  const profiles = await getProfilesByAccountId(Number(me.id));
+  const profiles = await getProfilesByAccountId(me.id);
 
   return (
     <div>

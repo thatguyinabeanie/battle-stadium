@@ -12,10 +12,11 @@ export async function getPokemonTeams() {
 export async function postPokemonTeam(
   validatedTeam: ValidatedPokemon[],
   metadata: PokePasteMetadata,
+  profileId?: bigint,
 ) {
   const body = {
     pokepasteId: metadata.id,
-    profileId: null,
+    profileId: profileId,
     name: metadata.title,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
@@ -40,7 +41,7 @@ export async function postPokemonTeam(
     ability: pokemon.ability,
     teraType: pokemon.teraType ?? "",
     nature: pokemon.nature,
-    form: null,
+    form: null, // TODO: #7 Update to pass through form
     move1: pokemon.moves[0] ?? null,
     move2: pokemon.moves[1] ?? null,
     move3: pokemon.moves[2] ?? null,
