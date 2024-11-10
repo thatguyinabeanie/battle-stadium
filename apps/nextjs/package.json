@@ -55,6 +55,7 @@
     "next": "catalog:",
     "openapi-fetch": "^0.13.0",
     "openapi-typescript-helpers": "^0.0.15",
+    "pokedex-promise-v2": "^4.2.0",
     "react": "catalog:react18",
     "react-dom": "catalog:react18",
     "server-only": "^0.0.1",

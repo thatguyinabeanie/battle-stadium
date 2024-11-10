@@ -24,6 +24,31 @@ export const env = createEnv({
     WEBSOCKET_URL: z.string().optional(),
     MEASUREMENT_ID: z.string().default("G-XXXXXXXXXX"),
     UPLOADTHING_SECRET: z.string(),
+    ROOT_URL: z
+      .string()
+      .url("ROOT_URL must be a valid URL")
+      .optional()
+      .default("http://localhost:10000"),
+    DISCORD_APP_PUBLIC_KEY: z
+      .string({
+        required_error:
+          "DISCORD_APP_PUBLIC_KEY is required. Visit https://discord.com/developers/applications -> General information -> PUBLIC KEY",
+      })
+      .min(
+        1,
+        "DISCORD_APP_PUBLIC_KEY is required. Visit https://discord.com/developers/applications -> General information -> PUBLIC KEY",
+      )
+      .optional(),
+    DISCORD_APP_ID: z
+      .string({
+        required_error:
+          "DISCORD_APP_ID is required. Visit https://discord.com/developers/applications -> Your bot -> General information -> Application ID",
+      })
+      .min(
+        1,
+        "DISCORD_APP_ID is required. Visit https://discord.com/developers/applications -> Your bot -> General information -> Application ID",
+      )
+      .optional(),
   },
 
   /**
