@@ -12,17 +12,17 @@ import {
 import UserMenuDropDown from "~/components/navbar/user-menu/user-menu-dropdown";
 
 interface UserMenuProps {
-  me?: typeof accounts.$inferSelect;
+  me?: typeof accounts.$inferSelect | null;
   isSignedIn: boolean;
 }
 
-async function SmartAvatar() {
+async function SmartAvatar () {
   const user = await currentUser();
 
   if (user?.imageUrl) {
     return (
       <Avatar aria-label="User's profile image" className="bg-transparent">
-        <AvatarImage src={user.imageUrl} />
+        <AvatarImage src={ user.imageUrl } />
         <AvatarFallback>X</AvatarFallback>
       </Avatar>
     );
@@ -33,13 +33,13 @@ async function SmartAvatar() {
   );
 }
 
-export default function UserMenu({ ...rest }: Readonly<UserMenuProps>) {
+export default function UserMenu ({ ...rest }: Readonly<UserMenuProps>) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <SmartAvatar />
       </DropdownMenuTrigger>
-      <UserMenuDropDown {...rest} />
+      <UserMenuDropDown { ...rest } />
     </DropdownMenu>
   );
 }

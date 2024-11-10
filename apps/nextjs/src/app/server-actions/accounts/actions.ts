@@ -5,11 +5,11 @@ import { auth } from "@clerk/nextjs/server";
 import { db, eq } from "@battle-stadium/db";
 import { accounts, clerkUsers, profiles } from "@battle-stadium/db/schema";
 
-export async function getAccounts() {
+export async function getAccounts () {
   return await db.query.accounts.findMany();
 }
 
-export async function getAccount(username: string) {
+export async function getAccount (username: string) {
   const profile = await db.query.profiles.findFirst({
     where: eq(profiles.username, username),
   });
@@ -23,10 +23,9 @@ export async function getAccount(username: string) {
   });
 }
 
-export async function getAccountMe() {
+export async function getAccountMe () {
   const { userId } = await auth();
 
-  console.log("userId", userId);
   if (!userId) {
     return null;
   }
@@ -35,7 +34,6 @@ export async function getAccountMe() {
     where: eq(clerkUsers.clerkUserId, userId),
   });
 
-  console.log("clerkUser", clerkUser);
   if (!clerkUser?.accountId) {
     return null;
   }
@@ -44,6 +42,5 @@ export async function getAccountMe() {
     where: eq(accounts.id, BigInt(clerkUser.accountId)),
   });
 
-  console.log("account", account);
   return account;
 }

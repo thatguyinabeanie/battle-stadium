@@ -1,4 +1,4 @@
-import { getAccount } from "~/app/server-actions/accounts/actions";
+import { getProfile } from "~/app/server-actions/profiles/actions";
 
 interface PlayerProfilePageProps {
   params: Promise<{
@@ -6,27 +6,25 @@ interface PlayerProfilePageProps {
   }>;
 }
 
-export async function generateMetadata(
+export async function generateMetadata (
   props: Readonly<PlayerProfilePageProps>,
 ) {
   const params = await props.params;
-  const { data: player } = await getAccount(params.username);
+  const player = await getProfile(params.username);
 
   return { title: player?.username ?? "Player" };
 }
 
-export default async function PlayerProfilePage(
+export default async function PlayerProfilePage (
   props: Readonly<PlayerProfilePageProps>,
 ) {
   const params = await props.params;
-  const { data: player } = await getAccount(params.username);
+  const player = await getProfile(params.username);
 
   return (
     <div>
-      <h1>{player?.username}</h1>
-      <p>
-        {player?.first_name} {player?.last_name}
-      </p>
+      <h1>{ player?.username }</h1>
+      <p> { player?.slug } </p>
     </div>
   );
 }

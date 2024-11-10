@@ -13,11 +13,11 @@ import {
 import { cn } from "~/lib/utils";
 
 interface UserMenuDropDownProps {
-  me?: typeof accounts.$inferSelect;
+  me?: typeof accounts.$inferSelect | null;
   isSignedIn: boolean;
 }
 
-export default function UserMenuDropDown({
+export default function UserMenuDropDown ({
   me,
   isSignedIn,
 }: Readonly<UserMenuDropDownProps>) {
@@ -27,13 +27,13 @@ export default function UserMenuDropDown({
         <DropdownMenuItem
           key="profile"
           aria-label="dashboard"
-          className={cn("hidden", { "sm:flex": me && isSignedIn })}
+          className={ cn("hidden", { "sm:flex": me && isSignedIn }) }
           color="primary"
         >
-          <Link prefetch={true} aria-label="dashboard" href="/dashboard">
+          <Link prefetch={ true } aria-label="dashboard" href="/dashboard">
             <span>
               <p className="text-default-400 font-normal">Signed in as</p>
-              <p className="truncate font-semibold">{`${me?.firstName} ${me?.lastName}`}</p>{" "}
+              <p className="truncate font-semibold">{ `${me?.firstName} ${me?.lastName}` }</p>{ " " }
             </span>
           </Link>
         </DropdownMenuItem>
@@ -41,9 +41,9 @@ export default function UserMenuDropDown({
         <DropdownMenuItem
           key="sign-in"
           aria-label="sign-in"
-          className={cn("", {
+          className={ cn("", {
             hidden: isSignedIn,
-          })}
+          }) }
           color="success"
         >
           <SignInButton>
@@ -54,11 +54,11 @@ export default function UserMenuDropDown({
         <DropdownMenuItem
           key="admin"
           aria-label="Admin"
-          className={cn("", {
+          className={ cn("", {
             hidden: !(me && isSignedIn) || !me.admin,
-          })}
+          }) }
         >
-          <Link prefetch={true} href="/dashboard?tab=admin">
+          <Link prefetch={ true } href="/dashboard?tab=admin">
             Admin
           </Link>
         </DropdownMenuItem>
@@ -66,11 +66,11 @@ export default function UserMenuDropDown({
         <DropdownMenuItem
           key="settings"
           aria-label="Settings"
-          className={cn("", {
+          className={ cn("", {
             hidden: !(me && isSignedIn),
-          })}
+          }) }
         >
-          <Link prefetch={true} href="/dashboard?tab=settings">
+          <Link prefetch={ true } href="/dashboard?tab=settings">
             Settings
           </Link>
         </DropdownMenuItem>
@@ -82,9 +82,9 @@ export default function UserMenuDropDown({
         <DropdownMenuItem
           key="logout"
           aria-label="Sign Out"
-          className={cn("", {
+          className={ cn("", {
             hidden: !(me && isSignedIn),
-          })}
+          }) }
           color="danger"
         >
           <SignOutButton>Sign out</SignOutButton>
