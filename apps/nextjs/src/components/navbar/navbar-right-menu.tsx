@@ -10,7 +10,7 @@ import UserMenu from "./user-menu/user-menu";
 
 export default async function RightMenu() {
   const clerkAuth = await auth();
-  const me = (await getAccountMe())?.data;
+  const me = await getAccountMe();
 
   return (
     <div className="flex flex-row items-center justify-center gap-2">
