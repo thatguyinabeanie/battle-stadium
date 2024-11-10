@@ -1,15 +1,16 @@
 "use server";
-
 import { auth } from "@clerk/nextjs/server";
-
 import { db, eq } from "@battle-stadium/db";
 import { accounts, clerkUsers, profiles } from "@battle-stadium/db/schema";
 
-export async function getAccounts() {
+export async function getAccounts () {
   return await db.query.accounts.findMany();
 }
 
-export async function getAccount(username: string) {
+export async function getAccount (
+  username: string,
+) {
+
   const profile = await db.query.profiles.findFirst({
     where: eq(profiles.username, username),
   });
@@ -23,7 +24,8 @@ export async function getAccount(username: string) {
   });
 }
 
-export async function getAccountMe() {
+export async function getAccountMe () {
+
   const { userId } = await auth();
 
   if (!userId) {
