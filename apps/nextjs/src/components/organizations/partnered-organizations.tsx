@@ -8,8 +8,8 @@ export default async function PartneredOrganizations() {
     <div className="flex h-full w-full flex-row items-center justify-center bg-transparent">
       {orgs.map((organization) => (
         <OrganizationCard
-          key={organization.id}
-          aria-label={`organization-card-${organization.id}`}
+          key={organization.slug}
+          aria-label={`organization-card-${organization.slug}`}
           organization={organization}
         />
       ))}

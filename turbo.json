@@ -26,10 +26,12 @@
       "dependsOn": ["^topo", "^build"],
       "outputs": [".cache/tsbuildinfo.json"]
     },
-    "clean": {
-      "cache": false
+    "typecheck:watch": {
+      "dependsOn": ["^topo", "^build"],
+      "cache": false,
+      "persistent": false
     },
-    "//#clean": {
+    "clean": {
       "cache": false
     },
     "push": {

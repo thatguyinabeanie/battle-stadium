@@ -1,13 +1,13 @@
 import type { PlaceholderValue } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 
-import type { organizations } from "@battle-stadium/db/schema";
+import type { Organization } from "@battle-stadium/db/schema";
 
 interface OrganizationLogoProps {
   alt?: string;
   src?: string;
   priority?: boolean;
-  organization: typeof organizations.$inferSelect;
+  organization: Organization;
   className?: string;
   logoSize: number;
   blurDataURL?: string;

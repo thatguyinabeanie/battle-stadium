@@ -1,16 +1,15 @@
 "use server";
 
-import type { Organization } from "@battle-stadium/db/schema";
 import { eq } from "@battle-stadium/db";
 import { db } from "@battle-stadium/db/client";
 import { organizations } from "@battle-stadium/db/schema";
 
-export async function getOrganizations(): Promise<Organization[]> {
+export async function getOrganizations() {
   const orgs = await db.query.organizations.findMany();
   return orgs;
 }
 
-export async function getPartneredOrganizations(): Promise<Organization[]> {
+export async function getPartneredOrganizations() {
   const orgs = await db.query.organizations.findMany({
     where: eq(organizations.partner, true),
   });
