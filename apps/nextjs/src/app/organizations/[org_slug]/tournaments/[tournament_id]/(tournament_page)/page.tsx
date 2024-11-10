@@ -3,11 +3,11 @@ import Link from "next/link";
 import { Chip } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentProps } from "~/types";
-import { getOrganization } from "~/app/server-actions/organizations/actions";
 import {
-  getTournament,
-  getTournaments,
-} from "~/app/server-actions/tournaments/actions";
+  getOrganizationTournaments,
+  getSingleOrganizationSingleTournament,
+} from "~/app/server-actions/organizations/tournaments/actions";
+import { getTournament } from "~/app/server-actions/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 
 export const revalidate = 300;
@@ -17,17 +17,17 @@ export async function generateMetadata(
   props: Readonly<OrganizationTournamentProps>,
 ) {
   const params = await props.params;
-  const tournament = (await getTournament(params.tournament_id)).data;
+  const tournament = await getTournament(params.tournament_id);
 
   return { title: tournament?.name ?? "Tournament" };
 }
 
 export async function generateStaticParams() {
-  const tournaments = (await getTournaments()).data?.data ?? [];
+  const results = await getOrganizationTournaments(1, 500);
 
-  return tournaments.map(({ organization, id }) => ({
-    org_slug: organization.slug,
-    tournament_id: id.toString(),
+  return results.map(({ tournaments, organizations }) => ({
+    org_slug: organizations?.slug,
+    tournament_id: tournaments.id.toString(),
   }));
 }
 
@@ -36,15 +36,10 @@ export default async function OrganizationTournament(
 ) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
-  const tournament = (await getTournament(tournament_id)).data;
+  const { organization, tournament } =
+    await getSingleOrganizationSingleTournament(org_slug, tournament_id);
 
-  if (!tournament) {
-    return <div>404 - Not Found</div>;
-  }
-
-  const organization = await getOrganization(tournament.organization.slug);
-
-  if (!organization) {
+  if (!organization || !tournament) {
     return <div>404 - Not Found</div>;
   }
 
@@ -61,9 +56,9 @@ export default async function OrganizationTournament(
 
           <div className="pt-2" />
 
-          <p>Registration: {tournament.registration_start_at}</p>
-          <p>Starts: {tournament.start_at}</p>
-          <p>Check in opens: {tournament.check_in_start_at} </p>
+          <p>Registration: {tournament.registrationStartAt}</p>
+          <p>Starts: {tournament.startAt}</p>
+          <p>Check in opens: {tournament.checkInStartAt} </p>
 
           <div className="pt-2" />
         </div>
@@ -88,7 +83,7 @@ export default async function OrganizationTournament(
 
 interface TournamentDetailChipsProps {
   org_slug: string;
-  tournament_id: number;
+  tournament_id: bigint;
 }
 function TournamentDetailChips(props: Readonly<TournamentDetailChipsProps>) {
   const { org_slug, tournament_id } = props;

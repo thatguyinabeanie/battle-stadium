@@ -2,42 +2,25 @@
 
 import type { FetchOptions } from "openapi-fetch";
 
+import { db, eq } from "@battle-stadium/db";
+import { tournaments } from "@battle-stadium/db/schema";
+
 import type { paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
-export async function getTournament(
-  tournament_id: number,
-  options?: FetchOptions<paths["/tournaments/{tournament_id}"]["get"]>,
-) {
-  const tournamentOptions = {
-    ...defaultConfig(`getTournament(${tournament_id})`),
-    ...options,
-    params: { path: { tournament_id } },
-  };
-
-  return BattleStadiumApiClient().GET(
-    "/tournaments/{tournament_id}",
-    tournamentOptions,
-  );
+export async function getTournament(tournament_id: bigint) {
+  return await db.query.tournaments.findFirst({
+    with: { organization: true },
+    where: eq(tournaments.id, BigInt(tournament_id)),
+  });
 }
 
-export async function getTournaments(
-  page = 0,
-  per_page = 20,
-  options?: FetchOptions<paths["/tournaments"]["get"]>,
-) {
-  const tournamentsOptions = {
-    ...defaultConfig("getTournaments"),
-    ...options,
-    params: { query: { page, per_page } },
-  };
-
-  const skipClerkAuth = true;
-
-  return BattleStadiumApiClient(skipClerkAuth).GET(
-    "/tournaments",
-    tournamentsOptions,
-  );
+export async function getTournaments(page = 1, pageSize = 20) {
+  return await db.query.tournaments.findMany({
+    orderBy: (tournaments, { desc }) => desc(tournaments.startAt),
+    limit: pageSize,
+    offset: (page - 1) * pageSize,
+  });
 }
 
 export async function postTournamentRegistration(
@@ -79,13 +62,13 @@ export async function postTournamentRegistration(
 }
 
 export async function getTournamentPlayers(
-  tournament_id: number,
+  tournament_id: bigint,
   options?: FetchOptions<paths["/tournaments/{tournament_id}/players"]["get"]>,
 ) {
   const tournamentPlayersOptions = {
     ...defaultConfig(`getTournamentPlayers(${tournament_id})`),
     ...options,
-    params: { path: { tournament_id } },
+    params: { path: { tournament_id: Number(tournament_id) } },
   };
 
   const resp = await BattleStadiumApiClient().GET(

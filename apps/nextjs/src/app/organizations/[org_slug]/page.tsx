@@ -3,7 +3,7 @@ import {
   getOrganization,
   getOrganizations,
 } from "~/app/server-actions/organizations/actions";
-import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
+import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 
 export const revalidate = 200;
@@ -30,7 +30,7 @@ export async function generateMetadata(
 export async function generateStaticParams() {
   const orgs = await getOrganizations();
 
-  return orgs.map(({ slug }) => ({ org_slug: slug }));
+  return orgs.filter((org) => org.slug).map((org) => ({ org_slug: org.slug }));
 }
 
 // const columns = [
@@ -65,13 +65,13 @@ export default async function OrganizationDetailPage(
   props: Readonly<OrganizationDetailPageProps>,
 ) {
   const params = await props.params;
-  const organization = await getOrganization(params.org_slug);
+  const { organization, tournaments } = await getSingleOrganizationTournaments(
+    params.org_slug,
+  );
 
   if (!organization) {
     return <div>404 - Not Found</div>;
   }
-
-  const tournaments = await getOrganizationTournaments(params.org_slug);
 
   return (
     <>
@@ -87,7 +87,7 @@ export default async function OrganizationDetailPage(
         {tournaments.map((tournament) => (
           <div key={tournament.id}>
             <h3>{tournament.name}</h3>
-            <p>{tournament.start_at}</p>
+            <p>{tournament.startAt}</p>
           </div>
         ))}
       </div>

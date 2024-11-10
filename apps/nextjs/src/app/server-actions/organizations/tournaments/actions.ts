@@ -1,29 +1,50 @@
 "use server";
 
-import type { FetchOptions } from "openapi-fetch";
+import { and, db, desc, eq } from "@battle-stadium/db";
+import { organizations, tournaments } from "@battle-stadium/db/schema";
 
-import type { paths } from "~/lib/api/openapi-v1";
-import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
+function tournamentsLeftJoinOrganizations() {
+  return db
+    .select()
+    .from(tournaments)
+    .leftJoin(organizations, eq(tournaments.organizationId, organizations.id));
+}
 
-export async function getOrganizationTournaments(
+export async function getOrganizationTournaments(page = 1, pageSize = 20) {
+  return await tournamentsLeftJoinOrganizations()
+    .orderBy(desc(tournaments.startAt))
+    .limit(pageSize)
+    .offset((page - 1) * pageSize);
+}
+
+export async function getSingleOrganizationTournaments(
   slug: string,
-  options?: FetchOptions<paths["/organizations/{slug}/tournaments"]["get"]>,
+  page = 1,
+  pageSize = 20,
 ) {
-  const organizationTournamentsOptions = {
-    ...defaultConfig(`getOrganizationTournaments(${slug})`),
-    ...options,
-    params: {
-      path: { slug },
-      ...options?.params,
-    },
-  };
+  const results = await tournamentsLeftJoinOrganizations()
+    .where(eq(organizations.slug, slug))
+    .orderBy(desc(tournaments.startAt))
+    .limit(pageSize)
+    .offset((page - 1) * pageSize);
 
-  const tours =
-    (
-      await BattleStadiumApiClient().GET(
-        "/organizations/{slug}/tournaments",
-        organizationTournamentsOptions,
-      )
-    ).data ?? [];
-  return tours;
+  return {
+    tournaments: results.map(({ tournaments }) => tournaments),
+    organization: results[0]?.organizations,
+  };
+}
+
+export async function getSingleOrganizationSingleTournament(
+  slug: string,
+  tournamentId: bigint,
+) {
+  const results = await tournamentsLeftJoinOrganizations()
+    .where(and(eq(organizations.slug, slug), eq(tournaments.id, tournamentId)))
+    .orderBy(desc(tournaments.startAt))
+    .limit(1);
+
+  return {
+    tournament: results[0]?.tournaments,
+    organization: results[0]?.organizations,
+  };
 }
