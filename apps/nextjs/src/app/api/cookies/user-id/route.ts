@@ -10,7 +10,7 @@ import {
 
 export const runtime = "edge";
 
-export async function POST (_req: NextRequest) {
+export async function POST(_req: NextRequest) {
   const { userId } = await auth();
   if (!userId) {
     return NextResponse.json(
@@ -52,7 +52,7 @@ export async function POST (_req: NextRequest) {
   return await setUserIdCookie(setCookies, userId, response);
 }
 
-async function setUserIdCookie (
+async function setUserIdCookie(
   setCookies: (name: string, value: string) => Promise<void>,
   userId: string,
   response: NextResponse,

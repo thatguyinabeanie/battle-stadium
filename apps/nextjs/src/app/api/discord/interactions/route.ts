@@ -10,6 +10,7 @@ import type {
 import type { NextRequest } from "next/server";
 import type Pokedex from "pokedex-promise-v2";
 import { NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs/server";
 import {
   InteractionResponseType,
   InteractionType,
@@ -21,7 +22,6 @@ import type { RandomPicType } from "~/lib/discord/commands";
 import { env } from "~/env";
 import { commands } from "~/lib/discord/commands";
 import { verifyInteractionRequest } from "~/lib/discord/verify-incoming-request";
-import { auth } from "@clerk/nextjs/server";
 
 /**
  * Use edge runtime which is faster, cheaper, and has no cold-boot.
@@ -33,7 +33,7 @@ export const runtime = "edge";
 
 const ROOT_URL = env.VERCEL_URL ? `https://${env.VERCEL_URL}` : env.ROOT_URL;
 
-function capitalizeFirstLetter (s: string) {
+function capitalizeFirstLetter(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
@@ -42,8 +42,7 @@ function capitalizeFirstLetter (s: string) {
  *
  * @see https://discord.com/developers/docs/interactions/receiving-and-responding#receiving-an-interaction
  */
-export async function POST (request: NextRequest) {
-
+export async function POST(request: NextRequest) {
   const { userId } = await auth();
   if (!userId) {
     return NextResponse.json(
