@@ -16,9 +16,14 @@ interface OrganizationDetailPageProps {
 export async function generateMetadata(
   props: Readonly<OrganizationDetailPageProps>,
 ) {
-  const params = await props.params;
-  const org = await getOrganization(params.org_slug);
-
+  const { org_slug } = await props.params;
+  let org;
+  try {
+    org = await getOrganization(org_slug);
+  } catch (error) {
+    console.error("Failed to fetch organization:", error);
+    org = null;
+  }
   return { title: org?.name ?? "Organization" };
 }
 

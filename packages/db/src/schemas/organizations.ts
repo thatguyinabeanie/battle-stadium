@@ -57,4 +57,5 @@ export const organizations = pgTable(
 );
 
 export type Organization = typeof organizations.$inferSelect;
+
 export type OrganizationInsert = typeof organizations.$inferInsert;
