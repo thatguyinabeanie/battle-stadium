@@ -14,11 +14,9 @@ export const phasePlayers = pgTable(
   "phase_players",
   {
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    playerId: bigint("player_id", { mode: "number" }).notNull(),
+    playerId: bigint("player_id", { mode: "bigint" }).notNull(),
     phaseType: varchar("phase_type").notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    phaseId: bigint("phase_id", { mode: "number" }).notNull(),
+    phaseId: bigint("phase_id", { mode: "bigint" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",

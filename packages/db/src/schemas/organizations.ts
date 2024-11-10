@@ -31,10 +31,8 @@ export const organizations = pgTable(
     partner: boolean().default(false).notNull(),
     hidden: boolean().default(false).notNull(),
     slug: varchar(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    limitlessOrgId: bigint("limitless_org_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    ownerId: bigint("owner_id", { mode: "number" }),
+    limitlessOrgId: bigint("limitless_org_id", { mode: "bigint" }),
+    ownerId: bigint("owner_id", { mode: "bigint" }),
   },
   (table) => {
     return {

@@ -31,16 +31,13 @@ export const tournaments = pgTable(
       precision: 6,
       mode: "string",
     }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    organizationId: bigint("organization_id", { mode: "number" }),
+    organizationId: bigint("organization_id", { mode: "bigint" }),
     checkInStartAt: timestamp("check_in_start_at", {
       precision: 6,
       mode: "string",
     }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    gameId: bigint("game_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    formatId: bigint("format_id", { mode: "number" }),
+    gameId: bigint("game_id", { mode: "bigint" }),
+    formatId: bigint("format_id", { mode: "bigint" }),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
     registrationStartAt: timestamp("registration_start_at", {
       precision: 6,
@@ -57,11 +54,9 @@ export const tournaments = pgTable(
     teamlistsRequired: boolean("teamlists_required").default(true).notNull(),
     openTeamSheets: boolean("open_team_sheets").default(true).notNull(),
     endAt: timestamp("end_at", { precision: 6, mode: "string" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    limitlessId: bigint("limitless_id", { mode: "number" }),
+    limitlessId: bigint("limitless_id", { mode: "bigint" }),
     published: boolean().default(false).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    currentPhaseId: bigint("current_phase_id", { mode: "number" }),
+    currentPhaseId: bigint("current_phase_id", { mode: "bigint" }),
   },
   (table) => {
     return {

@@ -33,8 +33,7 @@ export const phases = pgTable(
     startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
     order: integer().default(0).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    currentRoundId: bigint("current_round_id", { mode: "number" }),
+    currentRoundId: bigint("current_round_id", { mode: "bigint" }),
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (table): Record<string, any> => {

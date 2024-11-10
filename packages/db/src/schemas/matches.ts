@@ -20,15 +20,11 @@ export const matches = pgTable(
   "matches",
   {
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    roundId: bigint("round_id", { mode: "number" }).notNull(),
+    roundId: bigint("round_id", { mode: "bigint" }).notNull(),
     tableNumber: integer("table_number"),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    playerOneId: bigint("player_one_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    playerTwoId: bigint("player_two_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    winnerId: bigint("winner_id", { mode: "number" }),
+    playerOneId: bigint("player_one_id", { mode: "bigint" }),
+    playerTwoId: bigint("player_two_id", { mode: "bigint" }),
+    winnerId: bigint("winner_id", { mode: "bigint" }),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",
@@ -45,16 +41,12 @@ export const matches = pgTable(
       precision: 6,
       mode: "string",
     }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    loserId: bigint("loser_id", { mode: "number" }),
+    loserId: bigint("loser_id", { mode: "bigint" }),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    tournamentId: bigint("tournament_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    phaseId: bigint("phase_id", { mode: "number" }),
+    tournamentId: bigint("tournament_id", { mode: "bigint" }),
+    phaseId: bigint("phase_id", { mode: "bigint" }),
     bye: boolean().default(false).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    resetById: bigint("reset_by_id", { mode: "number" }),
+    resetById: bigint("reset_by_id", { mode: "bigint" }),
   },
   (table) => {
     return {

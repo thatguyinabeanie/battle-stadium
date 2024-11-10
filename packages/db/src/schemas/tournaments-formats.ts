@@ -14,10 +14,8 @@ export const tournamentFormats = pgTable(
   "tournament_formats",
   {
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    tournamentId: bigint("tournament_id", { mode: "number" }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    formatId: bigint("format_id", { mode: "number" }).notNull(),
+    tournamentId: bigint("tournament_id", { mode: "bigint" }).notNull(),
+    formatId: bigint("format_id", { mode: "bigint" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",

@@ -12,8 +12,7 @@ export const rounds = pgTable(
   "rounds",
   {
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    phaseId: bigint("phase_id", { mode: "number" }).notNull(),
+    phaseId: bigint("phase_id", { mode: "bigint" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",

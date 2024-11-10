@@ -39,6 +39,7 @@
     "nitropack",
     "Pressable",
     "prettiercache",
+    "sluggable",
     "subrouters",
     "thatguyinabenaie",
     "tsbuildinfo",
@@ -57,7 +58,7 @@
       "name": "postgres",
       "group": "postgres",
       "database": "fuecoco-db-dev",
-      "username": "postgres",
+      "username": "postgres"
     }
-  ],
+  ]
 }

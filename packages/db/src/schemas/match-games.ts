@@ -16,12 +16,9 @@ export const matchGames = pgTable(
   "match_games",
   {
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    matchId: bigint("match_id", { mode: "number" }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    winnerId: bigint("winner_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    loserId: bigint("loser_id", { mode: "number" }),
+    matchId: bigint("match_id", { mode: "bigint" }).notNull(),
+    winnerId: bigint("winner_id", { mode: "bigint" }),
+    loserId: bigint("loser_id", { mode: "bigint" }),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",
@@ -33,8 +30,7 @@ export const matchGames = pgTable(
     gameNumber: integer("game_number").default(1).notNull(),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
     startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-    reporterProfileId: bigint("reporter_profile_id", { mode: "number" }),
+    reporterProfileId: bigint("reporter_profile_id", { mode: "bigint" }),
   },
   (table) => {
     return {
