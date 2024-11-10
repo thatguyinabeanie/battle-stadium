@@ -2,11 +2,12 @@
 
 import type { FetchOptions } from "openapi-fetch";
 
+import type { PokemonTeam } from "@battle-stadium/db/schema";
+import { db } from "@battle-stadium/db";
+
 import type { paths } from "~/lib/api/openapi-v1";
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
-import { db } from "@battle-stadium/db";
-import type { PokemonTeam } from "@battle-stadium/db/schema";
 
 interface PostPokemonTeamBody {
   pokepaste_id?: string;
@@ -31,11 +32,11 @@ interface PostPokemonTeamBody {
   }[];
 }
 
-export async function getPokemonTeams (): Promise<PokemonTeam[] | undefined> {
+export async function getPokemonTeams(): Promise<PokemonTeam[] | undefined> {
   return await db.query.pokemonTeams.findMany();
 }
 
-export async function postPokemonTeam (
+export async function postPokemonTeam(
   validatedTeam: ValidatedPokemon[],
   metadata: PokePasteMetadata,
   options?: FetchOptions<paths["/pokemon_teams"]["post"]>,

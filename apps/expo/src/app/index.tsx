@@ -14,12 +14,7 @@ export function PostCard(
   return (
     <View className="flex flex-row rounded-lg bg-muted p-4">
       <View className="flex-grow">
-        <Link
-          asChild
-          href={{
-            pathname: "/post/[id]",
-          }}
-        >
+        <Link asChild href="/">
           <Pressable className="">
             <Text className="text-xl font-semibold text-primary">Title</Text>
             <Text className="mt-2 text-foreground">CONTENT</Text>

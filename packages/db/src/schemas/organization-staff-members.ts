@@ -49,5 +49,7 @@ export const organizationStaffMembers = pgTable(
   },
 );
 
-export type OrganizationStaffMember = typeof organizationStaffMembers.$inferSelect;
-export type OrganizationStaffMemberInsert = typeof organizationStaffMembers.$inferInsert;
+export type OrganizationStaffMember =
+  typeof organizationStaffMembers.$inferSelect;
+export type OrganizationStaffMemberInsert =
+  typeof organizationStaffMembers.$inferInsert;
