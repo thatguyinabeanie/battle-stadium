@@ -76,3 +76,6 @@ export const pokemon = pgTable(
     };
   },
 );
+
+export type Pokemon = typeof pokemon.$inferSelect;
+export type PokemonInsert = typeof pokemon.$inferInsert;

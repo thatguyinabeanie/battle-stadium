@@ -133,3 +133,7 @@ export const matches = pgTable(
     };
   },
 );
+
+
+export type Match = typeof matches.$inferSelect;
+export type MatchInsert = typeof matches.$inferInsert;

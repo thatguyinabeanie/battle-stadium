@@ -73,3 +73,6 @@ export const matchGames = pgTable(
     };
   },
 );
+
+export type MatchGame = typeof matchGames.$inferSelect;
+export type MatchGameInsert = typeof matchGames.$inferInsert;

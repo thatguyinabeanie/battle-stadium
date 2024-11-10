@@ -63,3 +63,6 @@ export const pokemonTeams = pgTable(
     };
   },
 );
+
+export type PokemonTeam = typeof pokemonTeams.$inferSelect;
+export type PokemonTeamInsert = typeof pokemonTeams.$inferInsert;

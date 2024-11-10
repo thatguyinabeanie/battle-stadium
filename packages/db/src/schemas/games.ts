@@ -30,3 +30,6 @@ export const games = pgTable(
     };
   },
 );
+
+export type Game = typeof games.$inferSelect;
+export type GameInsert = typeof games.$inferInsert;

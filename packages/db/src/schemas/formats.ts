@@ -48,3 +48,6 @@ export const formats = pgTable(
     };
   },
 );
+
+export type Format = typeof formats.$inferSelect;
+export type FormatInsert = typeof formats.$inferInsert;

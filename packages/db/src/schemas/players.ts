@@ -86,3 +86,7 @@ export const players = pgTable(
     };
   },
 );
+
+export type Player = typeof players.$inferSelect;
+export type PlayerInsert = typeof players.$inferInsert;
+

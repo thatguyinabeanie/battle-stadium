@@ -42,3 +42,7 @@ export const rounds = pgTable(
     };
   },
 );
+
+
+export type Round = typeof rounds.$inferSelect;
+export type RoundInsert = typeof rounds.$inferInsert;

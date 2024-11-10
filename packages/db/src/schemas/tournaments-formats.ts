@@ -48,3 +48,6 @@ export const tournamentFormats = pgTable(
     };
   },
 );
+
+export type TournamentFormat = typeof tournamentFormats.$inferSelect;
+export type TournamentFormatInsert = typeof tournamentFormats.$inferInsert;

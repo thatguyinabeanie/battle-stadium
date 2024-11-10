@@ -53,3 +53,6 @@ export const chatMessages = pgTable(
     };
   },
 );
+
+export type ChatMessage = typeof chatMessages.$inferInsert;
+export type ChatMessageInsert = typeof chatMessages.$inferInsert;

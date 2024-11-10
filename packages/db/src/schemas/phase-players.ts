@@ -48,3 +48,6 @@ export const phasePlayers = pgTable(
     };
   },
 );
+
+export type PhasePlayer = typeof phasePlayers.$inferSelect;
+export type PhasePlayerInsert = typeof phasePlayers.$inferInsert;

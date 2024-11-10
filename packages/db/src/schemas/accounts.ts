@@ -61,3 +61,6 @@ export const accounts = pgTable(
     };
   },
 );
+
+export type Account = typeof accounts.$inferSelect;
+export type AccountInsert = typeof accounts.$inferInsert;

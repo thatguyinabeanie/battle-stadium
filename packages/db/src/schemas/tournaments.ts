@@ -144,3 +144,8 @@ export const rk9Tournaments = pgTable(
     };
   },
 );
+
+export type Tournament = typeof tournaments.$inferSelect;
+export type TournamentInsert = typeof tournaments.$inferInsert;
+export type Rk9Tournament = typeof rk9Tournaments.$inferSelect;
+export type Rk9TournamentInsert = typeof rk9Tournaments.$inferInsert;

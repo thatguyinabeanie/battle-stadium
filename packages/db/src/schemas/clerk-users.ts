@@ -43,3 +43,6 @@ export const clerkUsers = pgTable(
     };
   },
 );
+
+export type ClerkUser = typeof clerkUsers.$inferSelect;
+export type ClerkUserInsert = typeof clerkUsers.$inferInsert;

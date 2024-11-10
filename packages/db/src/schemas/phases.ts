@@ -63,3 +63,6 @@ export const phases = pgTable(
     };
   },
 );
+
+export type Phase = typeof phases.$inferSelect;
+export type PhaseInsert = typeof phases.$inferInsert;
