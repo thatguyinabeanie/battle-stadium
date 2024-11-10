@@ -1,11 +1,12 @@
 import Link from "next/link";
 
-import type { Organization } from "~/lib/api";
+import type { organizations } from "@battle-stadium/db/schema";
+
 import { cn } from "~/lib/utils";
 import OrganizationLogo from "./organization-logo";
 
 export interface OrgCardProps {
-  organization: Organization;
+  organization: typeof organizations.$inferSelect;
   disableHover?: boolean;
 }
 
@@ -18,6 +19,7 @@ export default function OrganizationCard({
   return (
     <div className="relative rounded-lg border-none bg-transparent px-2">
       <Link
+        prefetch={true}
         key={organization.slug}
         href={`/organizations/${organization.slug}`}
       >

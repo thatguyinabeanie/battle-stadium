@@ -22,7 +22,7 @@ export default async function RightMenu() {
         />
       </Button>
 
-      <Link passHref href="/dashboard?tab=settings">
+      <Link prefetch={true} passHref href="/dashboard?tab=settings">
         <Button>
           <Icon
             className="text-default-500"

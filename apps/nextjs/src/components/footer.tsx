@@ -54,7 +54,12 @@ export default function Footer() {
 
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
           {navLinks.map((item) => (
-            <Link key={item.name} className="text-primary" href={item.href}>
+            <Link
+              prefetch={true}
+              key={item.name}
+              className="text-primary"
+              href={item.href}
+            >
               {item.name}
             </Link>
           ))}
@@ -62,7 +67,12 @@ export default function Footer() {
         {/* <Spacer y={6} /> */}
         <div className="flex justify-center gap-x-4">
           {socialItems.map((item) => (
-            <Link key={item.name} className="text-primary" href={item.href}>
+            <Link
+              prefetch={true}
+              key={item.name}
+              className="text-primary"
+              href={item.href}
+            >
               <span className="sr-only">{item.name}</span>
               <item.icon aria-hidden="true" className="w-5" />
             </Link>

@@ -95,6 +95,7 @@ function TournamentDetailChips(props: Readonly<TournamentDetailChipsProps>) {
       <Chip variant="light">Light</Chip>
       <Chip variant="flat">Flat</Chip>
       <Link
+        prefetch={true}
         href={`/organizations/${org_slug}/tournaments/${tournament_id}/register`}
       >
         <Chip>Register</Chip>

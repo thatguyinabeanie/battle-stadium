@@ -32,7 +32,7 @@ export default function BattleStadium() {
       className="flex flex-row gap-2 md:gap-4"
     >
       <div className="flex rounded-full bg-foreground">
-        <Link className="text-primary" href="/">
+        <Link prefetch={true} className="text-primary" href="/">
           <BattleStadiumIcon
             aria-label="Battle Stadium Logo"
             className="text-background"

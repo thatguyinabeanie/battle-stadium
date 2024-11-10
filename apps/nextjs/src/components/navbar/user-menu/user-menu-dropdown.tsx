@@ -30,7 +30,7 @@ export default function UserMenuDropDown({
           className={cn("hidden", { "sm:flex": me && isSignedIn })}
           color="primary"
         >
-          <Link aria-label="dashboard" href="/dashboard">
+          <Link prefetch={true} aria-label="dashboard" href="/dashboard">
             <span>
               <p className="text-default-400 font-normal">Signed in as</p>
               <p className="truncate font-semibold">{`${me?.first_name} ${me?.last_name}`}</p>{" "}
@@ -58,7 +58,9 @@ export default function UserMenuDropDown({
             hidden: !(me && isSignedIn) || !me.admin,
           })}
         >
-          <Link href="/dashboard?tab=admin">Admin</Link>
+          <Link prefetch={true} href="/dashboard?tab=admin">
+            Admin
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -68,7 +70,9 @@ export default function UserMenuDropDown({
             hidden: !(me && isSignedIn),
           })}
         >
-          <Link href="/dashboard?tab=settings">Settings</Link>
+          <Link prefetch={true} href="/dashboard?tab=settings">
+            Settings
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem key="help_and_feedback">

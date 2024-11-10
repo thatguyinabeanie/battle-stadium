@@ -29,7 +29,8 @@ export default function PlayersTable({
 //   switch (columnKey) {
 //     case "username":
 //       return (
-//         <Link className="text-primary" href={`/players/${username}`}>
+//         <Link
+//           prefetch={ true } className="text-primary" href={`/players/${username}`}>
 //           {username}
 //         </Link>
 //       );
