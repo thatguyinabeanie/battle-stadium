@@ -5,11 +5,11 @@ import { pokemon, pokemonTeams } from "@battle-stadium/db/schema";
 
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
 
-export async function getPokemonTeams () {
+export async function getPokemonTeams() {
   return await db.query.pokemonTeams.findMany();
 }
 
-export async function postPokemonTeam (
+export async function postPokemonTeam(
   validatedTeam: ValidatedPokemon[],
   metadata: PokePasteMetadata,
   profileId?: bigint,
