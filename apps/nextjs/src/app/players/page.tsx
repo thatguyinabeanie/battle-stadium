@@ -12,8 +12,8 @@ const columns = [
   },
 ];
 
-export default async function PlayersPage () {
+export default async function PlayersPage() {
   const players = await getProfiles();
 
-  return <PlayersTable columns={ columns } players={ players ?? [] } />;
+  return <PlayersTable columns={columns} players={players} />;
 }

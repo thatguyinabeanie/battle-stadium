@@ -13,7 +13,7 @@ interface OrganizationDetailPageProps {
   params: Promise<{ org_slug: string }>;
 }
 
-export async function generateMetadata (
+export async function generateMetadata(
   props: Readonly<OrganizationDetailPageProps>,
 ) {
   const params = await props.params;
@@ -22,7 +22,7 @@ export async function generateMetadata (
   return { title: org?.name ?? "Organization" };
 }
 
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   const orgs = await getOrganizations();
 
   return orgs.map(({ slug }) => ({ org_slug: slug }));
@@ -56,7 +56,7 @@ export async function generateStaticParams () {
 //   },
 // ];
 
-export default async function OrganizationDetailPage (
+export default async function OrganizationDetailPage(
   props: Readonly<OrganizationDetailPageProps>,
 ) {
   const params = await props.params;
@@ -70,25 +70,25 @@ export default async function OrganizationDetailPage (
 
   return (
     <>
-      <OrganizationHeader organization={ organization }>
+      <OrganizationHeader organization={organization}>
         <div className="mx-4 flex h-full w-full flex-col items-center justify-between py-2 text-center">
-          <h1 className="text-2xl font-semibold">{ organization.name }</h1>
-          <p>{ organization.description }</p>
+          <h1 className="text-2xl font-semibold">{organization.name}</h1>
+          <p>{organization.description}</p>
         </div>
       </OrganizationHeader>
 
       <div>
         <h2>TODO: tournament table</h2>
-        { tournaments.map((tournament) => (
-          <div key={ tournament.id }>
-            <h3>{ tournament.name }</h3>
-            <p>{ tournament.start_at }</p>
+        {tournaments.map((tournament) => (
+          <div key={tournament.id}>
+            <h3>{tournament.name}</h3>
+            <p>{tournament.start_at}</p>
           </div>
-        )) }
+        ))}
       </div>
-      {/* <Divider /> */ }
+      {/* <Divider /> */}
 
-      {/* <TournamentsTable columns={columns} data={tournaments} /> */ }
+      {/* <TournamentsTable columns={columns} data={tournaments} /> */}
     </>
   );
 }

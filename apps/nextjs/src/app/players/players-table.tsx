@@ -1,17 +1,17 @@
 "use client";
 
 import type { profiles } from "@battle-stadium/db/schema";
+
 // import { type Key } from "react";
 
 // import Link from "next/link";
 
-
 export interface PlayersTableProps {
-  players: typeof profiles.$inferSelect[];
+  players: (typeof profiles.$inferSelect)[];
   columns: { key: string; label: string }[];
 }
 
-export default function PlayersTable ({
+export default function PlayersTable({
   players,
   columns,
 }: Readonly<PlayersTableProps>) {

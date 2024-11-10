@@ -2,16 +2,16 @@
 
 import { useRouter } from "next/navigation";
 
+import type { accounts } from "@battle-stadium/db/schema";
 import { Button, Input } from "@battle-stadium/ui";
 
 import { createProfile } from "~/app/server-actions/profiles/actions";
-import type { accounts } from "@battle-stadium/db/schema";
 
 interface NewProfileProps {
   me: typeof accounts.$inferSelect;
 }
 
-export default function NewProfile ({ me }: Readonly<NewProfileProps>) {
+export default function NewProfile({ me }: Readonly<NewProfileProps>) {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
@@ -20,7 +20,7 @@ export default function NewProfile ({ me }: Readonly<NewProfileProps>) {
   };
 
   return (
-    <form action={ handleSubmit } className="flex flex-row">
+    <form action={handleSubmit} className="flex flex-row">
       <Input name="profile" placeholder="new profile" />
       <Button color="primary" type="submit">
         Add Profile

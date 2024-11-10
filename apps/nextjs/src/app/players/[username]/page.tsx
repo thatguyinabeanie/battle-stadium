@@ -6,7 +6,7 @@ interface PlayerProfilePageProps {
   }>;
 }
 
-export async function generateMetadata (
+export async function generateMetadata(
   props: Readonly<PlayerProfilePageProps>,
 ) {
   const params = await props.params;
@@ -15,7 +15,7 @@ export async function generateMetadata (
   return { title: player?.username ?? "Player" };
 }
 
-export default async function PlayerProfilePage (
+export default async function PlayerProfilePage(
   props: Readonly<PlayerProfilePageProps>,
 ) {
   const params = await props.params;
@@ -23,8 +23,8 @@ export default async function PlayerProfilePage (
 
   return (
     <div>
-      <h1>{ player?.username }</h1>
-      <p> { player?.slug } </p>
+      <h1>{player?.username}</h1>
+      <p> {player?.slug} </p>
     </div>
   );
 }
