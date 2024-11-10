@@ -3,18 +3,20 @@
 import type { FetchOptions } from "openapi-fetch";
 import { revalidateTag } from "next/cache";
 
+import { db, eq } from "@battle-stadium/db";
+import { profiles } from "@battle-stadium/db/schema";
+
 import type { paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
-export async function getProfiles(
-  options?: FetchOptions<paths["/profiles"]["get"]>,
-) {
-  const profilesOptions = {
-    ...defaultConfig("getPlayerProfiles"),
-    ...options,
-  };
+export async function getProfiles() {
+  return await db.query.profiles.findMany();
+}
 
-  return BattleStadiumApiClient().GET("/profiles", profilesOptions);
+export async function getProfile(username: string) {
+  return await db.query.profiles.findFirst({
+    where: eq(profiles.username, username),
+  });
 }
 
 export async function getProfilesByAccountId(

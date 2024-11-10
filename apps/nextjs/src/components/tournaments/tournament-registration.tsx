@@ -13,13 +13,13 @@ export default async function TournamentRegistration({
   org_slug,
   tournament_id,
 }: Readonly<TournamentRegisterProps>) {
-  const me = (await getAccountMe())?.data;
+  const me = await getAccountMe();
 
   if (!me) {
     redirect("/sign-in");
   }
 
-  const profiles = await getProfilesByAccountId(me.id);
+  const profiles = await getProfilesByAccountId(Number(me.id));
 
   return (
     <RegistrationCard

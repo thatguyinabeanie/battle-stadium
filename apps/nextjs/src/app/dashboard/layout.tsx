@@ -4,7 +4,7 @@ import { getAccountMe } from "~/app/server-actions/accounts/actions";
 export default async function DashboardLayout({
   children,
 }: Readonly<DashboardLayoutProps>) {
-  const me = (await getAccountMe())?.data;
+  const me = await getAccountMe();
 
   return (
     <div>

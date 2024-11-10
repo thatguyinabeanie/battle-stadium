@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Chip } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentProps } from "~/types";
+import { getOrganization } from "~/app/server-actions/organizations/actions";
 import {
   getTournament,
   getTournaments,
@@ -41,7 +42,11 @@ export default async function OrganizationTournament(
     return <div>404 - Not Found</div>;
   }
 
-  const { organization } = tournament;
+  const organization = await getOrganization(tournament.organization.slug);
+
+  if (!organization) {
+    return <div>404 - Not Found</div>;
+  }
 
   return (
     <>
@@ -95,6 +100,7 @@ function TournamentDetailChips(props: Readonly<TournamentDetailChipsProps>) {
       <Chip variant="light">Light</Chip>
       <Chip variant="flat">Flat</Chip>
       <Link
+        prefetch={true}
         href={`/organizations/${org_slug}/tournaments/${tournament_id}/register`}
       >
         <Chip>Register</Chip>

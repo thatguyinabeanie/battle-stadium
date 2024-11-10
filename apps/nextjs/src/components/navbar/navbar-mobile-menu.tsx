@@ -26,6 +26,7 @@ export default function MobileMenu() {
           <div className="mt-6 flex flex-col space-y-4">
             {NavbarItemsConfigs.map(({ label, value }) => (
               <Link
+                prefetch={true}
                 key={value}
                 href={`/${value}`}
                 onClick={() => setIsMobileMenuOpen(false)}

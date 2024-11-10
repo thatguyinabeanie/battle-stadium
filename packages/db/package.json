@@ -15,7 +15,7 @@
     },
     "./schema": {
       "types": "./dist/schema.d.ts",
-      "default": "./drizzle/schema.ts"
+      "default": "./src/schema.ts"
     }
   },
   "scripts": {
@@ -35,6 +35,7 @@
   "dependencies": {
     "@neondatabase/serverless": "^0.10.3",
     "drizzle-orm": "^0.35.1",
+    "drizzle-typebox": "^0.1.1",
     "drizzle-zod": "^0.5.1",
     "zod": "catalog:"
   },

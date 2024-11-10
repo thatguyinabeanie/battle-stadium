@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 
-import type { Organization } from "~/lib/api";
+import type { organizations } from "@battle-stadium/db/schema";
+
 import OrganizationLogo from "./organization-logo";
 
 interface OrganizationHeaderProps {
   children: ReactNode;
-  organization: Organization;
+  organization: typeof organizations.$inferSelect;
 }
 
 const HEIGHT_WIDTH = 175;

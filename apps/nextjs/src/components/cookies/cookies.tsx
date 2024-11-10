@@ -88,7 +88,7 @@ export default function CookiesComponent({
         <p className="text-small text-default-700 font-normal">
           We use cookies to provide the best experience. By continuing to use
           our site, you agree to our&nbsp;
-          <Link className="font-normal" href="/tos/cookies">
+          <Link prefetch={true} className="font-normal" href="/tos/cookies">
             Cookie Policy.
           </Link>
         </p>

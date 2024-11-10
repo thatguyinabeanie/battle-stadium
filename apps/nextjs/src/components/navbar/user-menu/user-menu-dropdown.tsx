@@ -3,17 +3,17 @@
 import Link from "next/link";
 import { SignInButton, SignOutButton } from "@clerk/nextjs";
 
+import type { accounts } from "@battle-stadium/db/schema";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@battle-stadium/ui";
 
-import type { components } from "~/lib/api/openapi-v1";
 import { cn } from "~/lib/utils";
 
 interface UserMenuDropDownProps {
-  me?: components["schemas"]["AccountMe"];
+  me?: typeof accounts.$inferSelect | null;
   isSignedIn: boolean;
 }
 
@@ -30,10 +30,10 @@ export default function UserMenuDropDown({
           className={cn("hidden", { "sm:flex": me && isSignedIn })}
           color="primary"
         >
-          <Link aria-label="dashboard" href="/dashboard">
+          <Link prefetch={true} aria-label="dashboard" href="/dashboard">
             <span>
               <p className="text-default-400 font-normal">Signed in as</p>
-              <p className="truncate font-semibold">{`${me?.first_name} ${me?.last_name}`}</p>{" "}
+              <p className="truncate font-semibold">{`${me?.firstName} ${me?.lastName}`}</p>{" "}
             </span>
           </Link>
         </DropdownMenuItem>
@@ -58,7 +58,9 @@ export default function UserMenuDropDown({
             hidden: !(me && isSignedIn) || !me.admin,
           })}
         >
-          <Link href="/dashboard?tab=admin">Admin</Link>
+          <Link prefetch={true} href="/dashboard?tab=admin">
+            Admin
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -68,7 +70,9 @@ export default function UserMenuDropDown({
             hidden: !(me && isSignedIn),
           })}
         >
-          <Link href="/dashboard?tab=settings">Settings</Link>
+          <Link prefetch={true} href="/dashboard?tab=settings">
+            Settings
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem key="help_and_feedback">

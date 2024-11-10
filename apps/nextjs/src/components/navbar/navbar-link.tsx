@@ -26,10 +26,11 @@ export default function NavbarLink({
   href,
   label,
   className,
-}: NavbarLinkProps) {
+}: Readonly<NavbarLinkProps>) {
   const pathname = usePathname();
   return (
     <Link
+      prefetch={true}
       key={value}
       href={href}
       className={`${getClassName(pathname, value)} ${className}`}

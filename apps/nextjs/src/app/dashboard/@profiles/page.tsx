@@ -3,13 +3,13 @@ import { getProfilesByAccountId } from "~/app/server-actions/profiles/actions";
 import NewProfile from "~/components/profiles/new-profile";
 
 export default async function Profiles() {
-  const me = (await getAccountMe())?.data;
+  const me = await getAccountMe();
 
   if (!me) {
     return null;
   }
 
-  const profiles = await getProfilesByAccountId(me.id);
+  const profiles = await getProfilesByAccountId(Number(me.id));
 
   return (
     <div>

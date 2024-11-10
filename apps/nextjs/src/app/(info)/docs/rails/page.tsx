@@ -12,7 +12,7 @@ export default async function OpenApiDocs() {
     return redirect("/");
   }
 
-  const me = (await getAccountMe())?.data;
+  const me = await getAccountMe();
 
   if (!me?.admin) {
     return redirect("/"); // Redirect to home page if account is not an admin)

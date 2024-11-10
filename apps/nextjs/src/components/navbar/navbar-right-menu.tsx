@@ -10,7 +10,7 @@ import UserMenu from "./user-menu/user-menu";
 
 export default async function RightMenu() {
   const clerkAuth = await auth();
-  const me = (await getAccountMe())?.data;
+  const me = await getAccountMe();
 
   return (
     <div className="flex flex-row items-center justify-center gap-2">
@@ -22,7 +22,7 @@ export default async function RightMenu() {
         />
       </Button>
 
-      <Link passHref href="/dashboard?tab=settings">
+      <Link prefetch={true} passHref href="/dashboard?tab=settings">
         <Button>
           <Icon
             className="text-default-500"

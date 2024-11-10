@@ -17,15 +17,15 @@ export async function generateMetadata(
   props: Readonly<OrganizationDetailPageProps>,
 ) {
   const params = await props.params;
-  const { data: org } = await getOrganization(params.org_slug);
+  const org = await getOrganization(params.org_slug);
 
   return { title: org?.name ?? "Organization" };
 }
 
 export async function generateStaticParams() {
-  const { partners, nonpartners } = await getOrganizations();
+  const orgs = await getOrganizations();
 
-  return [...partners, ...nonpartners].map(({ slug }) => ({ org_slug: slug }));
+  return orgs.map(({ slug }) => ({ org_slug: slug }));
 }
 
 // const columns = [
@@ -60,7 +60,7 @@ export default async function OrganizationDetailPage(
   props: Readonly<OrganizationDetailPageProps>,
 ) {
   const params = await props.params;
-  const { data: organization } = await getOrganization(params.org_slug);
+  const organization = await getOrganization(params.org_slug);
 
   if (!organization) {
     return <div>404 - Not Found</div>;

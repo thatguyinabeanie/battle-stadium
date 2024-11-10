@@ -1,49 +1,46 @@
 "use server";
 
-import type { FetchOptions } from "openapi-fetch";
 import { auth } from "@clerk/nextjs/server";
 
-import type { paths } from "~/lib/api/openapi-v1";
-import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
+import { db, eq } from "@battle-stadium/db";
+import { accounts, clerkUsers, profiles } from "@battle-stadium/db/schema";
 
-export async function getAccounts(
-  options?: FetchOptions<paths["/accounts"]["get"]>,
-) {
-  const usersOptions = {
-    ...defaultConfig("listUsers"),
-    ...options,
-  };
-  const skipClerkAuth = true;
-
-  return BattleStadiumApiClient(skipClerkAuth).GET("/accounts", usersOptions);
+export async function getAccounts() {
+  return await db.query.accounts.findMany();
 }
 
-export async function getAccount(
-  username: string,
-  options?: FetchOptions<paths["/accounts/{username}"]["get"]>,
-) {
-  const userOptions = {
-    ...defaultConfig(`getUser-${username}`),
-    ...options,
-    params: { path: { username } },
-  };
+export async function getAccount(username: string) {
+  const profile = await db.query.profiles.findFirst({
+    where: eq(profiles.username, username),
+  });
 
-  return BattleStadiumApiClient().GET("/accounts/{username}", userOptions);
+  if (!profile?.accountId) {
+    return null;
+  }
+
+  return await db.query.accounts.findFirst({
+    where: eq(accounts.id, BigInt(profile.accountId)),
+  });
 }
 
-export async function getAccountMe(
-  options?: FetchOptions<paths["/accounts/me"]["get"]>,
-) {
+export async function getAccountMe() {
   const { userId } = await auth();
 
   if (!userId) {
     return null;
   }
 
-  const userMeOptions = {
-    ...defaultConfig(`getAccountMe(${userId})`),
-    ...options,
-  };
+  const clerkUser = await db.query.clerkUsers.findFirst({
+    where: eq(clerkUsers.clerkUserId, userId),
+  });
 
-  return BattleStadiumApiClient().GET("/accounts/me", userMeOptions);
+  if (!clerkUser?.accountId) {
+    return null;
+  }
+
+  const account = await db.query.accounts.findFirst({
+    where: eq(accounts.id, BigInt(clerkUser.accountId)),
+  });
+
+  return account;
 }

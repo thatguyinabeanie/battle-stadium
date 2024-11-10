@@ -1,12 +1,13 @@
 "use client";
 
+import type { profiles } from "@battle-stadium/db/schema";
+
 // import { type Key } from "react";
 
 // import Link from "next/link";
-import type { Profile } from "~/lib/api";
 
 export interface PlayersTableProps {
-  players: Profile[];
+  players: (typeof profiles.$inferSelect)[];
   columns: { key: string; label: string }[];
 }
 
@@ -29,7 +30,8 @@ export default function PlayersTable({
 //   switch (columnKey) {
 //     case "username":
 //       return (
-//         <Link className="text-primary" href={`/players/${username}`}>
+//         <Link
+//           prefetch={ true } className="text-primary" href={`/players/${username}`}>
 //           {username}
 //         </Link>
 //       );
