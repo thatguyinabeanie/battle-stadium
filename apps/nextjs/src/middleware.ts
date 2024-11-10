@@ -25,6 +25,7 @@ export default clerkMiddleware(async (auth, request) => {
     [env.NODE_ENV, env.VERCEL_ENV].includes("development") &&
     !isPublicRoute(request)
   ) {
+    console.log("protecting route", request.url);
     await auth.protect();
   }
 });
