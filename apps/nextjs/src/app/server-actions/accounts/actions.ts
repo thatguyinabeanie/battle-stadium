@@ -19,7 +19,7 @@ export async function getAccount(username: string) {
   }
 
   return await db.query.accounts.findFirst({
-    where: eq(accounts.id, BigInt(profile.accountId)),
+    where: eq(accounts.id, profile.accountId),
   });
 }
 
@@ -39,7 +39,7 @@ export async function getAccountMe() {
   }
 
   const account = await db.query.accounts.findFirst({
-    where: eq(accounts.id, BigInt(clerkUser.accountId)),
+    where: eq(accounts.id, clerkUser.accountId),
   });
 
   return account;

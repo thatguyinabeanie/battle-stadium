@@ -6,7 +6,7 @@ import RegistrationCard from "./registration-card";
 
 interface TournamentRegisterProps {
   org_slug: string;
-  tournament_id: number;
+  tournament_id: bigint;
 }
 
 export default async function TournamentRegistration({
@@ -19,7 +19,7 @@ export default async function TournamentRegistration({
     redirect("/sign-in");
   }
 
-  const profiles = await getProfilesByAccountId(Number(me.id));
+  const profiles = await getProfilesByAccountId(me.id);
 
   return (
     <RegistrationCard
