@@ -4,15 +4,15 @@ import type { DashboardLayoutProps } from "~/types";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 
 const tabsList = [
+  { key: "dashboard", title: "Dashboard" },
   { key: "profiles", title: "Profiles" },
   { key: "pokemon", title: "Pokemon" },
   { key: "tournaments", title: "Tournaments" },
-  { key: "dashboard", title: "Dashboard" },
   { key: "settings", title: "Settings" },
 ];
 const adminTab = { key: "admin", title: "Admin" };
 
-export default async function DashboardLayout(
+export default async function DashboardLayout (
   props: Readonly<DashboardLayoutProps>,
 ) {
   const me = await getAccountMe();
@@ -20,35 +20,37 @@ export default async function DashboardLayout(
   const tabsToRender = me?.admin ? [...tabsList, adminTab] : tabsList;
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center">
-      <Tabs defaultValue="account" className="w-[400px]">
-        <TabsList>
-          {tabsToRender.map(({ key, title }) => (
-            <TabsTrigger key={key} value={key}>
-              {title}
+    <div className="flex min-h-screen w-full flex-col items-center pt-2">
+      <Tabs defaultValue="dashboard" className="w-[400px]">
+        <TabsList className="flex flex-row items-center justify-center w-fit">
+          { tabsToRender.map(({ key, title }) => (
+            <TabsTrigger key={ key } value={ key }>
+              { title }
             </TabsTrigger>
-          ))}
+          )) }
         </TabsList>
-        {tabsToRender.map(({ key }) => (
-          <TabsContent key={key} value={key}>
-            {renderTabContent(key, props)}
+        { tabsToRender.map(({ key }) => (
+          <TabsContent key={ key } value={ key }>
+            <div className="flex flex-col items-center">
+              { renderTabContent(key, props) }
+            </div>
           </TabsContent>
-        ))}
+        )) }
       </Tabs>
     </div>
   );
 }
 
-function renderTabContent(
-  activeTab: string,
+function renderTabContent (
+  key: string,
   props: Readonly<DashboardLayoutProps>,
 ) {
-  switch (activeTab) {
+  switch (key) {
     case "profiles":
       return props.profiles;
     case "pokemon":
       return props.pokemon;
-    case "tournament_history":
+    case "tournaments":
       return props.tournament_history;
     case "dashboard":
       return props.children;
