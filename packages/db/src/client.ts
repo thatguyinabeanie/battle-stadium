@@ -3,10 +3,10 @@ import { drizzle } from "drizzle-orm/neon-http";
 
 import * as schema from "./schemas";
 
-if (!process.env.POSTGRES_URL) {
-  throw new Error("Missing POSTGRES_URL");
+if (!process.env.DATABASE_URL) {
+  throw new Error("Missing DATABASE_URL");
 }
-const sql = neon(process.env.POSTGRES_URL);
+const sql = neon(process.env.DATABASE_URL);
 
 export const db = drizzle({
   client: sql,

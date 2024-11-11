@@ -30,17 +30,11 @@ export async function getAccountMe() {
     return null;
   }
 
-  const clerkUser = await db.query.clerkUsers.findFirst({
-    where: eq(clerkUsers.clerkUserId, userId),
-  });
+  const result = await db
+    .select()
+    .from(accounts)
+    .leftJoin(clerkUsers, eq(clerkUsers.accountId, accounts.id))
+    .where(eq(clerkUsers.clerkUserId, userId));
 
-  if (!clerkUser?.accountId) {
-    return null;
-  }
-
-  const account = await db.query.accounts.findFirst({
-    where: eq(accounts.id, clerkUser.accountId),
-  });
-
-  return account;
+  return result[0]?.accounts;
 }
