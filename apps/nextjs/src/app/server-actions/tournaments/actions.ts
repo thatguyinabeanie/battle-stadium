@@ -33,10 +33,10 @@ export async function getTournaments(page = 1, pageSize = 20) {
 }
 
 interface TournamentRegistration {
-  tournamentId: number;
+  tournamentId: bigint;
   inGameName: string;
-  profileId: number;
-  pokemonTeamId?: number;
+  profileId: bigint;
+  pokemonTeamId?: bigint;
   showCountryFlag: boolean;
 }
 
@@ -53,7 +53,7 @@ export async function postTournamentRegistration(
     .returning();
 }
 
-export async function getTournamentPlayers(tournament_id: number) {
+export async function getTournamentPlayers(tournament_id: bigint) {
   return await db
     .select()
     .from(players)
