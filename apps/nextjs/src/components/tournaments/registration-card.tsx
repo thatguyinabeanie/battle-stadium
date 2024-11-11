@@ -6,7 +6,7 @@ import ProfilesAutocomplete from "./profiles-autocomplete";
 
 interface RegistrationCardProps {
   org_slug: string;
-  tournament_id: bigint;
+  tournament_id: number;
   profiles: Profile[];
 }
 
