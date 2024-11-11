@@ -11,10 +11,10 @@ export const BattleStadiumIcon: FC<IconSvgProps> = ({
 }) => (
   <svg
     fill="none"
-    height={ size || height }
+    height={size || height}
     viewBox="0 0 32 32"
-    width={ size || width }
-    { ...props }
+    width={size || width}
+    {...props}
   >
     <path
       clipRule="evenodd"
@@ -25,14 +25,14 @@ export const BattleStadiumIcon: FC<IconSvgProps> = ({
   </svg>
 );
 
-export default function BattleStadium () {
+export default function BattleStadium() {
   return (
     <div
       aria-label="Battle Stadium Navigation"
       className="flex flex-row gap-2 md:gap-4"
     >
       <div className="flex rounded-full bg-foreground">
-        <Link prefetch={ true } className="text-primary" href="/">
+        <Link prefetch={true} className="text-primary" href="/">
           <BattleStadiumIcon
             aria-label="Battle Stadium Logo"
             className="text-background"
