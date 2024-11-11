@@ -2,20 +2,21 @@ import type { ReactNode } from "react";
 
 interface ComingSoonProps {
   title: string;
-  children: ReactNode
+  children: ReactNode;
 }
-export default function ComingSoon ({ title, children }: Readonly<ComingSoonProps>) {
+export default function ComingSoon({
+  title,
+  children,
+}: Readonly<ComingSoonProps>) {
   return (
-    <div className="min-h-screen flex flex-col pt-4">
-      <div className="text-center space-y-6 p-8 bg-white/10 backdrop-blur-lg rounded-xl shadow-xl animate-fade-in">
+    <div className="flex min-h-screen flex-col pt-4">
+      <div className="animate-fade-in space-y-6 rounded-xl bg-white/10 p-8 text-center shadow-xl backdrop-blur-lg">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">
-            { title }
-          </h1>
-          <p className="text-xl">{ title } Coming Soon</p>
+          <h1 className="text-4xl font-bold">{title}</h1>
+          {children}
         </div>
-        { children }
+        <p className="text-xl">Coming Soon</p>
       </div>
     </div>
-  )
+  );
 }

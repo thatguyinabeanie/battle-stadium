@@ -12,7 +12,7 @@ const tabsList = [
 ];
 const adminTab = { key: "admin", title: "Admin" };
 
-export default async function DashboardLayout (
+export default async function DashboardLayout(
   props: Readonly<DashboardLayoutProps>,
 ) {
   const me = await getAccountMe();
@@ -21,30 +21,27 @@ export default async function DashboardLayout (
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center pt-2">
-      <Tabs defaultValue="dashboard" className="w-[400px]">
-        <TabsList className="flex flex-row items-center justify-center w-fit">
-          { tabsToRender.map(({ key, title }) => (
-            <TabsTrigger key={ key } value={ key }>
-              { title }
+      <Tabs defaultValue="dashboard" className="flex flex-col">
+        <TabsList className="flex w-fit flex-row">
+          {tabsToRender.map(({ key, title }) => (
+            <TabsTrigger key={key} value={key}>
+              {title}
             </TabsTrigger>
-          )) }
+          ))}
         </TabsList>
-        { tabsToRender.map(({ key }) => (
-          <TabsContent key={ key } value={ key }>
+        {tabsToRender.map(({ key }) => (
+          <TabsContent key={key} value={key}>
             <div className="flex flex-col items-center">
-              { renderTabContent(key, props) }
+              {renderTabContent(key, props)}
             </div>
           </TabsContent>
-        )) }
+        ))}
       </Tabs>
     </div>
   );
 }
 
-function renderTabContent (
-  key: string,
-  props: Readonly<DashboardLayoutProps>,
-) {
+function renderTabContent(key: string, props: Readonly<DashboardLayoutProps>) {
   switch (key) {
     case "profiles":
       return props.profiles;

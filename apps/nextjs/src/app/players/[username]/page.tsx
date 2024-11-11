@@ -7,7 +7,7 @@ interface PlayerProfilePageProps {
   }>;
 }
 
-export async function generateMetadata (
+export async function generateMetadata(
   props: Readonly<PlayerProfilePageProps>,
 ) {
   const params = await props.params;
@@ -16,18 +16,15 @@ export async function generateMetadata (
   return { title: player?.username ?? "Player" };
 }
 
-export default async function PlayerProfilePage (
+export default async function PlayerProfilePage(
   props: Readonly<PlayerProfilePageProps>,
 ) {
   const params = await props.params;
   const player = await getProfile(params.username);
 
   return (
-    <ComingSoon
-      title={ player?.username ?? "Player Profile" }
-    >
+    <ComingSoon title={player?.username ?? "Player Profile"}>
       <h2>The Player Profiles are under construction</h2>
-      <h3>Coming Soon</h3>
-    </ComingSoon >
+    </ComingSoon>
   );
 }
