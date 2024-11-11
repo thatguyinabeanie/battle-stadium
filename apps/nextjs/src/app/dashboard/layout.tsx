@@ -8,11 +8,12 @@ const tabsList = [
   { key: "profiles", title: "Profiles" },
   { key: "pokemon", title: "Pokemon" },
   { key: "tournaments", title: "Tournaments" },
+  { key: "organizations", title: "Organizations" },
   { key: "settings", title: "Settings" },
 ];
 const adminTab = { key: "admin", title: "Admin" };
 
-export default async function DashboardLayout(
+export default async function DashboardLayout (
   props: Readonly<DashboardLayoutProps>,
 ) {
   const me = await getAccountMe();
@@ -23,25 +24,25 @@ export default async function DashboardLayout(
     <div className="flex min-h-screen w-full flex-col items-center pt-2">
       <Tabs defaultValue="dashboard" className="flex flex-col">
         <TabsList className="flex w-fit flex-row">
-          {tabsToRender.map(({ key, title }) => (
-            <TabsTrigger key={key} value={key}>
-              {title}
+          { tabsToRender.map(({ key, title }) => (
+            <TabsTrigger key={ key } value={ key }>
+              { title }
             </TabsTrigger>
-          ))}
+          )) }
         </TabsList>
-        {tabsToRender.map(({ key }) => (
-          <TabsContent key={key} value={key}>
+        { tabsToRender.map(({ key }) => (
+          <TabsContent key={ key } value={ key }>
             <div className="flex flex-col items-center">
-              {renderTabContent(key, props)}
+              { renderTabContent(key, props) }
             </div>
           </TabsContent>
-        ))}
+        )) }
       </Tabs>
     </div>
   );
 }
 
-function renderTabContent(key: string, props: Readonly<DashboardLayoutProps>) {
+function renderTabContent (key: string, props: Readonly<DashboardLayoutProps>) {
   switch (key) {
     case "profiles":
       return props.profiles;
@@ -55,6 +56,8 @@ function renderTabContent(key: string, props: Readonly<DashboardLayoutProps>) {
       return props.settings;
     case "admin":
       return props.admin;
+    case "organizations":
+      return props.organizations;
     default:
       return null;
   }
