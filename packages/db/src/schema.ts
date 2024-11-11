@@ -1,4 +1,5 @@
 import type * as schema from "../drizzle/schema";
+
 export * from "../drizzle/schema";
 export type Account = typeof schema.accounts.$inferSelect;
 export type AccountInsert = typeof schema.accounts.$inferInsert;
@@ -20,8 +21,10 @@ export type MatchGameInsert = typeof schema.matchGames.$inferInsert;
 export type Match = typeof schema.matches.$inferSelect;
 export type MatchInsert = typeof schema.matches.$inferInsert;
 
-export type OrganizationStaffMember = typeof schema.organizationStaffMembers.$inferSelect;
-export type OrganizationStaffMemberInsert = typeof schema.organizationStaffMembers.$inferInsert;
+export type OrganizationStaffMember =
+  typeof schema.organizationStaffMembers.$inferSelect;
+export type OrganizationStaffMemberInsert =
+  typeof schema.organizationStaffMembers.$inferInsert;
 
 export type Organization = typeof schema.organizations.$inferSelect;
 export type OrganizationInsert = typeof schema.organizations.$inferInsert;
@@ -48,7 +51,8 @@ export type Round = typeof schema.rounds.$inferSelect;
 export type RoundInsert = typeof schema.rounds.$inferInsert;
 
 export type TournamentFormat = typeof schema.tournamentFormats.$inferSelect;
-export type TournamentFormatInsert = typeof schema.tournamentFormats.$inferInsert;
+export type TournamentFormatInsert =
+  typeof schema.tournamentFormats.$inferInsert;
 
 export type Tournament = typeof schema.tournaments.$inferSelect;
 export type TournamentInsert = typeof schema.tournaments.$inferInsert;
