@@ -1,5 +1,5 @@
 {
   "extends": "@battle-stadium/tsconfig/internal-package.json",
-  "include": ["src"],
-  "exclude": ["node_modules", ".cache", ".turbo", "dist"]
+  "include": ["src", "drizzle"],
+  "exclude": ["node_modules", ".cache", ".turbo"]
 }
