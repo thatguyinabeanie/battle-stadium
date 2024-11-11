@@ -1,4 +1,5 @@
 import { getProfile } from "~/app/server-actions/profiles/actions";
+import ComingSoon from "~/components/coming-soon";
 
 interface PlayerProfilePageProps {
   params: Promise<{
@@ -6,7 +7,7 @@ interface PlayerProfilePageProps {
   }>;
 }
 
-export async function generateMetadata(
+export async function generateMetadata (
   props: Readonly<PlayerProfilePageProps>,
 ) {
   const params = await props.params;
@@ -15,16 +16,18 @@ export async function generateMetadata(
   return { title: player?.username ?? "Player" };
 }
 
-export default async function PlayerProfilePage(
+export default async function PlayerProfilePage (
   props: Readonly<PlayerProfilePageProps>,
 ) {
   const params = await props.params;
   const player = await getProfile(params.username);
 
   return (
-    <div>
-      <h1>{player?.username}</h1>
-      <p> {player?.slug} </p>
-    </div>
+    <ComingSoon
+      title={ player?.username ?? "Player Profile" }
+    >
+      <h2>The Player Profiles are under construction</h2>
+      <h3>Coming Soon</h3>
+    </ComingSoon >
   );
 }
