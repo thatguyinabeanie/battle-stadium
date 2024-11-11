@@ -8,6 +8,7 @@ const tabsList = [
   { key: "profiles", title: "Profiles" },
   { key: "pokemon", title: "Pokemon" },
   { key: "tournaments", title: "Tournaments" },
+  { key: "organizations", title: "Organizations" },
   { key: "settings", title: "Settings" },
 ];
 const adminTab = { key: "admin", title: "Admin" };
@@ -55,6 +56,8 @@ function renderTabContent(key: string, props: Readonly<DashboardLayoutProps>) {
       return props.settings;
     case "admin":
       return props.admin;
+    case "organizations":
+      return props.organizations;
     default:
       return null;
   }

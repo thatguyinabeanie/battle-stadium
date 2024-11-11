@@ -41,7 +41,7 @@ export default function BattleStadium() {
       </div>
 
       <Link
-        className="flex flex-col items-center justify-center text-lg font-bold text-primary opacity-100"
+        className="text-md flex flex-row items-center justify-center font-bold text-primary opacity-100"
         href="/"
       >
         Battle Stadium
