@@ -1,16 +1,16 @@
 import type { DashboardLayoutProps } from "~/types";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
+import Dashboard from "~/components/dashboard/dashboard-tab-group";
 
-export default async function DashboardLayout({
+export default async function DashboardLayout ({
   children,
+  ...rest
 }: Readonly<DashboardLayoutProps>) {
   const me = await getAccountMe();
 
   return (
-    <div>
-      <h2>TODO: Dashboard</h2>
-      {me && <p>Welcome, {me.email}</p>}
-      {children}
-    </div>
+    <Dashboard { ...rest } me={ me }>
+      { children }
+    </Dashboard>
   );
 }
