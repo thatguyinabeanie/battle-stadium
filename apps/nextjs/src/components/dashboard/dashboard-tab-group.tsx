@@ -23,7 +23,7 @@ interface DashboardProps extends DashboardLayoutProps {
   me?: Account | null;
 }
 
-export default function Dashboard (props: Readonly<DashboardProps>) {
+export default function Dashboard(props: Readonly<DashboardProps>) {
   const tabsToRender = props.me?.admin ? [...tabsList, adminTab] : tabsList;
 
   // TODO: Implement url deep linking of tabs
@@ -31,23 +31,23 @@ export default function Dashboard (props: Readonly<DashboardProps>) {
     <div className="flex min-h-screen w-full flex-col items-center">
       <ShadCnUITabs defaultValue="account" className="w-[400px]">
         <TabsList>
-          { tabsToRender.map(({ key, title }) => (
-            <TabsTrigger key={ key } value={ key }>
-              { title }
+          {tabsToRender.map(({ key, title }) => (
+            <TabsTrigger key={key} value={key}>
+              {title}
             </TabsTrigger>
-          )) }
+          ))}
         </TabsList>
-        { tabsToRender.map(({ key }) => (
-          <TabsContent key={ key } value={ key }>
-            { renderTabContent(key, props) }
+        {tabsToRender.map(({ key }) => (
+          <TabsContent key={key} value={key}>
+            {renderTabContent(key, props)}
           </TabsContent>
-        )) }
+        ))}
       </ShadCnUITabs>
     </div>
   );
 }
 
-function renderTabContent (activeTab: string, props: DashboardProps) {
+function renderTabContent(activeTab: string, props: DashboardProps) {
   switch (activeTab) {
     case "profiles":
       return props.profiles;
