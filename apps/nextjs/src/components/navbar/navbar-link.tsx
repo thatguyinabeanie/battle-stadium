@@ -7,7 +7,7 @@ import { cn } from "~/lib/utils";
 
 const getClassName = (pathname: string, value: string) =>
   cn(
-    "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+    "rounded-md px-1 py-2 text-sm font-medium transition-colors",
     pathname.includes(`/${value}`)
       ? "bg-primary/10 text-primary"
       : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
