@@ -3,12 +3,13 @@
 import * as React from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import { DayPicker } from "react-day-picker";
-import { cn } from "./utils";
+
 import { buttonVariants } from "./button";
+import { cn } from "./utils";
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
-function Calendar ({
+function Calendar({
   className,
   classNames,
   showOutsideDays = true,
@@ -16,9 +17,9 @@ function Calendar ({
 }: CalendarProps) {
   return (
     <DayPicker
-      showOutsideDays={ showOutsideDays }
-      className={ cn("p-3", className) }
-      classNames={ {
+      showOutsideDays={showOutsideDays}
+      className={cn("p-3", className)}
+      classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
         caption: "flex justify-center pt-1 relative items-center",
@@ -57,12 +58,12 @@ function Calendar ({
           "aria-selected:bg-accent aria-selected:text-accent-foreground",
         day_hidden: "invisible",
         ...classNames,
-      } }
-      components={ {
-        IconLeft: ({ ...props }) => <ChevronLeftIcon className="h-4 w-4" />,
-        IconRight: ({ ...props }) => <ChevronRightIcon className="h-4 w-4" />,
-      } }
-      { ...props }
+      }}
+      components={{
+        IconLeft: (_props) => <ChevronLeftIcon className="h-4 w-4" />,
+        IconRight: (_props) => <ChevronRightIcon className="h-4 w-4" />,
+      }}
+      {...props}
     />
   );
 }
