@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 
+import ComingSoon from "~/components/coming-soon";
+
 export const metadata: Metadata = {
   title: "Analytics",
 };
 
-export default function Analytics() {
+export default function PlayersPage() {
   return (
-    <div>
-      <h1>Analytics</h1>
-    </div>
+    <ComingSoon title={"Analytics"}>
+      <div className="flex flex-col items-center">
+        <h2>"Analytics is under construction</h2>
+      </div>
+    </ComingSoon>
   );
 }

@@ -12,10 +12,10 @@ export default function Home() {
   return (
     <HydrateClient>
       <div className="min--h-screen flex flex-col items-center justify-between">
-        <div className="mt-8 md:mt-20">
+        <div className="mt-4">
           <PartneredOrganizations />
         </div>
-        <div className="flex w-full max-w-fit flex-col items-center justify-center bg-transparent pt-10 text-center">
+        <div className="flex w-full max-w-fit flex-col items-center justify-center bg-transparent text-center">
           <h1 className={title({ color: "violet", size: "xl" })}>
             battlestadium.gg
           </h1>

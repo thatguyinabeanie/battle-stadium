@@ -16,7 +16,7 @@ export default async function OrganizationsPage() {
   const orgs = await getOrganizations();
   return (
     <>
-      <div className="mt-8 md:mt-20">
+      <div className="mt-4">
         <PartneredOrganizations />
       </div>
 

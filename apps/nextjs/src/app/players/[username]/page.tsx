@@ -1,4 +1,5 @@
 import { getProfile } from "~/app/server-actions/profiles/actions";
+import ComingSoon from "~/components/coming-soon";
 
 interface PlayerProfilePageProps {
   params: Promise<{
@@ -22,9 +23,8 @@ export default async function PlayerProfilePage(
   const player = await getProfile(params.username);
 
   return (
-    <div>
-      <h1>{player?.username}</h1>
-      <p> {player?.slug} </p>
-    </div>
+    <ComingSoon title={player?.username ?? "Player Profile"}>
+      <h2>The Player Profiles are under construction</h2>
+    </ComingSoon>
   );
 }
