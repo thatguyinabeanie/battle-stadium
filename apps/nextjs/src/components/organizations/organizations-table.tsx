@@ -15,14 +15,14 @@ import {
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
 
-import DataTable from "~/components/data-table";
+import { DataTable } from "@battle-stadium/ui";
 
 interface OrganizationTableProps {
   orgs: Organization[];
 }
 
-export default function OrganizationsTable({ orgs }: OrganizationTableProps) {
-  return <DataTable<Organization> data={orgs} columns={columns} />;
+export default function OrganizationsTable ({ orgs }: OrganizationTableProps) {
+  return <DataTable<Organization> data={ orgs } columns={ columns } />;
 }
 
 const columns: ColumnDef<Organization>[] = [
@@ -34,14 +34,14 @@ const columns: ColumnDef<Organization>[] = [
           table.getIsAllPageRowsSelected() ||
           (table.getIsSomePageRowsSelected() && "indeterminate")
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        onCheckedChange={ (value) => table.toggleAllPageRowsSelected(!!value) }
         aria-label="Select all"
       />
     ),
     cell: ({ row }) => (
       <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        checked={ row.getIsSelected() }
+        onCheckedChange={ (value) => row.toggleSelected(!!value) }
         aria-label="Select row"
       />
     ),
@@ -52,7 +52,7 @@ const columns: ColumnDef<Organization>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div className="capitalize">{ row.getValue("status") }</div>
     ),
   },
   {
@@ -61,14 +61,14 @@ const columns: ColumnDef<Organization>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={ () => column.toggleSorting(column.getIsSorted() === "asc") }
         >
           Email
           <ArrowUpDown />
         </Button>
       );
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="lowercase">{ row.getValue("email") }</div>,
   },
   {
     accessorKey: "amount",
@@ -82,7 +82,7 @@ const columns: ColumnDef<Organization>[] = [
         currency: "USD",
       }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>;
+      return <div className="text-right font-medium">{ formatted }</div>;
     },
   },
   {
@@ -102,7 +102,7 @@ const columns: ColumnDef<Organization>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() =>
+              onClick={ () =>
                 navigator.clipboard.writeText(`${organization.id}`)
               }
             >
