@@ -31,7 +31,9 @@
     "articifial",
     "Bloodmoon",
     "compat",
+    "discordjs",
     "Embla",
+    "esbuild",
     "galar",
     "gmax",
     "hoenn",
@@ -41,8 +43,11 @@
     "jullerino",
     "JWKS",
     "kalos",
+    "libsql",
     "nitropack",
+    "opentelemetry",
     "paldea",
+    "planetscale",
     "preconfigured",
     "Pressable",
     "prettiercache",
@@ -59,7 +64,9 @@
     "unauthed",
     "unova",
     "unviable",
-    "Ursaluna"
+    "upstash",
+    "Ursaluna",
+    "vercel"
   ],
   "coverage-gutters.showGutterCoverage": false,
   "sqltools.connections": [

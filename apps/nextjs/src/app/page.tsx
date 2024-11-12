@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { Separator } from "@battle-stadium/ui";
+
 import { title } from "~/components/miscellaneous/primitives";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 import { HydrateClient } from "~/trpc/server";
@@ -15,6 +17,9 @@ export default function Home() {
         <div className="mt-4">
           <PartneredOrganizations />
         </div>
+
+        <Separator className="w-full" />
+
         <div className="flex w-full max-w-fit flex-col items-center justify-center bg-transparent text-center">
           <h1 className={title({ color: "violet", size: "xl" })}>
             battlestadium.gg

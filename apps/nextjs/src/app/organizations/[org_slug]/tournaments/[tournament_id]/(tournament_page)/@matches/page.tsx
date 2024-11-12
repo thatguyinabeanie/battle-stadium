@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@battle-stadium/ui/card";
+import { Card, CardContent, CardHeader } from "@battle-stadium/ui";
 
 interface MatchPageProps {
   params: Promise<{
