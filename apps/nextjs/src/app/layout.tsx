@@ -6,6 +6,7 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
 import { cn, ThemeProvider } from "@battle-stadium/ui";
+// import { cn, ThemeProvider, ThemeToggle } from "@battle-stadium/ui";
 
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
@@ -67,7 +68,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function RootLayout({
+export default async function RootLayout ({
   children,
 }: Readonly<ChildrenProps>) {
   const { userId, sessionId } = await auth();
@@ -77,16 +78,16 @@ export default async function RootLayout({
       <ClerkProvider>
         <html lang="en" suppressHydrationWarning>
           <body
-            className={cn(
+            className={ cn(
               "min-h-screen overflow-y-scroll bg-background font-sans text-foreground antialiased",
               GeistSans.variable,
               GeistMono.variable,
-            )}
+            ) }
           >
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               <TRPCReactProvider>
                 <NextSSRPlugin
-                  routerConfig={extractRouterConfig(UploadThingRouter)}
+                  routerConfig={ extractRouterConfig(UploadThingRouter) }
                 />
                 <div className="flex min-h-screen flex-col items-center">
                   <AwesomeParticles />
@@ -96,7 +97,7 @@ export default async function RootLayout({
 
                     <main className="flex min-h-screen w-full flex-col items-center">
                       <section className="z-0 flex w-full flex-col items-center gap-4">
-                        {children}
+                        { children }
                       </section>
                     </main>
 
@@ -109,13 +110,13 @@ export default async function RootLayout({
                 <ThemeToggle />
               </div> */}
 
-              <Cookies isSignedIn={!!sessionId} userId={userId} />
+              <Cookies isSignedIn={ !!sessionId } userId={ userId } />
 
               <VercelAnalytics />
 
-              {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
+              { env.VERCEL_ENV === "production" && <VercelSpeedInsights /> }
 
-              <GoogleAnalytics gaId={env.MEASUREMENT_ID} />
+              <GoogleAnalytics gaId={ env.MEASUREMENT_ID } />
             </ThemeProvider>
           </body>
         </html>
