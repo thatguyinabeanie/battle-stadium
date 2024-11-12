@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import type { Tournament } from "~/lib/api";
+import OrganizationsTable from "~/components/organizations/organizations-table";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 import { getOrganizations } from "../server-actions/organizations/actions";
 
@@ -19,15 +20,8 @@ export default async function OrganizationsPage() {
       <div className="mt-4">
         <PartneredOrganizations />
       </div>
-
-      <div>
-        <h2>TODO: Organizations Table</h2>
-        {orgs.map((org) => (
-          <div key={org.id}>
-            <h3>{org.name}</h3>
-            <p>{org.description}</p>
-          </div>
-        ))}
+      <div className="mt-4">
+        <OrganizationsTable orgs={orgs} />
       </div>
     </>
   );

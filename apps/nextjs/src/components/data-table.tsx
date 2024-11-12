@@ -1,17 +1,12 @@
 "use client";
 
 import type {
+  ColumnDef,
   ColumnFiltersState,
   SortingState,
   VisibilityState,
 } from "@tanstack/react-table";
-import React from "react";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu";
+import * as React from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -24,6 +19,10 @@ import { ChevronDown } from "lucide-react";
 
 import {
   Button,
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
   Input,
   Table,
   TableBody,
@@ -33,10 +32,12 @@ import {
   TableRow,
 } from "@battle-stadium/ui";
 
-import { columns } from "./columns";
-import { data } from "./data";
+interface DataTableProps<T> {
+  data: T[];
+  columns: ColumnDef<T>[];
+}
 
-export function DataTableDemo() {
+export default function DataTable<T>({ data, columns }: DataTableProps<T>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
@@ -69,7 +70,7 @@ export function DataTableDemo() {
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter emails..."
-          value={table.getColumn("email")?.getFilterValue()?.toString() ?? ""}
+          value={table.getColumn("email")?.getFilterValue() as string}
           onChange={(event) =>
             table.getColumn("email")?.setFilterValue(event.target.value)
           }

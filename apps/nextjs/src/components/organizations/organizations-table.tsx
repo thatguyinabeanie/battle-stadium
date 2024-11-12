@@ -1,9 +1,9 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
-import * as React from "react";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
+import type { Organization } from "@battle-stadium/db/schema";
 import {
   Button,
   Checkbox,
@@ -15,9 +15,17 @@ import {
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
 
-import type { Payment } from "./types";
+import DataTable from "~/components/data-table";
 
-export const columns: ColumnDef<Payment>[] = [
+interface OrganizationTableProps {
+  orgs: Organization[];
+}
+
+export default function OrganizationsTable({ orgs }: OrganizationTableProps) {
+  return <DataTable<Organization> data={orgs} columns={columns} />;
+}
+
+export const columns: ColumnDef<Organization>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -81,7 +89,7 @@ export const columns: ColumnDef<Payment>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      const payment = row.original;
+      const organization = row.original;
 
       return (
         <DropdownMenu>
@@ -94,7 +102,9 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() =>
+                navigator.clipboard.writeText(`${organization.id}`)
+              }
             >
               Copy payment ID
             </DropdownMenuItem>
