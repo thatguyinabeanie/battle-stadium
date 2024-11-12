@@ -2,21 +2,11 @@
 
 import type {
   ColumnDef,
-  ColumnFiltersState,
   Table as ReactTable,
   RowData,
-  SortingState,
-  VisibilityState,
 } from "@tanstack/react-table";
-import React, { createContext, useContext, useState } from "react";
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import React from "react";
+import { flexRender } from "@tanstack/react-table";
 
 import {
   Button,
@@ -28,61 +18,13 @@ import {
   TableRow,
 } from "@battle-stadium/ui";
 
+import { DataTableContext } from "./data-table-context";
+import { useTanstackReactTable } from "./use-tanstack-react-table";
+
 interface DataTableProps<T> {
   data: T[];
   columns: ColumnDef<T>[];
   children?: React.ReactNode;
-}
-
-// Create generic context
-export const DataTableContext = createContext<{
-  table: ReturnType<typeof useReactTable<unknown>> | null;
-}>({ table: null });
-
-// Create generic provider component
-interface DataTableProviderProps<T> {
-  data: T[];
-  columns: ColumnDef<T>[];
-}
-
-export function useTanstackReactTable<T extends RowData>({
-  data,
-  columns,
-}: DataTableProviderProps<T>) {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-
-  const [rowSelection, setRowSelection] = useState({});
-
-  return useReactTable<T>({
-    data,
-    columns,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
-    },
-  });
-}
-
-// Create typed hook
-export function useDataTable<T extends RowData>() {
-  const context = useContext(DataTableContext);
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if (context === undefined) {
-    throw new Error("useDataTable must be used within a DataTableProvider");
-  }
-  return context.table as ReturnType<typeof useReactTable<T>> | null;
 }
 
 export default function DataTable<T extends RowData>({
@@ -90,7 +32,7 @@ export default function DataTable<T extends RowData>({
   columns,
   children,
 }: DataTableProps<T>) {
-  const table = useTanstackReactTable<T>({ data, columns });
+  const table = useTanstackReactTable<T>(data, columns);
   return (
     <DataTableContext.Provider
       value={{ table: table as ReactTable<unknown> | null }}

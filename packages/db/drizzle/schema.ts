@@ -19,8 +19,7 @@ export const formats = pgTable(
   "formats",
   {
     id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    name: varchar(),
-
+    name: varchar().notNull(),
     gameId: bigint("game_id", { mode: "bigint" }),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -58,7 +57,7 @@ export const tournaments = pgTable(
   "tournaments",
   {
     id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    name: varchar(),
+    name: varchar().notNull(),
     startAt: timestamp("start_at", { precision: 6, mode: "string" }),
     createdAt: timestamp("created_at", {
       precision: 6,

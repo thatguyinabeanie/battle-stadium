@@ -25,7 +25,7 @@ export default function OrganizationsTable({ orgs }: OrganizationTableProps) {
   return <DataTable<Organization> data={orgs} columns={columns} />;
 }
 
-export const columns: ColumnDef<Organization>[] = [
+const columns: ColumnDef<Organization>[] = [
   {
     id: "select",
     header: ({ table }) => (
