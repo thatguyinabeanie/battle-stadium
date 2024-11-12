@@ -5,7 +5,9 @@ import { SpeedInsights as VercelSpeedInsights } from "@vercel/speed-insights/nex
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
-import { cn, ThemeProvider, ThemeToggle } from "@battle-stadium/ui";
+import { cn, ThemeProvider } from "@battle-stadium/ui";
+
+// import { cn, ThemeProvider, ThemeToggle } from "@battle-stadium/ui";
 
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
@@ -26,7 +28,9 @@ import { siteConfig } from "~/lib/config/site";
 import { UploadThingRouter } from "./api/uploadthing/core";
 
 const Cookies = dynamic(() => import("~/components/cookies/cookies"));
-// const AwesomeParticles = dynamic(() => import("~/components/awesome-particles"));
+const AwesomeParticles = dynamic(
+  () => import("~/components/awesome-particles"),
+);
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -87,7 +91,7 @@ export default async function RootLayout({
                   routerConfig={extractRouterConfig(UploadThingRouter)}
                 />
                 <div className="flex min-h-screen flex-col items-center">
-                  {/* <AwesomeParticles /> */}
+                  <AwesomeParticles />
 
                   <div className="flex min-h-screen w-5/6 flex-col items-center shadow-2xl backdrop-blur dark:shadow-white">
                     <Navbar />
@@ -103,9 +107,9 @@ export default async function RootLayout({
                 </div>
               </TRPCReactProvider>
 
-              <div className="absolute bottom-4 right-4">
+              {/* <div className="absolute bottom-4 right-4">
                 <ThemeToggle />
-              </div>
+              </div> */}
 
               <Cookies isSignedIn={!!sessionId} userId={userId} />
 

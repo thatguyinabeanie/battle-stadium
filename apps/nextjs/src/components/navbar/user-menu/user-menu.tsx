@@ -21,7 +21,10 @@ async function SmartAvatar() {
 
   if (user?.imageUrl) {
     return (
-      <Avatar aria-label="User's profile image" className="bg-transparent">
+      <Avatar
+        aria-label="User's profile image"
+        className="h-[30px] w-[30px] bg-transparent"
+      >
         <AvatarImage src={user.imageUrl} />
         <AvatarFallback>X</AvatarFallback>
       </Avatar>
