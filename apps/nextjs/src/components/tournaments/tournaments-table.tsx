@@ -6,35 +6,35 @@ import { ChevronDown } from "lucide-react";
 import type { Tournament } from "@battle-stadium/db/schema";
 import {
   Button,
+  DataTable,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
   Input,
+  useDataTable,
 } from "@battle-stadium/ui";
-
-import { DataTable, useDataTable } from "@battle-stadium/ui";
 
 interface TournamentsTableProps {
   data: Tournament[];
 }
-export default function TournamentsTable ({ data }: TournamentsTableProps) {
+export default function TournamentsTable({ data }: TournamentsTableProps) {
   return (
-    <DataTable<Tournament> data={ data } columns={ columns }>
+    <DataTable<Tournament> data={data} columns={columns}>
       <TournamentsTableFiltering />
     </DataTable>
   );
 }
 
-function TournamentsTableFiltering () {
+function TournamentsTableFiltering() {
   const table = useDataTable<Tournament>();
   if (!table) return null;
   return (
     <div className="flex items-center py-4">
       <Input
         placeholder="Filter emails..."
-        value={ table.getColumn("email")?.getFilterValue() as string }
-        onChange={ (event) =>
+        value={table.getColumn("email")?.getFilterValue() as string}
+        onChange={(event) =>
           table.getColumn("email")?.setFilterValue(event.target.value)
         }
         className="max-w-sm"
@@ -46,21 +46,21 @@ function TournamentsTableFiltering () {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          { table
+          {table
             .getAllColumns()
             .filter((column) => column.getCanHide())
             .map((column) => {
               return (
                 <DropdownMenuCheckboxItem
-                  key={ column.id }
+                  key={column.id}
                   className="capitalize"
-                  checked={ column.getIsVisible() }
-                  onCheckedChange={ (value) => column.toggleVisibility(!!value) }
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
                 >
-                  { column.id }
+                  {column.id}
                 </DropdownMenuCheckboxItem>
               );
-            }) }
+            })}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
