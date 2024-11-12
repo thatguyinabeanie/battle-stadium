@@ -16,13 +16,13 @@ interface UserMenuProps {
   isSignedIn: boolean;
 }
 
-async function SmartAvatar() {
+async function SmartAvatar () {
   const user = await currentUser();
 
   if (user?.imageUrl) {
     return (
-      <Avatar aria-label="User's profile image" className="bg-transparent">
-        <AvatarImage src={user.imageUrl} />
+      <Avatar aria-label="User's profile image" className="bg-transparent h-[30px] w-[30px]">
+        <AvatarImage src={ user.imageUrl } />
         <AvatarFallback>X</AvatarFallback>
       </Avatar>
     );
@@ -33,13 +33,13 @@ async function SmartAvatar() {
   );
 }
 
-export default function UserMenu({ ...rest }: Readonly<UserMenuProps>) {
+export default function UserMenu ({ ...rest }: Readonly<UserMenuProps>) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
         <SmartAvatar />
       </DropdownMenuTrigger>
-      <UserMenuDropDown {...rest} />
+      <UserMenuDropDown { ...rest } />
     </DropdownMenu>
   );
 }
