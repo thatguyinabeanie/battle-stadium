@@ -7,6 +7,7 @@ import type { Organization } from "@battle-stadium/db/schema";
 import {
   Button,
   Checkbox,
+  DataTable,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -14,8 +15,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
-
-import DataTable from "~/components/data-table";
 
 interface OrganizationTableProps {
   orgs: Organization[];
@@ -25,7 +24,7 @@ export default function OrganizationsTable({ orgs }: OrganizationTableProps) {
   return <DataTable<Organization> data={orgs} columns={columns} />;
 }
 
-export const columns: ColumnDef<Organization>[] = [
+const columns: ColumnDef<Organization>[] = [
   {
     id: "select",
     header: ({ table }) => (

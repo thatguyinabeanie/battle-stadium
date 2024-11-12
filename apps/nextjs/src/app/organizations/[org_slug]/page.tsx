@@ -1,10 +1,12 @@
-// import TournamentsTable from "~/components/tournaments-table";
+import { Separator } from "@battle-stadium/ui";
+
 import {
   getOrganization,
   getOrganizations,
 } from "~/app/server-actions/organizations/actions";
 import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
+import TournamentsTable from "~/components/tournaments/tournaments-table";
 
 export const revalidate = 200;
 export const dynamicParams = true;
@@ -33,34 +35,6 @@ export async function generateStaticParams() {
   return orgs.filter((org) => org.slug).map((org) => ({ org_slug: org.slug }));
 }
 
-// const columns = [
-//   {
-//     key: "start_at",
-//     label: "DATE",
-//   },
-//   {
-//     key: "name",
-//     label: "NAME",
-//   },
-
-//   {
-//     key: "players",
-//     label: "PLAYERS",
-//   },
-//   {
-//     key: "registration",
-//     label: "REGISTRATION",
-//   },
-//   {
-//     key: "game",
-//     label: "GAME",
-//   },
-//   {
-//     key: "format",
-//     label: "FORMAT",
-//   },
-// ];
-
 export default async function OrganizationDetailPage(
   props: Readonly<OrganizationDetailPageProps>,
 ) {
@@ -82,18 +56,9 @@ export default async function OrganizationDetailPage(
         </div>
       </OrganizationHeader>
 
-      <div>
-        <h2>TODO: tournament table</h2>
-        {tournaments.map((tournament) => (
-          <div key={tournament.id}>
-            <h3>{tournament.name}</h3>
-            <p>{tournament.startAt}</p>
-          </div>
-        ))}
-      </div>
-      {/* <Divider /> */}
+      <Separator />
 
-      {/* <TournamentsTable columns={columns} data={tournaments} /> */}
+      <TournamentsTable data={tournaments} />
     </>
   );
 }

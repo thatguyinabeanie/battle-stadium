@@ -35,4 +35,5 @@ export * from "./components/toggle";
 export * from "./components/theme";
 export * from "./components/tabs";
 export * from "./components/table";
+export * from "./components/data-table";
 export * from "./utils";

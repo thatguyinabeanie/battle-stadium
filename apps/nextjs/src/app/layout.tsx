@@ -93,7 +93,7 @@ export default async function RootLayout({
                 <div className="flex min-h-screen flex-col items-center">
                   <AwesomeParticles />
 
-                  <div className="flex min-h-screen w-5/6 flex-col items-center shadow-2xl backdrop-blur dark:shadow-white">
+                  <div className="flex min-h-screen w-5/6 flex-col items-center shadow-2xl backdrop-blur-lg dark:shadow-white">
                     <Navbar />
 
                     <main className="flex min-h-screen w-full flex-col items-center">
