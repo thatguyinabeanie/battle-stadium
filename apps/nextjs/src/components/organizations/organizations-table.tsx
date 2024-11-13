@@ -16,13 +16,14 @@ import {
 } from "@battle-stadium/ui";
 
 import OrganizationLogo from "./organization-logo";
+import Link from "next/link";
 
 interface OrganizationTableProps {
   orgs: Organization[];
 }
 
-export default function OrganizationsTable({ orgs }: OrganizationTableProps) {
-  return <DataTable<Organization> data={orgs} columns={columns} />;
+export default function OrganizationsTable ({ orgs }: OrganizationTableProps) {
+  return <DataTable<Organization> data={ orgs } columns={ columns } />;
 }
 
 const columns: ColumnDef<Organization>[] = [
@@ -32,7 +33,7 @@ const columns: ColumnDef<Organization>[] = [
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={ () => column.toggleSorting(column.getIsSorted() === "asc") }
         >
           <div className="flex flex-row gap-1">
             Organization
@@ -42,15 +43,22 @@ const columns: ColumnDef<Organization>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="flex flex-row items-center gap-2">
-        <OrganizationLogo organization={row.original} logoSize={32} />
-        {row.getValue("name")}
-      </div>
+      <Link className="flex flex-row items-center gap-2 text-primary" href={ `/organizations/${row.original.slug}` }>
+        <OrganizationLogo organization={ row.original } logoSize={ 32 } />
+        { row.getValue("name") }
+      </Link>
     ),
   },
   {
     accessorKey: "description",
     header: "Description",
+  },
+  {
+    accessorKey: "partner",
+    header: "Partner",
+    cell: ({ row }) => (
+      <p> { row.original.partner ? "Partner" : "" }</p>
+    ),
   },
   {
     id: "actions",
@@ -69,7 +77,7 @@ const columns: ColumnDef<Organization>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() =>
+              onClick={ () =>
                 navigator.clipboard.writeText(`${organization.id}`)
               }
             >
