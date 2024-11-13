@@ -11,8 +11,8 @@
   },
   "aliases": {
     "utils": "@battle-stadium/ui",
-    "components": "src/",
-    "ui": "src/",
+    "components": "src/components",
+    "ui": "src/components",
     "hooks": "src/hooks",
     "lib": "src/lib"
   }
