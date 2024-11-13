@@ -1,6 +1,7 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 import type { Tournament } from "@battle-stadium/db/schema";
@@ -17,10 +18,27 @@ import {
 
 interface TournamentsTableProps {
   data: Tournament[];
+  org_slug: string;
 }
-export default function TournamentsTable({ data }: TournamentsTableProps) {
+export default function TournamentsTable({
+  data,
+  org_slug,
+}: TournamentsTableProps) {
+  const nameColumn: ColumnDef<Tournament> = {
+    accessorKey: "name",
+    header: "Name",
+    cell: ({ row }) => (
+      <Link
+        href={`/organizations/${org_slug}/tournaments/${row.original.id}`}
+        className="text-primary"
+      >
+        {row.getValue<string>("name")}
+      </Link>
+    ),
+  };
+
   return (
-    <DataTable<Tournament> data={data} columns={columns}>
+    <DataTable<Tournament> data={data} columns={[nameColumn, ...columns]}>
       <TournamentsTableFiltering />
     </DataTable>
   );
@@ -68,11 +86,6 @@ function TournamentsTableFiltering() {
 }
 
 const columns: ColumnDef<Tournament>[] = [
-  {
-    accessorKey: "name",
-    header: "Name",
-    cell: ({ row }) => row.getValue<string>("name"),
-  },
   {
     accessorKey: "startAt",
     header: "Start Date",

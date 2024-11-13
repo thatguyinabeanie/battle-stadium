@@ -58,7 +58,7 @@ export default async function OrganizationDetailPage(
 
       <Separator />
 
-      <TournamentsTable data={tournaments} />
+      <TournamentsTable data={tournaments} org_slug={params.org_slug} />
     </>
   );
 }
