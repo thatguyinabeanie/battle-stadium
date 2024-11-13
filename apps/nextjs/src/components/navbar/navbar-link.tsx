@@ -1,41 +1,43 @@
 "use client";
 
+import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { cn } from "~/lib/utils";
-
-const getClassName = (pathname: string, value: string) =>
-  cn(
-    "rounded-md px-1 py-2 text-sm font-medium transition-colors",
-    pathname.includes(`/${value}`)
-      ? "bg-primary/10 text-primary"
-      : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-  );
+import { cn } from "@battle-stadium/ui";
 
 type HREF = `/${string}`;
-interface NavbarLinkProps {
+
+interface NavbarLinkProps extends React.ComponentPropsWithoutRef<typeof Link> {
   href: HREF;
   value: string;
   label: string;
   className?: string;
 }
 
-export default function NavbarLink({
-  value,
-  href,
-  label,
-  className,
-}: Readonly<NavbarLinkProps>) {
+export const NavbarLink = React.forwardRef<
+  React.ElementRef<typeof Link>,
+  NavbarLinkProps
+>(({ value, href, className, label, ...props }, ref) => (
+  <Link
+    prefetch={true}
+    key={value}
+    ref={ref}
+    href={href}
+    className={`${usePathClassName(href)} ${className}`}
+    {...props}
+  >
+    {label}
+  </Link>
+));
+
+function usePathClassName(href: `/${string}`) {
   const pathname = usePathname();
-  return (
-    <Link
-      prefetch={true}
-      key={value}
-      href={href}
-      className={`${getClassName(pathname, value)} ${className}`}
-    >
-      {label}
-    </Link>
-  );
+
+  return cn("rounded-md px-1 py-2 text-sm font-medium transition-colors", {
+    "bg-primary/10 text-primary": pathname === href,
+    "text-muted-foreground hover:bg-accent hover:text-accent-foreground":
+      pathname !== href,
+  });
 }
+export default NavbarLink;

@@ -5,12 +5,11 @@ import { SignInButton, SignOutButton } from "@clerk/nextjs";
 
 import type { accounts } from "@battle-stadium/db/schema";
 import {
+  cn,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@battle-stadium/ui";
-
-import { cn } from "~/lib/utils";
 
 interface UserMenuDropDownProps {
   me?: typeof accounts.$inferSelect | null;

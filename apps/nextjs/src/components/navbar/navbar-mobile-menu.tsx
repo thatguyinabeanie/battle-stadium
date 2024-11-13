@@ -5,10 +5,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 
-import { Button, Sheet, SheetContent, SheetTrigger } from "@battle-stadium/ui";
+import {
+  Button,
+  cn,
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@battle-stadium/ui";
 
 import { NavbarItemsConfigs } from "~/lib/config/site";
-import { cn } from "~/lib/utils";
 
 export default function MobileMenu() {
   const pathname = usePathname();

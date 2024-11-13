@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import type { organizations } from "@battle-stadium/db/schema";
+import { cn } from "@battle-stadium/ui";
 
-import { cn } from "~/lib/utils";
 import OrganizationLogo from "./organization-logo";
 
 export interface OrgCardProps {
