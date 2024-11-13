@@ -36,4 +36,5 @@ export * from "./components/theme";
 export * from "./components/tabs";
 export * from "./components/table";
 export * from "./components/data-table";
+export * from "./components/carousel";
 export * from "./utils";

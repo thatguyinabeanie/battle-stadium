@@ -44,18 +44,18 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   icons: {
-    icon: "/favicon.ico",
+    icon: "/beanie-72x72.png",
   },
   openGraph: {
     title: "Battle Stadium",
-    description: "Simple monorepo with shared backend for web & mobile apps",
+    description: siteConfig.description,
     url: "https://battlestadium.gg",
     siteName: "Battle Stadium",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@thatguyinabenaie",
-    creator: "@thatguyinabenaie",
+    site: "@thatguyinabeanie",
+    creator: "@thatguyinabeanie",
   },
 };
 

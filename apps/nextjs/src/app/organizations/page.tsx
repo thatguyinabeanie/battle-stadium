@@ -17,12 +17,8 @@ export default async function OrganizationsPage() {
   const orgs = await getOrganizations();
   return (
     <>
-      <div className="mt-4">
-        <PartneredOrganizations />
-      </div>
-      <div className="mt-4">
-        <OrganizationsTable orgs={orgs} />
-      </div>
+      <PartneredOrganizations />
+      <OrganizationsTable orgs={orgs} />
     </>
   );
 }

@@ -1,5 +1,7 @@
+import * as React from "react";
+
 import { getPartneredOrganizations } from "~/app/server-actions/organizations/actions";
-import OrganizationCard from "~/components/organizations/organization-card";
+import OrganizationCard from "./organization-card";
 
 export default async function PartneredOrganizations() {
   const orgs = await getPartneredOrganizations();
