@@ -6,7 +6,7 @@ import {
 } from "~/app/server-actions/organizations/actions";
 import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
-import TournamentsTable from "~/components/tournaments/tournaments-table";
+import { SingleOrganizationTournamentsTable } from "~/components/tournaments/single-organization-tournaments-table";
 
 export const revalidate = 200;
 export const dynamicParams = true;
@@ -58,7 +58,10 @@ export default async function OrganizationDetailPage(
 
       <Separator />
 
-      <TournamentsTable data={tournaments} org_slug={params.org_slug} />
+      <SingleOrganizationTournamentsTable
+        data={tournaments}
+        org_slug={params.org_slug}
+      />
     </>
   );
 }

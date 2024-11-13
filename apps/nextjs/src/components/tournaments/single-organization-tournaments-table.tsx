@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
-import type { Organization, Tournament } from "@battle-stadium/db/schema";
+import type { Tournament } from "@battle-stadium/db/schema";
 import {
   Button,
   DataTable,
@@ -16,44 +16,39 @@ import {
   useDataTable,
 } from "@battle-stadium/ui";
 
-interface OrganizationTournament {
-  tournaments: Tournament;
-  organizations: Organization | null;
+interface SingleOrganizationTournamentsTableProps {
+  data: Tournament[];
+  org_slug: string;
 }
 
-interface TournamentsTableProps {
-  data: OrganizationTournament[];
-}
-
-export function TournamentsTable({ data }: TournamentsTableProps) {
-  const preColumn: ColumnDef<OrganizationTournament>[] = [
+export function SingleOrganizationTournamentsTable({
+  data,
+  org_slug,
+}: SingleOrganizationTournamentsTableProps) {
+  const preColumn: ColumnDef<Tournament>[] = [
     {
-      id: "name",
-      accessorKey: "tournaments.name",
+      accessorKey: "name",
       header: "Name",
       cell: ({ row }) => (
         <Link
-          href={`/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}`}
+          href={`/organizations/${org_slug}/tournaments/${row.original.id}`}
           className="text-primary"
         >
-          {row.original.tournaments.name}
+          {row.getValue<string>("name")}
         </Link>
       ),
     },
   ];
 
   return (
-    <DataTable<OrganizationTournament>
-      data={data}
-      columns={[...preColumn, ...columns]}
-    >
-      <TournamentsTableFiltering />
+    <DataTable<Tournament> data={data} columns={[...preColumn, ...columns]}>
+      <SingleOrganizationTournamentsTableFiltering />
     </DataTable>
   );
 }
 
-function TournamentsTableFiltering() {
-  const table = useDataTable<OrganizationTournament>();
+function SingleOrganizationTournamentsTableFiltering() {
+  const table = useDataTable<Tournament>();
 
   if (!table) return null;
 
@@ -95,58 +90,49 @@ function TournamentsTableFiltering() {
   );
 }
 
-const columns: ColumnDef<OrganizationTournament>[] = [
+const columns: ColumnDef<Tournament>[] = [
   {
-    accessorKey: "tournaments.startAt",
+    accessorKey: "startAt",
     header: "Start Date",
-    cell: ({ row }) => {
-      console.log(
-        "row.original.tournaments.startAt",
-        row.original.tournaments.startAt,
-      );
-      return (
-        row.original.tournaments.startAt &&
-        new Date(row.original.tournaments.startAt).toLocaleString()
-      );
-    },
+    cell: ({ row }) =>
+      new Date(row.getValue<string>("startAt")).toLocaleString(),
   },
   {
-    accessorKey: "tournaments.checkInStartAt",
+    accessorKey: "checkInStartAt",
     header: "Check-In Start",
     cell: ({ row }) =>
-      row.original.tournaments.checkInStartAt &&
-      new Date(row.original.tournaments.checkInStartAt).toLocaleString(),
+      new Date(row.getValue<string>("checkInStartAt")).toLocaleString(),
   },
   {
-    accessorKey: "tournaments.gameId",
+    accessorKey: "gameId",
     header: "Game ID",
-    cell: ({ row }) => row.original.tournaments.gameId,
+    cell: ({ row }) => row.getValue<string>("gameId"),
   },
   {
-    accessorKey: "tournaments.formatId",
+    accessorKey: "formatId",
     header: "Format ID",
-    cell: ({ row }) => row.original.tournaments.formatId,
+    cell: ({ row }) => row.getValue<string>("formatId"),
   },
   {
-    accessorKey: "tournaments.playerCap",
+    accessorKey: "playerCap",
     header: "Player Cap",
-    cell: ({ row }) => row.original.tournaments.playerCap,
+    cell: ({ row }) => row.getValue<number>("playerCap"),
   },
   {
-    accessorKey: "tournaments.lateRegistration",
+    accessorKey: "lateRegistration",
     header: "Late Registration",
     cell: ({ row }) =>
-      row.original.tournaments.lateRegistration ? "Yes" : "No",
+      row.getValue<boolean>("lateRegistration") ? "Yes" : "No",
   },
   {
-    accessorKey: "tournaments.teamlistsRequired",
+    accessorKey: "teamlistsRequired",
     header: "Teamlists Required",
     cell: ({ row }) =>
-      row.original.tournaments.teamlistsRequired ? "Yes" : "No",
+      row.getValue<boolean>("teamlistsRequired") ? "Yes" : "No",
   },
   {
-    accessorKey: "tournaments.openTeamSheets",
+    accessorKey: "openTeamSheets",
     header: "Open Team Sheets",
-    cell: ({ row }) => (row.original.tournaments.openTeamSheets ? "Yes" : "No"),
+    cell: ({ row }) => (row.getValue<boolean>("openTeamSheets") ? "Yes" : "No"),
   },
 ];
