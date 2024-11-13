@@ -30,6 +30,7 @@
     "lint": "eslint",
     "push": "pnpm with-env drizzle-kit push",
     "pull": "pnpm with-env drizzle-kit pull",
+    "generate": "pnpm with-env drizzle-kit generate",
     "sort-packages": "pnpx sort-package-json",
     "studio": "pnpm with-env drizzle-kit studio",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",

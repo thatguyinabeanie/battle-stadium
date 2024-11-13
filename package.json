@@ -13,6 +13,7 @@
     "db:push": "turbo -F @battle-stadium/db push",
     "db:pull": "turbo -F @battle-stadium/db pull",
     "db:studio": "turbo -F @battle-stadium/db studio",
+    "db:generate": "turbo -F @battle-stadium/db generate",
     "dev": "turbo watch dev --continue",
     "dev:next": "turbo watch dev -F @battle-stadium/nextjs...",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
