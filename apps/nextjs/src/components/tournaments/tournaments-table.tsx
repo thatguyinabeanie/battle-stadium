@@ -15,7 +15,7 @@ import {
   Input,
   useDataTable,
 } from "@battle-stadium/ui";
-import type { Organization } from "@clerk/backend";
+
 import OrganizationLogo from "../organizations/organization-logo";
 
 interface OrganizationTournament {

@@ -6,17 +6,17 @@ import NavbarLinks from "~/components/navbar/navbar-links";
 import MobileMenu from "~/components/navbar/navbar-mobile-menu";
 import RightMenu from "~/components/navbar/navbar-right-menu";
 
-export default async function Navbar() {
+export default async function Navbar () {
   const clerkAuth = await auth();
 
   return (
     <NavbarContainer>
       <nav className="relative flex w-full border-b bg-transparent backdrop-blur-3xl">
-        <div className="container mx-auto w-full px-4 backdrop-blur-3xl">
+        <div className="px-4 w-full backdrop-blur-3xl">
           <div className="flex h-16 w-full items-center justify-between backdrop-blur-3xl">
             <BattleStadium />
 
-            <NavbarLinks isSignedIn={!!clerkAuth.sessionId} />
+            <NavbarLinks isSignedIn={ !!clerkAuth.sessionId } />
 
             <RightMenu />
             <MobileMenu />
