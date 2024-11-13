@@ -8,7 +8,7 @@ if (!process.env.DATABASE_URL) {
 // Add BigInt serialization support
 declare global {
   interface BigInt {
-    toJSON (): string;
+    toJSON(): string;
   }
 }
 

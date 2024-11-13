@@ -161,12 +161,8 @@
           "name": "fk_rails_cee78b4b7d",
           "tableFrom": "accounts",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "default_profile_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["default_profile_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -294,12 +290,8 @@
           "name": "fk_rails_f9ae4172ee",
           "tableFrom": "chat_messages",
           "tableTo": "matches",
-          "columnsFrom": [
-            "match_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["match_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -307,12 +299,8 @@
           "name": "fk_rails_918ef7acc4",
           "tableFrom": "chat_messages",
           "tableTo": "accounts",
-          "columnsFrom": [
-            "account_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -320,12 +308,8 @@
           "name": "fk_rails_f531ed39e3",
           "tableFrom": "chat_messages",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "profile_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["profile_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -406,12 +390,8 @@
           "name": "fk_rails_982e94e92d",
           "tableFrom": "clerk_users",
           "tableTo": "accounts",
-          "columnsFrom": [
-            "account_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -498,12 +478,8 @@
           "name": "fk_rails_a0e0605606",
           "tableFrom": "formats",
           "tableTo": "games",
-          "columnsFrom": [
-            "game_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["game_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -798,12 +774,8 @@
           "name": "fk_rails_76cefaebc0",
           "tableFrom": "match_games",
           "tableTo": "matches",
-          "columnsFrom": [
-            "match_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["match_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -811,12 +783,8 @@
           "name": "fk_rails_a2c90fc36d",
           "tableFrom": "match_games",
           "tableTo": "players",
-          "columnsFrom": [
-            "loser_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["loser_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -824,12 +792,8 @@
           "name": "fk_rails_be3d6ef1eb",
           "tableFrom": "match_games",
           "tableTo": "players",
-          "columnsFrom": [
-            "winner_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["winner_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -837,12 +801,8 @@
           "name": "fk_rails_8599a8b8df",
           "tableFrom": "match_games",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "reporter_profile_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["reporter_profile_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1077,12 +1037,8 @@
           "name": "fk_rails_973a5646ac",
           "tableFrom": "matches",
           "tableTo": "players",
-          "columnsFrom": [
-            "loser_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["loser_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1090,12 +1046,8 @@
           "name": "fk_rails_bfcd6a3c9f",
           "tableFrom": "matches",
           "tableTo": "players",
-          "columnsFrom": [
-            "player_one_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["player_one_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1103,12 +1055,8 @@
           "name": "fk_rails_b58c6c3513",
           "tableFrom": "matches",
           "tableTo": "players",
-          "columnsFrom": [
-            "player_two_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["player_two_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1116,12 +1064,8 @@
           "name": "fk_rails_9d0deeb219",
           "tableFrom": "matches",
           "tableTo": "players",
-          "columnsFrom": [
-            "winner_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["winner_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1129,12 +1073,8 @@
           "name": "fk_rails_e7c0250650",
           "tableFrom": "matches",
           "tableTo": "rounds",
-          "columnsFrom": [
-            "round_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["round_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1142,12 +1082,8 @@
           "name": "fk_rails_700eaa2935",
           "tableFrom": "matches",
           "tableTo": "tournaments",
-          "columnsFrom": [
-            "tournament_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tournament_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1155,12 +1091,8 @@
           "name": "fk_rails_36efc9f0f5",
           "tableFrom": "matches",
           "tableTo": "phases",
-          "columnsFrom": [
-            "phase_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["phase_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1168,12 +1100,8 @@
           "name": "fk_rails_af814604cc",
           "tableFrom": "matches",
           "tableTo": "accounts",
-          "columnsFrom": [
-            "reset_by_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["reset_by_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1254,12 +1182,8 @@
           "name": "fk_rails_a177a0142c",
           "tableFrom": "organization_staff_members",
           "tableTo": "organizations",
-          "columnsFrom": [
-            "organization_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["organization_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1267,12 +1191,8 @@
           "name": "fk_rails_65be078ae6",
           "tableFrom": "organization_staff_members",
           "tableTo": "accounts",
-          "columnsFrom": [
-            "account_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1406,12 +1326,8 @@
           "name": "fk_rails_ab574863f6",
           "tableFrom": "organizations",
           "tableTo": "accounts",
-          "columnsFrom": [
-            "owner_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["owner_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1504,12 +1420,8 @@
           "name": "fk_rails_71fbe65d92",
           "tableFrom": "phase_players",
           "tableTo": "players",
-          "columnsFrom": [
-            "player_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["player_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1649,12 +1561,8 @@
           "name": "fk_rails_75e775589e",
           "tableFrom": "phases",
           "tableTo": "tournaments",
-          "columnsFrom": [
-            "tournament_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tournament_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1662,12 +1570,8 @@
           "name": "fk_rails_2909e41898",
           "tableFrom": "phases",
           "tableTo": "rounds",
-          "columnsFrom": [
-            "current_round_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["current_round_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -1851,12 +1755,8 @@
           "name": "fk_rails_aeec102047",
           "tableFrom": "players",
           "tableTo": "pokemon_teams",
-          "columnsFrom": [
-            "pokemon_team_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pokemon_team_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1864,12 +1764,8 @@
           "name": "fk_rails_f96ec8a72f",
           "tableFrom": "players",
           "tableTo": "tournaments",
-          "columnsFrom": [
-            "tournament_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tournament_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1877,12 +1773,8 @@
           "name": "fk_rails_224cac07ce",
           "tableFrom": "players",
           "tableTo": "accounts",
-          "columnsFrom": [
-            "account_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -1890,12 +1782,8 @@
           "name": "fk_rails_c31cf6bf09",
           "tableFrom": "players",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "profile_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["profile_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -2136,12 +2024,8 @@
           "name": "fk_rails_5b6022737b",
           "tableFrom": "pokemon",
           "tableTo": "pokemon_teams",
-          "columnsFrom": [
-            "pokemon_team_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["pokemon_team_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -2253,12 +2137,8 @@
           "name": "fk_rails_6e351688b8",
           "tableFrom": "pokemon_teams",
           "tableTo": "formats",
-          "columnsFrom": [
-            "format_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["format_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -2266,12 +2146,8 @@
           "name": "fk_rails_e0513d6a9c",
           "tableFrom": "pokemon_teams",
           "tableTo": "games",
-          "columnsFrom": [
-            "game_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["game_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -2279,12 +2155,8 @@
           "name": "fk_rails_7bf8c65391",
           "tableFrom": "pokemon_teams",
           "tableTo": "profiles",
-          "columnsFrom": [
-            "profile_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["profile_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -2412,12 +2284,8 @@
           "name": "fk_rails_e424190865",
           "tableFrom": "profiles",
           "tableTo": "accounts",
-          "columnsFrom": [
-            "account_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -2741,12 +2609,8 @@
           "name": "fk_rails_08c15d3c37",
           "tableFrom": "tournament_formats",
           "tableTo": "formats",
-          "columnsFrom": [
-            "format_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["format_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -2754,12 +2618,8 @@
           "name": "fk_rails_c679052dc0",
           "tableFrom": "tournament_formats",
           "tableTo": "tournaments",
-          "columnsFrom": [
-            "tournament_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["tournament_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -2993,12 +2853,8 @@
           "name": "fk_rails_8ef7ba6258",
           "tableFrom": "tournaments",
           "tableTo": "games",
-          "columnsFrom": [
-            "game_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["game_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -3006,12 +2862,8 @@
           "name": "fk_rails_325ccadea6",
           "tableFrom": "tournaments",
           "tableTo": "organizations",
-          "columnsFrom": [
-            "organization_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["organization_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -3019,12 +2871,8 @@
           "name": "fk_rails_40bc0fb494",
           "tableFrom": "tournaments",
           "tableTo": "phases",
-          "columnsFrom": [
-            "current_phase_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["current_phase_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
