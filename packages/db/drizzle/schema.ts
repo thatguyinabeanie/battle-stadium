@@ -90,7 +90,7 @@ export const pokemon = pgTable("pokemon", {
   updatedAt: timestamp("updated_at", { precision: 6, mode: 'string' }).notNull(),
   nickname: varchar(),
   // You can use { mode: "bigint" } if numbers are exceeding js number limitations
-  pokemonTeamId: bigint("pokemon_team_id", { mode: "bigint" }).default(0).notNull(),
+  pokemonTeamId: bigint("pokemon_team_id", { mode: "bigint" }).default(0n).notNull(),
   form: varchar(),
   position: integer().default(0).notNull(),
   gender: integer().default(2).notNull(),
