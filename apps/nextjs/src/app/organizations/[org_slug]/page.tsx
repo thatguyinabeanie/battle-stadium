@@ -1,12 +1,10 @@
-import { Separator } from "@battle-stadium/ui";
-
 import {
   getOrganization,
   getOrganizations,
 } from "~/app/server-actions/organizations/actions";
 import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
-import TournamentsTable from "~/components/tournaments/tournaments-table";
+import { SingleOrganizationTournamentsTable } from "~/components/tournaments/single-organization-tournaments-table";
 
 export const revalidate = 200;
 export const dynamicParams = true;
@@ -56,9 +54,11 @@ export default async function OrganizationDetailPage(
         </div>
       </OrganizationHeader>
 
-      <Separator />
-
-      <TournamentsTable data={tournaments} />
+      <SingleOrganizationTournamentsTable
+        className="w-11/12"
+        data={tournaments}
+        organization={organization}
+      />
     </>
   );
 }

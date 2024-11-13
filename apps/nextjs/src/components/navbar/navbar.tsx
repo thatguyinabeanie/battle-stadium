@@ -12,7 +12,7 @@ export default async function Navbar() {
   return (
     <NavbarContainer>
       <nav className="relative flex w-full border-b bg-transparent backdrop-blur-3xl">
-        <div className="container mx-auto w-full px-4 backdrop-blur-3xl">
+        <div className="w-full px-4 backdrop-blur-3xl">
           <div className="flex h-16 w-full items-center justify-between backdrop-blur-3xl">
             <BattleStadium />
 

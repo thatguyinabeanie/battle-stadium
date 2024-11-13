@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Chip } from "@battle-stadium/ui";
+import { Chip, Separator } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentProps } from "~/types";
 import {
@@ -72,10 +72,7 @@ export default async function OrganizationTournament(
       </OrganizationHeader>
 
       <div className="pt-2" />
-      {/* <Divider /> */}
-      <div>
-        <h2>TODO: Divider component</h2>
-      </div>
+      <Separator />
       <div className="pt-2" />
     </>
   );

@@ -1,5 +1,6 @@
+import { cn } from "@battle-stadium/ui";
+
 import { NavbarItemsConfigs } from "~/lib/config/site";
-import { cn } from "~/lib/utils";
 import NavbarLink from "./navbar-link";
 
 interface NavbarLinksProps {

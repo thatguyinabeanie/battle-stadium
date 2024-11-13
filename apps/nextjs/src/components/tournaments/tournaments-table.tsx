@@ -1,9 +1,10 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
-import type { Tournament } from "@battle-stadium/db/schema";
+import type { Organization, Tournament } from "@battle-stadium/db/schema";
 import {
   Button,
   DataTable,
@@ -15,20 +16,62 @@ import {
   useDataTable,
 } from "@battle-stadium/ui";
 
-interface TournamentsTableProps {
-  data: Tournament[];
+import OrganizationLogo from "../organizations/organization-logo";
+
+interface OrganizationTournament {
+  tournaments: Tournament;
+  organizations: Organization | null;
 }
-export default function TournamentsTable({ data }: TournamentsTableProps) {
+
+interface TournamentsTableProps {
+  data: OrganizationTournament[];
+}
+
+export function TournamentsTable({ data }: TournamentsTableProps) {
+  const preColumn: ColumnDef<OrganizationTournament>[] = [
+    {
+      header: "Organization",
+      cell: ({ row }) => (
+        <div className="flex flex-col items-center justify-center">
+          {row.original.organizations && (
+            <OrganizationLogo
+              organization={row.original.organizations}
+              logoSize={32}
+            />
+          )}
+        </div>
+      ),
+    },
+    {
+      id: "name",
+      accessorKey: "tournaments.name",
+      header: "Name",
+      cell: ({ row }) => (
+        <Link
+          href={`/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}`}
+          className="flex flex-row items-center gap-2 text-primary"
+        >
+          {row.original.tournaments.name}
+        </Link>
+      ),
+    },
+  ];
+
   return (
-    <DataTable<Tournament> data={data} columns={columns}>
+    <DataTable<OrganizationTournament>
+      data={data}
+      columns={[...preColumn, ...columns]}
+    >
       <TournamentsTableFiltering />
     </DataTable>
   );
 }
 
 function TournamentsTableFiltering() {
-  const table = useDataTable<Tournament>();
+  const table = useDataTable<OrganizationTournament>();
+
   if (!table) return null;
+
   return (
     <div className="flex items-center py-4">
       <Input
@@ -67,93 +110,58 @@ function TournamentsTableFiltering() {
   );
 }
 
-const columns: ColumnDef<Tournament>[] = [
+const columns: ColumnDef<OrganizationTournament>[] = [
   {
-    accessorKey: "name",
-    header: "Name",
-    cell: ({ row }) => row.getValue<string>("name"),
-  },
-  {
-    accessorKey: "startAt",
+    accessorKey: "tournaments.startAt",
     header: "Start Date",
-    cell: ({ row }) =>
-      new Date(row.getValue<string>("startAt")).toLocaleString(),
+    cell: ({ row }) => {
+      console.log(
+        "row.original.tournaments.startAt",
+        row.original.tournaments.startAt,
+      );
+      return (
+        row.original.tournaments.startAt &&
+        new Date(row.original.tournaments.startAt).toLocaleString()
+      );
+    },
   },
   {
-    accessorKey: "endedAt",
-    header: "Ended At",
-    cell: ({ row }) =>
-      new Date(row.getValue<string>("endedAt")).toLocaleString(),
-  },
-  {
-    accessorKey: "organizationId",
-    header: "Organization ID",
-    cell: ({ row }) => row.getValue<string>("organizationId"),
-  },
-  {
-    accessorKey: "checkInStartAt",
+    accessorKey: "tournaments.checkInStartAt",
     header: "Check-In Start",
     cell: ({ row }) =>
-      new Date(row.getValue<string>("checkInStartAt")).toLocaleString(),
+      row.original.tournaments.checkInStartAt &&
+      new Date(row.original.tournaments.checkInStartAt).toLocaleString(),
   },
   {
-    accessorKey: "gameId",
+    accessorKey: "tournaments.gameId",
     header: "Game ID",
-    cell: ({ row }) => row.getValue<string>("gameId"),
+    cell: ({ row }) => row.original.tournaments.gameId,
   },
   {
-    accessorKey: "formatId",
+    accessorKey: "tournaments.formatId",
     header: "Format ID",
-    cell: ({ row }) => row.getValue<string>("formatId"),
+    cell: ({ row }) => row.original.tournaments.formatId,
   },
   {
-    accessorKey: "registrationStartAt",
-    header: "Registration Start",
-    cell: ({ row }) =>
-      new Date(row.getValue<string>("registrationStartAt")).toLocaleString(),
-  },
-  {
-    accessorKey: "registrationEndAt",
-    header: "Registration End",
-    cell: ({ row }) =>
-      new Date(row.getValue<string>("registrationEndAt")).toLocaleString(),
-  },
-  {
-    accessorKey: "playerCap",
+    accessorKey: "tournaments.playerCap",
     header: "Player Cap",
-    cell: ({ row }) => row.getValue<number>("playerCap"),
+    cell: ({ row }) => row.original.tournaments.playerCap,
   },
   {
-    accessorKey: "autostart",
-    header: "Autostart",
-    cell: ({ row }) => (row.getValue<boolean>("autostart") ? "Yes" : "No"),
-  },
-  {
-    accessorKey: "startedAt",
-    header: "Started At",
-    cell: ({ row }) =>
-      new Date(row.getValue<string>("startedAt")).toLocaleString(),
-  },
-  {
-    accessorKey: "lateRegistration",
+    accessorKey: "tournaments.lateRegistration",
     header: "Late Registration",
     cell: ({ row }) =>
-      row.getValue<boolean>("lateRegistration") ? "Yes" : "No",
+      row.original.tournaments.lateRegistration ? "Yes" : "No",
   },
   {
-    accessorKey: "teamlistsRequired",
+    accessorKey: "tournaments.teamlistsRequired",
     header: "Teamlists Required",
     cell: ({ row }) =>
-      row.getValue<boolean>("teamlistsRequired") ? "Yes" : "No",
+      row.original.tournaments.teamlistsRequired ? "Yes" : "No",
   },
   {
-    accessorKey: "openTeamSheets",
+    accessorKey: "tournaments.openTeamSheets",
     header: "Open Team Sheets",
-    cell: ({ row }) => (row.getValue<boolean>("openTeamSheets") ? "Yes" : "No"),
-  },
-  {
-    accessorKey: "endAt",
-    header: "End At",
-    cell: ({ row }) => new Date(row.getValue<string>("endAt")).toLocaleString(),
+    cell: ({ row }) => (row.original.tournaments.openTeamSheets ? "Yes" : "No"),
   },
 ];

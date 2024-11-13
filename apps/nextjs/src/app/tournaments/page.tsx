@@ -1,12 +1,24 @@
 import type { Metadata } from "next";
 
-import { getTournaments } from "~/app/server-actions/tournaments/actions";
-import TournamentsTable from "~/components/tournaments/tournaments-table";
+import type { Organization, Tournament } from "@battle-stadium/db/schema";
+
+import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
+import { TournamentsTable } from "~/components/tournaments/tournaments-table";
 
 export const metadata: Metadata = {
   title: "Tournaments",
 };
 
+interface OrganizationTournament {
+  tournaments: Tournament;
+  organizations: Organization | null;
+}
 export default async function Tournaments() {
-  return <TournamentsTable data={await getTournaments()} />;
+  const data: OrganizationTournament[] = await getOrganizationTournaments();
+
+  return (
+    <div className="w-11/12">
+      <TournamentsTable data={data} />
+    </div>
+  );
 }
