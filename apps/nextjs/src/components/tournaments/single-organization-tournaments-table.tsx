@@ -22,10 +22,10 @@ interface SingleOrganizationTournamentsTableProps {
   className?: string;
 }
 
-export function SingleOrganizationTournamentsTable ({
+export function SingleOrganizationTournamentsTable({
   data,
   organization,
-  className
+  className,
 }: SingleOrganizationTournamentsTableProps) {
   const preColumn: ColumnDef<Tournament>[] = [
     {
@@ -33,25 +33,25 @@ export function SingleOrganizationTournamentsTable ({
       header: "Name",
       cell: ({ row }) => (
         <Link
-          href={ `/organizations/${organization.slug}/tournaments/${row.original.id}` }
+          href={`/organizations/${organization.slug}/tournaments/${row.original.id}`}
           className="text-primary"
         >
-          { row.getValue<string>("name") }
+          {row.getValue<string>("name")}
         </Link>
       ),
     },
   ];
 
   return (
-    <div className={ className }>
-      <DataTable<Tournament> data={ data } columns={ [...preColumn, ...columns] }>
+    <div className={className}>
+      <DataTable<Tournament> data={data} columns={[...preColumn, ...columns]}>
         <SingleOrganizationTournamentsTableFiltering />
       </DataTable>
     </div>
   );
 }
 
-function SingleOrganizationTournamentsTableFiltering () {
+function SingleOrganizationTournamentsTableFiltering() {
   const table = useDataTable<Tournament>();
 
   if (!table) return null;
@@ -60,8 +60,8 @@ function SingleOrganizationTournamentsTableFiltering () {
     <div className="flex items-center py-4">
       <Input
         placeholder="Filter emails..."
-        value={ table.getColumn("name")?.getFilterValue() as string }
-        onChange={ (event) =>
+        value={table.getColumn("name")?.getFilterValue() as string}
+        onChange={(event) =>
           table.getColumn("name")?.setFilterValue(event.target.value)
         }
         className="max-w-sm"
@@ -73,21 +73,21 @@ function SingleOrganizationTournamentsTableFiltering () {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          { table
+          {table
             .getAllColumns()
             .filter((column) => column.getCanHide())
             .map((column) => {
               return (
                 <DropdownMenuCheckboxItem
-                  key={ column.id }
+                  key={column.id}
                   className="capitalize"
-                  checked={ column.getIsVisible() }
-                  onCheckedChange={ (value) => column.toggleVisibility(!!value) }
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
                 >
-                  { column.id }
+                  {column.id}
                 </DropdownMenuCheckboxItem>
               );
-            }) }
+            })}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
