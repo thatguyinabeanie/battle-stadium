@@ -1,6 +1,7 @@
 "use client";
 
 import type { ColumnDef } from "@tanstack/react-table";
+import Link from "next/link";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 
 import type { Organization } from "@battle-stadium/db/schema";
@@ -42,15 +43,23 @@ const columns: ColumnDef<Organization>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="flex flex-row items-center gap-2">
+      <Link
+        className="flex flex-row items-center gap-2 text-primary"
+        href={`/organizations/${row.original.slug}`}
+      >
         <OrganizationLogo organization={row.original} logoSize={32} />
         {row.getValue("name")}
-      </div>
+      </Link>
     ),
   },
   {
     accessorKey: "description",
     header: "Description",
+  },
+  {
+    accessorKey: "partner",
+    header: "Partner",
+    cell: ({ row }) => <p> {row.original.partner ? "Partner" : ""}</p>,
   },
   {
     id: "actions",
