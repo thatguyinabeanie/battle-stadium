@@ -18,7 +18,9 @@ export default async function OrganizationsPage() {
   return (
     <>
       <PartneredOrganizations />
-      <OrganizationsTable orgs={orgs} />
+      <div className="w-11/12">
+        <OrganizationsTable orgs={orgs} />
+      </div>
     </>
   );
 }

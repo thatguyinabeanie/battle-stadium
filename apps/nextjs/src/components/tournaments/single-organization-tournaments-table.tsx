@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
-import type { Tournament } from "@battle-stadium/db/schema";
+import type { Organization, Tournament } from "@battle-stadium/db/schema";
 import {
   Button,
   DataTable,
@@ -18,12 +18,12 @@ import {
 
 interface SingleOrganizationTournamentsTableProps {
   data: Tournament[];
-  org_slug: string;
+  organization: Organization;
 }
 
 export function SingleOrganizationTournamentsTable({
   data,
-  org_slug,
+  organization,
 }: SingleOrganizationTournamentsTableProps) {
   const preColumn: ColumnDef<Tournament>[] = [
     {
@@ -31,7 +31,7 @@ export function SingleOrganizationTournamentsTable({
       header: "Name",
       cell: ({ row }) => (
         <Link
-          href={`/organizations/${org_slug}/tournaments/${row.original.id}`}
+          href={`/organizations/${organization.slug}/tournaments/${row.original.id}`}
           className="text-primary"
         >
           {row.getValue<string>("name")}

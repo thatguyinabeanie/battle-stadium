@@ -15,6 +15,8 @@ import {
   Input,
   useDataTable,
 } from "@battle-stadium/ui";
+import type { Organization } from "@clerk/backend";
+import OrganizationLogo from "../organizations/organization-logo";
 
 interface OrganizationTournament {
   tournaments: Tournament;
@@ -25,18 +27,35 @@ interface TournamentsTableProps {
   data: OrganizationTournament[];
 }
 
-export function TournamentsTable({ data }: TournamentsTableProps) {
+export function TournamentsTable ({ data }: TournamentsTableProps) {
   const preColumn: ColumnDef<OrganizationTournament>[] = [
+    {
+      header: "Organization",
+      cell: ({ row }) => (
+        <div className="flex flex-col justify-center items-center">
+          {
+            row.original.organizations && (
+              <OrganizationLogo
+                organization={ row.original.organizations }
+                logoSize={ 32 }
+              />
+            )
+          }
+        </div>
+      ),
+    },
     {
       id: "name",
       accessorKey: "tournaments.name",
       header: "Name",
       cell: ({ row }) => (
         <Link
-          href={`/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}`}
-          className="text-primary"
+          href={ `/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}` }
+          className="text-primary flex flex-row items-center gap-2"
         >
-          {row.original.tournaments.name}
+
+
+          { row.original.tournaments.name }
         </Link>
       ),
     },
@@ -44,15 +63,15 @@ export function TournamentsTable({ data }: TournamentsTableProps) {
 
   return (
     <DataTable<OrganizationTournament>
-      data={data}
-      columns={[...preColumn, ...columns]}
+      data={ data }
+      columns={ [...preColumn, ...columns] }
     >
       <TournamentsTableFiltering />
     </DataTable>
   );
 }
 
-function TournamentsTableFiltering() {
+function TournamentsTableFiltering () {
   const table = useDataTable<OrganizationTournament>();
 
   if (!table) return null;
@@ -61,8 +80,8 @@ function TournamentsTableFiltering() {
     <div className="flex items-center py-4">
       <Input
         placeholder="Filter emails..."
-        value={table.getColumn("name")?.getFilterValue() as string}
-        onChange={(event) =>
+        value={ table.getColumn("name")?.getFilterValue() as string }
+        onChange={ (event) =>
           table.getColumn("name")?.setFilterValue(event.target.value)
         }
         className="max-w-sm"
@@ -74,21 +93,21 @@ function TournamentsTableFiltering() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          {table
+          { table
             .getAllColumns()
             .filter((column) => column.getCanHide())
             .map((column) => {
               return (
                 <DropdownMenuCheckboxItem
-                  key={column.id}
+                  key={ column.id }
                   className="capitalize"
-                  checked={column.getIsVisible()}
-                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                  checked={ column.getIsVisible() }
+                  onCheckedChange={ (value) => column.toggleVisibility(!!value) }
                 >
-                  {column.id}
+                  { column.id }
                 </DropdownMenuCheckboxItem>
               );
-            })}
+            }) }
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

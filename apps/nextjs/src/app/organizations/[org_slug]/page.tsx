@@ -60,7 +60,7 @@ export default async function OrganizationDetailPage(
 
       <SingleOrganizationTournamentsTable
         data={tournaments}
-        org_slug={params.org_slug}
+        organization={organization}
       />
     </>
   );
