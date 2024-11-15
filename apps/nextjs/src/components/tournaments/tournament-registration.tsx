@@ -9,7 +9,7 @@ interface TournamentRegisterProps {
   tournament_id: number;
 }
 
-export default async function TournamentRegistration({
+export default async function TournamentRegistration ({
   org_slug,
   tournament_id,
 }: Readonly<TournamentRegisterProps>) {
@@ -23,9 +23,9 @@ export default async function TournamentRegistration({
 
   return (
     <RegistrationCard
-      org_slug={org_slug}
-      profiles={profiles}
-      tournament_id={tournament_id}
+      org_slug={ org_slug }
+      profiles={ profiles }
+      tournament_id={ tournament_id }
     />
   );
 }

@@ -5,13 +5,15 @@ import { auth } from "@clerk/nextjs/server";
 import { db, eq } from "@battle-stadium/db";
 import { accounts, profiles } from "@battle-stadium/db/schema";
 
-import { BattleStadiumApiClient } from "~/lib/api";
+import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
+import type { FetchOptions } from "openapi-fetch";
+import type { paths } from "~/lib/api/openapi-v1";
 
-export async function getAccounts() {
+export async function getAccounts () {
   return await db.query.accounts.findMany();
 }
 
-export async function getAccount(username: string) {
+export async function getAccount (username: string) {
   const profile = await db.query.profiles.findFirst({
     where: eq(profiles.username, username),
   });
@@ -25,14 +27,18 @@ export async function getAccount(username: string) {
   });
 }
 
-export async function getAccountMe() {
+export async function getAccountMe (options?: FetchOptions<paths["/accounts/me"]["get"]>) {
   const { userId } = await auth();
 
   if (!userId) {
     return null;
   }
 
-  const resp = (await BattleStadiumApiClient().GET("/accounts/me")).data;
+  const accountMeOptions = {
+    ...defaultConfig(`getAccountMe-${userId}`),
+    ...options
+  }
 
-  return resp;
+  const resp = await BattleStadiumApiClient().GET("/accounts/me", accountMeOptions);
+  return resp.data;
 }
