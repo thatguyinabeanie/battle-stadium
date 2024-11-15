@@ -2,13 +2,13 @@
 
 import { useRouter } from "next/navigation";
 
-import type { accounts } from "@battle-stadium/db/schema";
 import { Button, Input } from "@battle-stadium/ui";
 
+import type { AccountMe } from "~/lib/api";
 import { createProfile } from "~/app/server-actions/profiles/actions";
 
 interface NewProfileProps {
-  me: typeof accounts.$inferSelect;
+  me: AccountMe;
 }
 
 export default function NewProfile({ me }: Readonly<NewProfileProps>) {

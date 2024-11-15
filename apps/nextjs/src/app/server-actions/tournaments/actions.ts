@@ -8,7 +8,7 @@ import {
   tournaments,
 } from "@battle-stadium/db/schema";
 
-export async function getTournament(tournament_id: bigint) {
+export async function getTournament(tournament_id: number) {
   const result = await db
     .select()
     .from(tournaments)
@@ -33,10 +33,11 @@ export async function getTournaments(page = 1, pageSize = 20) {
 }
 
 interface TournamentRegistration {
-  tournamentId: bigint;
+  accountId: number;
+  tournamentId: number;
   inGameName: string;
-  profileId: bigint;
-  pokemonTeamId?: bigint;
+  profileId: number;
+  pokemonTeamId?: number;
   showCountryFlag: boolean;
 }
 
@@ -53,7 +54,7 @@ export async function postTournamentRegistration(
     .returning();
 }
 
-export async function getTournamentPlayers(tournament_id: bigint) {
+export async function getTournamentPlayers(tournament_id: number) {
   return await db
     .select()
     .from(players)

@@ -4,8 +4,210 @@
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.formats": {
-      "name": "formats",
+    "public.chat_messages": {
+      "name": "chat_messages",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "match_id": {
+          "name": "match_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "message_type": {
+          "name": "message_type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sent_at": {
+          "name": "sent_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "profile_id": {
+          "name": "profile_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "index_chat_messages_on_account_id": {
+          "name": "index_chat_messages_on_account_id",
+          "columns": [
+            {
+              "expression": "account_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_chat_messages_on_match_id": {
+          "name": "index_chat_messages_on_match_id",
+          "columns": [
+            {
+              "expression": "match_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fk_rails_8e0becf885": {
+          "name": "fk_rails_8e0becf885",
+          "tableFrom": "chat_messages",
+          "tableTo": "accounts",
+          "schemaTo": "public",
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_f9ae4172ee": {
+          "name": "fk_rails_f9ae4172ee",
+          "tableFrom": "chat_messages",
+          "tableTo": "matches",
+          "schemaTo": "public",
+          "columnsFrom": ["match_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_ef9208f8a6": {
+          "name": "fk_rails_ef9208f8a6",
+          "tableFrom": "chat_messages",
+          "tableTo": "profiles",
+          "schemaTo": "public",
+          "columnsFrom": ["profile_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.clerk_users": {
+      "name": "clerk_users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "clerk_user_id": {
+          "name": "clerk_user_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "index_clerk_users_on_account_id": {
+          "name": "index_clerk_users_on_account_id",
+          "columns": [
+            {
+              "expression": "account_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_clerk_users_on_clerk_user_id": {
+          "name": "index_clerk_users_on_clerk_user_id",
+          "columns": [
+            {
+              "expression": "clerk_user_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fk_rails_07d17e1c78": {
+          "name": "fk_rails_07d17e1c78",
+          "tableFrom": "clerk_users",
+          "tableTo": "accounts",
+          "schemaTo": "public",
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.games": {
+      "name": "games",
       "schema": "",
       "columns": {
         "id": {
@@ -17,12 +219,6 @@
         "name": {
           "name": "name",
           "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "game_id": {
-          "name": "game_id",
-          "type": "bigint",
           "primaryKey": false,
           "notNull": false
         },
@@ -40,11 +236,224 @@
         }
       },
       "indexes": {
-        "index_formats_on_game_id": {
-          "name": "index_formats_on_game_id",
+        "index_games_on_lower_name": {
+          "name": "index_games_on_lower_name",
           "columns": [
             {
-              "expression": "game_id",
+              "expression": "lower((name)::text)",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": true
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.friendly_id_slugs": {
+      "name": "friendly_id_slugs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sluggable_id": {
+          "name": "sluggable_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sluggable_type": {
+          "name": "sluggable_type",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "name": "scope",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "index_friendly_id_slugs_on_slug_and_sluggable_type": {
+          "name": "index_friendly_id_slugs_on_slug_and_sluggable_type",
+          "columns": [
+            {
+              "expression": "slug",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            },
+            {
+              "expression": "sluggable_type",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope": {
+          "name": "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope",
+          "columns": [
+            {
+              "expression": "slug",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            },
+            {
+              "expression": "sluggable_type",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            },
+            {
+              "expression": "scope",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id": {
+          "name": "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id",
+          "columns": [
+            {
+              "expression": "sluggable_type",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int4_ops",
+              "isExpression": false
+            },
+            {
+              "expression": "sluggable_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.match_games": {
+      "name": "match_games",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "match_id": {
+          "name": "match_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "winner_id": {
+          "name": "winner_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "loser_id": {
+          "name": "loser_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "game_number": {
+          "name": "game_number",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "ended_at": {
+          "name": "ended_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "reporter_profile_id": {
+          "name": "reporter_profile_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "index_match_games_on_loser_id": {
+          "name": "index_match_games_on_loser_id",
+          "columns": [
+            {
+              "expression": "loser_id",
               "asc": true,
               "nulls": "last",
               "opclass": "int8_ops",
@@ -56,37 +465,76 @@
           "method": "btree",
           "with": {}
         },
-        "index_formats_on_name_and_game_id": {
-          "name": "index_formats_on_name_and_game_id",
+        "index_match_games_on_match_id": {
+          "name": "index_match_games_on_match_id",
           "columns": [
             {
-              "expression": "name",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            },
-            {
-              "expression": "game_id",
+              "expression": "match_id",
               "asc": true,
               "nulls": "last",
               "opclass": "int8_ops",
               "isExpression": false
             }
           ],
-          "isUnique": true,
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_match_games_on_winner_id": {
+          "name": "index_match_games_on_winner_id",
+          "columns": [
+            {
+              "expression": "winner_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
           "concurrently": false,
           "method": "btree",
           "with": {}
         }
       },
       "foreignKeys": {
-        "fk_rails_a0e0605606": {
-          "name": "fk_rails_a0e0605606",
-          "tableFrom": "formats",
-          "tableTo": "games",
+        "fk_rails_76cefaebc0": {
+          "name": "fk_rails_76cefaebc0",
+          "tableFrom": "match_games",
+          "tableTo": "matches",
           "schemaTo": "public",
-          "columnsFrom": ["game_id"],
+          "columnsFrom": ["match_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_a2c90fc36d": {
+          "name": "fk_rails_a2c90fc36d",
+          "tableFrom": "match_games",
+          "tableTo": "players",
+          "schemaTo": "public",
+          "columnsFrom": ["loser_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_be3d6ef1eb": {
+          "name": "fk_rails_be3d6ef1eb",
+          "tableFrom": "match_games",
+          "tableTo": "players",
+          "schemaTo": "public",
+          "columnsFrom": ["winner_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_8599a8b8df": {
+          "name": "fk_rails_8599a8b8df",
+          "tableFrom": "match_games",
+          "tableTo": "profiles",
+          "schemaTo": "public",
+          "columnsFrom": ["reporter_profile_id"],
           "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -166,6 +614,16 @@
         }
       },
       "foreignKeys": {
+        "fk_rails_c2051734c8": {
+          "name": "fk_rails_c2051734c8",
+          "tableFrom": "organization_staff_members",
+          "tableTo": "accounts",
+          "schemaTo": "public",
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
         "fk_rails_a177a0142c": {
           "name": "fk_rails_a177a0142c",
           "tableFrom": "organization_staff_members",
@@ -175,24 +633,14 @@
           "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
-        },
-        "fk_rails_65be078ae6": {
-          "name": "fk_rails_65be078ae6",
-          "tableFrom": "organization_staff_members",
-          "tableTo": "accounts",
-          "schemaTo": "public",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "public.phase_players": {
-      "name": "phase_players",
+    "public.pokemon": {
+      "name": "pokemon",
       "schema": "",
       "columns": {
         "id": {
@@ -201,113 +649,57 @@
           "primaryKey": true,
           "notNull": true
         },
-        "player_id": {
-          "name": "player_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "phase_type": {
-          "name": "phase_type",
+        "species": {
+          "name": "species",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "phase_id": {
-          "name": "phase_id",
-          "type": "bigint",
+        "ability": {
+          "name": "ability",
+          "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
+        "tera_type": {
+          "name": "tera_type",
+          "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
+        "nature": {
+          "name": "nature",
+          "type": "varchar",
           "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {
-        "index_phase_players_on_player_id": {
-          "name": "index_phase_players_on_player_id",
-          "columns": [
-            {
-              "expression": "player_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
+          "notNull": false
         },
-        "index_tournament_phase_players_on_phase": {
-          "name": "index_tournament_phase_players_on_phase",
-          "columns": [
-            {
-              "expression": "phase_type",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            },
-            {
-              "expression": "phase_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "fk_rails_71fbe65d92": {
-          "name": "fk_rails_71fbe65d92",
-          "tableFrom": "phase_players",
-          "tableTo": "players",
-          "schemaTo": "public",
-          "columnsFrom": ["player_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.phases": {
-      "name": "phases",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "tournament_id": {
-          "name": "tournament_id",
-          "type": "bigint",
+        "item": {
+          "name": "item",
+          "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "number_of_rounds": {
-          "name": "number_of_rounds",
-          "type": "integer",
+        "move1": {
+          "name": "move1",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "move2": {
+          "name": "move2",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "move3": {
+          "name": "move3",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "move4": {
+          "name": "move4",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
@@ -323,57 +715,125 @@
           "primaryKey": false,
           "notNull": true
         },
-        "type": {
-          "name": "type",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
+        "nickname": {
+          "name": "nickname",
           "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
-        "best_of": {
-          "name": "best_of",
-          "type": "integer",
+        "pokemon_team_id": {
+          "name": "pokemon_team_id",
+          "type": "bigint",
           "primaryKey": false,
           "notNull": true,
-          "default": 3
+          "default": 0
         },
-        "started_at": {
-          "name": "started_at",
-          "type": "timestamp(6)",
+        "form": {
+          "name": "form",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
-        "ended_at": {
-          "name": "ended_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "order": {
-          "name": "order",
+        "position": {
+          "name": "position",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "default": 0
         },
-        "current_round_id": {
-          "name": "current_round_id",
-          "type": "bigint",
+        "gender": {
+          "name": "gender",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 2
+        },
+        "shiny": {
+          "name": "shiny",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "ev_hp": {
+          "name": "ev_hp",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ev_atk": {
+          "name": "ev_atk",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ev_def": {
+          "name": "ev_def",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ev_spa": {
+          "name": "ev_spa",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ev_spd": {
+          "name": "ev_spd",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ev_spe": {
+          "name": "ev_spe",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "iv_hp": {
+          "name": "iv_hp",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "iv_atk": {
+          "name": "iv_atk",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "iv_def": {
+          "name": "iv_def",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "iv_spa": {
+          "name": "iv_spa",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "iv_spd": {
+          "name": "iv_spd",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "iv_spe": {
+          "name": "iv_spe",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         }
       },
       "indexes": {
-        "index_phases_on_current_round_id": {
-          "name": "index_phases_on_current_round_id",
+        "index_pokemon_on_pokemon_team_id": {
+          "name": "index_pokemon_on_pokemon_team_id",
           "columns": [
             {
-              "expression": "current_round_id",
+              "expression": "pokemon_team_id",
               "asc": true,
               "nulls": "last",
               "opclass": "int8_ops",
@@ -385,56 +845,37 @@
           "method": "btree",
           "with": {}
         },
-        "index_phases_on_tournament_id": {
-          "name": "index_phases_on_tournament_id",
+        "index_pokemon_on_pokemon_team_id_and_position": {
+          "name": "index_pokemon_on_pokemon_team_id_and_position",
           "columns": [
             {
-              "expression": "tournament_id",
+              "expression": "pokemon_team_id",
               "asc": true,
               "nulls": "last",
-              "opclass": "int8_ops",
+              "opclass": "int4_ops",
+              "isExpression": false
+            },
+            {
+              "expression": "position",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int4_ops",
               "isExpression": false
             }
           ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_phases_on_type": {
-          "name": "index_phases_on_type",
-          "columns": [
-            {
-              "expression": "type",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
+          "isUnique": true,
           "concurrently": false,
           "method": "btree",
           "with": {}
         }
       },
       "foreignKeys": {
-        "fk_rails_75e775589e": {
-          "name": "fk_rails_75e775589e",
-          "tableFrom": "phases",
-          "tableTo": "tournaments",
+        "fk_rails_5b6022737b": {
+          "name": "fk_rails_5b6022737b",
+          "tableFrom": "pokemon",
+          "tableTo": "pokemon_teams",
           "schemaTo": "public",
-          "columnsFrom": ["tournament_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_2909e41898": {
-          "name": "fk_rails_2909e41898",
-          "tableFrom": "phases",
-          "tableTo": "rounds",
-          "schemaTo": "public",
-          "columnsFrom": ["current_round_id"],
+          "columnsFrom": ["pokemon_team_id"],
           "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -574,6 +1015,1102 @@
           "tableTo": "accounts",
           "schemaTo": "public",
           "columnsFrom": ["owner_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.phases": {
+      "name": "phases",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "tournament_id": {
+          "name": "tournament_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "number_of_rounds": {
+          "name": "number_of_rounds",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "best_of": {
+          "name": "best_of",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 3
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ended_at": {
+          "name": "ended_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "current_round_id": {
+          "name": "current_round_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "index_phases_on_current_round_id": {
+          "name": "index_phases_on_current_round_id",
+          "columns": [
+            {
+              "expression": "current_round_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_phases_on_tournament_id": {
+          "name": "index_phases_on_tournament_id",
+          "columns": [
+            {
+              "expression": "tournament_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_phases_on_type": {
+          "name": "index_phases_on_type",
+          "columns": [
+            {
+              "expression": "type",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fk_rails_2909e41898": {
+          "name": "fk_rails_2909e41898",
+          "tableFrom": "phases",
+          "tableTo": "rounds",
+          "schemaTo": "public",
+          "columnsFrom": ["current_round_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_75e775589e": {
+          "name": "fk_rails_75e775589e",
+          "tableFrom": "phases",
+          "tableTo": "tournaments",
+          "schemaTo": "public",
+          "columnsFrom": ["tournament_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.players": {
+      "name": "players",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "tournament_id": {
+          "name": "tournament_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "team_sheet_submitted": {
+          "name": "team_sheet_submitted",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "checked_in_at": {
+          "name": "checked_in_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "in_game_name": {
+          "name": "in_game_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "pokemon_team_id": {
+          "name": "pokemon_team_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dropped": {
+          "name": "dropped",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "disqualified": {
+          "name": "disqualified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "round_wins": {
+          "name": "round_wins",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "round_losses": {
+          "name": "round_losses",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "game_wins": {
+          "name": "game_wins",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "game_losses": {
+          "name": "game_losses",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "resistance": {
+          "name": "resistance",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "profile_id": {
+          "name": "profile_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "show_country_flag": {
+          "name": "show_country_flag",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        }
+      },
+      "indexes": {
+        "index_players_on_account_id": {
+          "name": "index_players_on_account_id",
+          "columns": [
+            {
+              "expression": "account_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_players_on_pokemon_team_id": {
+          "name": "index_players_on_pokemon_team_id",
+          "columns": [
+            {
+              "expression": "pokemon_team_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_players_on_tournament_id": {
+          "name": "index_players_on_tournament_id",
+          "columns": [
+            {
+              "expression": "tournament_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fk_rails_3c8ccf56fb": {
+          "name": "fk_rails_3c8ccf56fb",
+          "tableFrom": "players",
+          "tableTo": "accounts",
+          "schemaTo": "public",
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_aeec102047": {
+          "name": "fk_rails_aeec102047",
+          "tableFrom": "players",
+          "tableTo": "pokemon_teams",
+          "schemaTo": "public",
+          "columnsFrom": ["pokemon_team_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_d331b0f746": {
+          "name": "fk_rails_d331b0f746",
+          "tableFrom": "players",
+          "tableTo": "profiles",
+          "schemaTo": "public",
+          "columnsFrom": ["profile_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_f96ec8a72f": {
+          "name": "fk_rails_f96ec8a72f",
+          "tableFrom": "players",
+          "tableTo": "tournaments",
+          "schemaTo": "public",
+          "columnsFrom": ["tournament_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.phase_players": {
+      "name": "phase_players",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "player_id": {
+          "name": "player_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phase_type": {
+          "name": "phase_type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phase_id": {
+          "name": "phase_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "index_phase_players_on_player_id": {
+          "name": "index_phase_players_on_player_id",
+          "columns": [
+            {
+              "expression": "player_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_tournament_phase_players_on_phase": {
+          "name": "index_tournament_phase_players_on_phase",
+          "columns": [
+            {
+              "expression": "phase_type",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            },
+            {
+              "expression": "phase_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fk_rails_71fbe65d92": {
+          "name": "fk_rails_71fbe65d92",
+          "tableFrom": "phase_players",
+          "tableTo": "players",
+          "schemaTo": "public",
+          "columnsFrom": ["player_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.pokemon_teams": {
+      "name": "pokemon_teams",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "published": {
+          "name": "published",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "format_id": {
+          "name": "format_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "game_id": {
+          "name": "game_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "archived_at": {
+          "name": "archived_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pokepaste_id": {
+          "name": "pokepaste_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "profile_id": {
+          "name": "profile_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "index_pokemon_teams_on_format_id": {
+          "name": "index_pokemon_teams_on_format_id",
+          "columns": [
+            {
+              "expression": "format_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_pokemon_teams_on_game_id": {
+          "name": "index_pokemon_teams_on_game_id",
+          "columns": [
+            {
+              "expression": "game_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fk_rails_6e351688b8": {
+          "name": "fk_rails_6e351688b8",
+          "tableFrom": "pokemon_teams",
+          "tableTo": "formats",
+          "schemaTo": "public",
+          "columnsFrom": ["format_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_e0513d6a9c": {
+          "name": "fk_rails_e0513d6a9c",
+          "tableFrom": "pokemon_teams",
+          "tableTo": "games",
+          "schemaTo": "public",
+          "columnsFrom": ["game_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_5264a490c6": {
+          "name": "fk_rails_5264a490c6",
+          "tableFrom": "pokemon_teams",
+          "tableTo": "profiles",
+          "schemaTo": "public",
+          "columnsFrom": ["profile_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.rk9_tournaments": {
+      "name": "rk9_tournaments",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "rk9_id": {
+          "name": "rk9_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "start_date": {
+          "name": "start_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "end_date": {
+          "name": "end_date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "index_rk9_tournaments_on_end_date": {
+          "name": "index_rk9_tournaments_on_end_date",
+          "columns": [
+            {
+              "expression": "end_date",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "date_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_rk9_tournaments_on_name": {
+          "name": "index_rk9_tournaments_on_name",
+          "columns": [
+            {
+              "expression": "name",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_rk9_tournaments_on_rk9_id": {
+          "name": "index_rk9_tournaments_on_rk9_id",
+          "columns": [
+            {
+              "expression": "rk9_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_rk9_tournaments_on_start_and_end_date": {
+          "name": "index_rk9_tournaments_on_start_and_end_date",
+          "columns": [
+            {
+              "expression": "start_date",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "date_ops",
+              "isExpression": false
+            },
+            {
+              "expression": "end_date",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "date_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_rk9_tournaments_on_start_date": {
+          "name": "index_rk9_tournaments_on_start_date",
+          "columns": [
+            {
+              "expression": "start_date",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "date_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.tournament_formats": {
+      "name": "tournament_formats",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "tournament_id": {
+          "name": "tournament_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "format_id": {
+          "name": "format_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "index_tournament_formats_on_format_id": {
+          "name": "index_tournament_formats_on_format_id",
+          "columns": [
+            {
+              "expression": "format_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_tournament_formats_on_tournament_id": {
+          "name": "index_tournament_formats_on_tournament_id",
+          "columns": [
+            {
+              "expression": "tournament_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fk_rails_08c15d3c37": {
+          "name": "fk_rails_08c15d3c37",
+          "tableFrom": "tournament_formats",
+          "tableTo": "formats",
+          "schemaTo": "public",
+          "columnsFrom": ["format_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_c679052dc0": {
+          "name": "fk_rails_c679052dc0",
+          "tableFrom": "tournament_formats",
+          "tableTo": "tournaments",
+          "schemaTo": "public",
+          "columnsFrom": ["tournament_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.profiles": {
+      "name": "profiles",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "archived_at": {
+          "name": "archived_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "default": {
+          "name": "default",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "type": {
+          "name": "type",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Profile'"
+        }
+      },
+      "indexes": {
+        "index_profiles_on_account_id": {
+          "name": "index_profiles_on_account_id",
+          "columns": [
+            {
+              "expression": "account_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_profiles_on_slug": {
+          "name": "index_profiles_on_slug",
+          "columns": [
+            {
+              "expression": "slug",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_profiles_on_username": {
+          "name": "index_profiles_on_username",
+          "columns": [
+            {
+              "expression": "username",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fk_rails_f44be28d09": {
+          "name": "fk_rails_f44be28d09",
+          "tableFrom": "profiles",
+          "tableTo": "accounts",
+          "schemaTo": "public",
+          "columnsFrom": ["account_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.accounts": {
+      "name": "accounts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "pronouns": {
+          "name": "pronouns",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "admin": {
+          "name": "admin",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "archived_at": {
+          "name": "archived_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "default_profile_id": {
+          "name": "default_profile_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "timezone": {
+          "name": "timezone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "index_accounts_on_email": {
+          "name": "index_accounts_on_email",
+          "columns": [
+            {
+              "expression": "email",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "text_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fk_rails_5ce7a2836a": {
+          "name": "fk_rails_5ce7a2836a",
+          "tableFrom": "accounts",
+          "tableTo": "profiles",
+          "schemaTo": "public",
+          "columnsFrom": ["default_profile_id"],
           "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -814,6 +2351,26 @@
         }
       },
       "foreignKeys": {
+        "fk_rails_af814604cc": {
+          "name": "fk_rails_af814604cc",
+          "tableFrom": "matches",
+          "tableTo": "accounts",
+          "schemaTo": "public",
+          "columnsFrom": ["reset_by_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "fk_rails_36efc9f0f5": {
+          "name": "fk_rails_36efc9f0f5",
+          "tableFrom": "matches",
+          "tableTo": "phases",
+          "schemaTo": "public",
+          "columnsFrom": ["phase_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
         "fk_rails_973a5646ac": {
           "name": "fk_rails_973a5646ac",
           "tableFrom": "matches",
@@ -873,23 +2430,95 @@
           "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "public.formats": {
+      "name": "formats",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
         },
-        "fk_rails_36efc9f0f5": {
-          "name": "fk_rails_36efc9f0f5",
-          "tableFrom": "matches",
-          "tableTo": "phases",
-          "schemaTo": "public",
-          "columnsFrom": ["phase_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         },
-        "fk_rails_af814604cc": {
-          "name": "fk_rails_af814604cc",
-          "tableFrom": "matches",
-          "tableTo": "accounts",
+        "game_id": {
+          "name": "game_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(6)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "index_formats_on_game_id": {
+          "name": "index_formats_on_game_id",
+          "columns": [
+            {
+              "expression": "game_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "index_formats_on_name_and_game_id": {
+          "name": "index_formats_on_name_and_game_id",
+          "columns": [
+            {
+              "expression": "name",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            },
+            {
+              "expression": "game_id",
+              "asc": true,
+              "nulls": "last",
+              "opclass": "int8_ops",
+              "isExpression": false
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "fk_rails_a0e0605606": {
+          "name": "fk_rails_a0e0605606",
+          "tableFrom": "formats",
+          "tableTo": "games",
           "schemaTo": "public",
-          "columnsFrom": ["reset_by_id"],
+          "columnsFrom": ["game_id"],
           "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -989,101 +2618,6 @@
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.tournament_formats": {
-      "name": "tournament_formats",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "tournament_id": {
-          "name": "tournament_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "format_id": {
-          "name": "format_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {
-        "index_tournament_formats_on_format_id": {
-          "name": "index_tournament_formats_on_format_id",
-          "columns": [
-            {
-              "expression": "format_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_tournament_formats_on_tournament_id": {
-          "name": "index_tournament_formats_on_tournament_id",
-          "columns": [
-            {
-              "expression": "tournament_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "fk_rails_08c15d3c37": {
-          "name": "fk_rails_08c15d3c37",
-          "tableFrom": "tournament_formats",
-          "tableTo": "formats",
-          "schemaTo": "public",
-          "columnsFrom": ["format_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_c679052dc0": {
-          "name": "fk_rails_c679052dc0",
-          "tableFrom": "tournament_formats",
-          "tableTo": "tournaments",
-          "schemaTo": "public",
-          "columnsFrom": ["tournament_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -1349,440 +2883,6 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "public.pokemon": {
-      "name": "pokemon",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "species": {
-          "name": "species",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "ability": {
-          "name": "ability",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "tera_type": {
-          "name": "tera_type",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "nature": {
-          "name": "nature",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "item": {
-          "name": "item",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "move1": {
-          "name": "move1",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "move2": {
-          "name": "move2",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "move3": {
-          "name": "move3",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "move4": {
-          "name": "move4",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "nickname": {
-          "name": "nickname",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "pokemon_team_id": {
-          "name": "pokemon_team_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "form": {
-          "name": "form",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "position": {
-          "name": "position",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "gender": {
-          "name": "gender",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 2
-        },
-        "shiny": {
-          "name": "shiny",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
-        },
-        "ev_hp": {
-          "name": "ev_hp",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "ev_atk": {
-          "name": "ev_atk",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "ev_def": {
-          "name": "ev_def",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "ev_spa": {
-          "name": "ev_spa",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "ev_spd": {
-          "name": "ev_spd",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "ev_spe": {
-          "name": "ev_spe",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "iv_hp": {
-          "name": "iv_hp",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "iv_atk": {
-          "name": "iv_atk",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "iv_def": {
-          "name": "iv_def",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "iv_spa": {
-          "name": "iv_spa",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "iv_spd": {
-          "name": "iv_spd",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "iv_spe": {
-          "name": "iv_spe",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "index_pokemon_on_pokemon_team_id": {
-          "name": "index_pokemon_on_pokemon_team_id",
-          "columns": [
-            {
-              "expression": "pokemon_team_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_pokemon_on_pokemon_team_id_and_position": {
-          "name": "index_pokemon_on_pokemon_team_id_and_position",
-          "columns": [
-            {
-              "expression": "pokemon_team_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int4_ops",
-              "isExpression": false
-            },
-            {
-              "expression": "position",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int4_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "fk_rails_5b6022737b": {
-          "name": "fk_rails_5b6022737b",
-          "tableFrom": "pokemon",
-          "tableTo": "pokemon_teams",
-          "schemaTo": "public",
-          "columnsFrom": ["pokemon_team_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.pokemon_teams": {
-      "name": "pokemon_teams",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "published": {
-          "name": "published",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "format_id": {
-          "name": "format_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "game_id": {
-          "name": "game_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "archived_at": {
-          "name": "archived_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "pokepaste_id": {
-          "name": "pokepaste_id",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "profile_id": {
-          "name": "profile_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "index_pokemon_teams_on_format_id": {
-          "name": "index_pokemon_teams_on_format_id",
-          "columns": [
-            {
-              "expression": "format_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_pokemon_teams_on_game_id": {
-          "name": "index_pokemon_teams_on_game_id",
-          "columns": [
-            {
-              "expression": "game_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "fk_rails_6e351688b8": {
-          "name": "fk_rails_6e351688b8",
-          "tableFrom": "pokemon_teams",
-          "tableTo": "formats",
-          "schemaTo": "public",
-          "columnsFrom": ["format_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_e0513d6a9c": {
-          "name": "fk_rails_e0513d6a9c",
-          "tableFrom": "pokemon_teams",
-          "tableTo": "games",
-          "schemaTo": "public",
-          "columnsFrom": ["game_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_7bf8c65391": {
-          "name": "fk_rails_7bf8c65391",
-          "tableFrom": "pokemon_teams",
-          "tableTo": "profiles",
-          "schemaTo": "public",
-          "columnsFrom": ["profile_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.games": {
-      "name": "games",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {
-        "index_games_on_lower_name": {
-          "name": "index_games_on_lower_name",
-          "columns": [
-            {
-              "expression": "lower((name)::text)",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": true
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
     "public.schema_migrations": {
       "name": "schema_migrations",
       "schema": "",
@@ -1830,1157 +2930,6 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.match_games": {
-      "name": "match_games",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "match_id": {
-          "name": "match_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "winner_id": {
-          "name": "winner_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "loser_id": {
-          "name": "loser_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "game_number": {
-          "name": "game_number",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 1
-        },
-        "ended_at": {
-          "name": "ended_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "started_at": {
-          "name": "started_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "reporter_profile_id": {
-          "name": "reporter_profile_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "index_match_games_on_loser_id": {
-          "name": "index_match_games_on_loser_id",
-          "columns": [
-            {
-              "expression": "loser_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_match_games_on_match_id": {
-          "name": "index_match_games_on_match_id",
-          "columns": [
-            {
-              "expression": "match_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_match_games_on_winner_id": {
-          "name": "index_match_games_on_winner_id",
-          "columns": [
-            {
-              "expression": "winner_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "fk_rails_76cefaebc0": {
-          "name": "fk_rails_76cefaebc0",
-          "tableFrom": "match_games",
-          "tableTo": "matches",
-          "schemaTo": "public",
-          "columnsFrom": ["match_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_a2c90fc36d": {
-          "name": "fk_rails_a2c90fc36d",
-          "tableFrom": "match_games",
-          "tableTo": "players",
-          "schemaTo": "public",
-          "columnsFrom": ["loser_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_be3d6ef1eb": {
-          "name": "fk_rails_be3d6ef1eb",
-          "tableFrom": "match_games",
-          "tableTo": "players",
-          "schemaTo": "public",
-          "columnsFrom": ["winner_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_8599a8b8df": {
-          "name": "fk_rails_8599a8b8df",
-          "tableFrom": "match_games",
-          "tableTo": "profiles",
-          "schemaTo": "public",
-          "columnsFrom": ["reporter_profile_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.clerk_users": {
-      "name": "clerk_users",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "clerk_user_id": {
-          "name": "clerk_user_id",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "account_id": {
-          "name": "account_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "index_clerk_users_on_account_id": {
-          "name": "index_clerk_users_on_account_id",
-          "columns": [
-            {
-              "expression": "account_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_clerk_users_on_clerk_user_id": {
-          "name": "index_clerk_users_on_clerk_user_id",
-          "columns": [
-            {
-              "expression": "clerk_user_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "fk_rails_982e94e92d": {
-          "name": "fk_rails_982e94e92d",
-          "tableFrom": "clerk_users",
-          "tableTo": "accounts",
-          "schemaTo": "public",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.accounts": {
-      "name": "accounts",
-      "schema": "",
-      "columns": {
-        "email": {
-          "name": "email",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "''"
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "unlock_token": {
-          "name": "unlock_token",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "first_name": {
-          "name": "first_name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "last_name": {
-          "name": "last_name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "pronouns": {
-          "name": "pronouns",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "''"
-        },
-        "jti": {
-          "name": "jti",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'invalid'"
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "image_url": {
-          "name": "image_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "admin": {
-          "name": "admin",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
-        },
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "default_profile_id": {
-          "name": "default_profile_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "archived_at": {
-          "name": "archived_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "country": {
-          "name": "country",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "timezone": {
-          "name": "timezone",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "index_accounts_on_email": {
-          "name": "index_accounts_on_email",
-          "columns": [
-            {
-              "expression": "email",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_accounts_on_jti": {
-          "name": "index_accounts_on_jti",
-          "columns": [
-            {
-              "expression": "jti",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_accounts_on_unlock_token": {
-          "name": "index_accounts_on_unlock_token",
-          "columns": [
-            {
-              "expression": "unlock_token",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "fk_rails_cee78b4b7d": {
-          "name": "fk_rails_cee78b4b7d",
-          "tableFrom": "accounts",
-          "tableTo": "profiles",
-          "schemaTo": "public",
-          "columnsFrom": ["default_profile_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.players": {
-      "name": "players",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "tournament_id": {
-          "name": "tournament_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "team_sheet_submitted": {
-          "name": "team_sheet_submitted",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
-        },
-        "checked_in_at": {
-          "name": "checked_in_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "in_game_name": {
-          "name": "in_game_name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "''"
-        },
-        "pokemon_team_id": {
-          "name": "pokemon_team_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "dropped": {
-          "name": "dropped",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
-        },
-        "disqualified": {
-          "name": "disqualified",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
-        },
-        "round_wins": {
-          "name": "round_wins",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "round_losses": {
-          "name": "round_losses",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "game_wins": {
-          "name": "game_wins",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "game_losses": {
-          "name": "game_losses",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "default": 0
-        },
-        "resistance": {
-          "name": "resistance",
-          "type": "numeric(5, 2)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "account_id": {
-          "name": "account_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "profile_id": {
-          "name": "profile_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "show_country_flag": {
-          "name": "show_country_flag",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": true
-        }
-      },
-      "indexes": {
-        "index_players_on_account_id": {
-          "name": "index_players_on_account_id",
-          "columns": [
-            {
-              "expression": "account_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_players_on_pokemon_team_id": {
-          "name": "index_players_on_pokemon_team_id",
-          "columns": [
-            {
-              "expression": "pokemon_team_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_players_on_tournament_id": {
-          "name": "index_players_on_tournament_id",
-          "columns": [
-            {
-              "expression": "tournament_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "fk_rails_aeec102047": {
-          "name": "fk_rails_aeec102047",
-          "tableFrom": "players",
-          "tableTo": "pokemon_teams",
-          "schemaTo": "public",
-          "columnsFrom": ["pokemon_team_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_f96ec8a72f": {
-          "name": "fk_rails_f96ec8a72f",
-          "tableFrom": "players",
-          "tableTo": "tournaments",
-          "schemaTo": "public",
-          "columnsFrom": ["tournament_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_224cac07ce": {
-          "name": "fk_rails_224cac07ce",
-          "tableFrom": "players",
-          "tableTo": "accounts",
-          "schemaTo": "public",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_c31cf6bf09": {
-          "name": "fk_rails_c31cf6bf09",
-          "tableFrom": "players",
-          "tableTo": "profiles",
-          "schemaTo": "public",
-          "columnsFrom": ["profile_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.friendly_id_slugs": {
-      "name": "friendly_id_slugs",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "slug": {
-          "name": "slug",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "sluggable_id": {
-          "name": "sluggable_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "sluggable_type": {
-          "name": "sluggable_type",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "scope": {
-          "name": "scope",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {
-        "index_friendly_id_slugs_on_slug_and_sluggable_type": {
-          "name": "index_friendly_id_slugs_on_slug_and_sluggable_type",
-          "columns": [
-            {
-              "expression": "slug",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            },
-            {
-              "expression": "sluggable_type",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope": {
-          "name": "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope",
-          "columns": [
-            {
-              "expression": "slug",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            },
-            {
-              "expression": "sluggable_type",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            },
-            {
-              "expression": "scope",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id": {
-          "name": "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id",
-          "columns": [
-            {
-              "expression": "sluggable_type",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int4_ops",
-              "isExpression": false
-            },
-            {
-              "expression": "sluggable_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.profiles": {
-      "name": "profiles",
-      "schema": "",
-      "columns": {
-        "username": {
-          "name": "username",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "image_url": {
-          "name": "image_url",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "slug": {
-          "name": "slug",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "account_id": {
-          "name": "account_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "archived_at": {
-          "name": "archived_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "default": {
-          "name": "default",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": false
-        },
-        "type": {
-          "name": "type",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'Profile'"
-        }
-      },
-      "indexes": {
-        "index_profiles_on_account_id": {
-          "name": "index_profiles_on_account_id",
-          "columns": [
-            {
-              "expression": "account_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_profiles_on_slug": {
-          "name": "index_profiles_on_slug",
-          "columns": [
-            {
-              "expression": "slug",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_profiles_on_username": {
-          "name": "index_profiles_on_username",
-          "columns": [
-            {
-              "expression": "username",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "fk_rails_e424190865": {
-          "name": "fk_rails_e424190865",
-          "tableFrom": "profiles",
-          "tableTo": "accounts",
-          "schemaTo": "public",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.chat_messages": {
-      "name": "chat_messages",
-      "schema": "",
-      "columns": {
-        "match_id": {
-          "name": "match_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "content": {
-          "name": "content",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "message_type": {
-          "name": "message_type",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "sent_at": {
-          "name": "sent_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "account_id": {
-          "name": "account_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "profile_id": {
-          "name": "profile_id",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {
-        "index_chat_messages_on_account_id": {
-          "name": "index_chat_messages_on_account_id",
-          "columns": [
-            {
-              "expression": "account_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_chat_messages_on_match_id": {
-          "name": "index_chat_messages_on_match_id",
-          "columns": [
-            {
-              "expression": "match_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "int8_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "fk_rails_f9ae4172ee": {
-          "name": "fk_rails_f9ae4172ee",
-          "tableFrom": "chat_messages",
-          "tableTo": "matches",
-          "schemaTo": "public",
-          "columnsFrom": ["match_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_918ef7acc4": {
-          "name": "fk_rails_918ef7acc4",
-          "tableFrom": "chat_messages",
-          "tableTo": "accounts",
-          "schemaTo": "public",
-          "columnsFrom": ["account_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "fk_rails_f531ed39e3": {
-          "name": "fk_rails_f531ed39e3",
-          "tableFrom": "chat_messages",
-          "tableTo": "profiles",
-          "schemaTo": "public",
-          "columnsFrom": ["profile_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "public.rk9_tournaments": {
-      "name": "rk9_tournaments",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "bigserial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "rk9_id": {
-          "name": "rk9_id",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "start_date": {
-          "name": "start_date",
-          "type": "date",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "end_date": {
-          "name": "end_date",
-          "type": "date",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "timestamp(6)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {
-        "index_rk9_tournaments_on_end_date": {
-          "name": "index_rk9_tournaments_on_end_date",
-          "columns": [
-            {
-              "expression": "end_date",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "date_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_rk9_tournaments_on_name": {
-          "name": "index_rk9_tournaments_on_name",
-          "columns": [
-            {
-              "expression": "name",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_rk9_tournaments_on_rk9_id": {
-          "name": "index_rk9_tournaments_on_rk9_id",
-          "columns": [
-            {
-              "expression": "rk9_id",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "text_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": true,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_rk9_tournaments_on_start_and_end_date": {
-          "name": "index_rk9_tournaments_on_start_and_end_date",
-          "columns": [
-            {
-              "expression": "start_date",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "date_ops",
-              "isExpression": false
-            },
-            {
-              "expression": "end_date",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "date_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        },
-        "index_rk9_tournaments_on_start_date": {
-          "name": "index_rk9_tournaments_on_start_date",
-          "columns": [
-            {
-              "expression": "start_date",
-              "asc": true,
-              "nulls": "last",
-              "opclass": "date_ops",
-              "isExpression": false
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},

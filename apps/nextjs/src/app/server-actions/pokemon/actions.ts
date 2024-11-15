@@ -12,18 +12,18 @@ export async function getPokemonTeams() {
 export async function postPokemonTeam(
   validatedTeam: ValidatedPokemon[],
   metadata: PokePasteMetadata,
-  // profileId: bigint,
-  // gameId: bigint,
-  // formatId: bigint,
+  profileId: number,
+  gameId: number,
+  formatId: number,
 ) {
   const body = {
     pokepasteId: metadata.id,
-    profileId: 1n,
+    profileId,
     name: metadata.title,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    gameId: 1n,
-    formatId: 1n,
+    gameId,
+    formatId,
   };
 
   const pokemonTeamResult = await db

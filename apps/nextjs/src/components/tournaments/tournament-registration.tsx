@@ -6,7 +6,7 @@ import RegistrationCard from "./registration-card";
 
 interface TournamentRegisterProps {
   org_slug: string;
-  tournament_id: bigint;
+  tournament_id: number;
 }
 
 export default async function TournamentRegistration({
