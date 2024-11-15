@@ -19,6 +19,7 @@ const config: NextConfig = {
     staticGenerationMaxConcurrency: 8,
     // the minimum number of pages before spinning up a new export worker
     staticGenerationMinPagesPerWorker: 25,
+    ppr: true,
   },
 
   expireTime: 3600,

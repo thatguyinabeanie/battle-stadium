@@ -68,11 +68,11 @@ function SingleOrganizationTournamentsTableFiltering() {
       />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="ml-auto">
+          <Button variant="outline" className="ml-auto flex flex-row">
             Columns <ChevronDown />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="w-full backdrop-blur-3xl">
           {table
             .getAllColumns()
             .filter((column) => column.getCanHide())
@@ -96,47 +96,46 @@ function SingleOrganizationTournamentsTableFiltering() {
 
 const columns: ColumnDef<Tournament>[] = [
   {
-    accessorKey: "startAt",
+    accessorKey: "Start Date",
     header: "Start Date",
     cell: ({ row }) =>
-      new Date(row.getValue<string>("startAt")).toLocaleString(),
+      row.original.startAt && new Date(row.original.startAt).toLocaleString(),
   },
   {
     accessorKey: "checkInStartAt",
     header: "Check-In Start",
     cell: ({ row }) =>
-      new Date(row.getValue<string>("checkInStartAt")).toLocaleString(),
+      row.original.checkInStartAt &&
+      new Date(row.original.checkInStartAt).toLocaleString(),
   },
   {
-    accessorKey: "gameId",
+    accessorKey: "Game",
     header: "Game ID",
-    cell: ({ row }) => row.getValue<string>("gameId"),
+    cell: ({ row }) => row.original.gameId,
   },
   {
-    accessorKey: "formatId",
+    accessorKey: "Format",
     header: "Format ID",
-    cell: ({ row }) => row.getValue<string>("formatId"),
+    cell: ({ row }) => row.original.formatId,
   },
   {
-    accessorKey: "playerCap",
+    accessorKey: "Player Cap",
     header: "Player Cap",
-    cell: ({ row }) => row.getValue<number>("playerCap"),
+    cell: ({ row }) => row.original.playerCap,
   },
   {
-    accessorKey: "lateRegistration",
+    accessorKey: "Late Registration",
     header: "Late Registration",
-    cell: ({ row }) =>
-      row.getValue<boolean>("lateRegistration") ? "Yes" : "No",
+    cell: ({ row }) => (row.original.lateRegistration ? "Yes" : "No"),
   },
   {
-    accessorKey: "teamlistsRequired",
+    accessorKey: "Team List Required?",
     header: "Teamlists Required",
-    cell: ({ row }) =>
-      row.getValue<boolean>("teamlistsRequired") ? "Yes" : "No",
+    cell: ({ row }) => (row.original.teamlistsRequired ? "Yes" : "No"),
   },
   {
     accessorKey: "openTeamSheets",
     header: "Open Team Sheets",
-    cell: ({ row }) => (row.getValue<boolean>("openTeamSheets") ? "Yes" : "No"),
+    cell: ({ row }) => (row.original.openTeamSheets ? "Yes" : "No"),
   },
 ];
