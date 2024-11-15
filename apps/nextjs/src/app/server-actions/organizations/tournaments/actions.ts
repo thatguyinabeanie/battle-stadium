@@ -36,7 +36,7 @@ export async function getSingleOrganizationTournaments(
 
 export async function getSingleOrganizationSingleTournament(
   slug: string,
-  tournamentId: bigint,
+  tournamentId: number,
 ) {
   const results = await tournamentsLeftJoinOrganizations()
     .where(and(eq(organizations.slug, slug), eq(tournaments.id, tournamentId)))

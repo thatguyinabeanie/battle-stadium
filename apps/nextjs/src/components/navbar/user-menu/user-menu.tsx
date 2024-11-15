@@ -1,6 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server";
 
-import type { accounts } from "@battle-stadium/db/schema";
 import {
   Avatar,
   AvatarFallback,
@@ -9,10 +8,11 @@ import {
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
 
+import type { AccountMe } from "~/lib/api";
 import UserMenuDropDown from "~/components/navbar/user-menu/user-menu-dropdown";
 
 interface UserMenuProps {
-  me?: typeof accounts.$inferSelect | null;
+  me?: AccountMe;
   isSignedIn: boolean;
 }
 

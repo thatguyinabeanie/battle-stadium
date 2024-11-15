@@ -3,7 +3,8 @@ import type { Dispatch, SetStateAction } from "react";
 import { Button, Textarea } from "@battle-stadium/ui";
 
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
-import { postPokemonTeam } from "~/app/server-actions/pokemon/actions";
+// import { postPokemonTeam } from "~/app/server-actions/pokemon/actions";
+import { getAccountMe } from "~/app/server-actions/accounts/actions";
 
 interface PokemonShowdownSetFormProps {
   validatedTeam: ValidatedPokemon[] | null;
@@ -13,13 +14,17 @@ interface PokemonShowdownSetFormProps {
   metaData: PokePasteMetadata | null;
 }
 
-export function PokemonShowdownSetForm({
+export async function PokemonShowdownSetForm({
   validatedTeam,
   handleSubmit,
   input,
   setInput,
   metaData,
 }: Readonly<PokemonShowdownSetFormProps>) {
+  const me = await getAccountMe();
+  if (!me) {
+    return null;
+  }
   return (
     <form action={handleSubmit} className="grid grid-cols-1">
       <div className="mb-4">
@@ -43,10 +48,9 @@ export function PokemonShowdownSetForm({
         <Button
           color="primary"
           disabled={!validatedTeam || !metaData}
-          onClick={() =>
-            validatedTeam &&
-            metaData &&
-            postPokemonTeam(validatedTeam, metaData)
+          onClick={
+            () => validatedTeam && metaData
+            // postPokemonTeam(validatedTeam, metaData,)
           }
         >
           Upload

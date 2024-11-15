@@ -3,7 +3,9 @@
 import { auth } from "@clerk/nextjs/server";
 
 import { db, eq } from "@battle-stadium/db";
-import { accounts, clerkUsers, profiles } from "@battle-stadium/db/schema";
+import { accounts, profiles } from "@battle-stadium/db/schema";
+
+import { BattleStadiumApiClient } from "~/lib/api";
 
 export async function getAccounts() {
   return await db.query.accounts.findMany();
@@ -30,11 +32,7 @@ export async function getAccountMe() {
     return null;
   }
 
-  const result = await db
-    .select()
-    .from(accounts)
-    .leftJoin(clerkUsers, eq(clerkUsers.accountId, accounts.id))
-    .where(eq(clerkUsers.clerkUserId, userId));
+  const resp = (await BattleStadiumApiClient().GET("/accounts/me")).data;
 
-  return result[0]?.accounts;
+  return resp;
 }

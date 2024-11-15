@@ -41,6 +41,7 @@
     "drizzle-orm": "^0.35.1",
     "drizzle-typebox": "^0.1.1",
     "drizzle-zod": "^0.5.1",
+    "postgres": "^3.4.5",
     "zod": "catalog:"
   },
   "devDependencies": {

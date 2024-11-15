@@ -80,7 +80,7 @@ export default async function OrganizationTournament(
 
 interface TournamentDetailChipsProps {
   org_slug: string;
-  tournament_id: bigint;
+  tournament_id: number;
 }
 function TournamentDetailChips(props: Readonly<TournamentDetailChipsProps>) {
   const { org_slug, tournament_id } = props;

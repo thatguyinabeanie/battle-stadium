@@ -3,7 +3,7 @@ import TournamentRegistration from "~/components/tournaments/tournament-registra
 interface RegisterProps {
   params: Promise<{
     org_slug: string;
-    tournament_id: bigint;
+    tournament_id: number;
   }>;
 }
 

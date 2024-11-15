@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { SignInButton, SignOutButton } from "@clerk/nextjs";
 
-import type { accounts } from "@battle-stadium/db/schema";
 import {
   cn,
   DropdownMenu,
@@ -11,8 +10,10 @@ import {
   DropdownMenuItem,
 } from "@battle-stadium/ui";
 
+import type { AccountMe } from "~/lib/api";
+
 interface UserMenuDropDownProps {
-  me?: typeof accounts.$inferSelect | null;
+  me?: AccountMe;
   isSignedIn: boolean;
 }
 
@@ -32,7 +33,7 @@ export default function UserMenuDropDown({
           <Link prefetch={true} aria-label="dashboard" href="/dashboard">
             <span>
               <p className="text-default-400 font-normal">Signed in as</p>
-              <p className="truncate font-semibold">{`${me?.firstName} ${me?.lastName}`}</p>{" "}
+              <p className="truncate font-semibold">{`${me?.first_name} ${me?.last_name}`}</p>{" "}
             </span>
           </Link>
         </DropdownMenuItem>
