@@ -84,7 +84,7 @@ function TournamentsTableFiltering() {
       />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="ml-auto">
+          <Button variant="outline" className="ml-auto flex flex-row">
             Columns <ChevronDown />
           </Button>
         </DropdownMenuTrigger>
