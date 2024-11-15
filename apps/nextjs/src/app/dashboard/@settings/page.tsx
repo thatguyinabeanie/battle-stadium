@@ -21,6 +21,7 @@ export default function Settings() {
         <TabsContent value="account">
           Make changes to your account here.
         </TabsContent>
+
         <TabsContent value="appearance">
           {"Make changes to the site's appearance here."}
         </TabsContent>

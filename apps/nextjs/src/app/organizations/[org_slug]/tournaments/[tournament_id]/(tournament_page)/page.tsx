@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { format, parseISO } from "date-fns";
 
 import { Chip, Separator } from "@battle-stadium/ui";
 
@@ -47,18 +48,26 @@ export default async function OrganizationTournament(
     <>
       <div className="pt-2" />
       <OrganizationHeader organization={organization}>
-        <div className="mx-4 flex h-full flex-col items-center justify-between text-center">
+        <div className="mx-4 flex h-full w-full flex-col items-center justify-between text-center">
           <h1 className="text-2xl font-semibold">{tournament.name}</h1>
-          <h2 className="flex flex-row gap-1">
-            <p className="font-bold">Presented By: </p>
-            {organization.name}
-          </h2>
 
           <div className="pt-2" />
 
-          <p>Registration: {tournament.registrationStartAt}</p>
-          <p>Starts: {tournament.startAt}</p>
-          <p>Check in opens: {tournament.checkInStartAt} </p>
+          <div className="grid w-full grid-cols-2 justify-center gap-2">
+            <p className="text-right font-bold">Presented By: </p>{" "}
+            <p className="text-left">{organization.name}</p>
+            <p className="text-right">Registration:</p>{" "}
+            <p className="text-left">
+              {" "}
+              {formatTimestamp(tournament.registrationStartAt)}{" "}
+            </p>
+            <p className="text-right">Starts:</p>{" "}
+            <p className="text-left">{formatTimestamp(tournament.startAt)}</p>
+            <p className="text-right">Check in opens:</p>{" "}
+            <p className="text-left">
+              {formatTimestamp(tournament.checkInStartAt)}
+            </p>
+          </div>
 
           <div className="pt-2" />
         </div>
@@ -76,6 +85,13 @@ export default async function OrganizationTournament(
       <div className="pt-2" />
     </>
   );
+}
+
+function formatTimestamp(timestamp: string | null) {
+  if (!timestamp) {
+    return "N/A";
+  }
+  return format(parseISO(timestamp), "PPp");
 }
 
 interface TournamentDetailChipsProps {

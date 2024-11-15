@@ -2,6 +2,8 @@
 
 import type { ReactNode } from "react";
 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@battle-stadium/ui";
+
 // const tabs = [
 //   { key: "details", title: "Details" },
 //   { key: "registrations", title: "Registrations" },
@@ -21,35 +23,45 @@ interface OrganizationTournamentsTournamentLayoutProps {
   details: ReactNode;
 }
 
-// function renderTabContent(activeTab: string, props: Readonly<OrganizationTournamentsTournamentLayoutProps>) {
-//   switch (activeTab) {
-//     case "details":
-//       return props.details;
-//     case "registrations":
-//       return props.registrations;
-//     case "pairings":
-//       return props.pairings;
-//     case "standings":
-//       return props.standings;
-//     case "matches":
-//       return props.matches;
-//     case "meta":
-//       return props.metagame;
-//     default:
-//       return null;
-//   }
-// }
-
 export default function OrganizationTournamentsTournamentLayout(
   props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
 ) {
+  const { children, standings, pairings, metagame, registrations, details } =
+    props;
+
   return (
     <div className="flex h-full w-full flex-col items-center">
-      {props.children}
+      {children}
 
-      <div className="py-2" />
+      <div className="flex flex-col items-center py-2" />
 
-      {/* <Tabs renderTabContent={renderTabContent} tabContents={props} tabs={tabs} /> */}
+      <Tabs>
+        <TabsList>
+          <TabsTrigger value="standings" title="Standings">
+            Standings
+          </TabsTrigger>
+          <TabsTrigger value="pairings" title="Standings">
+            Pairings
+          </TabsTrigger>
+          {/* <TabsTrigger value="matches" title="Standings">Matches</TabsTrigger> */}
+          <TabsTrigger value="metagame" title="Standings">
+            Meta Game
+          </TabsTrigger>
+          <TabsTrigger value="registrations" title="Standings">
+            Pairings
+          </TabsTrigger>
+          <TabsTrigger value="details" title="Standings">
+            Details
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="standings">{standings}</TabsContent>
+        <TabsContent value="pairings">{pairings}</TabsContent>
+        {/* <TabsContent value="matches">{ matches }</TabsContent> */}
+        <TabsContent value="metagame">{metagame}</TabsContent>
+        <TabsContent value="registrations">{registrations}</TabsContent>
+        <TabsContent value="details">{details}</TabsContent>
+      </Tabs>
     </div>
   );
 }
