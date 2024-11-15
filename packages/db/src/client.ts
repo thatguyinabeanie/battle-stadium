@@ -3,11 +3,11 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { drizzle as drizzleNode } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
-export * from "drizzle-orm";
-
 import * as schema from "../drizzle/schema";
 
-function createClient () {
+export * from "drizzle-orm";
+
+function createClient() {
   if (!process.env.DATABASE_URL) {
     throw new Error("Missing DATABASE_URL");
   }
@@ -22,11 +22,10 @@ function createClient () {
     });
   }
 
-  return drizzleNode(
-    postgres(process.env.DATABASE_URL), {
+  return drizzleNode(postgres(process.env.DATABASE_URL), {
     schema,
     casing: "snake_case",
   });
-};
+}
 
 export const db = createClient();

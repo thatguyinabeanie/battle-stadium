@@ -1,7 +1,7 @@
 import type { ParsedPokemon, ParsedTeam, PokePasteMetadata } from "./common";
 import { cleanImageUrl, parseStats } from "./common";
 
-export function parsePokePasteHTML (html: string, url: string): ParsedTeam {
+export function parsePokePasteHTML(html: string, url: string): ParsedTeam {
   if (typeof window === "undefined")
     return { metadata: { title: "", author: "", format: "" }, pokemon: [] };
 
@@ -94,7 +94,7 @@ export function parsePokePasteHTML (html: string, url: string): ParsedTeam {
   return { metadata, pokemon };
 }
 
-function parseNameSpeciesItem (line: string): {
+function parseNameSpeciesItem(line: string): {
   name: string;
   species: string;
   item: string;

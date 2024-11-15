@@ -69,17 +69,17 @@ const baseOptions: ISourceOptions = {
   },
   detectRetina: true,
   smooth: true,
-}
-export default function useParticlesOptions (): ISourceOptions {
+};
+export default function useParticlesOptions(): ISourceOptions {
   const { theme } = useTheme();
 
   const isLight = theme?.includes("light");
 
-  const colorHex = isLight ? "#555" : "#fff"
+  const colorHex = isLight ? "#555" : "#fff";
   return {
     ...baseOptions,
     particles: {
-      ...(baseOptions.particles),
+      ...baseOptions.particles,
       links: {
         color: colorHex,
         distance: 150,
@@ -88,8 +88,8 @@ export default function useParticlesOptions (): ISourceOptions {
         width: 0.5,
       },
       color: {
-        value: colorHex
+        value: colorHex,
       },
-    }
+    },
   };
 }

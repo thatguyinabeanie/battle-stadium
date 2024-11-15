@@ -27,18 +27,18 @@ interface TournamentsTableProps {
   data: OrganizationTournament[];
 }
 
-export function TournamentsTable ({ data }: TournamentsTableProps) {
+export function TournamentsTable({ data }: TournamentsTableProps) {
   const preColumn: ColumnDef<OrganizationTournament>[] = [
     {
       header: "Organization",
       cell: ({ row }) => (
         <div className="flex flex-col items-center justify-center">
-          { row.original.organizations && (
+          {row.original.organizations && (
             <OrganizationLogo
-              organization={ row.original.organizations }
-              logoSize={ 32 }
+              organization={row.original.organizations}
+              logoSize={32}
             />
-          ) }
+          )}
         </div>
       ),
     },
@@ -48,10 +48,10 @@ export function TournamentsTable ({ data }: TournamentsTableProps) {
       header: "Name",
       cell: ({ row }) => (
         <Link
-          href={ `/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}` }
+          href={`/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}`}
           className="flex flex-row items-center gap-2 text-primary"
         >
-          { row.original.tournaments.name }
+          {row.original.tournaments.name}
         </Link>
       ),
     },
@@ -59,15 +59,15 @@ export function TournamentsTable ({ data }: TournamentsTableProps) {
 
   return (
     <DataTable<OrganizationTournament>
-      data={ data }
-      columns={ [...preColumn, ...columns] }
+      data={data}
+      columns={[...preColumn, ...columns]}
     >
       <TournamentsTableFiltering />
     </DataTable>
   );
 }
 
-function TournamentsTableFiltering () {
+function TournamentsTableFiltering() {
   const table = useDataTable<OrganizationTournament>();
 
   if (!table) return null;
@@ -76,8 +76,8 @@ function TournamentsTableFiltering () {
     <div className="flex items-center py-4">
       <Input
         placeholder="Filter emails..."
-        value={ table.getColumn("name")?.getFilterValue() as string }
-        onChange={ (event) =>
+        value={table.getColumn("name")?.getFilterValue() as string}
+        onChange={(event) =>
           table.getColumn("name")?.setFilterValue(event.target.value)
         }
         className="max-w-sm"
@@ -89,21 +89,21 @@ function TournamentsTableFiltering () {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          { table
+          {table
             .getAllColumns()
             .filter((column) => column.getCanHide())
             .map((column) => {
               return (
                 <DropdownMenuCheckboxItem
-                  key={ column.id }
+                  key={column.id}
                   className="capitalize"
-                  checked={ column.getIsVisible() }
-                  onCheckedChange={ (value) => column.toggleVisibility(!!value) }
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
                 >
-                  { column.id }
+                  {column.id}
                 </DropdownMenuCheckboxItem>
               );
-            }) }
+            })}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
