@@ -2,7 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@battle-stadium/ui";
 
-export default function Settings() {
+export default function Settings () {
   return (
     <div className="border-small w-full max-w-2xl flex-col rounded-3xl border-neutral-400 border-opacity-15 backdrop-blur">
       <Tabs>
@@ -21,8 +21,9 @@ export default function Settings() {
         <TabsContent value="account">
           Make changes to your account here.
         </TabsContent>
+
         <TabsContent value="appearance">
-          {"Make changes to the site's appearance here."}
+          { "Make changes to the site's appearance here." }
         </TabsContent>
       </Tabs>
     </div>

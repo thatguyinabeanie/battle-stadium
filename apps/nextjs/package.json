@@ -47,6 +47,7 @@
     "@vercel/kv": "^3.0.0",
     "@vercel/speed-insights": "^1.0.14",
     "cookie": "^1.0.1",
+    "date-fns": "^4.1.0",
     "discord-api-types": "^0.37.103",
     "discord-interactions": "^4.1.0",
     "discord.js": "^14.16.3",
