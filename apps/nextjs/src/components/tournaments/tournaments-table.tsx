@@ -115,10 +115,6 @@ const columns: ColumnDef<OrganizationTournament>[] = [
     accessorKey: "tournaments.startAt",
     header: "Start Date",
     cell: ({ row }) => {
-      console.log(
-        "row.original.tournaments.startAt",
-        row.original.tournaments.startAt,
-      );
       return (
         row.original.tournaments.startAt &&
         new Date(row.original.tournaments.startAt).toLocaleString()

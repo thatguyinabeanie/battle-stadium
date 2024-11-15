@@ -26,7 +26,6 @@ export default function RegistrationCard({
 
     if (profile_id) {
       await postTournamentRegistration({
-        accountId: 1,
         tournamentId: tournament_id,
         inGameName: in_game_name,
         profileId: profile_id,

@@ -5,33 +5,27 @@ import postgres from "postgres";
 
 import * as schema from "../drizzle/schema";
 
-const isProd = process.env.NODE_ENV === "production";
+export * from "drizzle-orm";
 
-// Production client (Neon)
-const createProdClient = () => {
-  if (!process.env.DATABASE_URL_UNPOOLED) {
-    throw new Error("Missing DATABASE_URL_UNPOOLED");
-  }
-  console.log("creating prod client");
-  const sql = neon(process.env.DATABASE_URL_UNPOOLED);
-  return drizzle({
-    client: sql,
-    schema,
-    casing: "snake_case",
-  });
-};
-
-// Development client (Local Postgres)
-const createDevClient = () => {
+function createClient() {
   if (!process.env.DATABASE_URL) {
     throw new Error("Missing DATABASE_URL");
   }
-  const client = postgres(process.env.DATABASE_URL);
-  return drizzleNode(client, {
+
+  const isProd = process.env.NODE_ENV === "production";
+
+  if (isProd) {
+    return drizzle({
+      client: neon(process.env.DATABASE_URL),
+      schema,
+      casing: "snake_case",
+    });
+  }
+
+  return drizzleNode(postgres(process.env.DATABASE_URL), {
     schema,
+    casing: "snake_case",
   });
-};
+}
 
-export const db = isProd ? createProdClient() : createDevClient();
-
-export * from "drizzle-orm";
+export const db = createClient();

@@ -43,7 +43,5 @@ export async function createProfile(
     await BattleStadiumApiClient().POST("/profiles", profileOptions)
   ).data;
 
-  // revalidateTag(`getPlayerProfileByAccountId-${accountId}`);
-
   return { success: true, resp };
 }

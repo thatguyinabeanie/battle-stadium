@@ -1,5 +1,7 @@
 "use server";
 
+import type { FetchOptions } from "openapi-fetch";
+
 import { db, eq } from "@battle-stadium/db";
 import {
   organizations,
@@ -7,6 +9,9 @@ import {
   profiles,
   tournaments,
 } from "@battle-stadium/db/schema";
+
+import type { paths } from "~/lib/api/openapi-v1";
+import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
 export async function getTournament(tournament_id: number) {
   const result = await db
@@ -33,7 +38,6 @@ export async function getTournaments(page = 1, pageSize = 20) {
 }
 
 interface TournamentRegistration {
-  accountId: number;
   tournamentId: number;
   inGameName: string;
   profileId: number;
@@ -42,16 +46,38 @@ interface TournamentRegistration {
 }
 
 export async function postTournamentRegistration(
-  registration: TournamentRegistration,
+  {
+    tournamentId,
+    inGameName,
+    profileId,
+    pokemonTeamId,
+    showCountryFlag,
+  }: TournamentRegistration,
+  options?: FetchOptions<paths["/tournaments/{tournament_id}/players"]["post"]>,
 ) {
-  return await db
-    .insert(players)
-    .values({
-      ...registration,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    })
-    .returning();
+  const registrationOptions: FetchOptions<
+    paths["/tournaments/{tournament_id}/players"]["post"]
+  > = {
+    ...defaultConfig("postTournamentRegistration"),
+    ...options,
+    params: {
+      query: {
+        in_game_name: inGameName,
+        profile_id: profileId,
+        pokemon_team_id: pokemonTeamId,
+        show_country_flag: showCountryFlag,
+      },
+      path: {
+        tournament_id: tournamentId,
+      },
+    },
+  };
+
+  const resp = await BattleStadiumApiClient().POST(
+    "/tournaments/{tournament_id}/players",
+    registrationOptions,
+  );
+  return resp.data;
 }
 
 export async function getTournamentPlayers(tournament_id: number) {

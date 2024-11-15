@@ -147,8 +147,5 @@ function parseNameSpeciesItem(line: string): {
     gender,
     remainingDetails,
   };
-
-  console.log("Parsed result:", obj);
-
   return obj;
 }

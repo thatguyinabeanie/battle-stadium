@@ -12,7 +12,12 @@ export default function ProfilesAutocomplete({
 }: Readonly<ProfilesAutocompleteProps>) {
   return (
     <div>
-      <Input type="text" list="profiles" placeholder="Select profile" />
+      <Input
+        type="text"
+        name="profile"
+        list="profiles"
+        placeholder="Select profile"
+      />
 
       <div className="pt-4">
         <datalist id="profiles">
