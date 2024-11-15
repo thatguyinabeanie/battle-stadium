@@ -14,7 +14,7 @@ interface PokemonShowdownSetFormProps {
   metaData: PokePasteMetadata | null;
 }
 
-export async function PokemonShowdownSetForm ({
+export async function PokemonShowdownSetForm({
   validatedTeam,
   handleSubmit,
   input,
@@ -26,17 +26,17 @@ export async function PokemonShowdownSetForm ({
     return null;
   }
   return (
-    <form action={ handleSubmit } className="grid grid-cols-1">
+    <form action={handleSubmit} className="grid grid-cols-1">
       <div className="mb-4">
         <h1 className="flex items-center justify-center text-2xl font-bold">
-          { "Showdown Set" }
+          {"Showdown Set"}
         </h1>
       </div>
       <Textarea
         name="pokepaste"
         placeholder="Paste your Showdown Set here"
-        value={ input }
-        onChange={ (e: { target: { value: SetStateAction<string> } }) =>
+        value={input}
+        onChange={(e: { target: { value: SetStateAction<string> } }) =>
           setInput(e.target.value)
         }
       />
@@ -47,10 +47,9 @@ export async function PokemonShowdownSetForm ({
         </Button>
         <Button
           color="primary"
-          disabled={ !validatedTeam || !metaData }
-          onClick={ () =>
-            validatedTeam &&
-            metaData
+          disabled={!validatedTeam || !metaData}
+          onClick={
+            () => validatedTeam && metaData
             // postPokemonTeam(validatedTeam, metaData,)
           }
         >
