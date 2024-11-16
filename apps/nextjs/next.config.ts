@@ -22,8 +22,8 @@ const config: NextConfig = {
     ppr: true,
     staleTimes: {
       dynamic: 0,
-      static: 180
-    }
+      static: 180,
+    },
   },
 
   expireTime: 3600,

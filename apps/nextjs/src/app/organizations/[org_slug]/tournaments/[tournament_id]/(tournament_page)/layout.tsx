@@ -23,16 +23,23 @@ interface OrganizationTournamentsTournamentLayoutProps {
   modal: ReactNode;
 }
 
-export default function OrganizationTournamentsTournamentLayout (
+export default function OrganizationTournamentsTournamentLayout(
   props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
 ) {
-  const { children, standings, pairings, metagame, registrations, details, modal } =
-    props;
+  const {
+    children,
+    standings,
+    pairings,
+    metagame,
+    registrations,
+    details,
+    modal,
+  } = props;
 
   return (
     <div key="layout-div" className="flex h-full w-full flex-col items-center">
-      { modal }
-      { children }
+      {modal}
+      {children}
 
       <div key="spacer" className="flex flex-col items-center py-2" />
 
@@ -47,7 +54,11 @@ export default function OrganizationTournamentsTournamentLayout (
           <TabsTrigger key="metagame" value="metagame" title="Standings">
             Meta Game
           </TabsTrigger>
-          <TabsTrigger key="registrations" value="registrations" title="Standings">
+          <TabsTrigger
+            key="registrations"
+            value="registrations"
+            title="Standings"
+          >
             Pairings
           </TabsTrigger>
           <TabsTrigger key="details" value="details" title="Standings">
@@ -55,11 +66,21 @@ export default function OrganizationTournamentsTournamentLayout (
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent key="standings" value="standings">{ standings }</TabsContent>
-        <TabsContent key="pairings" value="pairings">{ pairings }</TabsContent>
-        <TabsContent key="metagame" value="metagame">{ metagame }</TabsContent>
-        <TabsContent key="registrations" value="registrations">{ registrations }</TabsContent>
-        <TabsContent key="details" value="details">{ details }</TabsContent>
+        <TabsContent key="standings" value="standings">
+          {standings}
+        </TabsContent>
+        <TabsContent key="pairings" value="pairings">
+          {pairings}
+        </TabsContent>
+        <TabsContent key="metagame" value="metagame">
+          {metagame}
+        </TabsContent>
+        <TabsContent key="registrations" value="registrations">
+          {registrations}
+        </TabsContent>
+        <TabsContent key="details" value="details">
+          {details}
+        </TabsContent>
       </Tabs>
     </div>
   );

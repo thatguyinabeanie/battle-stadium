@@ -1,11 +1,12 @@
 import { redirect } from "next/navigation";
+
+import type { RegisterProps } from "../../register/page";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import { getProfilesByAccountId } from "~/app/server-actions/profiles/actions";
-import Modal from "~/components/modal";
 import TournamentRegistration from "~/components/tournaments/tournament-registration";
-import type { RegisterProps } from "../../register/page";
+import Modal from "~/components/tournaments/tournament-registration-modal";
 
-export default async function Register (props: Readonly<RegisterProps>) {
+export default async function Register(props: Readonly<RegisterProps>) {
   const params = await props.params;
 
   const me = await getAccountMe();
@@ -19,10 +20,10 @@ export default async function Register (props: Readonly<RegisterProps>) {
   return (
     <Modal>
       <TournamentRegistration
-        org_slug={ params.org_slug }
-        profiles={ profiles }
-        tournament_id={ params.tournament_id }
+        org_slug={params.org_slug}
+        profiles={profiles}
+        tournament_id={params.tournament_id}
       />
     </Modal>
-  )
+  );
 }
