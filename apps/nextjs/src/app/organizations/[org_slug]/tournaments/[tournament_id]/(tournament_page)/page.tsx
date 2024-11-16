@@ -2,9 +2,6 @@ import type { OrganizationTournamentProps } from "~/types";
 import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import { getTournament } from "~/app/server-actions/tournaments/actions";
 
-export const revalidate = 300;
-export const dynamicParams = true;
-
 export async function generateMetadata(
   props: Readonly<OrganizationTournamentProps>,
 ) {

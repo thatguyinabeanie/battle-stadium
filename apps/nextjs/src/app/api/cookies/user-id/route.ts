@@ -8,7 +8,7 @@ import {
   setResponseCookies,
 } from "~/lib/cookies/cookies";
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 export async function POST(_req: NextRequest) {
   const { userId } = await auth();

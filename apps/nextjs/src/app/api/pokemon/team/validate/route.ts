@@ -7,7 +7,7 @@ import Pokedex from "pokedex-promise-v2";
 
 import type { ParsedPokemon } from "~/lib/pokemon/common";
 
-export const runtime = "edge";
+// export const runtime = "edge";
 
 function createPokedexInstance() {
   try {

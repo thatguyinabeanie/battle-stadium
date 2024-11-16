@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { Separator } from "@battle-stadium/ui";
 
@@ -15,7 +16,9 @@ export default function Home() {
     <HydrateClient>
       <div className="min--h-screen flex flex-col items-center justify-between">
         <div className="mt-4">
-          <PartneredOrganizations />
+          <Suspense fallback={null}>
+            <PartneredOrganizations />
+          </Suspense>
         </div>
 
         <Separator className="w-full" />

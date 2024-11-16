@@ -29,7 +29,7 @@ import { verifyInteractionRequest } from "~/lib/discord/verify-incoming-request"
  *
  * @see https://nextjs.org/docs/app/building-your-application/rendering/edge-and-nodejs-runtimes
  */
-export const runtime = "edge";
+// export const runtime = "edge";
 
 const ROOT_URL = env.VERCEL_URL ? `https://${env.VERCEL_URL}` : env.ROOT_URL;
 
