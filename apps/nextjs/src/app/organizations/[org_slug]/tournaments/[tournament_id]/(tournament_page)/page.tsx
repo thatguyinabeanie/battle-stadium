@@ -1,20 +1,11 @@
-import Link from "next/link";
-import { format, parseISO } from "date-fns";
-
-import { Chip, Separator } from "@battle-stadium/ui";
-
 import type { OrganizationTournamentProps } from "~/types";
-import {
-  getOrganizationTournaments,
-  getSingleOrganizationSingleTournament,
-} from "~/app/server-actions/organizations/tournaments/actions";
+import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import { getTournament } from "~/app/server-actions/tournaments/actions";
-import OrganizationHeader from "~/components/organizations/organization-header";
 
 export const revalidate = 300;
 export const dynamicParams = true;
 
-export async function generateMetadata (
+export async function generateMetadata(
   props: Readonly<OrganizationTournamentProps>,
 ) {
   const params = await props.params;
@@ -23,7 +14,7 @@ export async function generateMetadata (
   return { title: result?.tournament.name ?? "Tournament" };
 }
 
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   const results = await getOrganizationTournaments(1, 500);
 
   return results.map(({ tournaments, organizations }) => ({
@@ -32,8 +23,8 @@ export async function generateStaticParams () {
   }));
 }
 
-export default function OrganizationTournament (
+export default function OrganizationTournamentDetailsPage(
   _props: Readonly<OrganizationTournamentProps>,
 ) {
-  return null;
+  return <h1>Details</h1>;
 }

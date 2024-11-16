@@ -5,27 +5,21 @@ import postgres from "postgres";
 
 import * as schema from "../drizzle/schema";
 
-export * from "drizzle-orm";
+type NeonClient = ReturnType<typeof neon>;
+type PostgresClient = ReturnType<typeof postgres>;
 
-function createClient() {
-  if (!process.env.DATABASE_URL) {
-    throw new Error("Missing DATABASE_URL");
-  }
-
-  const isProd = process.env.NODE_ENV === "production";
-
-  if (isProd) {
-    return drizzle({
-      client: neon(process.env.DATABASE_URL),
-      schema,
-      casing: "snake_case",
-    });
-  }
-
-  return drizzleNode(postgres(process.env.DATABASE_URL), {
-    schema,
-    casing: "snake_case",
-  });
+if (!process.env.DATABASE_URL) {
+  throw new Error("Missing DATABASE_URL");
 }
+const isProd =
+  process.env.NODE_ENV === "production" &&
+  process.env.VERCEL_ENV === "production";
+const client = isProd
+  ? neon(process.env.DATABASE_URL)
+  : postgres(process.env.DATABASE_URL);
 
-export const db = createClient();
+export const db = isProd
+  ? drizzle({ client: client as NeonClient, schema, casing: "snake_case" })
+  : drizzleNode(client as PostgresClient, { schema, casing: "snake_case" });
+
+export * from "drizzle-orm";
