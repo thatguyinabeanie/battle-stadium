@@ -29,6 +29,7 @@ export default function OrganizationHeader({
         className={`${classNames?.image}`}
         logoSize={HEIGHT_WIDTH}
         organization={organization}
+        priority={true}
       />
 
       <div
@@ -41,6 +42,7 @@ export default function OrganizationHeader({
         className={`hidden sm:flex ${classNames?.image}`}
         logoSize={HEIGHT_WIDTH}
         organization={organization}
+        priority={true}
       />
     </div>
   );

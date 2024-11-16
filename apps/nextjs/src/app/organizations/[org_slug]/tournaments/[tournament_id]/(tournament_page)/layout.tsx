@@ -1,67 +1,96 @@
-"use client";
-
 import type { ReactNode } from "react";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@battle-stadium/ui";
-
-// const tabs = [
-//   { key: "details", title: "Details" },
-//   { key: "registrations", title: "Registrations" },
-//   { key: "pairings", title: "Pairings" },
-//   { key: "standings", title: "Standings" },
-//   { key: "matches", title: "Matches" },
-//   { key: "meta", title: "Metagame" },
-// ];
+import {
+  Badge,
+  Card,
+  Tabs,
+  TabsList,
+  TabsContent as UiTabsContent,
+  TabsTrigger as UiTabsTrigger,
+} from "@battle-stadium/ui";
 
 interface OrganizationTournamentsTournamentLayoutProps {
   children: ReactNode;
   standings: ReactNode;
   pairings: ReactNode;
-  matches: ReactNode;
   metagame: ReactNode;
   registrations: ReactNode;
-  details: ReactNode;
+  modal: ReactNode;
+  header: ReactNode;
+}
+interface TabConfig {
+  value: string;
+  title?: string;
+}
+
+const tabs: TabConfig[] = [
+  { value: "details", title: "Details" },
+  { value: "standings", title: "Standings" },
+  { value: "pairings", title: "Pairings" },
+  { value: "metagame", title: "Meta Game" },
+  { value: "registrations", title: "Registrations" },
+];
+
+function TabsTrigger({ value, title }: Readonly<TabConfig>) {
+  return (
+    <UiTabsTrigger key={value} value={value} title={title}>
+      <Badge variant="secondary" className="text-md w-[8rem] py-1">
+        {title}
+      </Badge>
+    </UiTabsTrigger>
+  );
+}
+
+function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
+  return (
+    <UiTabsContent key={value} value={value}>
+      <div className="flex h-full w-full flex-col items-center justify-center">
+        {children}
+      </div>
+    </UiTabsContent>
+  );
 }
 
 export default function OrganizationTournamentsTournamentLayout(
   props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
 ) {
-  const { children, standings, pairings, metagame, registrations, details } =
-    props;
+  const {
+    children,
+    modal,
+    header,
+    standings,
+    pairings,
+    metagame,
+    registrations,
+  } = props;
 
   return (
-    <div className="flex h-full w-full flex-col items-center">
-      {children}
+    <div className="flex h-full w-full flex-col items-center justify-center">
+      {header}
+      {modal}
+      <Card className="flex h-[72vh] w-11/12 flex-col justify-center">
+        <Tabs
+          key="tabs"
+          className="flex h-full w-full flex-row items-center"
+          defaultValue="details"
+        >
+          <TabsList
+            key="tabslist"
+            defaultValue="details"
+            className="flex flex-col gap-4"
+          >
+            {tabs.map(({ value, title }) => (
+              <TabsTrigger key={value} value={value} title={title} />
+            ))}
+          </TabsList>
 
-      <div className="flex flex-col items-center py-2" />
-
-      <Tabs>
-        <TabsList>
-          <TabsTrigger value="standings" title="Standings">
-            Standings
-          </TabsTrigger>
-          <TabsTrigger value="pairings" title="Standings">
-            Pairings
-          </TabsTrigger>
-          {/* <TabsTrigger value="matches" title="Standings">Matches</TabsTrigger> */}
-          <TabsTrigger value="metagame" title="Standings">
-            Meta Game
-          </TabsTrigger>
-          <TabsTrigger value="registrations" title="Standings">
-            Pairings
-          </TabsTrigger>
-          <TabsTrigger value="details" title="Standings">
-            Details
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="standings">{standings}</TabsContent>
-        <TabsContent value="pairings">{pairings}</TabsContent>
-        {/* <TabsContent value="matches">{ matches }</TabsContent> */}
-        <TabsContent value="metagame">{metagame}</TabsContent>
-        <TabsContent value="registrations">{registrations}</TabsContent>
-        <TabsContent value="details">{details}</TabsContent>
-      </Tabs>
+          <TabsContent value="details">{children}</TabsContent>
+          <TabsContent value="standings">{standings}</TabsContent>
+          <TabsContent value="pairings">{pairings}</TabsContent>
+          <TabsContent value="metagame">{metagame}</TabsContent>
+          <TabsContent value="registrations">{registrations}</TabsContent>
+        </Tabs>
+      </Card>
     </div>
   );
 }
