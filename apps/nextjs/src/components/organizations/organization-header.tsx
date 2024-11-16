@@ -16,31 +16,33 @@ interface OrganizationHeaderProps {
 
 const HEIGHT_WIDTH = 175;
 
-export default function OrganizationHeader({
+export default function OrganizationHeader ({
   children,
   organization,
   classNames,
 }: Readonly<OrganizationHeaderProps>) {
   return (
     <div
-      className={`flex h-full w-full flex-row items-center justify-around py-8 ${classNames?.wrapper}`}
+      className={ `flex h-full w-full flex-row items-center justify-around py-8 ${classNames?.wrapper}` }
     >
       <OrganizationLogo
-        className={`${classNames?.image}`}
-        logoSize={HEIGHT_WIDTH}
-        organization={organization}
+        className={ `${classNames?.image}` }
+        logoSize={ HEIGHT_WIDTH }
+        organization={ organization }
+        priority={ true }
       />
 
       <div
-        className={`mx-4 flex h-full flex-col items-center justify-between text-center ${classNames?.childrenWrapper}`}
+        className={ `mx-4 flex h-full flex-col items-center justify-between text-center ${classNames?.childrenWrapper}` }
       >
-        {children}
+        { children }
       </div>
 
       <OrganizationLogo
-        className={`hidden sm:flex ${classNames?.image}`}
-        logoSize={HEIGHT_WIDTH}
-        organization={organization}
+        className={ `hidden sm:flex ${classNames?.image}` }
+        logoSize={ HEIGHT_WIDTH }
+        organization={ organization }
+        priority={ true }
       />
     </div>
   );

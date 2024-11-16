@@ -10,7 +10,7 @@ interface TournamentRegistrationProps {
   profiles: Profile[];
 }
 
-export default function TournamentRegistration({
+export default function TournamentRegistration ({
   org_slug,
   tournament_id,
   profiles,
@@ -37,24 +37,20 @@ export default function TournamentRegistration({
   return (
     <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
       <div>
-        Register for {org_slug} tournament {tournament_id}
+        Register for { org_slug } tournament { tournament_id }
       </div>
 
-      <div>
-        <form action={registerForTournament} className="grid grid-cols-1 gap-4">
-          <Input name="ign" />
 
-          <ProfilesAutocomplete profiles={profiles} />
-          {/*
-          <Checkbox defaultSelected aria-label="Show your country flag?" name="country_flag" size="sm" value="true">
-            Show your country flag?
-          </Checkbox> */}
+      <form action={ registerForTournament } className="grid grid-cols-1 gap-4">
+        <Input name="ign" />
 
-          <Button aria-label="Submit" color="primary" type="submit">
-            Submit
-          </Button>
-        </form>
-      </div>
+        <ProfilesAutocomplete profiles={ profiles } />
+
+        <Button aria-label="Submit" color="primary" type="submit">
+          Submit
+        </Button>
+      </form>
+
     </div>
   );
 }

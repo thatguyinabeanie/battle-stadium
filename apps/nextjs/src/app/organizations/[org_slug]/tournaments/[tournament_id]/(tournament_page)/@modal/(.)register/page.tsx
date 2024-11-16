@@ -6,7 +6,7 @@ import { getProfilesByAccountId } from "~/app/server-actions/profiles/actions";
 import TournamentRegistration from "~/components/tournaments/tournament-registration";
 import Modal from "~/components/tournaments/tournament-registration-modal";
 
-export default async function Register(props: Readonly<RegisterProps>) {
+export default async function Register (props: Readonly<RegisterProps>) {
   const params = await props.params;
 
   const me = await getAccountMe();
@@ -20,9 +20,9 @@ export default async function Register(props: Readonly<RegisterProps>) {
   return (
     <Modal>
       <TournamentRegistration
-        org_slug={params.org_slug}
-        profiles={profiles}
-        tournament_id={params.tournament_id}
+        org_slug={ params.org_slug }
+        profiles={ profiles }
+        tournament_id={ params.tournament_id }
       />
     </Modal>
   );
