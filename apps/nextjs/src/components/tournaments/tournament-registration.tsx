@@ -1,31 +1,61 @@
-import { redirect } from "next/navigation";
+import type { Profile } from "@battle-stadium/db/schema";
+import { Button, Input } from "@battle-stadium/ui";
 
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
-import { getProfilesByAccountId } from "~/app/server-actions/profiles/actions";
-import RegistrationCard from "./registration-card";
+import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
+import ProfilesAutocomplete from "./profiles-autocomplete";
 
-interface TournamentRegisterProps {
+interface TournamentRegistrationProps {
   org_slug: string;
   tournament_id: number;
+  profiles: Profile[];
 }
 
-export default async function TournamentRegistration({
-  org_slug,
-  tournament_id,
-}: Readonly<TournamentRegisterProps>) {
-  const me = await getAccountMe();
+export default function TournamentRegistration
+  ({
+    org_slug,
+    tournament_id,
+    profiles
+  }: Readonly<TournamentRegistrationProps>) {
+  const registerForTournament = async (formData: FormData) => {
+    "use server";
+    const in_game_name = formData.get("ign") as string;
+    const profile = formData.get("profile") as string;
+    const show_country_flag =
+      (formData.get("country_flag") as string) === "true";
 
-  if (!me) {
-    redirect("/sign-in");
-  }
+    const profile_id = profiles.find((p) => p.username == profile)?.id;
 
-  const profiles = await getProfilesByAccountId(me.id);
+    if (profile_id) {
+      await postTournamentRegistration({
+        tournamentId: tournament_id,
+        inGameName: in_game_name,
+        profileId: profile_id,
+        showCountryFlag: show_country_flag,
+      });
+    }
+  };
 
   return (
-    <RegistrationCard
-      org_slug={org_slug}
-      profiles={profiles}
-      tournament_id={tournament_id}
-    />
+    <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
+      <div>
+        Register for { org_slug } tournament { tournament_id }
+      </div>
+
+      <div>
+        <form action={ registerForTournament } className="grid grid-cols-1 gap-4">
+          <Input name="ign" />
+
+          <ProfilesAutocomplete profiles={ profiles } />
+          {/*
+          <Checkbox defaultSelected aria-label="Show your country flag?" name="country_flag" size="sm" value="true">
+            Show your country flag?
+          </Checkbox> */}
+
+          <Button aria-label="Submit" color="primary" type="submit">
+            Submit
+          </Button>
+        </form>
+      </div>
+    </div>
   );
 }

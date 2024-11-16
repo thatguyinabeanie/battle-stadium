@@ -1,10 +1,13 @@
 interface MatchPageProps {
-  org_slug: string;
-  tournament_id: string;
-  matchId: number;
+  params: Promise<{
+    org_slug: string;
+    tournament_id: number;
+    matchId: number;
+  }>;
 }
 
-export default function MatchPage({ matchId }: Readonly<MatchPageProps>) {
+export default async function MatchPage (props: Readonly<MatchPageProps>) {
+  const { matchId } = await props.params;
   // return <ChatComponent channelName={"ChatChannel"} roomName={matchId} websocketUrl={websocketUrl()} />;
-  return <div>Match Page {matchId}</div>;
+  return <div>Match Page { matchId }</div>;
 }

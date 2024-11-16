@@ -20,6 +20,10 @@ const config: NextConfig = {
     // the minimum number of pages before spinning up a new export worker
     staticGenerationMinPagesPerWorker: 25,
     ppr: true,
+    staleTimes: {
+      dynamic: 0,
+      static: 180
+    }
   },
 
   expireTime: 3600,
