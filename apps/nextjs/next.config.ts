@@ -12,21 +12,22 @@ const config: NextConfig = {
     // ppr: 'incremental',
     after: true,
     cssChunking: "loose", // default
-    // how many times Next.js will retry failed page generation attempts
-    // before failing the build
-    staticGenerationRetryCount: 1,
-    // how many pages will be processed per worker
-    staticGenerationMaxConcurrency: 8,
-    // the minimum number of pages before spinning up a new export worker
-    staticGenerationMinPagesPerWorker: 25,
+    // reactCompiler: true,
     ppr: true,
     staleTimes: {
-      dynamic: 0,
+      dynamic: 5,
       static: 180,
     },
   },
 
   expireTime: 3600,
+
+  logging: {
+    fetches: {
+      fullUrl: true,
+      hmrRefreshes: true,
+    },
+  },
 
   images: {
     remotePatterns: [
