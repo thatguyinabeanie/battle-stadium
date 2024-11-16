@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import type { RegisterProps } from "../../register/page";
+import type { RegisterProps } from "../../../register/page";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import { getProfilesByAccountId } from "~/app/server-actions/profiles/actions";
 import TournamentRegistration from "~/components/tournaments/tournament-registration";
