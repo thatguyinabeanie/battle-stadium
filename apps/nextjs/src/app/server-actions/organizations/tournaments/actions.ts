@@ -10,11 +10,7 @@ function tournamentsLeftJoinOrganizations() {
     .leftJoin(organizations, eq(tournaments.organizationId, organizations.id));
 }
 
-<<<<<<< Updated upstream
 export async function getOrganizationTournaments(page = 1, pageSize = 20) {
-=======
-export async function getOrganizationTournaments (page = 1, pageSize = 20) {
->>>>>>> Stashed changes
   return await tournamentsLeftJoinOrganizations()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
