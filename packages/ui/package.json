@@ -12,7 +12,8 @@
     "./*": {
       "types": "./dist/src/*.d.ts",
       "default": "./src/index.ts"
-    }
+    },
+    "./src/globals.css": "./src/globals.css"
   },
   "scripts": {
     "build": "tsc",
@@ -66,7 +67,7 @@
     "react-resizable-panels": "^2.1.6",
     "recharts": "^2.13.3",
     "sonner": "^1.7.0",
-    "tailwind-merge": "^2.5.4",
+    "tailwind-merge": "catalog:",
     "vaul": "^1.1.1"
   },
   "devDependencies": {

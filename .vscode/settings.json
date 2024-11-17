@@ -53,6 +53,7 @@
     "opentelemetry",
     "paldea",
     "planetscale",
+    "postcss",
     "preconfigured",
     "Pressable",
     "prettiercache",
