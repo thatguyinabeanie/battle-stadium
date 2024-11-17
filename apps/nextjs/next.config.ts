@@ -18,10 +18,7 @@ const config: NextConfig = {
       dynamic: 5,
       static: 180,
     },
-<<<<<<< Updated upstream
-=======
     // dynamicIO: true,
->>>>>>> Stashed changes
   },
 
   expireTime: 3600,
