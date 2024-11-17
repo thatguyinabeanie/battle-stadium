@@ -17,9 +17,9 @@
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
-    "postcss": "^8.4.47",
+    "postcss": "catalog:",
     "tailwindcss": "catalog:",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "catalog:"
   },
   "devDependencies": {
     "@battle-stadium/eslint-config": "workspace:*",

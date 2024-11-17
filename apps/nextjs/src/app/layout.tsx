@@ -12,7 +12,7 @@ import { cn, ThemeProvider } from "@battle-stadium/ui";
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 
-import "~/app/globals.css";
+import "~/styles/globals.css";
 
 import { StrictMode } from "react";
 import dynamic from "next/dynamic";

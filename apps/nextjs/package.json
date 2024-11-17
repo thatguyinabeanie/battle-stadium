@@ -63,9 +63,9 @@
     "react-dom": "catalog:react18",
     "server-only": "^0.0.1",
     "superjson": "2.2.1",
-    "tailwind-merge": "^2.5.4",
-    "tailwind-variants": "^0.2.1",
-    "tailwindcss-animate": "^1.0.7",
+    "tailwind-merge": "catalog:",
+    "tailwind-variants": "catalog:",
+    "tailwindcss-animate": "catalog:",
     "tweetnacl": "^1.0.3",
     "zod": "catalog:"
   },

@@ -14,9 +14,7 @@ export default function Home() {
   return (
     <HydrateClient>
       <div className="min--h-screen flex flex-col items-center justify-between">
-        <div className="mt-4">
-          <PartneredOrganizations />
-        </div>
+        <PartneredOrganizations />
 
         <Separator className="w-full" />
 

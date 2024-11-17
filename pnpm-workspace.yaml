@@ -15,7 +15,11 @@ catalog:
   "@trpc/server": next
   "@t3-oss/env-nextjs": ^0
   "@tanstack/react-table": ^8
+  "tailwind-merge": ^2
+  "tailwindcss-animate": ^1
+  "tailwind-variants": ^0
   eslint: ^9
+  postcss: ^8
   next: canary
   prettier: ^3
   tailwindcss: ^3

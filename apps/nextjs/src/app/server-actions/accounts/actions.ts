@@ -41,9 +41,14 @@ export async function getAccountMe(
     ...options,
   };
 
-  const resp = await BattleStadiumApiClient().GET(
-    "/accounts/me",
-    accountMeOptions,
-  );
-  return resp.data;
+  try {
+    const resp = await BattleStadiumApiClient().GET(
+      "/accounts/me",
+      accountMeOptions,
+    );
+    return resp.data;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
 }
