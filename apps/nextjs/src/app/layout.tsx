@@ -28,7 +28,9 @@ import { siteConfig } from "~/lib/config/site";
 import { UploadThingRouter } from "./api/uploadthing/core";
 
 const Cookies = dynamic(() => import("~/components/cookies/cookies"));
-const AwesomeParticles = dynamic(() => import("~/components/awesome-particles"));
+const AwesomeParticles = dynamic(
+  () => import("~/components/awesome-particles"),
+);
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -67,7 +69,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function RootLayout ({
+export default async function RootLayout({
   children,
 }: Readonly<ChildrenProps>) {
   const { userId, sessionId } = await auth();
@@ -77,16 +79,16 @@ export default async function RootLayout ({
       <ClerkProvider>
         <html lang="en" suppressHydrationWarning>
           <body
-            className={ cn(
+            className={cn(
               "min-h-screen overflow-y-scroll bg-background font-sans text-foreground antialiased",
               GeistSans.variable,
               GeistMono.variable,
-            ) }
+            )}
           >
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               <TRPCReactProvider>
                 <NextSSRPlugin
-                  routerConfig={ extractRouterConfig(UploadThingRouter) }
+                  routerConfig={extractRouterConfig(UploadThingRouter)}
                 />
                 <div className="flex min-h-screen flex-col items-center">
                   <AwesomeParticles />
@@ -96,7 +98,7 @@ export default async function RootLayout ({
 
                     <main className="flex min-h-screen w-full flex-col items-center">
                       <section className="z-0 flex w-full flex-col items-center gap-4">
-                        { children }
+                        {children}
                       </section>
                     </main>
 
@@ -109,13 +111,13 @@ export default async function RootLayout ({
                 <ThemeToggle />
               </div> */}
 
-              <Cookies isSignedIn={ !!sessionId } userId={ userId } />
+              <Cookies isSignedIn={!!sessionId} userId={userId} />
 
               <VercelAnalytics />
 
-              { env.VERCEL_ENV === "production" && <VercelSpeedInsights /> }
+              {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
 
-              <GoogleAnalytics gaId={ env.MEASUREMENT_ID } />
+              <GoogleAnalytics gaId={env.MEASUREMENT_ID} />
             </ThemeProvider>
           </body>
         </html>

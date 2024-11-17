@@ -3,18 +3,18 @@ import * as React from "react";
 import { getPartneredOrganizations } from "~/app/server-actions/organizations/actions";
 import OrganizationCard from "./organization-card";
 
-export default async function PartneredOrganizations () {
+export default async function PartneredOrganizations() {
   const orgs = await getPartneredOrganizations();
 
   return (
-    <div className="flex h-full w-full flex-row items-center justify-center bg-transparent mt-4">
-      { orgs.map((organization) => (
+    <div className="mt-4 flex h-full w-full flex-row items-center justify-center bg-transparent">
+      {orgs.map((organization) => (
         <OrganizationCard
-          key={ organization.slug }
-          aria-label={ `organization-card-${organization.slug}` }
-          organization={ organization }
+          key={organization.slug}
+          aria-label={`organization-card-${organization.slug}`}
+          organization={organization}
         />
-      )) }
+      ))}
     </div>
   );
 }

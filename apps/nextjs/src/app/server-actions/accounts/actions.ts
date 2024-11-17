@@ -9,11 +9,11 @@ import { accounts, profiles } from "@battle-stadium/db/schema";
 import type { paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
-export async function getAccounts () {
+export async function getAccounts() {
   return await db.query.accounts.findMany();
 }
 
-export async function getAccount (username: string) {
+export async function getAccount(username: string) {
   const profile = await db.query.profiles.findFirst({
     where: eq(profiles.username, username),
   });
@@ -27,7 +27,7 @@ export async function getAccount (username: string) {
   });
 }
 
-export async function getAccountMe (
+export async function getAccountMe(
   options?: FetchOptions<paths["/accounts/me"]["get"]>,
 ) {
   const { userId } = await auth();
@@ -47,9 +47,8 @@ export async function getAccountMe (
       accountMeOptions,
     );
     return resp.data;
-  }
-  catch (err) {
+  } catch (err) {
     console.error(err);
     return null;
   }
-};
+}

@@ -31,27 +31,27 @@ const tabs: TabConfig[] = [
   { value: "registrations", title: "Registrations" },
 ];
 
-function TabsTrigger ({ value, title }: Readonly<TabConfig>) {
+function TabsTrigger({ value, title }: Readonly<TabConfig>) {
   return (
-    <UiTabsTrigger key={ value } value={ value } title={ title }>
+    <UiTabsTrigger key={value} value={value} title={title}>
       <Badge variant="secondary" className="text-md w-[8rem] py-1">
-        { title }
+        {title}
       </Badge>
     </UiTabsTrigger>
   );
 }
 
-function TabsContent ({ value, children }: TabConfig & { children: ReactNode }) {
+function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
   return (
-    <UiTabsContent key={ value } value={ value }>
+    <UiTabsContent key={value} value={value}>
       <div className="flex h-full w-full flex-col items-center justify-center">
-        { children }
+        {children}
       </div>
     </UiTabsContent>
   );
 }
 
-export default function OrganizationTournamentsTournamentLayout (
+export default function OrganizationTournamentsTournamentLayout(
   props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
 ) {
   const {
@@ -66,9 +66,9 @@ export default function OrganizationTournamentsTournamentLayout (
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      { header }
-      { modal }
-      <Card className="flex h-[72vh] w-11/12  flex-col justify-center">
+      {header}
+      {modal}
+      <Card className="flex h-[72vh] w-11/12 flex-col justify-center">
         <Tabs
           key="tabs"
           className="flex h-full w-full flex-row items-center"
@@ -79,16 +79,16 @@ export default function OrganizationTournamentsTournamentLayout (
             defaultValue="details"
             className="flex flex-col gap-4"
           >
-            { tabs.map(({ value, title }) => (
-              <TabsTrigger key={ value } value={ value } title={ title } />
-            )) }
+            {tabs.map(({ value, title }) => (
+              <TabsTrigger key={value} value={value} title={title} />
+            ))}
           </TabsList>
 
-          <TabsContent value="details">{ children }</TabsContent>
-          <TabsContent value="standings">{ standings }</TabsContent>
-          <TabsContent value="pairings">{ pairings }</TabsContent>
-          <TabsContent value="metagame">{ metagame }</TabsContent>
-          <TabsContent value="registrations">{ registrations }</TabsContent>
+          <TabsContent value="details">{children}</TabsContent>
+          <TabsContent value="standings">{standings}</TabsContent>
+          <TabsContent value="pairings">{pairings}</TabsContent>
+          <TabsContent value="metagame">{metagame}</TabsContent>
+          <TabsContent value="registrations">{registrations}</TabsContent>
         </Tabs>
       </Card>
     </div>
