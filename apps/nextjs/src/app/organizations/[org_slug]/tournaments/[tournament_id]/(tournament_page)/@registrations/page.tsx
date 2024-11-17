@@ -1,7 +1,7 @@
 import type { OrganizationTournamentProps } from "~/types";
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
 
-export default async function TournamentRegistrations(
+export default async function TournamentRegistrations (
   props: Readonly<OrganizationTournamentProps>,
 ) {
   const params = await props.params;
@@ -10,14 +10,23 @@ export default async function TournamentRegistrations(
   const players = await getTournamentPlayers(tournament_id);
 
   return (
+<<<<<<< Updated upstream
     <div>
+=======
+    <Suspense fallback={ <div>Loading...</div> }>
+>>>>>>> Stashed changes
       <h2>TODO: Registrations</h2>
-      {players.map(({ players, profiles }) => (
-        <div key={players.accountId}>
-          <h3>{profiles?.username}</h3>
-          <h4>Checked In: {!!players.checkedInAt}</h4>
+      { players.map(({ players, profiles }) => (
+        <div key={ players.accountId }>
+          <h3>{ profiles?.username }</h3>
+          <h4>Checked In: { !!players.checkedInAt }</h4>
         </div>
+<<<<<<< Updated upstream
       ))}
     </div>
+=======
+      )) }
+    </Suspense>
+>>>>>>> Stashed changes
   );
 }
