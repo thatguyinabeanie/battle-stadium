@@ -10,7 +10,7 @@ export default async function TournamentRegistrations(
   const players = await getTournamentPlayers(tournament_id);
 
   return (
-    <div>
+    <>
       <h2>TODO: Registrations</h2>
       {players.map(({ players, profiles }) => (
         <div key={players.accountId}>
@@ -18,6 +18,6 @@ export default async function TournamentRegistrations(
           <h4>Checked In: {!!players.checkedInAt}</h4>
         </div>
       ))}
-    </div>
+    </>
   );
 }
