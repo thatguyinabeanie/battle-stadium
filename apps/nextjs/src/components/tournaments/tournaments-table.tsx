@@ -30,20 +30,20 @@ interface TournamentsTableProps {
   data: OrganizationTournament[];
 }
 
-export function TournamentsTable ({ data }: TournamentsTableProps) {
+export function TournamentsTable({ data }: TournamentsTableProps) {
   return (
     <DataTable<OrganizationTournament>
-      data={ data }
-      columns={ columns }
-      footer={ DataTableFooter<OrganizationTournament> }
-      classNames={ { wrapper: "px-4" } }
+      data={data}
+      columns={columns}
+      footer={DataTableFooter<OrganizationTournament>}
+      classNames={{ wrapper: "px-4" }}
     >
       <TournamentsTableFiltering />
     </DataTable>
   );
 }
 
-function TournamentsTableFiltering () {
+function TournamentsTableFiltering() {
   const table = useDataTable<OrganizationTournament>();
 
   if (!table) return null;
@@ -52,8 +52,8 @@ function TournamentsTableFiltering () {
     <div className="flex items-center py-4">
       <Input
         placeholder="Filter emails..."
-        value={ table.getColumn("name")?.getFilterValue() as string }
-        onChange={ (event) =>
+        value={table.getColumn("name")?.getFilterValue() as string}
+        onChange={(event) =>
           table.getColumn("name")?.setFilterValue(event.target.value)
         }
         className="max-w-sm"
@@ -65,21 +65,21 @@ function TournamentsTableFiltering () {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          { table
+          {table
             .getAllColumns()
             .filter((column) => column.getCanHide())
             .map((column) => {
               return (
                 <DropdownMenuCheckboxItem
-                  key={ column.id }
+                  key={column.id}
                   className="capitalize"
-                  checked={ column.getIsVisible() }
-                  onCheckedChange={ (value) => column.toggleVisibility(!!value) }
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
                 >
-                  { column.id }
+                  {column.id}
                 </DropdownMenuCheckboxItem>
               );
-            }) }
+            })}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
@@ -91,13 +91,13 @@ const columns: ColumnDef<OrganizationTournament>[] = [
     header: "Organization",
     cell: ({ row }) => (
       <div className="flex flex-col items-center justify-center">
-        { row.original.organizations && (
+        {row.original.organizations && (
           <OrganizationLogo
-            organization={ row.original.organizations }
-            logoSize={ DEFAULT_DATA_TABLE_IMAGE_SIZE }
-            alt={ `${row.original.organizations.name} logo` }
+            organization={row.original.organizations}
+            logoSize={DEFAULT_DATA_TABLE_IMAGE_SIZE}
+            alt={`${row.original.organizations.name} logo`}
           />
-        ) }
+        )}
       </div>
     ),
   },
@@ -107,11 +107,11 @@ const columns: ColumnDef<OrganizationTournament>[] = [
     header: "Name",
     cell: ({ row }) => (
       <Link
-        href={ `/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}` }
+        href={`/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}`}
         className="flex flex-row items-center gap-2 text-primary"
-        aria-label={ `View tournament: ${row.original.tournaments.name}` }
+        aria-label={`View tournament: ${row.original.tournaments.name}`}
       >
-        { row.original.tournaments.name }
+        {row.original.tournaments.name}
       </Link>
     ),
   },

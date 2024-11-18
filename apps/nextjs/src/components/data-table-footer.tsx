@@ -1,6 +1,6 @@
 import { Button, useDataTable } from "@battle-stadium/ui";
 
-export function DataTableFooter<T> () {
+export function DataTableFooter<T>() {
   const table = useDataTable<T>();
   if (!table) {
     return null; // Or return a meaningful fallback UI + }
@@ -12,8 +12,8 @@ export function DataTableFooter<T> () {
         <Button
           variant="outline"
           size="sm"
-          onClick={ () => table.previousPage() }
-          disabled={ !table.getCanPreviousPage() }
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
           aria-label="Go to previous page"
         >
           Previous
@@ -21,13 +21,13 @@ export function DataTableFooter<T> () {
         <Button
           variant="outline"
           size="sm"
-          onClick={ () => table.nextPage() }
-          disabled={ !table.getCanNextPage() }
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
           aria-label="Go to next page"
         >
           Next
         </Button>
       </div>
-    </div >
+    </div>
   );
 }
