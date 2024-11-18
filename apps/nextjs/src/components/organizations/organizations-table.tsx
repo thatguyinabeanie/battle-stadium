@@ -16,7 +16,7 @@ import {
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
 
-import { Footer } from "../data-table-footer";
+import { DataTableFooter } from "../data-table-footer";
 import OrganizationLogo, {
   DEFAULT_DATA_TABLE_IMAGE_SIZE,
 } from "./organization-logo";
@@ -30,7 +30,7 @@ export default function OrganizationsTable({ orgs }: OrganizationTableProps) {
     <DataTable<Organization>
       data={orgs}
       columns={columns}
-      footer={Footer<Organization>}
+      footer={DataTableFooter<Organization>}
       classNames={{ wrapper: "px-4" }}
     />
   );

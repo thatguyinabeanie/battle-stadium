@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@battle-stadium/ui";
 
-import { DataTableContext } from "./data-table-context";
+import { DataTableContext, useDataTable } from "./data-table-context";
 import { useTanstackReactTable } from "./use-tanstack-react-table";
 
 interface DataTableProps<T> {
@@ -35,7 +35,7 @@ interface DataTableProps<T> {
     tableBody?: string;
     tableCell?: string;
   };
-  footer?: ({ table }: { table: ReactTable<T> }) => React.ReactNode;
+  footer?: () => React.ReactNode;
 }
 
 const defaultWrapperClassNames = "w-full rounded-md";
@@ -115,13 +115,17 @@ export default function DataTable<T extends RowData>({
       </div>
 
       <div className={`${wrapperClassNames} ${wrapper}`}>
-        {footer ? footer({ table }) : <DefaultFooter<T> table={table} />}
+        {footer ? footer() : <DefaultFooter<T> />}
       </div>
     </DataTableContext.Provider>
   );
 }
 
-function DefaultFooter<T>({ table }: { table: ReactTable<T> }) {
+function DefaultFooter<T>() {
+  const table = useDataTable<T>();
+  if (!table) {
+    return null; // Or return a meaningful fallback UI + }
+  }
   return (
     <div className="flex items-center justify-end space-x-2 py-4">
       <div className="flex-1 text-sm text-muted-foreground">
