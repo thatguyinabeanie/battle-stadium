@@ -16,9 +16,5 @@ interface OrganizationTournament {
 export default async function Tournaments() {
   const data: OrganizationTournament[] = await getOrganizationTournaments();
 
-  return (
-    <div className="w-11/12">
-      <TournamentsTable data={data} />
-    </div>
-  );
+  return <TournamentsTable data={data} />;
 }

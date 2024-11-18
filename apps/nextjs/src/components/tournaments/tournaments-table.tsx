@@ -16,7 +16,10 @@ import {
   useDataTable,
 } from "@battle-stadium/ui";
 
-import OrganizationLogo from "../organizations/organization-logo";
+import { DataTableFooter } from "../data-table-footer";
+import OrganizationLogo, {
+  DEFAULT_DATA_TABLE_IMAGE_SIZE,
+} from "../organizations/organization-logo";
 
 interface OrganizationTournament {
   tournaments: Tournament;
@@ -28,39 +31,12 @@ interface TournamentsTableProps {
 }
 
 export function TournamentsTable({ data }: TournamentsTableProps) {
-  const preColumn: ColumnDef<OrganizationTournament>[] = [
-    {
-      header: "Organization",
-      cell: ({ row }) => (
-        <div className="flex flex-col items-center justify-center">
-          {row.original.organizations && (
-            <OrganizationLogo
-              organization={row.original.organizations}
-              logoSize={32}
-            />
-          )}
-        </div>
-      ),
-    },
-    {
-      id: "name",
-      accessorKey: "tournaments.name",
-      header: "Name",
-      cell: ({ row }) => (
-        <Link
-          href={`/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}`}
-          className="flex flex-row items-center gap-2 text-primary"
-        >
-          {row.original.tournaments.name}
-        </Link>
-      ),
-    },
-  ];
-
   return (
     <DataTable<OrganizationTournament>
       data={data}
-      columns={[...preColumn, ...columns]}
+      columns={columns}
+      footer={DataTableFooter<OrganizationTournament>}
+      classNames={{ wrapper: "px-4" }}
     >
       <TournamentsTableFiltering />
     </DataTable>
@@ -111,6 +87,34 @@ function TournamentsTableFiltering() {
 }
 
 const columns: ColumnDef<OrganizationTournament>[] = [
+  {
+    header: "Organization",
+    cell: ({ row }) => (
+      <div className="flex flex-col items-center justify-center">
+        {row.original.organizations && (
+          <OrganizationLogo
+            organization={row.original.organizations}
+            logoSize={DEFAULT_DATA_TABLE_IMAGE_SIZE}
+            alt={`${row.original.organizations.name} logo`}
+          />
+        )}
+      </div>
+    ),
+  },
+  {
+    id: "name",
+    accessorKey: "tournaments.name",
+    header: "Name",
+    cell: ({ row }) => (
+      <Link
+        href={`/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}`}
+        className="flex flex-row items-center gap-2 text-primary"
+        aria-label={`View tournament: ${row.original.tournaments.name}`}
+      >
+        {row.original.tournaments.name}
+      </Link>
+    ),
+  },
   {
     accessorKey: "tournaments.startAt",
     header: "Start Date",

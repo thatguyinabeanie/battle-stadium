@@ -16,14 +16,24 @@ import {
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
 
-import OrganizationLogo from "./organization-logo";
+import { DataTableFooter } from "../data-table-footer";
+import OrganizationLogo, {
+  DEFAULT_DATA_TABLE_IMAGE_SIZE,
+} from "./organization-logo";
 
 interface OrganizationTableProps {
   orgs: Organization[];
 }
 
 export default function OrganizationsTable({ orgs }: OrganizationTableProps) {
-  return <DataTable<Organization> data={orgs} columns={columns} />;
+  return (
+    <DataTable<Organization>
+      data={orgs}
+      columns={columns}
+      footer={DataTableFooter<Organization>}
+      classNames={{ wrapper: "px-4" }}
+    />
+  );
 }
 
 const columns: ColumnDef<Organization>[] = [
@@ -47,7 +57,10 @@ const columns: ColumnDef<Organization>[] = [
         className="flex flex-row items-center gap-2 text-primary"
         href={`/organizations/${row.original.slug}`}
       >
-        <OrganizationLogo organization={row.original} logoSize={32} />
+        <OrganizationLogo
+          organization={row.original}
+          logoSize={DEFAULT_DATA_TABLE_IMAGE_SIZE}
+        />
         {row.getValue("name")}
       </Link>
     ),
@@ -68,27 +81,29 @@ const columns: ColumnDef<Organization>[] = [
       const organization = row.original;
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() =>
-                navigator.clipboard.writeText(`${organization.id}`)
-              }
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="w-full">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() =>
+                  navigator.clipboard.writeText(`${organization.id}`)
+                }
+              >
+                Copy payment ID
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>View customer</DropdownMenuItem>
+              <DropdownMenuItem>View payment details</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       );
     },
   },
