@@ -95,6 +95,7 @@ const columns: ColumnDef<OrganizationTournament>[] = [
           <OrganizationLogo
             organization={row.original.organizations}
             logoSize={DEFAULT_DATA_TABLE_IMAGE_SIZE}
+            alt={`${row.original.organizations.name} logo`}
           />
         )}
       </div>
@@ -108,6 +109,7 @@ const columns: ColumnDef<OrganizationTournament>[] = [
       <Link
         href={`/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}`}
         className="flex flex-row items-center gap-2 text-primary"
+        aria-label={`View tournament: ${row.original.tournaments.name}`}
       >
         {row.original.tournaments.name}
       </Link>

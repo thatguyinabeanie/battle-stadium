@@ -38,7 +38,7 @@ interface DataTableProps<T> {
   footer?: ({ table }: { table: ReactTable<T> }) => React.ReactNode;
 }
 
-const wrapperClassNames = "w-full rounded-md";
+const defaultWrapperClassNames = "w-full rounded-md";
 export default function DataTable<T extends RowData>({
   data,
   columns,
@@ -54,7 +54,7 @@ export default function DataTable<T extends RowData>({
     tableHeaderRow,
     tableRow,
     tableBody,
-    tableCell,
+    tableCell = "p-2",  // Example default
   } = classNames ?? {};
 
   const table = useTanstackReactTable<T>(data, columns);

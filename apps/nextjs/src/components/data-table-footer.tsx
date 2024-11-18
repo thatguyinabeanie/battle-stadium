@@ -10,6 +10,7 @@ export function Footer<T>() {
           size="sm"
           onClick={() => table?.previousPage()}
           disabled={!table?.getCanPreviousPage()}
+          aria-label="Go to previous page"
         >
           Previous
         </Button>
@@ -18,6 +19,7 @@ export function Footer<T>() {
           size="sm"
           onClick={() => table?.nextPage()}
           disabled={!table?.getCanNextPage()}
+          aria-label="Go to next page"
         >
           Next
         </Button>
