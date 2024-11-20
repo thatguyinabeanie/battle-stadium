@@ -33,31 +33,6 @@ const tabs: TabConfig[] = [
   { value: "registrations", title: "Registrations" },
 ];
 
-function TabsTrigger ({ value, title }: Readonly<TabConfig>) {
-  return (
-    <UiTabsTrigger key={ value } value={ value } title={ title }>
-      <Badge variant="secondary" className="text-md w-[8rem] py-1">
-        { title }
-      </Badge>
-    </UiTabsTrigger>
-  );
-}
-
-function TabsContent ({ value, children }: TabConfig & { children: ReactNode }) {
-  return (
-    <UiTabsContent
-      key={ value }
-      value={ value }
-      className="flex h-full w-full flex-col items-center justify-center"
-    >
-      <CardHeader className="capitalize">{ value }</CardHeader>
-      <CardContent className="min-h-svh">
-        { children }
-      </CardContent>
-    </UiTabsContent>
-  );
-}
-
 export default function OrganizationTournamentsTournamentLayout (
   props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
 ) {
@@ -75,7 +50,7 @@ export default function OrganizationTournamentsTournamentLayout (
     <div className="flex h-full w-full flex-col items-center justify-center">
       { header }
       { modal }
-      <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-t border-b border-x-0">
+      <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-x-0 border-b border-t">
         <Tabs
           className="flex h-full w-full flex-col items-center"
           defaultValue="details"
@@ -94,5 +69,28 @@ export default function OrganizationTournamentsTournamentLayout (
         </Tabs>
       </Card>
     </div>
+  );
+}
+
+function TabsTrigger ({ value, title }: Readonly<TabConfig>) {
+  return (
+    <UiTabsTrigger key={ value } value={ value } title={ title }>
+      <Badge variant="secondary" className="text-md w-[8rem] py-1">
+        { title }
+      </Badge>
+    </UiTabsTrigger>
+  );
+}
+
+function TabsContent ({ value, children }: TabConfig & { children: ReactNode }) {
+  return (
+    <UiTabsContent
+      key={ value }
+      value={ value }
+      className="flex h-full w-full flex-col items-center justify-center"
+    >
+      <CardHeader className="capitalize">{ value }</CardHeader>
+      <CardContent className="min-h-svh">{ children }</CardContent>
+    </UiTabsContent>
   );
 }
