@@ -8,6 +8,9 @@
     "./native": "./native.ts",
     "./web": "./web.ts"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",

@@ -15,6 +15,9 @@
     "sort-packages": "pnpx sort-package-json",
     "typecheck": "tsc --noEmit"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "@bacons/text-decoder": "^0",
