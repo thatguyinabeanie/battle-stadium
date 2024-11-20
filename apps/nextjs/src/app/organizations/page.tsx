@@ -13,12 +13,12 @@ export interface OrganizationsPageProps {
   orgs: Tournament[];
 }
 
-export default async function OrganizationsPage() {
+export default async function OrganizationsPage () {
   const orgs = await getOrganizations();
   return (
     <>
       <PartneredOrganizations />
-      <OrganizationsTable orgs={orgs} />
+      <OrganizationsTable orgs={ orgs } />
     </>
   );
 }
