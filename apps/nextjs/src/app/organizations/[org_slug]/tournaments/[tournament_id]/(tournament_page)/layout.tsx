@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import {
   Badge,
   Card,
+  CardContent,
+  CardHeader,
   Tabs,
   TabsList,
   TabsContent as UiTabsContent,
@@ -31,27 +33,32 @@ const tabs: TabConfig[] = [
   { value: "registrations", title: "Registrations" },
 ];
 
-function TabsTrigger({ value, title }: Readonly<TabConfig>) {
+function TabsTrigger ({ value, title }: Readonly<TabConfig>) {
   return (
-    <UiTabsTrigger key={value} value={value} title={title}>
+    <UiTabsTrigger key={ value } value={ value } title={ title }>
       <Badge variant="secondary" className="text-md w-[8rem] py-1">
-        {title}
+        { title }
       </Badge>
     </UiTabsTrigger>
   );
 }
 
-function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
+function TabsContent ({ value, children }: TabConfig & { children: ReactNode }) {
   return (
-    <UiTabsContent key={value} value={value}>
-      <div className="flex h-full w-full flex-col items-center justify-center">
-        {children}
-      </div>
+    <UiTabsContent
+      key={ value }
+      value={ value }
+      className="flex h-full w-full flex-col items-center justify-center"
+    >
+      <CardHeader className="capitalize">{ value }</CardHeader>
+      <CardContent className="min-h-svh">
+        { children }
+      </CardContent>
     </UiTabsContent>
   );
 }
 
-export default function OrganizationTournamentsTournamentLayout(
+export default function OrganizationTournamentsTournamentLayout (
   props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
 ) {
   const {
@@ -66,29 +73,24 @@ export default function OrganizationTournamentsTournamentLayout(
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      {header}
-      {modal}
-      <Card className="flex h-[72vh] w-11/12 flex-col justify-center">
+      { header }
+      { modal }
+      <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-t border-b border-x-0">
         <Tabs
-          key="tabs"
-          className="flex h-full w-full flex-row items-center"
+          className="flex h-full w-full flex-col items-center"
           defaultValue="details"
         >
-          <TabsList
-            key="tabslist"
-            defaultValue="details"
-            className="flex flex-col gap-4"
-          >
-            {tabs.map(({ value, title }) => (
-              <TabsTrigger key={value} value={value} title={title} />
-            ))}
+          <TabsList key="tabslist" defaultValue="details" className="py-2">
+            { tabs.map(({ value, title }) => (
+              <TabsTrigger key={ value } value={ value } title={ title } />
+            )) }
           </TabsList>
 
-          <TabsContent value="details">{children}</TabsContent>
-          <TabsContent value="standings">{standings}</TabsContent>
-          <TabsContent value="pairings">{pairings}</TabsContent>
-          <TabsContent value="metagame">{metagame}</TabsContent>
-          <TabsContent value="registrations">{registrations}</TabsContent>
+          <TabsContent value="details">{ children }</TabsContent>
+          <TabsContent value="standings">{ standings }</TabsContent>
+          <TabsContent value="pairings">{ pairings }</TabsContent>
+          <TabsContent value="metagame">{ metagame }</TabsContent>
+          <TabsContent value="registrations">{ registrations }</TabsContent>
         </Tabs>
       </Card>
     </div>

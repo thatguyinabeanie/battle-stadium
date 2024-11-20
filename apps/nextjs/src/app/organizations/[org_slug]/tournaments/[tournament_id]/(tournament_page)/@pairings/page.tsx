@@ -1,13 +1,8 @@
-import { Card, CardContent, CardHeader } from "@battle-stadium/ui/card";
+import { CardContent } from "@battle-stadium/ui/card";
 
 const Pairings = () => {
   return (
-    <Card>
-      <CardHeader>Pairings</CardHeader>
-      <CardContent>
-        <p>Pairings content</p>
-      </CardContent>
-    </Card>
+    <p>Pairings content</p>
   );
 };
 

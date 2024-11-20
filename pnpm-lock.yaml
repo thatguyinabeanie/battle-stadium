@@ -44,7 +44,7 @@ catalogs:
       version: 9.12.0
     next:
       specifier: canary
-      version: 15.0.4-canary.15
+      version: 15.0.4-canary.20
     postcss:
       specifier: ^8
       version: 8.4.49
@@ -289,13 +289,13 @@ importers:
         version: 5.15.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/nextjs':
         specifier: ^6.3.4
-        version: 6.3.4(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 6.3.4(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@iconify/react':
         specifier: ^5.0.2
         version: 5.0.2(react@18.3.1)
       '@next/third-parties':
         specifier: ^15.0.3
-        version: 15.0.3(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 15.0.3(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@pkmn/sets':
         specifier: ^5.1.2
         version: 5.1.2
@@ -334,13 +334,13 @@ importers:
         version: 3.5.0
       '@uploadthing/react':
         specifier: ^7.1.1
-        version: 7.1.1(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(uploadthing@7.3.0(express@4.21.1)(fastify@5.1.0)(h3@1.13.0)(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.14(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))))
+        version: 7.1.1(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(uploadthing@7.3.0(express@4.21.1)(fastify@5.1.0)(h3@1.13.0)(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.14(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))))
       '@vercel/analytics':
         specifier: ^1.4.0
-        version: 1.4.0(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 1.4.0(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@vercel/flags':
         specifier: ^2.6.3
-        version: 2.6.3(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 2.6.3(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@vercel/functions':
         specifier: ^1.5.0
         version: 1.5.0
@@ -349,7 +349,7 @@ importers:
         version: 3.0.0
       '@vercel/speed-insights':
         specifier: ^1.1.0
-        version: 1.1.0(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 1.1.0(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       babel-plugin-react-compiler:
         specifier: 19.0.0-beta-a7bf2bd-20241110
         version: 19.0.0-beta-a7bf2bd-20241110
@@ -370,7 +370,7 @@ importers:
         version: 14.16.3(bufferutil@4.0.8)(utf-8-validate@6.0.4)
       geist:
         specifier: ^1.3.1
-        version: 1.3.1(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+        version: 1.3.1(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       jose:
         specifier: ^5.9.6
         version: 5.9.6
@@ -379,7 +379,7 @@ importers:
         version: 3.0.5
       next:
         specifier: 'catalog:'
-        version: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openapi-fetch:
         specifier: ^0.13.0
         version: 0.13.0
@@ -479,7 +479,7 @@ importers:
         version: 5.15.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/nextjs':
         specifier: 'catalog:'
-        version: 6.2.1(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 6.2.1(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/server':
         specifier: 'catalog:'
         version: 11.0.0-rc.638(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(utf-8-validate@6.0.4)
@@ -525,7 +525,7 @@ importers:
         version: 0.11.1(typescript@5.6.3)(zod@3.23.8)
       next:
         specifier: 'catalog:'
-        version: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react:
         specifier: catalog:react18
         version: 18.3.1
@@ -2658,8 +2658,8 @@ packages:
   '@next/env@15.0.3':
     resolution: {integrity: sha512-t9Xy32pjNOvVn2AS+Utt6VmyrshbpfUMhIjFO60gI58deSo/KgLOp31XZ4O+kY/Is8WAGYwA5gR7kOb1eORDBA==}
 
-  '@next/env@15.0.4-canary.15':
-    resolution: {integrity: sha512-BtgsRAzmBB/z8T1gxIRJ7nIBHqmyBuxC8icrxiq8yEuxBv5kC1Tp/cZhv8Xtmjn50yUnXV6Ef4owcNij3xOIWg==}
+  '@next/env@15.0.4-canary.20':
+    resolution: {integrity: sha512-0gxXJoDer+xbTm8ffgha1cwvmMyLltQXrlvnQLR2RoufehgNDbL2vxTEPY97qF3lQ/zrtUB6kIuAiNK7Z+CUkg==}
 
   '@next/eslint-plugin-next@14.2.17':
     resolution: {integrity: sha512-fW6/u1jjlBQrMs1ExyINehaK3B+LEW5UqdF6QYL07QK+SECkX0hnEyPMaNKj0ZFzirQ9D8jLWQ00P8oua4yx9g==}
@@ -2670,8 +2670,8 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
-  '@next/swc-darwin-arm64@15.0.4-canary.15':
-    resolution: {integrity: sha512-Jvsp87MQS7iXVuB/9kwOZD6gyRehsMadnii+Gm29TZ5+h4Ma3rDm2bQ4obG6Drqcq/fJqxD7G3FSFRfsAQmNMw==}
+  '@next/swc-darwin-arm64@15.0.4-canary.20':
+    resolution: {integrity: sha512-ABITn7jKwKiqMMtv6u5bdgZ7zq/uzVk7URwhTSI19YDquT41MFeGQgUwGoEF4Vm00R2TVXDFZjyuHlkaAX6y9g==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -2682,8 +2682,8 @@ packages:
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-darwin-x64@15.0.4-canary.15':
-    resolution: {integrity: sha512-NGZsh2yoCLa0vOerPRIEBWOx9CQuWlQ+bojvIls9HdYqq5vlHwSAwL3P0Pk+6RMcSSJOqftif9T8hSSMQ3VkYA==}
+  '@next/swc-darwin-x64@15.0.4-canary.20':
+    resolution: {integrity: sha512-HmiOHejzoh2F96WPwPHDadKBdmS0kCfW/CIvevHlCFJB7MoEHgne70YlHmwnIIjQZ+xEJgQkxJd3+A6wgP5nqA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -2694,8 +2694,8 @@ packages:
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-arm64-gnu@15.0.4-canary.15':
-    resolution: {integrity: sha512-LJvQocH6z4aYK/GpaJPo/yFTdmcp22sTc2KWcBY52Py8BDSbFNcfcNH0CfbpCfahNHE3fi5P0kRdYGXHf17peg==}
+  '@next/swc-linux-arm64-gnu@15.0.4-canary.20':
+    resolution: {integrity: sha512-+AZChfg9o9EewHNa5odG2hekWUIj8UT0Sjh1xR+xrGnJP3xY4vRuWzDUNqXYVDLgPt3swiX9zKIZsEBWU+7xeg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -2706,8 +2706,8 @@ packages:
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-arm64-musl@15.0.4-canary.15':
-    resolution: {integrity: sha512-RFrifoe6/Fhg6EEbMHne4kwUwnMIx4Y4kzx/t+WtZ7fXWfX2AGxLWPvt38hl+52W1rQG081ojZTdjnUseu3i+g==}
+  '@next/swc-linux-arm64-musl@15.0.4-canary.20':
+    resolution: {integrity: sha512-AxMITAEYYKssZd2Vj9xjpBN8mG1GTs1+IU82mXBl+gOF/zmW6ncmqkp+7coNGNiW6M5HXBGUH5yLym8j36swtw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -2718,8 +2718,8 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-linux-x64-gnu@15.0.4-canary.15':
-    resolution: {integrity: sha512-6yJ7NqpgBJo1+ce2Z9NJNLnK6dyZ/d5GFi9ywh19y1GnkVp45DgqhceN+emiAVwrloGxG9+HrroHhqhjck5g0Q==}
+  '@next/swc-linux-x64-gnu@15.0.4-canary.20':
+    resolution: {integrity: sha512-X4xs1z8DHHZMNXz8HozYBCEPlkv2QWbMsGeBZYQOjO7FhPGXQBJ2XNSp18mLkNdavsxQlC4AeMF/gdrVYIhfrg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -2730,8 +2730,8 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-linux-x64-musl@15.0.4-canary.15':
-    resolution: {integrity: sha512-ggqoXBngdE4UwstjiZHpFqtQQAjad94MjX5SsMG6yZd46HcYYbDaJruxu0pi4sHadBRUMk2a0Iow7CKHo1xxfw==}
+  '@next/swc-linux-x64-musl@15.0.4-canary.20':
+    resolution: {integrity: sha512-6gdMN4kc1hqybgZUKlMNCgt8CI2rUlGqmP54IFelJRJIVUmaGYDAt4OI8lEf2pZCOzMo2n0OSbO2YwOy7ZETsQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -2742,8 +2742,8 @@ packages:
     cpu: [arm64]
     os: [win32]
 
-  '@next/swc-win32-arm64-msvc@15.0.4-canary.15':
-    resolution: {integrity: sha512-fPy50XiFBtVykSLYtewdMrrBSrQWOhB0y6+94Jc0S9yVCScS5TpiMtgvPtEWQuNI3+D3GfTzMNo0O6YDP/wg+w==}
+  '@next/swc-win32-arm64-msvc@15.0.4-canary.20':
+    resolution: {integrity: sha512-H7LUxO6T4F9YJQk9dp2LgFexl0HwMGayPa91SgkwCfAGflHy8LDJSDfbDgIN99J89ZRy+WYAsfqhOkGZgFEE9g==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
@@ -2754,8 +2754,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@next/swc-win32-x64-msvc@15.0.4-canary.15':
-    resolution: {integrity: sha512-wYaYlBtvEmddtccbnSVQSw+JoxYm2JaQ+sjCs/hTY1z+Qg3n6ssE4LX4af49IU0bBREaOHIXAGsRIjJgIv94sw==}
+  '@next/swc-win32-x64-msvc@15.0.4-canary.20':
+    resolution: {integrity: sha512-/0RCXmohjv2tifKSswl94/Pbu8Zrre4o7M80E3UzZLfPFgDQP6jEJQwIG5zSpHcLBbX4rMTFDrswOxpX9F5Veg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -5375,12 +5375,16 @@ packages:
   cross-fetch@3.1.8:
     resolution: {integrity: sha512-cvA+JwZoU0Xq+h6WkMvAUqPEYy92Obet6UdKLfW60qn99ftItKjB5T+BkyWOFWe2pUyfQ+IJHmpOTznqk1M6Kg==}
 
-  cross-spawn@6.0.5:
-    resolution: {integrity: sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==}
+  cross-spawn@6.0.6:
+    resolution: {integrity: sha512-VqCUuhcd1iB+dsv8gxPttb5iZh/D0iubSP21g36KXdEuf6I5JiioesUVjpCdHV9MZRUfVFlvwtIUyPfxo5trtw==}
     engines: {node: '>=4.8'}
 
   cross-spawn@7.0.5:
     resolution: {integrity: sha512-ZVJrKKYunU38/76t0RMOulHOnUcbU9GbpWKAOZ0mhjr7CX6FVrH+4FrAapSOekrgFQ3f/8gwMEuIft0aKq6Hug==}
+    engines: {node: '>= 8'}
+
+  cross-spawn@7.0.6:
+    resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
 
   crossws@0.3.1:
@@ -7908,8 +7912,8 @@ packages:
       sass:
         optional: true
 
-  next@15.0.4-canary.15:
-    resolution: {integrity: sha512-EF8zlGvC7lV27bKPCFjAYjBWMcCj6UvVstiTvCTXHCls/cYKGBj3mQT2qdC3Vo5O0L6LxquQTZZ7RtlAy/vsbw==}
+  next@15.0.4-canary.20:
+    resolution: {integrity: sha512-+1OeBMDyPwRL545bsPvIY+KAeFFmaLarnSu36HpO6gZD3eh53DvBH0dxGtooewDzpEvdUmWoq4bm7de2/XrpiQ==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
     hasBin: true
     peerDependencies:
@@ -11250,29 +11254,29 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       tslib: 2.4.1
 
-  '@clerk/nextjs@6.2.1(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@clerk/nextjs@6.2.1(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@clerk/backend': 1.15.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/clerk-react': 5.15.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/shared': 2.11.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/types': 4.30.0
       crypto-js: 4.2.0
-      ezheaders: 0.1.0(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      next: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      ezheaders: 0.1.0(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      next: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       server-only: 0.0.1
       tslib: 2.4.1
 
-  '@clerk/nextjs@6.3.4(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@clerk/nextjs@6.3.4(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@clerk/backend': 1.16.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/clerk-react': 5.15.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/shared': 2.14.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/types': 4.34.0
       crypto-js: 4.2.0
-      ezheaders: 0.1.0(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      next: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      ezheaders: 0.1.0(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      next: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       server-only: 0.0.1
@@ -12374,7 +12378,7 @@ snapshots:
   '@next/env@15.0.3':
     optional: true
 
-  '@next/env@15.0.4-canary.15': {}
+  '@next/env@15.0.4-canary.20': {}
 
   '@next/eslint-plugin-next@14.2.17':
     dependencies:
@@ -12383,54 +12387,54 @@ snapshots:
   '@next/swc-darwin-arm64@15.0.3':
     optional: true
 
-  '@next/swc-darwin-arm64@15.0.4-canary.15':
+  '@next/swc-darwin-arm64@15.0.4-canary.20':
     optional: true
 
   '@next/swc-darwin-x64@15.0.3':
     optional: true
 
-  '@next/swc-darwin-x64@15.0.4-canary.15':
+  '@next/swc-darwin-x64@15.0.4-canary.20':
     optional: true
 
   '@next/swc-linux-arm64-gnu@15.0.3':
     optional: true
 
-  '@next/swc-linux-arm64-gnu@15.0.4-canary.15':
+  '@next/swc-linux-arm64-gnu@15.0.4-canary.20':
     optional: true
 
   '@next/swc-linux-arm64-musl@15.0.3':
     optional: true
 
-  '@next/swc-linux-arm64-musl@15.0.4-canary.15':
+  '@next/swc-linux-arm64-musl@15.0.4-canary.20':
     optional: true
 
   '@next/swc-linux-x64-gnu@15.0.3':
     optional: true
 
-  '@next/swc-linux-x64-gnu@15.0.4-canary.15':
+  '@next/swc-linux-x64-gnu@15.0.4-canary.20':
     optional: true
 
   '@next/swc-linux-x64-musl@15.0.3':
     optional: true
 
-  '@next/swc-linux-x64-musl@15.0.4-canary.15':
+  '@next/swc-linux-x64-musl@15.0.4-canary.20':
     optional: true
 
   '@next/swc-win32-arm64-msvc@15.0.3':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@15.0.4-canary.15':
+  '@next/swc-win32-arm64-msvc@15.0.4-canary.20':
     optional: true
 
   '@next/swc-win32-x64-msvc@15.0.3':
     optional: true
 
-  '@next/swc-win32-x64-msvc@15.0.4-canary.15':
+  '@next/swc-win32-x64-msvc@15.0.4-canary.20':
     optional: true
 
-  '@next/third-parties@15.0.3(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@next/third-parties@15.0.3(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
-      next: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       third-party-capital: 1.0.20
 
@@ -14480,14 +14484,14 @@ snapshots:
 
   '@uploadthing/mime-types@0.3.2': {}
 
-  '@uploadthing/react@7.1.1(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(uploadthing@7.3.0(express@4.21.1)(fastify@5.1.0)(h3@1.13.0)(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.14(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))))':
+  '@uploadthing/react@7.1.1(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(uploadthing@7.3.0(express@4.21.1)(fastify@5.1.0)(h3@1.13.0)(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.14(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))))':
     dependencies:
       '@uploadthing/shared': 7.1.1
       file-selector: 0.6.0
       react: 18.3.1
-      uploadthing: 7.3.0(express@4.21.1)(fastify@5.1.0)(h3@1.13.0)(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.14(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3)))
+      uploadthing: 7.3.0(express@4.21.1)(fastify@5.1.0)(h3@1.13.0)(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.14(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3)))
     optionalDependencies:
-      next: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   '@uploadthing/shared@7.1.1':
     dependencies:
@@ -14511,16 +14515,16 @@ snapshots:
       graphql: 15.8.0
       wonka: 4.0.15
 
-  '@vercel/analytics@1.4.0(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@vercel/analytics@1.4.0(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     optionalDependencies:
-      next: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
 
-  '@vercel/flags@2.6.3(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@vercel/flags@2.6.3(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       jose: 5.2.1
     optionalDependencies:
-      next: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
@@ -14557,9 +14561,9 @@ snapshots:
       - utf-8-validate
     optional: true
 
-  '@vercel/speed-insights@1.1.0(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@vercel/speed-insights@1.1.0(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     optionalDependencies:
-      next: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
 
   '@vladfrangu/async_event_emitter@2.4.6': {}
@@ -15471,7 +15475,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  cross-spawn@6.0.5:
+  cross-spawn@6.0.6:
     dependencies:
       nice-try: 1.0.5
       path-key: 2.0.1
@@ -15480,6 +15484,12 @@ snapshots:
       which: 1.3.1
 
   cross-spawn@7.0.5:
+    dependencies:
+      path-key: 3.1.1
+      shebang-command: 2.0.0
+      which: 2.0.2
+
+  cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
       shebang-command: 2.0.0
@@ -16263,7 +16273,7 @@ snapshots:
 
   execa@1.0.0:
     dependencies:
-      cross-spawn: 6.0.5
+      cross-spawn: 6.0.6
       get-stream: 4.1.0
       is-stream: 1.1.0
       npm-run-path: 2.0.2
@@ -16273,7 +16283,7 @@ snapshots:
 
   execa@5.1.1:
     dependencies:
-      cross-spawn: 7.0.5
+      cross-spawn: 7.0.6
       get-stream: 6.0.1
       human-signals: 2.1.0
       is-stream: 2.0.1
@@ -16285,7 +16295,7 @@ snapshots:
 
   execa@8.0.1:
     dependencies:
-      cross-spawn: 7.0.5
+      cross-spawn: 7.0.6
       get-stream: 8.0.1
       human-signals: 5.0.0
       is-stream: 3.0.0
@@ -16538,9 +16548,9 @@ snapshots:
       iconv-lite: 0.4.24
       tmp: 0.0.33
 
-  ezheaders@0.1.0(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
+  ezheaders@0.1.0(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
-      next: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   fast-check@3.23.1:
     dependencies:
@@ -16836,9 +16846,9 @@ snapshots:
       strip-ansi: 6.0.1
       wide-align: 1.1.5
 
-  geist@1.3.1(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
+  geist@1.3.1(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
-      next: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
   generate-function@2.3.1:
     dependencies:
@@ -18337,9 +18347,9 @@ snapshots:
       - babel-plugin-macros
     optional: true
 
-  next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@next/env': 15.0.4-canary.15
+      '@next/env': 15.0.4-canary.20
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.13
       busboy: 1.6.0
@@ -18349,14 +18359,14 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       styled-jsx: 5.1.6(@babel/core@7.26.0)(react@18.3.1)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.0.4-canary.15
-      '@next/swc-darwin-x64': 15.0.4-canary.15
-      '@next/swc-linux-arm64-gnu': 15.0.4-canary.15
-      '@next/swc-linux-arm64-musl': 15.0.4-canary.15
-      '@next/swc-linux-x64-gnu': 15.0.4-canary.15
-      '@next/swc-linux-x64-musl': 15.0.4-canary.15
-      '@next/swc-win32-arm64-msvc': 15.0.4-canary.15
-      '@next/swc-win32-x64-msvc': 15.0.4-canary.15
+      '@next/swc-darwin-arm64': 15.0.4-canary.20
+      '@next/swc-darwin-x64': 15.0.4-canary.20
+      '@next/swc-linux-arm64-gnu': 15.0.4-canary.20
+      '@next/swc-linux-arm64-musl': 15.0.4-canary.20
+      '@next/swc-linux-x64-gnu': 15.0.4-canary.20
+      '@next/swc-linux-x64-musl': 15.0.4-canary.20
+      '@next/swc-win32-arm64-msvc': 15.0.4-canary.20
+      '@next/swc-win32-x64-msvc': 15.0.4-canary.20
       '@opentelemetry/api': 1.9.0
       babel-plugin-react-compiler: 19.0.0-beta-a7bf2bd-20241110
       sharp: 0.33.5
@@ -18808,7 +18818,7 @@ snapshots:
   password-prompt@1.1.3:
     dependencies:
       ansi-escapes: 4.3.2
-      cross-spawn: 7.0.5
+      cross-spawn: 7.0.6
 
   path-case@2.1.1:
     dependencies:
@@ -20646,7 +20656,7 @@ snapshots:
       registry-auth-token: 3.3.2
       registry-url: 3.1.0
 
-  uploadthing@7.3.0(express@4.21.1)(fastify@5.1.0)(h3@1.13.0)(next@15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.14(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))):
+  uploadthing@7.3.0(express@4.21.1)(fastify@5.1.0)(h3@1.13.0)(next@15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(tailwindcss@3.4.14(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))):
     dependencies:
       '@effect/platform': 0.69.8(effect@3.10.3)
       '@uploadthing/mime-types': 0.3.2
@@ -20656,7 +20666,7 @@ snapshots:
       express: 4.21.1
       fastify: 5.1.0
       h3: 1.13.0
-      next: 15.0.4-canary.15(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      next: 15.0.4-canary.20(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwindcss: 3.4.14(ts-node@10.9.2(@types/node@20.17.6)(typescript@5.6.3))
 
   upper-case-first@1.1.2:
