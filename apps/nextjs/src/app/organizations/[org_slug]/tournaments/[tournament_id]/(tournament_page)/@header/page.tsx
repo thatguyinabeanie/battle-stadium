@@ -46,14 +46,24 @@ export default async function OrganizationTournamentHeader(
   }
 
   return (
-    <OrganizationHeader organization={organization}>
-      <TournamentDetails tournament={tournament} organization={organization} />
+    <>
+      <OrganizationHeader
+        organization={organization}
+        classNames={{
+          wrapper: "border border-1 w-11/12 border-x-0 border-t-0",
+        }}
+      >
+        <TournamentDetails
+          tournament={tournament}
+          organization={organization}
+        />
+      </OrganizationHeader>
 
       <TournamentDetailChips
         org_slug={org_slug}
         tournament_id={tournament_id}
       />
-    </OrganizationHeader>
+    </>
   );
 }
 interface TournamentDetailsProps {
@@ -67,33 +77,49 @@ function TournamentDetails({
 }: Readonly<TournamentDetailsProps>) {
   return (
     <div className="mx-4 flex h-full w-full flex-col items-center justify-between text-center">
-      <h1 className="text-2xl font-semibold">{tournament.name}</h1>
+      <h1 className="w-full text-2xl font-semibold">{tournament.name}</h1>
 
       <div className="pt-2" />
 
       <div className="grid w-full grid-cols-2 justify-center gap-2">
-        <p className="text-right font-bold">Presented By: </p>
-        <p className="text-left">{organization.name}</p>
-        <p className="text-right">Registration:</p>
-        <p className="text-left">
-          {formatTimestamp(tournament.registrationStartAt)}
-        </p>
-        <p className="text-right">Starts:</p>
-        <p className="text-left">{formatTimestamp(tournament.startAt)}</p>
-        <p className="text-right">Check in opens:</p>
-        <p className="text-left">
-          {formatTimestamp(tournament.checkInStartAt)}
-        </p>
+        <LeftRightGrid left="Presented By:" right={organization.name} />
+        <LeftRightGrid
+          left="Date:"
+          right={formatTimestamp(tournament.startAt, "PP")}
+        />
+        <LeftRightGrid
+          left="Start Time:"
+          right={formatTimestamp(tournament.startAt, "p")}
+        />
+        <LeftRightGrid
+          left="Check In:"
+          right={formatTimestamp(tournament.checkInStartAt, "p")}
+        />
+        <LeftRightGrid left="Rounds:" right={9} />
       </div>
     </div>
   );
 }
 
-function formatTimestamp(timestamp: string | null) {
+function LeftRightGrid({
+  left,
+  right,
+}: {
+  left: string | null;
+  right?: string | number | null;
+}) {
+  return (
+    <>
+      <p className="text-right">{left}</p>
+      <p className="text-left">{right}</p>
+    </>
+  );
+}
+function formatTimestamp(timestamp?: string | null, formatStr = "PPp") {
   if (!timestamp) {
     return "N/A";
   }
-  return format(parseISO(timestamp), "PPp");
+  return format(parseISO(timestamp), formatStr);
 }
 
 interface TournamentDetailChipsProps {
