@@ -4,13 +4,14 @@ import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { SpeedInsights as VercelSpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
-import { HydrateClient } from "~/trpc/server";
+
 import { cn, ThemeProvider } from "@battle-stadium/ui";
 
 // import { cn, ThemeProvider, ThemeToggle } from "@battle-stadium/ui";
 
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
+import { HydrateClient } from "~/trpc/server";
 
 import "~/styles/globals.css";
 
@@ -69,7 +70,7 @@ export const viewport: Viewport = {
   ],
 };
 
-export default async function RootLayout ({
+export default async function RootLayout({
   children,
 }: Readonly<ChildrenProps>) {
   const { userId, sessionId } = await auth();
@@ -79,27 +80,25 @@ export default async function RootLayout ({
       <ClerkProvider>
         <html lang="en" suppressHydrationWarning>
           <body
-            className={ cn(
+            className={cn(
               "min-h-screen overflow-y-scroll bg-background font-sans text-foreground antialiased",
               GeistSans.variable,
               GeistMono.variable,
-            ) }
+            )}
           >
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               <TRPCReactProvider>
                 <NextSSRPlugin
-                  routerConfig={ extractRouterConfig(UploadThingRouter) }
+                  routerConfig={extractRouterConfig(UploadThingRouter)}
                 />
                 <div className="flex min-h-screen flex-col items-center">
                   <AwesomeParticles />
 
-                  <div className="flex min-h-screen w-full flex-col items-center shadow-2xl backdrop-blur md:backdrop-blur dark:shadow-white/25">
+                  <div className="flex min-h-screen w-full flex-col items-center shadow-2xl backdrop-blur dark:shadow-white/25 md:backdrop-blur">
                     <Navbar />
                     <main className="flex min-h-screen w-full flex-col items-center">
                       <section className="z-0 flex w-full flex-col items-center gap-4">
-                        <HydrateClient>
-                          { children }
-                        </HydrateClient>
+                        <HydrateClient>{children}</HydrateClient>
                       </section>
                     </main>
 
@@ -112,13 +111,13 @@ export default async function RootLayout ({
                 <ThemeToggle />
               </div> */}
 
-              <Cookies isSignedIn={ !!sessionId } userId={ userId } />
+              <Cookies isSignedIn={!!sessionId} userId={userId} />
 
               <VercelAnalytics />
 
-              { env.VERCEL_ENV === "production" && <VercelSpeedInsights /> }
+              {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
 
-              <GoogleAnalytics gaId={ env.MEASUREMENT_ID } />
+              <GoogleAnalytics gaId={env.MEASUREMENT_ID} />
             </ThemeProvider>
           </body>
         </html>
