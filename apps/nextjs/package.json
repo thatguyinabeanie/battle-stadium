@@ -17,6 +17,9 @@
     "with-env": "dotenv -e ../../.env --"
   },
   "prettier": "@battle-stadium/prettier-config",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "@battle-stadium/api": "workspace:*",
     "@battle-stadium/auth": "workspace:*",
@@ -62,7 +65,7 @@
     "react": "catalog:react18",
     "react-dom": "catalog:react18",
     "server-only": "^0.0.1",
-    "superjson": "2.2.1",
+    "superjson": "catalog:",
     "tailwind-merge": "catalog:",
     "tailwind-variants": "catalog:",
     "tailwindcss-animate": "catalog:",

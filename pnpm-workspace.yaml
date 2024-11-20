@@ -25,6 +25,7 @@ catalog:
   tailwindcss: ^3
   typescript: ^5
   zod: ^3
+  superjson: ^2
 
 catalogs:
   react18:
