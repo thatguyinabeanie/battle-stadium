@@ -11,6 +11,7 @@ import { cn, ThemeProvider } from "@battle-stadium/ui";
 
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
+import { HydrateClient } from "~/trpc/server";
 
 import "~/styles/globals.css";
 
@@ -93,11 +94,11 @@ export default async function RootLayout({
                 <div className="flex min-h-screen flex-col items-center">
                   <AwesomeParticles />
 
-                  <div className="flex min-h-screen w-5/6 flex-col items-center shadow-2xl backdrop-blur-lg dark:shadow-white">
+                  <div className="flex min-h-screen w-full flex-col items-center shadow-2xl backdrop-blur dark:shadow-white/25 md:backdrop-blur">
                     <Navbar />
                     <main className="flex min-h-screen w-full flex-col items-center">
                       <section className="z-0 flex w-full flex-col items-center gap-4">
-                        {children}
+                        <HydrateClient>{children}</HydrateClient>
                       </section>
                     </main>
 

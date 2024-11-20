@@ -34,10 +34,13 @@ export const NavbarLink = React.forwardRef<
 function usePathClassName(href: `/${string}`) {
   const pathname = usePathname();
 
-  return cn("rounded-md px-1 py-2 text-sm font-medium transition-colors", {
-    "bg-primary/10 text-primary": pathname === href,
-    "text-muted-foreground hover:bg-accent hover:text-accent-foreground":
-      pathname !== href,
-  });
+  return cn(
+    "md:text-md rounded-md px-1 py-2 text-sm font-medium transition-colors lg:text-lg",
+    {
+      "bg-primary/10 text-primary": pathname === href,
+      "text-muted-foreground hover:bg-accent hover:text-accent-foreground":
+        pathname !== href,
+    },
+  );
 }
 export default NavbarLink;

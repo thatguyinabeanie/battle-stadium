@@ -4,7 +4,6 @@ import { Separator } from "@battle-stadium/ui";
 
 import { title } from "~/components/miscellaneous/primitives";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
-import { HydrateClient } from "~/trpc/server";
 
 export const metadata: Metadata = {
   title: "battlestadium.gg",
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <HydrateClient>
+    <>
       <div className="min--h-screen flex flex-col items-center justify-between">
         <PartneredOrganizations />
 
@@ -35,6 +34,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </HydrateClient>
+    </>
   );
 }

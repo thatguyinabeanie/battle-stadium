@@ -26,7 +26,7 @@ export default function OrganizationCard({
         <div className="flex flex-col overflow-hidden p-2">
           <OrganizationLogo
             priority
-            className={cn("rounded-3xl", {
+            className={cn("max-h-40 min-h-28 min-w-28 max-w-40 rounded-3xl", {
               "hover:scale-105": !disableHover,
               "hover:z-50": !disableHover,
             })}
