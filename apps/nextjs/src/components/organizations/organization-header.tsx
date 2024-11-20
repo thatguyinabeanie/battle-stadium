@@ -8,13 +8,13 @@ interface OrganizationHeaderProps {
   children: ReactNode;
   organization: Organization;
   classNames?: {
-    wrapper: string;
-    image: string;
-    childrenWrapper: string;
+    wrapper?: string;
+    image?: string;
+    childrenWrapper?: string;
   };
 }
 
-const HEIGHT_WIDTH = 175;
+const HEIGHT_WIDTH = 200;
 
 export default function OrganizationHeader({
   children,
@@ -23,7 +23,7 @@ export default function OrganizationHeader({
 }: Readonly<OrganizationHeaderProps>) {
   return (
     <div
-      className={`flex h-full w-full flex-row items-center justify-around py-8 ${classNames?.wrapper}`}
+      className={`flex h-full flex-row items-center justify-around py-4 sm:max-h-20 lg:max-h-48 ${classNames?.wrapper}`}
     >
       <OrganizationLogo
         className={`${classNames?.image}`}
