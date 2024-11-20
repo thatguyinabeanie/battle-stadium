@@ -45,37 +45,53 @@ export default function OrganizationTournamentsTournamentLayout(
     metagame,
     registrations,
   } = props;
-
+  // "border border-1 border-x-0 border-t-0"
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      {header}
       {modal}
-      <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-x-0 border-b border-t">
-        <Tabs
-          className="flex h-full w-full flex-col items-center"
-          defaultValue="details"
-        >
-          <TabsList key="tabslist" defaultValue="details" className="py-2">
+
+      {header}
+
+      <Tabs
+        className="flex h-full w-full flex-col items-center"
+        defaultValue="details"
+      >
+        <div className="w-full overflow-auto">
+          <TabsList
+            key="tabslist"
+            defaultValue="details"
+            className="flex flex-row gap-2 overflow-x-visible py-2"
+          >
             {tabs.map(({ value, title }) => (
               <TabsTrigger key={value} value={value} title={title} />
             ))}
           </TabsList>
+        </div>
 
+        <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-x-0 border-b border-t">
           <TabsContent value="details">{children}</TabsContent>
           <TabsContent value="standings">{standings}</TabsContent>
           <TabsContent value="pairings">{pairings}</TabsContent>
           <TabsContent value="metagame">{metagame}</TabsContent>
           <TabsContent value="registrations">{registrations}</TabsContent>
-        </Tabs>
-      </Card>
+        </Card>
+      </Tabs>
     </div>
   );
 }
 
 function TabsTrigger({ value, title }: Readonly<TabConfig>) {
   return (
-    <UiTabsTrigger key={value} value={value} title={title}>
-      <Badge variant="secondary" className="text-md w-[8rem] py-1">
+    <UiTabsTrigger
+      key={value}
+      value={value}
+      title={title}
+      className="px- w-[6rem] py-1 lg:w-[7.5rem]"
+    >
+      <Badge
+        variant="secondary"
+        className="md:text-md w-[6rem] px-1 py-1 text-sm lg:w-[7.5rem]"
+      >
         {title}
       </Badge>
     </UiTabsTrigger>

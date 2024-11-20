@@ -50,7 +50,7 @@ export default async function OrganizationTournamentHeader(
       <OrganizationHeader
         organization={organization}
         classNames={{
-          wrapper: "border border-1 w-11/12 border-x-0 border-t-0",
+          wrapper: "w-11/12 border border-1 border-x-0 border-t-0",
         }}
       >
         <TournamentDetails
@@ -58,11 +58,6 @@ export default async function OrganizationTournamentHeader(
           organization={organization}
         />
       </OrganizationHeader>
-
-      <TournamentDetailChips
-        org_slug={org_slug}
-        tournament_id={tournament_id}
-      />
     </>
   );
 }
@@ -110,8 +105,8 @@ function LeftRightGrid({
 }) {
   return (
     <>
-      <p className="text-right">{left}</p>
-      <p className="text-left">{right}</p>
+      <p className="md:text-md text-right text-sm">{left}</p>
+      <p className="md:text-md text-left text-sm">{right}</p>
     </>
   );
 }
@@ -126,7 +121,9 @@ interface TournamentDetailChipsProps {
   org_slug: string;
   tournament_id: number;
 }
-function TournamentDetailChips(props: Readonly<TournamentDetailChipsProps>) {
+export function TournamentDetailChips(
+  props: Readonly<TournamentDetailChipsProps>,
+) {
   const { org_slug, tournament_id } = props;
 
   return (
