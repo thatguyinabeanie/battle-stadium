@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
 
+import type { Organization, Tournament } from "@battle-stadium/db/schema";
 import { Chip } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentProps } from "~/types";
@@ -46,36 +47,45 @@ export default async function OrganizationTournamentHeader(
 
   return (
     <OrganizationHeader organization={organization}>
-      <div className="mx-4 flex h-full w-full flex-col items-center justify-between text-center">
-        <h1 className="text-2xl font-semibold">{tournament.name}</h1>
-
-        <div className="pt-2" />
-
-        <div className="grid w-full grid-cols-2 justify-center gap-2">
-          <p className="text-right font-bold">Presented By: </p>
-          <p className="text-left">{organization.name}</p>
-          <p className="text-right">Registration:</p>
-          <p className="text-left">
-            {formatTimestamp(tournament.registrationStartAt)}
-          </p>
-          <p className="text-right">Starts:</p>
-          <p className="text-left">{formatTimestamp(tournament.startAt)}</p>
-          <p className="text-right">Check in opens:</p>
-          <p className="text-left">
-            {formatTimestamp(tournament.checkInStartAt)}
-          </p>
-        </div>
-
-        <div className="pt-2" />
-      </div>
-
-      <div className="pt-2" />
+      <TournamentDetails tournament={tournament} organization={organization} />
 
       <TournamentDetailChips
         org_slug={org_slug}
         tournament_id={tournament_id}
       />
     </OrganizationHeader>
+  );
+}
+interface TournamentDetailsProps {
+  tournament: Tournament;
+  organization: Organization;
+}
+
+function TournamentDetails({
+  tournament,
+  organization,
+}: Readonly<TournamentDetailsProps>) {
+  return (
+    <div className="mx-4 flex h-full w-full flex-col items-center justify-between text-center">
+      <h1 className="text-2xl font-semibold">{tournament.name}</h1>
+
+      <div className="pt-2" />
+
+      <div className="grid w-full grid-cols-2 justify-center gap-2">
+        <p className="text-right font-bold">Presented By: </p>
+        <p className="text-left">{organization.name}</p>
+        <p className="text-right">Registration:</p>
+        <p className="text-left">
+          {formatTimestamp(tournament.registrationStartAt)}
+        </p>
+        <p className="text-right">Starts:</p>
+        <p className="text-left">{formatTimestamp(tournament.startAt)}</p>
+        <p className="text-right">Check in opens:</p>
+        <p className="text-left">
+          {formatTimestamp(tournament.checkInStartAt)}
+        </p>
+      </div>
+    </div>
   );
 }
 

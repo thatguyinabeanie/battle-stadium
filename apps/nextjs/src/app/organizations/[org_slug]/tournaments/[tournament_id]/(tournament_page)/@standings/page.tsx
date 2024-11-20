@@ -1,13 +1,11 @@
-import { Card, CardContent, CardHeader } from "@battle-stadium/ui/card";
+import type { OrganizationTournamentProps } from "~/types";
 
-export default function Standings() {
+export default function Standings(
+  _props: Readonly<OrganizationTournamentProps>,
+) {
   return (
-    <Card>
-      <CardHeader>Standings</CardHeader>
-
-      <CardContent>
-        <p>Standings content</p>
-      </CardContent>
-    </Card>
+    <>
+      <p>Standings content</p>
+    </>
   );
 }

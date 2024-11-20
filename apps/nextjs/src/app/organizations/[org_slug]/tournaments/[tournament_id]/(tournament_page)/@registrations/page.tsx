@@ -11,7 +11,6 @@ export default async function TournamentRegistrations(
 
   return (
     <>
-      <h2>TODO: Registrations</h2>
       {players.map(({ players, profiles }) => (
         <div key={players.accountId}>
           <h3>{profiles?.username}</h3>

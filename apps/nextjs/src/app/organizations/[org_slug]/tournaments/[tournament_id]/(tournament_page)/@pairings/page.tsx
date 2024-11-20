@@ -1,14 +1,7 @@
-import { Card, CardContent, CardHeader } from "@battle-stadium/ui/card";
+import type { OrganizationTournamentProps } from "~/types";
 
-const Pairings = () => {
-  return (
-    <Card>
-      <CardHeader>Pairings</CardHeader>
-      <CardContent>
-        <p>Pairings content</p>
-      </CardContent>
-    </Card>
-  );
-};
-
-export default Pairings;
+export default function Pairings(
+  _props: Readonly<OrganizationTournamentProps>,
+) {
+  return <p>Pairings content</p>;
+}

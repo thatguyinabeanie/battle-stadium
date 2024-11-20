@@ -26,5 +26,9 @@ export async function generateStaticParams() {
 export default function OrganizationTournamentDetailsPage(
   _props: Readonly<OrganizationTournamentProps>,
 ) {
-  return <h1>Details</h1>;
+  return (
+    <>
+      <p>Details and Rules and Things</p>
+    </>
+  );
 }

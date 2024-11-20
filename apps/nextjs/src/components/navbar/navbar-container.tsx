@@ -37,7 +37,7 @@ export default function NavbarContainer({
   return (
     <div
       className={cn(
-        "sticky top-0 z-40 w-full transform bg-transparent backdrop-blur-2xl transition-transform duration-300",
+        "sticky top-0 z-40 w-full transform backdrop-blur-3xl transition-transform duration-300",
         !isVisible && "-translate-y-full",
       )}
     >

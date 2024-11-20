@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import {
   Badge,
   Card,
+  CardContent,
+  CardHeader,
   Tabs,
   TabsList,
   TabsContent as UiTabsContent,
@@ -31,26 +33,6 @@ const tabs: TabConfig[] = [
   { value: "registrations", title: "Registrations" },
 ];
 
-function TabsTrigger({ value, title }: Readonly<TabConfig>) {
-  return (
-    <UiTabsTrigger key={value} value={value} title={title}>
-      <Badge variant="secondary" className="text-md w-[8rem] py-1">
-        {title}
-      </Badge>
-    </UiTabsTrigger>
-  );
-}
-
-function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
-  return (
-    <UiTabsContent key={value} value={value}>
-      <div className="flex h-full w-full flex-col items-center justify-center">
-        {children}
-      </div>
-    </UiTabsContent>
-  );
-}
-
 export default function OrganizationTournamentsTournamentLayout(
   props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
 ) {
@@ -68,17 +50,12 @@ export default function OrganizationTournamentsTournamentLayout(
     <div className="flex h-full w-full flex-col items-center justify-center">
       {header}
       {modal}
-      <Card className="flex h-[72vh] w-11/12 flex-col justify-center">
+      <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-x-0 border-b border-t">
         <Tabs
-          key="tabs"
-          className="flex h-full w-full flex-row items-center"
+          className="flex h-full w-full flex-col items-center"
           defaultValue="details"
         >
-          <TabsList
-            key="tabslist"
-            defaultValue="details"
-            className="flex flex-col gap-4"
-          >
+          <TabsList key="tabslist" defaultValue="details" className="py-2">
             {tabs.map(({ value, title }) => (
               <TabsTrigger key={value} value={value} title={title} />
             ))}
@@ -92,5 +69,28 @@ export default function OrganizationTournamentsTournamentLayout(
         </Tabs>
       </Card>
     </div>
+  );
+}
+
+function TabsTrigger({ value, title }: Readonly<TabConfig>) {
+  return (
+    <UiTabsTrigger key={value} value={value} title={title}>
+      <Badge variant="secondary" className="text-md w-[8rem] py-1">
+        {title}
+      </Badge>
+    </UiTabsTrigger>
+  );
+}
+
+function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
+  return (
+    <UiTabsContent
+      key={value}
+      value={value}
+      className="flex h-full w-full flex-col items-center justify-center"
+    >
+      <CardHeader className="capitalize">{value}</CardHeader>
+      <CardContent className="min-h-svh">{children}</CardContent>
+    </UiTabsContent>
   );
 }
