@@ -27,7 +27,7 @@
     "@clerk/clerk-react": "catalog:",
     "@clerk/nextjs": "catalog:",
     "@trpc/server": "catalog:",
-    "superjson": "2.2.1",
+    "superjson": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {

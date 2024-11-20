@@ -57,6 +57,11 @@ export default async function OrganizationTournamentHeader(
           tournament={tournament}
           organization={organization}
         />
+
+        <TournamentDetailChips
+          org_slug={org_slug}
+          tournament_id={tournament_id}
+        />
       </OrganizationHeader>
     </>
   );
@@ -128,15 +133,11 @@ export function TournamentDetailChips(
 
   return (
     <div className="flex w-full flex-row items-center justify-center gap-1">
-      <Chip variant="solid">Solid</Chip>
-      <Chip variant="bordered">Bordered</Chip>
-      <Chip variant="light">Light</Chip>
-      <Chip variant="flat">Flat</Chip>
       <Link
         prefetch={true}
         href={`/organizations/${org_slug}/tournaments/${tournament_id}/register`}
       >
-        <Chip>Register</Chip>
+        <Chip variant="light">Register</Chip>
       </Link>
     </div>
   );
