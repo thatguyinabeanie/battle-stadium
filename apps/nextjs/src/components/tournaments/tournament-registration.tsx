@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-import type { Profile } from "@battle-stadium/db/schema";
 import { Button, Input } from "@battle-stadium/ui";
 
 import type { PostTournamentRegistrationResponse } from "~/app/server-actions/tournaments/actions";
@@ -12,17 +11,17 @@ import type { PostTournamentRegistrationResponse } from "~/app/server-actions/to
 interface TournamentRegistrationProps {
   org_slug: string;
   tournament_id: number;
-  profiles: Profile[];
+  children?: React.ReactNode;
   tournamentRegistrationAction: (
     formData: FormData,
   ) => Promise<PostTournamentRegistrationResponse | undefined>;
 }
 
-export default function TournamentRegistration({
+export default function TournamentRegistration ({
   org_slug,
   tournament_id,
-  profiles,
   tournamentRegistrationAction,
+  children,
 }: Readonly<TournamentRegistrationProps>) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -44,57 +43,23 @@ export default function TournamentRegistration({
   return (
     <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
       <div>
-        Register for {org_slug} tournament {tournament_id}
+        Register for { org_slug } tournament { tournament_id }
       </div>
 
-      <form action={registerForTournament} className="grid grid-cols-1 gap-4">
+      <form action={ registerForTournament } className="grid grid-cols-1 gap-4">
         <Input name="ign" />
 
-        <ProfilesAutocomplete profiles={profiles} />
+        { children }
 
         <Button
           aria-label="Submit"
           color="primary"
           type="submit"
-          disabled={loading}
+          disabled={ loading }
         >
-          {loading ? "Submitting..." : "Submit"}
+          { loading ? "Submitting..." : "Submit" }
         </Button>
       </form>
-    </div>
-  );
-}
-
-interface ProfilesAutocompleteProps {
-  profiles: Profile[];
-}
-
-function ProfilesAutocomplete({
-  profiles,
-}: Readonly<ProfilesAutocompleteProps>) {
-  return (
-    <div>
-      <Input
-        type="text"
-        name="profile"
-        list="profiles"
-        placeholder="Select profile"
-        required
-        aria-label="Select your Profile"
-        aria-description="profile-description"
-      />
-
-      <div id="profile-description" className="sr-only">
-        Select your profile from the list of available profiles
-      </div>
-
-      <div className="pt-4">
-        <datalist id="profiles">
-          {profiles.map((profile) => (
-            <option key={profile.id} value={profile.username} />
-          ))}
-        </datalist>
-      </div>
     </div>
   );
 }

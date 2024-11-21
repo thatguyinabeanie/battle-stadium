@@ -19,6 +19,7 @@ interface OrganizationTournamentsTournamentLayoutProps {
   registrations: ReactNode;
   header: ReactNode;
 }
+
 interface TabConfig {
   value: string;
   title?: string;
@@ -32,14 +33,14 @@ const tabs: TabConfig[] = [
   { value: "registrations", title: "Registrations" },
 ];
 
-export default function OrganizationTournamentsTournamentLayout(
+export default function OrganizationTournamentsTournamentLayout (
   props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
 ) {
   const { children, header, standings, pairings, metagame, registrations } =
     props;
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      {header}
+      { header }
       <Tabs
         className="flex h-full w-full flex-col items-center"
         defaultValue="details"
@@ -50,51 +51,51 @@ export default function OrganizationTournamentsTournamentLayout(
             defaultValue="details"
             className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-b-2"
           >
-            {tabs.map(({ value, title }) => (
-              <TabsTrigger key={value} value={value} title={title} />
-            ))}
+            { tabs.map(({ value, title }) => (
+              <TabsTrigger key={ value } value={ value } title={ title } />
+            )) }
           </TabsList>
         </div>
 
         <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-0">
-          <TabsContent value="details">{children}</TabsContent>
-          <TabsContent value="standings">{standings}</TabsContent>
-          <TabsContent value="pairings">{pairings}</TabsContent>
-          <TabsContent value="metagame">{metagame}</TabsContent>
-          <TabsContent value="registrations">{registrations}</TabsContent>
+          <TabsContent value="details">{ children }</TabsContent>
+          <TabsContent value="standings">{ standings }</TabsContent>
+          <TabsContent value="pairings">{ pairings }</TabsContent>
+          <TabsContent value="metagame">{ metagame }</TabsContent>
+          <TabsContent value="registrations">{ registrations }</TabsContent>
         </Card>
       </Tabs>
     </div>
   );
 }
 
-function TabsTrigger({ value, title }: Readonly<TabConfig>) {
+function TabsTrigger ({ value, title }: Readonly<TabConfig>) {
   return (
     <UiTabsTrigger
-      key={value}
-      value={value}
-      title={title}
+      key={ value }
+      value={ value }
+      title={ title }
       className="px- w-[6rem] py-1 lg:w-[7.5rem]"
     >
       <Badge
         variant="secondary"
         className="md:text-md w-[6rem] px-1 py-1 text-sm lg:w-[7.5rem]"
       >
-        {title}
+        { title }
       </Badge>
     </UiTabsTrigger>
   );
 }
 
-function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
+function TabsContent ({ value, children }: TabConfig & { children: ReactNode }) {
   return (
     <UiTabsContent
-      key={value}
-      value={value}
+      key={ value }
+      value={ value }
       className="flex h-full w-full flex-col items-center justify-center"
     >
-      <CardHeader className="capitalize">{value}</CardHeader>
-      <CardContent className="min-h-svh">{children}</CardContent>
+      <CardHeader className="capitalize">{ value }</CardHeader>
+      <CardContent className="min-h-svh">{ children }</CardContent>
     </UiTabsContent>
   );
 }
