@@ -7,7 +7,7 @@ settings:
 catalogs:
   auth:
     '@auth/core':
-      specifier: ^0
+      specifier: ^0.37
       version: 0.37.4
     '@auth/drizzle-adapter':
       specifier: ^1
