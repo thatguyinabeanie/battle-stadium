@@ -19,6 +19,12 @@ interface OrganizationTournamentsTournamentLayoutProps {
   registrations: ReactNode;
   header: ReactNode;
 }
+
+/**
+ * Configuration for tournament page navigation tabs
+ * @property value - Unique identifier for the tab
+ * @property title - Display text for the tab (optional)
+ */
 interface TabConfig {
   value: string;
   title?: string;
@@ -32,6 +38,8 @@ const tabs: TabConfig[] = [
   { value: "registrations", title: "Registrations" },
 ];
 
+const DEFAULT_TAB = "details";
+
 export default function OrganizationTournamentsTournamentLayout(
   props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
 ) {
@@ -42,12 +50,12 @@ export default function OrganizationTournamentsTournamentLayout(
       {header}
       <Tabs
         className="flex h-full w-full flex-col items-center"
-        defaultValue="details"
+        defaultValue={DEFAULT_TAB}
+        aria-label="Tournament Information Tabs"
       >
         <div className="flex w-full flex-col items-center overflow-auto">
           <TabsList
-            key="tabslist"
-            defaultValue="details"
+            defaultValue={DEFAULT_TAB}
             className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-b-2"
           >
             {tabs.map(({ value, title }) => (
@@ -74,7 +82,7 @@ function TabsTrigger({ value, title }: Readonly<TabConfig>) {
       key={value}
       value={value}
       title={title}
-      className="px- w-[6rem] py-1 lg:w-[7.5rem]"
+      className="w-[6rem] py-1 lg:w-[7.5rem]"
     >
       <Badge
         variant="secondary"
@@ -89,7 +97,6 @@ function TabsTrigger({ value, title }: Readonly<TabConfig>) {
 function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
   return (
     <UiTabsContent
-      key={value}
       value={value}
       className="flex h-full w-full flex-col items-center justify-center"
     >

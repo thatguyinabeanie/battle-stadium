@@ -1,54 +1,75 @@
-import type { Profile } from "@battle-stadium/db/schema";
-import { Button, Input } from "@battle-stadium/ui";
+"use client";
 
-import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
-import ProfilesAutocomplete from "./profiles-autocomplete";
+import { useState } from "react";
+import Form from "next/form";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+
+import { Badge, Button } from "@battle-stadium/ui";
+
+import type { PostTournamentRegistrationResponse } from "~/app/server-actions/tournaments/actions";
 
 interface TournamentRegistrationProps {
   org_slug: string;
   tournament_id: number;
-  profiles: Profile[];
+  children?: React.ReactNode;
+  tournamentRegistrationAction: (
+    formData: FormData,
+  ) => Promise<PostTournamentRegistrationResponse | undefined>;
+}
+export function TournamentRegistrationForm(
+  props: Readonly<TournamentRegistrationProps>,
+) {
+  const { children } = props;
+  const { loading, registerForTournament } =
+    useTournamentRegistrationAction(props);
+
+  return (
+    <Form action={registerForTournament} className="grid grid-cols-1 gap-4">
+      {children}
+
+      <Button
+        aria-label="Submit"
+        color="primary"
+        type="submit"
+        disabled={loading}
+        className="flex items-center justify-center"
+      >
+        <Badge
+          variant="secondary"
+          className="md:text-md w-[6rem] px-1 py-1 text-sm lg:w-[7.5rem]"
+        >
+          {loading ? "Submitting..." : "Submit"}
+        </Badge>
+      </Button>
+    </Form>
+  );
 }
 
-export default function TournamentRegistration({
+function useTournamentRegistrationAction({
+  tournamentRegistrationAction,
   org_slug,
   tournament_id,
-  profiles,
-}: Readonly<TournamentRegistrationProps>) {
+}: Omit<TournamentRegistrationProps, "children">) {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const registerForTournament = async (formData: FormData) => {
-    "use server";
-    const in_game_name = formData.get("ign") as string;
-    const profile = formData.get("profile") as string;
-    const show_country_flag =
-      (formData.get("country_flag") as string) === "true";
-
-    const profile_id = profiles.find((p) => p.username == profile)?.id;
-
-    if (profile_id) {
-      await postTournamentRegistration({
-        tournamentId: tournament_id,
-        inGameName: in_game_name,
-        profileId: profile_id,
-        showCountryFlag: show_country_flag,
-      });
+    setLoading(true);
+    try {
+      await tournamentRegistrationAction(formData);
+      toast.success("Registration successful!");
+      router.push(`/organizations/${org_slug}/tournaments/${tournament_id}`);
+    } catch (error: unknown) {
+      console.log(`Registration failed. Please try again.`, error);
+      toast.error(`Registration failed. Please try again.`);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return (
-    <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
-      <div>
-        Register for {org_slug} tournament {tournament_id}
-      </div>
-
-      <form action={registerForTournament} className="grid grid-cols-1 gap-4">
-        <Input name="ign" />
-
-        <ProfilesAutocomplete profiles={profiles} />
-
-        <Button aria-label="Submit" color="primary" type="submit">
-          Submit
-        </Button>
-      </form>
-    </div>
-  );
+  return {
+    loading,
+    registerForTournament,
+  };
 }

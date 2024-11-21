@@ -40,19 +40,19 @@
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
-    "@neondatabase/serverless": "^0.10.3",
-    "drizzle-orm": "^0.35.1",
-    "drizzle-typebox": "^0.1.1",
-    "drizzle-zod": "^0.5.1",
-    "postgres": "^3.4.5",
+    "@neondatabase/serverless": "catalog:db",
+    "drizzle-orm": "catalog:db",
+    "drizzle-typebox": "catalog:db",
+    "drizzle-zod": "catalog:db",
+    "postgres": "catalog:db",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@battle-stadium/eslint-config": "workspace:*",
     "@battle-stadium/prettier-config": "workspace:*",
     "@battle-stadium/tsconfig": "workspace:*",
-    "dotenv-cli": "^7.4.2",
-    "drizzle-kit": "^0.26.2",
+    "dotenv-cli": "catalog:",
+    "drizzle-kit": "catalog:db",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

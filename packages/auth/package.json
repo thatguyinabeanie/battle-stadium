@@ -23,13 +23,13 @@
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
-    "@auth/core": "catalog:",
-    "@auth/drizzle-adapter": "1.4.2",
+    "@auth/core": "catalog:auth",
+    "@auth/drizzle-adapter": "catalog:auth",
     "@battle-stadium/db": "workspace:*",
-    "@t3-oss/env-nextjs": "catalog:",
-    "next": "catalog:",
-    "react": "catalog:react18",
-    "react-dom": "catalog:react18",
+    "@t3-oss/env-nextjs": "catalog:next",
+    "next": "catalog:next",
+    "react": "catalog:react",
+    "react-dom": "catalog:react",
     "zod": "catalog:"
   },
   "devDependencies": {

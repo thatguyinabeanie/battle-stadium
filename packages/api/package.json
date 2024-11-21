@@ -26,10 +26,10 @@
   "dependencies": {
     "@battle-stadium/db": "workspace:*",
     "@battle-stadium/validators": "workspace:*",
-    "@clerk/backend": "catalog:",
-    "@clerk/clerk-react": "catalog:",
-    "@clerk/nextjs": "catalog:",
-    "@trpc/server": "catalog:",
+    "@clerk/backend": "catalog:auth",
+    "@clerk/clerk-react": "catalog:auth",
+    "@clerk/nextjs": "catalog:auth",
+    "@trpc/server": "catalog:trpc",
     "superjson": "catalog:",
     "zod": "catalog:"
   },

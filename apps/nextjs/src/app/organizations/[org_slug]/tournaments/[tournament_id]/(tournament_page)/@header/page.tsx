@@ -4,27 +4,30 @@ import { format, parseISO } from "date-fns";
 import type { Organization, Tournament } from "@battle-stadium/db/schema";
 import { Chip } from "@battle-stadium/ui";
 
-import type { OrganizationTournamentProps } from "~/types";
+import type {
+  OrganizationTournamentParams,
+  OrganizationTournamentProps,
+} from "~/types";
 import { getSingleOrganizationSingleTournament } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
 export const revalidate = 300;
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return await generateOrganizationTournamentsStaticParams();
 }
 
 export default async function OrganizationTournamentHeader(
-  props: Readonly<OrganizationTournamentProps>,
+  props: Readonly<OrganizationTournamentParams>,
 ) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
   const { organization, tournament } =
     await getSingleOrganizationSingleTournament(org_slug, tournament_id);
 
-  if (!organization || !tournament) {
+  if (!(organization && tournament)) {
     return <div>404 - Not Found</div>;
   }
 
@@ -49,6 +52,7 @@ export default async function OrganizationTournamentHeader(
     </>
   );
 }
+
 interface TournamentDetailsProps {
   tournament: Tournament;
   organization: Organization;
@@ -105,13 +109,7 @@ function formatTimestamp(timestamp?: string | null, formatStr = "PPp") {
   return format(parseISO(timestamp), formatStr);
 }
 
-interface TournamentDetailChipsProps {
-  org_slug: string;
-  tournament_id: number;
-}
-export function TournamentDetailChips(
-  props: Readonly<TournamentDetailChipsProps>,
-) {
+function TournamentDetailChips(props: Readonly<OrganizationTournamentProps>) {
   const { org_slug, tournament_id } = props;
 
   return (
@@ -119,6 +117,7 @@ export function TournamentDetailChips(
       <Link
         prefetch={true}
         href={`/organizations/${org_slug}/tournaments/${tournament_id}/register`}
+        aria-label="Register for tournament"
       >
         <Chip variant="light">Register</Chip>
       </Link>

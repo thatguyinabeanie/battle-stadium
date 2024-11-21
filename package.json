@@ -5,7 +5,7 @@
     "node": "20.x",
     "pnpm": "^9"
   },
-  "packageManager": "pnpm@9.12.1",
+  "packageManager": "pnpm@9.14.2",
   "scripts": {
     "build": "turbo run build",
     "clean": "git clean -xdf node_modules",
@@ -30,9 +30,9 @@
   },
   "devDependencies": {
     "@battle-stadium/prettier-config": "workspace:*",
-    "@turbo/gen": "^2.3.0",
+    "@turbo/gen": "catalog:turbo",
     "prettier": "catalog:",
-    "turbo": "^2.3.0",
+    "turbo": "catalog:turbo",
     "typescript": "catalog:"
   },
   "prettier": "@battle-stadium/prettier-config"

@@ -7,8 +7,6 @@ import { GeistSans } from "geist/font/sans";
 
 import { cn, ThemeProvider } from "@battle-stadium/ui";
 
-// import { cn, ThemeProvider, ThemeToggle } from "@battle-stadium/ui";
-
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 import { HydrateClient } from "~/trpc/server";
@@ -106,10 +104,6 @@ export default async function RootLayout({
                   </div>
                 </div>
               </TRPCReactProvider>
-
-              {/* <div className="absolute bottom-4 right-4">
-                <ThemeToggle />
-              </div> */}
 
               <Cookies isSignedIn={!!sessionId} userId={userId} />
 
