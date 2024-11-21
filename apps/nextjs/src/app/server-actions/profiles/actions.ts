@@ -3,12 +3,14 @@
 import "server-only";
 
 import type { FetchOptions } from "openapi-fetch";
+import { redirect } from "next/navigation";
 
 import { db, eq } from "@battle-stadium/db";
 import { profiles } from "@battle-stadium/db/schema";
 
 import type { paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
+import { getAccountMe } from "../accounts/actions";
 
 export async function getProfiles() {
   return await db.query.profiles.findMany();
@@ -26,9 +28,19 @@ export async function getProfilesByAccountId(id: number) {
   });
 }
 
+type RedirectUrl = `/${string}`;
+export async function getProfilesMe({
+  redirectTo,
+}: { redirectTo?: RedirectUrl } = {}) {
+  const me = await getAccountMe();
+  if (!me) {
+    redirect(redirectTo ?? "/sign-in");
+  }
+  return getProfilesByAccountId(me.id);
+}
+
 export async function createProfile(
   username: string,
-  accountId: number,
   options?: FetchOptions<paths["/profiles"]["post"]>,
 ) {
   const profileOptions: FetchOptions<paths["/profiles"]["post"]> = {

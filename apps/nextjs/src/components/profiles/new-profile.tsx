@@ -4,18 +4,13 @@ import { useRouter } from "next/navigation";
 
 import { Button, Input } from "@battle-stadium/ui";
 
-import type { AccountMe } from "~/lib/api";
 import { createProfile } from "~/app/server-actions/profiles/actions";
 
-interface NewProfileProps {
-  me: AccountMe;
-}
-
-export default function NewProfile({ me }: Readonly<NewProfileProps>) {
+export default function NewProfile() {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
-    await createProfile(formData.get("profile") as string, me.id);
+    await createProfile(formData.get("profile") as string);
     router.push("/dashboard?tab=profiles");
   };
 

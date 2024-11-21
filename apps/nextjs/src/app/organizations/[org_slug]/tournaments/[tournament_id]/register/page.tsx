@@ -1,11 +1,9 @@
-import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 
 import { Input } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentParams } from "~/types";
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
-import { getProfilesByAccountId } from "~/app/server-actions/profiles/actions";
+import { getProfilesMe } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 import TournamentRegistration from "~/components/tournaments/tournament-registration";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
@@ -40,12 +38,7 @@ export default async function Register(
 function tournamentRegistrationAction(tournament_id: number) {
   return async (formData: FormData) => {
     "use server";
-
-    const me = await getAccountMe();
-    if (!me) {
-      redirect("/sign-in");
-    }
-    const profiles = await getProfilesByAccountId(me.id);
+    const profiles = await getProfilesMe();
 
     const in_game_name = formData.get("ign") as string;
     const profile = formData.get("profile") as string;
@@ -68,11 +61,7 @@ function tournamentRegistrationAction(tournament_id: number) {
 }
 
 async function ProfileSelector() {
-  const me = await getAccountMe();
-  if (!me) {
-    redirect("/sign-in");
-  }
-  const profiles = await getProfilesByAccountId(me.id);
+  const profiles = await getProfilesMe();
   return (
     <div>
       <Input
