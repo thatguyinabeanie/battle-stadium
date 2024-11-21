@@ -32,7 +32,7 @@ export default function TournamentRegistration({
       await tournamentRegistrationAction(formData);
       toast.success("Registration successful!");
       setLoading(false);
-      router.back();
+      router.push(`/organizations/${org_slug}/tournaments/${tournament_id}`);
     } catch (error: unknown) {
       toast.error(`Registration failed. Please try again. ${error as Error}`);
     } finally {
