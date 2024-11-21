@@ -47,7 +47,10 @@ export default async function OrganizationDetailPage(
 
   return (
     <>
-      <OrganizationHeader organization={organization}>
+      <OrganizationHeader
+        organization={organization}
+        classNames={{ wrapper: "my-8" }}
+      >
         <div className="mx-4 flex h-full w-full flex-col items-center justify-between py-2 text-center">
           <h1 className="text-2xl font-semibold">{organization.name}</h1>
           <p>{organization.description}</p>
