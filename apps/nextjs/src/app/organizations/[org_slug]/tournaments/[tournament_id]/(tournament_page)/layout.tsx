@@ -44,11 +44,11 @@ export default function OrganizationTournamentsTournamentLayout(
         className="flex h-full w-full flex-col items-center"
         defaultValue="details"
       >
-        <div className="w-full overflow-auto">
+        <div className="flex w-full flex-col items-center overflow-auto">
           <TabsList
             key="tabslist"
             defaultValue="details"
-            className="flex flex-row gap-2 overflow-x-visible py-2"
+            className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-y-2"
           >
             {tabs.map(({ value, title }) => (
               <TabsTrigger key={value} value={value} title={title} />
@@ -56,7 +56,7 @@ export default function OrganizationTournamentsTournamentLayout(
           </TabsList>
         </div>
 
-        <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-x-0 border-b border-t">
+        <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-0">
           <TabsContent value="details">{children}</TabsContent>
           <TabsContent value="standings">{standings}</TabsContent>
           <TabsContent value="pairings">{pairings}</TabsContent>
