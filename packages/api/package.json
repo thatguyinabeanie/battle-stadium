@@ -29,7 +29,7 @@
     "@clerk/backend": "catalog:auth",
     "@clerk/clerk-react": "catalog:auth",
     "@clerk/nextjs": "catalog:auth",
-    "@trpc/server": "catalog:",
+    "@trpc/server": "catalog:trpc",
     "superjson": "catalog:",
     "zod": "catalog:"
   },
