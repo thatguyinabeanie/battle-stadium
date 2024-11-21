@@ -55,7 +55,6 @@ export default function OrganizationTournamentsTournamentLayout(
       >
         <div className="flex w-full flex-col items-center overflow-auto">
           <TabsList
-            key="tabslist"
             defaultValue={DEFAULT_TAB}
             className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-b-2"
           >
@@ -98,7 +97,6 @@ function TabsTrigger({ value, title }: Readonly<TabConfig>) {
 function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
   return (
     <UiTabsContent
-      key={value}
       value={value}
       className="flex h-full w-full flex-col items-center justify-center"
     >
