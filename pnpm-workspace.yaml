@@ -5,22 +5,17 @@ packages:
 
 catalog:
   "@types/node": ^20
-  "@clerk/backend": "^1"
-  "@clerk/clerk-react": "^5"
-  "@clerk/nextjs": "^6"
-  "@auth/core": ^0
   "@tanstack/react-query": ^5
   "@trpc/client": next
   "@trpc/react-query": next
   "@trpc/server": next
-  "@t3-oss/env-nextjs": ^0
+
   "@tanstack/react-table": ^8
   "tailwind-merge": ^2
   "tailwindcss-animate": ^1
   "tailwind-variants": ^0
   eslint: ^9
   postcss: ^8
-  next: canary
   prettier: ^3
   tailwindcss: ^3
   typescript: ^5
@@ -28,11 +23,29 @@ catalog:
   superjson: ^2
 
 catalogs:
+  auth:
+    "@auth/core": ^0
+    "@auth/drizzle-adapter": ^1
+    "@clerk/backend": "^1"
+    "@clerk/clerk-react": "^5"
+    "@clerk/nextjs": "^6"
+    jose: ^5
+    "js-cookie": ^3
+    cookie: ^1
+    "@types/js-cookie": ^3
+
+  next:
+    "@next/third-parties": ^15
+    next: canary
+    "@types/node": ^20
+    "@t3-oss/env-nextjs": ^0
+
   react18:
     react: ^18
     react-dom: ^18
     "@types/react": ^18
     "@types/react-dom": ^18
+
   react19:
     react: rc
     react-dom: rc

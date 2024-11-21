@@ -26,9 +26,9 @@
   "dependencies": {
     "@battle-stadium/db": "workspace:*",
     "@battle-stadium/validators": "workspace:*",
-    "@clerk/backend": "catalog:",
-    "@clerk/clerk-react": "catalog:",
-    "@clerk/nextjs": "catalog:",
+    "@clerk/backend": "catalog:auth",
+    "@clerk/clerk-react": "catalog:auth",
+    "@clerk/nextjs": "catalog:auth",
     "@trpc/server": "catalog:",
     "superjson": "catalog:",
     "zod": "catalog:"

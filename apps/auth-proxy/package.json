@@ -15,7 +15,7 @@
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
-    "@auth/core": "catalog:"
+    "@auth/core": "catalog:auth"
   },
   "devDependencies": {
     "@battle-stadium/eslint-config": "workspace:*",
@@ -24,8 +24,8 @@
     "@battle-stadium/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "eslint": "catalog:",
-    "h3": "^1.13.0",
-    "nitropack": "^2.9.7",
+    "h3": "^1",
+    "nitropack": "^2",
     "prettier": "catalog:",
     "typescript": "catalog:"
   }
