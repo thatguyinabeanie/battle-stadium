@@ -17,7 +17,6 @@ interface OrganizationTournamentsTournamentLayoutProps {
   pairings: ReactNode;
   metagame: ReactNode;
   registrations: ReactNode;
-  modal: ReactNode;
   header: ReactNode;
 }
 interface TabConfig {
@@ -36,22 +35,12 @@ const tabs: TabConfig[] = [
 export default function OrganizationTournamentsTournamentLayout(
   props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
 ) {
-  const {
-    children,
-    modal,
-    header,
-    standings,
-    pairings,
-    metagame,
-    registrations,
-  } = props;
+  const { children, header, standings, pairings, metagame, registrations } =
+    props;
   // "border border-1 border-x-0 border-t-0"
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      {modal}
-
       {header}
-
       <Tabs
         className="flex h-full w-full flex-col items-center"
         defaultValue="details"
