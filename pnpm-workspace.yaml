@@ -45,8 +45,9 @@ catalogs:
     "expo-web-browser": ^14
 
   next:
-    "@next/third-parties": ^15
     next: canary
+    "@next/third-parties": canary
+    "@next/eslint-plugin-next": canary
     "@types/node": ^20
     "@t3-oss/env-nextjs": ^0
 

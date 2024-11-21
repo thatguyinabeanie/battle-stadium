@@ -16,10 +16,10 @@
     "vercel:pull": "vercel env pull .env.development.local",
     "with-env": "dotenv -e ../../.env --"
   },
-  "prettier": "@battle-stadium/prettier-config",
   "engines": {
     "node": "20.x"
   },
+  "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "@battle-stadium/api": "workspace:*",
     "@battle-stadium/auth": "workspace:*",
