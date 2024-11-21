@@ -15,11 +15,11 @@ import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-
 export const revalidate = 300;
 export const dynamicParams = false;
 
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   return await generateOrganizationTournamentsStaticParams();
 }
 
-export default async function OrganizationTournamentHeader (
+export default async function OrganizationTournamentHeader(
   props: Readonly<OrganizationTournamentParams>,
 ) {
   const params = await props.params;
@@ -34,19 +34,19 @@ export default async function OrganizationTournamentHeader (
   return (
     <>
       <OrganizationHeader
-        organization={ organization }
-        classNames={ {
+        organization={organization}
+        classNames={{
           wrapper: "w-11/12 my-4",
-        } }
+        }}
       >
         <TournamentDetails
-          tournament={ tournament }
-          organization={ organization }
+          tournament={tournament}
+          organization={organization}
         />
 
         <TournamentDetailChips
-          org_slug={ org_slug }
-          tournament_id={ tournament_id }
+          org_slug={org_slug}
+          tournament_id={tournament_id}
         />
       </OrganizationHeader>
     </>
@@ -58,37 +58,37 @@ interface TournamentDetailsProps {
   organization: Organization;
 }
 
-function TournamentDetails ({
+function TournamentDetails({
   tournament,
   organization,
 }: Readonly<TournamentDetailsProps>) {
   return (
     <div className="mx-4 flex h-full w-full flex-col items-center justify-between text-center">
-      <h1 className="w-full text-2xl font-semibold">{ tournament.name }</h1>
+      <h1 className="w-full text-2xl font-semibold">{tournament.name}</h1>
 
       <div className="pt-2" />
 
       <div className="grid w-full grid-cols-2 justify-center gap-2">
-        <LeftRightGrid left="Presented By:" right={ organization.name } />
+        <LeftRightGrid left="Presented By:" right={organization.name} />
         <LeftRightGrid
           left="Date:"
-          right={ formatTimestamp(tournament.startAt, "PP") }
+          right={formatTimestamp(tournament.startAt, "PP")}
         />
         <LeftRightGrid
           left="Start Time:"
-          right={ formatTimestamp(tournament.startAt, "p") }
+          right={formatTimestamp(tournament.startAt, "p")}
         />
         <LeftRightGrid
           left="Check In:"
-          right={ formatTimestamp(tournament.checkInStartAt, "p") }
+          right={formatTimestamp(tournament.checkInStartAt, "p")}
         />
-        <LeftRightGrid left="Rounds:" right={ 9 } />
+        <LeftRightGrid left="Rounds:" right={9} />
       </div>
     </div>
   );
 }
 
-function LeftRightGrid ({
+function LeftRightGrid({
   left,
   right,
 }: {
@@ -97,30 +97,30 @@ function LeftRightGrid ({
 }) {
   return (
     <>
-      <p className="md:text-md text-right text-sm">{ left }</p>
-      <p className="md:text-md text-left text-sm">{ right }</p>
+      <p className="md:text-md text-right text-sm">{left}</p>
+      <p className="md:text-md text-left text-sm">{right}</p>
     </>
   );
 }
-function formatTimestamp (timestamp?: string | null, formatStr = "PPp") {
+function formatTimestamp(timestamp?: string | null, formatStr = "PPp") {
   if (!timestamp) {
     return "N/A";
   }
   return format(parseISO(timestamp), formatStr);
 }
 
-function TournamentDetailChips (props: Readonly<OrganizationTournamentProps>) {
+function TournamentDetailChips(props: Readonly<OrganizationTournamentProps>) {
   const { org_slug, tournament_id } = props;
 
   return (
     <div className="flex w-full flex-row items-center justify-center gap-1">
       <Link
-        prefetch={ true }
-        href={ `/organizations/${org_slug}/tournaments/${tournament_id}/register` }
+        prefetch={true}
+        href={`/organizations/${org_slug}/tournaments/${tournament_id}/register`}
         aria-label="Register for tournament"
       >
         <Chip variant="light">Register</Chip>
       </Link>
-    </div >
+    </div>
   );
 }

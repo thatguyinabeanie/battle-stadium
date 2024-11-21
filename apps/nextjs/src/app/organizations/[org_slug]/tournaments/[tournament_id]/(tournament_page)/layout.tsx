@@ -20,6 +20,11 @@ interface OrganizationTournamentsTournamentLayoutProps {
   header: ReactNode;
 }
 
+/**
+ * Configuration for tournament page navigation tabs
+ * @property value - Unique identifier for the tab
+ * @property title - Display text for the tab (optional)
+ */
 interface TabConfig {
   value: string;
   title?: string;
