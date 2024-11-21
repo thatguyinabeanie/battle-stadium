@@ -1,5 +1,7 @@
 "use server";
 
+import "server-only";
+
 import type { FetchOptions } from "openapi-fetch";
 
 import { db, eq } from "@battle-stadium/db";

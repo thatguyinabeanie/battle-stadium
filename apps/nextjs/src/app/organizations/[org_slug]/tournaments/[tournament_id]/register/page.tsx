@@ -1,32 +1,35 @@
 import { redirect } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 
+import { Input } from "@battle-stadium/ui";
+
 import type { OrganizationTournamentParams } from "~/types";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import { getProfilesByAccountId } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 import TournamentRegistration from "~/components/tournaments/tournament-registration";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
-import { Input } from "@battle-stadium/ui";
 
 export const revalidate = 300;
 export const dynamicParams = true;
 
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   return await generateOrganizationTournamentsStaticParams();
 }
 
-export default async function Register (
+export default async function Register(
   props: Readonly<OrganizationTournamentParams>,
 ) {
   const params = await props.params;
-  const tournamentRegistration = tournamentRegistrationAction(params.tournament_id);
+  const tournamentRegistration = tournamentRegistrationAction(
+    params.tournament_id,
+  );
   return (
     <>
       <ToastContainer />
       <TournamentRegistration
-        { ...params }
-        tournamentRegistrationAction={ tournamentRegistration }
+        {...params}
+        tournamentRegistrationAction={tournamentRegistration}
       >
         <ProfileSelector />
       </TournamentRegistration>
@@ -34,9 +37,7 @@ export default async function Register (
   );
 }
 
-function tournamentRegistrationAction (
-  tournament_id: number,
-) {
+function tournamentRegistrationAction(tournament_id: number) {
   return async (formData: FormData) => {
     "use server";
 
@@ -66,7 +67,7 @@ function tournamentRegistrationAction (
   };
 }
 
-async function ProfileSelector () {
+async function ProfileSelector() {
   const me = await getAccountMe();
   if (!me) {
     redirect("/sign-in");
@@ -90,14 +91,14 @@ async function ProfileSelector () {
 
       <div className="pt-4">
         <datalist id="profiles">
-          { profiles.map((profile) => (
+          {profiles.map((profile) => (
             <option
-              key={ profile.id }
-              value={ profile.username }
-              label={ profile.username }
-              data-profile-id={ profile.id }
+              key={profile.id}
+              value={profile.username}
+              label={profile.username}
+              data-profile-id={profile.id}
             />
-          )) }
+          ))}
         </datalist>
       </div>
     </div>
