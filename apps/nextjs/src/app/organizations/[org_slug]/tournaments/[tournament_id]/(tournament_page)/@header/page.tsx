@@ -4,7 +4,10 @@ import { format, parseISO } from "date-fns";
 import type { Organization, Tournament } from "@battle-stadium/db/schema";
 import { Chip } from "@battle-stadium/ui";
 
-import type { OrganizationTournamentProps } from "~/types";
+import type {
+  OrganizationTournamentParams,
+  OrganizationTournamentProps,
+} from "~/types";
 import { getSingleOrganizationSingleTournament } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
@@ -17,7 +20,7 @@ export async function generateStaticParams() {
 }
 
 export default async function OrganizationTournamentHeader(
-  props: Readonly<OrganizationTournamentProps>,
+  props: Readonly<OrganizationTournamentParams>,
 ) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
@@ -105,13 +108,7 @@ function formatTimestamp(timestamp?: string | null, formatStr = "PPp") {
   return format(parseISO(timestamp), formatStr);
 }
 
-interface TournamentDetailChipsProps {
-  org_slug: string;
-  tournament_id: number;
-}
-export function TournamentDetailChips(
-  props: Readonly<TournamentDetailChipsProps>,
-) {
+function TournamentDetailChips(props: Readonly<OrganizationTournamentProps>) {
   const { org_slug, tournament_id } = props;
 
   return (

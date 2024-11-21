@@ -1,4 +1,4 @@
-import type { OrganizationTournamentProps } from "~/types";
+import type { OrganizationTournamentParams } from "~/types";
 import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import { getTournament } from "~/app/server-actions/tournaments/actions";
 
@@ -6,7 +6,7 @@ export const revalidate = 300;
 export const dynamicParams = true;
 
 export async function generateMetadata(
-  props: Readonly<OrganizationTournamentProps>,
+  props: Readonly<OrganizationTournamentParams>,
 ) {
   const params = await props.params;
   const result = await getTournament(params.tournament_id);
@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 }
 
 export default function OrganizationTournamentDetailsPage(
-  _props: Readonly<OrganizationTournamentProps>,
+  _props: Readonly<OrganizationTournamentParams>,
 ) {
   return (
     <>

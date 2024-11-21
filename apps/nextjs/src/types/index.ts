@@ -22,8 +22,10 @@ export interface DashboardLayoutProps extends ChildrenProps {
 }
 
 export interface OrganizationTournamentProps {
-  params: Promise<{
-    org_slug: string;
-    tournament_id: number;
-  }>;
+  org_slug: string;
+  tournament_id: number;
+}
+
+export interface OrganizationTournamentParams {
+  params: Promise<OrganizationTournamentProps>;
 }

@@ -13,7 +13,7 @@ import {
 import type { components, paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
-export async function getTournament (tournament_id: number) {
+export async function getTournament(tournament_id: number) {
   const result = await db
     .select()
     .from(tournaments)
@@ -23,13 +23,13 @@ export async function getTournament (tournament_id: number) {
 
   return result.length > 0 && result[0]
     ? {
-      tournament: result[0].tournaments,
-      organization: result[0].organizations,
-    }
+        tournament: result[0].tournaments,
+        organization: result[0].organizations,
+      }
     : null;
 }
 
-export async function getTournaments (page = 1, pageSize = 20) {
+export async function getTournaments(page = 1, pageSize = 20) {
   return await db.query.tournaments.findMany({
     orderBy: (tournaments, { desc }) => desc(tournaments.startAt),
     limit: pageSize,
@@ -52,7 +52,7 @@ export interface PostTournamentRegistrationResponse {
   show_country_flag?: boolean;
 }
 
-export async function postTournamentRegistration (
+export async function postTournamentRegistration(
   {
     tournamentId,
     inGameName,
@@ -87,7 +87,7 @@ export async function postTournamentRegistration (
   return resp.data as PostTournamentRegistrationResponse | undefined;
 }
 
-export async function getTournamentPlayers (tournament_id: number) {
+export async function getTournamentPlayers(tournament_id: number) {
   return await db
     .select()
     .from(players)

@@ -7,7 +7,7 @@ interface ProfilesAutocompleteProps {
   profiles: Profile[];
 }
 
-export default function ProfilesAutocomplete ({
+export default function ProfilesAutocomplete({
   profiles,
 }: Readonly<ProfilesAutocompleteProps>) {
   return (
@@ -21,9 +21,9 @@ export default function ProfilesAutocomplete ({
 
       <div className="pt-4">
         <datalist id="profiles">
-          { profiles.map((profile) => (
-            <option key={ profile.id } value={ profile.username } />
-          )) }
+          {profiles.map((profile) => (
+            <option key={profile.id} value={profile.username} />
+          ))}
         </datalist>
       </div>
     </div>
