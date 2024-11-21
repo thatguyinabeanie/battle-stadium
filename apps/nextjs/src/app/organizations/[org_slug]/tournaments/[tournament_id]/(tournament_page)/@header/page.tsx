@@ -33,7 +33,7 @@ export default async function OrganizationTournamentHeader(
       <OrganizationHeader
         organization={organization}
         classNames={{
-          wrapper: "w-11/12 border border-1 border-x-0 border-t-0 my-4",
+          wrapper: "w-11/12 my-4",
         }}
       >
         <TournamentDetails

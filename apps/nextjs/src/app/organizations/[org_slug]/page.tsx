@@ -58,7 +58,7 @@ export default async function OrganizationDetailPage(
       </OrganizationHeader>
 
       <SingleOrganizationTournamentsTable
-        className="w-11/12"
+        className="w-full px-4"
         data={tournaments}
         organization={organization}
       />
