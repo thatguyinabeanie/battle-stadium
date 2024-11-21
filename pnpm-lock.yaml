@@ -33,6 +33,19 @@ catalogs:
     js-cookie:
       specifier: ^3
       version: 3.0.5
+  babel:
+    '@babel/core':
+      specifier: ^7
+      version: 7.26.0
+    '@babel/preset-env':
+      specifier: ^7
+      version: 7.26.0
+    '@babel/runtime':
+      specifier: ^7
+      version: 7.26.0
+    '@types/babel__core':
+      specifier: ^7
+      version: 7.20.5
   db:
     '@neondatabase/serverless':
       specifier: ^0
@@ -151,6 +164,9 @@ catalogs:
       specifier: ^4
       version: 4.2.0
   tailwind:
+    nativewind:
+      specifier: ^4
+      version: 4.0.36
     tailwind-merge:
       specifier: ^2
       version: 2.5.4
@@ -315,7 +331,7 @@ importers:
         specifier: catalog:expo
         version: 14.0.1(expo@52.0.8(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@expo/metro-runtime@4.0.0(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@14.1.0(bufferutil@4.0.8))(@types/react@18.3.11)(bufferutil@4.0.8)(react@18.3.1)))(bufferutil@4.0.8)(graphql@15.8.0)(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@14.1.0(bufferutil@4.0.8))(@types/react@18.3.11)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@14.1.0(bufferutil@4.0.8))(@types/react@18.3.11)(bufferutil@4.0.8)(react@18.3.1))
       nativewind:
-        specifier: ^4
+        specifier: catalog:tailwind
         version: 4.0.36(@babel/core@7.26.0)(react-native-reanimated@3.15.5(@babel/core@7.26.0)(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@14.1.0(bufferutil@4.0.8))(@types/react@18.3.11)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native-safe-area-context@4.11.1(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@14.1.0(bufferutil@4.0.8))(@types/react@18.3.11)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@react-native-community/cli-server-api@14.1.0(bufferutil@4.0.8))(@types/react@18.3.11)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.14(ts-node@10.9.2(@types/node@22.9.1)(typescript@5.6.3)))
       react:
         specifier: catalog:react
@@ -346,13 +362,13 @@ importers:
         version: 2.2.1
     devDependencies:
       '@babel/core':
-        specifier: ^7
+        specifier: catalog:babel
         version: 7.26.0
       '@babel/preset-env':
-        specifier: ^7
+        specifier: catalog:babel
         version: 7.26.0(@babel/core@7.26.0)
       '@babel/runtime':
-        specifier: ^7
+        specifier: catalog:babel
         version: 7.26.0
       '@battle-stadium/api':
         specifier: workspace:*
@@ -373,7 +389,7 @@ importers:
         specifier: catalog:tanstack
         version: 5.61.0(@tanstack/react-query@5.59.15(react@18.3.1))(react@18.3.1)
       '@types/babel__core':
-        specifier: ^7
+        specifier: catalog:babel
         version: 7.20.5
       '@types/react':
         specifier: catalog:react
@@ -416,7 +432,7 @@ importers:
         version: 5.15.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/nextjs':
         specifier: catalog:auth
-        version: 6.3.4(next@15.0.4-canary.22(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 6.3.4(next@15.0.4-canary.22(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@iconify/react':
         specifier: ^5
         version: 5.0.2(react@18.3.1)
@@ -609,7 +625,7 @@ importers:
         version: 5.15.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/nextjs':
         specifier: catalog:auth
-        version: 6.3.4(next@15.0.4-canary.22(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 6.3.4(next@15.0.4-canary.22(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@trpc/server':
         specifier: catalog:trpc
         version: 11.0.0-rc.638(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(utf-8-validate@6.0.4)
@@ -11094,14 +11110,14 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       tslib: 2.4.1
 
-  '@clerk/nextjs@6.3.4(next@15.0.4-canary.22(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@clerk/nextjs@6.3.4(next@15.0.4-canary.22(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@clerk/backend': 1.16.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/clerk-react': 5.15.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/shared': 2.14.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@clerk/types': 4.34.0
       crypto-js: 4.2.0
-      ezheaders: 0.1.0(next@15.0.4-canary.22(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      ezheaders: 0.1.0(next@15.0.4-canary.22(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       next: 15.0.4-canary.22(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -16239,7 +16255,7 @@ snapshots:
       iconv-lite: 0.4.24
       tmp: 0.0.33
 
-  ezheaders@0.1.0(next@15.0.4-canary.22(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
+  ezheaders@0.1.0(next@15.0.4-canary.22(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
       next: 15.0.4-canary.22(@opentelemetry/api@1.9.0)(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
 
