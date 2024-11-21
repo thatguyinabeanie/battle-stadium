@@ -51,7 +51,7 @@
     "@battle-stadium/eslint-config": "workspace:*",
     "@battle-stadium/prettier-config": "workspace:*",
     "@battle-stadium/tsconfig": "workspace:*",
-    "dotenv-cli": "^7.4.2",
+    "dotenv-cli": "catalog:",
     "drizzle-kit": "catalog:db",
     "eslint": "catalog:",
     "prettier": "catalog:",
