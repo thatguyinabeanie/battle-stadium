@@ -18,7 +18,7 @@
   },
   "prettier": "@battle-stadium/prettier-config",
   "engines": {
-    "node": "^20"
+    "node": "20.x"
   },
   "dependencies": {
     "@battle-stadium/api": "workspace:*",

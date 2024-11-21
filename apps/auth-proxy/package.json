@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "engines": {
-    "node": "^20"
+    "node": "20.x"
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
