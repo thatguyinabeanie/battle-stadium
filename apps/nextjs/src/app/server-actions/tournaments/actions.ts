@@ -10,10 +10,10 @@ import {
   tournaments,
 } from "@battle-stadium/db/schema";
 
-import type { paths } from "~/lib/api/openapi-v1";
+import type { components, paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
-export async function getTournament(tournament_id: number) {
+export async function getTournament (tournament_id: number) {
   const result = await db
     .select()
     .from(tournaments)
@@ -23,13 +23,13 @@ export async function getTournament(tournament_id: number) {
 
   return result.length > 0 && result[0]
     ? {
-        tournament: result[0].tournaments,
-        organization: result[0].organizations,
-      }
+      tournament: result[0].tournaments,
+      organization: result[0].organizations,
+    }
     : null;
 }
 
-export async function getTournaments(page = 1, pageSize = 20) {
+export async function getTournaments (page = 1, pageSize = 20) {
   return await db.query.tournaments.findMany({
     orderBy: (tournaments, { desc }) => desc(tournaments.startAt),
     limit: pageSize,
@@ -45,7 +45,14 @@ interface TournamentRegistration {
   showCountryFlag: boolean;
 }
 
-export async function postTournamentRegistration(
+export interface PostTournamentRegistrationResponse {
+  id: number;
+  profile: components["schemas"]["Profile"];
+  in_game_name: string;
+  show_country_flag?: boolean;
+}
+
+export async function postTournamentRegistration (
   {
     tournamentId,
     inGameName,
@@ -77,10 +84,10 @@ export async function postTournamentRegistration(
     "/tournaments/{tournament_id}/players",
     registrationOptions,
   );
-  return resp.data;
+  return resp.data as PostTournamentRegistrationResponse | undefined;
 }
 
-export async function getTournamentPlayers(tournament_id: number) {
+export async function getTournamentPlayers (tournament_id: number) {
   return await db
     .select()
     .from(players)
