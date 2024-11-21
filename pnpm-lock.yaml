@@ -144,6 +144,13 @@ catalogs:
     next:
       specifier: canary
       version: 15.0.4-canary.22
+  open-api:
+    openapi-fetch:
+      specifier: ^0
+      version: 0.13.0
+    openapi-typescript-helpers:
+      specifier: ^0
+      version: 0.0.15
   particles:
     '@tsparticles/engine':
       specifier: ^3
@@ -249,6 +256,13 @@ catalogs:
     '@radix-ui/react-tooltip':
       specifier: ^1
       version: 1.1.4
+  rails:
+    '@rails/actioncable':
+      specifier: ^7
+      version: 7.2.200
+    '@types/rails__actioncable':
+      specifier: ^6
+      version: 6.1.11
   react:
     '@types/react':
       specifier: ^18
@@ -567,7 +581,7 @@ importers:
         specifier: catalog:pokemon
         version: 4.0.0
       '@rails/actioncable':
-        specifier: ^7
+        specifier: catalog:rails
         version: 7.2.200
       '@t3-oss/env-nextjs':
         specifier: catalog:next
@@ -645,10 +659,10 @@ importers:
         specifier: catalog:next
         version: 15.0.4-canary.22(babel-plugin-react-compiler@19.0.0-beta-a7bf2bd-20241110)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openapi-fetch:
-        specifier: ^0
+        specifier: catalog:open-api
         version: 0.13.0
       openapi-typescript-helpers:
-        specifier: ^0
+        specifier: catalog:open-api
         version: 0.0.15
       pokedex-promise-v2:
         specifier: catalog:pokemon
@@ -703,7 +717,7 @@ importers:
         specifier: 'catalog:'
         version: 20.17.6
       '@types/rails__actioncable':
-        specifier: ^6
+        specifier: catalog:rails
         version: 6.1.11
       '@types/react':
         specifier: catalog:react

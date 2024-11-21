@@ -68,6 +68,10 @@ catalogs:
     "@tsparticles/react": ^3
     "@tsparticles/slim": ^3
 
+  open-api:
+    "openapi-fetch": ^0
+    "openapi-typescript-helpers": ^0
+
   pokemon:
     "pokedex-promise-v2": ^4
     "@pkmn/sets": ^5
@@ -102,6 +106,10 @@ catalogs:
     "@radix-ui/react-toggle": ^1
     "@radix-ui/react-toggle-group": ^1
     "@radix-ui/react-tooltip": ^1
+
+  rails:
+    "@rails/actioncable": ^7
+    "@types/rails__actioncable": ^6
 
   react:
     react: ^18
