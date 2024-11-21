@@ -25,7 +25,7 @@ export default function RegistrationsTable({
 
 const columns: ColumnDef<PlayerProfile>[] = [
   {
-    accessorKey: "profiles.avatarUrl",
+    accessorKey: "profiles.imageUrl",
     header: "Avatar",
     cell: ({ row }) =>
       row.original.profiles?.imageUrl ? (

@@ -48,7 +48,7 @@ export default function OrganizationTournamentsTournamentLayout(
           <TabsList
             key="tabslist"
             defaultValue="details"
-            className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-y-2"
+            className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-b-2"
           >
             {tabs.map(({ value, title }) => (
               <TabsTrigger key={value} value={value} title={title} />
