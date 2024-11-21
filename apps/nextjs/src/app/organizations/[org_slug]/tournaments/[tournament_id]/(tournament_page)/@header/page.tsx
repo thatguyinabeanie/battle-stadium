@@ -5,32 +5,15 @@ import type { Organization, Tournament } from "@battle-stadium/db/schema";
 import { Chip } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentProps } from "~/types";
-import {
-  getOrganizationTournaments,
-  getSingleOrganizationSingleTournament,
-} from "~/app/server-actions/organizations/tournaments/actions";
-import { getTournament } from "~/app/server-actions/tournaments/actions";
+import { getSingleOrganizationSingleTournament } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
+import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
 export const revalidate = 300;
 export const dynamicParams = true;
 
-export async function generateMetadata(
-  props: Readonly<OrganizationTournamentProps>,
-) {
-  const params = await props.params;
-  const result = await getTournament(params.tournament_id);
-
-  return { title: result?.tournament.name ?? "Tournament" };
-}
-
 export async function generateStaticParams() {
-  const results = await getOrganizationTournaments(1, 500);
-
-  return results.map(({ tournaments, organizations }) => ({
-    org_slug: organizations?.slug,
-    tournament_id: tournaments.id.toString(),
-  }));
+  return await generateOrganizationTournamentsStaticParams();
 }
 
 export default async function OrganizationTournamentHeader(

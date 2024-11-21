@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 
-import { Separator } from "@battle-stadium/ui";
-
 import { title } from "~/components/miscellaneous/primitives";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 
@@ -14,8 +12,6 @@ export default function Home() {
     <>
       <div className="min--h-screen flex flex-col items-center justify-between">
         <PartneredOrganizations />
-
-        <Separator className="w-full" />
 
         <div className="flex w-full max-w-fit flex-col items-center justify-center bg-transparent text-center">
           <h1 className={title({ color: "violet", size: "xl" })}>
