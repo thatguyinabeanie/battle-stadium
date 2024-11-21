@@ -7,7 +7,7 @@ export default async function PartneredOrganizations() {
   const orgs = await getPartneredOrganizations();
 
   return (
-    <div className="mt-4 flex h-full min-h-40 w-full flex-row overflow-x-scroll bg-transparent">
+    <div className="item-center mt-4 flex h-full min-h-40 w-full flex-row justify-center bg-transparent">
       {orgs.map((organization) => (
         <OrganizationCard
           key={organization.slug}
