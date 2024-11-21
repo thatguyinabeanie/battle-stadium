@@ -60,8 +60,8 @@ catalogs:
     next: canary
     "@next/third-parties": canary
     "@next/eslint-plugin-next": canary
-    "@types/node": ^20
     "@t3-oss/env-nextjs": ^0
+    "babel-plugin-react-compiler": beta
 
   particles:
     "@tsparticles/engine": ^3
@@ -111,7 +111,7 @@ catalogs:
     "@rails/actioncable": ^7
     "@types/rails__actioncable": ^6
 
-  react:
+  react18:
     react: ^18
     react-dom: ^18
     "@types/react": ^18
@@ -120,13 +120,13 @@ catalogs:
     "eslint-plugin-react": ^7
     "eslint-plugin-react-compiler": beta
 
-  react19:
-    react: rc
-    react-dom: rc
+  react:
+    react: next
+    react-dom: next
     "@types/react": "npm:types-react@rc"
     "@types/react-dom": "npm:types-react-dom@rc"
-    "eslint-plugin-react-hooks": ^5
-    "eslint-plugin-react": ^7
+    "eslint-plugin-react-hooks": next
+    "eslint-plugin-react": next
     "eslint-plugin-react-compiler": beta
 
   react-native:

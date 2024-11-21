@@ -6,7 +6,7 @@
   "scripts": {
     "build": "pnpm with-env next build",
     "clean": "git clean -xdf .cache .next .turbo node_modules",
-    "dev": "pnpm with-env next dev --turbo",
+    "dev": "pnpm with-env next dev",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "sort-packages": "pnpx sort-package-json",
@@ -50,6 +50,7 @@
     "@vercel/functions": "catalog:vercel",
     "@vercel/kv": "catalog:vercel",
     "@vercel/speed-insights": "catalog:vercel",
+    "babel-plugin-react-compiler": "catalog:next",
     "cookie": "catalog:auth",
     "date-fns": "^4",
     "discord-api-types": "catalog:discord",
