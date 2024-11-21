@@ -51,3 +51,7 @@ catalogs:
     react-dom: rc
     "@types/react": rc
     "@types/react-dom": rc
+
+  turbo:
+    turbo: ^2
+    "@turbo/gen": ^2
