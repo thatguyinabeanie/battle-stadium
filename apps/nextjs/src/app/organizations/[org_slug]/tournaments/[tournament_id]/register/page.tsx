@@ -52,13 +52,13 @@ function tournamentRegistrationAction(tournament_id: number) {
     const show_country_flag =
       (formData.get("country_flag") as string) === "true";
 
-    const profile_id = profiles.find((p) => p.username == profile)?.id;
+    const profile_id = profiles.find((p) => p.username === profile)?.id;
 
     if (!profile_id) {
       throw new Error("Profile not found.");
     }
 
-    return await postTournamentRegistration({
+    return postTournamentRegistration({
       tournamentId: tournament_id,
       inGameName: in_game_name,
       profileId: profile_id,

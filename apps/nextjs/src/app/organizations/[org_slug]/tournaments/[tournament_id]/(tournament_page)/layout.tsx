@@ -49,6 +49,7 @@ export default function OrganizationTournamentsTournamentLayout(
       <Tabs
         className="flex h-full w-full flex-col items-center"
         defaultValue="details"
+        aria-label="Tournament Information Tabs"
       >
         <div className="flex w-full flex-col items-center overflow-auto">
           <TabsList
