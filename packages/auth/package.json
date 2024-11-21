@@ -28,8 +28,8 @@
     "@battle-stadium/db": "workspace:*",
     "@t3-oss/env-nextjs": "catalog:next",
     "next": "catalog:next",
-    "react": "catalog:react18",
-    "react-dom": "catalog:react18",
+    "react": "catalog:react",
+    "react-dom": "catalog:react",
     "zod": "catalog:"
   },
   "devDependencies": {
