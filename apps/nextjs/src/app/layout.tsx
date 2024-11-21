@@ -12,6 +12,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { HydrateClient } from "~/trpc/server";
 
 import "~/styles/globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 import { StrictMode } from "react";
 import dynamic from "next/dynamic";

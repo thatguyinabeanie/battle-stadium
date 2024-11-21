@@ -46,3 +46,10 @@ declare module "@next/eslint-plugin-next" {
   };
   export const rules: Record<string, Rule.RuleModule>;
 }
+
+// types.d.ts
+declare module "eslint-plugin-react-compiler" {
+  import type { Rule } from "eslint";
+
+  export const rules: Record<string, Rule.RuleModule>;
+}

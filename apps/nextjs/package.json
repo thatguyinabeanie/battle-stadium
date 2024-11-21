@@ -6,7 +6,7 @@
   "scripts": {
     "build": "pnpm with-env next build",
     "clean": "git clean -xdf .cache .next .turbo node_modules",
-    "dev": "NODE_OPTIONS='--inspect' pnpm with-env next dev",
+    "dev": "pnpm with-env next dev --turbo",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "sort-packages": "pnpx sort-package-json",
@@ -21,6 +21,7 @@
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
+    "@aws-sdk/credential-provider-web-identity": "catalog:vercel",
     "@battle-stadium/api": "workspace:*",
     "@battle-stadium/auth": "workspace:*",
     "@battle-stadium/db": "workspace:*",
@@ -49,7 +50,6 @@
     "@vercel/functions": "catalog:vercel",
     "@vercel/kv": "catalog:vercel",
     "@vercel/speed-insights": "catalog:vercel",
-    "babel-plugin-react-compiler": "catalog:react",
     "cookie": "catalog:auth",
     "date-fns": "^4",
     "discord-api-types": "catalog:discord",

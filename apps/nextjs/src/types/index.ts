@@ -29,3 +29,13 @@ export interface OrganizationTournamentProps {
 export interface OrganizationTournamentParams {
   params: Promise<OrganizationTournamentProps>;
 }
+
+/**
+ * Configuration for tournament page navigation tabs
+ * @property value - Unique identifier for the tab
+ * @property title - Display text for the tab (optional)
+ */
+export interface TabConfig {
+  value: string;
+  title?: string;
+}

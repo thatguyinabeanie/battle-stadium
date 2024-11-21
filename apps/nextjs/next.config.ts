@@ -8,18 +8,18 @@ createJiti(fileURLToPath(import.meta.url))("./src/env.ts");
 const config: NextConfig = {
   reactStrictMode: true,
 
-  experimental: {
-    // ppr: 'incremental',
-    after: true,
-    cssChunking: "loose", // default
-    // reactCompiler: true,
-    ppr: true,
-    staleTimes: {
-      dynamic: 5,
-      static: 180,
-    },
-    // dynamicIO: true,
-  },
+  // experimental: {
+  //   // ppr: 'incremental',
+  //   after: true,
+  //   cssChunking: "loose", // default
+  //   // reactCompiler: true,
+  //   ppr: true,
+  //   staleTimes: {
+  //     dynamic: 5,
+  //     static: 180,
+  //   },
+  //   // dynamicIO: true,
+  // },
 
   expireTime: 3600,
 
