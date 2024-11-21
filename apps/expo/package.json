@@ -61,7 +61,7 @@
     "@types/react": "catalog:react",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "tailwindcss": "catalog:",
+    "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:"
   }
 }

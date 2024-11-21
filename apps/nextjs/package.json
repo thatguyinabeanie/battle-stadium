@@ -67,9 +67,9 @@
     "react-toastify": "^10",
     "server-only": "^0",
     "superjson": "catalog:",
-    "tailwind-merge": "catalog:",
-    "tailwind-variants": "catalog:",
-    "tailwindcss-animate": "catalog:",
+    "tailwind-merge": "catalog:tailwind",
+    "tailwind-variants": "catalog:tailwind",
+    "tailwindcss-animate": "catalog:tailwind",
     "tweetnacl": "^1",
     "zod": "catalog:"
   },
@@ -87,7 +87,7 @@
     "eslint": "catalog:",
     "jiti": "^1.21.6",
     "prettier": "catalog:",
-    "tailwindcss": "catalog:",
+    "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:"
   }
 }
