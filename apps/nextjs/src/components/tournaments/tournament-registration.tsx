@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import Form from "next/form";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-import { Button, Input } from "@battle-stadium/ui";
+import { Badge, Button } from "@battle-stadium/ui";
 
 import type { PostTournamentRegistrationResponse } from "~/app/server-actions/tournaments/actions";
 
@@ -16,13 +17,40 @@ interface TournamentRegistrationProps {
     formData: FormData,
   ) => Promise<PostTournamentRegistrationResponse | undefined>;
 }
+export function TournamentRegistrationForm(
+  props: Readonly<TournamentRegistrationProps>,
+) {
+  const { children } = props;
+  const { loading, registerForTournament } =
+    useTournamentRegistrationAction(props);
 
-export default function TournamentRegistration ({
+  return (
+    <Form action={registerForTournament} className="grid grid-cols-1 gap-4">
+      {children}
+
+      <Button
+        aria-label="Submit"
+        color="primary"
+        type="submit"
+        disabled={loading}
+        className="flex items-center justify-center"
+      >
+        <Badge
+          variant="secondary"
+          className="md:text-md w-[6rem] px-1 py-1 text-sm lg:w-[7.5rem]"
+        >
+          {loading ? "Submitting..." : "Submit"}
+        </Badge>
+      </Button>
+    </Form>
+  );
+}
+
+function useTournamentRegistrationAction({
+  tournamentRegistrationAction,
   org_slug,
   tournament_id,
-  tournamentRegistrationAction,
-  children,
-}: Readonly<TournamentRegistrationProps>) {
+}: Omit<TournamentRegistrationProps, "children">) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -40,26 +68,8 @@ export default function TournamentRegistration ({
     }
   };
 
-  return (
-    <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
-      <div>
-        Register for { org_slug } tournament { tournament_id }
-      </div>
-
-      <form action={ registerForTournament } className="grid grid-cols-1 gap-4">
-        <Input name="ign" />
-
-        { children }
-
-        <Button
-          aria-label="Submit"
-          color="primary"
-          type="submit"
-          disabled={ loading }
-        >
-          { loading ? "Submitting..." : "Submit" }
-        </Button>
-      </form>
-    </div>
-  );
+  return {
+    loading,
+    registerForTournament,
+  };
 }

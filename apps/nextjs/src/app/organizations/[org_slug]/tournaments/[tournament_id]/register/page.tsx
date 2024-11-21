@@ -5,7 +5,7 @@ import { Input } from "@battle-stadium/ui";
 import type { OrganizationTournamentParams } from "~/types";
 import { getProfilesMe } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
-import TournamentRegistration from "~/components/tournaments/tournament-registration";
+import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
 export const revalidate = 300;
@@ -19,18 +19,25 @@ export default async function Register(
   props: Readonly<OrganizationTournamentParams>,
 ) {
   const params = await props.params;
-  const tournamentRegistration = tournamentRegistrationAction(
-    params.tournament_id,
-  );
+  const { org_slug, tournament_id } = params;
+  const tournamentRegistration = tournamentRegistrationAction(tournament_id);
+
   return (
     <>
       <ToastContainer />
-      <TournamentRegistration
-        {...params}
-        tournamentRegistrationAction={tournamentRegistration}
-      >
-        <ProfileSelector />
-      </TournamentRegistration>
+      <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
+        <div>
+          Register for {org_slug} tournament {tournament_id}
+        </div>
+
+        <TournamentRegistrationForm
+          {...params}
+          tournamentRegistrationAction={tournamentRegistration}
+        >
+          <Input name="ign" />
+          <ProfileSelector />
+        </TournamentRegistrationForm>
+      </div>
     </>
   );
 }
@@ -63,7 +70,7 @@ function tournamentRegistrationAction(tournament_id: number) {
 async function ProfileSelector() {
   const profiles = await getProfilesMe();
   return (
-    <div>
+    <>
       <Input
         type="text"
         name="profile"
@@ -78,18 +85,16 @@ async function ProfileSelector() {
         Select your profile from the list of available profiles
       </div>
 
-      <div className="pt-4">
-        <datalist id="profiles">
-          {profiles.map((profile) => (
-            <option
-              key={profile.id}
-              value={profile.username}
-              label={profile.username}
-              data-profile-id={profile.id}
-            />
-          ))}
-        </datalist>
-      </div>
-    </div>
+      <datalist id="profiles">
+        {profiles.map((profile) => (
+          <option
+            key={profile.id}
+            value={profile.username}
+            label={profile.username}
+            data-profile-id={profile.id}
+          />
+        ))}
+      </datalist>
+    </>
   );
 }

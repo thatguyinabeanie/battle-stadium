@@ -36,7 +36,12 @@ export async function getProfilesMe({
   if (!me) {
     redirect(redirectTo ?? "/sign-in");
   }
-  return getProfilesByAccountId(me.id);
+  try {
+    return await getProfilesByAccountId(me.id);
+  } catch (error) {
+    console.error("Failed to fetch profiles:", error);
+    throw new Error("Unable to retrieve profiles. Please try again later.");
+  }
 }
 
 export async function createProfile(
