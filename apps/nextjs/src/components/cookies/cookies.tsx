@@ -6,15 +6,23 @@ import Cookies from "js-cookie";
 
 import { Button } from "@battle-stadium/ui";
 
-const cookieAttributes = (
-  attrs: Partial<Cookies.CookieAttributes>,
-): Cookies.CookieAttributes => ({
-  expires: 7,
-  sameSite: "strict",
-  secure: true,
-  path: "/",
-  ...attrs,
-});
+interface CookieOptions {
+  expires?: number;
+  secure?: boolean;
+  httpOnly?: boolean;
+  sameSite?: 'strict' | 'lax' | 'none';
+}
+
+function cookieAttributes (options: CookieOptions = {}) {
+  return {
+    expires: options.expires,
+    secure: true, // Force HTTPS
+    httpOnly: true, // Prevent XSS
+    sameSite: 'strict' as const, // CSRF protection
+    path: '/',
+    ...options
+  };
+}
 
 const COOKIE_CONSENT = "cookieConsent";
 
