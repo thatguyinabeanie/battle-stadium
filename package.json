@@ -5,7 +5,7 @@
     "node": "20.x",
     "pnpm": "^9"
   },
-  "packageManager": "pnpm@9.14.2",
+  "packageManager": "pnpm@9.13.0",
   "scripts": {
     "build": "turbo run build",
     "clean": "git clean -xdf node_modules",
