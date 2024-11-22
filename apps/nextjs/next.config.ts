@@ -9,13 +9,10 @@ const config: NextConfig = {
   reactStrictMode: true,
 
   experimental: {
-    // ppr: 'incremental',
     after: true,
-    cssChunking: "loose", // default
-    // reactCompiler: true,
     ppr: true,
     staleTimes: {
-      dynamic: 5,
+      dynamic: 30,
       static: 180,
     },
     // dynamicIO: true,

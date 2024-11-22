@@ -11,6 +11,8 @@ import {
   TabsTrigger as UiTabsTrigger,
 } from "@battle-stadium/ui";
 
+import type { TabConfig } from "~/types";
+
 interface OrganizationTournamentsTournamentLayoutProps {
   children: ReactNode;
   standings: ReactNode;
@@ -18,16 +20,6 @@ interface OrganizationTournamentsTournamentLayoutProps {
   metagame: ReactNode;
   registrations: ReactNode;
   header: ReactNode;
-}
-
-/**
- * Configuration for tournament page navigation tabs
- * @property value - Unique identifier for the tab
- * @property title - Display text for the tab (optional)
- */
-interface TabConfig {
-  value: string;
-  title?: string;
 }
 
 const tabs: TabConfig[] = [

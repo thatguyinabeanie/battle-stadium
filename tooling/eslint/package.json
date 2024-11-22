@@ -23,8 +23,9 @@
     "@next/eslint-plugin-next": "catalog:next",
     "eslint-plugin-import": "^2",
     "eslint-plugin-jsx-a11y": "^6",
-    "eslint-plugin-react": "^7",
-    "eslint-plugin-react-hooks": "^5",
+    "eslint-plugin-react": "catalog:react",
+    "eslint-plugin-react-compiler": "catalog:react",
+    "eslint-plugin-react-hooks": "catalog:react",
     "eslint-plugin-turbo": "^2",
     "typescript-eslint": "^8"
   },
