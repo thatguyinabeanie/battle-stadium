@@ -6,12 +6,3 @@
 # Specify owners for the entire repository
 
 * @thatguyinabeanie
-
-# Specify owners for specific directories
-
-/frontend/apps/nextjs/    @nextjs-team
-/frontend/components/     @components-team
-
-# Specify owners for specific files
-
-/frontend/package.json    @package-maintainer
