@@ -12,9 +12,10 @@ export default [
       "react-compiler": reactCompilerPlugin,
     },
     rules: {
-      ...reactPlugin.configs.recommended.rules,
+      ...reactPlugin.configs["jsx-runtime"].rules,
       ...hooksPlugin.configs.recommended.rules,
       "react-compiler/react-compiler": "error",
+      "react/display-name": "off",
     },
     languageOptions: {
       globals: {
