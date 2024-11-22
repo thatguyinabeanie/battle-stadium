@@ -16,7 +16,7 @@ export const Tabs = forwardRef<
   TabsProps
 >(
   (
-    { defaultValue, disableTabSearchParam = true, onValueChange, ...props },
+    { defaultValue, disableTabSearchParam = false, onValueChange, ...props },
     ref,
   ) => {
     const validDefaultValue =
@@ -26,6 +26,7 @@ export const Tabs = forwardRef<
 
     const [activeTab, searchParams] = useActiveTab(validDefaultValue);
     const router = useRouter();
+
     const onTabChange = (value: string) => {
       // Call the user's handler if provided
       onValueChange?.(value);
@@ -34,6 +35,7 @@ export const Tabs = forwardRef<
       if (disableTabSearchParam) {
         return;
       }
+
       const params = new URLSearchParams(searchParams);
       params.set("tab", value);
       router.replace(`?${params.toString()}`);
