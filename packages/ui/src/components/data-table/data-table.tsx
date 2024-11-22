@@ -5,7 +5,7 @@ import type {
   Table as ReactTable,
   RowData,
 } from "@tanstack/react-table";
-import React from "react";
+import type { ReactNode } from "react";
 import { flexRender } from "@tanstack/react-table";
 
 import {
@@ -24,7 +24,7 @@ import { useTanstackReactTable } from "./use-tanstack-react-table";
 interface DataTableProps<T> {
   data: T[];
   columns: ColumnDef<T>[];
-  children?: React.ReactNode;
+  children?: ReactNode;
   classNames?: {
     wrapper?: string;
     table?: string;
@@ -35,7 +35,7 @@ interface DataTableProps<T> {
     tableBody?: string;
     tableCell?: string;
   };
-  footer?: () => React.ReactNode;
+  footer?: () => ReactNode;
 }
 
 const defaultWrapperClassNames = "w-full rounded-md";

@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { Icon } from "@iconify/react/dist/iconify.js";

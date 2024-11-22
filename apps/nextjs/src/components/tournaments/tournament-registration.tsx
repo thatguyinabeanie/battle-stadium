@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useState } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
@@ -12,7 +13,7 @@ import type { PostTournamentRegistrationResponse } from "~/app/server-actions/to
 interface TournamentRegistrationProps {
   org_slug: string;
   tournament_id: number;
-  children?: React.ReactNode;
+  children?: ReactNode;
   tournamentRegistrationAction: (
     formData: FormData,
   ) => Promise<PostTournamentRegistrationResponse | undefined>;

@@ -1,4 +1,5 @@
-import React from "react";
+import type { HTMLAttributes, MouseEvent, ReactNode } from "react";
+import { forwardRef } from "react";
 import { X } from "lucide-react";
 
 import { cn } from "../utils";
@@ -8,13 +9,13 @@ export type ChipVariant = "solid" | "bordered" | "light" | "flat";
 export type ChipSize = "sm" | "md" | "lg";
 export type ChipRadius = "full" | "lg" | "md" | "sm";
 
-export interface ChipProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ChipProps extends HTMLAttributes<HTMLDivElement> {
   variant?: ChipVariant;
   size?: ChipSize;
   radius?: ChipRadius;
-  onClose?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClose?: (e: MouseEvent<HTMLButtonElement>) => void;
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const ChipVariants: Record<ChipVariant, string> = {
@@ -30,7 +31,7 @@ export const ChipSizes: Record<ChipSize, string> = {
   lg: "text-base px-4 py-1.5 h-8",
 };
 
-export const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
+export const Chip = forwardRef<HTMLDivElement, ChipProps>(
   (
     {
       children,
@@ -76,7 +77,7 @@ export const Chip = React.forwardRef<HTMLDivElement, ChipProps>(
         {children}
         {onClose && (
           <button
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            onClick={(e: MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
               onClose(e);
             }}

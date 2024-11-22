@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import type { ComponentPropsWithoutRef, ComponentRef } from "react";
+import React, { forwardRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -8,15 +9,15 @@ import { cn } from "@battle-stadium/ui";
 
 type HREF = `/${string}`;
 
-interface NavbarLinkProps extends React.ComponentPropsWithoutRef<typeof Link> {
+interface NavbarLinkProps extends ComponentPropsWithoutRef<typeof Link> {
   href: HREF;
   value: string;
   label: string;
   className?: string;
 }
 
-export const NavbarLink = React.forwardRef<
-  React.ComponentRef<typeof Link>,
+export const NavbarLink = forwardRef<
+  ComponentRef<typeof Link>,
   NavbarLinkProps
 >(({ value, href, className, label, ...props }, ref) => (
   <Link
