@@ -9,7 +9,7 @@ export default async function Navbar() {
   const clerkAuth = await auth();
 
   return (
-    <NavbarContainer>
+    <NavbarContainer disableHide>
       <nav className="relative flex w-full border-b backdrop-blur-3xl">
         <div className="w-full px-4 backdrop-blur-3xl">
           <div className="flex h-12 w-full items-center justify-between backdrop-blur-3xl md:h-16">
