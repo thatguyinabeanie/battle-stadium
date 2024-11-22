@@ -21,27 +21,32 @@ function useActiveTab(
 
 interface TabsProps
   extends ComponentPropsWithoutRef<typeof TabsPrimitive.Root> {
-  enableTabSearchParam?: boolean;
+  disableTabSearchParam?: boolean;
 }
 export const Tabs = forwardRef<
   ComponentRef<typeof TabsPrimitive.Root>,
   TabsProps
->(({ defaultValue, ...props }, ref) => {
+>(({ defaultValue, disableTabSearchParam = true, onValueChange, ...props }, ref) => {
   const [activeTab, searchParams] = useActiveTab(defaultValue);
   const router = useRouter();
-
   const onTabChange = (value: string) => {
+    // Call the user's handler if provided
+    onValueChange?.(value);
+
+    // Update URL only if enabled
+    if (disableTabSearchParam) {
+      return;
+    }
     const params = new URLSearchParams(searchParams);
     params.set("tab", value);
     router.replace(`?${params.toString()}`);
   };
-
   return (
     <UiTabs
-      ref={ref}
-      {...props}
-      onValueChange={onTabChange}
-      defaultValue={activeTab}
+      ref={ ref }
+      { ...props }
+      onValueChange={ onTabChange }
+      defaultValue={ activeTab }
     />
   );
 });
