@@ -5,13 +5,12 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Tabs,
-  TabsList,
   TabsContent as UiTabsContent,
   TabsTrigger as UiTabsTrigger,
 } from "@battle-stadium/ui";
 
 import type { TabConfig } from "~/types";
+import { Tabs, TabsList } from "~/components/tabs/tabs";
 
 interface OrganizationTournamentsTournamentLayoutProps {
   children: ReactNode;
@@ -40,6 +39,7 @@ export default function OrganizationTournamentsTournamentLayout(
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       {header}
+
       <Tabs
         className="flex h-full w-full flex-col items-center"
         defaultValue={DEFAULT_TAB}
