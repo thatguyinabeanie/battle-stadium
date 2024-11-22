@@ -10,7 +10,7 @@ import {
   TabsTrigger as UiTabsTrigger,
 } from "@battle-stadium/ui";
 
-import { Tabs , TabsList } from "~/components/tabs/tab";
+import { Tabs , TabsList } from "~/components/tabs/tabs";
 
 interface OrganizationTournamentsTournamentLayoutProps {
   children: ReactNode;
