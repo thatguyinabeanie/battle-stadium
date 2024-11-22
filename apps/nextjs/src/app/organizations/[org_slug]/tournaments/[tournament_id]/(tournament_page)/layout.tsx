@@ -5,7 +5,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  cn,
   Tabs,
   TabsList,
   TabsContent as UiTabsContent,
@@ -75,7 +74,7 @@ function TabsTrigger({ value, title }: Readonly<TabConfig>) {
       key={value}
       value={value}
       title={title}
-      className="w-[6rem] py-1 lg:w-[7.5rem]  transition-colors data-[state=active]:text-primary"
+      className="w-[6rem] py-1 transition-colors data-[state=active]:text-primary lg:w-[7.5rem]"
     >
       <Badge
         variant="secondary"
@@ -91,7 +90,7 @@ function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
   return (
     <UiTabsContent
       value={value}
-      className="flex h-full w-full flex-col items-center justify-center py-0 mt-0"
+      className="mt-0 flex h-full w-full flex-col items-center justify-center py-0"
     >
       <CardHeader className="capitalize">{value}</CardHeader>
       <CardContent className="min-h-svh">{children}</CardContent>
