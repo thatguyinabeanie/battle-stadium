@@ -7,8 +7,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cn } from "../utils";
 
 const Tabs = TabsPrimitive.Root;
-
-Tabs.displayName = "TournamentTabs";
+Tabs.displayName = "Tabs";
 
 const TabsList = forwardRef<
   ComponentRef<typeof TabsPrimitive.List>,
