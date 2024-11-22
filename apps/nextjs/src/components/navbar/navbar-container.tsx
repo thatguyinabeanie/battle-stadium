@@ -13,7 +13,6 @@ export default function NavbarContainer({
   children,
   disableHide = false,
 }: Readonly<NavbarContainerProps>) {
-
   const { isVisible } = useNavbarVisibility(disableHide);
 
   return (
@@ -28,7 +27,7 @@ export default function NavbarContainer({
   );
 }
 
-function useNavbarVisibility (disableHide: boolean) {
+function useNavbarVisibility(disableHide: boolean) {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
