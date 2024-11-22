@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
+// import { Suspense } from "react";
 
 import { title } from "~/components/miscellaneous/primitives";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
@@ -13,9 +13,9 @@ export default function Home() {
     <>
       <div className="min--h-screen flex flex-col items-center justify-between">
         <PartneredOrganizations />
-        <Suspense fallback={<FrontPageTextSkeleton />}>
+        {/* <Suspense fallback={<FrontPageTextSkeleton />}> */}
           <FrontPageText />
-        </Suspense>
+        {/* </Suspense> */}
       </div>
     </>
   );
