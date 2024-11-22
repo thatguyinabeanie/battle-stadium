@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import type { TabConfig } from "~/types";
 
 import {
   Badge,
@@ -10,7 +9,8 @@ import {
   TabsTrigger as UiTabsTrigger,
 } from "@battle-stadium/ui";
 
-import { Tabs , TabsList } from "~/components/tabs/tabs";
+import type { TabConfig } from "~/types";
+import { Tabs, TabsList } from "~/components/tabs/tabs";
 
 interface OrganizationTournamentsTournamentLayoutProps {
   children: ReactNode;
