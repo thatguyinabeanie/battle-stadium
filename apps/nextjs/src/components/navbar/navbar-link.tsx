@@ -16,7 +16,7 @@ interface NavbarLinkProps extends React.ComponentPropsWithoutRef<typeof Link> {
 }
 
 export const NavbarLink = React.forwardRef<
-  React.ElementRef<typeof Link>,
+  React.ComponentRef<typeof Link>,
   NavbarLinkProps
 >(({ value, href, className, label, ...props }, ref) => (
   <Link
