@@ -16,11 +16,11 @@ interface CookieOptions {
 function cookieAttributes (options: CookieOptions = {}) {
   return {
     expires: options.expires,
+    path: '/',
+    ...options,
     secure: true, // Force HTTPS
     httpOnly: true, // Prevent XSS
     sameSite: 'strict' as const, // CSRF protection
-    path: '/',
-    ...options
   };
 }
 
