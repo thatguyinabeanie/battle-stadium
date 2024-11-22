@@ -50,7 +50,6 @@
     "@vercel/functions": "catalog:vercel",
     "@vercel/kv": "catalog:vercel",
     "@vercel/speed-insights": "catalog:vercel",
-    "babel-plugin-react-compiler": "catalog:next",
     "cookie": "catalog:auth",
     "date-fns": "^4",
     "discord-api-types": "catalog:discord",

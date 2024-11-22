@@ -15,11 +15,15 @@ export default [
       ...reactPlugin.configs["jsx-runtime"].rules,
       ...hooksPlugin.configs.recommended.rules,
       "react-compiler/react-compiler": "error",
-      "react/display-name": "off",
     },
     languageOptions: {
       globals: {
         React: "writable",
+      },
+    },
+    settings: {
+      react: {
+        version: "detect",
       },
     },
   },

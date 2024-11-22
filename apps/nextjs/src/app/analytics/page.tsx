@@ -10,7 +10,7 @@ export default function PlayersPage() {
   return (
     <ComingSoon title={"Analytics"}>
       <div className="flex flex-col items-center">
-        <h2>"Analytics is under construction</h2>
+        <h2>Analytics is under construction</h2>
       </div>
     </ComingSoon>
   );
