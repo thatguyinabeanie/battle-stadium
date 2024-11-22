@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import React from "react";
+import React, { Component } from "react";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -10,7 +10,7 @@ interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-export class ErrorBoundary extends React.Component<
+export class ErrorBoundary extends Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
 > {

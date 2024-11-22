@@ -1,11 +1,12 @@
 "use client";
 
+import type { ReactNode} from "react";
 import React, { useEffect, useState } from "react";
 
 import { cn } from "@battle-stadium/ui";
 
 interface NavbarContainerProps {
-  children: React.ReactNode;
+  children: ReactNode;
   disableHide?: boolean; // Optional prop
 }
 

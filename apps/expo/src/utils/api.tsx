@@ -1,3 +1,4 @@
+import type { ReactNode} from "react";
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink, loggerLink } from "@trpc/client";
@@ -19,7 +20,7 @@ export { type RouterInputs, type RouterOutputs } from "@battle-stadium/api";
  * A wrapper for your app that provides the TRPC context.
  * Use only in _app.tsx
  */
-export function TRPCProvider(props: Readonly<{ children: React.ReactNode }>) {
+export function TRPCProvider(props: Readonly<{ children: ReactNode }>) {
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
     api.createClient({
