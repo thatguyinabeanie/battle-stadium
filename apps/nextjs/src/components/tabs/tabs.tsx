@@ -7,18 +7,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import type { TabsPrimitive } from "@battle-stadium/ui";
 import { Tabs as UiTabs, TabsList as UiTabsList } from "@battle-stadium/ui";
 
-function useActiveTab(
-  defaultValue?: string | number | readonly string[],
-): readonly [string, URLSearchParams] {
-  const searchParams = useSearchParams();
-  const tabParam = searchParams.get("tab") ?? defaultValue;
-  if (Array.isArray(tabParam) && tabParam.length > 0) {
-    return [tabParam[0] as string, searchParams] as const;
-  }
-  const activeTab = `${tabParam as string | number | undefined}`;
-  return [activeTab, searchParams] as const;
-}
-
 interface TabsProps
   extends ComponentPropsWithoutRef<typeof TabsPrimitive.Root> {
   disableTabSearchParam?: boolean;
@@ -63,3 +51,16 @@ export const TabsList = forwardRef<
   const [activeTab] = useActiveTab(defaultValue);
   return <UiTabsList ref={ref} {...props} defaultValue={activeTab} />;
 });
+
+function useActiveTab(
+  defaultValue?: string | number | readonly string[],
+): readonly [string, URLSearchParams] {
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab") ?? defaultValue;
+  if (Array.isArray(tabParam) && tabParam.length > 0) {
+    return [tabParam[0] as string, searchParams] as const;
+  }
+  const activeTab =
+    tabParam !== undefined ? `${tabParam as string | number}` : "";
+  return [activeTab, searchParams] as const;
+}
