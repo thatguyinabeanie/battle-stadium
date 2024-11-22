@@ -6,21 +6,28 @@ import Cookies from "js-cookie";
 
 import { Button } from "@battle-stadium/ui";
 
+/**
+ * Interface for configuring cookie attributes with security best practices
+ */
 interface CookieOptions {
+  /** Number of days until the cookie expires */
   expires?: number;
+  /** Ensures cookie is only sent over HTTPS */
   secure?: boolean;
+  /** Prevents JavaScript access to cookies, mitigating XSS risks */
   httpOnly?: boolean;
-  sameSite?: 'strict' | 'lax' | 'none';
+  /** Controls how cookies are sent in cross-site requests for CSRF protection */
+  sameSite?: "strict" | "lax" | "none";
 }
 
-function cookieAttributes (options: CookieOptions = {}) {
+function cookieAttributes(options: CookieOptions = {}) {
   return {
     expires: options.expires,
-    path: '/',
+    path: "/",
     ...options,
     secure: true, // Force HTTPS
     httpOnly: true, // Prevent XSS
-    sameSite: 'strict' as const, // CSRF protection
+    sameSite: "strict" as const, // CSRF protection
   };
 }
 
