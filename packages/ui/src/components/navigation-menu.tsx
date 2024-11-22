@@ -1,11 +1,10 @@
-
+import type { ComponentPropsWithoutRef, ComponentRef } from "react";
+import { forwardRef } from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 import { cva } from "class-variance-authority";
 
 import { cn } from "../utils";
-import type { ComponentRef, ComponentPropsWithoutRef } from "react";
-import { forwardRef } from "react";
 
 const NavigationMenu = forwardRef<
   ComponentRef<typeof NavigationMenuPrimitive.Root>,

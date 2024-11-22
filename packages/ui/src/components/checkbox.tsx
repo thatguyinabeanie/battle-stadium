@@ -1,12 +1,11 @@
 "use client";
 
-
+import type { ComponentPropsWithoutRef, ComponentRef } from "react";
+import { forwardRef } from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
 
 import { cn } from "../utils";
-import type { ComponentRef, ComponentPropsWithoutRef } from "react";
-import { forwardRef } from "react";
 
 const Checkbox = forwardRef<
   ComponentRef<typeof CheckboxPrimitive.Root>,

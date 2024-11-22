@@ -5,7 +5,7 @@ import type {
   Table as ReactTable,
   RowData,
 } from "@tanstack/react-table";
-
+import type { ReactNode } from "react";
 import { flexRender } from "@tanstack/react-table";
 
 import {
@@ -20,7 +20,6 @@ import {
 
 import { DataTableContext, useDataTable } from "./data-table-context";
 import { useTanstackReactTable } from "./use-tanstack-react-table";
-import type { ReactNode } from "react";
 
 interface DataTableProps<T> {
   data: T[];

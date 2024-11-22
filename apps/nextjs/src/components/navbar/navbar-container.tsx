@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode} from "react";
+import type { ReactNode } from "react";
 import React, { useEffect, useState } from "react";
 
 import { cn } from "@battle-stadium/ui";

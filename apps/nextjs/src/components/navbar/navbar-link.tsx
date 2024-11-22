@@ -1,6 +1,6 @@
 "use client";
 
-import type { ComponentPropsWithoutRef, ComponentRef} from "react";
+import type { ComponentPropsWithoutRef, ComponentRef } from "react";
 import React, { forwardRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

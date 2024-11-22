@@ -1,12 +1,11 @@
 "use client";
 
-
+import type { ComponentPropsWithoutRef, ComponentRef } from "react";
+import { forwardRef } from "react";
 import { DotFilledIcon } from "@radix-ui/react-icons";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
 import { cn } from "../utils";
-import type { ComponentPropsWithoutRef, ComponentRef} from "react";
-import { forwardRef } from "react";
 
 const RadioGroup = forwardRef<
   ComponentRef<typeof RadioGroupPrimitive.Root>,

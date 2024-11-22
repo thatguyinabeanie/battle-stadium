@@ -1,5 +1,3 @@
-
-
 import { getPartneredOrganizations } from "~/app/server-actions/organizations/actions";
 import OrganizationCard from "./organization-card";
 

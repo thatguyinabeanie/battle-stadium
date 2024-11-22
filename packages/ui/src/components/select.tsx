@@ -1,6 +1,7 @@
 "use client";
 
-
+import type { ComponentPropsWithoutRef, ComponentRef } from "react";
+import { forwardRef } from "react";
 import {
   CheckIcon,
   ChevronDownIcon,
@@ -9,8 +10,6 @@ import {
 import * as SelectPrimitive from "@radix-ui/react-select";
 
 import { cn } from "../utils";
-import type { ComponentPropsWithoutRef, ComponentRef} from "react";
-import { forwardRef } from "react";
 
 const Select = SelectPrimitive.Root;
 

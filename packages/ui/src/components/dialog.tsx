@@ -1,11 +1,15 @@
 "use client";
 
+import type {
+  ComponentPropsWithoutRef,
+  ComponentRef,
+  HTMLAttributes,
+} from "react";
+import { forwardRef } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Cross2Icon } from "@radix-ui/react-icons";
 
 import { cn } from "../utils";
-import type { ComponentRef, ComponentPropsWithoutRef, HTMLAttributes} from "react";
-import { forwardRef } from "react";
 
 const Dialog = DialogPrimitive.Root;
 

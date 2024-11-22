@@ -1,17 +1,14 @@
 "use client";
 
 import type { VariantProps } from "class-variance-authority";
-
+import type { ComponentPropsWithoutRef, ComponentRef } from "react";
+import { createContext, forwardRef, useContext } from "react";
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 
 import { cn } from "../utils";
 import { toggleVariants } from "./toggle";
-import type { ComponentPropsWithoutRef, ComponentRef} from "react";
-import { createContext, forwardRef, useContext } from "react";
 
-const ToggleGroupContext = createContext<
-  VariantProps<typeof toggleVariants>
->({
+const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({
   size: "default",
   variant: "default",
 });

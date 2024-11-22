@@ -1,10 +1,13 @@
-
+import type {
+  ComponentProps,
+  ComponentPropsWithoutRef,
+  ReactNode,
+} from "react";
+import { forwardRef } from "react";
 import { ChevronRightIcon, DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { Slot } from "@radix-ui/react-slot";
 
 import { cn } from "../utils";
-import type { ComponentPropsWithoutRef, ReactNode, ComponentProps } from "react";
-import { forwardRef } from "react";
 
 const Breadcrumb = forwardRef<
   HTMLElement,

@@ -1,11 +1,15 @@
 "use client";
 
-
+import type {
+  ComponentProps,
+  ComponentPropsWithoutRef,
+  ComponentRef,
+  HTMLAttributes,
+} from "react";
+import { forwardRef } from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 
 import { cn } from "../utils";
-import type { ComponentProps, ComponentPropsWithoutRef, ComponentRef, HTMLAttributes } from "react";
-import { forwardRef } from "react";
 
 const Drawer = ({
   shouldScaleBackground = true,

@@ -1,6 +1,11 @@
 "use client";
 
-
+import type {
+  ComponentPropsWithoutRef,
+  ComponentRef,
+  HTMLAttributes,
+} from "react";
+import { forwardRef } from "react";
 import {
   CheckIcon,
   ChevronRightIcon,
@@ -9,8 +14,6 @@ import {
 import * as MenubarPrimitive from "@radix-ui/react-menubar";
 
 import { cn } from "../utils";
-import type { ComponentPropsWithoutRef, ComponentRef, HTMLAttributes } from "react";
-import { forwardRef } from "react";
 
 const MenubarMenu = MenubarPrimitive.Menu;
 

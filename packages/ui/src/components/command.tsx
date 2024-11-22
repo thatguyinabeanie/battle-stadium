@@ -1,14 +1,17 @@
 "use client";
 
 import type { DialogProps } from "@radix-ui/react-dialog";
-
+import type {
+  ComponentPropsWithoutRef,
+  ComponentRef,
+  HTMLAttributes,
+} from "react";
+import { forwardRef } from "react";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import { Command as CommandPrimitive } from "cmdk";
 
 import { cn } from "../utils";
 import { Dialog, DialogContent } from "./dialog";
-import type { ComponentRef, ComponentPropsWithoutRef, HTMLAttributes } from "react";
-import { forwardRef } from "react";
 
 const Command = forwardRef<
   ComponentRef<typeof CommandPrimitive>,

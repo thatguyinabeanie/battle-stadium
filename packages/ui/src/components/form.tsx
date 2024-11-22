@@ -1,15 +1,18 @@
 "use client";
 
 import type * as LabelPrimitive from "@radix-ui/react-label";
+import type {
+  ComponentPropsWithoutRef,
+  ComponentRef,
+  HTMLAttributes,
+} from "react";
 import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form";
-
+import { createContext, forwardRef, useContext, useId } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 import { cn } from "../utils";
 import { Label } from "./label";
-import type { HTMLAttributes, ComponentRef, ComponentPropsWithoutRef } from "react";
-import { createContext, useContext, forwardRef, useId } from "react";
 
 const Form = FormProvider;
 
@@ -69,18 +72,17 @@ const FormItemContext = createContext<FormItemContextValue>(
   {} as FormItemContextValue,
 );
 
-const FormItem = forwardRef<
-  HTMLDivElement,
-  HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const id = useId();
+const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    const id = useId();
 
-  return (
-    <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
-    </FormItemContext.Provider>
-  );
-});
+    return (
+      <FormItemContext.Provider value={{ id }}>
+        <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      </FormItemContext.Provider>
+    );
+  },
+);
 FormItem.displayName = "FormItem";
 
 const FormLabel = forwardRef<

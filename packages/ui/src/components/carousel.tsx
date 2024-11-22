@@ -1,13 +1,20 @@
 "use client";
 
 import type { UseEmblaCarouselType } from "embla-carousel-react";
+import type { ComponentProps, HTMLAttributes, KeyboardEvent } from "react";
+import {
+  createContext,
+  forwardRef,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@radix-ui/react-icons";
 import useEmblaCarousel from "embla-carousel-react";
 
 import { cn } from "../utils";
 import { Button } from "./button";
-import type { ComponentProps, HTMLAttributes, KeyboardEvent } from "react";
-import { createContext, forwardRef, useCallback, useContext, useEffect, useState } from "react";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -171,26 +178,25 @@ const CarouselContent = forwardRef<
 });
 CarouselContent.displayName = "CarouselContent";
 
-const CarouselItem = forwardRef<
-  HTMLDivElement,
-  HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const { orientation } = useCarousel();
+const CarouselItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    const { orientation } = useCarousel();
 
-  return (
-    <div
-      ref={ref}
-      role="group"
-      aria-roledescription="slide"
-      className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full",
-        orientation === "horizontal" ? "pl-4" : "pt-4",
-        className,
-      )}
-      {...props}
-    />
-  );
-});
+    return (
+      <div
+        ref={ref}
+        role="group"
+        aria-roledescription="slide"
+        className={cn(
+          "min-w-0 shrink-0 grow-0 basis-full",
+          orientation === "horizontal" ? "pl-4" : "pt-4",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
 CarouselItem.displayName = "CarouselItem";
 
 const CarouselPrevious = forwardRef<
