@@ -12,7 +12,7 @@ export default [
       "react-compiler": reactCompilerPlugin,
     },
     rules: {
-      ...reactPlugin.configs["jsx-runtime"].rules,
+      ...reactPlugin.configs.recommended.rules,
       ...hooksPlugin.configs.recommended.rules,
       "react-compiler/react-compiler": "error",
     },

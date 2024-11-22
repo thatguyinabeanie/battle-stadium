@@ -1,7 +1,7 @@
 @import "@battle-stadium/ui/src/globals.css";
+@import "react-toastify/dist/ReactToastify.css";
 
 /*
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
