@@ -96,7 +96,7 @@ export default async function RootLayout({
                 <div className="flex min-h-screen flex-col items-center">
                   <AwesomeParticles />
                   <HydrateClient>
-                    <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20 md:backdrop-blur-sm">
+                    <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
                       {navbar}
                       <main
                         id="main-content"
