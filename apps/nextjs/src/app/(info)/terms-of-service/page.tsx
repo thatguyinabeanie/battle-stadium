@@ -1,7 +1,9 @@
-export default function Cookies() {
+export default function TermsOfService() {
   return (
     <div>
-      <p className="text-default-700 text-base font-medium">Terms of Service</p>
+      <h1 className="text-default-700 text-base font-medium">
+        Terms of Service
+      </h1>
 
       <p>TODO: Terms of Service</p>
     </div>
