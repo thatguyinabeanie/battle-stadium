@@ -45,17 +45,17 @@ export default function CookiesComponent({
   const [showConsent, setShowConsent] = useState(false);
 
   function handleAccept() {
-    Cookies.set(COOKIE_CONSENT, "accepted", cookieAttributes({ expires: 365 }));
+    Cookies.set(COOKIE_CONSENT, "accepted", cookieAttributes({ expires: 365, secure: true, httpOnly: true, sameSite: "strict" }));
 
     if (isSignedIn && userId) {
-      Cookies.set("userId", userId, cookieAttributes({ expires: 7 }));
+      Cookies.set("userId", userId, cookieAttributes({ expires: 7, secure: true, httpOnly: true, sameSite: "strict" }));
     }
 
     setShowConsent(false);
   }
 
   function handleReject() {
-    Cookies.set(COOKIE_CONSENT, "rejected", cookieAttributes({ expires: 1 }));
+    Cookies.set(COOKIE_CONSENT, "rejected", cookieAttributes({ expires: 1, secure: true, httpOnly: true, sameSite: "strict" }));
     setShowConsent(false);
   }
 
