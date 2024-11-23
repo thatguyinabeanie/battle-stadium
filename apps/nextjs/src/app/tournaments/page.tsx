@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import type { Organization, Tournament } from "@battle-stadium/db/schema";
 
@@ -13,7 +14,15 @@ interface OrganizationTournament {
   tournaments: Tournament;
   organizations: Organization | null;
 }
-export default async function Tournaments() {
+export default function TournamentsSuspenseWrapper() {
+  return (
+    <Suspense fallback={<div>Loading tournaments...</div>}>
+      <Tournaments />
+    </Suspense>
+  );
+}
+
+async function Tournaments() {
   const data: OrganizationTournament[] = await getOrganizationTournaments();
 
   return <TournamentsTable data={data} />;
