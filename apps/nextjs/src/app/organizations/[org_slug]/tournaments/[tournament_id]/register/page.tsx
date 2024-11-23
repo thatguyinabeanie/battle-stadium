@@ -22,7 +22,6 @@ export default async function Register(
 
   return (
     <>
-      {/* <ToastContainer /> */}
       <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
         <div>
           Register for {org_slug} tournament {tournament_id}

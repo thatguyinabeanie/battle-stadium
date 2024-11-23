@@ -10,9 +10,9 @@ const config: NextConfig = {
 
   experimental: {
     after: true,
-    ppr: true,
+    ppr: false,
     staleTimes: {
-      dynamic: 30,
+      dynamic: 5,
       static: 180,
     },
     // dynamicIO: true,

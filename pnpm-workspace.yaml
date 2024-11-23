@@ -57,9 +57,9 @@ catalogs:
     "expo-web-browser": ^14
 
   next:
-    next: canary
-    "@next/third-parties": canary
-    "@next/eslint-plugin-next": canary
+    next: latest
+    "@next/third-parties": latest
+    "@next/eslint-plugin-next": latest
     "@t3-oss/env-nextjs": ^0
     "babel-plugin-react-compiler": beta
 

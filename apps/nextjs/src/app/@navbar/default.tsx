@@ -1,5 +1,5 @@
 import Navbar from "~/components/navbar/navbar";
 
-export default function NavbarSlot() {
+export default function NavbarDefaultSlot() {
   return <Navbar />;
 }

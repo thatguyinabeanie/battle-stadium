@@ -6,12 +6,12 @@ export default function WaitlistPage() {
   const { user } = useUser();
 
   if (user) {
-    return (
-      <div className="p-4 text-center">
-        <h2 className="text-xl font-semibold">Welcome, {user.firstName}! 👋</h2>
-        <p>You're already signed in and don't need to join the waitlist.</p>
-      </div>
-    );
+    return <div>You are signed in.. </div>;
   }
-  return <Waitlist />;
+
+  return (
+    <div className="flex h-full min-h-screen w-full items-center justify-center">
+      <Waitlist />
+    </div>
+  );
 }
