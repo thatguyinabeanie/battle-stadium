@@ -62,9 +62,6 @@ export default function CookiesComponent({
         userId,
         cookieAttributes({
           expires: 7,
-          secure: true,
-          httpOnly: true,
-          sameSite: "strict",
         }),
       );
     }
