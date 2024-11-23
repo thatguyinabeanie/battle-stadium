@@ -12,8 +12,6 @@ interface PlayerProfilePageProps {
 export async function generateMetadata(
   props: Readonly<PlayerProfilePageProps>,
 ) {
-  "use cache";
-
   const params = await props.params;
   const player = await getProfile(params.username);
 

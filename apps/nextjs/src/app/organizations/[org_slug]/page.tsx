@@ -16,8 +16,6 @@ interface OrganizationDetailPageProps {
 export async function generateMetadata(
   props: Readonly<OrganizationDetailPageProps>,
 ) {
-  "use cache";
-
   const { org_slug } = await props.params;
   let org;
   try {
