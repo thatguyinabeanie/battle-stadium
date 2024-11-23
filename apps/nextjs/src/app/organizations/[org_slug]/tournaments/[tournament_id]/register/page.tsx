@@ -6,9 +6,6 @@ import { postTournamentRegistration } from "~/app/server-actions/tournaments/act
 import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
-export const revalidate = 300;
-export const dynamicParams = true;
-
 export async function generateStaticParams() {
   return await generateOrganizationTournamentsStaticParams();
 }

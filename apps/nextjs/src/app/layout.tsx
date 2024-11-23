@@ -8,8 +8,8 @@ import { GeistSans } from "geist/font/sans";
 import { cn, ThemeProvider } from "@battle-stadium/ui";
 
 import { env } from "~/env";
-import { TRPCReactProvider } from "~/trpc/react";
-import { HydrateClient } from "~/trpc/server";
+// import { TRPCReactProvider } from "~/trpc/react";
+// import { HydrateClient } from "~/trpc/server";
 
 import "~/styles/globals.css";
 
@@ -17,7 +17,7 @@ import type { ReactNode } from "react";
 import { StrictMode } from "react";
 import dynamic from "next/dynamic";
 import { ClerkProvider } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
+
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 
@@ -26,7 +26,7 @@ import Footer from "~/components/footer";
 import { siteConfig } from "~/lib/config/site";
 import { UploadThingRouter } from "./api/uploadthing/core";
 
-const Cookies = dynamic(() => import("~/components/cookies/cookies"));
+
 const AwesomeParticles = dynamic(
   () => import("~/components/awesome-particles"),
 );
@@ -70,12 +70,12 @@ export const viewport: Viewport = {
 
 interface RootLayoutProps extends ChildrenProps {
   navbar: ReactNode;
+  cookies: ReactNode;
 }
-export default async function RootLayout({
+export default function RootLayout({
   navbar,
   children,
 }: Readonly<RootLayoutProps>) {
-  const { userId, sessionId } = await auth();
 
   return (
     <StrictMode>
@@ -89,24 +89,24 @@ export default async function RootLayout({
             )}
           >
             <ThemeProvider attribute="class" defaultTheme="dark">
-              <TRPCReactProvider>
-                <NextSSRPlugin
+              {/* <TRPCReactProvider> */}
+                {/* <NextSSRPlugin
                   routerConfig={extractRouterConfig(UploadThingRouter)}
-                />
+                /> */}
                 <div className="flex min-h-screen flex-col items-center">
                   <AwesomeParticles />
-                  <HydrateClient>
+                  {/* <HydrateClient> */}
                     <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
                       {navbar}
                       <MainSection>{children}</MainSection>
                       <Footer />
                     </div>
-                  </HydrateClient>
+                  {/* </HydrateClient> */}
                 </div>
-              </TRPCReactProvider>
+              {/* </TRPCReactProvider> */}
 
-              <Cookies isSignedIn={!!sessionId} userId={userId} />
 
+              {/* { cookies } */}
               <VercelAnalytics />
 
               {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}

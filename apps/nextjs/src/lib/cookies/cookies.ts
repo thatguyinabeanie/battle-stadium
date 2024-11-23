@@ -37,7 +37,7 @@ export function setResponseCookies() {
       cookie.serialize(key, signedEncodedValue, defaultCookieOptions),
     );
 
-    const expires = new Date(Date.now() + maxAge * 1000).toUTCString();
+    const expires = new Date(performance.now() + maxAge * 1000).toUTCString();
 
     response.headers.append(
       "Set-Cookie",
