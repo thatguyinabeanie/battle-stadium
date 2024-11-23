@@ -27,8 +27,14 @@ export default async function RightMenu() {
 
   return (
     <div className="flex flex-row items-center justify-end">
-      <Button className="flex items-center justify-center bg-transparent p-1">
-        <SolarMagniferLinear className={sharedClassNames} />
+      <Link href="/search">
+        <Button 
+          aria-label="Search"
+          className="flex items-center justify-center bg-transparent p-1"
+        >
+          <SolarMagniferLinear className={sharedClassNames} />
+        </Button>
+      </Link>
       </Button>
 
       <Link prefetch={true} passHref href="/dashboard?tab=settings">
