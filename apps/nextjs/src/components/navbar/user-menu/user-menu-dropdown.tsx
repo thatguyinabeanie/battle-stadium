@@ -70,7 +70,7 @@ export default function UserMenuDropDown({
       </DropdownMenuItem>
 
       <DropdownMenuItem key="help_and_feedback">
-        <Link href="/help" prefetch={ true }>
+        <Link href="/help" prefetch={true}>
           Help & Feedback
         </Link>
       </DropdownMenuItem>
