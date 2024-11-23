@@ -98,8 +98,8 @@ export default async function RootLayout({
                   <HydrateClient>
                     <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20 md:backdrop-blur-sm">
                       {navbar}
-                      <main className="flex min-h-screen w-full flex-col items-center">
-                        <section className="z-0 flex h-full w-full flex-col items-center gap-4">
+                      <main id="main-content" className="flex min-h-screen w-full flex-col items-center">
+                        <section aria-label="Main content" className="z-0 flex h-full w-full flex-col items-center gap-4">
                           {children}
                         </section>
                       </main>
