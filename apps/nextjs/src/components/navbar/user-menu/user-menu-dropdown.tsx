@@ -22,7 +22,7 @@ export default function UserMenuDropDown({
   isSignedIn,
 }: Readonly<UserMenuDropDownProps>) {
   return (
-    <DropdownMenu aria-label="Profile Actions">
+    <>
       <DropdownMenuContent>
         <DropdownMenuItem
           key="profile"
@@ -90,6 +90,6 @@ export default function UserMenuDropDown({
           <SignOutButton>Sign out</SignOutButton>
         </DropdownMenuItem>
       </DropdownMenuContent>
-    </DropdownMenu>
+    </>
   );
 }

@@ -9,18 +9,10 @@ export default async function Navbar() {
   const clerkAuth = await auth();
 
   return (
-    <NavbarContainer disableHide>
-      <nav className="relative flex w-full border-b backdrop-blur-3xl">
-        <div className="w-full px-4 backdrop-blur-3xl">
-          <div className="flex h-12 w-full items-center justify-between backdrop-blur-3xl md:h-16">
-            <BattleStadium />
-
-            <NavbarLinks isSignedIn={!!clerkAuth.sessionId} />
-
-            <RightMenu />
-          </div>
-        </div>
-      </nav>
+    <NavbarContainer disableHide className="bg-black/90 backdrop-blur-3xl">
+      <BattleStadium />
+      <NavbarLinks isSignedIn={!!clerkAuth.sessionId} />
+      <RightMenu />
     </NavbarContainer>
   );
 }

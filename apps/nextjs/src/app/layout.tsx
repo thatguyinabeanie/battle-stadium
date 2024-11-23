@@ -95,7 +95,7 @@ export default async function RootLayout({
                   <div className="flex min-h-screen w-full flex-col items-center shadow-2xl backdrop-blur dark:shadow-white/25 md:backdrop-blur">
                     <Navbar />
                     <main className="flex min-h-screen w-full flex-col items-center">
-                      <section className="z-0 flex w-full flex-col items-center gap-4">
+                      <section className="z-0 flex h-full w-full flex-col items-center gap-4">
                         <HydrateClient>{children}</HydrateClient>
                       </section>
                     </main>

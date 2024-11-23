@@ -14,6 +14,7 @@ import {
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import MobileMenu from "~/components/navbar/navbar-mobile-menu";
 import UserMenuDropDown from "./user-menu/user-menu-dropdown";
+import { SolarUserLinear } from "../svg/solar-user-linear";
 
 const sharedClassNames =
   "h-[20px] w-[20px] md:h-[24px] md:w-[24px] lg:h-[30px] lg:w-[30px]";
@@ -22,18 +23,18 @@ export default async function RightMenu() {
   const me = (await getAccountMe()) ?? undefined;
 
   return (
-    <div className="flex flex-row items-center justify-center">
-      <Button className="p-1">
+    <div className="flex flex-row items-center justify-center ">
+      <Button className="p-1 bg-transparent flex items-center justify-center">
         <Icon className={sharedClassNames} icon="solar:magnifer-linear" />
       </Button>
 
       <Link prefetch={true} passHref href="/dashboard?tab=settings">
-        <Button className="p-1">
+        <Button className="p-1 bg-transparent flex items-center justify-center">
           <Icon className={sharedClassNames} icon="solar:settings-linear" />
         </Button>
       </Link>
 
-      <DropdownMenu>
+      <DropdownMenu aria-label="Profile Actions">
         <DropdownMenuTrigger>
           <SmartAvatar />
         </DropdownMenuTrigger>
@@ -48,23 +49,19 @@ export default async function RightMenu() {
 async function SmartAvatar() {
   const user = await currentUser();
 
-  if (user?.imageUrl) {
-    return (
-      <Avatar aria-label="User's profile image" className="bg-transparent p-1">
-        <AvatarImage
-          src={user.imageUrl}
-          className={
-            "h-[24px] w-[24px] md:h-[30px] md:w-[30px] lg:h-[32px] lg:w-[32px]"
-          }
-        />
-        <AvatarFallback>
-          <div className={sharedClassNames} />{" "}
-        </AvatarFallback>
-      </Avatar>
-    );
-  }
-
   return (
-    <Avatar aria-label="default profile image" className="bg-transparent" />
+    <Avatar aria-label="User's profile image" className="bg-transparent p-1">
+      <AvatarImage
+        src={user?.imageUrl}
+        className={
+          "h-[24px] w-[24px] md:h-[30px] md:w-[30px] lg:h-[32px] lg:w-[32px]"
+        }
+      />
+      <AvatarFallback>
+        <AvatarFallback>
+          <SolarUserLinear className="h-[24px] w-[24px] md:h-[30px] md:w-[30px] lg:h-[32px] lg:w-[32px]" />
+        </AvatarFallback>
+      </AvatarFallback>
+    </Avatar>
   );
 }

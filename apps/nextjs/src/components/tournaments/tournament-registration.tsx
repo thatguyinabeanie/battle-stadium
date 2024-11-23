@@ -4,7 +4,8 @@ import type { ReactNode } from "react";
 import { useState } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+
+// import { toast } from "react-toastify";
 
 import { Badge, Button } from "@battle-stadium/ui";
 
@@ -59,11 +60,11 @@ function useTournamentRegistrationAction({
     setLoading(true);
     try {
       await tournamentRegistrationAction(formData);
-      toast.success("Registration successful!");
+      // toast.success("Registration successful!");
       router.push(`/organizations/${org_slug}/tournaments/${tournament_id}`);
     } catch (error: unknown) {
       console.log(`Registration failed. Please try again.`, error);
-      toast.error(`Registration failed. Please try again.`);
+      // toast.error(`Registration failed. Please try again.`);
     } finally {
       setLoading(false);
     }
