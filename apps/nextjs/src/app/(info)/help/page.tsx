@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: "Learn more about who we are and what we do",
+  title: "Help & Support",
+  description: "Get help and support with using our platform",
 };
 
 export default function About() {
