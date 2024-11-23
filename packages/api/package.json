@@ -10,9 +10,6 @@
       "default": "./src/index.ts"
     }
   },
-  "engines": {
-    "node": "20.x"
-  },
   "scripts": {
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
@@ -40,5 +37,8 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }

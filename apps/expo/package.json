@@ -15,9 +15,6 @@
     "sort-packages": "pnpx sort-package-json",
     "typecheck": "tsc --noEmit"
   },
-  "engines": {
-    "node": "20.x"
-  },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "@bacons/text-decoder": "^0",
@@ -63,5 +60,8 @@
     "prettier": "catalog:",
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }

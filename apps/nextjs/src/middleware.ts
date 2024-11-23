@@ -19,12 +19,12 @@ export const config = {
   ],
 };
 
-const isPublicRoute = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
+const publicRoutes = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)", "/waitlist(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
   if (
     [env.NODE_ENV, env.VERCEL_ENV].includes("development") &&
-    !isPublicRoute(request)
+    !publicRoutes(request)
   ) {
     await auth.protect();
   }

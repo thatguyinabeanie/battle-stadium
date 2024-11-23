@@ -15,9 +15,6 @@
     },
     "./src/globals.css": "./src/globals.css"
   },
-  "engines": {
-    "node": "20.x"
-  },
   "scripts": {
     "build": "tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
@@ -88,5 +85,8 @@
   "peerDependencies": {
     "react": "catalog:react",
     "zod": "catalog:"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
