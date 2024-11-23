@@ -1,5 +1,5 @@
-import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 import {
   getOrganization,
@@ -42,10 +42,10 @@ export default function OrganizationDetailPage(
     <Suspense fallback={<div>Loading...</div>}>
       <OrganizationDetails {...props} />
     </Suspense>
-  )
+  );
 }
 
-async function OrganizationDetails (
+async function OrganizationDetails(
   props: Readonly<OrganizationDetailPageProps>,
 ) {
   const params = await props.params;
@@ -60,19 +60,19 @@ async function OrganizationDetails (
   return (
     <>
       <OrganizationHeader
-        organization={ organization }
-        classNames={ { wrapper: "my-8" } }
+        organization={organization}
+        classNames={{ wrapper: "my-8" }}
       >
         <div className="mx-4 flex h-full w-full flex-col items-center justify-between py-2 text-center">
-          <h1 className="text-2xl font-semibold">{ organization.name }</h1>
-          <p>{ organization.description }</p>
+          <h1 className="text-2xl font-semibold">{organization.name}</h1>
+          <p>{organization.description}</p>
         </div>
       </OrganizationHeader>
 
       <SingleOrganizationTournamentsTable
         className="w-full px-4"
-        data={ tournaments }
-        organization={ organization }
+        data={tournaments}
+        organization={organization}
       />
     </>
   );

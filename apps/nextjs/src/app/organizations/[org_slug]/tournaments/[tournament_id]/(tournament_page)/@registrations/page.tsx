@@ -1,7 +1,8 @@
+import { Suspense } from "react";
+
 import type { OrganizationTournamentParams } from "~/types";
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
 import RegistrationsTable from "~/components/tournaments/registrations-table";
-import { Suspense } from "react";
 
 export default async function TournamentRegistrationsPage(
   props: Readonly<OrganizationTournamentParams>,
@@ -16,8 +17,11 @@ export default async function TournamentRegistrationsPage(
   );
 }
 
-async function TournamentsRegistrationTable({ tournament_id }: { tournament_id: number }) {
+async function TournamentsRegistrationTable({
+  tournament_id,
+}: {
+  tournament_id: number;
+}) {
   const players = await getTournamentPlayers(tournament_id);
   return <RegistrationsTable players={players} />;
-
 }

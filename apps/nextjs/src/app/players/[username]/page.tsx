@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { getProfile, getProfiles } from "~/app/server-actions/profiles/actions";
 import ComingSoon from "~/components/coming-soon";
 
@@ -8,7 +7,7 @@ interface PlayerProfilePageProps {
   }>;
 }
 
-export async function generateMetadata (
+export async function generateMetadata(
   props: Readonly<PlayerProfilePageProps>,
 ) {
   "use cache";
@@ -19,18 +18,19 @@ export async function generateMetadata (
   return { title: player?.username ?? "Player" };
 }
 
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   const profiles = await getProfiles();
 
   return profiles.map((profile) => ({ username: profile.username }));
 }
 
-export default async function PlayerProfilePageSuspenseWrapper (props: Readonly<PlayerProfilePageProps>) {
+export default async function PlayerProfilePageSuspenseWrapper(
+  props: Readonly<PlayerProfilePageProps>,
+) {
   const params = await props.params;
   return (
-    <ComingSoon title={ params.username }>
+    <ComingSoon title={params.username}>
       <h2>The Player Profiles are under construction</h2>
     </ComingSoon>
-  )
+  );
 }
-
