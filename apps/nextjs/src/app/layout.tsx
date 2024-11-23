@@ -72,8 +72,8 @@ interface RootLayoutProps extends ChildrenProps {
   navbar: ReactNode;
 }
 export default async function RootLayout({
-  children,
   navbar,
+  children,
 }: Readonly<RootLayoutProps>) {
   const { userId, sessionId } = await auth();
 
