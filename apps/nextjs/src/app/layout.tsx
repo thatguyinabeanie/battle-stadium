@@ -1,4 +1,11 @@
+import type { ReactNode } from "react";
+import { StrictMode } from "react";
+
+import "~/styles/globals.css";
+
 import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
+import { ClerkProvider } from "@clerk/nextjs";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { SpeedInsights as VercelSpeedInsights } from "@vercel/speed-insights/next";
@@ -7,25 +14,16 @@ import { GeistSans } from "geist/font/sans";
 
 import { cn, ThemeProvider } from "@battle-stadium/ui";
 
-import { env } from "~/env";
-// import { TRPCReactProvider } from "~/trpc/react";
-// import { HydrateClient } from "~/trpc/server";
-
-import "~/styles/globals.css";
-
-import type { ReactNode } from "react";
-import { StrictMode } from "react";
-import dynamic from "next/dynamic";
-import { ClerkProvider } from "@clerk/nextjs";
-
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
-import { extractRouterConfig } from "uploadthing/server";
-
 import type { ChildrenProps } from "~/types";
 import Footer from "~/components/footer";
+import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
-import { UploadThingRouter } from "./api/uploadthing/core";
 
+// import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+// import { extractRouterConfig } from "uploadthing/server";
+// import { UploadThingRouter } from "./api/uploadthing/core";
+// import { TRPCReactProvider } from "~/trpc/react";
+// import { HydrateClient } from "~/trpc/server";
 
 const AwesomeParticles = dynamic(
   () => import("~/components/awesome-particles"),
@@ -76,7 +74,6 @@ export default function RootLayout({
   navbar,
   children,
 }: Readonly<RootLayoutProps>) {
-
   return (
     <StrictMode>
       <ClerkProvider>
@@ -90,21 +87,20 @@ export default function RootLayout({
           >
             <ThemeProvider attribute="class" defaultTheme="dark">
               {/* <TRPCReactProvider> */}
-                {/* <NextSSRPlugin
+              {/* <NextSSRPlugin
                   routerConfig={extractRouterConfig(UploadThingRouter)}
                 /> */}
-                <div className="flex min-h-screen flex-col items-center">
-                  <AwesomeParticles />
-                  {/* <HydrateClient> */}
-                    <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
-                      {navbar}
-                      <MainSection>{children}</MainSection>
-                      <Footer />
-                    </div>
-                  {/* </HydrateClient> */}
+              <div className="flex min-h-screen flex-col items-center">
+                <AwesomeParticles />
+                {/* <HydrateClient> */}
+                <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
+                  {navbar}
+                  <MainSection>{children}</MainSection>
+                  <Footer />
                 </div>
+                {/* </HydrateClient> */}
+              </div>
               {/* </TRPCReactProvider> */}
-
 
               {/* { cookies } */}
               <VercelAnalytics />

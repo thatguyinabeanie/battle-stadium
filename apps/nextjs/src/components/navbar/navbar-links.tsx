@@ -1,9 +1,10 @@
+import { Suspense } from "react";
+import { auth } from "@clerk/nextjs/server";
+
 import { cn } from "@battle-stadium/ui";
 
 import { NavbarItemsConfigs } from "~/lib/config/site";
 import NavbarLink from "./navbar-link";
-import { auth } from "@clerk/nextjs/server";
-import { Suspense } from "react";
 
 export default function NavbarLinks() {
   return (
@@ -16,10 +17,9 @@ export default function NavbarLinks() {
           label={label}
         />
       ))}
-      <Suspense fallback={ null }>
+      <Suspense fallback={null}>
         <DashboardNavLink />
       </Suspense>
-
     </div>
   );
 }
@@ -31,10 +31,10 @@ async function DashboardNavLink() {
       value="dashboard"
       key="dashboard"
       href="/dashboard"
-      className={ cn("hidden", {
-        "sm:flex": !!sessionId
-      }) }
+      className={cn("hidden", {
+        "sm:flex": !!sessionId,
+      })}
       label="Dashboard"
     />
-  )
+  );
 }

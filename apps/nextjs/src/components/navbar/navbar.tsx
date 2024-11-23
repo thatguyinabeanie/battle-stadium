@@ -10,7 +10,7 @@ export default function Navbar() {
       className="bg-white/95 backdrop-blur-3xl dark:bg-black/95"
     >
       <BattleStadium />
-      <NavbarLinks/>
+      <NavbarLinks />
       <RightMenu />
     </NavbarContainer>
   );

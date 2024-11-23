@@ -12,7 +12,6 @@ import { getSingleOrganizationSingleTournament } from "~/app/server-actions/orga
 import OrganizationHeader from "~/components/organizations/organization-header";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
-
 export async function generateStaticParams() {
   return await generateOrganizationTournamentsStaticParams();
 }
