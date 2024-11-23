@@ -45,25 +45,24 @@ export default async function OrganizationDetailPage(
 
   if (!organization) {
     notFound();
-  } else {
-    return (
-      <>
-        <OrganizationHeader
-          organization={organization}
-          classNames={{ wrapper: "my-8" }}
-        >
-          <div className="mx-4 flex h-full w-full flex-col items-center justify-between py-2 text-center">
-            <h1 className="text-2xl font-semibold">{organization.name}</h1>
-            <p>{organization.description}</p>
-          </div>
-        </OrganizationHeader>
-
-        <SingleOrganizationTournamentsTable
-          className="w-full px-4"
-          data={tournaments}
-          organization={organization}
-        />
-      </>
-    );
   }
+  return (
+    <>
+      <OrganizationHeader
+        organization={organization}
+        classNames={{ wrapper: "my-8" }}
+      >
+        <div className="mx-4 flex h-full w-full flex-col items-center justify-between py-2 text-center">
+          <h1 className="text-2xl font-semibold">{organization.name}</h1>
+          <p>{organization.description}</p>
+        </div>
+      </OrganizationHeader>
+
+      <SingleOrganizationTournamentsTable
+        className="w-full px-4"
+        data={tournaments}
+        organization={organization}
+      />
+    </>
+  );
 }
