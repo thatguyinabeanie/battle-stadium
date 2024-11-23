@@ -42,9 +42,8 @@ export default async function Register(
 function tournamentRegistrationAction(tournament_id: number) {
   return async (formData: FormData) => {
     "use server";
-    // http://localhost:3000/sign-in?redirect_url=http%3A%2F%2Flocalhost%3A3000%2Forganizations
-    const profiles = await getProfilesMe();
 
+    const profiles = await getProfilesMe();
     const in_game_name = formData.get("ign") as string;
     const profile = formData.get("profile") as string;
     const show_country_flag =
