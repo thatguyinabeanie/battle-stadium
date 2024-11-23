@@ -1,10 +1,7 @@
-import type { IconProps } from "@iconify/react";
 import Link from "next/link";
-import { Icon } from "@iconify/react";
 
 import BattleStadium from "./battle-stadium";
-
-type SocialIconProps = Omit<IconProps, "icon">;
+import { LineMdGithubLoop, LineMdTwitter } from "./svg/icons";
 
 const navLinks = [
   {
@@ -29,16 +26,12 @@ const socialItems = [
   {
     name: "Twitter",
     href: "https://x.com/thatguyinabeani",
-    icon: (props: SocialIconProps) => (
-      <Icon {...props} icon="fontisto:twitter" />
-    ),
+    icon: (props: { className?: string }) => <LineMdTwitter {...props} />,
   },
   {
     name: "GitHub",
     href: "https://github.com/thatguyinabeanie/battle-stadium/",
-    icon: (props: SocialIconProps) => (
-      <Icon {...props} icon="fontisto:github" />
-    ),
+    icon: (props: { className?: string }) => <LineMdGithubLoop {...props} />,
   },
 ];
 

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { Icon } from "@iconify/react/dist/iconify.js";
 
 import {
   Avatar,
@@ -13,8 +12,12 @@ import {
 
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import MobileMenu from "~/components/navbar/navbar-mobile-menu";
+import {
+  SolarMagniferLinear,
+  SolarSettingsLinear,
+  SolarUserLinear,
+} from "../svg/icons";
 import UserMenuDropDown from "./user-menu/user-menu-dropdown";
-import { SolarUserLinear } from "../svg/solar-user-linear";
 
 const sharedClassNames =
   "h-[20px] w-[20px] md:h-[24px] md:w-[24px] lg:h-[30px] lg:w-[30px]";
@@ -23,14 +26,14 @@ export default async function RightMenu() {
   const me = (await getAccountMe()) ?? undefined;
 
   return (
-    <div className="flex flex-row items-center justify-end ">
-      <Button className="p-1 bg-transparent flex items-center justify-center">
-        <Icon className={sharedClassNames} icon="solar:magnifer-linear" />
+    <div className="flex flex-row items-center justify-end">
+      <Button className="flex items-center justify-center bg-transparent p-1">
+        <SolarMagniferLinear className={sharedClassNames} />
       </Button>
 
       <Link prefetch={true} passHref href="/dashboard?tab=settings">
-        <Button className="p-1 bg-transparent flex items-center justify-center">
-          <Icon className={sharedClassNames} icon="solar:settings-linear" />
+        <Button className="flex items-center justify-center bg-transparent p-1">
+          <SolarSettingsLinear className={sharedClassNames} />
         </Button>
       </Link>
 

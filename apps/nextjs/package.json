@@ -30,7 +30,6 @@
     "@clerk/backend": "catalog:auth",
     "@clerk/clerk-react": "catalog:auth",
     "@clerk/nextjs": "catalog:auth",
-    "@iconify/react": "^5",
     "@next/third-parties": "catalog:next",
     "@pkmn/sets": "catalog:pokemon",
     "@pkmn/types": "catalog:pokemon",

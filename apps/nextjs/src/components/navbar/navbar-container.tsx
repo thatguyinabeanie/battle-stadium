@@ -14,16 +14,16 @@ interface NavbarContainerProps {
 export default function NavbarContainer({
   children,
   disableHide = false,
-  className
+  className,
 }: Readonly<NavbarContainerProps>) {
   const { isVisible } = useNavbarVisibility(disableHide);
 
   return (
     <nav
       className={cn(
-        "sticky top-0 z-40 w-full transform transition-transform duration-300 grid grid-cols-2 md:grid-cols-3 border-b px-4 h-12 items-center justify-between  md:h-16",
+        "sticky top-0 z-40 grid h-12 w-full transform grid-cols-2 items-center justify-between border-b px-4 transition-transform duration-300 md:h-16 md:grid-cols-3",
         !isVisible && "-translate-y-full",
-        className
+        className,
       )}
     >
       {children}
