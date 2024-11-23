@@ -58,11 +58,9 @@ function useTournamentRegistrationAction({
     setLoading(true);
     try {
       await tournamentRegistrationAction(formData);
-      // toast.success("Registration successful!");
       router.push(`/organizations/${org_slug}/tournaments/${tournament_id}`);
     } catch (error: unknown) {
       console.log(`Registration failed. Please try again.`, error);
-      // toast.error(`Registration failed. Please try again.`);
     } finally {
       setLoading(false);
     }
