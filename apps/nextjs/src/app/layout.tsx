@@ -13,6 +13,7 @@ import { HydrateClient } from "~/trpc/server";
 
 import "~/styles/globals.css";
 
+import type { ReactNode } from "react";
 import { StrictMode } from "react";
 import dynamic from "next/dynamic";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -22,7 +23,6 @@ import { extractRouterConfig } from "uploadthing/server";
 
 import type { ChildrenProps } from "~/types";
 import Footer from "~/components/footer";
-import Navbar from "~/components/navbar/navbar";
 import { siteConfig } from "~/lib/config/site";
 import { UploadThingRouter } from "./api/uploadthing/core";
 
@@ -68,9 +68,13 @@ export const viewport: Viewport = {
   ],
 };
 
+interface RootLayoutProps extends ChildrenProps {
+  navbar: ReactNode;
+}
 export default async function RootLayout({
+  navbar,
   children,
-}: Readonly<ChildrenProps>) {
+}: Readonly<RootLayoutProps>) {
   const { userId, sessionId } = await auth();
 
   return (
@@ -84,24 +88,31 @@ export default async function RootLayout({
               GeistMono.variable,
             )}
           >
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="dark">
               <TRPCReactProvider>
                 <NextSSRPlugin
                   routerConfig={extractRouterConfig(UploadThingRouter)}
                 />
                 <div className="flex min-h-screen flex-col items-center">
                   <AwesomeParticles />
+                  <HydrateClient>
+                    <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
+                      {navbar}
+                      <main
+                        id="main-content"
+                        className="flex min-h-screen w-full flex-col items-center"
+                      >
+                        <section
+                          aria-label="Main content"
+                          className="z-0 flex h-full w-full flex-col items-center gap-4"
+                        >
+                          {children}
+                        </section>
+                      </main>
 
-                  <div className="flex min-h-screen w-full flex-col items-center shadow-2xl backdrop-blur dark:shadow-white/25 md:backdrop-blur">
-                    <Navbar />
-                    <main className="flex min-h-screen w-full flex-col items-center">
-                      <section className="z-0 flex w-full flex-col items-center gap-4">
-                        <HydrateClient>{children}</HydrateClient>
-                      </section>
-                    </main>
-
-                    <Footer />
-                  </div>
+                      <Footer />
+                    </div>
+                  </HydrateClient>
                 </div>
               </TRPCReactProvider>
 

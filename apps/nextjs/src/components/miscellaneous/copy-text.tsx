@@ -1,6 +1,5 @@
 import type { HTMLAttributes } from "react";
 import { forwardRef, memo, useMemo, useState } from "react";
-import { Icon } from "@iconify/react";
 
 import {
   Button,
@@ -10,6 +9,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@battle-stadium/ui";
+
+import { SolarCheckReadLinear, SolarCopyLinear } from "../svg/icons";
 
 export interface CopyTextProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
@@ -65,17 +66,9 @@ export const CopyText = memo(
                   size="sm"
                   onClick={handleClick}
                 >
-                  {!copied && (
-                    <Icon
-                      className="h-[14px] w-[14px]"
-                      icon="solar:copy-linear"
-                    />
-                  )}
+                  {!copied && <SolarCopyLinear className="h-[14px] w-[14px]" />}
                   {copied && (
-                    <Icon
-                      className="h-[14px] w-[14px]"
-                      icon="solar:check-read-linear"
-                    />
+                    <SolarCheckReadLinear className="h-[14px] w-[14px]" />
                   )}
                 </Button>
               </TooltipContent>

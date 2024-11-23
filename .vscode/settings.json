@@ -70,6 +70,7 @@
     "npmcli",
     "opentelemetry",
     "paldea",
+    "panva",
     "pglite",
     "planetscale",
     "postcss",
@@ -102,6 +103,7 @@
     "upstash",
     "Ursaluna",
     "vercel",
+    "Waitlist",
     "webapi"
   ],
   "coverage-gutters.showGutterCoverage": false,

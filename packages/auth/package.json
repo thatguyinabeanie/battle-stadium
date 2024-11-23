@@ -11,9 +11,6 @@
     },
     "./env": "./env.ts"
   },
-  "engines": {
-    "node": "20.x"
-  },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore",
@@ -39,5 +36,8 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }

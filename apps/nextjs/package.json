@@ -16,9 +16,6 @@
     "vercel:pull": "vercel env pull .env.development.local",
     "with-env": "dotenv -e ../../.env --"
   },
-  "engines": {
-    "node": "20.x"
-  },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "@aws-sdk/credential-provider-web-identity": "catalog:vercel",
@@ -30,7 +27,6 @@
     "@clerk/backend": "catalog:auth",
     "@clerk/clerk-react": "catalog:auth",
     "@clerk/nextjs": "catalog:auth",
-    "@iconify/react": "^5",
     "@next/third-parties": "catalog:next",
     "@pkmn/sets": "catalog:pokemon",
     "@pkmn/types": "catalog:pokemon",
@@ -71,6 +67,7 @@
     "tailwind-variants": "catalog:tailwind",
     "tailwindcss-animate": "catalog:tailwind",
     "tweetnacl": "^1",
+    "vercel": "catalog:vercel",
     "zod": "catalog:"
   },
   "devDependencies": {
@@ -89,5 +86,8 @@
     "prettier": "catalog:",
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }

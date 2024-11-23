@@ -10,9 +10,6 @@
     "sort-packages": "pnpx sort-package-json",
     "typecheck": "tsc --noEmit"
   },
-  "engines": {
-    "node": "20.x"
-  },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "@auth/core": "catalog:auth"
@@ -28,5 +25,8 @@
     "nitropack": "^2",
     "prettier": "catalog:",
     "typescript": "catalog:"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
