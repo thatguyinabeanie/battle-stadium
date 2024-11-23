@@ -14,11 +14,9 @@ export default function NewProfile() {
     router.push("/dashboard?tab=profiles");
     try {
       await createProfile(formData.get("profile") as string);
-      // toast.success("Profile created successfully!");
       router.push("/dashboard?tab=profiles");
     } catch (error: unknown) {
       console.error("Failed to create profile:", error);
-      // toast.error("Failed to create profile. Please try again.");
     }
   };
 
