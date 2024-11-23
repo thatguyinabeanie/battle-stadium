@@ -11,12 +11,25 @@ import type {
 import { getSingleOrganizationSingleTournament } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
+import { Suspense } from "react";
 
 export async function generateStaticParams() {
-  return await generateOrganizationTournamentsStaticParams();
+  const staticParams = await generateOrganizationTournamentsStaticParams();
+  return staticParams;
 }
 
-export default async function OrganizationTournamentHeader(
+export default function OrganizationTournamentHeaderSlot(
+  props: Readonly<OrganizationTournamentParams>,
+) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OrganizationTournamentHeader {...props} />
+    </Suspense>
+  );
+}
+
+
+async function OrganizationTournamentHeader (
   props: Readonly<OrganizationTournamentParams>,
 ) {
   const params = await props.params;
@@ -31,24 +44,25 @@ export default async function OrganizationTournamentHeader(
   return (
     <>
       <OrganizationHeader
-        organization={organization}
-        classNames={{
+        organization={ organization }
+        classNames={ {
           wrapper: "w-11/12 my-4",
-        }}
+        } }
       >
         <TournamentDetails
-          tournament={tournament}
-          organization={organization}
+          tournament={ tournament }
+          organization={ organization }
         />
 
         <TournamentDetailChips
-          org_slug={org_slug}
-          tournament_id={tournament_id}
+          org_slug={ org_slug }
+          tournament_id={ tournament_id }
         />
       </OrganizationHeader>
     </>
   );
 }
+
 
 interface TournamentDetailsProps {
   tournament: Tournament;

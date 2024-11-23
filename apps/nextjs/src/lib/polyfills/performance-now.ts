@@ -7,6 +7,10 @@ interface DateConstructor {
 }
 
 if (typeof window !== "undefined") {
-  Date.originalNow = Date.now;
-  Date.now = () => performance.now();
+  const originalDateNow = Date.now;
+
+  Date.now = () =>  performance.now();
+
+  // Keep reference to original for any code that needs it
+  Date.originalNow = originalDateNow;
 }

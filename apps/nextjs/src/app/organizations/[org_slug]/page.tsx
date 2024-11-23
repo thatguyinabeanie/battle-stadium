@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 
 import {
   getOrganization,
@@ -15,6 +16,8 @@ interface OrganizationDetailPageProps {
 export async function generateMetadata(
   props: Readonly<OrganizationDetailPageProps>,
 ) {
+  "use cache";
+
   const { org_slug } = await props.params;
   let org;
   try {
@@ -32,7 +35,17 @@ export async function generateStaticParams() {
   return orgs.filter((org) => org.slug).map((org) => ({ org_slug: org.slug }));
 }
 
-export default async function OrganizationDetailPage(
+export default function OrganizationDetailPage(
+  props: Readonly<OrganizationDetailPageProps>,
+) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OrganizationDetails {...props} />
+    </Suspense>
+  )
+}
+
+async function OrganizationDetails (
   props: Readonly<OrganizationDetailPageProps>,
 ) {
   const params = await props.params;
@@ -43,22 +56,23 @@ export default async function OrganizationDetailPage(
   if (!organization) {
     notFound();
   }
+
   return (
     <>
       <OrganizationHeader
-        organization={organization}
-        classNames={{ wrapper: "my-8" }}
+        organization={ organization }
+        classNames={ { wrapper: "my-8" } }
       >
         <div className="mx-4 flex h-full w-full flex-col items-center justify-between py-2 text-center">
-          <h1 className="text-2xl font-semibold">{organization.name}</h1>
-          <p>{organization.description}</p>
+          <h1 className="text-2xl font-semibold">{ organization.name }</h1>
+          <p>{ organization.description }</p>
         </div>
       </OrganizationHeader>
 
       <SingleOrganizationTournamentsTable
         className="w-full px-4"
-        data={tournaments}
-        organization={organization}
+        data={ tournaments }
+        organization={ organization }
       />
     </>
   );

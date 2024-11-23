@@ -10,7 +10,7 @@ const config: NextConfig = {
 
   experimental: {
     after: true,
-    ppr: false,
+    ppr: 'incremental',
     staleTimes: {
       dynamic: 5,
       static: 180,
