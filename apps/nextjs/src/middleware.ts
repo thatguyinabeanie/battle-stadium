@@ -27,7 +27,7 @@ const publicRoutes = createRouteMatcher([
 
 export default clerkMiddleware(async (auth, request) => {
   if (
-    [env.NODE_ENV, env.VERCEL_ENV].includes("development") &&
+    [env.NODE_ENV, env.VERCEL_ENV].includes("production") &&
     !publicRoutes(request)
   ) {
     await auth.protect();
