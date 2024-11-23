@@ -8,8 +8,8 @@ import { GeistSans } from "geist/font/sans";
 import { cn, ThemeProvider } from "@battle-stadium/ui";
 
 import { env } from "~/env";
-import { TRPCReactProvider } from "~/trpc/react";
-import { HydrateClient } from "~/trpc/server";
+// import { TRPCReactProvider } from "~/trpc/react";
+// import { HydrateClient } from "~/trpc/server";
 
 import "~/styles/globals.css";
 
@@ -89,13 +89,13 @@ export default async function RootLayout({
             )}
           >
             <ThemeProvider attribute="class" defaultTheme="dark">
-              <TRPCReactProvider>
+              {/* <TRPCReactProvider> */}
                 <NextSSRPlugin
                   routerConfig={extractRouterConfig(UploadThingRouter)}
                 />
                 <div className="flex min-h-screen flex-col items-center">
                   <AwesomeParticles />
-                  <HydrateClient>
+                  {/* <HydrateClient> */}
                     <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
                       {navbar}
                       <main
@@ -112,9 +112,9 @@ export default async function RootLayout({
 
                       <Footer />
                     </div>
-                  </HydrateClient>
+                  {/* </HydrateClient> */}
                 </div>
-              </TRPCReactProvider>
+              {/* </TRPCReactProvider> */}
 
               <Cookies isSignedIn={!!sessionId} userId={userId} />
 

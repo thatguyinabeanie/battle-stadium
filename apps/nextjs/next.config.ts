@@ -15,7 +15,7 @@ const config: NextConfig = {
       dynamic: 5,
       static: 180,
     },
-    // dynamicIO: true,
+    dynamicIO: false,
   },
 
   expireTime: 3600,
