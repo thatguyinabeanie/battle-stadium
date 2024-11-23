@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import type { Tournament } from "~/lib/api";
 import OrganizationsTable from "~/components/organizations/organizations-table";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
-import { getOrganizations } from "../(server-actions)/organizations/actions";
+import { getOrganizations } from "../server-actions/organizations/actions";
 
 export const metadata: Metadata = {
   title: "Organizations",

@@ -12,9 +12,9 @@ export const config = {
 
 const protectedRoutes = createRouteMatcher([
   "/api/(.*)",
-  "server-actions/(.*)",
+  "/server-actions/(.*)",
   "/dashboard",
-  "pokemon(.*)",
+  "/pokemon(.*)",
   "/organizations/:orgSlug/tournaments/:tournamentId/register",
 ]);
 

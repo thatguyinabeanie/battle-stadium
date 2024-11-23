@@ -1,6 +1,6 @@
 import type { OrganizationTournamentParams } from "~/types";
-import { getOrganizationTournaments } from "~/app/(server-actions)/organizations/tournaments/actions";
-import { getTournament } from "~/app/(server-actions)/tournaments/actions";
+import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
+import { getTournament } from "~/app/server-actions/tournaments/actions";
 
 export const revalidate = 300;
 export const dynamicParams = true;

@@ -8,7 +8,7 @@ import type {
   OrganizationTournamentParams,
   OrganizationTournamentProps,
 } from "~/types";
-import { getSingleOrganizationSingleTournament } from "~/app/(server-actions)/organizations/tournaments/actions";
+import { getSingleOrganizationSingleTournament } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 

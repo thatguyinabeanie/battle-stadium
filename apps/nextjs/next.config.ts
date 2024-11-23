@@ -15,7 +15,7 @@ const config: NextConfig = {
       dynamic: 5,
       static: 180,
     },
-    dynamicIO: false,
+    dynamicIO: true,
   },
 
   expireTime: 3600,
@@ -42,6 +42,38 @@ const config: NextConfig = {
         hostname: "limitlesstcg.s3.us-east-2.amazonaws.com",
       },
     ],
+  },
+
+  // next.config.ts
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      const originalEntry = config.entry;
+      config.entry = async () => {
+        // Get the entries but handle possible promise
+        const entries = await (typeof originalEntry === "function"
+          ? originalEntry()
+          : Promise.resolve(originalEntry));
+
+        // Handle different entry formats
+        if (typeof entries === "string") {
+          return ["./src/lib/polyfills/performance-now.ts", entries];
+        }
+
+        if (Array.isArray(entries)) {
+          return ["./src/lib/polyfills/performance-now.ts", ...entries];
+        }
+
+        // Object format
+        const mainEntry = entries.main || [];
+        return {
+          ...entries,
+          main: Array.isArray(mainEntry)
+            ? ["./src/lib/polyfills/performance-now.ts", ...mainEntry]
+            : ["./src/lib/polyfills/performance-now.ts", mainEntry],
+        };
+      };
+    }
+    return config;
   },
 
   /** Enables hot reloading for local packages without a build step */

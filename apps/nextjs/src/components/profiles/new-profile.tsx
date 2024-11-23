@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import { Button, Input } from "@battle-stadium/ui";
 
-import { createProfile } from "~/app/(server-actions)/profiles/actions";
+import { createProfile } from "~/app/server-actions/profiles/actions";
 
 export default function NewProfile() {
   const router = useRouter();

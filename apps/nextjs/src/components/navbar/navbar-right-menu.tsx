@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
 
-import { getAccountMe } from "~/app/(server-actions)/accounts/actions";
+import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import MobileMenu from "~/components/navbar/navbar-mobile-menu";
 import {
   SolarMagniferLinear,

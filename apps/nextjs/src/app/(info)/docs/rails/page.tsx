@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
-import { getAccountMe } from "~/app/(server-actions)/accounts/actions";
+import { getAccountMe } from "~/app/server-actions/accounts/actions";
 
 export default async function OpenApiDocs() {
   const { sessionId } = await auth();

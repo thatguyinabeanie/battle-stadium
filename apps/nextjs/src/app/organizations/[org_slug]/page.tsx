@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import {
   getOrganization,
   getOrganizations,
-} from "~/app/(server-actions)/organizations/actions";
-import { getSingleOrganizationTournaments } from "~/app/(server-actions)/organizations/tournaments/actions";
+} from "~/app/server-actions/organizations/actions";
+import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 import { SingleOrganizationTournamentsTable } from "~/components/tournaments/single-organization-tournaments-table";
 
