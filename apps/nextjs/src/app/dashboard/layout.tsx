@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@battle-stadium/ui";
 
 import type { DashboardLayoutProps } from "~/types";
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
+import { getAccountMe } from "~/app/(server-actions)/accounts/actions";
 
 const tabsList = [
   { key: "dashboard", title: "Dashboard" },

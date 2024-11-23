@@ -1,4 +1,4 @@
-import { getPartneredOrganizations } from "~/app/server-actions/organizations/actions";
+import { getPartneredOrganizations } from "~/app/(server-actions)/organizations/actions";
 import OrganizationCard from "./organization-card";
 
 export default async function PartneredOrganizations() {

@@ -1,5 +1,5 @@
 import type { OrganizationTournamentParams } from "~/types";
-import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
+import { getTournamentPlayers } from "~/app/(server-actions)/tournaments/actions";
 import RegistrationsTable from "~/components/tournaments/registrations-table";
 
 export default async function TournamentRegistrations(
