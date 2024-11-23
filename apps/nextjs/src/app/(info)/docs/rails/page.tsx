@@ -1,11 +1,20 @@
 // import "swagger-ui-react/swagger-ui.css";
 // import SwaggerUI from "swagger-ui-react"
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 
-export default async function OpenApiDocs() {
+export default function OpenApiDocsSuspenseWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OpenApiDocs />
+    </Suspense>
+  );
+}
+
+async function OpenApiDocs() {
   const { sessionId } = await auth();
 
   if (!sessionId) {

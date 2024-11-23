@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { Input } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentParams } from "~/types";
@@ -29,7 +31,9 @@ export default async function Register(
           tournamentRegistrationAction={tournamentRegistration}
         >
           <Input name="ign" />
-          <ProfileSelector />
+          <Suspense fallback={<div>Loading...</div>}>
+            <ProfileSelector />
+          </Suspense>
         </TournamentRegistrationForm>
       </div>
     </>
