@@ -19,7 +19,12 @@ export const config = {
   ],
 };
 
-const publicRoutes = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)", "/waitlist(.*)"]);
+const publicRoutes = createRouteMatcher([
+  "/",
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/waitlist(.*)",
+]);
 
 export default clerkMiddleware(async (auth, request) => {
   if (

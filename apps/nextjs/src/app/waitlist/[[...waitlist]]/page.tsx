@@ -1,9 +1,8 @@
 "use client";
 
-import { Waitlist } from '@clerk/nextjs'
-import { useUser } from "@clerk/nextjs";
+import { useUser, Waitlist } from "@clerk/nextjs";
 
-export default function WaitlistPage () {
+export default function WaitlistPage() {
   const { user } = useUser();
 
   if (user) {
