@@ -9,7 +9,6 @@ const config: NextConfig = {
   reactStrictMode: true,
 
   experimental: {
-    // serverComponentsExternalPackages: ["@battle-stadium/db"],
     after: true,
     ppr: "incremental",
     staleTimes: {

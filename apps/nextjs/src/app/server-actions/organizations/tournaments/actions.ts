@@ -4,15 +4,12 @@ import { and, db, desc, eq } from "@battle-stadium/db";
 import { organizations, tournaments } from "@battle-stadium/db/schema";
 
 function tournamentsLeftJoinOrganizations() {
-  return db
-    .select()
+  return db.select()
     .from(tournaments)
     .leftJoin(organizations, eq(tournaments.organizationId, organizations.id));
 }
 
 export async function getOrganizationTournaments(page = 1, pageSize = 20) {
-  "use cache";
-
   return await tournamentsLeftJoinOrganizations()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
