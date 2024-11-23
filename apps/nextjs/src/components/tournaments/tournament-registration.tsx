@@ -60,7 +60,7 @@ function useTournamentRegistrationAction({
       await tournamentRegistrationAction(formData);
       router.push(`/organizations/${org_slug}/tournaments/${tournament_id}`);
     } catch (error: unknown) {
-      console.log(`Registration failed. Please try again.`, error);
+      console.error(`Registration failed. Please try again.`, error);
     } finally {
       setLoading(false);
     }
