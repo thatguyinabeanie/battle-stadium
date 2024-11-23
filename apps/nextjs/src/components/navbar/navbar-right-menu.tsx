@@ -23,7 +23,7 @@ export default async function RightMenu() {
   const me = (await getAccountMe()) ?? undefined;
 
   return (
-    <div className="flex flex-row items-center justify-center ">
+    <div className="flex flex-row items-center justify-end ">
       <Button className="p-1 bg-transparent flex items-center justify-center">
         <Icon className={sharedClassNames} icon="solar:magnifer-linear" />
       </Button>

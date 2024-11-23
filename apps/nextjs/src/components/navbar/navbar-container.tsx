@@ -21,7 +21,7 @@ export default function NavbarContainer({
   return (
     <nav
       className={cn(
-        "sticky top-0 z-40 w-full transform transition-transform duration-300 flex border-b px-4 h-12 items-center justify-between  md:h-16",
+        "sticky top-0 z-40 w-full transform transition-transform duration-300 grid grid-cols-2 md:grid-cols-3 border-b px-4 h-12 items-center justify-between  md:h-16",
         !isVisible && "-translate-y-full",
         className
       )}

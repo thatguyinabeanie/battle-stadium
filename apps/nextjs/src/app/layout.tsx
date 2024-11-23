@@ -76,7 +76,7 @@ export default async function RootLayout({
   return (
     <StrictMode>
       <ClerkProvider>
-        <html lang="en" suppressHydrationWarning>
+        <html lang="en" suppressHydrationWarning >
           <body
             className={cn(
               "min-h-screen overflow-y-scroll bg-background font-sans text-foreground antialiased",
@@ -84,7 +84,7 @@ export default async function RootLayout({
               GeistMono.variable,
             )}
           >
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="dark">
               <TRPCReactProvider>
                 <NextSSRPlugin
                   routerConfig={extractRouterConfig(UploadThingRouter)}

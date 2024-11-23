@@ -11,7 +11,7 @@ export default function NavbarLinks({
   isSignedIn,
 }: Readonly<NavbarLinksProps>) {
   return (
-    <div className="hidden md:flex">
+    <div className="hidden md:flex justify-center items-center">
       {NavbarItemsConfigs.map(({ label, value }) => (
         <NavbarLink
           key={value}
