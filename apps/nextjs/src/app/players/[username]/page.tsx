@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { getProfile, getProfiles } from "~/app/server-actions/profiles/actions";
 import ComingSoon from "~/components/coming-soon";
 
@@ -24,9 +26,17 @@ export async function generateStaticParams() {
   return profiles.map((profile) => ({ username: profile.username }));
 }
 
-export default async function PlayerProfilePageSuspenseWrapper(
+export default function PlayerProfilePageSuspenseWrapper(
   props: Readonly<PlayerProfilePageProps>,
 ) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PlayerProfile {...props} />
+    </Suspense>
+  );
+}
+
+async function PlayerProfile(props: Readonly<PlayerProfilePageProps>) {
   const params = await props.params;
   return (
     <ComingSoon title={params.username}>

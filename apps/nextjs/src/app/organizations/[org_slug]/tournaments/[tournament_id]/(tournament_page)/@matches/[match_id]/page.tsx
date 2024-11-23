@@ -1,11 +1,24 @@
 import { Suspense } from "react";
 
+import { generateOrganizationTournamentMatchesStaticParams } from "~/lib/organization-tournaments-static-params";
+
 interface MatchPageProps {
   params: Promise<{
     org_slug: string;
     tournament_id: number;
     matchId: number;
   }>;
+}
+
+export async function generateStaticParams(props: Readonly<MatchPageProps>) {
+  "use cache";
+
+  const { org_slug, tournament_id } = await props.params;
+  const staticParams = await generateOrganizationTournamentMatchesStaticParams(
+    org_slug,
+    tournament_id,
+  );
+  return staticParams;
 }
 
 export default function MatchPage(props: Readonly<MatchPageProps>) {

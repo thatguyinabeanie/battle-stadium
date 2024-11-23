@@ -11,6 +11,8 @@ function tournamentsLeftJoinOrganizations() {
 }
 
 export async function getOrganizationTournaments(page = 1, pageSize = 20) {
+  "use cache";
+
   return await tournamentsLeftJoinOrganizations()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
@@ -22,6 +24,8 @@ export async function getSingleOrganizationTournaments(
   page = 1,
   pageSize = 20,
 ) {
+  "use cache";
+
   const results = await tournamentsLeftJoinOrganizations()
     .where(eq(organizations.slug, slug))
     .orderBy(desc(tournaments.startAt))
@@ -38,6 +42,8 @@ export async function getSingleOrganizationSingleTournament(
   slug: string,
   tournamentId: number,
 ) {
+  "use cache";
+
   const results = await tournamentsLeftJoinOrganizations()
     .where(and(eq(organizations.slug, slug), eq(tournaments.id, tournamentId)))
     .orderBy(desc(tournaments.startAt))

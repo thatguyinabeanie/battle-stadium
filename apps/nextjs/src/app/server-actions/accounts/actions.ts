@@ -10,10 +10,12 @@ import type { paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
 export async function getAccounts() {
+  "use cache";
   return await db.query.accounts.findMany();
 }
 
 export async function getAccount(username: string) {
+  "use cache";
   const profile = await db.query.profiles.findFirst({
     where: eq(profiles.username, username),
   });
@@ -30,6 +32,7 @@ export async function getAccount(username: string) {
 export async function getAccountMe(
   options?: FetchOptions<paths["/accounts/me"]["get"]>,
 ) {
+  "use cache";
   const { userId } = await auth();
 
   if (!userId) {
