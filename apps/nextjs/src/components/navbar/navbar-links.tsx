@@ -16,24 +16,25 @@ export default function NavbarLinks() {
           label={label}
         />
       ))}
-      {/* <DashboardNavLink /> */}
+      <Suspense fallback={ null }>
+        <DashboardNavLink />
+      </Suspense>
+
     </div>
   );
 }
 
-// async function DashboardNavLink() {
-//   const { sessionId } = await auth();
-//   return (
-//     <Suspense fallback={null}>
-//       <NavbarLink
-//         value="dashboard"
-//         key="dashboard"
-//         href="/dashboard"
-//         className={ cn("hidden", {
-//           "sm:flex": !!sessionId
-//         }) }
-//         label="Dashboard"
-//       />
-//     </Suspense>
-//   )
-// }
+async function DashboardNavLink() {
+  const { sessionId } = await auth();
+  return (
+    <NavbarLink
+      value="dashboard"
+      key="dashboard"
+      href="/dashboard"
+      className={ cn("hidden", {
+        "sm:flex": !!sessionId
+      }) }
+      label="Dashboard"
+    />
+  )
+}
