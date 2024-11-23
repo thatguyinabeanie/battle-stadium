@@ -5,8 +5,6 @@ import { useState } from "react";
 import Form from "next/form";
 import { useRouter } from "next/navigation";
 
-// import { toast } from "react-toastify";
-
 import { Badge, Button } from "@battle-stadium/ui";
 
 import type { PostTournamentRegistrationResponse } from "~/app/server-actions/tournaments/actions";

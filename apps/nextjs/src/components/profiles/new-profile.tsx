@@ -2,8 +2,6 @@
 
 import { useRouter } from "next/navigation";
 
-// import { toast } from "react-toastify";
-
 import { Button, Input } from "@battle-stadium/ui";
 
 import { createProfile } from "~/app/server-actions/profiles/actions";
