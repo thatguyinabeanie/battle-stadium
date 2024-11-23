@@ -11,7 +11,7 @@ export default function NotFound() {
           Sorry, we couldn't find the organization you're looking for.
         </p>
         <Link
-          prefetch={true}
+          prefetch={false}
           href="/"
           className="mt-6 inline-block text-blue-600 hover:underline"
         >
