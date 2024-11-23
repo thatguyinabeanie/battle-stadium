@@ -1,7 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-import { env } from "./env";
-
 // Or like this if you need to do something here.
 // export default auth((req) => {
 //   console.log(req.auth) //  { session: { user: { ... } } }
@@ -26,10 +24,7 @@ const publicRoutes = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, request) => {
-  if (
-    [env.NODE_ENV, env.VERCEL_ENV].includes("production") &&
-    !publicRoutes(request)
-  ) {
+  if (!publicRoutes(request)) {
     await auth.protect();
   }
 });
