@@ -31,6 +31,18 @@ export function NavMain({
     }[];
   }[];
 }) {
+export function NavMain({ items }: Props) {
+  if (!items?.length) {
+    return (
+      <SidebarGroup>
+        <SidebarGroupLabel>Platform</SidebarGroupLabel>
+        <div className="px-2 py-4 text-sm text-muted-foreground">
+          No navigation items available
+        </div>
+      </SidebarGroup>
+    );
+  }
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>

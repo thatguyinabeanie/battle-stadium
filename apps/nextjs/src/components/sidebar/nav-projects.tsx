@@ -46,7 +46,17 @@ export function NavProjects({
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuAction showOnHover>
+                <SidebarMenuAction
+                  showOnHover
+                  role="button"
+                  aria-label={`More actions for ${item.name}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      e.currentTarget.click();
+                    }
+                  }}
+                >
                   <MoreHorizontal />
                   <span className="sr-only">More</span>
                 </SidebarMenuAction>

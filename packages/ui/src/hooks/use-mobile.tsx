@@ -4,6 +4,15 @@ const MOBILE_BREAKPOINT = 768;
 
 type MobileState = boolean | undefined;
 
+/**
+ * React hook to detect if the current viewport is mobile-sized.
+ * @returns {boolean} True if the viewport width is less than 768px, false otherwise.
+ * @example
+ * function MyComponent() {
+ *   const isMobile = useIsMobile();
+ *   return isMobile ? <MobileView /> : <DesktopView />;
+ * }
+ */
 export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState<MobileState>(undefined);
 
