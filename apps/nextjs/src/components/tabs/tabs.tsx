@@ -95,7 +95,7 @@ function useActiveTab(
   return [activeTab, searchParams] as const;
 }
 
-export const TabsTrigger = memo(({value,  title }: Readonly<TabConfig>) => {
+export const TabsTrigger = memo(({ value, title }: Readonly<TabConfig>) => {
   return (
     <UiTabsTrigger
       key={value}
@@ -113,28 +113,35 @@ export const TabsTrigger = memo(({value,  title }: Readonly<TabConfig>) => {
   );
 });
 
-export const TabsContent = memo(({
-  value,
-  children,
-  loadingText = "Loading...",
-  capitalize = true,
-}: TabConfig & {
-  children: ReactNode,
-  loadingText?: string,
-  capitalize?: boolean,
-}) =>{
-
-  return (
-    <UiTabsContent
-      value={value}
-      className="mt-0 flex h-full w-full flex-col items-center justify-center py-0"
-    >
-      <CardHeader className={capitalize ? "capitalize" : undefined}>
-        {value}
-      </CardHeader>
-      <Suspense fallback={<div role="status" aria-live="polite">{loadingText}</div>}>
-        <CardContent className="min-h-svh">{children}</CardContent>
-      </Suspense>
-    </UiTabsContent>
-  );
-});
+export const TabsContent = memo(
+  ({
+    value,
+    children,
+    loadingText = "Loading...",
+    capitalize = true,
+  }: TabConfig & {
+    children: ReactNode;
+    loadingText?: string;
+    capitalize?: boolean;
+  }) => {
+    return (
+      <UiTabsContent
+        value={value}
+        className="mt-0 flex h-full w-full flex-col items-center justify-center py-0"
+      >
+        <CardHeader className={capitalize ? "capitalize" : undefined}>
+          {value}
+        </CardHeader>
+        <Suspense
+          fallback={
+            <div role="status" aria-live="polite">
+              {loadingText}
+            </div>
+          }
+        >
+          <CardContent className="min-h-svh">{children}</CardContent>
+        </Suspense>
+      </UiTabsContent>
+    );
+  },
+);
