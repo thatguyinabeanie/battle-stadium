@@ -21,7 +21,7 @@ import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/react";
 import { HydrateClient } from "~/trpc/server";
-import { UploadThingRouter } from "./(main)/api/uploadthing/core";
+import { UploadThingRouter } from "./api/uploadthing/core";
 
 const AwesomeParticles = dynamic(
   () => import("~/components/awesome-particles"),

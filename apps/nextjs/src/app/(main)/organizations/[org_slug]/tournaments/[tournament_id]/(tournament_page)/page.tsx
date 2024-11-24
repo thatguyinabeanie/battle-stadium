@@ -1,5 +1,5 @@
 import type { OrganizationTournamentParams } from "~/types";
-import { getOrganizationTournaments } from "~/app/(main)/server-actions/organizations/tournaments/actions";
+import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 
 export async function generateStaticParams() {
   const results = await getOrganizationTournaments(1, 500);

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import type { Tournament } from "~/lib/api";
-import { getOrganizations } from "~/app/(main)/server-actions/organizations/actions";
+import { getOrganizations } from "~/app/server-actions/organizations/actions";
 import OrganizationsTable from "~/components/organizations/organizations-table";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 

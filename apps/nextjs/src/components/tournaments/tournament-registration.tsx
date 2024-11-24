@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { Badge, Button } from "@battle-stadium/ui";
 
-import type { PostTournamentRegistrationResponse } from "~/app/(main)/server-actions/tournaments/actions";
+import type { PostTournamentRegistrationResponse } from "~/app/server-actions/tournaments/actions";
 
 interface TournamentRegistrationProps {
   org_slug: string;
