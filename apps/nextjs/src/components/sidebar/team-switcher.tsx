@@ -27,8 +27,8 @@ export function TeamSwitcher({
   }[];
 }) {
   const { isMobile } = useSidebar();
-  const [activeTeam, setActiveTeam] = React.useState(() => 
-    teams.length > 0 ? teams[0] : null
+  const [activeTeam, setActiveTeam] = React.useState(() =>
+    teams.length > 0 ? teams[0] : null,
   );
 
   return (
@@ -38,7 +38,7 @@ export function TeamSwitcher({
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              aria-label={`Switch team (current: ${activeTeam?.name ?? 'None'})`}
+              aria-label={`Switch team (current: ${activeTeam?.name ?? "None"})`}
               role="combobox"
               aria-expanded="false"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
