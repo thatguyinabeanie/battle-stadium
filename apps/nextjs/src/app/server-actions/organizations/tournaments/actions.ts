@@ -11,7 +11,6 @@ function tournamentsLeftJoinOrganizations() {
 }
 
 async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
-  "use cache";
   const results = await tournamentsLeftJoinOrganizations()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)

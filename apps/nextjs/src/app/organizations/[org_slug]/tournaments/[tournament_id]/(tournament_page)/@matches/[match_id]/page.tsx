@@ -19,16 +19,7 @@ export async function generateStaticParams(props: Readonly<MatchPageProps>) {
   return staticParams;
 }
 
-export default function MatchPage(props: Readonly<MatchPageProps>) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Match {...props} />
-    </Suspense>
-  );
-}
-
-async function Match(props: Readonly<MatchPageProps>) {
+export default async function MatchPage(props: Readonly<MatchPageProps>) {
   const { matchId } = await props.params;
-  // return <ChatComponent channelName={"ChatChannel"} roomName={matchId} websocketUrl={websocketUrl()} />;
-  return <div>Match Page {matchId}</div>;
+  return <div>Match Page { matchId }</div>;
 }
