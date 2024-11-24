@@ -36,8 +36,6 @@ function OrganizationsTableSuspenseWrapper() {
 async function OrganizationsTableServerComponent() {
   const orgs = await getOrganizations();
   return (
-    <MainSection>
-      <OrganizationsTable orgs={orgs} />
-    </MainSection>
+    <OrganizationsTable orgs={orgs} />
   );
 }
