@@ -7,7 +7,6 @@ import type { Metadata, Viewport } from "next";
 import type { ChildrenProps } from "~/types";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
-import { HydrateClient } from "~/trpc/server";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -57,13 +56,13 @@ export default function RootLayout({
 }: Readonly<RootLayoutSlots>) {
   return (
     <div className="flex min-h-screen w-full flex-col items-center">
-      <HydrateClient>
+
         <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
           {navbar}
           {children}
           {footer}
         </div>
-      </HydrateClient>
+
     </div>
   );
 }
