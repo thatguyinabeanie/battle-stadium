@@ -17,9 +17,9 @@ async function getOrganizationTournamentMatchesRaw(
   page = 1,
   pageSize = 20,
 ) {
-  'use cache';
+  "use cache";
 
-  const results  = await  MatchesLeftJoinTournamentsLeftJoinOrganizations()
+  const results = await MatchesLeftJoinTournamentsLeftJoinOrganizations()
     .where(
       and(eq(organizations.slug, org_slug), eq(tournaments.id, tournament_id)),
     )
@@ -36,5 +36,10 @@ export async function getOrganizationTournamentMatches(
   page = 1,
   pageSize = 20,
 ) {
-  return await getOrganizationTournamentMatchesRaw(org_slug, tournament_id, page, pageSize);
+  return await getOrganizationTournamentMatchesRaw(
+    org_slug,
+    tournament_id,
+    page,
+    pageSize,
+  );
 }

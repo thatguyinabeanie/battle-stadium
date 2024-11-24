@@ -4,7 +4,8 @@ import { and, db, desc, eq } from "@battle-stadium/db";
 import { organizations, tournaments } from "@battle-stadium/db/schema";
 
 function tournamentsLeftJoinOrganizations() {
-  return db.select()
+  return db
+    .select()
     .from(tournaments)
     .leftJoin(organizations, eq(tournaments.organizationId, organizations.id));
 }
@@ -28,12 +29,13 @@ async function getSingleOrganizationTournamentsRaw(
   page = 1,
   pageSize = 20,
 ) {
-  'use cache';
+  "use cache";
   const results = await tournamentsLeftJoinOrganizations()
     .where(eq(organizations.slug, slug))
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
+
   return results;
 }
 
@@ -42,7 +44,11 @@ export async function getSingleOrganizationTournaments(
   page = 1,
   pageSize = 20,
 ) {
-  const results = await getSingleOrganizationTournamentsRaw(slug, page, pageSize);
+  const results = await getSingleOrganizationTournamentsRaw(
+    slug,
+    page,
+    pageSize,
+  );
   return {
     tournaments: results.map(({ tournaments }) => tournaments),
     organization: results[0]?.organizations,
@@ -67,7 +73,11 @@ export async function getSingleOrganizationSingleTournament(
   slug: string,
   tournamentId: number,
 ) {
-  const results = await getSingleOrganizationSingleTournamentRaw(slug, tournamentId);
+  const results = await getSingleOrganizationSingleTournamentRaw(
+    slug,
+    tournamentId,
+  );
+
   return {
     tournament: results[0]?.tournaments,
     organization: results[0]?.organizations,

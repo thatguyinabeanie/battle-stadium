@@ -96,7 +96,9 @@ function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
       className="mt-0 flex h-full w-full flex-col items-center justify-center py-0"
     >
       <CardHeader className="capitalize">{value}</CardHeader>
-      <CardContent className="min-h-svh">{children}</CardContent>
+      <Suspense fallback={<div>Loading...</div>}>
+        <CardContent className="min-h-svh">{children}</CardContent>
+      </Suspense>
     </UiTabsContent>
   );
 }

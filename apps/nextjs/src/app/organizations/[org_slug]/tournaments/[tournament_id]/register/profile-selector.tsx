@@ -1,15 +1,14 @@
 // components/profile-selector.tsx
 "use client";
 
-import { Input } from "@battle-stadium/ui";
 import type { Profile } from "@battle-stadium/db/schema";
+import { Input } from "@battle-stadium/ui";
 
 interface ProfileSelectorProps {
   profiles: Profile[];
 }
 
-export function ProfileSelector ({ profiles }: ProfileSelectorProps) {
-
+export function ProfileSelector({ profiles }: ProfileSelectorProps) {
   return (
     <>
       <Input
@@ -27,14 +26,14 @@ export function ProfileSelector ({ profiles }: ProfileSelectorProps) {
       </div>
 
       <datalist id="profiles">
-        { profiles.map((profile) => (
+        {profiles.map((profile) => (
           <option
-            key={ profile.id }
-            value={ profile.username }
-            label={ profile.username }
-            data-profile-id={ profile.id }
+            key={profile.id}
+            value={profile.username}
+            label={profile.username}
+            data-profile-id={profile.id}
           />
-        )) }
+        ))}
       </datalist>
     </>
   );

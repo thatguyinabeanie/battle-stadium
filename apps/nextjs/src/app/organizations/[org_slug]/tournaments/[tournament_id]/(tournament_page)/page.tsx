@@ -1,15 +1,15 @@
 import type { OrganizationTournamentParams } from "~/types";
 import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
-import { getTournament } from "~/app/server-actions/tournaments/actions";
+// import { getTournament } from "~/app/server-actions/tournaments/actions";
 
-export async function generateMetadata(
-  props: Readonly<OrganizationTournamentParams>,
-) {
-  const params = await props.params;
-  const result = await getTournament(params.tournament_id);
+// // export async function generateMetadata(
+// //   props: Readonly<OrganizationTournamentParams>,
+// // ) {
+// //   const params = await props.params;
+// //   const result = await getTournament(params.tournament_id);
 
-  return { title: result?.tournament.name ?? "Tournament" };
-}
+// //   return { title: result?.tournament.name ?? "Tournament" };
+// // }
 
 export async function generateStaticParams() {
   const results = await getOrganizationTournaments(1, 500);
