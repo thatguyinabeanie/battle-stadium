@@ -22,7 +22,7 @@ async function getSingleOrganizationTournamentsRaw(
   pageSize = 20,
 ) {
 
-  "use cache";
+  'use cache';
   const results = await tournamentsLeftJoinOrganizations()
     .where(eq(organizations.slug, slug))
     .orderBy(desc(tournaments.startAt))
@@ -49,7 +49,7 @@ export async function getSingleOrganizationSingleTournament(
   slug: string,
   tournamentId: number,
 ) {
-  "use cache";
+  'use cache';
 
   const results = await tournamentsLeftJoinOrganizations()
     .where(and(eq(organizations.slug, slug), eq(tournaments.id, tournamentId)))

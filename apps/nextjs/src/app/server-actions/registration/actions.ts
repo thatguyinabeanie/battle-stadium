@@ -5,7 +5,7 @@ import { getProfilesMe } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 
 export async function getProfiles () {
-  "use cache";
+  'use cache';
   return getProfilesMe();
 }
 

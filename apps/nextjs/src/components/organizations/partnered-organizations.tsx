@@ -12,7 +12,7 @@ export default function PartneredOrganizationsSuspenseWrapper() {
 }
 
 async function PartneredOrganizations() {
-  "use cache";
+  'use cache';
   const orgs = await getPartneredOrganizations();
 
   return (

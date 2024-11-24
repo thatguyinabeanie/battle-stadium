@@ -16,6 +16,6 @@ function CookiesComponent({
   isSignedIn: boolean;
   userId: string | null;
 }) {
-  // "use cache";
+  // 'use cache';
   return <Cookies isSignedIn={isSignedIn} userId={userId} />;
 }

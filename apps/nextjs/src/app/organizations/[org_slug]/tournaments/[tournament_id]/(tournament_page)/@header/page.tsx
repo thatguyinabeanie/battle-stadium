@@ -14,7 +14,7 @@ import OrganizationHeader from "~/components/organizations/organization-header";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
 export async function generateStaticParams() {
-  "use cache";
+  'use cache';
 
   const staticParams = await generateOrganizationTournamentsStaticParams();
   return staticParams;

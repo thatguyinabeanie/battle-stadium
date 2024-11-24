@@ -2,7 +2,7 @@ import { getOrganizationTournaments } from "~/app/server-actions/organizations/t
 import { getOrganizationTournamentMatches } from "~/app/server-actions/organizations/tournaments/matches/actions";
 
 export async function generateOrganizationTournamentsStaticParams() {
-  "use cache";
+  'use cache';
 
   const results = await getOrganizationTournaments(1, 500);
 
@@ -16,7 +16,7 @@ export async function generateOrganizationTournamentMatchesStaticParams(
   org_slug: string,
   tournament_id: number,
 ) {
-  "use cache";
+  'use cache';
 
   const results = await getOrganizationTournamentMatches(
     org_slug,

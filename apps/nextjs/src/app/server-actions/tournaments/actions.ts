@@ -14,7 +14,7 @@ import type { components, paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
 export async function getTournament(tournament_id: number) {
-  "use cache";
+  'use cache';
   const result = await db
     .select()
     .from(tournaments)
@@ -31,7 +31,7 @@ export async function getTournament(tournament_id: number) {
 }
 
 export async function getTournaments(page = 1, pageSize = 20) {
-  "use cache";
+  'use cache';
   return await db.query.tournaments.findMany({
     orderBy: (tournaments, { desc }) => desc(tournaments.startAt),
     limit: pageSize,
@@ -90,7 +90,7 @@ export async function postTournamentRegistration(
 }
 
 export async function getTournamentPlayers(tournament_id: number) {
-  "use cache";
+  'use cache';
 
   return await db
     .select()
