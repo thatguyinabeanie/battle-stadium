@@ -5,63 +5,50 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-  Separator,
+} from "@battle-stadium/ui/breadcrumb"
+import { Separator } from "@battle-stadium/ui/separator"
+import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@battle-stadium/ui";
+} from "@battle-stadium/ui/sidebar"
+import { AppSidebar } from "~/components/sidebar/app-sidebar"
 
-import type { ChildrenProps } from "~/types";
-import { AppSidebar } from "~/components/sidebar/app-sidebar";
-
-export default function Page() {
+export default function Page () {
   return (
-    <SidebarWrapper>
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-        </div>
-        <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-      </div>
-    </SidebarWrapper>
-  );
-}
-
-function SidebarWrapper({ children }: ChildrenProps) {
-  return (
-    <SidebarProvider>
-      <SidebarInset>
-        <SidebarHeader />
-        {children}
-      </SidebarInset>
-
+    <SidebarProvider
+      style={
+        {
+          "--sidebar-width": "350px",
+        } as React.CSSProperties
+      }
+    >
       <AppSidebar />
+      <SidebarInset>
+        <header className="sticky top-0 flex shrink-0 items-center gap-2 border-b bg-background p-4">
+          <SidebarTrigger className="-ml-1" />
+          <Separator orientation="vertical" className="mr-2 h-4" />
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem className="hidden md:block">
+                <BreadcrumbLink href="#">All Inboxes</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator className="hidden md:block" />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Inbox</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </header>
+        <div className="flex flex-1 flex-col gap-4 p-4">
+          { Array.from({ length: 24 }).map((_, index) => (
+            <div
+              key={ index }
+              className="aspect-video h-12 w-full rounded-lg bg-muted/50"
+            />
+          )) }
+        </div>
+      </SidebarInset>
     </SidebarProvider>
-  );
-}
-
-function SidebarHeader() {
-  return (
-    <header className="flex h-16 shrink-0 items-center gap-2">
-      <div className="flex items-center gap-2 px-4">
-        <SidebarTrigger className="-ml-1" />
-        <Separator orientation="vertical" className="mr-2 h-4" />
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem className="hidden md:block">
-              <BreadcrumbLink href="#">
-                Building Your Application
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator className="hidden md:block" />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-      </div>
-    </header>
-  );
+  )
 }
