@@ -8,6 +8,10 @@ ignorePaths:
   - "**/.cache/**"
   - pnpm-lock.yaml
   - "**/package.json"
+  - "**/.git/**"
+  - "**/coverage/**"
+  - "**/*.min.js"
+  - "**/*.map"
 dictionaryDefinitions: []
 dictionaries: []
 words:
