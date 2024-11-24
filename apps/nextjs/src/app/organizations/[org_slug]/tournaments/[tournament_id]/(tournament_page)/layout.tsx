@@ -47,7 +47,6 @@ export default function OrganizationTournamentsTournamentLayout(
         >
           <div className="flex w-full flex-col items-center overflow-auto">
             <TabsList
-              defaultValue={DEFAULT_TAB}
               className="border-x-0 border-t-2"
             >
               {tabs.map(({ value, title }) => (
