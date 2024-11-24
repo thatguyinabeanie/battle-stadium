@@ -27,7 +27,7 @@ export default async function Register(
 
         <TournamentRegistrationForm
           {...params}
-          handleTournamentRegistration={ handleTournamentRegistration }
+          handleTournamentRegistration={handleTournamentRegistration}
         >
           <Input name="ign" />
           <ProfileSelector />
@@ -37,14 +37,16 @@ export default async function Register(
   );
 }
 
-async function handleTournamentRegistration (formData: FormData, tournament_id: number) {
+async function handleTournamentRegistration(
+  formData: FormData,
+  tournament_id: number,
+) {
   "use server";
   const profiles = await getProfilesMe();
 
   const in_game_name = formData.get("ign") as string;
   const profile = formData.get("profile") as string;
-  const show_country_flag =
-    (formData.get("country_flag") as string) === "true";
+  const show_country_flag = (formData.get("country_flag") as string) === "true";
 
   const profile_id = profiles.find((p) => p.username === profile)?.id;
 
@@ -58,8 +60,7 @@ async function handleTournamentRegistration (formData: FormData, tournament_id: 
     profileId: profile_id,
     showCountryFlag: show_country_flag,
   });
-};
-
+}
 
 async function ProfileSelector() {
   const profiles = await getProfilesMe();

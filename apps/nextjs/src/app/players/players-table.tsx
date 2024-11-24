@@ -10,7 +10,7 @@ export interface PlayersTableProps {
   columns: { key: string; label: string }[];
 }
 
-export default function PlayersTable ({
+export default function PlayersTable({
   players,
   columns,
 }: Readonly<PlayersTableProps>) {
@@ -21,35 +21,35 @@ export default function PlayersTable ({
       <table className="table-auto">
         <thead>
           <tr>
-            { columns.map(({ key, label }) => (
-              <th key={ key }>{ label }</th>
-            )) }
+            {columns.map(({ key, label }) => (
+              <th key={key}>{label}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          { players.map((player) => (
-            <tr key={ player.username }>
-              { columns.map(({ key }) => (
-                <td key={ key }>{ renderCell(player, key as Key) }</td>
-              )) }
+          {players.map((player) => (
+            <tr key={player.username}>
+              {columns.map(({ key }) => (
+                <td key={key}>{renderCell(player, key as Key)}</td>
+              ))}
             </tr>
-          )) }
+          ))}
         </tbody>
       </table>
     </div>
   );
 }
 
-function renderCell (row: Profile, columnKey: Key) {
+function renderCell(row: Profile, columnKey: Key) {
   switch (columnKey) {
     case "username":
       return (
         <Link
-          prefetch={ true }
+          prefetch={true}
           className="text-primary"
-          href={ `/players/${row.username}` }
+          href={`/players/${row.username}`}
         >
-          { row.username }
+          {row.username}
         </Link>
       );
     case "pronouns":

@@ -2,7 +2,7 @@
 
 import { SignIn, useUser } from "@clerk/nextjs";
 
-export default function SignInPage () {
+export default function SignInPage() {
   const { user } = useUser();
 
   if (user) {
