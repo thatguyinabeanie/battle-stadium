@@ -35,7 +35,6 @@ export default async function Register(
 }
 
 async function getCachedProfiles () {
-
   return await getProfilesMe();
 }
 

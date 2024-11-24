@@ -11,7 +11,6 @@ interface MatchPageProps {
 }
 
 export async function generateStaticParams(props: Readonly<MatchPageProps>) {
-
   const { org_slug, tournament_id } = await props.params;
   const staticParams = await generateOrganizationTournamentMatchesStaticParams(
     org_slug,

@@ -28,7 +28,6 @@ async function getSingleOrganizationTournamentsRaw(
   page = 1,
   pageSize = 20,
 ) {
-
   'use cache';
   const results = await tournamentsLeftJoinOrganizations()
     .where(eq(organizations.slug, slug))
@@ -43,26 +42,32 @@ export async function getSingleOrganizationTournaments(
   page = 1,
   pageSize = 20,
 ) {
-
   const results = await getSingleOrganizationTournamentsRaw(slug, page, pageSize);
-
   return {
     tournaments: results.map(({ tournaments }) => tournaments),
     organization: results[0]?.organizations,
   };
 }
 
-export async function getSingleOrganizationSingleTournament(
+async function getSingleOrganizationSingleTournamentRaw(
   slug: string,
   tournamentId: number,
 ) {
-  'use cache';
+  "use cache";
 
   const results = await tournamentsLeftJoinOrganizations()
     .where(and(eq(organizations.slug, slug), eq(tournaments.id, tournamentId)))
     .orderBy(desc(tournaments.startAt))
     .limit(1);
 
+  return results;
+}
+
+export async function getSingleOrganizationSingleTournament(
+  slug: string,
+  tournamentId: number,
+) {
+  const results = await getSingleOrganizationSingleTournamentRaw(slug, tournamentId);
   return {
     tournament: results[0]?.tournaments,
     organization: results[0]?.organizations,
