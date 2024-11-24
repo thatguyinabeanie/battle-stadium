@@ -51,7 +51,7 @@ export function NavProjects({
                   role="button"
                   aria-label={`More actions for ${item.name}`}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
+                    if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
                       e.currentTarget.click();
                     }

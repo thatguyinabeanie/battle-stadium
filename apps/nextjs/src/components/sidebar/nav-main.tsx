@@ -17,22 +17,19 @@ import {
   SidebarMenuSubItem,
 } from "@battle-stadium/ui";
 
-export function NavMain({
-  items,
-}: {
-  items: {
+interface NavMainItem {
+  title: string;
+  url: string;
+  icon?: LucideIcon;
+  isActive?: boolean;
+  items?: {
     title: string;
     url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
   }[];
-}) {
-export function NavMain({ items }: Props) {
-  if (!items?.length) {
+}
+
+export function NavMain({ items }: { items: NavMainItem[] }) {
+  if (!items.length) {
     return (
       <SidebarGroup>
         <SidebarGroupLabel>Platform</SidebarGroupLabel>
