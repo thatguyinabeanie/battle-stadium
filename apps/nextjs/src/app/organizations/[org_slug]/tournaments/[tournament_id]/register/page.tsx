@@ -9,11 +9,11 @@ import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-
 export const revalidate = 300;
 export const dynamicParams = true;
 
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   return await generateOrganizationTournamentsStaticParams();
 }
 
-export default async function Register (
+export default async function Register(
   props: Readonly<OrganizationTournamentParams>,
 ) {
   const params = await props.params;
@@ -22,15 +22,14 @@ export default async function Register (
 
   return (
     <>
-      {/* <ToastContainer /> */ }
       <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
         <div>
-          Register for { org_slug } tournament { tournament_id }
+          Register for {org_slug} tournament {tournament_id}
         </div>
 
         <TournamentRegistrationForm
-          { ...params }
-          tournamentRegistrationAction={ tournamentRegistration }
+          {...params}
+          tournamentRegistrationAction={tournamentRegistration}
         >
           <Input name="ign" />
           <ProfileSelector />
@@ -40,7 +39,7 @@ export default async function Register (
   );
 }
 
-function tournamentRegistrationAction (tournament_id: number) {
+function tournamentRegistrationAction(tournament_id: number) {
   return async (formData: FormData) => {
     "use server";
     const profiles = await getProfilesMe();
@@ -65,7 +64,7 @@ function tournamentRegistrationAction (tournament_id: number) {
   };
 }
 
-async function ProfileSelector () {
+async function ProfileSelector() {
   const profiles = await getProfilesMe();
   return (
     <>
@@ -84,14 +83,14 @@ async function ProfileSelector () {
       </div>
 
       <datalist id="profiles">
-        { profiles.map((profile) => (
+        {profiles.map((profile) => (
           <option
-            key={ profile.id }
-            value={ profile.username }
-            label={ profile.username }
-            data-profile-id={ profile.id }
+            key={profile.id}
+            value={profile.username}
+            label={profile.username}
+            data-profile-id={profile.id}
           />
-        )) }
+        ))}
       </datalist>
     </>
   );
