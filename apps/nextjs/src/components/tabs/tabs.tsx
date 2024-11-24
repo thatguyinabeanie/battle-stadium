@@ -106,7 +106,7 @@ export const TabsTrigger = memo(
         key={value}
         value={value}
         title={title}
-        aria-label={ `Select ${title} tab` }
+        aria-label={`Select ${title} tab`}
         className={cn(
           "w-[6rem] py-1 transition-colors data-[state=active]:text-primary lg:w-[7.5rem]",
           classNames?.tabsTrigger,
