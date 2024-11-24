@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { ArchiveX, Command, File, Inbox, Send, Trash2 } from "lucide-react"
+import * as React from "react";
+import { ArchiveX, Command, File, Inbox, Send, Trash2 } from "lucide-react";
 
-import { NavUser } from "~/components/sidebar/nav-user"
-import { Label } from "@battle-stadium/ui/label"
+import { Label } from "@battle-stadium/ui/label";
 import {
   Sidebar,
   SidebarContent,
@@ -17,15 +16,17 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@battle-stadium/ui/sidebar"
-import { Switch } from "@battle-stadium/ui/switch"
+} from "@battle-stadium/ui/sidebar";
+import { Switch } from "@battle-stadium/ui/switch";
+
+import { NavUser } from "~/components/sidebar/nav-user";
 
 // This is sample data
 const data = {
   user: {
     name: "shadcn",
     email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: "/images/beanie-72x72.png",
   },
   navMain: [
     {
@@ -141,24 +142,24 @@ const data = {
         "To celebrate our recent project success, I'd like to organize a team dinner.\nAre you available next Friday evening? Please let me know your preferences.",
     },
   ],
-}
+};
 
-export function AppSidebar ({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // Note: I'm using state to show active item.
   // IRL you should use the url/router.
-  const [activeItem, setActiveItem] = React.useState(data.navMain[0])
-  const [mails, setMails] = React.useState(data.mails)
-  const { setOpen } = useSidebar()
+  const [activeItem, setActiveItem] = React.useState(data.navMain[0]);
+  const [mails, setMails] = React.useState(data.mails);
+  const { setOpen } = useSidebar();
 
   return (
     <Sidebar
       collapsible="icon"
       className="overflow-hidden [&>[data-sidebar=sidebar]]:flex-row"
-      { ...props }
+      {...props}
     >
-      {/* This is the first sidebar */ }
-      {/* We disable collapsible and adjust width to icon. */ }
-      {/* This will make the sidebar appear as icons. */ }
+      {/* This is the first sidebar */}
+      {/* We disable collapsible and adjust width to icon. */}
+      {/* This will make the sidebar appear as icons. */}
       <Sidebar
         collapsible="none"
         className="!w-[calc(var(--sidebar-width-icon)_+_1px)] border-r"
@@ -184,48 +185,48 @@ export function AppSidebar ({ ...props }: React.ComponentProps<typeof Sidebar>) 
           <SidebarGroup>
             <SidebarGroupContent className="px-1.5 md:px-0">
               <SidebarMenu>
-                { data.navMain.map((item) => (
-                  <SidebarMenuItem key={ item.title }>
+                {data.navMain.map((item) => (
+                  <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton
-                      tooltip={ {
+                      tooltip={{
                         children: item.title,
                         hidden: false,
-                      } }
-                      onClick={ () => {
-                        setActiveItem(item)
-                        const mail = data.mails.sort(() => Math.random() - 0.5)
+                      }}
+                      onClick={() => {
+                        setActiveItem(item);
+                        const mail = data.mails.sort(() => Math.random() - 0.5);
                         setMails(
                           mail.slice(
                             0,
-                            Math.max(5, Math.floor(Math.random() * 10) + 1)
-                          )
-                        )
-                        setOpen(true)
-                      } }
-                      isActive={ activeItem?.title === item.title }
+                            Math.max(5, Math.floor(Math.random() * 10) + 1),
+                          ),
+                        );
+                        setOpen(true);
+                      }}
+                      isActive={activeItem?.title === item.title}
                       className="px-2.5 md:px-2"
                     >
                       <item.icon />
-                      <span>{ item.title }</span>
+                      <span>{item.title}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
-                )) }
+                ))}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
-          <NavUser user={ data.user } />
+          <NavUser user={data.user} />
         </SidebarFooter>
       </Sidebar>
 
-      {/* This is the second sidebar */ }
-      {/* We disable collapsible and let it fill remaining space */ }
+      {/* This is the second sidebar */}
+      {/* We disable collapsible and let it fill remaining space */}
       <Sidebar collapsible="none" className="hidden flex-1 md:flex">
         <SidebarHeader className="gap-3.5 border-b p-4">
           <div className="flex w-full items-center justify-between">
             <div className="text-base font-medium text-foreground">
-              { activeItem?.title }
+              {activeItem?.title}
             </div>
             <Label className="flex items-center gap-2 text-sm">
               <span>Unreads</span>
@@ -237,26 +238,26 @@ export function AppSidebar ({ ...props }: React.ComponentProps<typeof Sidebar>) 
         <SidebarContent>
           <SidebarGroup className="px-0">
             <SidebarGroupContent>
-              { mails.map((mail) => (
+              {mails.map((mail) => (
                 <a
                   href="#"
-                  key={ mail.email }
+                  key={mail.email}
                   className="flex flex-col items-start gap-2 whitespace-nowrap border-b p-4 text-sm leading-tight last:border-b-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                 >
                   <div className="flex w-full items-center gap-2">
-                    <span>{ mail.name }</span>{ " " }
-                    <span className="ml-auto text-xs">{ mail.date }</span>
+                    <span>{mail.name}</span>{" "}
+                    <span className="ml-auto text-xs">{mail.date}</span>
                   </div>
-                  <span className="font-medium">{ mail.subject }</span>
+                  <span className="font-medium">{mail.subject}</span>
                   <span className="line-clamp-2 w-[260px] whitespace-break-spaces text-xs">
-                    { mail.teaser }
+                    {mail.teaser}
                   </span>
                 </a>
-              )) }
+              ))}
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
       </Sidebar>
     </Sidebar>
-  )
+  );
 }
