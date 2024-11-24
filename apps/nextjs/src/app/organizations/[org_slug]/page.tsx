@@ -1,30 +1,13 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
-import {
-  getOrganization,
-  getOrganizations,
-} from "~/app/server-actions/organizations/actions";
+import { getOrganizations } from "~/app/server-actions/organizations/actions";
 import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 import { SingleOrganizationTournamentsTable } from "~/components/tournaments/single-organization-tournaments-table";
 
 interface OrganizationDetailPageProps {
   params: Promise<{ org_slug: string }>;
-}
-
-export async function generateMetadata(
-  props: Readonly<OrganizationDetailPageProps>,
-) {
-  const { org_slug } = await props.params;
-  let org;
-  try {
-    org = await getOrganization(org_slug);
-  } catch (error) {
-    console.error("Failed to fetch organization:", error);
-    org = null;
-  }
-  return { title: org?.name ?? "Organization" };
 }
 
 export async function generateStaticParams() {

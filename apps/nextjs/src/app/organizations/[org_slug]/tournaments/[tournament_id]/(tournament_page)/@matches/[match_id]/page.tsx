@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import { generateOrganizationTournamentMatchesStaticParams } from "~/lib/organization-tournaments-static-params";
 
 interface MatchPageProps {
@@ -21,5 +19,5 @@ export async function generateStaticParams(props: Readonly<MatchPageProps>) {
 
 export default async function MatchPage(props: Readonly<MatchPageProps>) {
   const { matchId } = await props.params;
-  return <div>Match Page { matchId }</div>;
+  return <div>Match Page {matchId}</div>;
 }
