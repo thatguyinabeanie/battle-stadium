@@ -90,7 +90,7 @@ function useActiveTab(
   if (Array.isArray(tabParam) && tabParam.length > 0) {
     const firstTab = (tabParam as readonly (string | number)[])[0];
     if (typeof firstTab !== "string" && typeof firstTab !== "number") {
-      return ["", searchParams] as const;
+      return [String(defaultValue ?? ""), searchParams] as const;
     }
     return [String(firstTab), searchParams] as const;
   }
