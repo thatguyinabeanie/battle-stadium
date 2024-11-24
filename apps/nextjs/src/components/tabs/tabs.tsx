@@ -9,6 +9,7 @@ import {
   Badge,
   CardContent,
   CardHeader,
+  cn,
   Tabs as UiTabs,
   TabsContent as UiTabsContent,
   TabsList as UiTabsList,
@@ -64,7 +65,7 @@ export const Tabs = forwardRef<
 export const TabsList = forwardRef<
   ComponentRef<typeof UiTabsList>,
   ComponentPropsWithoutRef<typeof UiTabsList>
->(({ defaultValue, ...props }, ref) => {
+>(({ defaultValue, className, ...props }, ref) => {
   const [activeTab] = useActiveTab(defaultValue);
   return (
     <UiTabsList
@@ -72,7 +73,10 @@ export const TabsList = forwardRef<
       {...props}
       defaultValue={activeTab}
       aria-orientation="horizontal"
-      className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-b-2"
+      className={cn(
+        "flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none",
+        className,
+      )}
     />
   );
 });
@@ -95,23 +99,31 @@ function useActiveTab(
   return [activeTab, searchParams] as const;
 }
 
-export const TabsTrigger = memo(({ value, title }: Readonly<TabConfig>) => {
-  return (
-    <UiTabsTrigger
-      key={value}
-      value={value}
-      title={title}
-      className="w-[6rem] py-1 transition-colors data-[state=active]:text-primary lg:w-[7.5rem]"
-    >
-      <Badge
-        variant="secondary"
-        className="md:text-md w-[6rem] px-1 py-1 text-sm lg:w-[7.5rem]"
+export const TabsTrigger = memo(
+  ({ value, title, classNames }: Readonly<TabConfig>) => {
+    return (
+      <UiTabsTrigger
+        key={value}
+        value={value}
+        title={title}
+        className={cn(
+          "w-[6rem] py-1 transition-colors data-[state=active]:text-primary lg:w-[7.5rem]",
+          classNames?.tabsTrigger,
+        )}
       >
-        {title}
-      </Badge>
-    </UiTabsTrigger>
-  );
-});
+        <Badge
+          variant="secondary"
+          className={cn(
+            "md:text-md w-[6rem] px-1 py-1 text-sm lg:w-[7.5rem]",
+            classNames?.badge,
+          )}
+        >
+          {title}
+        </Badge>
+      </UiTabsTrigger>
+    );
+  },
+);
 
 export const TabsContent = memo(
   ({

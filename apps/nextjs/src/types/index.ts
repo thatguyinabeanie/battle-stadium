@@ -38,4 +38,8 @@ export interface OrganizationTournamentParams {
 export interface TabConfig {
   value: string;
   title?: string;
+  classNames?: {
+    tabsTrigger?: string;
+    badge?: string;
+  };
 }
