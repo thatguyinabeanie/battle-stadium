@@ -21,7 +21,7 @@ import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/react";
 import { HydrateClient } from "~/trpc/server";
-import { UploadThingRouter } from "./api/uploadthing/core";
+import { UploadThingRouter } from "./(main)/api/uploadthing/core";
 
 const AwesomeParticles = dynamic(
   () => import("~/components/awesome-particles"),
@@ -63,16 +63,11 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
 };
-
 interface RootLayoutSlots extends ChildrenProps {
-  navbar: ReactNode;
   cookies: ReactNode;
-  footer: ReactNode;
 }
 export default function RootLayout({
-  navbar,
   cookies,
-  footer,
   children,
 }: Readonly<RootLayoutSlots>) {
   return (
@@ -95,9 +90,7 @@ export default function RootLayout({
                   <AwesomeParticles />
                   <HydrateClient>
                     <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
-                      {navbar}
                       {children}
-                      {footer}
                     </div>
                   </HydrateClient>
                 </div>

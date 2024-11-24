@@ -1,8 +1,8 @@
 // server-actions/registration/actions.ts
 "use server";
 
-import { getProfilesMe } from "~/app/server-actions/profiles/actions";
-import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
+import { getProfilesMe } from "~/app/(main)/server-actions/profiles/actions";
+import { postTournamentRegistration } from "~/app/(main)/server-actions/tournaments/actions";
 
 export async function handleTournamentRegistration(
   formData: FormData,

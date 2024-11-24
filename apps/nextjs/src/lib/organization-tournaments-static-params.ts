@@ -1,5 +1,5 @@
-import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
-import { getOrganizationTournamentMatches } from "~/app/server-actions/organizations/tournaments/matches/actions";
+import { getOrganizationTournaments } from "~/app/(main)/server-actions/organizations/tournaments/actions";
+import { getOrganizationTournamentMatches } from "~/app/(main)/server-actions/organizations/tournaments/matches/actions";
 
 export async function generateOrganizationTournamentsStaticParams() {
   const results = await getOrganizationTournaments(1, 500);

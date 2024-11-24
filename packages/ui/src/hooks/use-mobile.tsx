@@ -5,9 +5,7 @@ const MOBILE_BREAKPOINT = 768;
 type MobileState = boolean | undefined;
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState<MobileState>(
-    undefined,
-  );
+  const [isMobile, setIsMobile] = React.useState<MobileState>(undefined);
 
   React.useEffect(() => {
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);

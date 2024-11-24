@@ -1,8 +1,8 @@
 import { Input } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentParams } from "~/types";
-import { getProfilesMe } from "~/app/server-actions/profiles/actions";
-import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
+import { getProfilesMe } from "~/app/(main)/server-actions/profiles/actions";
+import { postTournamentRegistration } from "~/app/(main)/server-actions/tournaments/actions";
 import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 

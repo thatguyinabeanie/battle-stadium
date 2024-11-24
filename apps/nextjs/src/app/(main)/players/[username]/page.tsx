@@ -1,4 +1,4 @@
-import { getProfile } from "~/app/server-actions/profiles/actions";
+import { getProfile } from "~/app/(main)/server-actions/profiles/actions";
 import ComingSoon from "~/components/coming-soon";
 
 interface PlayerProfilePageProps {

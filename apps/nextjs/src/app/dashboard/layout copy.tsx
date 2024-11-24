@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { TabsContent as UiTabsContent } from "@battle-stadium/ui";
 
 import type { DashboardLayoutSlots } from "~/types";
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
+import { getAccountMe } from "~/app/(main)/server-actions/accounts/actions";
 import { Tabs, TabsList, TabsTrigger } from "~/components/tabs/tabs";
 
 const tabsList = [

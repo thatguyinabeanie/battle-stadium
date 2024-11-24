@@ -1,4 +1,4 @@
-import { getProfilesMe } from "~/app/server-actions/profiles/actions";
+import { getProfilesMe } from "~/app/(main)/server-actions/profiles/actions";
 import NewProfile from "~/components/profiles/new-profile";
 
 export default async function Profiles() {

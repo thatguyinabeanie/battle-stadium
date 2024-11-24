@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
-import { getOrganizations } from "~/app/server-actions/organizations/actions";
-import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
+import { getOrganizations } from "~/app/(main)/server-actions/organizations/actions";
+import { getSingleOrganizationTournaments } from "~/app/(main)/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 import { SingleOrganizationTournamentsTable } from "~/components/tournaments/single-organization-tournaments-table";
 
