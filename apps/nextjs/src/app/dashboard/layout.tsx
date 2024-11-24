@@ -1,14 +1,10 @@
 import { Suspense } from "react";
 
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent as UITabsContent,
-} from "@battle-stadium/ui";
+import { TabsContent as UiTabsContent } from "@battle-stadium/ui";
 
 import type { DashboardLayoutProps } from "~/types";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
+import { Tabs, TabsList, TabsTrigger } from "~/components/tabs/tabs";
 
 const tabsList = [
   { key: "dashboard", title: "Dashboard" },
@@ -23,17 +19,14 @@ const adminTab = { key: "admin", title: "Admin" };
 export default function DashboardLayout(props: Readonly<DashboardLayoutProps>) {
   return (
     <div className="flex min-h-screen w-full flex-col items-center pt-2">
-      <Tabs defaultValue="dashboard" className="flex flex-col">
-        <TabsList className="flex w-fit flex-row">
-          <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Tabs defaultValue="dashboard" className="flex flex-col">
+          <TabsList className="flex w-fit flex-row">
             <TabsTriggers />
-          </Suspense>
-        </TabsList>
-
-        <Suspense fallback={<div>Loading...</div>}>
+          </TabsList>
           <TabsContent {...props} />
-        </Suspense>
-      </Tabs>
+        </Tabs>
+      </Suspense>
     </div>
   );
 }
@@ -45,11 +38,11 @@ async function TabsContent(props: Readonly<DashboardLayoutProps>) {
   return (
     <>
       {tabsToRender.map(({ key }) => (
-        <UITabsContent key={key} value={key}>
+        <UiTabsContent key={key} value={key}>
           <div className="flex flex-col items-center">
             {renderTabContent(key, props)}
           </div>
-        </UITabsContent>
+        </UiTabsContent>
       ))}
     </>
   );
@@ -62,9 +55,12 @@ async function TabsTriggers() {
   return (
     <>
       {tabsToRender.map(({ key, title }) => (
-        <TabsTrigger key={key} value={key}>
-          {title}
-        </TabsTrigger>
+        <TabsTrigger
+          key={key}
+          value={key}
+          title={title}
+          aria-label={`Switch to ${title} tab`}
+        />
       ))}
     </>
   );

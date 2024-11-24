@@ -1,11 +1,21 @@
 "use client";
 
-import type { ComponentPropsWithoutRef, ComponentRef } from "react";
-import { forwardRef } from "react";
+import type { ComponentPropsWithoutRef, ComponentRef, ReactNode } from "react";
+import { forwardRef, memo, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import type { TabsPrimitive } from "@battle-stadium/ui";
-import { Tabs as UiTabs, TabsList as UiTabsList } from "@battle-stadium/ui";
+import {
+  Badge,
+  CardContent,
+  CardHeader,
+  Tabs as UiTabs,
+  TabsContent as UiTabsContent,
+  TabsList as UiTabsList,
+  TabsTrigger as UiTabsTrigger,
+} from "@battle-stadium/ui";
+
+import type { TabConfig } from "~/types";
 
 interface TabsProps
   extends ComponentPropsWithoutRef<typeof TabsPrimitive.Root> {
@@ -56,7 +66,15 @@ export const TabsList = forwardRef<
   ComponentPropsWithoutRef<typeof UiTabsList>
 >(({ defaultValue, ...props }, ref) => {
   const [activeTab] = useActiveTab(defaultValue);
-  return <UiTabsList ref={ref} {...props} defaultValue={activeTab} />;
+  return (
+    <UiTabsList
+      ref={ref}
+      {...props}
+      defaultValue={activeTab}
+      aria-orientation="horizontal"
+      className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-b-2"
+    />
+  );
 });
 
 function useActiveTab(
@@ -76,3 +94,54 @@ function useActiveTab(
   const activeTab = `${tabParam as string | number}`;
   return [activeTab, searchParams] as const;
 }
+
+export const TabsTrigger = memo(({ value, title }: Readonly<TabConfig>) => {
+  return (
+    <UiTabsTrigger
+      key={value}
+      value={value}
+      title={title}
+      className="w-[6rem] py-1 transition-colors data-[state=active]:text-primary lg:w-[7.5rem]"
+    >
+      <Badge
+        variant="secondary"
+        className="md:text-md w-[6rem] px-1 py-1 text-sm lg:w-[7.5rem]"
+      >
+        {title}
+      </Badge>
+    </UiTabsTrigger>
+  );
+});
+
+export const TabsContent = memo(
+  ({
+    value,
+    children,
+    loadingText = "Loading...",
+    capitalize = true,
+  }: TabConfig & {
+    children: ReactNode;
+    loadingText?: string;
+    capitalize?: boolean;
+  }) => {
+    return (
+      <UiTabsContent
+        value={value}
+        className="mt-0 flex h-full w-full flex-col items-center justify-center py-0"
+      >
+        <CardHeader className={capitalize ? "capitalize" : undefined}>
+          {value}
+        </CardHeader>
+        <Suspense
+          fallback={
+            <div role="status" aria-live="polite">
+              {loadingText}
+            </div>
+          }
+        >
+          <CardContent className="min-h-svh">{children}</CardContent>
+        </Suspense>
+      </UiTabsContent>
+    );
+  },
+);
