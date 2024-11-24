@@ -13,8 +13,9 @@ interface TournamentRegistrationProps {
   org_slug: string;
   tournament_id: number;
   children?: ReactNode;
-  tournamentRegistrationAction: (
+  handleTournamentRegistration: (
     formData: FormData,
+    tournament_id: number,
   ) => Promise<PostTournamentRegistrationResponse | undefined>;
 }
 export function TournamentRegistrationForm(

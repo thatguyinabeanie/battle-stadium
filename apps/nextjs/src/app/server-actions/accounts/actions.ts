@@ -32,7 +32,6 @@ export async function getAccount(username: string) {
 export async function getAccountMe(
   options?: FetchOptions<paths["/accounts/me"]["get"]>,
 ) {
-  "use cache";
   const { userId } = await auth();
 
   if (!userId) {
