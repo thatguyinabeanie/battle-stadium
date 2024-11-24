@@ -139,7 +139,7 @@ export const TabsContent = memo(
   }) => {
     return (
       <UiTabsContent
-        id={ `${value}-tab` }
+        id={`${value}-tab`}
         value={value}
         className="mt-0 flex h-full w-full flex-col items-center justify-center py-0"
       >

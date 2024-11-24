@@ -52,7 +52,7 @@ export default function OrganizationTournamentsTournamentLayout(
                   key={value}
                   value={value}
                   title={title}
-                  aria-controls={ `${value}-tab` }
+                  aria-controls={`${value}-tab`}
                 />
               ))}
             </TabsList>
