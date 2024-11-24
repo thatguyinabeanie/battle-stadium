@@ -17,7 +17,6 @@ export default async function Register(
 ) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
-  const tournamentRegistration = tournamentRegistrationAction(tournament_id);
 
   return (
     <>
@@ -26,19 +25,31 @@ export default async function Register(
           Register for {org_slug} tournament {tournament_id}
         </div>
 
-        <TournamentRegistrationForm
-          {...params}
-          tournamentRegistrationAction={tournamentRegistration}
-        >
-          <Input name="ign" />
-          <Suspense fallback={<div>Loading...</div>}>
-            <ProfileSelector />
-          </Suspense>
-        </TournamentRegistrationForm>
+        <Suspense fallback={ <div>Loading...</div> }>
+          <TournamentRegistrationFormWrapper org_slug={org_slug} tournament_id={tournament_id} />
+        </Suspense>
       </div>
     </>
   );
 }
+
+function TournamentRegistrationFormWrapper(props: {org_slug: string, tournament_id: number}) {
+
+  const tournamentRegistration = tournamentRegistrationAction(props.tournament_id);
+
+  return (
+    <TournamentRegistrationForm
+      {...props}
+      tournamentRegistrationAction={tournamentRegistration}
+    >
+      <Input name="ign" />
+
+        <ProfileSelector />
+    </TournamentRegistrationForm>
+  );
+
+}
+
 
 function tournamentRegistrationAction(tournament_id: number) {
   return async (formData: FormData) => {
