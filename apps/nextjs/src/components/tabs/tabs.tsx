@@ -1,11 +1,21 @@
 "use client";
 
-import type { ComponentPropsWithoutRef, ComponentRef } from "react";
-import { forwardRef } from "react";
+import type { ComponentPropsWithoutRef, ComponentRef, ReactNode } from "react";
+import { forwardRef, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import type { TabsPrimitive } from "@battle-stadium/ui";
-import { Tabs as UiTabs, TabsList as UiTabsList } from "@battle-stadium/ui";
+import {
+  Badge,
+  CardContent,
+  CardHeader,
+  Tabs as UiTabs,
+  TabsContent as UiTabsContent,
+  TabsList as UiTabsList,
+  TabsTrigger as UiTabsTrigger,
+} from "@battle-stadium/ui";
+
+import type { TabConfig } from "~/types";
 
 interface TabsProps
   extends ComponentPropsWithoutRef<typeof TabsPrimitive.Root> {
@@ -75,4 +85,39 @@ function useActiveTab(
 
   const activeTab = `${tabParam as string | number}`;
   return [activeTab, searchParams] as const;
+}
+
+export function TabsTrigger({ value, title }: Readonly<TabConfig>) {
+  return (
+    <UiTabsTrigger
+      key={value}
+      value={value}
+      title={title}
+      className="w-[6rem] py-1 transition-colors data-[state=active]:text-primary lg:w-[7.5rem]"
+    >
+      <Badge
+        variant="secondary"
+        className="md:text-md w-[6rem] px-1 py-1 text-sm lg:w-[7.5rem]"
+      >
+        {title}
+      </Badge>
+    </UiTabsTrigger>
+  );
+}
+
+export function TabsContent({
+  value,
+  children,
+}: TabConfig & { children: ReactNode }) {
+  return (
+    <UiTabsContent
+      value={value}
+      className="mt-0 flex h-full w-full flex-col items-center justify-center py-0"
+    >
+      <CardHeader className="capitalize">{value}</CardHeader>
+      <Suspense fallback={<div>Loading...</div>}>
+        <CardContent className="min-h-svh">{children}</CardContent>
+      </Suspense>
+    </UiTabsContent>
+  );
 }

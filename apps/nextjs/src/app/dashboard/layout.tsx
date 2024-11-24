@@ -3,12 +3,12 @@ import { Suspense } from "react";
 import {
   Tabs,
   TabsList,
-  TabsTrigger,
-  TabsContent as UITabsContent,
+  TabsContent as UiTabsContent,
 } from "@battle-stadium/ui";
 
 import type { DashboardLayoutProps } from "~/types";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
+import { TabsTrigger } from "~/components/tabs/tabs";
 
 const tabsList = [
   { key: "dashboard", title: "Dashboard" },
@@ -45,11 +45,11 @@ async function TabsContent(props: Readonly<DashboardLayoutProps>) {
   return (
     <>
       {tabsToRender.map(({ key }) => (
-        <UITabsContent key={key} value={key}>
+        <UiTabsContent key={key} value={key}>
           <div className="flex flex-col items-center">
             {renderTabContent(key, props)}
           </div>
-        </UITabsContent>
+        </UiTabsContent>
       ))}
     </>
   );
@@ -62,9 +62,7 @@ async function TabsTriggers() {
   return (
     <>
       {tabsToRender.map(({ key, title }) => (
-        <TabsTrigger key={key} value={key}>
-          {title}
-        </TabsTrigger>
+        <TabsTrigger key={key} value={key} title={title} />
       ))}
     </>
   );
