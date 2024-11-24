@@ -30,15 +30,22 @@ export function NavProjects({
   const { isMobile } = useSidebar();
 
   return (
-    <SidebarGroup className="group-data-[collapsible=icon]:hidden">
+    <SidebarGroup 
+      className="group-data-[collapsible=icon]:hidden"
+      aria-label="Project navigation"
+    >
       <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a href={item.url}>
+              <a 
+                href={item.url}
+                title={item.name}
+                className="truncate"
+              >
                 <item.icon />
-                <span>{item.name}</span>
+                <span className="truncate">{item.name}</span>
               </a>
             </SidebarMenuButton>
             <DropdownMenu>
