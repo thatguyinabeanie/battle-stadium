@@ -1,7 +1,7 @@
 "use client";
 
 import type { ComponentPropsWithoutRef, ComponentRef, ReactNode } from "react";
-import { forwardRef, Suspense } from "react";
+import { forwardRef, memo, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import type { TabsPrimitive } from "@battle-stadium/ui";
@@ -95,7 +95,7 @@ function useActiveTab(
   return [activeTab, searchParams] as const;
 }
 
-export function TabsTrigger({ value, title }: Readonly<TabConfig>) {
+export const TabsTrigger = memo(({value,  title }: Readonly<TabConfig>) => {
   return (
     <UiTabsTrigger
       key={value}
@@ -111,18 +111,19 @@ export function TabsTrigger({ value, title }: Readonly<TabConfig>) {
       </Badge>
     </UiTabsTrigger>
   );
-}
+});
 
-export function TabsContent({
+export const TabsContent = memo(({
   value,
   children,
   loadingText = "Loading...",
   capitalize = true,
-}: TabConfig & { 
+}: TabConfig & {
   children: ReactNode,
   loadingText?: string,
   capitalize?: boolean,
-}) {
+}) =>{
+
   return (
     <UiTabsContent
       value={value}
@@ -136,4 +137,4 @@ export function TabsContent({
       </Suspense>
     </UiTabsContent>
   );
-}
+});
