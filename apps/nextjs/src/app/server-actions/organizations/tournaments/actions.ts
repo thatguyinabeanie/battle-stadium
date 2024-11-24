@@ -10,14 +10,20 @@ function tournamentsLeftJoinOrganizations() {
     .leftJoin(organizations, eq(tournaments.organizationId, organizations.id));
 }
 
-export async function getOrganizationTournaments(page = 1, pageSize = 20) {
-  return await tournamentsLeftJoinOrganizations()
+async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
+  const results = await tournamentsLeftJoinOrganizations()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
+
+  return results;
 }
 
-export async function getSingleOrganizationTournaments(
+export async function getOrganizationTournaments(page = 1, pageSize = 20) {
+  return getOrganizationTournamentsRaw(page, pageSize);
+}
+
+async function getSingleOrganizationTournamentsRaw(
   slug: string,
   page = 1,
   pageSize = 20,
@@ -28,13 +34,26 @@ export async function getSingleOrganizationTournaments(
     .limit(pageSize)
     .offset((page - 1) * pageSize);
 
+  return results;
+}
+
+export async function getSingleOrganizationTournaments(
+  slug: string,
+  page = 1,
+  pageSize = 20,
+) {
+  const results = await getSingleOrganizationTournamentsRaw(
+    slug,
+    page,
+    pageSize,
+  );
   return {
     tournaments: results.map(({ tournaments }) => tournaments),
     organization: results[0]?.organizations,
   };
 }
 
-export async function getSingleOrganizationSingleTournament(
+async function getSingleOrganizationSingleTournamentRaw(
   slug: string,
   tournamentId: number,
 ) {
@@ -42,6 +61,18 @@ export async function getSingleOrganizationSingleTournament(
     .where(and(eq(organizations.slug, slug), eq(tournaments.id, tournamentId)))
     .orderBy(desc(tournaments.startAt))
     .limit(1);
+
+  return results;
+}
+
+export async function getSingleOrganizationSingleTournament(
+  slug: string,
+  tournamentId: number,
+) {
+  const results = await getSingleOrganizationSingleTournamentRaw(
+    slug,
+    tournamentId,
+  );
 
   return {
     tournament: results[0]?.tournaments,

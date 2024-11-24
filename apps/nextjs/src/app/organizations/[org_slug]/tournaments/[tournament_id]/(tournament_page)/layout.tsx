@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Suspense } from "react";
 
 import {
   Badge,
@@ -40,30 +41,32 @@ export default function OrganizationTournamentsTournamentLayout(
     <div className="flex h-full w-full flex-col items-center justify-center">
       {header}
 
-      <Tabs
-        className="flex h-full w-full flex-col items-center"
-        defaultValue={DEFAULT_TAB}
-        aria-label="Tournament Information Tabs"
-      >
-        <div className="flex w-full flex-col items-center overflow-auto">
-          <TabsList
-            defaultValue={DEFAULT_TAB}
-            className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-b-2"
-          >
-            {tabs.map(({ value, title }) => (
-              <TabsTrigger key={value} value={value} title={title} />
-            ))}
-          </TabsList>
-        </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Tabs
+          className="flex h-full w-full flex-col items-center"
+          defaultValue={DEFAULT_TAB}
+          aria-label="Tournament Information Tabs"
+        >
+          <div className="flex w-full flex-col items-center overflow-auto">
+            <TabsList
+              defaultValue={DEFAULT_TAB}
+              className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-b-2"
+            >
+              {tabs.map(({ value, title }) => (
+                <TabsTrigger key={value} value={value} title={title} />
+              ))}
+            </TabsList>
+          </div>
 
-        <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-0">
-          <TabsContent value="details">{children}</TabsContent>
-          <TabsContent value="standings">{standings}</TabsContent>
-          <TabsContent value="pairings">{pairings}</TabsContent>
-          <TabsContent value="metagame">{metagame}</TabsContent>
-          <TabsContent value="registrations">{registrations}</TabsContent>
-        </Card>
-      </Tabs>
+          <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-0">
+            <TabsContent value="details">{children}</TabsContent>
+            <TabsContent value="standings">{standings}</TabsContent>
+            <TabsContent value="pairings">{pairings}</TabsContent>
+            <TabsContent value="metagame">{metagame}</TabsContent>
+            <TabsContent value="registrations">{registrations}</TabsContent>
+          </Card>
+        </Tabs>
+      </Suspense>
     </div>
   );
 }
@@ -93,7 +96,9 @@ function TabsContent({ value, children }: TabConfig & { children: ReactNode }) {
       className="mt-0 flex h-full w-full flex-col items-center justify-center py-0"
     >
       <CardHeader className="capitalize">{value}</CardHeader>
-      <CardContent className="min-h-svh">{children}</CardContent>
+      <Suspense fallback={<div>Loading...</div>}>
+        <CardContent className="min-h-svh">{children}</CardContent>
+      </Suspense>
     </UiTabsContent>
   );
 }

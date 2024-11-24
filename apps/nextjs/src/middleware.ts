@@ -10,15 +10,16 @@ export const config = {
   ],
 };
 
-const publicRoutes = createRouteMatcher([
-  "/",
-  "/sign-in(.*)",
-  "/sign-up(.*)",
-  "/image(.*)",
+const protectedRoutes = createRouteMatcher([
+  "/api/(.*)",
+  "/server-actions/(.*)",
+  "/dashboard",
+  "/pokemon(.*)",
+  "/organizations/:orgSlug/tournaments/:tournamentId/register",
 ]);
 
 export default clerkMiddleware(async (auth, request) => {
-  if (!publicRoutes(request)) {
+  if (protectedRoutes(request)) {
     await auth.protect();
   }
 });

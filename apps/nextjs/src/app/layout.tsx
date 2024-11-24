@@ -1,32 +1,28 @@
+import type { ReactNode } from "react";
+import { StrictMode } from "react";
+
+import "~/styles/globals.css";
+
 import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
+import { ClerkProvider } from "@clerk/nextjs";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { SpeedInsights as VercelSpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+import { extractRouterConfig } from "uploadthing/server";
 
 import { cn, ThemeProvider } from "@battle-stadium/ui";
 
+import type { ChildrenProps } from "~/types";
 import { env } from "~/env";
+import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/react";
 import { HydrateClient } from "~/trpc/server";
-
-import "~/styles/globals.css";
-
-import type { ReactNode } from "react";
-import { StrictMode } from "react";
-import dynamic from "next/dynamic";
-import { ClerkProvider } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
-import { extractRouterConfig } from "uploadthing/server";
-
-import type { ChildrenProps } from "~/types";
-import Footer from "~/components/footer";
-import { siteConfig } from "~/lib/config/site";
 import { UploadThingRouter } from "./api/uploadthing/core";
 
-const Cookies = dynamic(() => import("~/components/cookies/cookies"));
 const AwesomeParticles = dynamic(
   () => import("~/components/awesome-particles"),
 );
@@ -70,13 +66,15 @@ export const viewport: Viewport = {
 
 interface RootLayoutProps extends ChildrenProps {
   navbar: ReactNode;
+  cookies: ReactNode;
+  footer: ReactNode;
 }
-export default async function RootLayout({
+export default function RootLayout({
   navbar,
+  cookies,
+  footer,
   children,
 }: Readonly<RootLayoutProps>) {
-  const { userId, sessionId } = await auth();
-
   return (
     <StrictMode>
       <ClerkProvider>
@@ -98,35 +96,36 @@ export default async function RootLayout({
                   <HydrateClient>
                     <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
                       {navbar}
-                      <main
-                        id="main-content"
-                        className="flex min-h-screen w-full flex-col items-center"
-                      >
-                        <section
-                          aria-label="Main content"
-                          className="z-0 flex h-full w-full flex-col items-center gap-4"
-                        >
-                          {children}
-                        </section>
-                      </main>
-
-                      <Footer />
+                      <MainSection>{children}</MainSection>
+                      {footer}
                     </div>
                   </HydrateClient>
                 </div>
               </TRPCReactProvider>
-
-              <Cookies isSignedIn={!!sessionId} userId={userId} />
-
+              {cookies}
               <VercelAnalytics />
-
               {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
-
               <GoogleAnalytics gaId={env.MEASUREMENT_ID} />
             </ThemeProvider>
           </body>
         </html>
       </ClerkProvider>
     </StrictMode>
+  );
+}
+
+function MainSection({ children }: Readonly<{ children: ReactNode }>) {
+  return (
+    <main
+      id="main-content"
+      className="flex min-h-screen w-full flex-col items-center"
+    >
+      <section
+        aria-label="Main content"
+        className="z-0 flex h-full w-full flex-col items-center gap-4"
+      >
+        {children}
+      </section>
+    </main>
   );
 }

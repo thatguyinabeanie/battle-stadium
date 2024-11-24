@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import type { Tournament } from "~/lib/api";
+import { getOrganizations } from "~/app/server-actions/organizations/actions";
 import OrganizationsTable from "~/components/organizations/organizations-table";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
-import { getOrganizations } from "../server-actions/organizations/actions";
 
 export const metadata: Metadata = {
   title: "Organizations",
@@ -13,12 +14,25 @@ export interface OrganizationsPageProps {
   orgs: Tournament[];
 }
 
-export default async function OrganizationsPage() {
-  const orgs = await getOrganizations();
+export default function OrganizationsPage() {
   return (
     <>
       <PartneredOrganizations />
-      <OrganizationsTable orgs={orgs} />
+      <OrganizationsTableSuspenseWrapper />
     </>
   );
+}
+
+function OrganizationsTableSuspenseWrapper() {
+  // TODO: Implement a proper skeleton for OrganizationsTable
+  return (
+    <Suspense fallback={<div>Loading organizations...</div>}>
+      <OrganizationsTableServerComponent />
+    </Suspense>
+  );
+}
+
+async function OrganizationsTableServerComponent() {
+  const orgs = await getOrganizations();
+  return <OrganizationsTable orgs={orgs} />;
 }

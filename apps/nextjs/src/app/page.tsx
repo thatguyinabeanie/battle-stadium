@@ -13,6 +13,7 @@ export default function Home() {
     <>
       <div className="min--h-screen flex flex-col items-center justify-between">
         <PartneredOrganizations />
+
         <Suspense fallback={<FrontPageTextSkeleton />}>
           <FrontPageText />
         </Suspense>

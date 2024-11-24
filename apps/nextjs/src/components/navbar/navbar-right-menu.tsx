@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
@@ -21,10 +22,11 @@ import UserMenuDropDown from "./user-menu/user-menu-dropdown";
 
 const sharedClassNames =
   "h-[20px] w-[20px] md:h-[24px] md:w-[24px] lg:h-[30px] lg:w-[30px]";
-export default async function RightMenu() {
-  const clerkAuth = await auth();
-  const me = (await getAccountMe()) ?? undefined;
 
+const solarUserLinearClassNames =
+  "h-[24px] w-[24px] md:h-[30px] md:w-[30px] lg:h-[32px] lg:w-[32px]";
+
+export default function RightMenu() {
   return (
     <div className="flex flex-row items-center justify-end">
       <Link passHref href="/search">
@@ -45,15 +47,35 @@ export default async function RightMenu() {
         </Button>
       </Link>
 
-      <DropdownMenu aria-label="Profile Actions">
-        <DropdownMenuTrigger>
-          <SmartAvatar />
-        </DropdownMenuTrigger>
-        <UserMenuDropDown isSignedIn={!!clerkAuth.userId} me={me} />
-      </DropdownMenu>
+      <Suspense
+        fallback={
+          <Avatar
+            aria-label="User's profile image"
+            className="bg-transparent p-1"
+          >
+            <SolarUserLinear className={solarUserLinearClassNames} />
+          </Avatar>
+        }
+      >
+        <UserMenu />
+      </Suspense>
 
       <MobileMenu />
     </div>
+  );
+}
+
+async function UserMenu() {
+  const clerkAuth = await auth();
+  const me = (await getAccountMe()) ?? undefined;
+
+  return (
+    <DropdownMenu aria-label="Profile Actions">
+      <DropdownMenuTrigger>
+        <SmartAvatar />
+      </DropdownMenuTrigger>
+      <UserMenuDropDown isSignedIn={!!clerkAuth.userId} me={me} />
+    </DropdownMenu>
   );
 }
 
@@ -69,9 +91,7 @@ async function SmartAvatar() {
         }
       />
       <AvatarFallback>
-        <AvatarFallback>
-          <SolarUserLinear className="h-[24px] w-[24px] md:h-[30px] md:w-[30px] lg:h-[32px] lg:w-[32px]" />
-        </AvatarFallback>
+        <SolarUserLinear className={solarUserLinearClassNames} />
       </AvatarFallback>
     </Avatar>
   );

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import BattleStadium from "./battle-stadium";
-import { LineMdGithubLoop, LineMdTwitter } from "./svg/icons";
+import BattleStadium from "~/components/battle-stadium";
+import { LineMdGithubLoop, LineMdTwitter } from "~/components/svg/icons";
 
 const navLinks = [
   {

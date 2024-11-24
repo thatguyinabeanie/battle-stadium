@@ -1,15 +1,12 @@
+import { Suspense } from "react";
+import { auth } from "@clerk/nextjs/server";
+
 import { cn } from "@battle-stadium/ui";
 
 import { NavbarItemsConfigs } from "~/lib/config/site";
 import NavbarLink from "./navbar-link";
 
-interface NavbarLinksProps {
-  isSignedIn: boolean | null;
-}
-
-export default function NavbarLinks({
-  isSignedIn,
-}: Readonly<NavbarLinksProps>) {
+export default function NavbarLinks() {
   return (
     <div className="hidden items-center justify-center md:flex">
       {NavbarItemsConfigs.map(({ label, value }) => (
@@ -20,16 +17,24 @@ export default function NavbarLinks({
           label={label}
         />
       ))}
-
-      <NavbarLink
-        value="dashboard"
-        key="dashboard"
-        href="/dashboard"
-        className={cn("hidden", {
-          "sm:flex": isSignedIn,
-        })}
-        label="Dashboard"
-      />
+      <Suspense fallback={null}>
+        <DashboardNavLink />
+      </Suspense>
     </div>
+  );
+}
+
+async function DashboardNavLink() {
+  const { sessionId } = await auth();
+  return (
+    <NavbarLink
+      value="dashboard"
+      key="dashboard"
+      href="/dashboard"
+      className={cn("hidden", {
+        "sm:flex": !!sessionId,
+      })}
+      label="Dashboard"
+    />
   );
 }

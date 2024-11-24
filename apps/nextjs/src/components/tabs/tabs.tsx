@@ -28,7 +28,7 @@ export const Tabs = forwardRef<
     const router = useRouter();
 
     const onTabChange = (value: string) => {
-      // Call the user's handler if provided
+      // Call the user'sx handler if provided
       onValueChange?.(value);
 
       // Update URL only if enabled

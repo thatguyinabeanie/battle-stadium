@@ -13,8 +13,9 @@ interface TournamentRegistrationProps {
   org_slug: string;
   tournament_id: number;
   children?: ReactNode;
-  tournamentRegistrationAction: (
+  handleTournamentRegistration: (
     formData: FormData,
+    tournament_id: number,
   ) => Promise<PostTournamentRegistrationResponse | undefined>;
 }
 export function TournamentRegistrationForm(
@@ -47,7 +48,7 @@ export function TournamentRegistrationForm(
 }
 
 function useTournamentRegistrationAction({
-  tournamentRegistrationAction,
+  handleTournamentRegistration,
   org_slug,
   tournament_id,
 }: Omit<TournamentRegistrationProps, "children">) {
@@ -57,7 +58,7 @@ function useTournamentRegistrationAction({
   const registerForTournament = async (formData: FormData) => {
     setLoading(true);
     try {
-      await tournamentRegistrationAction(formData);
+      await handleTournamentRegistration(formData, tournament_id);
       router.push(`/organizations/${org_slug}/tournaments/${tournament_id}`);
     } catch (error: unknown) {
       console.error(`Registration failed. Please try again.`, error);

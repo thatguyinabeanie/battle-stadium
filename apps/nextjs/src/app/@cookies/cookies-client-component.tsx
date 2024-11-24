@@ -50,9 +50,6 @@ export default function CookiesComponent({
       "accepted",
       cookieAttributes({
         expires: 365,
-        secure: true,
-        httpOnly: true,
-        sameSite: "strict",
       }),
     );
 
@@ -70,16 +67,7 @@ export default function CookiesComponent({
   }
 
   function handleReject() {
-    Cookies.set(
-      COOKIE_CONSENT,
-      "rejected",
-      cookieAttributes({
-        expires: 1,
-        secure: true,
-        httpOnly: true,
-        sameSite: "strict",
-      }),
-    );
+    Cookies.set(COOKIE_CONSENT, "rejected", cookieAttributes({ expires: 1 }));
     setShowConsent(false);
   }
 

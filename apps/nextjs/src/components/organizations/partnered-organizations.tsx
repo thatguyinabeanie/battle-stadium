@@ -1,7 +1,17 @@
+import { Suspense } from "react";
+
 import { getPartneredOrganizations } from "~/app/server-actions/organizations/actions";
 import OrganizationCard from "./organization-card";
 
-export default async function PartneredOrganizations() {
+export default function PartneredOrganizationsSuspenseWrapper() {
+  return (
+    <Suspense fallback={<div>Loading organizations...</div>}>
+      <PartneredOrganizations />
+    </Suspense>
+  );
+}
+
+async function PartneredOrganizations() {
   const orgs = await getPartneredOrganizations();
 
   return (

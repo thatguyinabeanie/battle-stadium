@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
 
@@ -12,14 +13,22 @@ import { getSingleOrganizationSingleTournament } from "~/app/server-actions/orga
 import OrganizationHeader from "~/components/organizations/organization-header";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
-export const revalidate = 300;
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
-  return await generateOrganizationTournamentsStaticParams();
+  const staticParams = await generateOrganizationTournamentsStaticParams();
+  return staticParams;
 }
 
-export default async function OrganizationTournamentHeader(
+export default function OrganizationTournamentHeaderSlot(
+  props: Readonly<OrganizationTournamentParams>,
+) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OrganizationTournamentHeader {...props} />
+    </Suspense>
+  );
+}
+
+async function OrganizationTournamentHeader(
   props: Readonly<OrganizationTournamentParams>,
 ) {
   const params = await props.params;
