@@ -1,0 +1,16 @@
+version: "0.2"
+ignorePaths:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/.next/**"
+  - "**/.turbo/**"
+  - "**/.cache/**"
+  - pnpm-lock.yaml
+  - "**/package.json"
+dictionaryDefinitions: []
+dictionaries: []
+words:
+  - nums
+ignoreWords: []
+import: []

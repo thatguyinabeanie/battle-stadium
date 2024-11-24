@@ -18,9 +18,16 @@ const adminTab = { key: "admin", title: "Admin" };
 
 export default function DashboardLayout(slots: Readonly<DashboardLayoutSlots>) {
   return (
-    <>
-      {slots.organizations}
-    </>
+    <div className="flex min-h-screen w-full flex-col items-center pt-2">
+      <Suspense fallback={<div>Loading...</div>}>
+        <Tabs defaultValue="dashboard" className="flex flex-col items-center">
+          <TabsList className="flex w-fit flex-row">
+            <TabsTriggers />
+          </TabsList>
+          <TabsContent {...slots} />
+        </Tabs>
+      </Suspense>
+    </div>
   );
 }
 

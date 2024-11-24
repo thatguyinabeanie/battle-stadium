@@ -5,6 +5,7 @@ import type { Tournament } from "~/lib/api";
 import { getOrganizations } from "~/app/server-actions/organizations/actions";
 import OrganizationsTable from "~/components/organizations/organizations-table";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
+import { MainSection } from "~/components/main-section";
 
 export const metadata: Metadata = {
   title: "Organizations",
@@ -34,5 +35,9 @@ function OrganizationsTableSuspenseWrapper() {
 
 async function OrganizationsTableServerComponent() {
   const orgs = await getOrganizations();
-  return <OrganizationsTable orgs={orgs} />;
+  return (
+    <MainSection>
+      <OrganizationsTable orgs={orgs} />
+    </MainSection>
+  );
 }

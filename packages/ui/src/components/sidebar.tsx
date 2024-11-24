@@ -1,7 +1,7 @@
 "use client";
 
 import type { VariantProps } from "class-variance-authority";
-import type { ComponentProps, CSSProperties, ElementRef } from "react";
+import type { ComponentProps, ComponentRef, CSSProperties } from "react";
 import {
   createContext,
   forwardRef,
@@ -9,6 +9,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { ViewVerticalIcon } from "@radix-ui/react-icons";
@@ -46,10 +47,11 @@ interface SidebarContext {
   toggleSidebar: () => void;
 }
 
-const SidebarContext = createContext<SidebarContext | null>(null);
+const SidebarContext = createContext<SidebarContext>({} as SidebarContext);
 
-function useSidebar() {
+function useSidebar(): SidebarContext {
   const context = useContext(SidebarContext);
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!context) {
     throw new Error("useSidebar must be used within a SidebarProvider.");
   }
@@ -80,6 +82,12 @@ const SidebarProvider = forwardRef<
     const isMobile = useIsMobile();
     const [openMobile, setOpenMobile] = useState(false);
 
+    const documentRef = useRef<Document | null>(null);
+
+    useEffect(() => {
+      documentRef.current = document;
+    }, []);
+
     // This is the internal state of the sidebar.
     // We use openProp and setOpenProp for control from outside the component.
     const [_open, _setOpen] = useState(defaultOpen);
@@ -92,13 +100,12 @@ const SidebarProvider = forwardRef<
         } else {
           _setOpen(openState);
         }
+        if (documentRef.current) {
+          documentRef.current.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+        }
       },
       [setOpenProp, open],
     );
-
-    useEffect(() => {
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${_open}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
-    }, [_open]);
 
     // Helper to toggle the sidebar.
     const toggleSidebar = useCallback(() => {
@@ -234,7 +241,7 @@ const Sidebar = forwardRef<
     return (
       <div
         ref={ref}
-        className="group peer hidden text-sidebar-foreground md:block"
+        className="group peer text-sidebar-foreground md:block"
         data-state={state}
         data-collapsible={state === "collapsed" ? collapsible : ""}
         data-variant={variant}
@@ -243,7 +250,7 @@ const Sidebar = forwardRef<
         {/* This is what handles the sidebar gap on desktop */}
         <div
           className={cn(
-            "relative h-svh w-[--sidebar-width] bg-transparent transition-[width] duration-200 ease-linear",
+            "relative h-svh bg-transparent transition-[width] duration-200 ease-linear",
             "group-data-[collapsible=offcanvas]:w-0",
             "group-data-[side=right]:rotate-180",
             variant === "floating" || variant === "inset"
@@ -279,7 +286,7 @@ const Sidebar = forwardRef<
 Sidebar.displayName = "Sidebar";
 
 const SidebarTrigger = forwardRef<
-  ElementRef<typeof Button>,
+  ComponentRef<typeof Button>,
   ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
   const { toggleSidebar } = useSidebar();
@@ -332,13 +339,13 @@ const SidebarRail = forwardRef<HTMLButtonElement, ComponentProps<"button">>(
 );
 SidebarRail.displayName = "SidebarRail";
 
-const SidebarInset = forwardRef<HTMLDivElement, ComponentProps<"main">>(
+const SidebarInset = forwardRef<HTMLDivElement, ComponentProps<"div">>(
   ({ className, ...props }, ref) => {
     return (
-      <main
+      <div
         ref={ref}
         className={cn(
-          "relative flex min-h-svh flex-1 flex-col bg-background",
+          "flex min-h-svh flex-1 flex-col bg-background",
           "peer-data-[variant=inset]:min-h-[calc(100svh-theme(spacing.4))] md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow",
           className,
         )}
@@ -350,7 +357,7 @@ const SidebarInset = forwardRef<HTMLDivElement, ComponentProps<"main">>(
 SidebarInset.displayName = "SidebarInset";
 
 const SidebarInput = forwardRef<
-  ElementRef<typeof Input>,
+  ComponentRef<typeof Input>,
   ComponentProps<typeof Input>
 >(({ className, ...props }, ref) => {
   return (
@@ -396,7 +403,7 @@ const SidebarFooter = forwardRef<HTMLDivElement, ComponentProps<"div">>(
 SidebarFooter.displayName = "SidebarFooter";
 
 const SidebarSeparator = forwardRef<
-  ElementRef<typeof Separator>,
+  ComponentRef<typeof Separator>,
   ComponentProps<typeof Separator>
 >(({ className, ...props }, ref) => {
   return (

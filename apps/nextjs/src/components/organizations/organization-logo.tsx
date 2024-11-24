@@ -15,7 +15,7 @@ interface OrganizationLogoProps {
   quality?: number;
 }
 
-const DEFAULT_ORG_IMAGE = "/image/pokemon/vgc.png";
+const DEFAULT_ORG_IMAGE = "/images/pokemon/vgc.png";
 export const DEFAULT_DATA_TABLE_IMAGE_SIZE = 30;
 
 export default function OrganizationLogo({
