@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   BookOpen,
   Bot,
@@ -12,12 +12,7 @@ import {
   Send,
   Settings2,
   SquareTerminal,
-} from "lucide-react"
-
-import { NavMain } from "~/components/sidebar/nav-main";
-import { NavProjects } from "~/components/sidebar/nav-projects";
-import { NavSecondary } from "~/components/sidebar/nav-secondary";
-import { NavUser } from "~/components/sidebar/nav-user";
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -28,6 +23,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@battle-stadium/ui";
+
+import { NavMain } from "~/components/sidebar/nav-main";
+import { NavProjects } from "~/components/sidebar/nav-projects";
+import { NavSecondary } from "~/components/sidebar/nav-secondary";
+import { NavUser } from "~/components/sidebar/nav-user";
 
 const data = {
   user: {
@@ -151,11 +151,11 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
-export function AppSidebar ({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar variant="inset" { ...props }>
+    <Sidebar variant="floating" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -174,13 +174,13 @@ export function AppSidebar ({ ...props }: React.ComponentProps<typeof Sidebar>) 
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={ data.navMain } />
-        <NavProjects projects={ data.projects } />
-        <NavSecondary items={ data.navSecondary } className="mt-auto" />
+        <NavMain items={data.navMain} />
+        <NavProjects projects={data.projects} />
+        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={ data.user } />
+        <NavUser user={data.user} />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

@@ -1,6 +1,6 @@
 import type { ChildrenProps } from "~/types";
 
-export function MainSection ({ children }: Readonly<ChildrenProps>) {
+export function MainSection({ children }: Readonly<ChildrenProps>) {
   return (
     <main
       id="main-content"
@@ -10,7 +10,7 @@ export function MainSection ({ children }: Readonly<ChildrenProps>) {
         aria-label="Main content"
         className="z-0 flex h-full w-full flex-col items-center gap-4"
       >
-        { children }
+        {children}
       </section>
     </main>
   );

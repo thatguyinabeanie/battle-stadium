@@ -1,5 +1,6 @@
-import * as React from "react"
-import type {LucideIcon} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import type { ComponentPropsWithoutRef } from "react";
+import * as React from "react";
 
 import {
   SidebarGroup,
@@ -8,34 +9,33 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@battle-stadium/ui";
-import type { ComponentPropsWithoutRef } from "react";
 
-export function NavSecondary ({
+export function NavSecondary({
   items,
   ...props
 }: {
   items: {
-    title: string
-    url: string
-    icon: LucideIcon
-  }[]
+    title: string;
+    url: string;
+    icon: LucideIcon;
+  }[];
 } & ComponentPropsWithoutRef<typeof SidebarGroup>) {
   return (
-    <SidebarGroup { ...props }>
+    <SidebarGroup {...props}>
       <SidebarGroupContent>
         <SidebarMenu>
-          { items.map((item) => (
-            <SidebarMenuItem key={ item.title }>
+          {items.map((item) => (
+            <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild size="sm">
-                <a href={ item.url }>
+                <a href={item.url}>
                   <item.icon />
-                  <span>{ item.title }</span>
+                  <span>{item.title}</span>
                 </a>
               </SidebarMenuButton>
             </SidebarMenuItem>
-          )) }
+          ))}
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
-  )
+  );
 }
