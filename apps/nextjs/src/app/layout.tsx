@@ -103,7 +103,6 @@ export default function RootLayout({
                 </div>
               </TRPCReactProvider>
               {cookies}
-              `
               <VercelAnalytics />
               {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
               <GoogleAnalytics gaId={env.MEASUREMENT_ID} />
