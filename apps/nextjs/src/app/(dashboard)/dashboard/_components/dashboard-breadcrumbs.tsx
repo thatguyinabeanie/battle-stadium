@@ -6,12 +6,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@battle-stadium/ui/breadcrumb";
+import {Fragment} from "react";
 
 interface BreadcrumbsProps {
-  items?: Array<{
+  items?: {
     label: string;
     href?: string;
-  }>;
+  }[];
 }
 
 export default function Breadcrumbs({ items = defaultItems }: BreadcrumbsProps) {
@@ -19,7 +20,7 @@ export default function Breadcrumbs({ items = defaultItems }: BreadcrumbsProps) 
     <Breadcrumb aria-label="Navigation breadcrumbs">
       <BreadcrumbList>
         {items.map((item, index) => (
-          <React.Fragment key={item.label}>
+          <Fragment key={item.label}>
             <BreadcrumbItem className={index === 0 ? "hidden md:block" : undefined}>
               {item.href ? (
                 <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
@@ -30,7 +31,7 @@ export default function Breadcrumbs({ items = defaultItems }: BreadcrumbsProps) 
             {index < items.length - 1 && (
               <BreadcrumbSeparator className={index === 0 ? "hidden md:block" : undefined} />
             )}
-          </React.Fragment>
+          </Fragment>
         ))}
       </BreadcrumbList>
     </Breadcrumb>
