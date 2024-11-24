@@ -1,11 +1,9 @@
-import ComingSoon from "~/components/coming-soon";
+import { Card } from "@battle-stadium/ui";
 
 export default function OrganizationsDashboard() {
   return (
-    <ComingSoon title="Organizations">
-      <div className="flex flex-col items-center">
-        <h2>Organization Management is under construction.</h2>
-      </div>
-    </ComingSoon>
+    <Card className="w-full flex flex-col h-screen">
+
+    </Card>
   );
 }
