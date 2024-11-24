@@ -10,6 +10,7 @@ function tournamentsLeftJoinOrganizations() {
 }
 
 export async function getOrganizationTournaments(page = 1, pageSize = 20) {
+  "use cache";
   return await tournamentsLeftJoinOrganizations()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)

@@ -17,7 +17,6 @@ export async function getOrganizationTournamentMatches(
   page = 1,
   pageSize = 20,
 ) {
-  'use cache';
   return await MatchesLeftJoinTournamentsLeftJoinOrganizations()
     .where(
       and(eq(organizations.slug, org_slug), eq(tournaments.id, tournament_id)),
