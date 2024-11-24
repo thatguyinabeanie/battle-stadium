@@ -44,7 +44,6 @@ const config: NextConfig = {
     ],
   },
 
-  // next.config.ts
   webpack: (config, { isServer }) => {
     if (!isServer) {
       const originalEntry = config.entry;

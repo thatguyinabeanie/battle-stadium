@@ -13,19 +13,16 @@ import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 import { getAccountMe } from "../accounts/actions";
 
 export async function getProfiles() {
-
   return await db.query.profiles.findMany();
 }
 
 export async function getProfile(username: string) {
-  "use cache";
   return await db.query.profiles.findFirst({
     where: eq(profiles.username, username),
   });
 }
 
 export async function getProfilesByAccountId(id: number) {
-  "use cache";
   return await db.query.profiles.findMany({
     where: eq(profiles.accountId, id),
   });

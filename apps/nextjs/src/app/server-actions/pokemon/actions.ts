@@ -6,8 +6,6 @@ import { pokemon, pokemonTeams } from "@battle-stadium/db/schema";
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
 
 export async function getPokemonTeams() {
-  "use cache";
-
   return await db.query.pokemonTeams.findMany();
 }
 
