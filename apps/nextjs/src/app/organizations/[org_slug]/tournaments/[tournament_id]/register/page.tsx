@@ -34,37 +34,31 @@ export default async function Register(
 }
 
 function TournamentRegistrationFormWrapper(props: {org_slug: string, tournament_id: number}) {
-
-  const tournamentRegistration = tournamentRegistrationAction(props.tournament_id);
-
   return (
     <TournamentRegistrationForm
       {...props}
-      tournamentRegistrationAction={tournamentRegistration}
+      tournamentRegistrationAction={ createRegistrationHandler(props.tournament_id) }
     >
       <Input name="ign" />
-
-        <ProfileSelector />
+      <ProfileSelector />
     </TournamentRegistrationForm>
   );
-
 }
 
-
-function tournamentRegistrationAction(tournament_id: number) {
-  return async (formData: FormData) => {
+// Registration handler without cache directive
+function createRegistrationHandler (tournament_id: number) {
+  return async function handleRegistration (formData: FormData) {
     "use server";
+    const in_game_name = formData.get("in_game_name")?.toString() ?? "";
+    const profile_username = formData.get("profile")?.toString() ?? "";
+    const show_country_flag = formData.get("show_country_flag") === "on";
 
-    const profiles = await getProfilesMe();
-    const in_game_name = formData.get("ign") as string;
-    const profile = formData.get("profile") as string;
-    const show_country_flag =
-      (formData.get("country_flag") as string) === "true";
-
-    const profile_id = profiles.find((p) => p.username === profile)?.id;
+    const profiles = await getCachedProfiles();
+    const profile = profiles.find((p) => p.username === profile_username);
+    const profile_id = profile?.id;
 
     if (!profile_id) {
-      throw new Error("Profile not found.");
+      throw new Error("Profile not found");
     }
 
     return postTournamentRegistration({
@@ -82,10 +76,7 @@ async function getCachedProfiles () {
   return getProfilesMe();
 }
 
-
-async function ProfileSelector() {
-  "use cache";
-
+async function ProfileSelector () {
   const profiles = await getCachedProfiles();
 
   return (
@@ -105,14 +96,14 @@ async function ProfileSelector() {
       </div>
 
       <datalist id="profiles">
-        {profiles.map((profile) => (
+        { profiles.map((profile) => (
           <option
-            key={profile.id}
-            value={profile.username}
-            label={profile.username}
-            data-profile-id={profile.id}
+            key={ profile.id }
+            value={ profile.username }
+            label={ profile.username }
+            data-profile-id={ profile.id }
           />
-        ))}
+        )) }
       </datalist>
     </>
   );
