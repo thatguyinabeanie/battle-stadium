@@ -1,14 +1,12 @@
 import { Suspense } from "react";
 
 import {
-  Tabs,
-  TabsList,
   TabsContent as UiTabsContent,
 } from "@battle-stadium/ui";
 
 import type { DashboardLayoutProps } from "~/types";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
-import { TabsTrigger } from "~/components/tabs/tabs";
+import { Tabs, TabsTrigger, TabsList } from "~/components/tabs/tabs";
 
 const tabsList = [
   { key: "dashboard", title: "Dashboard" },

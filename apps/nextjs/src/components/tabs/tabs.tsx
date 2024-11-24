@@ -66,7 +66,14 @@ export const TabsList = forwardRef<
   ComponentPropsWithoutRef<typeof UiTabsList>
 >(({ defaultValue, ...props }, ref) => {
   const [activeTab] = useActiveTab(defaultValue);
-  return <UiTabsList ref={ref} {...props} defaultValue={activeTab} />;
+  return (
+    <UiTabsList
+      ref={ref}
+      {...props}
+      defaultValue={activeTab}
+      className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-b-2"
+    />
+  );
 });
 
 function useActiveTab(
