@@ -21,17 +21,13 @@ import {
   useSidebar,
 } from "./sidebar";
 
-export function NavProjects({
-  projects,
-}: {
 interface Project {
   name: string;
   url: string;
   icon: LucideIcon;
 }
 
-  projects: Project[];
-}) {
+export function NavProjects({ projects }: { projects: Project[] }) {
   const { isMobile } = useSidebar();
 
   return (
@@ -41,7 +37,7 @@ interface Project {
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a 
+              <a
                 href={item.url}
                 role="menuitem"
                 aria-label={`View ${item.name} project`}

@@ -5,9 +5,9 @@ import "~/styles/globals.css";
 import type { Metadata, Viewport } from "next";
 
 import type { ChildrenProps } from "~/types";
+import { MainSection } from "~/components/main-section";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
-import { MainSection } from "~/components/main-section";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -59,9 +59,7 @@ export default function MainContentLayout({
     <div className="flex min-h-screen w-full flex-col items-center">
       <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
         {navbar}
-        <MainSection>
-          {children}
-        </MainSection>
+        <MainSection>{children}</MainSection>
         {footer}
       </div>
     </div>

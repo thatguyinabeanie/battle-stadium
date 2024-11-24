@@ -1,6 +1,7 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import { memo } from "react";
 import { ChevronRightIcon } from "@radix-ui/react-icons";
 
 import {
@@ -32,18 +33,7 @@ interface NavItem {
   items?: NavSubItem[];
 }
 
-export function NavMain({
-  items,
-}: {
-  items: NavItem[];
-}) {
-import { memo } from 'react';
-
-export const NavMain = memo(function NavMain({
-  items,
-}: {
-  items: NavItem[];
-}) {
+export const NavMain = memo(function NavMain({ items }: { items: NavItem[] }) {
   return (
     <SidebarGroup aria-label="Main Navigation">
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -57,7 +47,7 @@ export const NavMain = memo(function NavMain({
           >
             <SidebarMenuItem role="menuitem">
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton 
+                <SidebarMenuButton
                   tooltip={item.title}
                   aria-expanded={item.isActive}
                 >
@@ -71,10 +61,7 @@ export const NavMain = memo(function NavMain({
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
-                        <a 
-                          href={subItem.url}
-                          role="menuitem"
-                        >
+                        <a href={subItem.url} role="menuitem">
                           <span>{subItem.title}</span>
                         </a>
                       </SidebarMenuSubButton>

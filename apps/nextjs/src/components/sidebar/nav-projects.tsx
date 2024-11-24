@@ -52,7 +52,7 @@ export function NavProjects({
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-48 rounded-lg max-h-[300px] overflow-y-auto"
+                className="max-h-[300px] w-48 overflow-y-auto rounded-lg"
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
                 sideOffset={8}

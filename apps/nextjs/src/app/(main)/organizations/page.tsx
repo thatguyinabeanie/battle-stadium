@@ -3,7 +3,6 @@ import { Suspense } from "react";
 
 import type { Tournament } from "~/lib/api";
 import { getOrganizations } from "~/app/(main)/server-actions/organizations/actions";
-import { MainSection } from "~/components/main-section";
 import OrganizationsTable from "~/components/organizations/organizations-table";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 
@@ -35,7 +34,5 @@ function OrganizationsTableSuspenseWrapper() {
 
 async function OrganizationsTableServerComponent() {
   const orgs = await getOrganizations();
-  return (
-    <OrganizationsTable orgs={orgs} />
-  );
+  return <OrganizationsTable orgs={orgs} />;
 }

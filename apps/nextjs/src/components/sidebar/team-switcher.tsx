@@ -41,7 +41,6 @@ export function TeamSwitcher({
               aria-label={`Switch team (current: ${activeTeam?.name ?? "None"})`}
               role="button"
               aria-haspopup="true"
-              aria-expanded={open}
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               {activeTeam && (
