@@ -7,18 +7,37 @@ import {
   BreadcrumbSeparator,
 } from "@battle-stadium/ui/breadcrumb";
 
-export default function Breadcrumbs() {
+interface BreadcrumbsProps {
+  items?: Array<{
+    label: string;
+    href?: string;
+  }>;
+}
+
+export default function Breadcrumbs({ items = defaultItems }: BreadcrumbsProps) {
   return (
-    <Breadcrumb>
+    <Breadcrumb aria-label="Navigation breadcrumbs">
       <BreadcrumbList>
-        <BreadcrumbItem className="hidden md:block">
-          <BreadcrumbLink href="#">Building Your Application</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator className="hidden md:block" />
-        <BreadcrumbItem>
-          <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-        </BreadcrumbItem>
+        {items.map((item, index) => (
+          <React.Fragment key={item.label}>
+            <BreadcrumbItem className={index === 0 ? "hidden md:block" : undefined}>
+              {item.href ? (
+                <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
+              ) : (
+                <BreadcrumbPage>{item.label}</BreadcrumbPage>
+              )}
+            </BreadcrumbItem>
+            {index < items.length - 1 && (
+              <BreadcrumbSeparator className={index === 0 ? "hidden md:block" : undefined} />
+            )}
+          </React.Fragment>
+        ))}
       </BreadcrumbList>
     </Breadcrumb>
   );
 }
+
+const defaultItems = [
+  { label: "Building Your Application", href: "/docs/building" },
+  { label: "Data Fetching" }
+];
