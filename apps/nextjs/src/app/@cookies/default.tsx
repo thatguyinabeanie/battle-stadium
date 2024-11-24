@@ -1,5 +1,10 @@
-import CookiesServerComponent from "~/components/cookies/cookies-slot";
+import { Suspense } from "react";
+import CookiesServerComponent from "./cookies-server-component";
 
 export default function CookiesSlot() {
-  return <CookiesServerComponent />;
+return (
+  <Suspense fallback={ null }>
+    <CookiesServerComponent />
+  </Suspense>
+);
 }

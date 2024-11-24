@@ -15,15 +15,14 @@ import { GeistSans } from "geist/font/sans";
 import { cn, ThemeProvider } from "@battle-stadium/ui";
 
 import type { ChildrenProps } from "~/types";
-import Footer from "~/components/footer";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 
-// import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
-// import { extractRouterConfig } from "uploadthing/server";
-// import { UploadThingRouter } from "./api/uploadthing/core";
-// import { TRPCReactProvider } from "~/trpc/react";
-// import { HydrateClient } from "~/trpc/server";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { UploadThingRouter } from "./api/uploadthing/core";
+import { TRPCReactProvider } from "~/trpc/react";
+import { HydrateClient } from "~/trpc/server";
 
 const AwesomeParticles = dynamic(
   () => import("~/components/awesome-particles"),
@@ -69,9 +68,12 @@ export const viewport: Viewport = {
 interface RootLayoutProps extends ChildrenProps {
   navbar: ReactNode;
   cookies: ReactNode;
+  footer: ReactNode;
 }
 export default function RootLayout({
   navbar,
+  cookies,
+  footer,
   children,
 }: Readonly<RootLayoutProps>) {
   return (
@@ -86,23 +88,24 @@ export default function RootLayout({
             )}
           >
             <ThemeProvider attribute="class" defaultTheme="dark">
-              {/* <TRPCReactProvider> */}
-              {/* <NextSSRPlugin
+              <TRPCReactProvider>
+              <NextSSRPlugin
                   routerConfig={extractRouterConfig(UploadThingRouter)}
-                /> */}
+                />
               <div className="flex min-h-screen flex-col items-center">
                 <AwesomeParticles />
-                {/* <HydrateClient> */}
+                <HydrateClient>
                 <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
                   {navbar}
                   <MainSection>{children}</MainSection>
-                  <Footer />
+                  {footer}
                 </div>
-                {/* </HydrateClient> */}
+                </HydrateClient>
               </div>
-              {/* </TRPCReactProvider> */}
+              </TRPCReactProvider>
 
-              {/* { cookies } */}
+              { cookies }
+`
               <VercelAnalytics />
 
               {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
