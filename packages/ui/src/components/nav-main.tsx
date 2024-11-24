@@ -19,22 +19,33 @@ import {
   SidebarMenuSubItem,
 } from "./sidebar";
 
+interface NavSubItem {
+  title: string;
+  url: string;
+}
+
+interface NavItem {
+  title: string;
+  url: string;
+  icon?: LucideIcon;
+  isActive?: boolean;
+  items?: NavSubItem[];
+}
+
 export function NavMain({
   items,
 }: {
-  items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
+  items: NavItem[];
+}) {
+import { memo } from 'react';
+
+export const NavMain = memo(function NavMain({
+  items,
+}: {
+  items: NavItem[];
 }) {
   return (
-    <SidebarGroup>
+    <SidebarGroup aria-label="Main Navigation">
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
@@ -44,20 +55,26 @@ export function NavMain({
             defaultOpen={item.isActive}
             className="group/collapsible"
           >
-            <SidebarMenuItem>
+            <SidebarMenuItem role="menuitem">
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton tooltip={item.title}>
+                <SidebarMenuButton 
+                  tooltip={item.title}
+                  aria-expanded={item.isActive}
+                >
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>
                   <ChevronRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
               <CollapsibleContent>
-                <SidebarMenuSub>
+                <SidebarMenuSub role="menu">
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
+                        <a 
+                          href={subItem.url}
+                          role="menuitem"
+                        >
                           <span>{subItem.title}</span>
                         </a>
                       </SidebarMenuSubButton>
@@ -71,4 +88,4 @@ export function NavMain({
       </SidebarMenu>
     </SidebarGroup>
   );
-}
+});

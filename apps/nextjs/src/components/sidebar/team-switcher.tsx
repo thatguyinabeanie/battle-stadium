@@ -39,8 +39,9 @@ export function TeamSwitcher({
             <SidebarMenuButton
               size="lg"
               aria-label={`Switch team (current: ${activeTeam?.name ?? "None"})`}
-              role="combobox"
-              aria-expanded="false"
+              role="button"
+              aria-haspopup="true"
+              aria-expanded={open}
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               {activeTeam && (

@@ -24,11 +24,13 @@ import {
 export function NavProjects({
   projects,
 }: {
-  projects: {
-    name: string;
-    url: string;
-    icon: LucideIcon;
-  }[];
+interface Project {
+  name: string;
+  url: string;
+  icon: LucideIcon;
+}
+
+  projects: Project[];
 }) {
   const { isMobile } = useSidebar();
 
@@ -39,7 +41,11 @@ export function NavProjects({
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a href={item.url}>
+              <a 
+                href={item.url}
+                role="menuitem"
+                aria-label={`View ${item.name} project`}
+              >
                 <item.icon />
                 <span>{item.name}</span>
               </a>
@@ -76,7 +82,8 @@ export function NavProjects({
         <SidebarMenuItem>
           <SidebarMenuButton className="text-sidebar-foreground/70">
             <DotsHorizontalIcon className="text-sidebar-foreground/70" />
-            <span>More</span>
+            <span>More Actions</span>
+            <span className="sr-only">Additional project options</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>

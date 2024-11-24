@@ -52,9 +52,12 @@ export function NavProjects({
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-48 rounded-lg"
+                className="w-48 rounded-lg max-h-[300px] overflow-y-auto"
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
+                sideOffset={8}
+                alignOffset={-4}
+                avoidCollisions
               >
                 <DropdownMenuItem>
                   <Folder className="text-muted-foreground" />
