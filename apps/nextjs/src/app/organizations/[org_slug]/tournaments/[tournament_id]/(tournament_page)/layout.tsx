@@ -48,7 +48,12 @@ export default function OrganizationTournamentsTournamentLayout(
           <div className="flex w-full flex-col items-center overflow-auto">
             <TabsList className="border-x-0 border-t-2">
               {tabs.map(({ value, title }) => (
-                <TabsTrigger key={value} value={value} title={title} />
+                <TabsTrigger
+                  key={value}
+                  value={value}
+                  title={title}
+                  aria-controls={ `${value}-tab` }
+                />
               ))}
             </TabsList>
           </div>
