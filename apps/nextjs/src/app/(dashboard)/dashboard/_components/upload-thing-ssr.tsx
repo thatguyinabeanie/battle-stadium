@@ -8,7 +8,7 @@ export default async function UploadThingSSR() {
   try {
     await connection();
   } catch (error) {
-    console.error('Failed to establish connection:', error);
+    console.error("Failed to establish connection:", error);
     throw error; // Or handle gracefully based on requirements
   }
   return (
