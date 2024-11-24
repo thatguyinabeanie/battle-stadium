@@ -26,16 +26,16 @@ const socialItems = [
   {
     name: "Twitter",
     href: "https://x.com/thatguyinabeani",
-    icon: (props: { className?: string }) => <LineMdTwitter { ...props } />,
+    icon: (props: { className?: string }) => <LineMdTwitter {...props} />,
   },
   {
     name: "GitHub",
     href: "https://github.com/thatguyinabeanie/battle-stadium/",
-    icon: (props: { className?: string }) => <LineMdGithubLoop { ...props } />,
+    icon: (props: { className?: string }) => <LineMdGithubLoop {...props} />,
   },
 ];
 
-export default function Footer () {
+export default function Footer() {
   return (
     <footer className="flex flex-col items-center justify-center py-8">
       <div className="flex flex-col items-center justify-center">
@@ -43,35 +43,35 @@ export default function Footer () {
           <BattleStadium />
         </div>
 
-        {/* <Spacer y={4} /> */ }
+        {/* <Spacer y={4} /> */}
 
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
-          { navLinks.map((item) => (
+          {navLinks.map((item) => (
             <Link
-              prefetch={ true }
-              key={ item.name }
+              prefetch={true}
+              key={item.name}
               className="text-primary"
-              href={ item.href }
+              href={item.href}
             >
-              { item.name }
+              {item.name}
             </Link>
-          )) }
+          ))}
         </div>
-        {/* <Spacer y={6} /> */ }
+        {/* <Spacer y={6} /> */}
         <div className="flex justify-center gap-x-4">
-          { socialItems.map((item) => (
+          {socialItems.map((item) => (
             <Link
-              prefetch={ true }
-              key={ item.name }
+              prefetch={true}
+              key={item.name}
               className="text-primary"
-              href={ item.href }
+              href={item.href}
             >
-              <span className="sr-only">{ item.name }</span>
+              <span className="sr-only">{item.name}</span>
               <item.icon aria-hidden="true" className="w-5" />
             </Link>
-          )) }
+          ))}
         </div>
-        {/* <Spacer y={4} /> */ }
+        {/* <Spacer y={4} /> */}
         <p className="text-small text-default-400 mt-1 text-center">
           &copy; 2024 Beanie LLC Inc. All rights reserved.
         </p>
