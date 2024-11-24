@@ -58,7 +58,7 @@ async function TabsTriggers() {
   return (
     <>
       {tabsToRender.map(({ key, title }) => (
-        <TabsTrigger key={key} value={key} title={title} />
+        <TabsTrigger key={key} value={key} title={title} aria-label={`Switch to ${title} tab`} />
       ))}
     </>
   );

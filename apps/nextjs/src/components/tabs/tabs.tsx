@@ -71,6 +71,7 @@ export const TabsList = forwardRef<
       ref={ref}
       {...props}
       defaultValue={activeTab}
+      aria-orientation="horizontal"
       className="flex w-11/12 flex-row gap-2 overflow-x-visible rounded-none border-x-0 border-b-2"
     />
   );
@@ -115,14 +116,22 @@ export function TabsTrigger({ value, title }: Readonly<TabConfig>) {
 export function TabsContent({
   value,
   children,
-}: TabConfig & { children: ReactNode }) {
+  loadingText = "Loading...",
+  capitalize = true,
+}: TabConfig & { 
+  children: ReactNode,
+  loadingText?: string,
+  capitalize?: boolean,
+}) {
   return (
     <UiTabsContent
       value={value}
       className="mt-0 flex h-full w-full flex-col items-center justify-center py-0"
     >
-      <CardHeader className="capitalize">{value}</CardHeader>
-      <Suspense fallback={<div>Loading...</div>}>
+      <CardHeader className={capitalize ? "capitalize" : undefined}>
+        {value}
+      </CardHeader>
+      <Suspense fallback={<div role="status" aria-live="polite">{loadingText}</div>}>
         <CardContent className="min-h-svh">{children}</CardContent>
       </Suspense>
     </UiTabsContent>
