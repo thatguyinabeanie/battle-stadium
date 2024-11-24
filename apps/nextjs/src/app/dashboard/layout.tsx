@@ -24,10 +24,7 @@ export default function DashboardLayout(props: Readonly<DashboardLayoutProps>) {
           <TabsList className="flex w-fit flex-row">
             <TabsTriggers />
           </TabsList>
-
-          <Suspense fallback={<div>Loading...</div>}>
-            <TabsContent {...props} />
-          </Suspense>
+          <TabsContent {...props} />
         </Tabs>
       </Suspense>
     </div>
