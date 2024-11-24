@@ -18,8 +18,6 @@ export default async function Register(
 ) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
-  const tournamentRegistration = tournamentRegistrationAction(tournament_id);
-
   return (
     <>
       <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
@@ -29,7 +27,7 @@ export default async function Register(
 
         <TournamentRegistrationForm
           {...params}
-          tournamentRegistrationAction={tournamentRegistration}
+          handleTournamentRegistration={ handleTournamentRegistration }
         >
           <Input name="ign" />
           <ProfileSelector />
@@ -39,30 +37,29 @@ export default async function Register(
   );
 }
 
-function tournamentRegistrationAction(tournament_id: number) {
-  return async (formData: FormData) => {
-    "use server";
-    const profiles = await getProfilesMe();
+async function handleTournamentRegistration (formData: FormData, tournament_id: number) {
+  "use server";
+  const profiles = await getProfilesMe();
 
-    const in_game_name = formData.get("ign") as string;
-    const profile = formData.get("profile") as string;
-    const show_country_flag =
-      (formData.get("country_flag") as string) === "true";
+  const in_game_name = formData.get("ign") as string;
+  const profile = formData.get("profile") as string;
+  const show_country_flag =
+    (formData.get("country_flag") as string) === "true";
 
-    const profile_id = profiles.find((p) => p.username === profile)?.id;
+  const profile_id = profiles.find((p) => p.username === profile)?.id;
 
-    if (!profile_id) {
-      throw new Error("Profile not found.");
-    }
+  if (!profile_id) {
+    throw new Error("Profile not found.");
+  }
 
-    return postTournamentRegistration({
-      tournamentId: tournament_id,
-      inGameName: in_game_name,
-      profileId: profile_id,
-      showCountryFlag: show_country_flag,
-    });
-  };
-}
+  return postTournamentRegistration({
+    tournamentId: tournament_id,
+    inGameName: in_game_name,
+    profileId: profile_id,
+    showCountryFlag: show_country_flag,
+  });
+};
+
 
 async function ProfileSelector() {
   const profiles = await getProfilesMe();
