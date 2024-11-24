@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import { TabsContent as UiTabsContent } from "@battle-stadium/ui";
 
-import type { DashboardLayoutProps } from "~/types";
+import type { DashboardLayoutSlots } from "~/types";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import { Tabs, TabsList, TabsTrigger } from "~/components/tabs/tabs";
 
@@ -16,11 +16,11 @@ const tabsList = [
 ];
 const adminTab = { key: "admin", title: "Admin" };
 
-export default function DashboardLayout(props: Readonly<DashboardLayoutProps>) {
+export default function DashboardLayout (props: Readonly<DashboardLayoutSlots>) {
   return (
     <div className="flex min-h-screen w-full flex-col items-center pt-2">
       <Suspense fallback={<div>Loading...</div>}>
-        <Tabs defaultValue="dashboard" className="flex flex-col">
+        <Tabs defaultValue="dashboard" className="flex flex-col items-center">
           <TabsList className="flex w-fit flex-row">
             <TabsTriggers />
           </TabsList>
@@ -31,7 +31,7 @@ export default function DashboardLayout(props: Readonly<DashboardLayoutProps>) {
   );
 }
 
-async function TabsContent(props: Readonly<DashboardLayoutProps>) {
+async function TabsContent (props: Readonly<DashboardLayoutSlots>) {
   const me = await getAccountMe();
   const tabsToRender = me?.admin ? [...tabsList, adminTab] : tabsList;
 
@@ -66,7 +66,7 @@ async function TabsTriggers() {
   );
 }
 
-function renderTabContent(key: string, props: Readonly<DashboardLayoutProps>) {
+function renderTabContent (key: string, props: Readonly<DashboardLayoutSlots>) {
   switch (key) {
     case "profiles":
       return props.profiles;
