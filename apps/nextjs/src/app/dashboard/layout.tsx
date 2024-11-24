@@ -19,18 +19,17 @@ const adminTab = { key: "admin", title: "Admin" };
 export default function DashboardLayout(props: Readonly<DashboardLayoutProps>) {
   return (
     <div className="flex min-h-screen w-full flex-col items-center pt-2">
-      <Suspense fallback={ <div>Loading...</div> }>
-      <Tabs defaultValue="dashboard" className="flex flex-col">
-        <TabsList className="flex w-fit flex-row">
-          <TabsTriggers />
-        </TabsList>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Tabs defaultValue="dashboard" className="flex flex-col">
+          <TabsList className="flex w-fit flex-row">
+            <TabsTriggers />
+          </TabsList>
 
-        <Suspense fallback={<div>Loading...</div>}>
-          <TabsContent {...props} />
-        </Suspense>
-      </Tabs>
+          <Suspense fallback={<div>Loading...</div>}>
+            <TabsContent {...props} />
+          </Suspense>
+        </Tabs>
       </Suspense>
-
     </div>
   );
 }
