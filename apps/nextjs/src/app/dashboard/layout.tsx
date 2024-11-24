@@ -16,7 +16,7 @@ const tabsList = [
 ];
 const adminTab = { key: "admin", title: "Admin" };
 
-export default function DashboardLayout (props: Readonly<DashboardLayoutSlots>) {
+export default function DashboardLayout(props: Readonly<DashboardLayoutSlots>) {
   return (
     <div className="flex min-h-screen w-full flex-col items-center pt-2">
       <Suspense fallback={<div>Loading...</div>}>
@@ -31,7 +31,7 @@ export default function DashboardLayout (props: Readonly<DashboardLayoutSlots>) 
   );
 }
 
-async function TabsContent (props: Readonly<DashboardLayoutSlots>) {
+async function TabsContent(props: Readonly<DashboardLayoutSlots>) {
   const me = await getAccountMe();
   const tabsToRender = me?.admin ? [...tabsList, adminTab] : tabsList;
 
@@ -66,7 +66,7 @@ async function TabsTriggers() {
   );
 }
 
-function renderTabContent (key: string, props: Readonly<DashboardLayoutSlots>) {
+function renderTabContent(key: string, props: Readonly<DashboardLayoutSlots>) {
   switch (key) {
     case "profiles":
       return props.profiles;
