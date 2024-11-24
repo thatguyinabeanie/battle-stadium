@@ -76,10 +76,18 @@ function tournamentRegistrationAction(tournament_id: number) {
   };
 }
 
+// Helper function for cached profile data
+async function getCachedProfiles () {
+  "use cache";
+  return getProfilesMe();
+}
+
+
 async function ProfileSelector() {
   "use cache";
 
-  const profiles = await getProfilesMe();
+  const profiles = await getCachedProfiles();
+
   return (
     <>
       <Input
