@@ -11,17 +11,30 @@ function MatchesLeftJoinTournamentsLeftJoinOrganizations() {
     .leftJoin(organizations, eq(tournaments.organizationId, organizations.id));
 }
 
-export async function getOrganizationTournamentMatches(
+async function getOrganizationTournamentMatchesRaw(
   org_slug: string,
   tournament_id: number,
   page = 1,
   pageSize = 20,
 ) {
-  return await MatchesLeftJoinTournamentsLeftJoinOrganizations()
+  'use cache';
+
+  const results  = await  MatchesLeftJoinTournamentsLeftJoinOrganizations()
     .where(
       and(eq(organizations.slug, org_slug), eq(tournaments.id, tournament_id)),
     )
     .orderBy(desc(matches.createdAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
+
+  return results;
+}
+
+export async function getOrganizationTournamentMatches(
+  org_slug: string,
+  tournament_id: number,
+  page = 1,
+  pageSize = 20,
+) {
+  return await getOrganizationTournamentMatchesRaw(org_slug, tournament_id, page, pageSize);
 }

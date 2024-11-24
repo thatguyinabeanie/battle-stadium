@@ -9,12 +9,18 @@ function tournamentsLeftJoinOrganizations() {
     .leftJoin(organizations, eq(tournaments.organizationId, organizations.id));
 }
 
-export async function getOrganizationTournaments(page = 1, pageSize = 20) {
+async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
   "use cache";
-  return await tournamentsLeftJoinOrganizations()
+  const results = await tournamentsLeftJoinOrganizations()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
+
+  return results;
+}
+
+export async function getOrganizationTournaments(page = 1, pageSize = 20) {
+  return getOrganizationTournamentsRaw(page, pageSize);
 }
 
 async function getSingleOrganizationTournamentsRaw(
