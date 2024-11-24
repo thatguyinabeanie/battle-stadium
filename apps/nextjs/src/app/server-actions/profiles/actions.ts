@@ -13,7 +13,7 @@ import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 import { getAccountMe } from "../accounts/actions";
 
 export async function getProfiles() {
-  "use cache";
+
   return await db.query.profiles.findMany();
 }
 
