@@ -77,6 +77,8 @@ function tournamentRegistrationAction(tournament_id: number) {
 }
 
 async function ProfileSelector() {
+  "use cache";
+
   const profiles = await getProfilesMe();
   return (
     <>
