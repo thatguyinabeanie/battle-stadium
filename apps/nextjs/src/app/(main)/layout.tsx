@@ -49,20 +49,18 @@ interface RootLayoutSlots extends ChildrenProps {
   navbar: ReactNode;
   footer: ReactNode;
 }
-export default function RootLayout({
+export default function MainContentLayout({
   navbar,
   footer,
   children,
 }: Readonly<RootLayoutSlots>) {
   return (
     <div className="flex min-h-screen w-full flex-col items-center">
-
-        <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
-          {navbar}
-          {children}
-          {footer}
-        </div>
-
+      <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-sm dark:shadow-white/20">
+        {navbar}
+        {children}
+        {footer}
+      </div>
     </div>
   );
 }
