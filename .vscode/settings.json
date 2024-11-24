@@ -72,6 +72,7 @@
     "nodelib",
     "nodemailer",
     "npmcli",
+    "nums",
     "opentelemetry",
     "paldea",
     "panva",

@@ -56,7 +56,7 @@
     "@radix-ui/react-toggle": "catalog:radix",
     "@radix-ui/react-toggle-group": "catalog:radix",
     "@radix-ui/react-tooltip": "catalog:radix",
-    "class-variance-authority": "^0",
+    "class-variance-authority": "^0.7",
     "cmdk": "^1",
     "embla-carousel-react": "^8",
     "input-otp": "^1",
