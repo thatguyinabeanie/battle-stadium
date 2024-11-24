@@ -11,7 +11,7 @@ import {
   TabsTrigger,
 } from "~/components/tabs/tabs";
 
-interface OrganizationTournamentsTournamentLayoutProps {
+interface OrganizationTournamentsLayoutSlots {
   children: ReactNode;
   standings: ReactNode;
   pairings: ReactNode;
@@ -31,10 +31,10 @@ const tabs: TabConfig[] = [
 const DEFAULT_TAB = "details";
 
 export default function OrganizationTournamentsTournamentLayout(
-  props: Readonly<OrganizationTournamentsTournamentLayoutProps>,
+  slots: Readonly<OrganizationTournamentsLayoutSlots>,
 ) {
   const { children, header, standings, pairings, metagame, registrations } =
-    props;
+    slots;
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       {header}

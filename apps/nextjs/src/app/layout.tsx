@@ -64,7 +64,7 @@ export const viewport: Viewport = {
   ],
 };
 
-interface RootLayoutProps extends ChildrenProps {
+interface RootLayoutSlots extends ChildrenProps {
   navbar: ReactNode;
   cookies: ReactNode;
   footer: ReactNode;
@@ -74,7 +74,7 @@ export default function RootLayout({
   cookies,
   footer,
   children,
-}: Readonly<RootLayoutProps>) {
+}: Readonly<RootLayoutSlots>) {
   return (
     <StrictMode>
       <ClerkProvider>

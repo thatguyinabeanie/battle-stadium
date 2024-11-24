@@ -16,7 +16,7 @@ const tabsList = [
 ];
 const adminTab = { key: "admin", title: "Admin" };
 
-export default function DashboardLayout(props: Readonly<DashboardLayoutSlots>) {
+export default function DashboardLayout(slots: Readonly<DashboardLayoutSlots>) {
   return (
     <div className="flex min-h-screen w-full flex-col items-center pt-2">
       <Suspense fallback={<div>Loading...</div>}>
@@ -24,7 +24,7 @@ export default function DashboardLayout(props: Readonly<DashboardLayoutSlots>) {
           <TabsList className="flex w-fit flex-row">
             <TabsTriggers />
           </TabsList>
-          <TabsContent {...props} />
+          <TabsContent {...slots} />
         </Tabs>
       </Suspense>
     </div>
@@ -39,9 +39,9 @@ async function TabsContent(props: Readonly<DashboardLayoutSlots>) {
     <>
       {tabsToRender.map(({ key }) => (
         <UiTabsContent key={key} value={key}>
-          <div className="flex flex-col items-center">
-            {renderTabContent(key, props)}
-          </div>
+          {/* <div className="flex flex-col items-center"> */}
+          {renderTabContent(key, props)}
+          {/* </div> */}
         </UiTabsContent>
       ))}
     </>
