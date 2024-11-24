@@ -16,18 +16,28 @@ export async function getOrganizationTournaments(page = 1, pageSize = 20) {
     .offset((page - 1) * pageSize);
 }
 
-export async function getSingleOrganizationTournaments(
+async function getSingleOrganizationTournamentsRaw(
   slug: string,
   page = 1,
   pageSize = 20,
 ) {
-  "use cache";
 
+  "use cache";
   const results = await tournamentsLeftJoinOrganizations()
     .where(eq(organizations.slug, slug))
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
+  return results;
+}
+
+export async function getSingleOrganizationTournaments(
+  slug: string,
+  page = 1,
+  pageSize = 20,
+) {
+
+  const results = await getSingleOrganizationTournamentsRaw(slug, page, pageSize);
 
   return {
     tournaments: results.map(({ tournaments }) => tournaments),
