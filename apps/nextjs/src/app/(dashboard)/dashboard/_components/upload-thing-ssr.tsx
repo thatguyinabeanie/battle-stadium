@@ -5,7 +5,12 @@ import { extractRouterConfig } from "uploadthing/server";
 import { UploadThingRouter } from "~/app/api/uploadthing/core";
 
 export default async function UploadThingSSR() {
-  await connection();
+  try {
+    await connection();
+  } catch (error) {
+    console.error('Failed to establish connection:', error);
+    throw error; // Or handle gracefully based on requirements
+  }
   return (
     <NextSSRPlugin routerConfig={extractRouterConfig(UploadThingRouter)} />
   );
