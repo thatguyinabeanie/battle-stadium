@@ -17,6 +17,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@battle-stadium/ui";
+import Link from "next/link";
 
 export function NavProjects({
   projects,
@@ -39,10 +40,10 @@ export function NavProjects({
         {projects.map((item) => (
           <SidebarMenuItem key={item.name}>
             <SidebarMenuButton asChild>
-              <a href={item.url} title={item.name} className="truncate">
+              <Link href={item.url} title={item.name} className="truncate">
                 <item.icon />
                 <span className="truncate">{item.name}</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

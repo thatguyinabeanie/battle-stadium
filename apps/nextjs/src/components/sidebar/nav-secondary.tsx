@@ -9,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@battle-stadium/ui";
+import Link from "next/link";
 
 export function NavSecondary({
   items,
@@ -27,10 +28,10 @@ export function NavSecondary({
           {items.map((item, index) => (
             <SidebarMenuItem key={`${item.title}-${index}`}>
               <SidebarMenuButton asChild size="sm">
-                <a href={item.url} aria-label={`Navigate to ${item.title}`}>
+                <Link href={item.url} aria-label={`Navigate to ${item.title}`}>
                   <item.icon />
                   <span>{item.title}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
