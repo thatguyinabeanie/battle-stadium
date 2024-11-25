@@ -70,7 +70,6 @@
     "tailwind-merge": "catalog:tailwind",
     "tailwind-variants": "catalog:tailwind",
     "tailwindcss-animate": "catalog:tailwind",
-    "tsparticles": "catalog:particles",
     "tweetnacl": "^1.0.3",
     "vercel": "catalog:vercel",
     "zod": "catalog:"
