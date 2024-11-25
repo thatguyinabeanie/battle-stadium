@@ -39,9 +39,8 @@ async function TabsContent(props: Readonly<DashboardLayoutSlots>) {
     <>
       {tabsToRender.map(({ key }) => (
         <UiTabsContent key={key} value={key} className="min-w-screen w-full">
-          {/* <div className="flex flex-col items-center"> */}
           {renderTabContent(key, props)}
-          {/* </div> */}
+        </UiTabsContent>
         </UiTabsContent>
       ))}
     </>
