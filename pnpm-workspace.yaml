@@ -58,15 +58,18 @@ catalogs:
 
   next:
     next: canary
-    "@next/third-parties": canary
+    "@next/bundle-analyzer": canary
     "@next/eslint-plugin-next": canary
+    "@next/third-parties": canary
     "@t3-oss/env-nextjs": ^0
     "babel-plugin-react-compiler": beta
 
   particles:
-    "@tsparticles/engine": ^3
-    "@tsparticles/react": ^3
-    "@tsparticles/slim": ^3
+    tsparticles: ^3.7
+    "@tsparticles/engine": ^3.7
+    "@tsparticles/react": ^3.0.0
+    "@tsparticles/slim": ^3.7
+    "@tsparticles/basic": ^3.7
 
   open-api:
     "openapi-fetch": ^0

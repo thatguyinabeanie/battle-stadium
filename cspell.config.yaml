@@ -13,6 +13,7 @@ ignorePaths:
   - "**/*.min.js"
   - "**/*.map"
   - "**/turbo.json"
+  - "**/pnpm-workspace.yaml"
 dictionaryDefinitions: []
 dictionaries: []
 words:

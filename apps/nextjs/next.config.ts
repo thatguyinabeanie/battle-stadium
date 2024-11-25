@@ -5,7 +5,13 @@ import createJiti from "jiti";
 // Import env files to validate at build time. Use jiti so we can load .ts files in here.
 createJiti(fileURLToPath(import.meta.url))("./src/env.ts");
 
-const config: NextConfig = {
+// To analyze bundle sizes, run with ANALYZE=true
+// Example: ANALYZE=true pnpm build
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+export default withBundleAnalyzer({
   reactStrictMode: true,
 
   experimental: {
@@ -15,7 +21,11 @@ const config: NextConfig = {
       dynamic: 5,
       static: 180,
     },
+    typedRoutes: true,
     dynamicIO: false,
+    staticGenerationRetryCount: 2,
+    staticGenerationMaxConcurrency: 8,
+    staticGenerationMinPagesPerWorker: 25,
   },
 
   expireTime: 3600,
@@ -87,6 +97,4 @@ const config: NextConfig = {
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-};
-
-export default config;
+} satisfies NextConfig);

@@ -4,6 +4,7 @@ import { extractRouterConfig } from "uploadthing/server";
 
 import { UploadThingRouter } from "~/app/api/uploadthing/core";
 
+export const runtime = "edge";
 export default async function UploadThingSSR() {
   try {
     await connection();
