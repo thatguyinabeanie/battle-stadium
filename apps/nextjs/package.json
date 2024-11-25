@@ -9,6 +9,8 @@
     "dev": "pnpm with-env next dev",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
+    "lint:fix": "pnpm lint --fix",
+    "format:fix": "prettier --write . --ignore-path ../../.gitignore",
     "sort-packages": "pnpx sort-package-json",
     "start": "pnpm with-env next start",
     "typecheck": "tsc --noEmit",
