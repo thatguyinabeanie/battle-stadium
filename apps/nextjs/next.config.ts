@@ -9,7 +9,6 @@ const config: NextConfig = {
   reactStrictMode: true,
 
   experimental: {
-
     after: true,
     ppr: true,
     staleTimes: {
@@ -18,6 +17,9 @@ const config: NextConfig = {
     },
     typedRoutes: true,
     dynamicIO: false,
+    staticGenerationRetryCount: 2,
+    staticGenerationMaxConcurrency: 8,
+    staticGenerationMinPagesPerWorker: 25,
   },
 
   expireTime: 3600,
