@@ -58,7 +58,7 @@ export default function MainContentLayout({
 }: Readonly<RootLayoutSlots>) {
   return (
     <div className="flex min-h-screen w-full flex-col items-center">
-      <div className="flex w-full flex-col items-center shadow-md backdrop-blur-[2px] dark:shadow-white/10 will-change-transform">
+      <div className="flex w-full flex-col items-center shadow-md backdrop-blur-[2px] will-change-transform dark:shadow-white/10">
         {navbar}
         <MainSection>{children}</MainSection>
         {footer}

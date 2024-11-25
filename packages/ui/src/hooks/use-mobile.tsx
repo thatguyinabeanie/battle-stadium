@@ -14,8 +14,10 @@ type MobileState = boolean | undefined;
  * }
  */
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = React.useState<MobileState>(() => 
-    typeof window !== 'undefined' ? window.innerWidth < MOBILE_BREAKPOINT : false
+  const [isMobile, setIsMobile] = React.useState<MobileState>(() =>
+    typeof window !== "undefined"
+      ? window.innerWidth < MOBILE_BREAKPOINT
+      : false,
   );
 
   const onChange = React.useCallback(() => {

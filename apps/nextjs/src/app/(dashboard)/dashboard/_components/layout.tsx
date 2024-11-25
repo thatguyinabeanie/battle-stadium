@@ -41,7 +41,6 @@ async function TabsContent(props: Readonly<DashboardLayoutSlots>) {
         <UiTabsContent key={key} value={key} className="min-w-screen w-full">
           {renderTabContent(key, props)}
         </UiTabsContent>
-        </UiTabsContent>
       ))}
     </>
   );

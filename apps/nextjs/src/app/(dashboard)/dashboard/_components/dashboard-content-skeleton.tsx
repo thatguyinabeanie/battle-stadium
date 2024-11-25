@@ -24,6 +24,6 @@ export default function DashboardContentSkeleton() {
         aria-hidden="true"
       />
       <span className="sr-only">Loading dashboard content, please wait...</span>
-    </div>
+    </section>
   );
 }
