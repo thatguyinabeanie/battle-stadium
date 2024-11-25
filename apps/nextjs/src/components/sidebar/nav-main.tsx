@@ -33,8 +33,12 @@ export function NavMain({ items }: { items: NavMainItem[] }) {
   if (!items.length) {
     return (
       <SidebarGroup>
-        <SidebarGroupLabel>Platform</SidebarGroupLabel>
-        <div className="px-2 py-4 text-sm text-muted-foreground">
+        <SidebarGroupLabel aria-label="Navigation Menu">Platform</SidebarGroupLabel>
+        <div 
+          className="px-2 py-4 text-sm text-muted-foreground"
+          role="status"
+          aria-live="polite"
+        >
           No navigation items available
         </div>
       </SidebarGroup>
