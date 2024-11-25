@@ -58,8 +58,9 @@ catalogs:
 
   next:
     next: canary
-    "@next/third-parties": canary
+    "@next/bundle-analyzer": canary
     "@next/eslint-plugin-next": canary
+    "@next/third-parties": canary
     "@t3-oss/env-nextjs": ^0
     "babel-plugin-react-compiler": beta
 

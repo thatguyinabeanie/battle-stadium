@@ -1,10 +1,16 @@
 "use client";
 
+import { Suspense } from "react";
+
 import { UploadButton } from "~/components/upload-thing/components";
+import UploadThingSSR from "./_components/upload-thing-ssr";
 
 export default function Admin() {
   return (
     <div>
+      <Suspense>
+        <UploadThingSSR />
+      </Suspense>
       <UploadButton
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {

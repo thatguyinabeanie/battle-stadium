@@ -5,6 +5,10 @@ import createJiti from "jiti";
 // Import env files to validate at build time. Use jiti so we can load .ts files in here.
 createJiti(fileURLToPath(import.meta.url))("./src/env.ts");
 
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
 const config: NextConfig = {
   reactStrictMode: true,
 
@@ -93,4 +97,4 @@ const config: NextConfig = {
   typescript: { ignoreBuildErrors: true },
 };
 
-export default config;
+export default withBundleAnalyzer(config);
