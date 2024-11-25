@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import type { ComponentPropsWithoutRef } from "react";
 import * as React from "react";
+import Link from "next/link";
 
 import {
   SidebarGroup,
@@ -9,7 +10,6 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@battle-stadium/ui";
-import Link from "next/link";
 
 export function NavSecondary({
   items,

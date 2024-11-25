@@ -1,6 +1,7 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 import {
@@ -16,7 +17,6 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@battle-stadium/ui";
-import Link from "next/link";
 
 interface NavMainItem {
   title: string;

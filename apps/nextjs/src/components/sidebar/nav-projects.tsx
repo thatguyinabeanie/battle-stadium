@@ -1,6 +1,7 @@
 "use client";
 
 import type { LucideIcon } from "lucide-react";
+import Link from "next/link";
 import { Folder, Forward, MoreHorizontal, Trash2 } from "lucide-react";
 
 import {
@@ -17,7 +18,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@battle-stadium/ui";
-import Link from "next/link";
+
+///Add touch-friendly styles for mobile +
 
 export function NavProjects({
   projects,
@@ -29,7 +31,7 @@ export function NavProjects({
   }[];
 }) {
   const { isMobile } = useSidebar();
-
+  const touchStyles = isMobile ? "min-h-[44px] active:bg-accent/80" : "";
   return (
     <SidebarGroup
       className="group-data-[collapsible=icon]:hidden"
@@ -63,10 +65,10 @@ export function NavProjects({
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="max-h-[300px] w-48 overflow-y-auto rounded-lg"
+                className={`max-h-[300px] w-48 overflow-y-auto rounded-lg ${touchStyles}`}
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
-                sideOffset={8}
+                sideOffset={isMobile ? 8 : 2}
                 alignOffset={-4}
                 avoidCollisions
               >
