@@ -1,7 +1,7 @@
+import NavbarContainer from "~/app/(main)/@navbar/_navbar-components/navbar-container";
+import NavbarLinks from "~/app/(main)/@navbar/_navbar-components/navbar-links";
+import RightMenu from "~/app/(main)/@navbar/_navbar-components/navbar-right-menu";
 import BattleStadium from "~/components/battle-stadium";
-import NavbarContainer from "~/components/navbar/navbar-container";
-import NavbarLinks from "~/components/navbar/navbar-links";
-import RightMenu from "~/components/navbar/navbar-right-menu";
 
 export default function Navbar() {
   return (

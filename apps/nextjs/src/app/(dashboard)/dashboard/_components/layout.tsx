@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import { TabsContent as UiTabsContent } from "@battle-stadium/ui";
 
-import type { DashboardLayoutProps } from "~/types";
+import type { DashboardLayoutSlots } from "~/types";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import { Tabs, TabsList, TabsTrigger } from "~/components/tabs/tabs";
 
@@ -16,32 +16,30 @@ const tabsList = [
 ];
 const adminTab = { key: "admin", title: "Admin" };
 
-export default function DashboardLayout(props: Readonly<DashboardLayoutProps>) {
+export default function DashboardLayout(slots: Readonly<DashboardLayoutSlots>) {
   return (
-    <div className="flex min-h-screen w-full flex-col items-center pt-2">
+    <div className="min-w-screen flex min-h-screen flex-col items-center pt-2">
       <Suspense fallback={<div>Loading...</div>}>
-        <Tabs defaultValue="dashboard" className="flex flex-col">
-          <TabsList className="flex w-fit flex-row">
+        <Tabs defaultValue="dashboard" className="flex flex-col items-center">
+          <TabsList className="min-w-screen flex flex-row">
             <TabsTriggers />
           </TabsList>
-          <TabsContent {...props} />
+          <TabsContent {...slots} />
         </Tabs>
       </Suspense>
     </div>
   );
 }
 
-async function TabsContent(props: Readonly<DashboardLayoutProps>) {
+async function TabsContent(props: Readonly<DashboardLayoutSlots>) {
   const me = await getAccountMe();
   const tabsToRender = me?.admin ? [...tabsList, adminTab] : tabsList;
 
   return (
     <>
       {tabsToRender.map(({ key }) => (
-        <UiTabsContent key={key} value={key}>
-          <div className="flex flex-col items-center">
-            {renderTabContent(key, props)}
-          </div>
+        <UiTabsContent key={key} value={key} className="min-w-screen w-full">
+          {renderTabContent(key, props)}
         </UiTabsContent>
       ))}
     </>
@@ -66,7 +64,7 @@ async function TabsTriggers() {
   );
 }
 
-function renderTabContent(key: string, props: Readonly<DashboardLayoutProps>) {
+function renderTabContent(key: string, props: Readonly<DashboardLayoutSlots>) {
   switch (key) {
     case "profiles":
       return props.profiles;

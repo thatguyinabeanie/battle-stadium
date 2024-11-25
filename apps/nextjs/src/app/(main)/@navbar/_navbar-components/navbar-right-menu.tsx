@@ -11,13 +11,13 @@ import {
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
 
+import MobileMenu from "~/app/(main)/@navbar/_navbar-components/navbar-mobile-menu";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
-import MobileMenu from "~/components/navbar/navbar-mobile-menu";
 import {
   SolarMagniferLinear,
   SolarSettingsLinear,
   SolarUserLinear,
-} from "../svg/icons";
+} from "~/components/svg/icons";
 import UserMenuDropDown from "./user-menu/user-menu-dropdown";
 
 const sharedClassNames =

@@ -1,0 +1,23 @@
+version: "0.2"
+ignorePaths:
+  - "**/node_modules/**"
+  - "**/dist/**"
+  - "**/build/**"
+  - "**/.next/**"
+  - "**/.turbo/**"
+  - "**/.cache/**"
+  - pnpm-lock.yaml
+  - "**/package.json"
+  - "**/.git/**"
+  - "**/coverage/**"
+  - "**/*.min.js"
+  - "**/*.map"
+  - "**/turbo.json"
+dictionaryDefinitions: []
+dictionaries: []
+words:
+  - nums
+  - Unreads
+  - UTSSR
+ignoreWords: []
+import: []

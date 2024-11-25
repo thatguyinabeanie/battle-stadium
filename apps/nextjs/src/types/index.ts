@@ -12,7 +12,7 @@ export interface PageTitleProps {
   title: string;
 }
 
-export interface DashboardLayoutProps extends ChildrenProps {
+export interface DashboardLayoutSlots extends ChildrenProps {
   profiles: ReactNode;
   pokemon: ReactNode;
   tournament_history: ReactNode;
