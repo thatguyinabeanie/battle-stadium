@@ -9,12 +9,14 @@ const config: NextConfig = {
   reactStrictMode: true,
 
   experimental: {
+
     after: true,
     ppr: true,
     staleTimes: {
       dynamic: 5,
       static: 180,
     },
+    typedRoutes: true,
     dynamicIO: false,
   },
 
