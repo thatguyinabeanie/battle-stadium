@@ -12,6 +12,7 @@ ignorePaths:
   - "**/coverage/**"
   - "**/*.min.js"
   - "**/*.map"
+  - "**/turbo.json"
 dictionaryDefinitions: []
 dictionaries: []
 words:
