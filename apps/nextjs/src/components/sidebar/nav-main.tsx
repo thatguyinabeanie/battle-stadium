@@ -43,7 +43,9 @@ export function NavMain({ items }: { items: NavMainItem[] }) {
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel aria-label="Platform Navigation">Platform</SidebarGroupLabel>
+      <SidebarGroupLabel aria-label="Platform Navigation">
+        Platform
+      </SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => (
           <Collapsible
@@ -51,12 +53,15 @@ export function NavMain({ items }: { items: NavMainItem[] }) {
             asChild
             defaultOpen={item.isActive}
             className="group/collapsible"
-            aria-expanded={ item.isActive }
-            aria-label= {`${item.title} navigation section`}
+            aria-expanded={item.isActive}
+            aria-label={`${item.title} navigation section`}
           >
             <SidebarMenuItem>
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton tooltip={ item.title } aria-current={ item.isActive ? 'page' : undefined }>
+                <SidebarMenuButton
+                  tooltip={item.title}
+                  aria-current={item.isActive ? "page" : undefined}
+                >
                   {item.icon ? <item.icon aria-hidden="true" /> : null}
                   <span>{item.title}</span>
                   <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
