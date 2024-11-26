@@ -154,9 +154,16 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     header: "Players",
     cell: ({ row }) => {
       if (row.original.tournaments.playerCap) {
-        return `${row.original.playerCount}/${row.original.tournaments.playerCap}`;
+
+        return (
+              <span className="font-mono">
+                  { row.original.playerCount }
+                  <span className="text-muted-foreground">/</span>
+                  { row.original.tournaments.playerCap }
+                </span>
+            );
       }
-      return row.original.playerCount;
+      return <span className="font-mono">{ row.original.playerCount }</span>;
     },
   },
   {
