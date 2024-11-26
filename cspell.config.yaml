@@ -28,6 +28,9 @@ dictionaries:
   - bash
   - npm
   - filetypes
+  - python
+  - markdown
+  - lorem-ipsum
 words:
   - nums
   - Unreads

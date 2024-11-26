@@ -1,10 +1,16 @@
 name: 'Check spelling'
 on: # rebuild any PRs and main branch changes
   pull_request:
-
+  push:
+    branches:
+      - main
 jobs:
   spellcheck: # run the action
+    name: Spell Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write  # Allows the action to comment on PRs
     steps:
       - uses: actions/checkout@v4
       - uses: streetsidesoftware/cspell-action@v6
