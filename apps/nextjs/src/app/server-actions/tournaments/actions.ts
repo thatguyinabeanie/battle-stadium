@@ -96,15 +96,13 @@ export async function getTournamentPlayers(tournament_id: number) {
     .orderBy(players.createdAt);
 }
 
-
-export async function getTournamentPlayerCount (tournament_id: number) {
+export async function getTournamentPlayerCount(tournament_id: number) {
   const result = await db
     .select({
-      count: count(players.id)
+      count: count(players.id),
     })
     .from(players)
     .where(eq(players.tournamentId, tournament_id));
 
   return result[0]?.count ?? 0;
 }
-

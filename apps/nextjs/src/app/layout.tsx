@@ -80,11 +80,11 @@ export default function RootLayout({
           >
             <ThemeProvider attribute="class" defaultTheme="dark">
               <TRPCReactProvider>
-                <div className="flex min-h-screen flex-col items-center ">
+                <div className="flex min-h-screen flex-col items-center">
                   <AwesomeParticles />
                   <HydrateClient>
                     <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
-                    {children}
+                      {children}
                     </div>
                   </HydrateClient>
                 </div>

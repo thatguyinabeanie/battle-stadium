@@ -1,14 +1,15 @@
 "use server";
 
+import { count } from "drizzle-orm";
+
 import { and, db, desc, eq } from "@battle-stadium/db";
 import { organizations, players, tournaments } from "@battle-stadium/db/schema";
-import { count } from "drizzle-orm";
 
 function tournamentsLeftJoinOrganizations() {
   return db
     .select()
     .from(tournaments)
-    .leftJoin(organizations, eq(tournaments.organizationId, organizations.id))
+    .leftJoin(organizations, eq(tournaments.organizationId, organizations.id));
 }
 
 function tournamentsLeftJoinOrganizationsWithPlayerCounts() {

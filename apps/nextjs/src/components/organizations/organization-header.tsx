@@ -23,7 +23,7 @@ export default function OrganizationHeader({
 }: Readonly<OrganizationHeaderProps>) {
   return (
     <div
-      className={`h-full w-full grid grid-cols-2 md:grid-cols-3 py-4 justify-center  ${classNames?.wrapper}`}
+      className={`grid h-full w-full grid-cols-2 justify-center py-4 md:grid-cols-3 ${classNames?.wrapper}`}
     >
       <OrganizationLogo
         className={`${classNames?.image}`}
