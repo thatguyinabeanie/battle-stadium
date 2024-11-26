@@ -59,7 +59,8 @@ function TournamentsTableFiltering() {
             Columns <ChevronDown />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+
+        <DropdownMenuContent align="end" className="bg-background">
           {table
             .getAllColumns()
             .filter((column) => column.getCanHide())
@@ -83,7 +84,7 @@ function TournamentsTableFiltering() {
 
 const columns: ColumnDef<OrganizationTournamentView>[] = [
   {
-    accessorKey: "tournaments.date",
+    accessorKey: "Date",
     header: "Date",
     cell: ({ row }) => {
       return (
@@ -96,7 +97,7 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     },
   },
   {
-    accessorKey: "tournaments.startTime",
+    accessorKey: "Time",
     header: "Time",
     cell: ({ row }) => {
       return (
@@ -109,7 +110,7 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     },
   },
   {
-    accessorKey: "tournaments.checkInStartAt",
+    accessorKey: "Check In",
     header: "Check In",
     cell: ({ row }) =>
       row.original.tournaments.checkInStartAt &&
@@ -121,7 +122,7 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
 
   {
     id: "name",
-    accessorKey: "tournaments.name",
+    accessorKey: "Name",
     header: "Name",
     cell: ({ row }) => (
       <Link
@@ -134,6 +135,7 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     ),
   },
   {
+    accessorKey: "Organization",
     header: "Organization",
     cell: ({ row }) => (
       <div className="flex flex-col items-center justify-center">
@@ -150,7 +152,7 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     ),
   },
   {
-    accessorKey: "tournaments.playerCap",
+    accessorKey: "Players",
     header: "Players",
     cell: ({ row }) => {
       if (row.original.tournaments.playerCap) {
@@ -166,19 +168,19 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     },
   },
   {
-    accessorKey: "tournaments.lateRegistration",
-    header: "Late Registration",
+    accessorKey: "Registration",
+    header: "Registration",
     cell: ({ row }) =>
       row.original.tournaments.lateRegistration ? "Yes" : "No",
   },
   {
-    accessorKey: "tournaments.teamlistsRequired",
-    header: "Teamlists Required",
+    accessorKey: "Team Lists",
+    header: "Team Lists",
     cell: ({ row }) =>
       row.original.tournaments.teamlistsRequired ? "Yes" : "No",
   },
   {
-    accessorKey: "tournaments.openTeamSheets",
+    accessorKey: "Open Team Sheets",
     header: "Open Team Sheets",
     cell: ({ row }) => (row.original.tournaments.openTeamSheets ? "Yes" : "No"),
   },
