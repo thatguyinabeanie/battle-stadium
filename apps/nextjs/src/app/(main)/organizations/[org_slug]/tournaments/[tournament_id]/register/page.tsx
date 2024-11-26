@@ -57,7 +57,7 @@ async function handleTournamentRegistration(
   return postTournamentRegistration({
     tournamentId: tournament_id,
     inGameName: in_game_name,
-    profileId: profile_id,
+    profileId: Number(profile_id),
     showCountryFlag: show_country_flag,
   });
 }
