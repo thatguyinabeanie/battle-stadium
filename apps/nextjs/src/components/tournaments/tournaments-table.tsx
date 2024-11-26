@@ -194,7 +194,7 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
       <span
         className={cn(
           "inline-flex rounded-full px-2 py-1 text-xs font-semibold",
-          row.original.tournaments.lateRegistration ? GREEN : RED,
+          row.original.tournaments.teamlistsRequired ? GREEN : RED,
         )}
       >
         {row.original.tournaments.teamlistsRequired ? "Yes" : "No"}
