@@ -5,7 +5,6 @@ import "~/styles/globals.css";
 import type { Metadata, Viewport } from "next";
 
 import type { ChildrenProps } from "~/types";
-import { MainSection } from "~/components/main-section";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 
@@ -57,12 +56,22 @@ export default function MainContentLayout({
   children,
 }: Readonly<RootLayoutSlots>) {
   return (
-    <div className="flex min-h-screen w-full flex-col items-center">
-      <div className="flex w-full flex-col items-center shadow-md backdrop-blur-[2px] will-change-transform dark:shadow-white/10">
-        {navbar}
-        <MainSection>{children}</MainSection>
-        {footer}
-      </div>
+    <div className="flex w-full shrink-0 flex-col items-center bg-neutral-950 shadow-md will-change-transform dark:shadow-white/10 lg:w-11/12 xl:w-10/12 2xl:w-8/12">
+      {navbar}
+
+      <main
+        id="main-content"
+        className="flex min-h-screen w-full flex-col items-center"
+      >
+        <section
+          role="region"
+          aria-label="Main content"
+          className="z-0 flex h-full w-full flex-col items-center gap-4"
+        >
+          {children}
+        </section>
+      </main>
+      {footer}
     </div>
   );
 }

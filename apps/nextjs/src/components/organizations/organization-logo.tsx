@@ -27,15 +27,17 @@ export default function OrganizationLogo({
   quality,
 }: Readonly<OrganizationLogoProps>) {
   return (
-    <Image
-      quality={quality}
-      alt={organization.name ?? alt ?? ""}
-      aria-label={organization.name ?? alt ?? ""}
-      className={className}
-      priority={priority ?? false}
-      src={organization.logoUrl ?? DEFAULT_ORG_IMAGE}
-      height={logoSize}
-      width={logoSize}
-    />
+    <div className="flex justify-center">
+      <Image
+        quality={quality}
+        alt={organization.name ?? alt ?? ""}
+        aria-label={organization.name ?? alt ?? ""}
+        className={`${className} aspect-square`}
+        priority={priority ?? false}
+        src={organization.logoUrl ?? DEFAULT_ORG_IMAGE}
+        height={logoSize}
+        width={logoSize}
+      />
+    </div>
   );
 }

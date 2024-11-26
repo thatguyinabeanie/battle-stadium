@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <NavbarContainer
       disableHide
-      className="bg-white/95 backdrop-blur-3xl dark:bg-black/95"
+      className="bg-white/95 backdrop-blur-3xl dark:bg-neutral-950"
     >
       <BattleStadium />
       <NavbarLinks />

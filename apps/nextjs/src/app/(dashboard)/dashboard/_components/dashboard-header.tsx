@@ -12,10 +12,10 @@ const LAYOUT_CONSTANTS = {
 export default function DashboardHeader() {
   return (
     <header
-      className={`flex ${LAYOUT_CONSTANTS.HEADER_HEIGHT} shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[data-collapsible=icon]/sidebar-wrapper:${LAYOUT_CONSTANTS.HEADER_HEIGHT_COLLAPSED}`}
+      className={`flex ${LAYOUT_CONSTANTS.HEADER_HEIGHT} shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[data-collapsible=icon]/sidebar-wrapper:${LAYOUT_CONSTANTS.HEADER_HEIGHT_COLLAPSED} border-b-[1px]`}
     >
       <div className="flex items-center gap-2 px-4">
-        <SidebarTrigger className="-ml-1" aria-label="Open Sidebar" />
+        <SidebarTrigger className="ml-1" aria-label="Open Sidebar" />
         <Separator
           orientation="vertical"
           className={`mr-2 ${LAYOUT_CONSTANTS.SEPARATOR_HEIGHT}`}

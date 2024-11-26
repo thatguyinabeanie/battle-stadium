@@ -14,6 +14,7 @@ ignorePaths:
   - "**/*.map"
   - "**/turbo.json"
   - "**/pnpm-workspace.yaml"
+  - "packages/db/drizzle/schema.ts"
 dictionaryDefinitions: []
 dictionaries: []
 words:

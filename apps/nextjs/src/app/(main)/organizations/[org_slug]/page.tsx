@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
+import { SingleOrgTournamentsTable } from "~/app/(main)/organizations/[org_slug]/_components/tournaments-table";
 import { getOrganizations } from "~/app/server-actions/organizations/actions";
 import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
-import { SingleOrganizationTournamentsTable } from "~/components/tournaments/single-organization-tournaments-table";
 
 interface OrganizationDetailPageProps {
   params: Promise<{ org_slug: string }>;
@@ -50,7 +50,7 @@ async function OrganizationDetails(
         </div>
       </OrganizationHeader>
 
-      <SingleOrganizationTournamentsTable
+      <SingleOrgTournamentsTable
         className="w-full px-4"
         data={tournaments}
         organization={organization}

@@ -23,7 +23,11 @@ export async function handleTournamentRegistration(
   return postTournamentRegistration({
     tournamentId: tournament_id,
     inGameName: in_game_name,
-    profileId: profile_id,
+    profileId: Number.isFinite(Number(profile_id))
+      ? Number(profile_id)
+      : (() => {
+          throw new Error("Invalid profile ID format");
+        })(),
     showCountryFlag: show_country_flag,
   });
 }

@@ -2,7 +2,7 @@
 
 import type { FetchOptions } from "openapi-fetch";
 
-import { db, eq } from "@battle-stadium/db";
+import { count, db, eq } from "@battle-stadium/db";
 import {
   organizations,
   players,
@@ -94,4 +94,15 @@ export async function getTournamentPlayers(tournament_id: number) {
     .leftJoin(profiles, eq(players.profileId, profiles.id))
     .where(eq(players.tournamentId, tournament_id))
     .orderBy(players.createdAt);
+}
+
+export async function getTournamentPlayerCount(tournament_id: number) {
+  const result = await db
+    .select({
+      count: count(players.id),
+    })
+    .from(players)
+    .where(eq(players.tournamentId, tournament_id));
+
+  return result[0]?.count ?? 0;
 }

@@ -4,9 +4,10 @@ import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
-import type { Organization, Tournament } from "@battle-stadium/db/schema";
+import type { OrganizationTournamentView } from "@battle-stadium/db/schema";
 import {
   Button,
+  cn,
   DataTable,
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -21,21 +22,16 @@ import OrganizationLogo, {
   DEFAULT_DATA_TABLE_IMAGE_SIZE,
 } from "../organizations/organization-logo";
 
-interface OrganizationTournament {
-  tournaments: Tournament;
-  organizations: Organization | null;
-}
-
 interface TournamentsTableProps {
-  data: OrganizationTournament[];
+  data: OrganizationTournamentView[];
 }
 
 export function TournamentsTable({ data }: TournamentsTableProps) {
   return (
-    <DataTable<OrganizationTournament>
+    <DataTable<OrganizationTournamentView>
       data={data}
       columns={columns}
-      footer={DataTableFooter<OrganizationTournament>}
+      footer={DataTableFooter<OrganizationTournamentView>}
       classNames={{ wrapper: "px-4" }}
     >
       <TournamentsTableFiltering />
@@ -44,7 +40,7 @@ export function TournamentsTable({ data }: TournamentsTableProps) {
 }
 
 function TournamentsTableFiltering() {
-  const table = useDataTable<OrganizationTournament>();
+  const table = useDataTable<OrganizationTournamentView>();
 
   if (!table) return null;
 
@@ -64,7 +60,8 @@ function TournamentsTableFiltering() {
             Columns <ChevronDown />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+
+        <DropdownMenuContent align="end" className="bg-background">
           {table
             .getAllColumns()
             .filter((column) => column.getCanHide())
@@ -85,25 +82,50 @@ function TournamentsTableFiltering() {
     </div>
   );
 }
+const GREEN = "bg-green-100 text-green-800";
+const RED = "bg-red-100 text-red-800";
 
-const columns: ColumnDef<OrganizationTournament>[] = [
+const columns: ColumnDef<OrganizationTournamentView>[] = [
   {
-    header: "Organization",
-    cell: ({ row }) => (
-      <div className="flex flex-col items-center justify-center">
-        {row.original.organizations && (
-          <OrganizationLogo
-            organization={row.original.organizations}
-            logoSize={DEFAULT_DATA_TABLE_IMAGE_SIZE}
-            alt={`${row.original.organizations.name} logo`}
-          />
-        )}
-      </div>
-    ),
+    accessorKey: "Date",
+    header: "Date",
+    cell: ({ row }) => {
+      return (
+        row.original.tournaments.startAt &&
+        new Date(row.original.tournaments.startAt).toLocaleDateString(
+          undefined,
+          { dateStyle: "medium" },
+        )
+      );
+    },
   },
   {
+    accessorKey: "Time",
+    header: "Time",
+    cell: ({ row }) => {
+      return (
+        row.original.tournaments.startAt &&
+        new Date(row.original.tournaments.startAt).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        })
+      );
+    },
+  },
+  {
+    accessorKey: "Check In",
+    header: "Check In",
+    cell: ({ row }) =>
+      row.original.tournaments.checkInStartAt &&
+      new Date(row.original.tournaments.checkInStartAt).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+  },
+
+  {
     id: "name",
-    accessorKey: "tournaments.name",
+    accessorKey: "Name",
     header: "Name",
     cell: ({ row }) => (
       <Link
@@ -116,52 +138,81 @@ const columns: ColumnDef<OrganizationTournament>[] = [
     ),
   },
   {
-    accessorKey: "tournaments.startAt",
-    header: "Start Date",
+    accessorKey: "Organization",
+    header: "Organization",
+    cell: ({ row }) => (
+      <div className="flex flex-col items-center justify-center">
+        {row.original.organizations && (
+          <Link
+            href={`/organizations/${row.original.organizations.slug}`}
+            aria-label={`View organization: ${row.original.organizations.name}`}
+          >
+            <OrganizationLogo
+              organization={row.original.organizations}
+              logoSize={DEFAULT_DATA_TABLE_IMAGE_SIZE}
+              alt={`${row.original.organizations.name} logo`}
+            />
+          </Link>
+        )}
+      </div>
+    ),
+  },
+  {
+    accessorKey: "Players",
+    header: "Players",
     cell: ({ row }) => {
-      return (
-        row.original.tournaments.startAt &&
-        new Date(row.original.tournaments.startAt).toLocaleString()
-      );
+      if (row.original.tournaments.playerCap) {
+        return (
+          <span className="font-mono">
+            {row.original.playerCount}
+            <span className="text-muted-foreground">/</span>
+            {row.original.tournaments.playerCap}
+          </span>
+        );
+      }
+      return <span className="font-mono">{row.original.playerCount}</span>;
     },
   },
   {
-    accessorKey: "tournaments.checkInStartAt",
-    header: "Check-In Start",
-    cell: ({ row }) =>
-      row.original.tournaments.checkInStartAt &&
-      new Date(row.original.tournaments.checkInStartAt).toLocaleString(),
+    accessorKey: "Registration",
+    header: "Registration",
+    cell: ({ row }) => (
+      <span
+        className={cn(
+          "inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+          row.original.tournaments.lateRegistration ? GREEN : RED,
+        )}
+      >
+        {row.original.tournaments.lateRegistration ? "Yes" : "No"}
+      </span>
+    ),
   },
   {
-    accessorKey: "tournaments.gameId",
-    header: "Game ID",
-    cell: ({ row }) => row.original.tournaments.gameId,
+    accessorKey: "Team Lists",
+    header: "Team Lists",
+    cell: ({ row }) => (
+      <span
+        className={cn(
+          "inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+          row.original.tournaments.teamlistsRequired ? GREEN : RED,
+        )}
+      >
+        {row.original.tournaments.teamlistsRequired ? "Yes" : "No"}
+      </span>
+    ),
   },
   {
-    accessorKey: "tournaments.formatId",
-    header: "Format ID",
-    cell: ({ row }) => row.original.tournaments.formatId,
-  },
-  {
-    accessorKey: "tournaments.playerCap",
-    header: "Player Cap",
-    cell: ({ row }) => row.original.tournaments.playerCap,
-  },
-  {
-    accessorKey: "tournaments.lateRegistration",
-    header: "Late Registration",
-    cell: ({ row }) =>
-      row.original.tournaments.lateRegistration ? "Yes" : "No",
-  },
-  {
-    accessorKey: "tournaments.teamlistsRequired",
-    header: "Teamlists Required",
-    cell: ({ row }) =>
-      row.original.tournaments.teamlistsRequired ? "Yes" : "No",
-  },
-  {
-    accessorKey: "tournaments.openTeamSheets",
+    accessorKey: "Open Team Sheets",
     header: "Open Team Sheets",
-    cell: ({ row }) => (row.original.tournaments.openTeamSheets ? "Yes" : "No"),
+    cell: ({ row }) => (
+      <span
+        className={cn(
+          "inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+          row.original.tournaments.openTeamSheets ? GREEN : RED,
+        )}
+      >
+        {row.original.tournaments.openTeamSheets ? "Yes" : "No"}
+      </span>
+    ),
   },
 ];

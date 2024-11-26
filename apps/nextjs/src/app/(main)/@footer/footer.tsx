@@ -37,45 +37,40 @@ const socialItems = [
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-center py-8">
-      <div className="flex flex-col items-center justify-center">
-        <div className="flex items-center justify-center">
-          <BattleStadium />
-        </div>
-
-        {/* <Spacer y={4} /> */}
-
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
-          {navLinks.map((item) => (
-            <Link
-              prefetch={true}
-              key={item.name}
-              className="text-primary"
-              href={item.href}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </div>
-        {/* <Spacer y={6} /> */}
-        <div className="flex justify-center gap-x-4">
-          {socialItems.map((item) => (
-            <Link
-              prefetch={true}
-              key={item.name}
-              className="text-primary"
-              href={item.href}
-            >
-              <span className="sr-only">{item.name}</span>
-              <item.icon aria-hidden="true" className="w-5" />
-            </Link>
-          ))}
-        </div>
-        {/* <Spacer y={4} /> */}
-        <p className="text-small text-default-400 mt-1 text-center">
-          &copy; 2024 Beanie LLC Inc. All rights reserved.
-        </p>
+    <footer className="flex flex-col items-center justify-center gap-4 py-8">
+      <div className="flex items-center justify-center">
+        <BattleStadium />
       </div>
+
+      <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
+        {navLinks.map((item) => (
+          <Link
+            prefetch={true}
+            key={item.name}
+            className="text-primary"
+            href={item.href}
+          >
+            {item.name}
+          </Link>
+        ))}
+      </div>
+      <div className="flex justify-center gap-x-4">
+        {socialItems.map((item) => (
+          <Link
+            prefetch={true}
+            key={item.name}
+            className="text-primary"
+            href={item.href}
+          >
+            <span className="sr-only">{item.name}</span>
+            <item.icon aria-hidden="true" className="w-5" />
+          </Link>
+        ))}
+      </div>
+
+      <p className="text-small mt-1 text-center text-primary">
+        &copy; 2024 Beanie LLC Inc. All rights reserved.
+      </p>
     </footer>
   );
 }
