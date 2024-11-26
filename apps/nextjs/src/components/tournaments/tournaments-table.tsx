@@ -1,6 +1,6 @@
 "use client";
 
-import type { CellContext, ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
@@ -143,7 +143,10 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     cell: ({ row }) => (
       <div className="flex flex-col items-center justify-center">
         {row.original.organizations && (
-          <Link href={`/organizations/${row.original.organizations.slug}`}>
+          <Link
+            href={`/organizations/${row.original.organizations.slug}`}
+            aria-label={`View organization: ${row.original.organizations.name}`}
+          >
             <OrganizationLogo
               organization={row.original.organizations}
               logoSize={DEFAULT_DATA_TABLE_IMAGE_SIZE}
@@ -174,10 +177,13 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     accessorKey: "Registration",
     header: "Registration",
     cell: ({ row }) => (
-      <span className={ cn("inline-flex rounded-full px-2 py-1 text-xs font-semibold",
-        row.original.tournaments.lateRegistration ? GREEN : RED) }
+      <span
+        className={cn(
+          "inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+          row.original.tournaments.lateRegistration ? GREEN : RED,
+        )}
       >
-        { row.original.tournaments.lateRegistration ? "Yes" : "No" }
+        {row.original.tournaments.lateRegistration ? "Yes" : "No"}
       </span>
     ),
   },
@@ -185,10 +191,13 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     accessorKey: "Team Lists",
     header: "Team Lists",
     cell: ({ row }) => (
-      <span className={ cn("inline-flex rounded-full px-2 py-1 text-xs font-semibold",
-        row.original.tournaments.lateRegistration ? GREEN : RED) }
+      <span
+        className={cn(
+          "inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+          row.original.tournaments.lateRegistration ? GREEN : RED,
+        )}
       >
-        { row.original.tournaments.teamlistsRequired ? "Yes" : "No" }
+        {row.original.tournaments.teamlistsRequired ? "Yes" : "No"}
       </span>
     ),
   },
@@ -196,10 +205,13 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     accessorKey: "Open Team Sheets",
     header: "Open Team Sheets",
     cell: ({ row }) => (
-      <span className={ cn("inline-flex rounded-full px-2 py-1 text-xs font-semibold",
-        row.original.tournaments.openTeamSheets ? GREEN : RED) }
+      <span
+        className={cn(
+          "inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+          row.original.tournaments.openTeamSheets ? GREEN : RED,
+        )}
       >
-        { row.original.tournaments.openTeamSheets ? "Yes" : "No" }
+        {row.original.tournaments.openTeamSheets ? "Yes" : "No"}
       </span>
     ),
   },
