@@ -1,12 +1,13 @@
 "use client";
 
-import type { ColumnDef } from "@tanstack/react-table";
+import type { CellContext, ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 import type { OrganizationTournamentView } from "@battle-stadium/db/schema";
 import {
   Button,
+  cn,
   DataTable,
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -81,6 +82,8 @@ function TournamentsTableFiltering() {
     </div>
   );
 }
+const GREEN = "bg-green-100 text-green-800";
+const RED = "bg-red-100 text-red-800";
 
 const columns: ColumnDef<OrganizationTournamentView>[] = [
   {
@@ -170,18 +173,34 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
   {
     accessorKey: "Registration",
     header: "Registration",
-    cell: ({ row }) =>
-      row.original.tournaments.lateRegistration ? "Yes" : "No",
+    cell: ({ row }) => (
+      <span className={ cn("inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+        row.original.tournaments.lateRegistration ? GREEN : RED) }
+      >
+        { row.original.tournaments.lateRegistration ? "Yes" : "No" }
+      </span>
+    ),
   },
   {
     accessorKey: "Team Lists",
     header: "Team Lists",
-    cell: ({ row }) =>
-      row.original.tournaments.teamlistsRequired ? "Yes" : "No",
+    cell: ({ row }) => (
+      <span className={ cn("inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+        row.original.tournaments.lateRegistration ? GREEN : RED) }
+      >
+        { row.original.tournaments.teamlistsRequired ? "Yes" : "No" }
+      </span>
+    ),
   },
   {
     accessorKey: "Open Team Sheets",
     header: "Open Team Sheets",
-    cell: ({ row }) => (row.original.tournaments.openTeamSheets ? "Yes" : "No"),
+    cell: ({ row }) => (
+      <span className={ cn("inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+        row.original.tournaments.openTeamSheets ? GREEN : RED) }
+      >
+        { row.original.tournaments.openTeamSheets ? "Yes" : "No" }
+      </span>
+    ),
   },
 ];
