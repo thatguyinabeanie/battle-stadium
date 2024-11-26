@@ -30,7 +30,7 @@ export function TournamentsTable({ data }: TournamentsTableProps) {
     <DataTable<OrganizationTournamentView>
       data={data}
       columns={columns}
-      footer={ DataTableFooter<OrganizationTournamentView>}
+      footer={DataTableFooter<OrganizationTournamentView>}
       classNames={{ wrapper: "px-4" }}
     >
       <TournamentsTableFiltering />
