@@ -11,7 +11,7 @@ export default function DashboardLayout({ children }: Readonly<ChildrenProps>) {
   return (
     <SidebarProvider className="border-[1px]">
       <AppSidebar />
-      <SidebarInset className="bg-transparent border-l-[1px]">
+      <SidebarInset className="border-l-[1px] bg-transparent">
         <DashboardHeader />
         <Suspense fallback={<DashboardContentSkeleton />}>{children}</Suspense>
       </SidebarInset>

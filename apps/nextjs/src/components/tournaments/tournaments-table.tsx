@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
-import type { OrganizationTournament } from "@battle-stadium/db/schema";
+import type { OrganizationTournamentView } from "@battle-stadium/db/schema";
 import {
   Button,
   DataTable,
@@ -22,15 +22,15 @@ import OrganizationLogo, {
 } from "../organizations/organization-logo";
 
 interface TournamentsTableProps {
-  data: OrganizationTournament[];
+  data: OrganizationTournamentView[];
 }
 
 export function TournamentsTable({ data }: TournamentsTableProps) {
   return (
-    <DataTable<OrganizationTournament>
+    <DataTable<OrganizationTournamentView>
       data={data}
       columns={columns}
-      footer={DataTableFooter<OrganizationTournament>}
+      footer={ DataTableFooter<OrganizationTournamentView>}
       classNames={{ wrapper: "px-4" }}
     >
       <TournamentsTableFiltering />
@@ -39,7 +39,7 @@ export function TournamentsTable({ data }: TournamentsTableProps) {
 }
 
 function TournamentsTableFiltering() {
-  const table = useDataTable<OrganizationTournament>();
+  const table = useDataTable<OrganizationTournamentView>();
 
   if (!table) return null;
 
@@ -81,14 +81,17 @@ function TournamentsTableFiltering() {
   );
 }
 
-const columns: ColumnDef<OrganizationTournament>[] = [
+const columns: ColumnDef<OrganizationTournamentView>[] = [
   {
     accessorKey: "tournaments.date",
     header: "Date",
     cell: ({ row }) => {
       return (
         row.original.tournaments.startAt &&
-        new Date(row.original.tournaments.startAt).toLocaleDateString()
+        new Date(row.original.tournaments.startAt).toLocaleDateString(
+          undefined,
+          { dateStyle: "medium" },
+        )
       );
     },
   },
@@ -174,14 +177,3 @@ const columns: ColumnDef<OrganizationTournament>[] = [
     cell: ({ row }) => (row.original.tournaments.openTeamSheets ? "Yes" : "No"),
   },
 ];
-
-// {
-//   accessorKey: "tournaments.gameId",
-//   header: "Game ID",
-//   cell: ({ row }) => row.original.tournaments.gameId,
-// },
-// {
-//   accessorKey: "tournaments.formatId",
-//   header: "Format ID",
-//   cell: ({ row }) => row.original.tournaments.formatId,
-// },

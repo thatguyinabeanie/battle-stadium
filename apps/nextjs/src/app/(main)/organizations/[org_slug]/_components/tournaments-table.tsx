@@ -97,30 +97,26 @@ function SingleOrganizationTournamentsTableFiltering() {
 const columns: ColumnDef<Tournament>[] = [
   {
     accessorKey: "Start Date",
-    header: "Start Date",
+    header: "Date",
     cell: ({ row }) =>
-      row.original.startAt && new Date(row.original.startAt).toLocaleString(),
+      row.original.startAt &&
+      new Date(row.original.startAt).toLocaleDateString(undefined, {
+        dateStyle: "medium",
+      }),
   },
   {
     accessorKey: "checkInStartAt",
-    header: "Check-In Start",
+    header: "Check In",
     cell: ({ row }) =>
       row.original.checkInStartAt &&
-      new Date(row.original.checkInStartAt).toLocaleString(),
+      new Date(row.original.checkInStartAt).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
   },
   {
-    accessorKey: "Game",
-    header: "Game ID",
-    cell: ({ row }) => row.original.gameId,
-  },
-  {
-    accessorKey: "Format",
-    header: "Format ID",
-    cell: ({ row }) => row.original.formatId,
-  },
-  {
-    accessorKey: "Player Cap",
-    header: "Player Cap",
+    accessorKey: "Players",
+    header: "Players",
     cell: ({ row }) => row.original.playerCap,
   },
   {

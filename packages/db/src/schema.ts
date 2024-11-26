@@ -63,5 +63,8 @@ export type Rk9TournamentInsert = typeof schema.rk9Tournaments.$inferInsert;
 export interface OrganizationTournament {
   tournaments: Tournament;
   organizations: Organization | null;
+}
+
+export interface OrganizationTournamentView extends OrganizationTournament {
   playerCount?: number;
 }
