@@ -22,10 +22,10 @@ import {
   SidebarRail,
 } from "@battle-stadium/ui/sidebar";
 
-import { NavMain } from "~/components/sidebar/nav-main";
-import { NavProjects } from "~/components/sidebar/nav-projects";
-import { NavUser } from "~/components/sidebar/nav-user";
-import { TeamSwitcher } from "~/components/sidebar/team-switcher";
+import { NavMain } from "~/app/(dashboard)/dashboard/_components/sidebar/nav-main";
+import { NavProjects } from "~/app/(dashboard)/dashboard/_components/sidebar/nav-projects";
+import { NavUser } from "~/app/(dashboard)/dashboard/_components/sidebar/nav-user";
+import { TeamSwitcher } from "~/app/(dashboard)/dashboard/_components/sidebar/team-switcher";
 
 // This is sample data.
 const data = {

@@ -64,6 +64,7 @@ export default function MainContentLayout({
         className="flex min-h-screen w-full flex-col items-center"
       >
         <section
+          role="region"
           aria-label="Main content"
           className="z-0 flex h-full w-full flex-col items-center gap-4"
         >
