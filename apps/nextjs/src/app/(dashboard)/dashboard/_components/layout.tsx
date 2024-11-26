@@ -3,8 +3,8 @@ import { Suspense } from "react";
 import { TabsContent as UiTabsContent } from "@battle-stadium/ui";
 
 import type { DashboardLayoutSlots } from "~/types";
+import { Tabs, TabsList, TabsTrigger } from "~/app/components/tabs/tabs";
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
-import { Tabs, TabsList, TabsTrigger } from "~/components/tabs/tabs";
 
 const tabsList = [
   { key: "dashboard", title: "Dashboard" },

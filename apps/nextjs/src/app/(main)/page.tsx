@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { title } from "~/components/miscellaneous/primitives";
-import PartneredOrganizations from "~/components/organizations/partnered-organizations";
+import { title } from "~/app/_components/miscellaneous/primitives";
+import PartneredOrganizations from "~/app/_components/organizations/partnered-organizations";
 
 export const metadata: Metadata = {
   title: "battlestadium.gg",

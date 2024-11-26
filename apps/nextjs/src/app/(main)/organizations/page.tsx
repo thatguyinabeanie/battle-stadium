@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
+import OrganizationsTable from "~/app/components/organizations/organizations-table";
+import PartneredOrganizations from "~/app/components/organizations/partnered-organizations";
 import { getOrganizations } from "~/app/server-actions/organizations/actions";
-import OrganizationsTable from "~/components/organizations/organizations-table";
-import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 
 export const metadata: Metadata = {
   title: "Organizations",

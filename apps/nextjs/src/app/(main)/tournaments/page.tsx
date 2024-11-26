@@ -3,8 +3,8 @@ import { Suspense } from "react";
 
 import type { OrganizationTournament } from "@battle-stadium/db/schema";
 
+import { TournamentsTable } from "~/app/components/tournaments/tournaments-table";
 import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
-import { TournamentsTable } from "~/components/tournaments/tournaments-table";
 
 export const metadata: Metadata = {
   title: "Tournaments",

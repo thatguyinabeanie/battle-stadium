@@ -12,12 +12,12 @@ import {
 } from "@battle-stadium/ui";
 
 import MobileMenu from "~/app/(main)/@navbar/_navbar-components/navbar-mobile-menu";
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import {
   SolarMagniferLinear,
   SolarSettingsLinear,
   SolarUserLinear,
-} from "~/components/svg/icons";
+} from "~/app/components/svg/icons";
+import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import UserMenuDropDown from "./user-menu/user-menu-dropdown";
 
 const sharedClassNames =

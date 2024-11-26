@@ -9,8 +9,8 @@ import type {
   OrganizationTournamentParams,
   OrganizationTournamentProps,
 } from "~/types";
+import OrganizationHeader from "~/app/components/organizations/organization-header";
 import { getSingleOrganizationSingleTournament } from "~/app/server-actions/organizations/tournaments/actions";
-import OrganizationHeader from "~/components/organizations/organization-header";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
 export async function generateStaticParams() {

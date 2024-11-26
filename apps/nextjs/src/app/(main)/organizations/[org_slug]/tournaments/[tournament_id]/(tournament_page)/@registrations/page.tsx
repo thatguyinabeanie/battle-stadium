@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 
 import type { OrganizationTournamentParams } from "~/types";
+import RegistrationsTable from "~/app/components/tournaments/registrations-table";
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
-import RegistrationsTable from "~/components/tournaments/registrations-table";
 
 export default async function TournamentRegistrationsPage(
   props: Readonly<OrganizationTournamentParams>,

@@ -21,7 +21,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import { HydrateClient } from "~/trpc/server";
 
 const AwesomeParticles = dynamic(
-  () => import("~/components/awesome-particles"),
+  () => import("~/app/components/awesome-particles"),
 );
 
 export const metadata: Metadata = {

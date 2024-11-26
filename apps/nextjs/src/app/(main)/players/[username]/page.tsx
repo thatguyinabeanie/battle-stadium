@@ -1,5 +1,5 @@
+import ComingSoon from "~/app/components/coming-soon";
 import { getProfile } from "~/app/server-actions/profiles/actions";
-import ComingSoon from "~/components/coming-soon";
 
 interface PlayerProfilePageProps {
   params: Promise<{

@@ -2,9 +2,9 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
 import { SingleOrgTournamentsTable } from "~/app/(main)/organizations/[org_slug]/_components/tournaments-table";
+import OrganizationHeader from "~/app/components/organizations/organization-header";
 import { getOrganizations } from "~/app/server-actions/organizations/actions";
 import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
-import OrganizationHeader from "~/components/organizations/organization-header";
 
 interface OrganizationDetailPageProps {
   params: Promise<{ org_slug: string }>;

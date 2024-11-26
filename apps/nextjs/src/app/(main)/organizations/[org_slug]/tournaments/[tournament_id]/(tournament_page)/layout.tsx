@@ -9,7 +9,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "~/components/tabs/tabs";
+} from "~/app/components/tabs/tabs";
 
 interface OrganizationTournamentsLayoutSlots {
   children: ReactNode;

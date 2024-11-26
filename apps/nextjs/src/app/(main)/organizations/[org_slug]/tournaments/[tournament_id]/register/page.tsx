@@ -1,9 +1,9 @@
 import { Input } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentParams } from "~/types";
+import { TournamentRegistrationForm } from "~/app/components/tournaments/tournament-registration";
 import { getProfilesMe } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
-import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
 import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
 export const revalidate = 300;
