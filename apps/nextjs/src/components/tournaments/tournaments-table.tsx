@@ -4,7 +4,8 @@ import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
-import type { Organization, Tournament } from "@battle-stadium/db/schema";
+import type { OrganizationTournament } from "@battle-stadium/db/schema";
+
 import {
   Button,
   DataTable,
@@ -17,14 +18,8 @@ import {
 } from "@battle-stadium/ui";
 
 import { DataTableFooter } from "../data-table-footer";
-import OrganizationLogo, {
-  DEFAULT_DATA_TABLE_IMAGE_SIZE,
-} from "../organizations/organization-logo";
 
-interface OrganizationTournament {
-  tournaments: Tournament;
-  organizations: Organization | null;
-}
+import OrganizationLogo, { DEFAULT_DATA_TABLE_IMAGE_SIZE } from "../organizations/organization-logo";
 
 interface TournamentsTableProps {
   data: OrganizationTournament[];
@@ -88,64 +83,78 @@ function TournamentsTableFiltering() {
 
 const columns: ColumnDef<OrganizationTournament>[] = [
   {
-    header: "Organization",
-    cell: ({ row }) => (
-      <div className="flex flex-col items-center justify-center">
-        {row.original.organizations && (
-          <OrganizationLogo
-            organization={row.original.organizations}
-            logoSize={DEFAULT_DATA_TABLE_IMAGE_SIZE}
-            alt={`${row.original.organizations.name} logo`}
-          />
-        )}
-      </div>
-    ),
+    accessorKey: "tournaments.date",
+    header: "Date",
+    cell: ({ row }) => {
+      return (
+        row.original.tournaments.startAt &&
+        new Date(row.original.tournaments.startAt).toLocaleDateString()
+      );
+    },
   },
+  {
+    accessorKey: "tournaments.startTime",
+    header: "Time",
+    cell: ({ row }) => {
+      return (
+        row.original.tournaments.startAt &&
+        new Date(row.original.tournaments.startAt).toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+        })
+      );
+    },
+  },
+  {
+    accessorKey: "tournaments.checkInStartAt",
+    header: "Check In",
+    cell: ({ row }) =>
+      row.original.tournaments.checkInStartAt &&
+      new Date(row.original.tournaments.checkInStartAt).toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+  },
+
   {
     id: "name",
     accessorKey: "tournaments.name",
     header: "Name",
     cell: ({ row }) => (
       <Link
-        href={`/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}`}
+        href={ `/organizations/${row.original.organizations?.slug}/tournaments/${row.original.tournaments.id}` }
         className="flex flex-row items-center gap-2 text-primary"
-        aria-label={`View tournament: ${row.original.tournaments.name}`}
+        aria-label={ `View tournament: ${row.original.tournaments.name}` }
       >
-        {row.original.tournaments.name}
+        { row.original.tournaments.name }
       </Link>
     ),
   },
   {
-    accessorKey: "tournaments.startAt",
-    header: "Start Date",
-    cell: ({ row }) => {
-      return (
-        row.original.tournaments.startAt &&
-        new Date(row.original.tournaments.startAt).toLocaleString()
-      );
-    },
-  },
-  {
-    accessorKey: "tournaments.checkInStartAt",
-    header: "Check-In Start",
-    cell: ({ row }) =>
-      row.original.tournaments.checkInStartAt &&
-      new Date(row.original.tournaments.checkInStartAt).toLocaleString(),
-  },
-  {
-    accessorKey: "tournaments.gameId",
-    header: "Game ID",
-    cell: ({ row }) => row.original.tournaments.gameId,
-  },
-  {
-    accessorKey: "tournaments.formatId",
-    header: "Format ID",
-    cell: ({ row }) => row.original.tournaments.formatId,
+    header: "Organization",
+    cell: ({ row }) => (
+      <div className="flex flex-col items-center justify-center">
+        { row.original.organizations && (
+          <Link href={ `/organizations/${row.original.organizations.slug}` }>
+            <OrganizationLogo
+              organization={ row.original.organizations }
+              logoSize={ DEFAULT_DATA_TABLE_IMAGE_SIZE }
+              alt={ `${row.original.organizations.name} logo` }
+            />
+          </Link>
+        ) }
+      </div>
+    )
   },
   {
     accessorKey: "tournaments.playerCap",
-    header: "Player Cap",
-    cell: ({ row }) => row.original.tournaments.playerCap,
+    header: "Players",
+    cell: ({ row }) => {
+      if (row.original.tournaments.playerCap) {
+        return `${row.original.playerCount}/${row.original.tournaments.playerCap}`;
+      }
+      return row.original.playerCount;
+    }
   },
   {
     accessorKey: "tournaments.lateRegistration",
@@ -165,3 +174,15 @@ const columns: ColumnDef<OrganizationTournament>[] = [
     cell: ({ row }) => (row.original.tournaments.openTeamSheets ? "Yes" : "No"),
   },
 ];
+
+
+// {
+//   accessorKey: "tournaments.gameId",
+//   header: "Game ID",
+//   cell: ({ row }) => row.original.tournaments.gameId,
+// },
+// {
+//   accessorKey: "tournaments.formatId",
+//   header: "Format ID",
+//   cell: ({ row }) => row.original.tournaments.formatId,
+// },

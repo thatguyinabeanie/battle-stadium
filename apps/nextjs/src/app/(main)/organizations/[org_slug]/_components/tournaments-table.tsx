@@ -22,7 +22,7 @@ interface SingleOrganizationTournamentsTableProps {
   className?: string;
 }
 
-export function SingleOrganizationTournamentsTable({
+export function SingleOrgTournamentsTable({
   data,
   organization,
   className,

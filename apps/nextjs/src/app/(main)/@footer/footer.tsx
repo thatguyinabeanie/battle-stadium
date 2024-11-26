@@ -37,13 +37,10 @@ const socialItems = [
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col items-center justify-center py-8">
-      <div className="flex flex-col items-center justify-center">
+    <footer className="flex flex-col items-center justify-center py-8 gap-4">
         <div className="flex items-center justify-center">
           <BattleStadium />
         </div>
-
-        {/* <Spacer y={4} /> */}
 
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">
           {navLinks.map((item) => (
@@ -57,7 +54,6 @@ export default function Footer() {
             </Link>
           ))}
         </div>
-        {/* <Spacer y={6} /> */}
         <div className="flex justify-center gap-x-4">
           {socialItems.map((item) => (
             <Link
@@ -71,11 +67,10 @@ export default function Footer() {
             </Link>
           ))}
         </div>
-        {/* <Spacer y={4} /> */}
-        <p className="text-small text-default-400 mt-1 text-center">
+
+        <p className="text-small text-primary mt-1 text-center">
           &copy; 2024 Beanie LLC Inc. All rights reserved.
         </p>
-      </div>
     </footer>
   );
 }

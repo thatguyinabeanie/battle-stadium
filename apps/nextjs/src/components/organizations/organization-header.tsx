@@ -23,7 +23,7 @@ export default function OrganizationHeader({
 }: Readonly<OrganizationHeaderProps>) {
   return (
     <div
-      className={`flex h-full flex-row items-center justify-around py-4 sm:max-h-20 lg:max-h-48 ${classNames?.wrapper}`}
+      className={`h-full w-full grid grid-cols-2 md:grid-cols-3 py-4 justify-center  ${classNames?.wrapper}`}
     >
       <OrganizationLogo
         className={`${classNames?.image}`}
@@ -39,7 +39,7 @@ export default function OrganizationHeader({
       </div>
 
       <OrganizationLogo
-        className={`hidden sm:flex ${classNames?.image}`}
+        className={`hidden md:flex ${classNames?.image}`}
         logoSize={HEIGHT_WIDTH}
         organization={organization}
         priority={true}

@@ -1,17 +1,31 @@
 "use server";
 
 import { and, db, desc, eq } from "@battle-stadium/db";
-import { organizations, tournaments } from "@battle-stadium/db/schema";
+import { organizations, players, tournaments } from "@battle-stadium/db/schema";
+import { count } from "drizzle-orm";
 
 function tournamentsLeftJoinOrganizations() {
   return db
     .select()
     .from(tournaments)
-    .leftJoin(organizations, eq(tournaments.organizationId, organizations.id));
+    .leftJoin(organizations, eq(tournaments.organizationId, organizations.id))
+}
+
+function tournamentsLeftJoinOrganizationsWithPlayerCounts() {
+  return db
+    .select({
+      tournaments,
+      organizations,
+      playerCount: count(players.id).as("playerCount"),
+    })
+    .from(tournaments)
+    .leftJoin(organizations, eq(tournaments.organizationId, organizations.id))
+    .leftJoin(players, eq(players.tournamentId, tournaments.id))
+    .groupBy(organizations.id, tournaments.id);
 }
 
 async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
-  const results = await tournamentsLeftJoinOrganizations()
+  const results = await tournamentsLeftJoinOrganizationsWithPlayerCounts()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);

@@ -59,3 +59,9 @@ export type TournamentInsert = typeof schema.tournaments.$inferInsert;
 
 export type Rk9Tournament = typeof schema.rk9Tournaments.$inferSelect;
 export type Rk9TournamentInsert = typeof schema.rk9Tournaments.$inferInsert;
+
+export interface OrganizationTournament {
+  tournaments: Tournament;
+  organizations: Organization | null;
+  playerCount?: number;
+}
