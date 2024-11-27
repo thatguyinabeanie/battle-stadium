@@ -30,18 +30,18 @@ export default function DashboardLayout({ children }: Readonly<ChildrenProps>) {
 
 function DashboardSideBar() {
   return (
-    <Sidebar variant="sidebar" collapsible="icon" >
-      <SidebarHeader className="bg-neutral-900/50 rounded-xl m-4">
+    <Sidebar variant="sidebar" collapsible="icon">
+      <SidebarHeader className="m-4 rounded-xl bg-neutral-900/50">
         <MainAppLinksMenu />
       </SidebarHeader>
 
-      <div className="flex flex-col h-full">
-        <SidebarContent className="bg-neutral-900/50 rounded-xl mx-4 mb-4">
+      <div className="flex h-full flex-col">
+        <SidebarContent className="mx-4 mb-4 rounded-xl bg-neutral-900/50">
           <NavMain />
           <NavProjects />
         </SidebarContent>
 
-        <SidebarFooter className="bg-neutral-900/50 rounded-xl mx-4 mb-4">
+        <SidebarFooter className="mx-4 mb-4 rounded-xl bg-neutral-900/50">
           <NavUserComponent />
         </SidebarFooter>
       </div>

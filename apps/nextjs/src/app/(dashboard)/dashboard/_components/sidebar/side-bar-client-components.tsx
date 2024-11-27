@@ -3,10 +3,9 @@
 import { forwardRef } from "react";
 
 import {
-  DropdownMenuPrimitive} from "@battle-stadium/ui";
-import {
   cn,
   DropdownMenuContent,
+  DropdownMenuPrimitive,
   SidebarMenuAction,
   useSidebar,
 } from "@battle-stadium/ui";

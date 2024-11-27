@@ -1,4 +1,5 @@
 import { DashboardContentBody } from "~/app/(dashboard)/dashboard/_components/content/dashboard-content-body";
+
 // import { DashboardContentSection } from "~/app/(dashboard)/dashboard/_components/content/dashboard-content-top-section";
 
 interface LayoutProps {
@@ -8,7 +9,7 @@ interface LayoutProps {
   right: React.ReactNode;
 }
 
-export default function SharedLayout ({
+export default function SharedLayout({
   children,
   // left,
   // center,
@@ -26,7 +27,7 @@ export default function SharedLayout ({
         <DashboardContentSection>{ right }</DashboardContentSection>
       </div> */}
 
-      <DashboardContentBody>{ children }</DashboardContentBody>
+      <DashboardContentBody>{children}</DashboardContentBody>
     </section>
   );
 }

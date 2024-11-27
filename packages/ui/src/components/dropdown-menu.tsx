@@ -202,5 +202,5 @@ export {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
-  DropdownMenuPrimitive
+  DropdownMenuPrimitive,
 };
