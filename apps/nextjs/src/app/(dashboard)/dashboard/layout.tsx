@@ -46,7 +46,7 @@ function DashboardSideBar() {
         </SidebarFooter>
       </div>
 
-      {/* <SidebarRail /> */}
+      <SidebarRail />
     </Sidebar>
   );
 }
