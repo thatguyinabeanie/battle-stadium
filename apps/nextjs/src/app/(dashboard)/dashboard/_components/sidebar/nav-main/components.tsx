@@ -17,7 +17,7 @@ import {
 
 export interface NavMainItem {
   title: string;
-  url: string;
+  url: `/dashboard${string}` | "#";
   icon?: LucideIcon;
   isActive?: boolean;
   items?: {
