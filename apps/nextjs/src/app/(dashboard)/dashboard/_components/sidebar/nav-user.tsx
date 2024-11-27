@@ -78,8 +78,12 @@ function NavUserDropdownMenuContent() {
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuItem>
-        <LogOut />
-        <SignOutButton>Log out</SignOutButton>
+        <SignOutButton>
+          <div className="flex items-center gap-2">
+            <LogOut className="size-4" />
+            <span>Log out</span>
+          </div>
+        </SignOutButton>
       </DropdownMenuItem>
     </DropDownMenuContentMobile>
   );
