@@ -62,9 +62,11 @@ export const env = createEnv({
     NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID: z
       .string()
       .regex(/^ca-pub-[0-9]{16}$/, {
-        message: "Invalid AdSense client ID format. Must start with 'ca-pub-' followed by 16 digits"
+        message:
+          "Invalid AdSense client ID format. Must start with 'ca-pub-' followed by 16 digits",
       })
-      .describe("Google AdSense client ID (required for ad integration)"),
+      .describe("Google AdSense client ID (required for ad integration)")
+      .optional(),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
