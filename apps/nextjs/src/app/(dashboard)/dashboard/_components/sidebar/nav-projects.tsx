@@ -77,8 +77,6 @@ export function NavProjects() {
             <span title="Show additional projects">More</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
-
-      </SidebarMenu>
     </SidebarGroup>
   );
 }
