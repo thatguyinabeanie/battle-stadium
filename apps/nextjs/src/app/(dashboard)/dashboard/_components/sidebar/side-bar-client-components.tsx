@@ -3,6 +3,8 @@
 import { forwardRef } from "react";
 
 import {
+  DropdownMenuPrimitive} from "@battle-stadium/ui";
+import {
   cn,
   DropdownMenuContent,
   SidebarMenuAction,
@@ -34,25 +36,27 @@ export const DropDownMenuContentMobile = forwardRef<
 DropDownMenuContentMobile.displayName = "DropDownMenuContentMobile";
 
 export const ProjectsDropDownMenuContentMobile = forwardRef<
-  React.ComponentRef<typeof DropdownMenuContent>,
-  React.ComponentPropsWithoutRef<typeof DropdownMenuContent>
+  React.ComponentRef<typeof DropdownMenuPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Content>
 >(({ className, ...props }, ref) => {
   const { isMobile } = useSidebar();
   const touchStyles = isMobile ? "min-h-[44px] active:bg-accent/80" : "";
 
   return (
-    <DropdownMenuContent
-      ref={ref}
-      className={`max-h-[300px] w-48 overflow-y-auto rounded-lg bg-background ${touchStyles} ${className}`}
-      side={isMobile ? "bottom" : "right"}
-      align={isMobile ? "end" : "start"}
-      sideOffset={isMobile ? 8 : 2}
-      alignOffset={-4}
-      avoidCollisions
-      {...props}
-    >
-      {props.children}
-    </DropdownMenuContent>
+    <DropdownMenuPrimitive.Portal>
+      <DropdownMenuPrimitive.Content
+        ref={ref}
+        className={`max-h-[300px] w-48 overflow-y-auto rounded-lg bg-background ${touchStyles} ${className}`}
+        side={isMobile ? "bottom" : "right"}
+        align={isMobile ? "end" : "start"}
+        sideOffset={isMobile ? 8 : 2}
+        alignOffset={-4}
+        avoidCollisions
+        {...props}
+      >
+        {props.children}
+      </DropdownMenuPrimitive.Content>
+    </DropdownMenuPrimitive.Portal>
   );
 });
 ProjectsDropDownMenuContentMobile.displayName = "DropDownMenuContentMobile";
