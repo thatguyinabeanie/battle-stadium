@@ -25,18 +25,7 @@ import {
 export function NavMain() {
   if (navMainItems.length === 0) {
     return (
-      <SidebarGroup>
-        <SidebarGroupLabel aria-label="Navigation Menu">
-          Platform
-        </SidebarGroupLabel>
-        <div
-          className="px-2 py-4 text-sm text-muted-foreground"
-          role="status"
-          aria-live="polite"
-        >
-          No navigation items available
-        </div>
-      </SidebarGroup>
+      <EmptyNavItems />
     );
   }
 
@@ -46,42 +35,7 @@ export function NavMain() {
         Platform
       </SidebarGroupLabel>
       <SidebarMenu>
-        {navMainItems.map((item) => (
-          <Collapsible
-            key={item.title}
-            asChild
-            defaultOpen={item.isActive}
-            className="group/collapsible"
-            aria-expanded={item.isActive}
-            aria-label={`${item.title} navigation section`}
-          >
-            <SidebarMenuItem>
-              <CollapsibleTrigger asChild>
-                <SidebarMenuButton
-                  tooltip={item.title}
-                  aria-current={item.isActive ? "page" : undefined}
-                >
-                  {item.icon ? <item.icon aria-hidden="true" /> : null}
-                  <span>{item.title}</span>
-                  <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <Link href={subItem.url}>
-                          <span>{subItem.title}</span>
-                        </Link>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
-                </SidebarMenuSub>
-              </CollapsibleContent>
-            </SidebarMenuItem>
-          </Collapsible>
-        ))}
+        {navMainItems.map((item) => (<CollapsibleMenuNavItem key={ item.title } item={ item } />))}
       </SidebarMenu>
     </SidebarGroup>
   );
@@ -98,10 +52,81 @@ interface NavMainItem {
   }[];
 }
 
+interface CollapsibleMenuNavItemProps {
+  item: NavMainItem;
+}
+
+function CollapsibleMenuNavItem ({ item }: CollapsibleMenuNavItemProps) {
+  return (
+    <Collapsible
+      asChild
+      defaultOpen={ item.isActive }
+      className="group/collapsible"
+      aria-expanded={ item.isActive }
+      aria-label={ `${item.title} navigation section` }
+    >
+      <SidebarMenuItem>
+        <SidebarMenuButtonCollapsibleTrigger item={ item } />
+        <SidebarMenuCollapsibleContent item={ item } />
+      </SidebarMenuItem>
+    </Collapsible>
+  )
+}
+
+function SidebarMenuButtonCollapsibleTrigger({ item }: CollapsibleMenuNavItemProps) {
+  return (
+    <CollapsibleTrigger asChild>
+      <SidebarMenuButton
+        tooltip={ item.title }
+        aria-current={ item.isActive ? "page" : undefined }
+      >
+        { item.icon ? <item.icon aria-hidden="true" /> : null }
+        <span>{ item.title }</span>
+        <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+      </SidebarMenuButton>
+    </CollapsibleTrigger>
+  );
+}
+
+function SidebarMenuCollapsibleContent({ item }: CollapsibleMenuNavItemProps) {
+  return (
+    <CollapsibleContent>
+      <SidebarMenuSub>
+        { item.items?.map((subItem) => (
+          <SidebarMenuSubItem key={ subItem.title }>
+            <SidebarMenuSubButton asChild>
+              <Link href={ subItem.url }>
+                <span>{ subItem.title }</span>
+              </Link>
+            </SidebarMenuSubButton>
+          </SidebarMenuSubItem>
+        )) }
+      </SidebarMenuSub>
+    </CollapsibleContent>
+  );
+}
+
+function EmptyNavItems() {
+  return (
+    <SidebarGroup>
+      <SidebarGroupLabel aria-label="Navigation Menu">
+        Platform
+      </SidebarGroupLabel>
+      <div
+        className="px-2 py-4 text-sm text-muted-foreground"
+        role="status"
+        aria-live="polite"
+      >
+        No navigation items available
+      </div>
+    </SidebarGroup>
+  );
+}
+
 export const navMainItems: NavMainItem[] = [
   {
-    title: "Playground",
-    url: "#",
+    title: "Dashboard",
+    url: "/dashboard/profiles",
     icon: SquareTerminal,
     isActive: true,
     items: [
@@ -120,7 +145,7 @@ export const navMainItems: NavMainItem[] = [
     ],
   },
   {
-    title: "Models",
+    title: "Profiles",
     url: "#",
     icon: Bot,
     items: [
@@ -139,7 +164,7 @@ export const navMainItems: NavMainItem[] = [
     ],
   },
   {
-    title: "Documentation",
+    title: "Teams",
     url: "#",
     icon: BookOpen,
     items: [
@@ -162,7 +187,7 @@ export const navMainItems: NavMainItem[] = [
     ],
   },
   {
-    title: "Settings",
+    title: "Organizations",
     url: "#",
     icon: Settings2,
     items: [
