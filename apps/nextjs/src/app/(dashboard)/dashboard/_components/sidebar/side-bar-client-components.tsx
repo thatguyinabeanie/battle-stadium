@@ -2,7 +2,12 @@
 
 import { forwardRef } from "react";
 
-import { cn, DropdownMenuContent, SidebarMenuAction, useSidebar } from "@battle-stadium/ui";
+import {
+  cn,
+  DropdownMenuContent,
+  SidebarMenuAction,
+  useSidebar,
+} from "@battle-stadium/ui";
 
 export const DropDownMenuContentMobile = forwardRef<
   React.ComponentRef<typeof DropdownMenuContent>,
@@ -28,8 +33,6 @@ export const DropDownMenuContentMobile = forwardRef<
 });
 DropDownMenuContentMobile.displayName = "DropDownMenuContentMobile";
 
-
-
 export const ProjectsDropDownMenuContentMobile = forwardRef<
   React.ComponentRef<typeof DropdownMenuContent>,
   React.ComponentPropsWithoutRef<typeof DropdownMenuContent>
@@ -39,41 +42,39 @@ export const ProjectsDropDownMenuContentMobile = forwardRef<
 
   return (
     <DropdownMenuContent
-      ref={ ref }
-      className={ `max-h-[300px] w-48 overflow-y-auto rounded-lg bg-background ${touchStyles} ${className}` }
-      side={ isMobile ? "bottom" : "right" }
-      align={ isMobile ? "end" : "start" }
-      sideOffset={ isMobile ? 8 : 2 }
-      alignOffset={ -4 }
+      ref={ref}
+      className={`max-h-[300px] w-48 overflow-y-auto rounded-lg bg-background ${touchStyles} ${className}`}
+      side={isMobile ? "bottom" : "right"}
+      align={isMobile ? "end" : "start"}
+      sideOffset={isMobile ? 8 : 2}
+      alignOffset={-4}
       avoidCollisions
-      { ...props }
+      {...props}
     >
-      { props.children }
+      {props.children}
     </DropdownMenuContent>
   );
 });
 DropDownMenuContentMobile.displayName = "DropDownMenuContentMobile";
 
-
 export const ProjectsSidebarMenuAction = forwardRef<
-React.ComponentRef<typeof SidebarMenuAction>,
-React.ComponentPropsWithoutRef<typeof SidebarMenuAction>
->(   ({ children, ...props}, ref) => {
+  React.ComponentRef<typeof SidebarMenuAction>,
+  React.ComponentPropsWithoutRef<typeof SidebarMenuAction>
+>(({ children, ...props }, ref) => {
   return (
     <SidebarMenuAction
       ref={ref}
       showOnHover
       role="button"
-      aria-label={ props["aria-label"] }
-      onKeyDown={ (e) => {
+      aria-label={props["aria-label"]}
+      onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           e.currentTarget.click();
         }
-      } }
+      }}
     >
-      { children }
+      {children}
     </SidebarMenuAction>
   );
 });
-

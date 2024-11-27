@@ -21,9 +21,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@battle-stadium/ui";
-import { ProjectsDropDownMenuContentMobile, ProjectsSidebarMenuAction } from "./side-bar-client-components";
 
-///Add touch-friendly styles for mobile +
+import {
+  ProjectsDropDownMenuContentMobile,
+  ProjectsSidebarMenuAction,
+} from "./side-bar-client-components";
 
 export function NavProjects() {
   return (
@@ -33,9 +35,7 @@ export function NavProjects() {
     >
       <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
-
         {projects.map((item) => (
-
           <SidebarMenuItem key={item.name} className="flex flex-row">
             <SidebarMenuButton asChild>
               <Link href={item.url} title={item.name} className="truncate">
@@ -46,14 +46,13 @@ export function NavProjects() {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <ProjectsSidebarMenuAction
-                >
+                <ProjectsSidebarMenuAction>
                   <MoreHorizontal />
                   <span className="sr-only">More</span>
                 </ProjectsSidebarMenuAction>
               </DropdownMenuTrigger>
 
-              <ProjectsDropDownMenuContentMobile >
+              <ProjectsDropDownMenuContentMobile>
                 <DropdownMenuItem>
                   <Folder className="text-muted-foreground" />
                   <span>View Project</span>
@@ -77,6 +76,7 @@ export function NavProjects() {
             <span title="Show additional projects">More</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
+      </SidebarMenu>
     </SidebarGroup>
   );
 }
