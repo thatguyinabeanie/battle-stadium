@@ -17,10 +17,16 @@ export default function NavbarLinks() {
           label={label}
         />
       ))}
-      <Suspense fallback={null}>
-        <DashboardNavLink />
-      </Suspense>
+      <DashboardNavLinkSuspense />
     </div>
+  );
+}
+
+function DashboardNavLinkSuspense() {
+  return (
+    <Suspense fallback={null}>
+      <DashboardNavLink />
+    </Suspense>
   );
 }
 
@@ -31,9 +37,7 @@ async function DashboardNavLink() {
       value="dashboard"
       key="dashboard"
       href="/dashboard"
-      className={cn("hidden", {
-        "sm:flex": !!sessionId,
-      })}
+      className={cn("items-center", sessionId ? "md:flex" : "hidden")}
       label="Dashboard"
     />
   );
