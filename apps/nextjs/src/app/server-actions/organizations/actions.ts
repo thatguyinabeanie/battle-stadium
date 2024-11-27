@@ -27,6 +27,7 @@ export async function getOrganization(slug: string) {
 }
 
 export async function getMyOrganizations() {
+  // TODO: Optimize SQL queries
   const me = await getAccountMe();
 
   if (!me) {
