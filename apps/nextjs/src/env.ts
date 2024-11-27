@@ -65,8 +65,7 @@ export const env = createEnv({
         message:
           "Invalid AdSense client ID format. Must start with 'ca-pub-' followed by 16 digits",
       })
-      .describe("Google AdSense client ID (required for ad integration)")
-      .optional(),
+      .describe("Google AdSense client ID (required for ad integration)"),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
