@@ -31,7 +31,7 @@ async function DashboardNavLink() {
       value="dashboard"
       key="dashboard"
       href="/dashboard"
-      className={ cn("flex", { "hidden": !sessionId})}
+      className={ cn("hidden", { "sm:flex": !sessionId})}
       label="Dashboard"
     />
   );
