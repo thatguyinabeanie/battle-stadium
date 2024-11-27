@@ -37,10 +37,12 @@ export function MainAppLinksMenu() {
               >
                 <>
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold text-primary uppercase">
+                    <span className="truncate font-semibold uppercase text-primary">
                       Battle Stadium
                     </span>
-                    <span className="truncate text-xs text-primary">Beanie LLC</span>
+                    <span className="truncate text-xs text-primary">
+                      Beanie LLC
+                    </span>
                   </div>
                 </>
 
@@ -48,8 +50,7 @@ export function MainAppLinksMenu() {
               </SidebarMenuButton>
             </DropdownMenuTrigger>
 
-            <NavLinksDropDownMenuContentMobile  />
-
+            <NavLinksDropDownMenuContentMobile />
           </DropdownMenu>
         </SidebarMenuItem>
       </SidebarMenu>
@@ -57,23 +58,23 @@ export function MainAppLinksMenu() {
   );
 }
 
-function NavLinksDropDownMenuContentMobile () {
+function NavLinksDropDownMenuContentMobile() {
   return (
     <DropDownMenuContentMobile>
       <DropdownMenuLabel className="text-xs text-muted-foreground">
         Teams
       </DropdownMenuLabel>
-      { NavbarItemsConfigs.map((navItem, index) => (
-        <Link key={ navItem.value } href={ `/${navItem.value}` }>
+      {NavbarItemsConfigs.map((navItem, index) => (
+        <Link key={navItem.value} href={`/${navItem.value}`}>
           <DropdownMenuItem className="gap-2 p-2">
             <div className="flex size-6 items-center justify-center rounded-sm border">
               <navItem.logo className="size-4 shrink-0" />
             </div>
-            { navItem.label }
-            <DropdownMenuShortcut>⌘{ index + 1 }</DropdownMenuShortcut>
+            {navItem.label}
+            <DropdownMenuShortcut>⌘{index + 1}</DropdownMenuShortcut>
           </DropdownMenuItem>
         </Link>
-      )) }
+      ))}
     </DropDownMenuContentMobile>
-  )
+  );
 }

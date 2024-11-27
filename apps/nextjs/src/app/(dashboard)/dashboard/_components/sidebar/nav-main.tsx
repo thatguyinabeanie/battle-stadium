@@ -24,9 +24,7 @@ import {
 
 export function NavMain() {
   if (navMainItems.length === 0) {
-    return (
-      <EmptyNavItems />
-    );
+    return <EmptyNavItems />;
   }
 
   return (
@@ -35,7 +33,9 @@ export function NavMain() {
         Platform
       </SidebarGroupLabel>
       <SidebarMenu>
-        {navMainItems.map((item) => (<CollapsibleMenuNavItem key={ item.title } item={ item } />))}
+        {navMainItems.map((item) => (
+          <CollapsibleMenuNavItem key={item.title} item={item} />
+        ))}
       </SidebarMenu>
     </SidebarGroup>
   );
@@ -56,32 +56,34 @@ interface CollapsibleMenuNavItemProps {
   item: NavMainItem;
 }
 
-function CollapsibleMenuNavItem ({ item }: CollapsibleMenuNavItemProps) {
+function CollapsibleMenuNavItem({ item }: CollapsibleMenuNavItemProps) {
   return (
     <Collapsible
       asChild
-      defaultOpen={ item.isActive }
+      defaultOpen={item.isActive}
       className="group/collapsible"
-      aria-expanded={ item.isActive }
-      aria-label={ `${item.title} navigation section` }
+      aria-expanded={item.isActive}
+      aria-label={`${item.title} navigation section`}
     >
       <SidebarMenuItem>
-        <SidebarMenuButtonCollapsibleTrigger item={ item } />
-        <SidebarMenuCollapsibleContent item={ item } />
+        <SidebarMenuButtonCollapsibleTrigger item={item} />
+        <SidebarMenuCollapsibleContent item={item} />
       </SidebarMenuItem>
     </Collapsible>
-  )
+  );
 }
 
-function SidebarMenuButtonCollapsibleTrigger({ item }: CollapsibleMenuNavItemProps) {
+function SidebarMenuButtonCollapsibleTrigger({
+  item,
+}: CollapsibleMenuNavItemProps) {
   return (
     <CollapsibleTrigger asChild>
       <SidebarMenuButton
-        tooltip={ item.title }
-        aria-current={ item.isActive ? "page" : undefined }
+        tooltip={item.title}
+        aria-current={item.isActive ? "page" : undefined}
       >
-        { item.icon ? <item.icon aria-hidden="true" /> : null }
-        <span>{ item.title }</span>
+        {item.icon ? <item.icon aria-hidden="true" /> : null}
+        <span>{item.title}</span>
         <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
       </SidebarMenuButton>
     </CollapsibleTrigger>
@@ -92,15 +94,15 @@ function SidebarMenuCollapsibleContent({ item }: CollapsibleMenuNavItemProps) {
   return (
     <CollapsibleContent>
       <SidebarMenuSub>
-        { item.items?.map((subItem) => (
-          <SidebarMenuSubItem key={ subItem.title }>
+        {item.items?.map((subItem) => (
+          <SidebarMenuSubItem key={subItem.title}>
             <SidebarMenuSubButton asChild>
-              <Link href={ subItem.url }>
-                <span>{ subItem.title }</span>
+              <Link href={subItem.url}>
+                <span>{subItem.title}</span>
               </Link>
             </SidebarMenuSubButton>
           </SidebarMenuSubItem>
-        )) }
+        ))}
       </SidebarMenuSub>
     </CollapsibleContent>
   );

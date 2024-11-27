@@ -1,19 +1,19 @@
 import { DashboardContentBody } from "../../_components/dashboard-content-body";
 import { DashboardContentSection } from "../../_components/dashboard-content-top-section";
 
-interface LayoutProps {
+interface DashboardOrgsLayoutProps {
   children: React.ReactNode;
   left: React.ReactNode;
   center: React.ReactNode;
   right: React.ReactNode;
 }
 
-export default function Content({
+export default function DashboardOrgsLayout({
   children,
   left,
   center,
   right,
-}: LayoutProps) {
+}: DashboardOrgsLayoutProps) {
   return (
     <>
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
