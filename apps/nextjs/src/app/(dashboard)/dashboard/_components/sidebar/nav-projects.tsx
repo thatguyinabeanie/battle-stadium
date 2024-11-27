@@ -39,14 +39,17 @@ export function NavProjects() {
     >
       <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
+
         {projects.map((item) => (
-          <SidebarMenuItem key={item.name}>
+
+          <SidebarMenuItem key={item.name} className="flex flex-row">
             <SidebarMenuButton asChild>
               <Link href={item.url} title={item.name} className="truncate">
                 <item.icon />
                 <span className="truncate">{item.name}</span>
               </Link>
             </SidebarMenuButton>
+
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuAction
@@ -64,8 +67,9 @@ export function NavProjects() {
                   <span className="sr-only">More</span>
                 </SidebarMenuAction>
               </DropdownMenuTrigger>
+
               <DropdownMenuContent
-                className={`max-h-[300px] w-48 overflow-y-auto rounded-lg ${touchStyles}`}
+                className={`max-h-[300px] w-48 overflow-y-auto rounded-lg bg-background ${touchStyles}`}
                 side={isMobile ? "bottom" : "right"}
                 align={isMobile ? "end" : "start"}
                 sideOffset={isMobile ? 8 : 2}
@@ -89,12 +93,17 @@ export function NavProjects() {
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
+
+
+
         <SidebarMenuItem>
           <SidebarMenuButton className="text-sidebar-foreground/70">
             <MoreHorizontal className="text-sidebar-foreground/70" />
             <span>More</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
+
+
       </SidebarMenu>
     </SidebarGroup>
   );
