@@ -13,6 +13,10 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
 } from "@battle-stadium/ui";
 
 export interface NavMainItem {
@@ -51,16 +55,32 @@ export function SidebarMenuButtonCollapsibleTrigger({
   item,
 }: CollapsibleMenuNavItemProps) {
   return (
-    <CollapsibleTrigger asChild>
-      <SidebarMenuButton
-        tooltip={item.title}
-        aria-current={item.isActive ? "page" : undefined}
+    <div className="flex flex-row">
+      <Link
+        href={item.url}
+        className="flex flex-row items-center gap-2 p-2 text-sm"
       >
         {item.icon ? <item.icon aria-hidden="true" /> : null}
-        <span>{item.title}</span>
-        <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-      </SidebarMenuButton>
-    </CollapsibleTrigger>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="max-w-28 truncate text-primary">
+                {item.title}
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>{item.title}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </Link>
+      <CollapsibleTrigger asChild>
+        <SidebarMenuButton
+          tooltip={item.title}
+          aria-current={item.isActive ? "page" : undefined}
+        >
+          <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+        </SidebarMenuButton>
+      </CollapsibleTrigger>
+    </div>
   );
 }
 
@@ -101,27 +121,28 @@ export function EmptyNavItems() {
   );
 }
 
+export const dashboardNavItem: NavMainItem = {
+  title: "Dashboard",
+  url: "/dashboard",
+  icon: SquareTerminal,
+  isActive: true,
+  items: [
+    {
+      title: "History",
+      url: "#",
+    },
+    {
+      title: "Starred",
+      url: "#",
+    },
+    {
+      title: "Settings",
+      url: "#",
+    },
+  ],
+};
+
 export const navMainItems: NavMainItem[] = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: SquareTerminal,
-    isActive: true,
-    items: [
-      {
-        title: "History",
-        url: "#",
-      },
-      {
-        title: "Starred",
-        url: "#",
-      },
-      {
-        title: "Settings",
-        url: "#",
-      },
-    ],
-  },
   {
     title: "Profiles",
     url: "/dashboard/profiles",
@@ -142,7 +163,7 @@ export const navMainItems: NavMainItem[] = [
     ],
   },
   {
-    title: "Pokemon Teams",
+    title: "Teams",
     url: "#",
     icon: BookOpen,
     items: [

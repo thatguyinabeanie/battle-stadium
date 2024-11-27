@@ -11,6 +11,7 @@ import type { NavMainItem } from "./components";
 import { getMyOrganizations } from "~/app/server-actions/organizations/actions";
 import {
   CollapsibleMenuNavItem,
+  dashboardNavItem,
   EmptyNavItems,
   navMainItems,
   SidebarMenuButtonCollapsibleTrigger,
@@ -25,11 +26,12 @@ export function NavMain() {
   return (
     <SidebarGroup>
       <SidebarMenu>
+        <DashboardCollapsibleNavItem />
+        <OrganizationsCollapsibleMenuNavItem />
+
         {navMainItems.map((item) => (
           <CollapsibleMenuNavItem key={item.title} item={item} />
         ))}
-
-        <OrganizationsCollapsibleMenuNavItem />
       </SidebarMenu>
     </SidebarGroup>
   );
@@ -59,6 +61,23 @@ async function OrganizationsCollapsibleMenuNavItem() {
       <SidebarMenuItem>
         <SidebarMenuButtonCollapsibleTrigger item={item} />
         <SidebarMenuCollapsibleContent item={item} />
+      </SidebarMenuItem>
+    </Collapsible>
+  );
+}
+
+function DashboardCollapsibleNavItem() {
+  return (
+    <Collapsible
+      asChild
+      defaultOpen={true}
+      className="group/collapsible"
+      aria-expanded={true}
+      aria-label="Organizations navigation section"
+    >
+      <SidebarMenuItem>
+        <SidebarMenuButtonCollapsibleTrigger item={dashboardNavItem} />
+        <SidebarMenuCollapsibleContent item={dashboardNavItem} />
       </SidebarMenuItem>
     </Collapsible>
   );
