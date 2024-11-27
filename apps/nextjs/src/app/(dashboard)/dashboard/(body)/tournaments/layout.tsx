@@ -1,5 +1,5 @@
-import { DashboardContentBody } from "../../_components/dashboard-content-body";
-import { DashboardContentSection } from "../../_components/dashboard-content-top-section";
+import { DashboardContentBody } from "~/app/(dashboard)/dashboard/_components/content/dashboard-content-body";
+import { DashboardContentSection } from "~/app/(dashboard)/dashboard/_components/content/dashboard-content-top-section";
 
 interface LayoutProps {
   children: React.ReactNode;
