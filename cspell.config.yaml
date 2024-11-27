@@ -33,13 +33,13 @@ dictionaries:
   - python
   - markdown
   - lorem-ipsum
-  - Magnifer
-  - thatguyinabeanie
 words:
   - nums
   - UNPOOLED
   - Unreads
   - UTSSR
   - uploadthing
+  - Magnifer
+  - thatguyinabeanie
 ignoreWords: []
 import: []
