@@ -1,7 +1,7 @@
-import { DashboardContentBody } from "./_components/dashboard-content-body";
-import { DashboardContentSection } from "./_components/dashboard-content-top-section";
+import { DashboardContentBody } from "../_components/dashboard-content-body";
+import { DashboardContentSection } from "../_components/dashboard-content-top-section";
 
-export default function DashboardProfiles() {
+export default function DashboardProfiles () {
   return (
     <section
       role="status"
