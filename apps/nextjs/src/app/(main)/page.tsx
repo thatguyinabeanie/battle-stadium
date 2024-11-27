@@ -5,6 +5,7 @@ import { title } from "~/components/miscellaneous/primitives";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 import AdBanner from "../_components/ad-banner";
 
+import { env } from "~/env";
 export const metadata: Metadata = {
   title: "battlestadium.gg",
 };
@@ -41,12 +42,16 @@ function FrontPageText() {
         </h2>
       </div>
 
-      <AdBanner
-        data-ad-slot="slotnumber"
-        data-full-width-responsive="true"
-        data-ad-layout="in-article"
-        data-ad-format="fluid"
-      />
+      {
+        env.SHOW_ADS && (
+          <AdBanner
+            data-ad-slot="slotnumber"
+            data-full-width-responsive="true"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+          />
+        )
+      }
     </div>
   );
 }
