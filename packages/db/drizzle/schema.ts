@@ -36,7 +36,7 @@ export const arInternalMetadata = pgTable("ar_internal_metadata", {
 export const tournaments = pgTable(
   "tournaments",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     name: varchar(),
     startAt: timestamp("start_at", { precision: 6, mode: "string" }),
     createdAt: timestamp("created_at", {
@@ -47,15 +47,15 @@ export const tournaments = pgTable(
       precision: 6,
       mode: "string",
     }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     organizationId: bigint("organization_id", { mode: "number" }),
     checkInStartAt: timestamp("check_in_start_at", {
       precision: 6,
       mode: "string",
     }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     gameId: bigint("game_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     formatId: bigint("format_id", { mode: "number" }),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
     registrationStartAt: timestamp("registration_start_at", {
@@ -75,10 +75,10 @@ export const tournaments = pgTable(
     endAt: timestamp("end_at", { precision: 6, mode: "string" }).default(
       sql`NULL`,
     ),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     limitlessId: bigint("limitless_id", { mode: "number" }),
     published: boolean().default(false).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     currentPhaseId: bigint("current_phase_id", { mode: "number" }),
   },
   (table) => {
@@ -138,7 +138,7 @@ export const tournaments = pgTable(
 export const organizations = pgTable(
   "organizations",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     name: varchar(),
     description: text(),
     createdAt: timestamp("created_at", {
@@ -153,9 +153,9 @@ export const organizations = pgTable(
     partner: boolean().default(false).notNull(),
     hidden: boolean().default(false).notNull(),
     slug: varchar(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     limitlessOrgId: bigint("limitless_org_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     ownerId: bigint("owner_id", { mode: "number" }),
   },
   (table) => {
@@ -184,15 +184,15 @@ export const organizations = pgTable(
 export const matches = pgTable(
   "matches",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     roundId: bigint("round_id", { mode: "number" }).notNull(),
     tableNumber: integer("table_number"),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     playerOneId: bigint("player_one_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     playerTwoId: bigint("player_two_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     winnerId: bigint("winner_id", { mode: "number" }),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -210,15 +210,15 @@ export const matches = pgTable(
       precision: 6,
       mode: "string",
     }).default(sql`NULL`),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     loserId: bigint("loser_id", { mode: "number" }),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     tournamentId: bigint("tournament_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     phaseId: bigint("phase_id", { mode: "number" }),
     bye: boolean().default(false).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     resetById: bigint("reset_by_id", { mode: "number" }),
   },
   (table) => {
@@ -306,8 +306,8 @@ export const matches = pgTable(
 export const players = pgTable(
   "players",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     tournamentId: bigint("tournament_id", { mode: "number" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -322,7 +322,7 @@ export const players = pgTable(
       .notNull(),
     checkedInAt: timestamp("checked_in_at", { mode: "string" }),
     inGameName: varchar("in_game_name").default("").notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     pokemonTeamId: bigint("pokemon_team_id", { mode: "number" }),
     dropped: boolean().default(false).notNull(),
     disqualified: boolean().default(false).notNull(),
@@ -331,9 +331,9 @@ export const players = pgTable(
     gameWins: integer("game_wins").default(0).notNull(),
     gameLosses: integer("game_losses").default(0).notNull(),
     resistance: numeric({ precision: 5, scale: 2 }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     accountId: bigint("account_id", { mode: "number" }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     profileId: bigint("profile_id", { mode: "number" }).notNull(),
     showCountryFlag: boolean("show_country_flag").default(true).notNull(),
   },
@@ -437,9 +437,9 @@ export const players = pgTable(
 export const formats = pgTable(
   "formats",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     name: varchar(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     gameId: bigint("game_id", { mode: "number" }),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -475,7 +475,7 @@ export const formats = pgTable(
 export const games = pgTable(
   "games",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     name: varchar(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -514,8 +514,8 @@ export const accounts = pgTable(
     imageUrl: text("image_url"),
     admin: boolean().default(false).notNull(),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     defaultProfileId: bigint("default_profile_id", { mode: "number" }),
     country: varchar(),
     timezone: varchar(),
@@ -549,8 +549,8 @@ export const accounts = pgTable(
 export const phases = pgTable(
   "phases",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     tournamentId: bigint("tournament_id", { mode: "number" }).notNull(),
     numberOfRounds: integer("number_of_rounds"),
     createdAt: timestamp("created_at", {
@@ -567,7 +567,7 @@ export const phases = pgTable(
     startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
     order: integer().default(0).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     currentRoundId: bigint("current_round_id", { mode: "number" }),
   },
   (table): Record<string, IndexBuilder | ForeignKeyBuilder> => {
@@ -600,12 +600,12 @@ export const phases = pgTable(
 export const matchGames = pgTable(
   "match_games",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     matchId: bigint("match_id", { mode: "number" }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     winnerId: bigint("winner_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     loserId: bigint("loser_id", { mode: "number" }),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -618,7 +618,7 @@ export const matchGames = pgTable(
     gameNumber: integer("game_number").default(1).notNull(),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
     startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     reporterProfileId: bigint("reporter_profile_id", { mode: "number" }),
   },
   (table) => {
@@ -662,10 +662,10 @@ export const matchGames = pgTable(
 export const tournamentFormats = pgTable(
   "tournament_formats",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     tournamentId: bigint("tournament_id", { mode: "number" }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     formatId: bigint("format_id", { mode: "number" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -699,8 +699,8 @@ export const tournamentFormats = pgTable(
 );
 
 export const rounds = pgTable("rounds", {
-  id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  id: bigserial({ mode: "number" }).primaryKey().notNull(),
+  // You can use { mode: "number" } if numbers are exceeding js number limitations
   phaseId: bigint("phase_id", { mode: "number" }).notNull(),
   createdAt: timestamp("created_at", {
     precision: 6,
@@ -718,8 +718,8 @@ export const rounds = pgTable("rounds", {
 export const organizationStaffMembers = pgTable(
   "organization_staff_members",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     organizationId: bigint("organization_id", { mode: "number" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -729,7 +729,7 @@ export const organizationStaffMembers = pgTable(
       precision: 6,
       mode: "string",
     }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     accountId: bigint("account_id", { mode: "number" }),
   },
   (table) => {
@@ -757,11 +757,11 @@ export const organizationStaffMembers = pgTable(
 export const phasePlayers = pgTable(
   "phase_players",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     playerId: bigint("player_id", { mode: "number" }).notNull(),
     phaseType: varchar("phase_type").notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     phaseId: bigint("phase_id", { mode: "number" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -793,7 +793,7 @@ export const phasePlayers = pgTable(
 export const pokemonTeams = pgTable(
   "pokemon_teams",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",
@@ -804,13 +804,13 @@ export const pokemonTeams = pgTable(
     }).notNull(),
     published: boolean().default(true).notNull(),
     name: varchar(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     formatId: bigint("format_id", { mode: "number" }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     gameId: bigint("game_id", { mode: "number" }).notNull(),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
     pokepasteId: varchar("pokepaste_id"),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     profileId: bigint("profile_id", { mode: "number" }),
   },
   (table) => {
@@ -859,7 +859,7 @@ export const pokemonTeams = pgTable(
 export const clerkUsers = pgTable(
   "clerk_users",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     clerkUserId: varchar("clerk_user_id").notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -869,7 +869,7 @@ export const clerkUsers = pgTable(
       precision: 6,
       mode: "string",
     }).notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     accountId: bigint("account_id", { mode: "number" }),
   },
   (table) => {
@@ -899,7 +899,7 @@ export const clerkUsers = pgTable(
 export const friendlyIdSlugs = pgTable(
   "friendly_id_slugs",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     slug: varchar().notNull(),
     sluggableId: integer("sluggable_id").notNull(),
     sluggableType: varchar("sluggable_type", { length: 50 }),
@@ -937,15 +937,15 @@ export const friendlyIdSlugs = pgTable(
 export const chatMessages = pgTable(
   "chat_messages",
   {
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     matchId: bigint("match_id", { mode: "number" }).notNull(),
     content: text(),
     messageType: varchar("message_type"),
     sentAt: timestamp("sent_at", { precision: 6, mode: "string" }),
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     accountId: bigint("account_id", { mode: "number" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     profileId: bigint("profile_id", { mode: "number" }).notNull(),
   },
   (table) => {
@@ -1006,9 +1006,9 @@ export const profiles = pgTable(
     imageUrl: varchar("image_url"),
     slug: varchar(),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     accountId: bigint("account_id", { mode: "number" }),
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     default: boolean().default(false).notNull(),
     type: varchar().default("Profile").notNull(),
   },
@@ -1038,7 +1038,7 @@ export const profiles = pgTable(
 export const pokemon = pgTable(
   "pokemon",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     species: varchar(),
     ability: varchar(),
     teraType: varchar("tera_type"),
@@ -1057,7 +1057,7 @@ export const pokemon = pgTable(
       mode: "string",
     }).notNull(),
     nickname: varchar(),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     pokemonTeamId: bigint("pokemon_team_id", { mode: "number" })
       .default(0)
       .notNull(),
@@ -1110,7 +1110,7 @@ export const pokemon = pgTable(
 export const rk9Tournaments = pgTable(
   "rk9_tournaments",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     rk9Id: varchar("rk9_id").notNull(),
     name: varchar().notNull(),
     startDate: date("start_date").notNull(),

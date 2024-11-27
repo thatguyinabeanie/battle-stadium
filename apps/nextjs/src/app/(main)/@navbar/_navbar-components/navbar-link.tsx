@@ -25,7 +25,7 @@ export const NavbarLink = forwardRef<
     key={value}
     ref={ref}
     href={href}
-    className={`${usePathClassName(href)} ${className}`}
+    className={cn(usePathClassName(href), className)}
     {...props}
   >
     {label}
