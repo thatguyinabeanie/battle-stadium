@@ -19,7 +19,7 @@ import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/react";
 import { HydrateClient } from "~/trpc/server";
-import { AdSenseScript } from "./_components/ad-sense";
+import { AdSenseScript } from "~/app/_components/ad-sense";
 
 const AwesomeParticles = dynamic(
   () => import("~/components/awesome-particles"),
@@ -73,7 +73,6 @@ export default function RootLayout({
       <ClerkProvider>
         <html lang="en" suppressHydrationWarning>
           <AdSenseScript />
-
           <body
             className={cn(
               "min-h-screen overflow-y-scroll bg-background font-sans text-foreground antialiased",
