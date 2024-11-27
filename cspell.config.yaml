@@ -17,6 +17,7 @@ ignorePaths:
   - packages/db/drizzle/schema.ts
   - code-rabbit-ai.yaml
   - .env*
+  - .env*
 dictionaryDefinitions: []
 dictionaries:
   - en_US
@@ -44,5 +45,7 @@ words:
   - Unreads
   - uploadthing
   - UTSSR
+  - Magnifer
+  - thatguyinabeanie
 ignoreWords: []
 import: []
