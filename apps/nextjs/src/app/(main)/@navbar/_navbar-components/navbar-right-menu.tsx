@@ -27,14 +27,7 @@ const solarUserLinearClassNames = "h-[30px] w-[30px]";
 export default function RightMenu() {
   return (
     <div className="flex flex-row items-center justify-end">
-      <Link passHref href="/search">
-        <Button
-          aria-label="Search"
-          className="flex items-center justify-center bg-transparent p-1"
-        >
-          <SolarMagniferLinear className={sharedClassNames} />
-        </Button>
-      </Link>
+      <SolarMagniferLinear className={sharedClassNames} />
 
       <Link prefetch={true} passHref href="/dashboard?tab=settings">
         <Button
