@@ -58,9 +58,10 @@ DropDownMenuContentMobile.displayName = "DropDownMenuContentMobile";
 export const ProjectsSidebarMenuAction = forwardRef<
 React.ComponentRef<typeof SidebarMenuAction>,
 React.ComponentPropsWithoutRef<typeof SidebarMenuAction>
->(   ({ children, ...props}) => {
+>(   ({ children, ...props}, ref) => {
   return (
     <SidebarMenuAction
+      ref={ref}
       showOnHover
       role="button"
       aria-label={ props["aria-label"] }
