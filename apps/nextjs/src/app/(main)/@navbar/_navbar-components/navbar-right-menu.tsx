@@ -20,11 +20,9 @@ import {
 } from "~/components/svg/icons";
 import UserMenuDropDown from "./user-menu/user-menu-dropdown";
 
-const sharedClassNames =
-  "h-[20px] w-[20px] md:h-[24px] md:w-[24px] lg:h-[30px] lg:w-[30px]";
+const sharedClassNames = "h-[28px] w-[28px]";
 
-const solarUserLinearClassNames =
-  "h-[24px] w-[24px] md:h-[30px] md:w-[30px] lg:h-[32px] lg:w-[32px]";
+const solarUserLinearClassNames = "h-[30px] w-[30px]";
 
 export default function RightMenu() {
   return (
@@ -86,9 +84,7 @@ async function SmartAvatar() {
     <Avatar aria-label="User's profile image" className="bg-transparent p-1">
       <AvatarImage
         src={user?.imageUrl}
-        className={
-          "h-[24px] w-[24px] md:h-[30px] md:w-[30px] lg:h-[32px] lg:w-[32px]"
-        }
+        className={"h-[30px] w-[30px]"}
       />
       <AvatarFallback>
         <SolarUserLinear className={solarUserLinearClassNames} />

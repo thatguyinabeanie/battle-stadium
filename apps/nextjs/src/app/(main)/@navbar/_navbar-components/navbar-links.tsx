@@ -17,10 +17,16 @@ export default function NavbarLinks() {
           label={label}
         />
       ))}
-      <Suspense fallback={null}>
-        <DashboardNavLink />
-      </Suspense>
+      <DashboardNavLinkSuspense />
     </div>
+  );
+}
+
+function DashboardNavLinkSuspense() {
+  return (
+    <Suspense fallback={null}>
+      <DashboardNavLink />
+    </Suspense>
   );
 }
 

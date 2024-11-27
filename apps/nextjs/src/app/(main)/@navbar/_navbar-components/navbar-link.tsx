@@ -33,7 +33,7 @@ export const NavbarLink = forwardRef<
 ));
 
 const BASE_CLASSNAMES =
-  "md:text-md rounded-md px-1 py-2 text-sm font-medium transition-colors lg:text-lg";
+  "md:text-md rounded-md px-1 py-2 font-medium transition-colors text-lg";
 const ACTIVE_CLASSNAMES = "bg-primary/10 text-primary";
 const INACTIVE_CLASSNAMES =
   "text-muted-foreground hover:bg-accent hover:text-accent-foreground";
