@@ -5,7 +5,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export interface ChildrenProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export interface PageTitleProps {

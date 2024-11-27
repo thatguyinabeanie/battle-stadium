@@ -39,7 +39,12 @@ export default function DashboardLayout({ children }: Readonly<ChildrenProps>) {
       </Sidebar>
       <SidebarInset className="border-l-[1px] bg-transparent">
         <DashboardHeader />
-        <Suspense fallback={<DashboardContentSkeleton />}>{children}</Suspense>
+        <Suspense fallback={<DashboardContentSkeleton />}>
+          {children}
+          <span className="sr-only">
+            Loading dashboard content, please wait...
+          </span>
+        </Suspense>
       </SidebarInset>
     </SidebarProvider>
   );
