@@ -16,7 +16,21 @@ ignorePaths:
   - "**/pnpm-workspace.yaml"
   - "packages/db/drizzle/schema.ts"
 dictionaryDefinitions: []
-dictionaries: []
+dictionaries:
+  - en_US
+  - companies
+  - softwareTerms
+  - misc
+  - typescript
+  - node
+  - html
+  - css
+  - bash
+  - npm
+  - filetypes
+  - python
+  - markdown
+  - lorem-ipsum
 words:
   - nums
   - Unreads
