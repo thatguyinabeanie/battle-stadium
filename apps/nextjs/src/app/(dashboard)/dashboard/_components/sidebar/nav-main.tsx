@@ -23,7 +23,6 @@ import {
 } from "@battle-stadium/ui";
 
 export function NavMain() {
-  console.log(navMainItems);
   if (navMainItems.length === 0) {
     return (
       <SidebarGroup>
