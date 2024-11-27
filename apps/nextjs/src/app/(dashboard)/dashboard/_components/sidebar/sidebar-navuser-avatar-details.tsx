@@ -33,8 +33,8 @@ async function SidebarNavUserDetailsAndAvatar() {
       </Avatar>
 
       <div className="grid flex-1 text-left text-sm leading-tight">
-        <span className="h-4 w-24  truncate font-semibold">{`${me?.first_name} ${me?.last_name}`}</span>
-        <span className="mt-1 h-3 w-16 truncate text-xs">{me?.username}</span>
+        <span className="h-4 min-w-[6rem] max-w-[12rem] truncate font-semibold">{`${me?.first_name} ${me?.last_name}`}</span>
+        <span className="mt-1 h-3 min-w-[4rem] max-w-[10rem] truncate text-xs">{me?.username}</span>
       </div>
     </>
   );
