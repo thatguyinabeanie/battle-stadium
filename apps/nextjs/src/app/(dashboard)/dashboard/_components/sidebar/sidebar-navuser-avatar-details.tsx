@@ -47,8 +47,8 @@ function SidebarNavUserDetailsAndAvatarSkeleton() {
       </Avatar>
 
       <div className="grid flex-1 text-left text-sm leading-tight">
-        <span className="truncate font-semibold">Loading...</span>
-        <span className="truncate text-xs">Loading...</span>
+        <span className="h-4 w-24 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
+        <span className="mt-1 h-3 w-16 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
       </div>
     </>
   );
