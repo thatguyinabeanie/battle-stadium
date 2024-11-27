@@ -36,7 +36,7 @@ export const arInternalMetadata = pgTable("ar_internal_metadata", {
 export const tournaments = pgTable(
   "tournaments",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     name: varchar(),
     startAt: timestamp("start_at", { precision: 6, mode: "string" }),
     createdAt: timestamp("created_at", {
@@ -47,15 +47,15 @@ export const tournaments = pgTable(
       precision: 6,
       mode: "string",
     }).notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     organizationId: bigint("organization_id", { mode: "number" }),
     checkInStartAt: timestamp("check_in_start_at", {
       precision: 6,
       mode: "string",
     }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     gameId: bigint("game_id", { mode: "number" }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     formatId: bigint("format_id", { mode: "number" }),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
     registrationStartAt: timestamp("registration_start_at", {
@@ -75,33 +75,47 @@ export const tournaments = pgTable(
     endAt: timestamp("end_at", { precision: 6, mode: "string" }).default(
       sql`NULL`,
     ),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     limitlessId: bigint("limitless_id", { mode: "number" }),
     published: boolean().default(false).notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     currentPhaseId: bigint("current_phase_id", { mode: "number" }),
   },
   (table): Record<string, IndexBuilder | ForeignKeyBuilder> => {
     return {
-      indexTournamentsOnCurrentPhaseId: index(
-        "index_tournaments_on_current_phase_id",
-      ).using("btree", table.currentPhaseId.asc().nullsLast().op("int8_ops")),
-      indexTournamentsOnFormatId: index("index_tournaments_on_format_id").using(
+      indexTournamentsOnFormatIdAndStartAt: index(
+        "index_tournaments_on_format_id_and_start_at",
+      ).using(
         "btree",
-        table.formatId.asc().nullsLast().op("int8_ops"),
+        table.formatId.asc().nullsLast().op("timestamp_ops"),
+        table.startAt.asc().nullsLast().op("int8_ops"),
       ),
-      indexTournamentsOnGameId: index("index_tournaments_on_game_id").using(
+      indexTournamentsOnGameIdAndStartAt: index(
+        "index_tournaments_on_game_id_and_start_at",
+      ).using(
         "btree",
-        table.gameId.asc().nullsLast().op("int8_ops"),
+        table.gameId.asc().nullsLast().op("timestamp_ops"),
+        table.startAt.asc().nullsLast().op("timestamp_ops"),
       ),
       indexTournamentsOnLimitlessId: uniqueIndex(
         "index_tournaments_on_limitless_id",
       )
         .using("btree", table.limitlessId.asc().nullsLast().op("int8_ops"))
         .where(sql`(limitless_id IS NOT NULL)`),
-      indexTournamentsOnOrganizationId: index(
-        "index_tournaments_on_organization_id",
-      ).using("btree", table.organizationId.asc().nullsLast().op("int8_ops")),
+      indexTournamentsOnOrganizationIdAndStartAt: index(
+        "index_tournaments_on_organization_id_and_start_at",
+      ).using(
+        "btree",
+        table.organizationId.asc().nullsLast().op("timestamp_ops"),
+        table.startAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      indexTournamentsOnPublished: index(
+        "index_tournaments_on_published",
+      ).using("btree", table.published.asc().nullsLast().op("bool_ops")),
+      indexTournamentsOnStartAt: index("index_tournaments_on_start_at").using(
+        "btree",
+        table.startAt.asc().nullsLast().op("timestamp_ops"),
+      ),
       fkRails325Ccadea6: foreignKey({
         columns: [table.organizationId],
         foreignColumns: [organizations.id],
@@ -124,7 +138,7 @@ export const tournaments = pgTable(
 export const organizations = pgTable(
   "organizations",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     name: varchar(),
     description: text(),
     createdAt: timestamp("created_at", {
@@ -139,9 +153,9 @@ export const organizations = pgTable(
     partner: boolean().default(false).notNull(),
     hidden: boolean().default(false).notNull(),
     slug: varchar(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     limitlessOrgId: bigint("limitless_org_id", { mode: "number" }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     ownerId: bigint("owner_id", { mode: "number" }),
   },
   (table) => {
@@ -152,6 +166,9 @@ export const organizations = pgTable(
       indexOrganizationsOnOwnerId: index(
         "index_organizations_on_owner_id",
       ).using("btree", table.ownerId.asc().nullsLast().op("int8_ops")),
+      indexOrganizationsOnPartner: index(
+        "index_organizations_on_partner",
+      ).using("btree", table.partner.asc().nullsLast().op("bool_ops")),
       indexOrganizationsOnSlug: uniqueIndex(
         "index_organizations_on_slug",
       ).using("btree", table.slug.asc().nullsLast().op("text_ops")),
@@ -167,15 +184,15 @@ export const organizations = pgTable(
 export const matches = pgTable(
   "matches",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     roundId: bigint("round_id", { mode: "number" }).notNull(),
     tableNumber: integer("table_number"),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     playerOneId: bigint("player_one_id", { mode: "number" }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     playerTwoId: bigint("player_two_id", { mode: "number" }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     winnerId: bigint("winner_id", { mode: "number" }),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -193,19 +210,28 @@ export const matches = pgTable(
       precision: 6,
       mode: "string",
     }).default(sql`NULL`),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     loserId: bigint("loser_id", { mode: "number" }),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     tournamentId: bigint("tournament_id", { mode: "number" }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     phaseId: bigint("phase_id", { mode: "number" }),
     bye: boolean().default(false).notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     resetById: bigint("reset_by_id", { mode: "number" }),
   },
   (table) => {
     return {
+      idxOnTournamentIdPhaseIdRoundIdTableNumber8Acf8Fd66A: index(
+        "idx_on_tournament_id_phase_id_round_id_table_number_8acf8fd66a",
+      ).using(
+        "btree",
+        table.tournamentId.asc().nullsLast().op("int8_ops"),
+        table.phaseId.asc().nullsLast().op("int4_ops"),
+        table.roundId.asc().nullsLast().op("int8_ops"),
+        table.tableNumber.asc().nullsLast().op("int4_ops"),
+      ),
       indexMatchesOnLoserId: index("index_matches_on_loser_id").using(
         "btree",
         table.loserId.asc().nullsLast().op("int8_ops"),
@@ -222,17 +248,12 @@ export const matches = pgTable(
         "btree",
         table.playerTwoId.asc().nullsLast().op("int8_ops"),
       ),
-      indexMatchesOnRoundAndPlayersUnique: uniqueIndex(
-        "index_matches_on_round_and_players_unique",
+      indexMatchesOnTournamentIdAndCreatedAt: index(
+        "index_matches_on_tournament_id_and_created_at",
       ).using(
         "btree",
-        table.roundId.asc().nullsLast().op("int8_ops"),
-        table.playerOneId.asc().nullsLast().op("int8_ops"),
-        table.playerTwoId.asc().nullsLast().op("int8_ops"),
-      ),
-      indexMatchesOnTournamentId: index("index_matches_on_tournament_id").using(
-        "btree",
-        table.tournamentId.asc().nullsLast().op("int8_ops"),
+        table.tournamentId.asc().nullsLast().op("timestamp_ops"),
+        table.createdAt.asc().nullsLast().op("int8_ops"),
       ),
       indexMatchesOnWinnerId: index("index_matches_on_winner_id").using(
         "btree",
@@ -285,8 +306,8 @@ export const matches = pgTable(
 export const players = pgTable(
   "players",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     tournamentId: bigint("tournament_id", { mode: "number" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -301,7 +322,7 @@ export const players = pgTable(
       .notNull(),
     checkedInAt: timestamp("checked_in_at", { mode: "string" }),
     inGameName: varchar("in_game_name").default("").notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     pokemonTeamId: bigint("pokemon_team_id", { mode: "number" }),
     dropped: boolean().default(false).notNull(),
     disqualified: boolean().default(false).notNull(),
@@ -310,9 +331,9 @@ export const players = pgTable(
     gameWins: integer("game_wins").default(0).notNull(),
     gameLosses: integer("game_losses").default(0).notNull(),
     resistance: numeric({ precision: 5, scale: 2 }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     accountId: bigint("account_id", { mode: "number" }).notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     profileId: bigint("profile_id", { mode: "number" }).notNull(),
     showCountryFlag: boolean("show_country_flag").default(true).notNull(),
   },
@@ -322,9 +343,27 @@ export const players = pgTable(
         "btree",
         table.accountId.asc().nullsLast().op("int8_ops"),
       ),
+      indexPlayersOnAccountIdAndCreatedAt: index(
+        "index_players_on_account_id_and_created_at",
+      ).using(
+        "btree",
+        table.accountId.asc().nullsLast().op("int8_ops"),
+        table.createdAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      indexPlayersOnCheckedInAt: index("index_players_on_checked_in_at").using(
+        "btree",
+        table.checkedInAt.asc().nullsLast().op("timestamp_ops"),
+      ),
       indexPlayersOnPokemonTeamId: index(
         "index_players_on_pokemon_team_id",
       ).using("btree", table.pokemonTeamId.asc().nullsLast().op("int8_ops")),
+      indexPlayersOnProfileIdAndCreatedAt: index(
+        "index_players_on_profile_id_and_created_at",
+      ).using(
+        "btree",
+        table.profileId.asc().nullsLast().op("timestamp_ops"),
+        table.createdAt.asc().nullsLast().op("timestamp_ops"),
+      ),
       indexPlayersOnTournamentAndAccount: uniqueIndex(
         "index_players_on_tournament_and_account",
       ).using(
@@ -332,16 +371,44 @@ export const players = pgTable(
         table.tournamentId.asc().nullsLast().op("int8_ops"),
         table.accountId.asc().nullsLast().op("int8_ops"),
       ),
-      indexPlayersOnTournamentAndProfile: uniqueIndex(
-        "index_players_on_tournament_and_profile",
-      ).using(
-        "btree",
-        table.tournamentId.asc().nullsLast().op("int8_ops"),
-        table.profileId.asc().nullsLast().op("int8_ops"),
-      ),
       indexPlayersOnTournamentId: index("index_players_on_tournament_id").using(
         "btree",
         table.tournamentId.asc().nullsLast().op("int8_ops"),
+      ),
+      indexPlayersOnTournamentIdAndCheckedInAt: index(
+        "index_players_on_tournament_id_and_checked_in_at",
+      ).using(
+        "btree",
+        table.tournamentId.asc().nullsLast().op("timestamp_ops"),
+        table.checkedInAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      indexPlayersOnTournamentIdAndDisqualified: index(
+        "index_players_on_tournament_id_and_disqualified",
+      ).using(
+        "btree",
+        table.tournamentId.asc().nullsLast().op("bool_ops"),
+        table.disqualified.asc().nullsLast().op("bool_ops"),
+      ),
+      indexPlayersOnTournamentIdAndDropped: index(
+        "index_players_on_tournament_id_and_dropped",
+      ).using(
+        "btree",
+        table.tournamentId.asc().nullsLast().op("bool_ops"),
+        table.dropped.asc().nullsLast().op("int8_ops"),
+      ),
+      indexPlayersOnTournamentIdAndRoundWins: index(
+        "index_players_on_tournament_id_and_round_wins",
+      ).using(
+        "btree",
+        table.tournamentId.asc().nullsLast().op("int4_ops"),
+        table.roundWins.asc().nullsLast().op("int8_ops"),
+      ),
+      indexPlayersOnTournamentIdAndTeamSheetSubmitted: index(
+        "index_players_on_tournament_id_and_team_sheet_submitted",
+      ).using(
+        "btree",
+        table.tournamentId.asc().nullsLast().op("int8_ops"),
+        table.teamSheetSubmitted.asc().nullsLast().op("int8_ops"),
       ),
       fkRails12F8141A7C: foreignKey({
         columns: [table.tournamentId],
@@ -370,9 +437,9 @@ export const players = pgTable(
 export const formats = pgTable(
   "formats",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     name: varchar(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     gameId: bigint("game_id", { mode: "number" }),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -408,7 +475,7 @@ export const formats = pgTable(
 export const games = pgTable(
   "games",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     name: varchar(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -447,14 +514,25 @@ export const accounts = pgTable(
     imageUrl: text("image_url"),
     admin: boolean().default(false).notNull(),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     defaultProfileId: bigint("default_profile_id", { mode: "number" }),
     country: varchar(),
     timezone: varchar(),
   },
   (table): Record<string, IndexBuilder | ForeignKeyBuilder> => {
     return {
+      indexAccountsOnArchivedAt: index("index_accounts_on_archived_at").using(
+        "btree",
+        table.archivedAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      indexAccountsOnCreatedAt: index("index_accounts_on_created_at").using(
+        "btree",
+        table.createdAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      indexAccountsOnDefaultProfileId: uniqueIndex(
+        "index_accounts_on_default_profile_id",
+      ).using("btree", table.defaultProfileId.asc().nullsLast().op("int8_ops")),
       indexAccountsOnEmail: uniqueIndex("index_accounts_on_email").using(
         "btree",
         table.email.asc().nullsLast().op("text_ops"),
@@ -471,8 +549,8 @@ export const accounts = pgTable(
 export const phases = pgTable(
   "phases",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     tournamentId: bigint("tournament_id", { mode: "number" }).notNull(),
     numberOfRounds: integer("number_of_rounds"),
     createdAt: timestamp("created_at", {
@@ -489,17 +567,17 @@ export const phases = pgTable(
     startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
     order: integer().default(0).notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     currentRoundId: bigint("current_round_id", { mode: "number" }),
   },
   (table) => {
     return {
-      indexPhasesOnCurrentRoundId: index(
-        "index_phases_on_current_round_id",
-      ).using("btree", table.currentRoundId.asc().nullsLast().op("int8_ops")),
-      indexPhasesOnTournamentId: index("index_phases_on_tournament_id").using(
+      indexPhasesOnTournamentIdAndOrder: index(
+        "index_phases_on_tournament_id_and_order",
+      ).using(
         "btree",
-        table.tournamentId.asc().nullsLast().op("int8_ops"),
+        table.tournamentId.asc().nullsLast().op("int4_ops"),
+        table.order.asc().nullsLast().op("int4_ops"),
       ),
       indexPhasesOnType: index("index_phases_on_type").using(
         "btree",
@@ -522,12 +600,12 @@ export const phases = pgTable(
 export const matchGames = pgTable(
   "match_games",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     matchId: bigint("match_id", { mode: "number" }).notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     winnerId: bigint("winner_id", { mode: "number" }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     loserId: bigint("loser_id", { mode: "number" }),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -540,7 +618,7 @@ export const matchGames = pgTable(
     gameNumber: integer("game_number").default(1).notNull(),
     endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
     startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     reporterProfileId: bigint("reporter_profile_id", { mode: "number" }),
   },
   (table) => {
@@ -584,10 +662,10 @@ export const matchGames = pgTable(
 export const tournamentFormats = pgTable(
   "tournament_formats",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     tournamentId: bigint("tournament_id", { mode: "number" }).notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     formatId: bigint("format_id", { mode: "number" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -620,46 +698,28 @@ export const tournamentFormats = pgTable(
   },
 );
 
-export const rounds = pgTable(
-  "rounds",
-  {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
-    phaseId: bigint("phase_id", { mode: "number" }).notNull(),
-    createdAt: timestamp("created_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    updatedAt: timestamp("updated_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    roundNumber: integer("round_number").default(1).notNull(),
-    startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
-    endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
-  },
-  (table) => {
-    return {
-      indexRoundsOnPhaseId: index("index_rounds_on_phase_id").using(
-        "btree",
-        table.phaseId.asc().nullsLast().op("int8_ops"),
-      ),
-      indexRoundsOnPhaseIdAndRoundNumber: uniqueIndex(
-        "index_rounds_on_phase_id_and_round_number",
-      ).using(
-        "btree",
-        table.phaseId.asc().nullsLast().op("int4_ops"),
-        table.roundNumber.asc().nullsLast().op("int4_ops"),
-      ),
-    };
-  },
-);
+export const rounds = pgTable("rounds", {
+  id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+  // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+  phaseId: bigint("phase_id", { mode: "number" }).notNull(),
+  createdAt: timestamp("created_at", {
+    precision: 6,
+    mode: "string",
+  }).notNull(),
+  updatedAt: timestamp("updated_at", {
+    precision: 6,
+    mode: "string",
+  }).notNull(),
+  roundNumber: integer("round_number").default(1).notNull(),
+  startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
+  endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
+});
 
 export const organizationStaffMembers = pgTable(
   "organization_staff_members",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     organizationId: bigint("organization_id", { mode: "number" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -669,7 +729,7 @@ export const organizationStaffMembers = pgTable(
       precision: 6,
       mode: "string",
     }).notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     accountId: bigint("account_id", { mode: "number" }),
   },
   (table) => {
@@ -697,11 +757,11 @@ export const organizationStaffMembers = pgTable(
 export const phasePlayers = pgTable(
   "phase_players",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     playerId: bigint("player_id", { mode: "number" }).notNull(),
     phaseType: varchar("phase_type").notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     phaseId: bigint("phase_id", { mode: "number" }).notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -714,15 +774,12 @@ export const phasePlayers = pgTable(
   },
   (table) => {
     return {
-      indexPhasePlayersOnPlayerId: index(
-        "index_phase_players_on_player_id",
-      ).using("btree", table.playerId.asc().nullsLast().op("int8_ops")),
-      indexTournamentPhasePlayersOnPhase: index(
-        "index_tournament_phase_players_on_phase",
+      indexPhasePlayersOnPhaseIdAndPlayerId: index(
+        "index_phase_players_on_phase_id_and_player_id",
       ).using(
         "btree",
-        table.phaseType.asc().nullsLast().op("int8_ops"),
         table.phaseId.asc().nullsLast().op("int8_ops"),
+        table.playerId.asc().nullsLast().op("int8_ops"),
       ),
       fkRailsF772A83198: foreignKey({
         columns: [table.playerId],
@@ -736,7 +793,7 @@ export const phasePlayers = pgTable(
 export const pokemonTeams = pgTable(
   "pokemon_teams",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",
@@ -747,23 +804,38 @@ export const pokemonTeams = pgTable(
     }).notNull(),
     published: boolean().default(true).notNull(),
     name: varchar(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     formatId: bigint("format_id", { mode: "number" }).notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     gameId: bigint("game_id", { mode: "number" }).notNull(),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
     pokepasteId: varchar("pokepaste_id"),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     profileId: bigint("profile_id", { mode: "number" }),
   },
   (table) => {
     return {
-      indexPokemonTeamsOnFormatId: index(
-        "index_pokemon_teams_on_format_id",
-      ).using("btree", table.formatId.asc().nullsLast().op("int8_ops")),
-      indexPokemonTeamsOnGameId: index("index_pokemon_teams_on_game_id").using(
+      indexPokemonTeamsOnFormatIdAndCreatedAt: index(
+        "index_pokemon_teams_on_format_id_and_created_at",
+      ).using(
+        "btree",
+        table.formatId.asc().nullsLast().op("int8_ops"),
+        table.createdAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      indexPokemonTeamsOnGameIdAndFormatIdAndCreatedAt: index(
+        "index_pokemon_teams_on_game_id_and_format_id_and_created_at",
+      ).using(
         "btree",
         table.gameId.asc().nullsLast().op("int8_ops"),
+        table.formatId.asc().nullsLast().op("timestamp_ops"),
+        table.createdAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      indexPokemonTeamsOnProfileIdAndArchivedAt: index(
+        "index_pokemon_teams_on_profile_id_and_archived_at",
+      ).using(
+        "btree",
+        table.profileId.asc().nullsLast().op("timestamp_ops"),
+        table.archivedAt.asc().nullsLast().op("int8_ops"),
       ),
       fkRails6E351688B8: foreignKey({
         columns: [table.formatId],
@@ -787,7 +859,7 @@ export const pokemonTeams = pgTable(
 export const clerkUsers = pgTable(
   "clerk_users",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     clerkUserId: varchar("clerk_user_id").notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -797,7 +869,7 @@ export const clerkUsers = pgTable(
       precision: 6,
       mode: "string",
     }).notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     accountId: bigint("account_id", { mode: "number" }),
   },
   (table) => {
@@ -805,6 +877,13 @@ export const clerkUsers = pgTable(
       indexClerkUsersOnAccountId: index(
         "index_clerk_users_on_account_id",
       ).using("btree", table.accountId.asc().nullsLast().op("int8_ops")),
+      indexClerkUsersOnAccountIdAndClerkUserId: uniqueIndex(
+        "index_clerk_users_on_account_id_and_clerk_user_id",
+      ).using(
+        "btree",
+        table.accountId.asc().nullsLast().op("text_ops"),
+        table.clerkUserId.asc().nullsLast().op("int8_ops"),
+      ),
       indexClerkUsersOnClerkUserId: uniqueIndex(
         "index_clerk_users_on_clerk_user_id",
       ).using("btree", table.clerkUserId.asc().nullsLast().op("text_ops")),
@@ -820,7 +899,7 @@ export const clerkUsers = pgTable(
 export const friendlyIdSlugs = pgTable(
   "friendly_id_slugs",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     slug: varchar().notNull(),
     sluggableId: integer("sluggable_id").notNull(),
     sluggableType: varchar("sluggable_type", { length: 50 }),
@@ -858,15 +937,15 @@ export const friendlyIdSlugs = pgTable(
 export const chatMessages = pgTable(
   "chat_messages",
   {
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     matchId: bigint("match_id", { mode: "number" }).notNull(),
     content: text(),
     messageType: varchar("message_type"),
     sentAt: timestamp("sent_at", { precision: 6, mode: "string" }),
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     accountId: bigint("account_id", { mode: "number" }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     profileId: bigint("profile_id", { mode: "number" }).notNull(),
   },
   (table) => {
@@ -877,6 +956,22 @@ export const chatMessages = pgTable(
       indexChatMessagesOnMatchId: index(
         "index_chat_messages_on_match_id",
       ).using("btree", table.matchId.asc().nullsLast().op("int8_ops")),
+      indexChatMessagesOnMatchIdAndAccountIdAndSentAt: index(
+        "index_chat_messages_on_match_id_and_account_id_and_sent_at",
+      ).using(
+        "btree",
+        table.matchId.asc().nullsLast().op("int8_ops"),
+        table.accountId.asc().nullsLast().op("timestamp_ops"),
+        table.sentAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      indexChatMessagesOnMatchIdAndProfileIdAndSentAt: index(
+        "index_chat_messages_on_match_id_and_profile_id_and_sent_at",
+      ).using(
+        "btree",
+        table.matchId.asc().nullsLast().op("timestamp_ops"),
+        table.profileId.asc().nullsLast().op("timestamp_ops"),
+        table.sentAt.asc().nullsLast().op("timestamp_ops"),
+      ),
       fkRailsF9Ae4172Ee: foreignKey({
         columns: [table.matchId],
         foreignColumns: [matches.id],
@@ -911,9 +1006,9 @@ export const profiles = pgTable(
     imageUrl: varchar("image_url"),
     slug: varchar(),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     accountId: bigint("account_id", { mode: "number" }),
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     default: boolean().default(false).notNull(),
     type: varchar().default("Profile").notNull(),
   },
@@ -943,7 +1038,7 @@ export const profiles = pgTable(
 export const pokemon = pgTable(
   "pokemon",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     species: varchar(),
     ability: varchar(),
     teraType: varchar("tera_type"),
@@ -962,7 +1057,7 @@ export const pokemon = pgTable(
       mode: "string",
     }).notNull(),
     nickname: varchar(),
-    // You can use { mode: "number" } if numbers are exceeding js number limitations
+    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
     pokemonTeamId: bigint("pokemon_team_id", { mode: "number" })
       .default(0)
       .notNull(),
@@ -985,15 +1080,23 @@ export const pokemon = pgTable(
   },
   (table) => {
     return {
-      indexPokemonOnPokemonTeamId: index(
-        "index_pokemon_on_pokemon_team_id",
-      ).using("btree", table.pokemonTeamId.asc().nullsLast().op("int8_ops")),
       indexPokemonOnPokemonTeamIdAndPosition: uniqueIndex(
         "index_pokemon_on_pokemon_team_id_and_position",
       ).using(
         "btree",
         table.pokemonTeamId.asc().nullsLast().op("int4_ops"),
         table.position.asc().nullsLast().op("int4_ops"),
+      ),
+      indexPokemonOnPokemonTeamIdAndSpecies: index(
+        "index_pokemon_on_pokemon_team_id_and_species",
+      ).using(
+        "btree",
+        table.pokemonTeamId.asc().nullsLast().op("int8_ops"),
+        table.species.asc().nullsLast().op("text_ops"),
+      ),
+      indexPokemonOnSpecies: index("index_pokemon_on_species").using(
+        "btree",
+        table.species.asc().nullsLast().op("text_ops"),
       ),
       fkRails5Fae4Aaee4: foreignKey({
         columns: [table.pokemonTeamId],
@@ -1007,7 +1110,7 @@ export const pokemon = pgTable(
 export const rk9Tournaments = pgTable(
   "rk9_tournaments",
   {
-    id: bigserial({ mode: "number" }).primaryKey().notNull(),
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
     rk9Id: varchar("rk9_id").notNull(),
     name: varchar().notNull(),
     startDate: date("start_date").notNull(),
