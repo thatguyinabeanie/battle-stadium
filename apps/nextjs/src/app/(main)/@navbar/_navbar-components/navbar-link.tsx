@@ -32,17 +32,17 @@ export const NavbarLink = forwardRef<
   </Link>
 ));
 
-const BASE_CLASSNAMES = "md:text-md rounded-md px-1 py-2 text-sm font-medium transition-colors lg:text-lg";
+const BASE_CLASSNAMES =
+  "md:text-md rounded-md px-1 py-2 text-sm font-medium transition-colors lg:text-lg";
 const ACTIVE_CLASSNAMES = "bg-primary/10 text-primary";
-const INACTIVE_CLASSNAMES = "text-muted-foreground hover:bg-accent hover:text-accent-foreground";
+const INACTIVE_CLASSNAMES =
+  "text-muted-foreground hover:bg-accent hover:text-accent-foreground";
 function usePathClassName(href: `/${string}`) {
   const pathname = usePathname();
 
-  return cn(BASE_CLASSNAMES,
-    {
-      [ACTIVE_CLASSNAMES]: pathname === href,
-      [INACTIVE_CLASSNAMES]: pathname !== href,
-    },
-  );
+  return cn(BASE_CLASSNAMES, {
+    [ACTIVE_CLASSNAMES]: pathname === href,
+    [INACTIVE_CLASSNAMES]: pathname !== href,
+  });
 }
 export default NavbarLink;
