@@ -13,7 +13,7 @@ import {
 import type { ChildrenProps } from "~/types";
 import DashboardContentSkeleton from "~/app/(dashboard)/dashboard/_components/content/dashboard-content-skeleton";
 import DashboardHeader from "~/app/(dashboard)/dashboard/_components/content/dashboard-header";
-import { NavMain } from "./_components/sidebar/nav-main";
+import { NavMain } from "./_components/sidebar/nav-main/nav-main";
 import { MainAppLinksMenu } from "./_components/sidebar/nav-menu-switcher";
 import { NavProjects } from "./_components/sidebar/nav-projects";
 import { NavUserComponent } from "./_components/sidebar/nav-user";
