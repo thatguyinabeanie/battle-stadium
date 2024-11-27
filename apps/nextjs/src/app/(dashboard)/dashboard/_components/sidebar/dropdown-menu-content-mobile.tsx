@@ -26,3 +26,4 @@ export const DropDownMenuContentMobile = forwardRef<
     </DropdownMenuContent>
   );
 });
+DropDownMenuContentMobile.displayName = "DropDownMenuContentMobile";
