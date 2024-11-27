@@ -22,7 +22,8 @@ async function SidebarNavUserDetailsAndAvatar() {
     <>
       <Avatar className="h-8 w-8 rounded-lg">
         <AvatarImage
-          src={user?.imageUrl ?? me?.image_url ?? DEFAULT_AVATAR}
+          className="h-[30px] w-[30px]"
+          src={ user?.imageUrl ?? me?.image_url ?? DEFAULT_AVATAR}
           alt={me?.first_name}
         />
 
@@ -32,8 +33,8 @@ async function SidebarNavUserDetailsAndAvatar() {
       </Avatar>
 
       <div className="grid flex-1 text-left text-sm leading-tight">
-        <span className="truncate font-semibold">{`${me?.first_name} ${me?.last_name}`}</span>
-        <span className="truncate text-xs">{me?.username}</span>
+        <span className="h-4 w-24  truncate font-semibold">{`${me?.first_name} ${me?.last_name}`}</span>
+        <span className="mt-1 h-3 w-16 truncate text-xs">{me?.username}</span>
       </div>
     </>
   );
