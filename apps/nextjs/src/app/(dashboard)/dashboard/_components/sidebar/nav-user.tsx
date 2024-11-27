@@ -19,7 +19,7 @@ import {
   SidebarMenuItem,
 } from "@battle-stadium/ui";
 
-import { DropDownMenuContentMobile } from "./dropdown-menu-content-mobile";
+import { DropDownMenuContentMobile } from "./side-bar-client-components";
 import { SidebarNavUserDetailsAndAvatarSuspense } from "./sidebar-navuser-avatar-details";
 
 export function NavUserComponent() {

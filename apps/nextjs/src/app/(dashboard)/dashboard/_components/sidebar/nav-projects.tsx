@@ -1,5 +1,3 @@
-"use client";
-
 import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import {
@@ -14,24 +12,20 @@ import {
 
 import {
   DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@battle-stadium/ui";
+import { ProjectsDropDownMenuContentMobile, ProjectsSidebarMenuAction } from "./side-bar-client-components";
 
 ///Add touch-friendly styles for mobile +
 
 export function NavProjects() {
-  const { isMobile } = useSidebar();
-  const touchStyles = isMobile ? "min-h-[44px] active:bg-accent/80" : "";
   return (
     <SidebarGroup
       className="group-data-[collapsible=icon]:hidden"
@@ -52,30 +46,14 @@ export function NavProjects() {
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuAction
-                  showOnHover
-                  role="button"
-                  aria-label={`More actions for ${item.name}`}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      e.currentTarget.click();
-                    }
-                  }}
+                <ProjectsSidebarMenuAction
                 >
                   <MoreHorizontal />
                   <span className="sr-only">More</span>
-                </SidebarMenuAction>
+                </ProjectsSidebarMenuAction>
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent
-                className={`max-h-[300px] w-48 overflow-y-auto rounded-lg bg-background ${touchStyles}`}
-                side={isMobile ? "bottom" : "right"}
-                align={isMobile ? "end" : "start"}
-                sideOffset={isMobile ? 8 : 2}
-                alignOffset={-4}
-                avoidCollisions
-              >
+              <ProjectsDropDownMenuContentMobile >
                 <DropdownMenuItem>
                   <Folder className="text-muted-foreground" />
                   <span>View Project</span>
@@ -89,12 +67,10 @@ export function NavProjects() {
                   <Trash2 className="text-muted-foreground" />
                   <span>Delete Project</span>
                 </DropdownMenuItem>
-              </DropdownMenuContent>
+              </ProjectsDropDownMenuContentMobile>
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-
-
 
         <SidebarMenuItem>
           <SidebarMenuButton className="text-sidebar-foreground/70">
