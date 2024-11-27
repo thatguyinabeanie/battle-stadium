@@ -256,7 +256,7 @@ export const games = pgTable("games", {
   name: varchar(),
   createdAt: timestamp("created_at", { precision: 6, mode: 'string' }).notNull(),
   updatedAt: timestamp("updated_at", { precision: 6, mode: 'string' }).notNull(),
-}, (table) => {
+}, (_table) => {
   return {
     indexGamesOnLowerName: uniqueIndex("index_games_on_lower_name").using("btree", sql`lower((name)::text)`),
   }
