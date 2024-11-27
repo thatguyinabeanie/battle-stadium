@@ -64,7 +64,7 @@ export function SidebarMenuButtonCollapsibleTrigger({
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <span className="max-w-28 truncate text-primary">
+              <span className="max-w-[12rem] truncate text-primary">
                 {item.title}
               </span>
             </TooltipTrigger>
