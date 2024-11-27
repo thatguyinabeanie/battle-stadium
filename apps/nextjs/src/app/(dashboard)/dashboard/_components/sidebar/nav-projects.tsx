@@ -71,14 +71,12 @@ export function NavProjects() {
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-
-        <SidebarMenuItem>
+        <SidebarMenuItem aria-label="Show more projects">
           <SidebarMenuButton className="text-sidebar-foreground/70">
             <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>More</span>
+            <span title="Show additional projects">More</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
-
 
       </SidebarMenu>
     </SidebarGroup>
