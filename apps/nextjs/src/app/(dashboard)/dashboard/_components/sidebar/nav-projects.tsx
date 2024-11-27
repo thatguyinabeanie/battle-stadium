@@ -2,7 +2,15 @@
 
 import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
-import { Folder, Forward, MoreHorizontal, Trash2 } from "lucide-react";
+import {
+  Folder,
+  Forward,
+  Frame,
+  MapIcon,
+  MoreHorizontal,
+  PieChart,
+  Trash2,
+} from "lucide-react";
 
 import {
   DropdownMenu,
@@ -21,15 +29,7 @@ import {
 
 ///Add touch-friendly styles for mobile +
 
-export function NavProjects({
-  projects,
-}: {
-  projects: {
-    name: string;
-    url: string;
-    icon: LucideIcon;
-  }[];
-}) {
+export function NavProjects() {
   const { isMobile } = useSidebar();
   const touchStyles = isMobile ? "min-h-[44px] active:bg-accent/80" : "";
   return (
@@ -99,3 +99,26 @@ export function NavProjects({
     </SidebarGroup>
   );
 }
+
+interface NavProject {
+  name: string;
+  url: string;
+  icon: LucideIcon;
+}
+export const projects: NavProject[] = [
+  {
+    name: "Design Engineering",
+    url: "#",
+    icon: Frame,
+  },
+  {
+    name: "Sales & Marketing",
+    url: "#",
+    icon: PieChart,
+  },
+  {
+    name: "Travel",
+    url: "#",
+    icon: MapIcon,
+  },
+];

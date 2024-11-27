@@ -25,20 +25,26 @@ export const BattleStadiumIcon: FC<IconSvgProps> = ({
   </svg>
 );
 
+export function BattleStadiumLogoLink() {
+  return (
+    <div className="flex rounded-full bg-foreground">
+      <Link prefetch={true} className="text-primary" href="/">
+        <BattleStadiumIcon
+          aria-label="Battle Stadium Logo"
+          className="text-background"
+        />
+      </Link>
+    </div>
+  );
+}
+
 export default function BattleStadium() {
   return (
     <div
       aria-label="Battle Stadium Navigation"
       className="flex flex-row gap-2 md:gap-4"
     >
-      <div className="flex rounded-full bg-foreground">
-        <Link prefetch={true} className="text-primary" href="/">
-          <BattleStadiumIcon
-            aria-label="Battle Stadium Logo"
-            className="text-background"
-          />
-        </Link>
-      </div>
+      <BattleStadiumLogoLink />
 
       <Link
         className="invisible flex-row items-center justify-center text-lg font-bold text-primary opacity-100 lg:flex"
