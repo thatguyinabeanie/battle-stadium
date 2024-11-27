@@ -1,3 +1,4 @@
+import { SignOutButton } from "@clerk/nextjs";
 import {
   BadgeCheck,
   Bell,
@@ -78,7 +79,7 @@ function NavUserDropdownMenuContent() {
       <DropdownMenuSeparator />
       <DropdownMenuItem>
         <LogOut />
-        Log out
+        <SignOutButton>Log out</SignOutButton>
       </DropdownMenuItem>
     </DropDownMenuContentMobile>
   );
