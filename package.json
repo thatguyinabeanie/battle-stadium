@@ -27,13 +27,13 @@
     "ui-add": "turbo run ui-add",
     "sort-packages": "turbo run sort-packages",
     "vercel:pull": "turbo run vercel:pull",
-    "turbo:update": "pnpx @turbo/codemod@latest update"
+    "turbo:update": "pnpm add turbo@latest --save-dev -w"
   },
   "devDependencies": {
     "@battle-stadium/prettier-config": "workspace:*",
     "@turbo/gen": "catalog:turbo",
     "prettier": "catalog:",
-    "turbo": "catalog:turbo",
+    "turbo": "^2.3.3",
     "typescript": "catalog:"
   },
   "prettier": "@battle-stadium/prettier-config"
