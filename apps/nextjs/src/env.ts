@@ -59,6 +59,14 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: z.string().optional().default("/sign-in"),
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: z.string().optional().default("/sign-up"),
+    NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID: z
+      .string()
+      .regex(/^ca-pub-[0-9]{16}$/, {
+        message:
+          "Invalid AdSense client ID format. Must start with 'ca-pub-' followed by 16 digits",
+      })
+      .describe("Google AdSense client ID (required for ad integration)")
+      .optional(),
   },
   /**
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
@@ -67,6 +75,8 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL,
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: process.env.NEXT_PUBLIC_CLERK_SIGN_UP_URL,
+    NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID:
+      process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID,
   },
   skipValidation:
     !!process.env.CI || process.env.npm_lifecycle_event === "lint",
