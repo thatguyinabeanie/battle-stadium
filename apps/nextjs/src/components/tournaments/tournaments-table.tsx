@@ -150,7 +150,7 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
             <OrganizationLogo
               organization={row.original.organizations}
               logoSize={DEFAULT_DATA_TABLE_IMAGE_SIZE}
-              alt={`${row.original.organizations.name} logo`}
+              altName={`${row.original.organizations.name} logo`}
             />
           </Link>
         )}
