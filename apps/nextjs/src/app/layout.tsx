@@ -72,9 +72,7 @@ export default function RootLayout({
     <StrictMode>
       <ClerkProvider>
         <html lang="en" suppressHydrationWarning>
-
           <AdSenseScript />
-
 
           <body
             className={cn(
