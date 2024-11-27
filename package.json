@@ -26,7 +26,8 @@
     "typecheck:watch": "turbo run typecheck:watch",
     "ui-add": "turbo run ui-add",
     "sort-packages": "turbo run sort-packages",
-    "vercel:pull": "turbo run vercel:pull"
+    "vercel:pull": "turbo run vercel:pull",
+    "turbo:update": "pnpx @turbo/codemod@latest update"
   },
   "devDependencies": {
     "@battle-stadium/prettier-config": "workspace:*",

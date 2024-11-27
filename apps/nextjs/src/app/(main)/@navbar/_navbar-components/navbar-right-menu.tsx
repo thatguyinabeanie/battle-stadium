@@ -82,10 +82,7 @@ async function SmartAvatar() {
 
   return (
     <Avatar aria-label="User's profile image" className="bg-transparent p-1">
-      <AvatarImage
-        src={user?.imageUrl}
-        className={"h-[30px] w-[30px]"}
-      />
+      <AvatarImage src={user?.imageUrl} className={"h-[30px] w-[30px]"} />
       <AvatarFallback>
         <SolarUserLinear className={solarUserLinearClassNames} />
       </AvatarFallback>
