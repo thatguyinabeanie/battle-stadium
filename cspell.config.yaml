@@ -16,6 +16,7 @@ ignorePaths:
   - "**/pnpm-workspace.yaml"
   - packages/db/drizzle/schema.ts
   - code-rabbit-ai.yaml
+  - ".env*"
 dictionaryDefinitions: []
 dictionaries:
   - en_US
