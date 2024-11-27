@@ -1,5 +1,3 @@
-"use client";
-
 import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import {
@@ -14,24 +12,22 @@ import {
 
 import {
   DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@battle-stadium/ui";
 
-///Add touch-friendly styles for mobile +
+import {
+  ProjectsDropDownMenuContentMobile,
+  ProjectsSidebarMenuAction,
+} from "./side-bar-client-components";
 
 export function NavProjects() {
-  const { isMobile } = useSidebar();
-  const touchStyles = isMobile ? "min-h-[44px] active:bg-accent/80" : "";
   return (
     <SidebarGroup
       className="group-data-[collapsible=icon]:hidden"
@@ -40,38 +36,23 @@ export function NavProjects() {
       <SidebarGroupLabel>Projects</SidebarGroupLabel>
       <SidebarMenu>
         {projects.map((item) => (
-          <SidebarMenuItem key={item.name}>
+          <SidebarMenuItem key={item.name} className="flex flex-row">
             <SidebarMenuButton asChild>
               <Link href={item.url} title={item.name} className="truncate">
                 <item.icon />
                 <span className="truncate">{item.name}</span>
               </Link>
             </SidebarMenuButton>
+
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuAction
-                  showOnHover
-                  role="button"
-                  aria-label={`More actions for ${item.name}`}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      e.currentTarget.click();
-                    }
-                  }}
-                >
+                <ProjectsSidebarMenuAction>
                   <MoreHorizontal />
                   <span className="sr-only">More</span>
-                </SidebarMenuAction>
+                </ProjectsSidebarMenuAction>
               </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className={`max-h-[300px] w-48 overflow-y-auto rounded-lg ${touchStyles}`}
-                side={isMobile ? "bottom" : "right"}
-                align={isMobile ? "end" : "start"}
-                sideOffset={isMobile ? 8 : 2}
-                alignOffset={-4}
-                avoidCollisions
-              >
+
+              <ProjectsDropDownMenuContentMobile>
                 <DropdownMenuItem>
                   <Folder className="text-muted-foreground" />
                   <span>View Project</span>
@@ -85,14 +66,14 @@ export function NavProjects() {
                   <Trash2 className="text-muted-foreground" />
                   <span>Delete Project</span>
                 </DropdownMenuItem>
-              </DropdownMenuContent>
+              </ProjectsDropDownMenuContentMobile>
             </DropdownMenu>
           </SidebarMenuItem>
         ))}
-        <SidebarMenuItem>
+        <SidebarMenuItem aria-label="Show more projects">
           <SidebarMenuButton className="text-sidebar-foreground/70">
             <MoreHorizontal className="text-sidebar-foreground/70" />
-            <span>More</span>
+            <span title="Show additional projects">More</span>
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
