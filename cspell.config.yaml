@@ -14,7 +14,8 @@ ignorePaths:
   - "**/*.map"
   - "**/turbo.json"
   - "**/pnpm-workspace.yaml"
-  - "packages/db/drizzle/schema.ts"
+  - packages/db/drizzle/schema.ts
+  - code-rabbit-ai.yaml
 dictionaryDefinitions: []
 dictionaries:
   - en_US
@@ -33,6 +34,7 @@ dictionaries:
   - lorem-ipsum
 words:
   - nums
+  - UNPOOLED
   - Unreads
   - UTSSR
 ignoreWords: []
