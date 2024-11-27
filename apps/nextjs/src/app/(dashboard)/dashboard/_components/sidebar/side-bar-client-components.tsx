@@ -55,7 +55,7 @@ export const ProjectsDropDownMenuContentMobile = forwardRef<
     </DropdownMenuContent>
   );
 });
-DropDownMenuContentMobile.displayName = "DropDownMenuContentMobile";
+ProjectsDropDownMenuContentMobile.displayName = "DropDownMenuContentMobile";
 
 export const ProjectsSidebarMenuAction = forwardRef<
   React.ComponentRef<typeof SidebarMenuAction>,
