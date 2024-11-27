@@ -55,7 +55,7 @@ export function MainAppLinksMenu() {
 
               {NavbarItemsConfigs.map((navItem, index) => (
                 <Link key={navItem.value} href={`/${navItem.value}`}>
-                  <DropdownMenuItem key={navItem.value} className="gap-2 p-2">
+                  <DropdownMenuItem className="gap-2 p-2">
                     <div className="flex size-6 items-center justify-center rounded-sm border">
                       <navItem.logo className="size-4 shrink-0" />
                     </div>
