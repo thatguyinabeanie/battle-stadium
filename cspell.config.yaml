@@ -16,7 +16,8 @@ ignorePaths:
   - "**/pnpm-workspace.yaml"
   - packages/db/drizzle/schema.ts
   - code-rabbit-ai.yaml
-  - ".env*"
+  - .env*
+  - .env*
 dictionaryDefinitions: []
 dictionaries:
   - en_US
@@ -34,12 +35,19 @@ dictionaries:
   - markdown
   - lorem-ipsum
 words:
+  - adbanner
+  - adsbygoogle
+  - adtest
+  - Magnifer
   - nums
+  - thatguyinabeanie
   - UNPOOLED
   - Unreads
-  - UTSSR
   - uploadthing
+  - UTSSR
   - Magnifer
   - thatguyinabeanie
+  - battlestadium
+  - slotnumber
 ignoreWords: []
 import: []

@@ -15,6 +15,7 @@ import { GeistSans } from "geist/font/sans";
 import { cn, ThemeProvider } from "@battle-stadium/ui";
 
 import type { ChildrenProps } from "~/types";
+import { AdSenseScript } from "~/app/_components/ad-sense";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/react";
@@ -71,6 +72,7 @@ export default function RootLayout({
     <StrictMode>
       <ClerkProvider>
         <html lang="en" suppressHydrationWarning>
+          <AdSenseScript />
           <body
             className={cn(
               "min-h-screen overflow-y-scroll bg-background font-sans text-foreground antialiased",
