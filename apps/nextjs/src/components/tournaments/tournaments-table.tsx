@@ -179,7 +179,7 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     cell: ({ row }) => (
       <span
         className={cn(
-          "inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+          "inline-flex rounded-full px-2 py-1 text-sm font-semibold",
           row.original.tournaments.lateRegistration ? GREEN : RED,
         )}
       >
@@ -193,7 +193,7 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     cell: ({ row }) => (
       <span
         className={cn(
-          "inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+          "inline-flex rounded-full px-2 py-1 text-sm font-semibold",
           row.original.tournaments.teamlistsRequired ? GREEN : RED,
         )}
       >
@@ -207,7 +207,7 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
     cell: ({ row }) => (
       <span
         className={cn(
-          "inline-flex rounded-full px-2 py-1 text-xs font-semibold",
+          "inline-flex rounded-full px-2 py-1 text-sm font-semibold",
           row.original.tournaments.openTeamSheets ? GREEN : RED,
         )}
       >

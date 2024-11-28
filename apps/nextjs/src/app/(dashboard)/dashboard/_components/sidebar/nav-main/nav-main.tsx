@@ -1,4 +1,11 @@
-import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react";
+import {
+  Building,
+  Building2,
+  FolderOpen,
+  LayoutDashboard,
+  Trophy,
+  UserRoundPen,
+} from "lucide-react";
 
 import {
   Collapsible,
@@ -37,9 +44,10 @@ async function OrganizationsCollapsibleMenuNavItem() {
   const item: NavMainItem = {
     title: "Organizations",
     url: "/dashboard/organizations",
-    icon: Settings2,
+    icon: Building2,
     isActive: true,
     items: [...own, ...member].map((org) => ({
+      logo: Building,
       title: org.name,
       url: `/dashboard/organizations/${org.slug}`,
     })),
@@ -79,57 +87,24 @@ function DashboardCollapsibleNavItem() {
 const dashboardNavItem: NavMainItem = {
   title: "Dashboard",
   url: "/dashboard",
-  icon: SquareTerminal,
+  icon: LayoutDashboard,
   isActive: true,
-  // items: [
-  //   {
-  //     title: "History",
-  //     url: "#",
-  //   },
-  // ],
 };
 
 const navMainItems: NavMainItem[] = [
   {
     title: "Profiles",
     url: "/dashboard/profiles",
-    icon: Bot,
-    items: [
-      {
-        title: "Genesis",
-        url: "#",
-      },
-      {
-        title: "Explorer",
-        url: "#",
-      },
-      {
-        title: "Quantum",
-        url: "#",
-      },
-    ],
+    icon: UserRoundPen,
   },
   {
     title: "Teams",
     url: "#",
-    icon: BookOpen,
-    items: [
-      {
-        title: "Introduction",
-        url: "#",
-      },
-      {
-        title: "Get Started",
-        url: "#",
-      },
-      {
-        title: "Tutorials",
-        url: "#",
-      },
-      {
-        title: "Changelog",
-        url: "#",
-      },
-    ],
+    icon: FolderOpen,
+  },
+  {
+    title: "Tournament History",
+    url: "/dashboard/tournaments",
+    icon: Trophy,
   },
 ];

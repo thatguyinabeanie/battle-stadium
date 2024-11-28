@@ -112,7 +112,7 @@ export default function CookiesComponent({
       role="alert"
     >
       <div className="rounded-large border-divider shadow-small flex w-full items-center justify-between gap-x-20 border bg-background/15 px-6 py-4 backdrop-blur">
-        <p className="text-small text-default-700 font-normal">
+        <p className="text-md text-default-700 font-normal">
           We use cookies to provide the best experience. By continuing to use
           our site, you agree to our&nbsp;
           <Link prefetch={true} className="font-normal" href="/tos/cookies">

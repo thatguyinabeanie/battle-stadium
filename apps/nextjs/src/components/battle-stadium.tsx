@@ -31,7 +31,7 @@ export function BattleStadiumLogoLink() {
       <Link prefetch={true} className="text-primary" href="/">
         <BattleStadiumIcon
           aria-label="Battle Stadium Logo"
-          className="text-background"
+          className="background-none text-background"
         />
       </Link>
     </div>

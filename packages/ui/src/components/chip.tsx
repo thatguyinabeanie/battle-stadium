@@ -26,8 +26,8 @@ export const ChipVariants: Record<ChipVariant, string> = {
 };
 
 export const ChipSizes: Record<ChipSize, string> = {
-  sm: "text-xs px-2 py-0.5 h-6",
-  md: "text-sm px-3 py-1 h-7",
+  sm: "text-sm px-2 py-0.5 h-6",
+  md: "text-md px-3 py-1 h-7",
   lg: "text-base px-4 py-1.5 h-8",
 };
 

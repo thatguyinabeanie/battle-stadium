@@ -68,7 +68,7 @@ export default function Footer() {
         ))}
       </div>
 
-      <p className="text-small mt-1 text-center text-primary">
+      <p className="text-md mt-1 text-center text-primary">
         &copy; 2024 Beanie LLC Inc. All rights reserved.
       </p>
     </footer>
