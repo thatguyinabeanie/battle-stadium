@@ -60,7 +60,7 @@ function DashboardContent({ children }: Readonly<ChildrenProps>) {
       <DashboardHeader />
       <Suspense fallback={<DashboardContentSkeleton />}>
         {children}
-        <span className="sr-only">
+        <span className="sr-only" role="status" aria-live="polite">
           Loading dashboard content, please wait...
         </span>
       </Suspense>
