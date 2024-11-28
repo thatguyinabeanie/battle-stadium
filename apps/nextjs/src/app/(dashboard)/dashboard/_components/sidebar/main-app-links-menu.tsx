@@ -50,11 +50,16 @@ export function MainAppLinksMenu() {
 
 function BattleStadiumNaming() {
   return (
-    <div className="grid flex-1 text-left text-sm leading-tight" role="presentation">
+    <div
+      className="grid flex-1 text-left text-sm leading-tight"
+      role="presentation"
+    >
       <span className="truncate font-semibold uppercase text-primary">
         Battle Stadium
       </span>
-      <span className="truncate text-xs text-primary" aria-label="Company name">Beanie LLC</span>
+      <span className="truncate text-xs text-primary" aria-label="Company name">
+        Beanie LLC
+      </span>
     </div>
   );
 }
