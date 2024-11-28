@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState } from "react";
+
 import type { ChildrenProps } from "~/types";
 
 export interface BreadCrumbsContext {
@@ -11,7 +12,6 @@ export const BreadCrumbsContext = createContext<BreadCrumbsContext>({
   breadCrumbs: [],
   setBreadCrumbs: () => null,
 });
-
 
 export function useBreadCrumbs() {
   const context = useContext(BreadCrumbsContext);
