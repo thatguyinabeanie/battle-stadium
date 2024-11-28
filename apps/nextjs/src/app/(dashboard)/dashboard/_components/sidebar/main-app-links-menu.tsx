@@ -35,17 +35,7 @@ export function MainAppLinksMenu() {
                 aria-haspopup="true"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               >
-                <>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold uppercase text-primary">
-                      Battle Stadium
-                    </span>
-                    <span className="truncate text-xs text-primary">
-                      Beanie LLC
-                    </span>
-                  </div>
-                </>
-
+                <BattleStadiumNaming />
                 <ChevronsUpDown className="ml-auto" />
               </SidebarMenuButton>
             </DropdownMenuTrigger>
@@ -58,12 +48,29 @@ export function MainAppLinksMenu() {
   );
 }
 
+function BattleStadiumNaming() {
+  return (
+    <div
+      className="grid flex-1 text-left text-sm leading-tight"
+      role="presentation"
+    >
+      <span className="truncate font-semibold uppercase text-primary">
+        Battle Stadium
+      </span>
+      <span className="truncate text-xs text-primary" aria-label="Company name">
+        Beanie LLC
+      </span>
+    </div>
+  );
+}
+
 function NavLinksDropDownMenuContentMobile() {
   return (
     <DropDownMenuContentMobile>
       <DropdownMenuLabel className="text-xs text-muted-foreground">
-        Teams
+        Battle Stadium
       </DropdownMenuLabel>
+
       {NavbarItemsConfigs.map((navItem, index) => (
         <Link key={navItem.value} href={`/${navItem.value}`}>
           <DropdownMenuItem className="gap-2 p-2">

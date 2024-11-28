@@ -1,4 +1,4 @@
-import { Settings2 } from "lucide-react";
+import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react";
 
 import {
   Collapsible,
@@ -11,22 +11,16 @@ import type { NavMainItem } from "./components";
 import { getMyOrganizations } from "~/app/server-actions/organizations/actions";
 import {
   CollapsibleMenuNavItem,
-  dashboardNavItem,
-  EmptyNavItems,
-  navMainItems,
   SidebarMenuButtonCollapsibleTrigger,
   SidebarMenuCollapsibleContent,
 } from "./components";
 
 export function NavMain() {
-  if (navMainItems.length === 0) {
-    return <EmptyNavItems />;
-  }
-
   return (
     <SidebarGroup>
       <SidebarMenu>
         <DashboardCollapsibleNavItem />
+
         <OrganizationsCollapsibleMenuNavItem />
 
         {navMainItems.map((item) => (
@@ -82,3 +76,60 @@ function DashboardCollapsibleNavItem() {
     </Collapsible>
   );
 }
+const dashboardNavItem: NavMainItem = {
+  title: "Dashboard",
+  url: "/dashboard",
+  icon: SquareTerminal,
+  isActive: true,
+  // items: [
+  //   {
+  //     title: "History",
+  //     url: "#",
+  //   },
+  // ],
+};
+
+const navMainItems: NavMainItem[] = [
+  {
+    title: "Profiles",
+    url: "/dashboard/profiles",
+    icon: Bot,
+    items: [
+      {
+        title: "Genesis",
+        url: "#",
+      },
+      {
+        title: "Explorer",
+        url: "#",
+      },
+      {
+        title: "Quantum",
+        url: "#",
+      },
+    ],
+  },
+  {
+    title: "Teams",
+    url: "#",
+    icon: BookOpen,
+    items: [
+      {
+        title: "Introduction",
+        url: "#",
+      },
+      {
+        title: "Get Started",
+        url: "#",
+      },
+      {
+        title: "Tutorials",
+        url: "#",
+      },
+      {
+        title: "Changelog",
+        url: "#",
+      },
+    ],
+  },
+];

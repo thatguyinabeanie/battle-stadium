@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import Link from "next/link";
-import { BookOpen, Bot, ChevronRight, SquareTerminal } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 import {
   Collapsible,
@@ -42,6 +42,7 @@ export function CollapsibleMenuNavItem({ item }: CollapsibleMenuNavItemProps) {
       className="group/collapsible"
       aria-expanded={item.isActive}
       aria-label={`${item.title} navigation section`}
+      aria-controls={`${item.title.toLowerCase()}-content`}
     >
       <SidebarMenuItem>
         <SidebarMenuButtonCollapsibleTrigger item={item} />
@@ -96,7 +97,7 @@ export function SidebarMenuCollapsibleContent({
   item,
 }: CollapsibleMenuNavItemProps) {
   return (
-    <CollapsibleContent>
+    <CollapsibleContent id={`${item.title.toLowerCase()}-content`}>
       <SidebarMenuSub>
         {item.items?.map((subItem) => (
           <SidebarMenuSubItem key={subItem.title}>
@@ -128,61 +129,3 @@ export function EmptyNavItems() {
     </SidebarGroup>
   );
 }
-
-export const dashboardNavItem: NavMainItem = {
-  title: "Dashboard",
-  url: "/dashboard",
-  icon: SquareTerminal,
-  isActive: true,
-  // items: [
-  //   {
-  //     title: "History",
-  //     url: "#",
-  //   },
-  // ],
-};
-
-export const navMainItems: NavMainItem[] = [
-  {
-    title: "Profiles",
-    url: "/dashboard/profiles",
-    icon: Bot,
-    items: [
-      {
-        title: "Genesis",
-        url: "#",
-      },
-      {
-        title: "Explorer",
-        url: "#",
-      },
-      {
-        title: "Quantum",
-        url: "#",
-      },
-    ],
-  },
-  {
-    title: "Teams",
-    url: "#",
-    icon: BookOpen,
-    items: [
-      {
-        title: "Introduction",
-        url: "#",
-      },
-      {
-        title: "Get Started",
-        url: "#",
-      },
-      {
-        title: "Tutorials",
-        url: "#",
-      },
-      {
-        title: "Changelog",
-        url: "#",
-      },
-    ],
-  },
-];
