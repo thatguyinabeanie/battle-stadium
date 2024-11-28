@@ -51,5 +51,6 @@ words:
   - teamlists
   - pkmn
   - Tera
+  - cmdk
 ignoreWords: []
 import: []
