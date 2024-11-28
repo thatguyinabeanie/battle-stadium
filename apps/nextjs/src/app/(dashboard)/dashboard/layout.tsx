@@ -15,8 +15,8 @@ import type { ChildrenProps } from "~/types";
 import DashboardContentSkeleton from "~/app/(dashboard)/dashboard/_components/content/dashboard-content-skeleton";
 import DashboardHeader from "~/app/(dashboard)/dashboard/_components/content/dashboard-header";
 import { BreadCrumbsProvider } from "./_components/breadcrumbs/context";
+import { MainAppLinksMenu } from "./_components/sidebar/main-app-links-menu";
 import { NavMain } from "./_components/sidebar/nav-main/nav-main";
-import { MainAppLinksMenu } from "./_components/sidebar/nav-menu-switcher";
 import { NavUserComponent } from "./_components/sidebar/nav-user";
 
 export default function DashboardLayout({ children }: Readonly<ChildrenProps>) {
