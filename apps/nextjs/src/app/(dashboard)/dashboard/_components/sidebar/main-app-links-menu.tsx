@@ -20,7 +20,7 @@ import { DropDownMenuContentMobile } from "./side-bar-client-components";
 export function MainAppLinksMenu() {
   return (
     <div className="flex flex-row items-center justify-center gap-2">
-      <div className="flex aspect-square size-8 items-center justify-center rounded-lg ">
+      <div className="flex aspect-square size-8 items-center justify-center rounded-lg">
         <BattleStadiumLogoLink />
       </div>
 
@@ -51,13 +51,16 @@ export function MainAppLinksMenu() {
 function BattleStadiumNaming() {
   return (
     <div
-      className="grid flex-1 text-left text-md leading-tight"
+      className="text-md grid flex-1 text-left leading-tight"
       role="presentation"
     >
       <span className="truncate font-semibold text-primary">
         Battle Stadium
       </span>
-      <span className="truncate text-sm text-muted-foreground"aria-label="Company name">
+      <span
+        className="truncate text-sm text-muted-foreground"
+        aria-label="Company name"
+      >
         Beanie LLC
       </span>
     </div>

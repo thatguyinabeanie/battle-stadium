@@ -38,7 +38,7 @@ export function TournamentRegistrationForm(
       >
         <Badge
           variant="secondary"
-          className="md:text-md w-[6rem] px-1 py-1 text-md lg:w-[7.5rem]"
+          className="md:text-md text-md w-[6rem] px-1 py-1 lg:w-[7.5rem]"
         >
           {loading ? "Submitting..." : "Submit"}
         </Badge>

@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import { SignOutButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 import {
   BadgeCheck,
   Bell,
@@ -9,6 +11,9 @@ import {
 } from "lucide-react";
 
 import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
   DropdownMenu,
   DropdownMenuGroup,
   DropdownMenuItem,
@@ -20,14 +25,9 @@ import {
   SidebarMenuItem,
 } from "@battle-stadium/ui";
 
-import { DropDownMenuContentMobile } from "./side-bar-client-components";
-import { Suspense } from "react";
-import { currentUser } from "@clerk/nextjs/server";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@battle-stadium/ui";
-
 import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import { SolarUserLinear } from "~/components/svg/icons";
+import { DropDownMenuContentMobile } from "./side-bar-client-components";
 
 export function NavUserComponent() {
   return (
@@ -56,7 +56,7 @@ function NavUserDropdownMenuContent() {
   return (
     <DropDownMenuContentMobile>
       <DropdownMenuLabel className="p-0 font-normal">
-        <div className="flex items-center gap-2 px-1 py-1.5 text-left text-md">
+        <div className="text-md flex items-center gap-2 px-1 py-1.5 text-left">
           <SidebarNavUserDetailsAndAvatarSuspense />
         </div>
       </DropdownMenuLabel>
@@ -95,16 +95,16 @@ function NavUserDropdownMenuContent() {
   );
 }
 
-export function SidebarNavUserDetailsAndAvatarSuspense () {
+export function SidebarNavUserDetailsAndAvatarSuspense() {
   return (
-    <Suspense fallback={ <SidebarNavUserDetailsAndAvatarSkeleton /> }>
+    <Suspense fallback={<SidebarNavUserDetailsAndAvatarSkeleton />}>
       <SidebarNavUserDetailsAndAvatar />
     </Suspense>
   );
 }
 
 const DEFAULT_AVATAR = "/images/solar-user-linear.svg";
-async function SidebarNavUserDetailsAndAvatar () {
+async function SidebarNavUserDetailsAndAvatar() {
   const me = await getAccountMe();
   const user = await currentUser();
   return (
@@ -112,8 +112,8 @@ async function SidebarNavUserDetailsAndAvatar () {
       <Avatar className="h-8 w-8 rounded-lg">
         <AvatarImage
           className="h-[30px] w-[30px]"
-          src={ user?.imageUrl ?? me?.image_url ?? DEFAULT_AVATAR }
-          alt={ me?.first_name }
+          src={user?.imageUrl ?? me?.image_url ?? DEFAULT_AVATAR}
+          alt={me?.first_name}
         />
 
         <AvatarFallback className="rounded-lg">
@@ -121,24 +121,24 @@ async function SidebarNavUserDetailsAndAvatar () {
         </AvatarFallback>
       </Avatar>
 
-      <div className="grid flex-1 text-left text-md leading-tight">
-        <span className="h-5 min-w-[6rem] max-w-[12rem] truncate font-semibold text-muted-foreground">{ `${me?.first_name} ${me?.last_name}` }</span>
+      <div className="text-md grid flex-1 text-left leading-tight">
+        <span className="h-5 min-w-[6rem] max-w-[12rem] truncate font-semibold text-muted-foreground">{`${me?.first_name} ${me?.last_name}`}</span>
         <span className="h-5 min-w-[4rem] max-w-[10rem] truncate text-sm text-muted-foreground">
-          { me?.username }
+          {me?.username}
         </span>
       </div>
     </>
   );
 }
 
-function SidebarNavUserDetailsAndAvatarSkeleton () {
+function SidebarNavUserDetailsAndAvatarSkeleton() {
   return (
     <>
       <Avatar className="h-8 w-8 rounded-lg">
         <SolarUserLinear className="h-[30px] w-[30px]" />
       </Avatar>
 
-      <div className="grid flex-1 text-left text-md leading-tight">
+      <div className="text-md grid flex-1 text-left leading-tight">
         <span className="h-4 w-24 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
         <span className="mt-1 h-3 w-16 animate-pulse rounded bg-gray-200 dark:bg-gray-700" />
       </div>

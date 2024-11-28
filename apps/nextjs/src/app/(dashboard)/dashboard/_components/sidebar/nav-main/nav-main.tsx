@@ -98,5 +98,5 @@ const navMainItems: NavMainItem[] = [
     title: "Tournament History",
     url: "/dashboard/tournaments",
     icon: BookOpen,
-  }
+  },
 ];

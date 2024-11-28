@@ -63,9 +63,11 @@ export function SidebarMenuButtonCollapsibleTrigger({
     <div className="flex flex-row">
       <Link
         href={item.url}
-        className="flex flex-row items-center gap-2 p-2 text-md"
+        className="text-md flex flex-row items-center gap-2 p-2"
       >
-        { item.icon ? <item.icon aria-hidden="true" className="text-muted-foreground" /> : null}
+        {item.icon ? (
+          <item.icon aria-hidden="true" className="text-muted-foreground" />
+        ) : null}
 
         {item.title.length < 20 && title}
 
@@ -85,7 +87,7 @@ export function SidebarMenuButtonCollapsibleTrigger({
             tooltip={item.title}
             aria-current={item.isActive ? "page" : undefined}
           >
-            <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 text-muted-foreground" />
+            <ChevronRight className="ml-auto text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
           </SidebarMenuButton>
         </CollapsibleTrigger>
       )}
@@ -120,7 +122,7 @@ export function EmptyNavItems() {
         Platform
       </SidebarGroupLabel>
       <div
-        className="px-2 py-4 text-md text-muted-foreground"
+        className="text-md px-2 py-4 text-muted-foreground"
         role="status"
         aria-live="polite"
       >
