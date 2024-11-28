@@ -15,7 +15,7 @@ import DashboardContentSkeleton from "~/app/(dashboard)/dashboard/_components/co
 import DashboardHeader from "~/app/(dashboard)/dashboard/_components/content/dashboard-header";
 import { NavMain } from "./_components/sidebar/nav-main/nav-main";
 import { MainAppLinksMenu } from "./_components/sidebar/nav-menu-switcher";
-import { NavProjects } from "./_components/sidebar/nav-projects";
+// import { NavProjects } from "./_components/sidebar/nav-projects";
 import { NavUserComponent } from "./_components/sidebar/nav-user";
 
 export default function DashboardLayout({ children }: Readonly<ChildrenProps>) {
@@ -38,7 +38,7 @@ function DashboardSideBar() {
       <div className="flex h-full flex-col">
         <SidebarContent className="mx-4 mb-4 rounded-xl bg-neutral-900/50">
           <NavMain />
-          <NavProjects />
+          {/* <NavProjects /> */}
         </SidebarContent>
 
         <SidebarFooter className="mx-4 mb-4 rounded-xl bg-neutral-900/50">
