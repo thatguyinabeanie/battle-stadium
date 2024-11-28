@@ -49,7 +49,7 @@ function PokemonName({ pokemon }: Readonly<PokemonCardProps>) {
 
 function PokemonAttributes({ pokemon, ots }: Readonly<PokemonCardProps>) {
   return (
-    <div className="flex flex-col p-2 text-sm">
+    <div className="flex flex-col p-2 text-md">
       <p>
         <strong>Ability:</strong> {pokemon.ability}
       </p>

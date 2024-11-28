@@ -81,12 +81,6 @@ const dashboardNavItem: NavMainItem = {
   url: "/dashboard",
   icon: SquareTerminal,
   isActive: true,
-  // items: [
-  //   {
-  //     title: "History",
-  //     url: "#",
-  //   },
-  // ],
 };
 
 const navMainItems: NavMainItem[] = [
@@ -94,42 +88,15 @@ const navMainItems: NavMainItem[] = [
     title: "Profiles",
     url: "/dashboard/profiles",
     icon: Bot,
-    items: [
-      {
-        title: "Genesis",
-        url: "#",
-      },
-      {
-        title: "Explorer",
-        url: "#",
-      },
-      {
-        title: "Quantum",
-        url: "#",
-      },
-    ],
   },
   {
     title: "Teams",
     url: "#",
     icon: BookOpen,
-    items: [
-      {
-        title: "Introduction",
-        url: "#",
-      },
-      {
-        title: "Get Started",
-        url: "#",
-      },
-      {
-        title: "Tutorials",
-        url: "#",
-      },
-      {
-        title: "Changelog",
-        url: "#",
-      },
-    ],
   },
+  {
+    title: "Tournament History",
+    url: "/dashboard/tournaments",
+    icon: BookOpen,
+  }
 ];

@@ -115,7 +115,7 @@ export const TabsTrigger = memo(
         <Badge
           variant="secondary"
           className={cn(
-            "md:text-md w-[6rem] px-1 py-1 text-sm lg:w-[7.5rem]",
+            "md:text-md w-[6rem] px-1 py-1 text-md lg:w-[7.5rem]",
             classNames?.badge,
           )}
         >

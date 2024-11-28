@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "../utils";
 
 const alertVariants = cva(
-  "relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7",
+  "relative w-full rounded-lg border px-4 py-3 text-md [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7",
   {
     variants: {
       variant: {
@@ -52,7 +52,7 @@ const AlertDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("text-sm [&_p]:leading-relaxed", className)}
+    className={cn("text-md [&_p]:leading-relaxed", className)}
     {...props}
   />
 ));

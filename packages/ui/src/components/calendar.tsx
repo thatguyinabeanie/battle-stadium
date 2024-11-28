@@ -24,7 +24,7 @@ function Calendar({
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
         caption: "flex justify-center pt-1 relative items-center",
-        caption_label: "text-sm font-medium",
+        caption_label: "text-md font-medium",
         nav: "space-x-1 flex items-center",
         nav_button_previous: cn(
           buttonVariants({ variant: "outline" }),
@@ -40,7 +40,7 @@ function Calendar({
           "text-muted-foreground rounded-md w-8 font-normal text-[0.8rem]",
         row: "flex w-full mt-2",
         day: cn(
-          "relative p-0 text-center text-sm focus-within:relative focus-within:z-20",
+          "relative p-0 text-center text-md focus-within:relative focus-within:z-20",
           props.mode === "range"
             ? "[&:has(>.rdp-day_range-end)]:rounded-r-md [&:has(>.rdp-day_range-start)]:rounded-l-md"
             : "[&:has(.rdp-day_selected)]:rounded-md",

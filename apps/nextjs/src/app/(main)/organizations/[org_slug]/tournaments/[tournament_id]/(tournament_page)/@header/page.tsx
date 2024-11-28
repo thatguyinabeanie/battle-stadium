@@ -106,8 +106,8 @@ function LeftRightGrid({
 }) {
   return (
     <>
-      <p className="md:text-md text-right text-sm">{left}</p>
-      <p className="md:text-md text-left text-sm">{right}</p>
+      <p className="md:text-md text-right text-md">{left}</p>
+      <p className="md:text-md text-left text-md">{right}</p>
     </>
   );
 }
