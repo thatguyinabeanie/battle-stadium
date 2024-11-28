@@ -54,6 +54,10 @@ export function CollapsibleMenuNavItem({ item }: CollapsibleMenuNavItemProps) {
 export function SidebarMenuButtonCollapsibleTrigger({
   item,
 }: CollapsibleMenuNavItemProps) {
+  const title = (
+    <span className="max-w-[12rem] truncate text-primary">{item.title}</span>
+  );
+
   return (
     <div className="flex flex-row">
       <Link
@@ -61,25 +65,29 @@ export function SidebarMenuButtonCollapsibleTrigger({
         className="flex flex-row items-center gap-2 p-2 text-sm"
       >
         {item.icon ? <item.icon aria-hidden="true" /> : null}
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span className="max-w-[12rem] truncate text-primary">
-                {item.title}
-              </span>
-            </TooltipTrigger>
-            <TooltipContent>{item.title}</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+
+        {item.title.length < 20 && title}
+
+        {item.title.length >= 20 && (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>{title}</TooltipTrigger>
+              <TooltipContent>{item.title}</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        )}
       </Link>
-      <CollapsibleTrigger asChild>
-        <SidebarMenuButton
-          tooltip={item.title}
-          aria-current={item.isActive ? "page" : undefined}
-        >
-          <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-        </SidebarMenuButton>
-      </CollapsibleTrigger>
+
+      {item.items?.length && (
+        <CollapsibleTrigger asChild>
+          <SidebarMenuButton
+            tooltip={item.title}
+            aria-current={item.isActive ? "page" : undefined}
+          >
+            <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+          </SidebarMenuButton>
+        </CollapsibleTrigger>
+      )}
     </div>
   );
 }
@@ -126,20 +134,12 @@ export const dashboardNavItem: NavMainItem = {
   url: "/dashboard",
   icon: SquareTerminal,
   isActive: true,
-  items: [
-    {
-      title: "History",
-      url: "#",
-    },
-    {
-      title: "Starred",
-      url: "#",
-    },
-    {
-      title: "Settings",
-      url: "#",
-    },
-  ],
+  // items: [
+  //   {
+  //     title: "History",
+  //     url: "#",
+  //   },
+  // ],
 };
 
 export const navMainItems: NavMainItem[] = [
