@@ -97,7 +97,7 @@ export function SidebarMenuCollapsibleContent({
   item,
 }: CollapsibleMenuNavItemProps) {
   return (
-    <CollapsibleContent id={ `${item.title.toLowerCase()}-content` }>
+    <CollapsibleContent id={`${item.title.toLowerCase()}-content`}>
       <SidebarMenuSub>
         {item.items?.map((subItem) => (
           <SidebarMenuSubItem key={subItem.title}>
