@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import { cn } from "@battle-stadium/ui";
 import {
   Sidebar,
   SidebarContent,
@@ -23,25 +24,27 @@ export default function DashboardLayout({ children }: Readonly<ChildrenProps>) {
     <BreadCrumbsProvider>
       <SidebarProvider className="border-[1px]">
         <DashboardSideBar />
+
         <DashboardContent>{children}</DashboardContent>
       </SidebarProvider>
     </BreadCrumbsProvider>
   );
 }
 
+const SIDEBAR_DEFAULT_CLASSNAMES = "m-4 rounded-xl bg-neutral-900/50";
 function DashboardSideBar() {
   return (
     <Sidebar variant="sidebar" collapsible="icon">
-      <SidebarHeader className="m-4 rounded-xl bg-neutral-900/50">
+      <SidebarHeader className={SIDEBAR_DEFAULT_CLASSNAMES}>
         <MainAppLinksMenu />
       </SidebarHeader>
 
       <div className="flex h-full flex-col">
-        <SidebarContent className="mx-4 mb-4 rounded-xl bg-neutral-900/50">
+        <SidebarContent className={cn(SIDEBAR_DEFAULT_CLASSNAMES, "mt-0")}>
           <NavMain />
         </SidebarContent>
 
-        <SidebarFooter className="mx-4 mb-4 rounded-xl bg-neutral-900/50">
+        <SidebarFooter className={cn(SIDEBAR_DEFAULT_CLASSNAMES, "mt-0")}>
           <NavUserComponent />
         </SidebarFooter>
       </div>

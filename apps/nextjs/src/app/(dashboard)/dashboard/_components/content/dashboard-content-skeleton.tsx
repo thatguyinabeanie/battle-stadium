@@ -1,4 +1,4 @@
-import { DashboardContentSection } from "./dashboard-content-top-section";
+import { DashboardContentSection } from "./dashboard-content-section";
 
 export default function DashboardContentSkeleton() {
   return (
