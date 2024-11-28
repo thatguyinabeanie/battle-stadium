@@ -14,6 +14,7 @@ const protectedRoutes = createRouteMatcher([
   "/api/(.*)",
   "/server-actions/(.*)",
   "/dashboard",
+  "/dashboard/(.*)",
   "/pokemon(.*)",
   "/organizations/:orgSlug/tournaments/:tournamentId/register",
 ]);
