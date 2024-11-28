@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
+import { memo, Suspense } from "react";
 
 import type { Organization } from "@battle-stadium/db/schema";
 import { Card, CardFooter } from "@battle-stadium/ui";
@@ -12,13 +12,15 @@ export const metadata: Metadata = {
   title: "Organizations",
 };
 
+const LoadingOrganizations = memo(() => <div>Loading organizations...</div>);
+
 export default function OrganizationsPage() {
   return (
     <>
-      <Suspense fallback={<div>Loading organizations...</div>}>
+      <Suspense fallback={<LoadingOrganizations />}>
         <PartneredOrganizations />
       </Suspense>
-      <Suspense fallback={<div>Loading organizations...</div>}>
+      <Suspense fallback={<LoadingOrganizations />}>
         <OrganizationsGridRSC />
       </Suspense>
     </>
