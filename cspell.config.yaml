@@ -52,5 +52,7 @@ words:
   - pkmn
   - Tera
   - cmdk
+  - vaul
+  - scrollback
 ignoreWords: []
 import: []
