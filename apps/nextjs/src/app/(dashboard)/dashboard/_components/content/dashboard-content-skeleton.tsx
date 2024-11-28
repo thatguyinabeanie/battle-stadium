@@ -12,7 +12,7 @@ export default function DashboardContentSkeleton() {
         <DashboardContentSection />
         <DashboardContentSection />
       </div>
-      <div className="min-h-[100vh] flex-1 rounded-xl bg-neutral-900/50 md:min-h-min" />
+      <div className="min-h-[100vh] flex-1 rounded-xl bg-neutral-900/50 md:min-h-min animate-pulse" />
       <span className="sr-only">Loading dashboard content, please wait...</span>
     </section>
   );
