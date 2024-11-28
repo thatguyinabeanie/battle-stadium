@@ -63,8 +63,9 @@ function NavLinksDropDownMenuContentMobile() {
   return (
     <DropDownMenuContentMobile>
       <DropdownMenuLabel className="text-xs text-muted-foreground">
-        Teams
+        Battle Stadium
       </DropdownMenuLabel>
+
       {NavbarItemsConfigs.map((navItem, index) => (
         <Link key={navItem.value} href={`/${navItem.value}`}>
           <DropdownMenuItem className="gap-2 p-2">
