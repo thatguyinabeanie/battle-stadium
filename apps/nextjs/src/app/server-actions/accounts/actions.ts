@@ -34,6 +34,7 @@ export async function getAccountMe(
 
   if (userId) {
     const accountMeOptions = {
+      // Cache key includes userId to prevent cross-user cache conflicts
       ...defaultConfig(`getAccountMe-${userId}`),
       ...options,
     };

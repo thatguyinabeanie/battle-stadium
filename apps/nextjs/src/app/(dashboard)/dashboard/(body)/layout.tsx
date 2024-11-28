@@ -4,9 +4,9 @@ import { DashboardContentBody } from "~/app/(dashboard)/dashboard/_components/co
 
 interface LayoutProps {
   children: React.ReactNode;
-  left: React.ReactNode;
-  center: React.ReactNode;
-  right: React.ReactNode;
+  left?: React.ReactNode;
+  center?: React.ReactNode;
+  right?: React.ReactNode;
 }
 
 export default function SharedLayout({
