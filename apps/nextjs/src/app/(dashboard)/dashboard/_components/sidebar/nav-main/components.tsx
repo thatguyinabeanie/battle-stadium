@@ -42,7 +42,7 @@ export function CollapsibleMenuNavItem({ item }: CollapsibleMenuNavItemProps) {
       className="group/collapsible"
       aria-expanded={item.isActive}
       aria-label={`${item.title} navigation section`}
-      aria-controls={ `${item.title.toLowerCase()}-content` }
+      aria-controls={`${item.title.toLowerCase()}-content`}
     >
       <SidebarMenuItem>
         <SidebarMenuButtonCollapsibleTrigger item={item} />
