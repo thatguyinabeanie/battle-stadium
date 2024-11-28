@@ -15,7 +15,9 @@ export const metadata: Metadata = {
 export default function OrganizationsPage() {
   return (
     <>
-      <PartneredOrganizations />
+      <Suspense fallback={<div>Loading organizations...</div>}>
+        <PartneredOrganizations />
+      </Suspense>
       <Suspense fallback={<div>Loading organizations...</div>}>
         <OrganizationsGridRSC />
       </Suspense>
