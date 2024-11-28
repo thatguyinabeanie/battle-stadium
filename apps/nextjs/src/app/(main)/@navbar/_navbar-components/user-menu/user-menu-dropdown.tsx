@@ -17,7 +17,7 @@ export default function UserMenuDropDown({
   isSignedIn,
 }: Readonly<UserMenuDropDownProps>) {
   return (
-    <DropdownMenuContent>
+    <DropdownMenuContent className="bg-background">
       <DropdownMenuItem
         key="profile"
         aria-label="dashboard"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Router from "next/router";
 
 import { env } from "~/env";
@@ -20,14 +20,14 @@ interface AdsBannerProps {
 }
 
 const AdBanner = (props: AdsBannerProps) => {
-  useAdSense();
-
   const NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID = env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID;
+  const { adRef } = useAdSense();
 
   return (
     <div className="w-full min-w-[250px]">
       {NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID && (
         <ins
+          ref={adRef}
           className={`adsbygoogle adbanner-customize mt-2 ${props.className ?? ""}`}
           style={{
             display: "block",
@@ -48,32 +48,46 @@ const AdBanner = (props: AdsBannerProps) => {
 };
 
 function useAdSense() {
+  const adRef = useRef<HTMLModElement>(null);
+  const isInitialized = useRef(false);
   useEffect(() => {
-    const handleRouteChange = () => {
+    const initAd = () => {
       const intervalId = setInterval(() => {
         try {
-          const adElement = document.querySelector(".adsbygoogle");
-          if (window.adsbygoogle && adElement && adElement.clientWidth >= 250) {
+          if (!adRef.current || isInitialized.current) return;
+
+          if (
+            window.adsbygoogle &&
+            adRef.current.clientWidth >= 250 &&
+            !adRef.current.dataset.adInitialized
+          ) {
             window.adsbygoogle.push({});
+            adRef.current.dataset.adInitialized = "true";
+            isInitialized.current = true;
             clearInterval(intervalId);
           }
         } catch (err) {
-          console.error("Error pushing ads: ", err);
+          console.error("Error pushing ads:", err);
           clearInterval(intervalId);
         }
       }, 100);
+
       return () => clearInterval(intervalId);
     };
 
-    handleRouteChange();
+    const cleanup = initAd();
 
     if (typeof window !== "undefined") {
-      Router.events.on("routeChangeComplete", handleRouteChange);
+      Router.events.on("routeChangeComplete", initAd);
       return () => {
-        Router.events.off("routeChangeComplete", handleRouteChange);
+        Router.events.off("routeChangeComplete", initAd);
+        cleanup();
+        isInitialized.current = false;
       };
     }
   }, []);
+
+  return { adRef };
 }
 
 export default AdBanner;

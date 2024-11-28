@@ -46,6 +46,6 @@ export default function Breadcrumbs({
 }
 
 const defaultItems = [
-  { label: "Building Your Application", href: "/docs/building" },
-  { label: "Data Fetching" },
+  { label: "Battle Stadium", href: "/" },
+  { label: "Dashboard", href: "/dashboard" },
 ];

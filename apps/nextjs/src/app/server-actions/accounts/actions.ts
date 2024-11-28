@@ -32,23 +32,24 @@ export async function getAccountMe(
 ) {
   const { userId } = await auth();
 
-  if (!userId) {
-    return null;
+  if (userId) {
+    const accountMeOptions = {
+      // Cache key includes userId to prevent cross-user cache conflicts
+      ...defaultConfig(`getAccountMe-${userId}`),
+      ...options,
+    };
+
+    try {
+      const resp = await BattleStadiumApiClient().GET(
+        "/accounts/me",
+        accountMeOptions,
+      );
+      return resp.data;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   }
 
-  const accountMeOptions = {
-    ...defaultConfig(`getAccountMe-${userId}`),
-    ...options,
-  };
-
-  try {
-    const resp = await BattleStadiumApiClient().GET(
-      "/accounts/me",
-      accountMeOptions,
-    );
-    return resp.data;
-  } catch (err) {
-    console.error(err);
-    return null;
-  }
+  return null;
 }

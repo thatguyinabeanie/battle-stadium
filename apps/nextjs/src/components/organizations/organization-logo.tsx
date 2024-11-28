@@ -4,7 +4,7 @@ import Image from "next/image";
 import type { Organization } from "@battle-stadium/db/schema";
 
 interface OrganizationLogoProps {
-  alt?: string;
+  altName?: string;
   src?: string;
   priority?: boolean;
   organization: Organization;
@@ -19,7 +19,7 @@ const DEFAULT_ORG_IMAGE = "/images/pokemon/vgc.png";
 export const DEFAULT_DATA_TABLE_IMAGE_SIZE = 30;
 
 export default function OrganizationLogo({
-  alt,
+  altName,
   priority,
   organization,
   className,
@@ -30,8 +30,8 @@ export default function OrganizationLogo({
     <div className="flex justify-center">
       <Image
         quality={quality}
-        alt={organization.name ?? alt ?? ""}
-        aria-label={organization.name ?? alt ?? ""}
+        alt={altName ?? organization.name}
+        aria-label={altName ?? organization.name}
         className={`${className} aspect-square`}
         priority={priority ?? false}
         src={organization.logoUrl ?? DEFAULT_ORG_IMAGE}

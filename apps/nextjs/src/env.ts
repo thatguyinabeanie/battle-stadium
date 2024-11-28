@@ -50,6 +50,7 @@ export const env = createEnv({
         "DISCORD_APP_ID is required. Visit https://discord.com/developers/applications -> Your bot -> General information -> Application ID",
       )
       .optional(),
+    SHOW_ADS: z.boolean().optional().default(false),
   },
 
   /**

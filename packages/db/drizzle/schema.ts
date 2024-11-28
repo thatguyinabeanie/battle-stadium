@@ -81,21 +81,21 @@ export const tournaments = pgTable(
     // You can use { mode: "number" } if numbers are exceeding js number limitations
     currentPhaseId: bigint("current_phase_id", { mode: "number" }),
   },
-  (table) => {
+  (table): Record<string, IndexBuilder | ForeignKeyBuilder> => {
     return {
       indexTournamentsOnFormatIdAndStartAt: index(
         "index_tournaments_on_format_id_and_start_at",
       ).using(
         "btree",
-        table.formatId.asc().nullsLast().op("timestamp_ops"),
-        table.startAt.asc().nullsLast().op("int8_ops"),
+        table.formatId.asc().nullsLast().op("int8_ops"),
+        table.startAt.asc().nullsLast().op("timestamp_ops"),
       ),
       indexTournamentsOnGameIdAndStartAt: index(
         "index_tournaments_on_game_id_and_start_at",
       ).using(
         "btree",
-        table.gameId.asc().nullsLast().op("timestamp_ops"),
-        table.startAt.asc().nullsLast().op("timestamp_ops"),
+        table.gameId.asc().nullsLast().op("int8_ops"),
+        table.startAt.asc().nullsLast().op("int8_ops"),
       ),
       indexTournamentsOnLimitlessId: uniqueIndex(
         "index_tournaments_on_limitless_id",
@@ -107,7 +107,7 @@ export const tournaments = pgTable(
       ).using(
         "btree",
         table.organizationId.asc().nullsLast().op("timestamp_ops"),
-        table.startAt.asc().nullsLast().op("timestamp_ops"),
+        table.startAt.asc().nullsLast().op("int8_ops"),
       ),
       indexTournamentsOnPublished: index(
         "index_tournaments_on_published",
@@ -139,7 +139,7 @@ export const organizations = pgTable(
   "organizations",
   {
     id: bigserial({ mode: "number" }).primaryKey().notNull(),
-    name: varchar(),
+    name: varchar().notNull(),
     description: text(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -160,9 +160,9 @@ export const organizations = pgTable(
   },
   (table) => {
     return {
-      indexOrganizationsOnName: uniqueIndex(
-        "index_organizations_on_name",
-      ).using("btree", table.name.asc().nullsLast().op("text_ops")),
+      indexOrganizationsOnName: uniqueIndex("index_organizations_on_name")
+        .using("btree", table.name.asc().nullsLast().op("text_ops"))
+        .where(sql`(name IS NOT NULL)`),
       indexOrganizationsOnOwnerId: index(
         "index_organizations_on_owner_id",
       ).using("btree", table.ownerId.asc().nullsLast().op("int8_ops")),
@@ -227,8 +227,8 @@ export const matches = pgTable(
         "idx_on_tournament_id_phase_id_round_id_table_number_8acf8fd66a",
       ).using(
         "btree",
-        table.tournamentId.asc().nullsLast().op("int8_ops"),
-        table.phaseId.asc().nullsLast().op("int4_ops"),
+        table.tournamentId.asc().nullsLast().op("int4_ops"),
+        table.phaseId.asc().nullsLast().op("int8_ops"),
         table.roundId.asc().nullsLast().op("int8_ops"),
         table.tableNumber.asc().nullsLast().op("int4_ops"),
       ),
@@ -253,7 +253,7 @@ export const matches = pgTable(
       ).using(
         "btree",
         table.tournamentId.asc().nullsLast().op("timestamp_ops"),
-        table.createdAt.asc().nullsLast().op("int8_ops"),
+        table.createdAt.asc().nullsLast().op("timestamp_ops"),
       ),
       indexMatchesOnWinnerId: index("index_matches_on_winner_id").using(
         "btree",
@@ -348,7 +348,7 @@ export const players = pgTable(
       ).using(
         "btree",
         table.accountId.asc().nullsLast().op("int8_ops"),
-        table.createdAt.asc().nullsLast().op("timestamp_ops"),
+        table.createdAt.asc().nullsLast().op("int8_ops"),
       ),
       indexPlayersOnCheckedInAt: index("index_players_on_checked_in_at").using(
         "btree",
@@ -361,8 +361,8 @@ export const players = pgTable(
         "index_players_on_profile_id_and_created_at",
       ).using(
         "btree",
-        table.profileId.asc().nullsLast().op("timestamp_ops"),
-        table.createdAt.asc().nullsLast().op("timestamp_ops"),
+        table.profileId.asc().nullsLast().op("int8_ops"),
+        table.createdAt.asc().nullsLast().op("int8_ops"),
       ),
       indexPlayersOnTournamentAndAccount: uniqueIndex(
         "index_players_on_tournament_and_account",
@@ -379,22 +379,22 @@ export const players = pgTable(
         "index_players_on_tournament_id_and_checked_in_at",
       ).using(
         "btree",
-        table.tournamentId.asc().nullsLast().op("timestamp_ops"),
-        table.checkedInAt.asc().nullsLast().op("timestamp_ops"),
+        table.tournamentId.asc().nullsLast().op("int8_ops"),
+        table.checkedInAt.asc().nullsLast().op("int8_ops"),
       ),
       indexPlayersOnTournamentIdAndDisqualified: index(
         "index_players_on_tournament_id_and_disqualified",
       ).using(
         "btree",
-        table.tournamentId.asc().nullsLast().op("bool_ops"),
+        table.tournamentId.asc().nullsLast().op("int8_ops"),
         table.disqualified.asc().nullsLast().op("bool_ops"),
       ),
       indexPlayersOnTournamentIdAndDropped: index(
         "index_players_on_tournament_id_and_dropped",
       ).using(
         "btree",
-        table.tournamentId.asc().nullsLast().op("bool_ops"),
-        table.dropped.asc().nullsLast().op("int8_ops"),
+        table.tournamentId.asc().nullsLast().op("int8_ops"),
+        table.dropped.asc().nullsLast().op("bool_ops"),
       ),
       indexPlayersOnTournamentIdAndRoundWins: index(
         "index_players_on_tournament_id_and_round_wins",
@@ -408,7 +408,7 @@ export const players = pgTable(
       ).using(
         "btree",
         table.tournamentId.asc().nullsLast().op("int8_ops"),
-        table.teamSheetSubmitted.asc().nullsLast().op("int8_ops"),
+        table.teamSheetSubmitted.asc().nullsLast().op("bool_ops"),
       ),
       fkRails12F8141A7C: foreignKey({
         columns: [table.tournamentId],
@@ -570,7 +570,7 @@ export const phases = pgTable(
     // You can use { mode: "number" } if numbers are exceeding js number limitations
     currentRoundId: bigint("current_round_id", { mode: "number" }),
   },
-  (table): Record<string, IndexBuilder | ForeignKeyBuilder> => {
+  (table) => {
     return {
       indexPhasesOnTournamentIdAndOrder: index(
         "index_phases_on_tournament_id_and_order",
@@ -881,7 +881,7 @@ export const clerkUsers = pgTable(
         "index_clerk_users_on_account_id_and_clerk_user_id",
       ).using(
         "btree",
-        table.accountId.asc().nullsLast().op("text_ops"),
+        table.accountId.asc().nullsLast().op("int8_ops"),
         table.clerkUserId.asc().nullsLast().op("int8_ops"),
       ),
       indexClerkUsersOnClerkUserId: uniqueIndex(
@@ -960,15 +960,15 @@ export const chatMessages = pgTable(
         "index_chat_messages_on_match_id_and_account_id_and_sent_at",
       ).using(
         "btree",
-        table.matchId.asc().nullsLast().op("int8_ops"),
+        table.matchId.asc().nullsLast().op("timestamp_ops"),
         table.accountId.asc().nullsLast().op("timestamp_ops"),
-        table.sentAt.asc().nullsLast().op("timestamp_ops"),
+        table.sentAt.asc().nullsLast().op("int8_ops"),
       ),
       indexChatMessagesOnMatchIdAndProfileIdAndSentAt: index(
         "index_chat_messages_on_match_id_and_profile_id_and_sent_at",
       ).using(
         "btree",
-        table.matchId.asc().nullsLast().op("timestamp_ops"),
+        table.matchId.asc().nullsLast().op("int8_ops"),
         table.profileId.asc().nullsLast().op("timestamp_ops"),
         table.sentAt.asc().nullsLast().op("timestamp_ops"),
       ),
@@ -1085,14 +1085,14 @@ export const pokemon = pgTable(
       ).using(
         "btree",
         table.pokemonTeamId.asc().nullsLast().op("int4_ops"),
-        table.position.asc().nullsLast().op("int4_ops"),
+        table.position.asc().nullsLast().op("int8_ops"),
       ),
       indexPokemonOnPokemonTeamIdAndSpecies: index(
         "index_pokemon_on_pokemon_team_id_and_species",
       ).using(
         "btree",
-        table.pokemonTeamId.asc().nullsLast().op("int8_ops"),
-        table.species.asc().nullsLast().op("text_ops"),
+        table.pokemonTeamId.asc().nullsLast().op("text_ops"),
+        table.species.asc().nullsLast().op("int8_ops"),
       ),
       indexPokemonOnSpecies: index("index_pokemon_on_species").using(
         "btree",
