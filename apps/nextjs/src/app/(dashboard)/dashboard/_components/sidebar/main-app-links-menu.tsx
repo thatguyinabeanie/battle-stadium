@@ -35,17 +35,7 @@ export function MainAppLinksMenu() {
                 aria-haspopup="true"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               >
-                <>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold uppercase text-primary">
-                      Battle Stadium
-                    </span>
-                    <span className="truncate text-xs text-primary">
-                      Beanie LLC
-                    </span>
-                  </div>
-                </>
-
+                <BattleStadiumNaming />
                 <ChevronsUpDown className="ml-auto" />
               </SidebarMenuButton>
             </DropdownMenuTrigger>
@@ -54,6 +44,17 @@ export function MainAppLinksMenu() {
           </DropdownMenu>
         </SidebarMenuItem>
       </SidebarMenu>
+    </div>
+  );
+}
+
+function BattleStadiumNaming() {
+  return (
+    <div className="grid flex-1 text-left text-sm leading-tight">
+      <span className="truncate font-semibold uppercase text-primary">
+        Battle Stadium
+      </span>
+      <span className="truncate text-xs text-primary">Beanie LLC</span>
     </div>
   );
 }
