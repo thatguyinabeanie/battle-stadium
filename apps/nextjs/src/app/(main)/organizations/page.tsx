@@ -42,9 +42,7 @@ async function OrganizationsGridRSC() {
 
 function SimpleOrgCard({ org }: { org: Organization }) {
   return (
-    <Card
-      className="flex aspect-square h-44 flex-col items-center justify-around rounded-xl bg-muted/50 md:h-60"
-    >
+    <Card className="flex aspect-square h-44 flex-col items-center justify-around rounded-xl bg-muted/50 md:h-60">
       <OrganizationLogo organization={org} logoSize={140} />
       <CardFooter className="text-center text-lg font-bold">
         {org.name}
