@@ -15,8 +15,6 @@ import {
   SidebarMenuCollapsibleContent,
 } from "./components";
 
-
-
 export function NavMain() {
   return (
     <SidebarGroup>
