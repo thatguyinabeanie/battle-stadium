@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import React from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
@@ -25,6 +26,7 @@ export interface NavMainItem {
   icon?: LucideIcon;
   isActive?: boolean;
   items?: {
+    logo?: LucideIcon;
     title: string;
     url: string;
   }[];
@@ -104,7 +106,15 @@ export function SidebarMenuCollapsibleContent({
         {item.items?.map((subItem) => (
           <SidebarMenuSubItem key={subItem.title}>
             <SidebarMenuSubButton asChild>
-              <Link href={subItem.url} className="ml-8 text-muted-foreground">
+              <Link
+                href={subItem.url}
+                className="text-sm text-muted-foreground"
+              >
+                {subItem.logo && (
+                  <span>
+                    <subItem.logo className="h-4" />
+                  </span>
+                )}
                 <span>{subItem.title}</span>
               </Link>
             </SidebarMenuSubButton>

@@ -1,4 +1,11 @@
-import { BookOpen, Bot, Settings2, SquareTerminal } from "lucide-react";
+import {
+  Building,
+  Building2,
+  FolderOpen,
+  LayoutDashboard,
+  Trophy,
+  UserRoundPen,
+} from "lucide-react";
 
 import {
   Collapsible,
@@ -37,9 +44,10 @@ async function OrganizationsCollapsibleMenuNavItem() {
   const item: NavMainItem = {
     title: "Organizations",
     url: "/dashboard/organizations",
-    icon: Settings2,
+    icon: Building2,
     isActive: true,
     items: [...own, ...member].map((org) => ({
+      logo: Building,
       title: org.name,
       url: `/dashboard/organizations/${org.slug}`,
     })),
@@ -79,7 +87,7 @@ function DashboardCollapsibleNavItem() {
 const dashboardNavItem: NavMainItem = {
   title: "Dashboard",
   url: "/dashboard",
-  icon: SquareTerminal,
+  icon: LayoutDashboard,
   isActive: true,
 };
 
@@ -87,16 +95,16 @@ const navMainItems: NavMainItem[] = [
   {
     title: "Profiles",
     url: "/dashboard/profiles",
-    icon: Bot,
+    icon: UserRoundPen,
   },
   {
     title: "Teams",
     url: "#",
-    icon: BookOpen,
+    icon: FolderOpen,
   },
   {
     title: "Tournament History",
     url: "/dashboard/tournaments",
-    icon: BookOpen,
+    icon: Trophy,
   },
 ];
