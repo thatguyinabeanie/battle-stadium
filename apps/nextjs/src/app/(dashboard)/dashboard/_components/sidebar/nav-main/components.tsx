@@ -61,7 +61,7 @@ export function SidebarMenuButtonCollapsibleTrigger({
     <span className="max-w-[12rem] truncate text-primary">{item.title}</span>
   );
 
-  const hasItems = !!(item.items?.length && item.items.length > 0);
+  const hasItems = !!item.items?.length;
 
   return (
     <div className="flex flex-row">
