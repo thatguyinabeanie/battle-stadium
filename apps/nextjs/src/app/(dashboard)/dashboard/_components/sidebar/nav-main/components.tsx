@@ -61,11 +61,13 @@ export function SidebarMenuButtonCollapsibleTrigger({
     <span className="max-w-[12rem] truncate text-primary">{item.title}</span>
   );
 
+  const hasItems = !!(item.items?.length && item.items.length > 0);
+
   return (
     <div className="flex flex-row">
       <Link
         href={item.url}
-        className="text-md flex flex-row items-center gap-2 p-2"
+        className="text-md flex flex-row items-center justify-start gap-2 p-2"
       >
         {item.icon ? (
           <item.icon aria-hidden="true" className="text-muted-foreground" />
@@ -83,9 +85,10 @@ export function SidebarMenuButtonCollapsibleTrigger({
         )}
       </Link>
 
-      {item.items?.length && (
+      {hasItems && (
         <CollapsibleTrigger asChild>
           <SidebarMenuButton
+            className="flex items-center"
             tooltip={item.title}
             aria-current={item.isActive ? "page" : undefined}
           >
