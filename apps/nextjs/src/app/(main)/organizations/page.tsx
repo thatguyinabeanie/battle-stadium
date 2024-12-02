@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import {
   getOrganizations,
@@ -6,7 +7,6 @@ import {
 } from "~/app/server-actions/organizations/actions";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 import { OrganizationsGrid } from "./_components/client-components";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Organizations",
@@ -15,11 +15,11 @@ export const metadata: Metadata = {
 export default function OrganizationsPage() {
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>} >
+      <Suspense fallback={<div>Loading...</div>}>
         <PartneredOrganizations />
       </Suspense>
 
-      <Suspense fallback={<div>Loading...</div>} >
+      <Suspense fallback={<div>Loading...</div>}>
         <OrganizationsGrid
           getOrSearchOrganizationsAction={getOrSearchOrganizationsAction}
         />

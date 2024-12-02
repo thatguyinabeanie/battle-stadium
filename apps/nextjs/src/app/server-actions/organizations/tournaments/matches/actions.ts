@@ -1,5 +1,6 @@
 "use server";
 
+import { cacheLife } from "next/dist/server/use-cache/cache-life";
 import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 import { and, db, desc, eq } from "@battle-stadium/db";
@@ -21,6 +22,8 @@ async function getOrganizationTournamentMatchesRaw(
 ) {
   "use cache";
   cacheTag(`getOrganizationTournamentMatches(${org_slug}, ${tournament_id})`);
+  cacheLife("minutes");
+  // TODO: revalidate on match updates
 
   return MatchesLeftJoinTournamentsLeftJoinOrganizations()
     .where(

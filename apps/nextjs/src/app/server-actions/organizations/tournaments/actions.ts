@@ -1,5 +1,6 @@
 "use server";
 
+import { cacheLife } from "next/dist/server/use-cache/cache-life";
 import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 import { count } from "drizzle-orm";
 
@@ -36,6 +37,9 @@ async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
 export async function getOrganizationTournaments(page = 1, pageSize = 20) {
   "use cache";
   cacheTag(`getOrganizationTournaments(${page},${pageSize})`);
+  cacheLife("days");
+  // TODO: revalidate on tournament creation
+
   return getOrganizationTournamentsRaw(page, pageSize);
 }
 
@@ -46,6 +50,8 @@ async function getSingleOrganizationTournamentsRaw(
 ) {
   "use cache";
   cacheTag(`getSingleOrganizationTournamentsRaw(${slug},${page},${pageSize})`);
+  cacheLife("hours");
+  // TODO: revalidate on tournament creation
 
   return tournamentsLeftJoinOrganizations()
     .where(eq(organizations.slug, slug))
@@ -59,8 +65,6 @@ export async function getSingleOrganizationTournaments(
   page = 1,
   pageSize = 20,
 ) {
-  "use cache";
-  cacheTag(`getSingleOrganizationTournaments(${slug},${page},${pageSize})`);
   const results = await getSingleOrganizationTournamentsRaw(
     slug,
     page,
@@ -78,6 +82,9 @@ async function getSingleOrganizationSingleTournamentRaw(
 ) {
   "use cache";
   cacheTag(`getSingleOrganizationSingleTournamentRaw(${slug},${tournamentId})`);
+  cacheLife("minutes");
+  // TODO: revalidate on tournament update
+
   return tournamentsLeftJoinOrganizations()
     .where(and(eq(organizations.slug, slug), eq(tournaments.id, tournamentId)))
     .orderBy(desc(tournaments.startAt))
@@ -88,8 +95,6 @@ export async function getSingleOrganizationSingleTournament(
   slug: string,
   tournamentId: number,
 ) {
-  "use cache";
-  cacheTag(`getSingleOrganizationSingleTournament(${slug},${tournamentId})`);
   const results = await getSingleOrganizationSingleTournamentRaw(
     slug,
     tournamentId,

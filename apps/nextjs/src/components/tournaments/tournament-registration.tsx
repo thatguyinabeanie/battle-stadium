@@ -53,7 +53,7 @@ function useTournamentRegistrationAction({
   handleTournamentRegistration,
   org_slug,
   tournament_id,
-  userId
+  userId,
 }: Omit<TournamentRegistrationProps, "children">) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);

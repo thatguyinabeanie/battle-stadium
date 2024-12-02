@@ -4,11 +4,11 @@ import type { OrganizationTournamentParams } from "~/types";
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
 import RegistrationsTable from "~/components/tournaments/registrations-table";
 
-export default function TournamentRegistrationsPage (
+export default function TournamentRegistrationsPage(
   props: Readonly<OrganizationTournamentParams>,
 ) {
   return (
-    <Suspense fallback={ <div>Loading...</div> }>
+    <Suspense fallback={<div>Loading...</div>}>
       <TournamentRegistrations {...props} />
     </Suspense>
   );
@@ -21,7 +21,7 @@ async function TournamentRegistrations(
   const { tournament_id } = params;
 
   return (
-    <Suspense fallback={ <div>Loading...</div> }>
+    <Suspense fallback={<div>Loading...</div>}>
       <TournamentsRegistrationTable tournament_id={tournament_id} />
     </Suspense>
   );

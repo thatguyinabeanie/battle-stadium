@@ -1,5 +1,6 @@
 "use server";
 
+import { cacheLife } from "next/dist/server/use-cache/cache-life";
 import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 import SqlString from "sqlstring";
 
@@ -12,6 +13,8 @@ import { getAccount } from "../accounts/actions";
 export async function getOrganizations() {
   "use cache";
   cacheTag("getOrganizations");
+  cacheLife("hours");
+  // TODO: revalidate on organization creation
 
   return db.query.organizations.findMany();
 }
@@ -19,9 +22,10 @@ export async function getOrganizations() {
 export async function searchOrganizations(query: string) {
   "use cache";
   cacheTag(`searchOrganizations(${query})`);
+  cacheLife("hours");
+  // TODO: revalidate on organization creation
 
   const sanitizedQuery = SqlString.escape(query).toLowerCase();
-
   return db.query.organizations.findMany({
     where: (organizations, { or, like }) =>
       or(
@@ -34,6 +38,8 @@ export async function searchOrganizations(query: string) {
 export async function getPartneredOrganizations() {
   "use cache";
   cacheTag("getPartneredOrganizations");
+  cacheLife("days");
+  // TODO: revalidate on organization update => partner
 
   return db.query.organizations.findMany({
     where: eq(organizations.partner, true),
@@ -43,15 +49,19 @@ export async function getPartneredOrganizations() {
 export async function findOrganizationBySlug(slug: string) {
   "use cache";
   cacheTag(`findOrganizationBySlug(${slug})`);
-  const org = await db.query.organizations.findFirst({
+  cacheLife("days");
+  // TODO: revalidate on organization update
+
+  return db.query.organizations.findFirst({
     where: eq(organizations.slug, slug),
   });
-  return org;
 }
 
 export async function getUserOrganizations(userId: string) {
   "use cache";
   cacheTag(`getUserOrganizations(${userId})`);
+  cacheLife("hours");
+  // TODO: revalidate on organization creation
 
   const me = await getAccount(userId);
 

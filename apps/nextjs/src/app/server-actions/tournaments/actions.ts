@@ -1,6 +1,7 @@
 "use server";
 
 import type { FetchOptions } from "openapi-fetch";
+import { cacheLife } from "next/dist/server/use-cache/cache-life";
 import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 import { count, db, eq } from "@battle-stadium/db";
@@ -17,6 +18,8 @@ import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 export async function getTournament(tournament_id: number) {
   "use cache";
   cacheTag(`getTournament(${tournament_id})`);
+  cacheLife("hours");
+  // TODO: revalidate on tournament update
 
   const result = await db
     .select()
@@ -34,7 +37,12 @@ export async function getTournament(tournament_id: number) {
 }
 
 export async function getTournaments(page = 1, pageSize = 20) {
-  return await db.query.tournaments.findMany({
+  "use cache";
+  cacheTag(`getTournaments(${page},${pageSize})`);
+  cacheLife("hours");
+  // TODO: revalidate on tournament creation
+
+  return db.query.tournaments.findMany({
     orderBy: (tournaments, { desc }) => desc(tournaments.startAt),
     limit: pageSize,
     offset: (page - 1) * pageSize,
@@ -94,6 +102,8 @@ export async function postTournamentRegistration(
 export async function getTournamentPlayers(tournament_id: number) {
   "use cache";
   cacheTag(`getTournamentPlayers-${tournament_id}`);
+  cacheLife("minutes");
+  // TODO: revalidate on player registration
 
   return await db
     .select()
@@ -104,6 +114,11 @@ export async function getTournamentPlayers(tournament_id: number) {
 }
 
 export async function getTournamentPlayerCount(tournament_id: number) {
+  "use cache";
+  cacheTag(`getTournamentPlayerCount-${tournament_id}`);
+  cacheLife("minutes");
+  // TODO: revalidate on player registration
+
   const result = await db
     .select({
       count: count(players.id),

@@ -1,6 +1,7 @@
 "use server";
 
 import type { FetchOptions } from "openapi-fetch";
+import { cacheLife } from "next/dist/server/use-cache/cache-life";
 import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 import { db, eq } from "@battle-stadium/db";
@@ -12,7 +13,10 @@ import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 export async function getAccounts() {
   "use cache";
   cacheTag("getAccounts");
-  return await db.query.accounts.findMany();
+  cacheLife("minutes");
+  // TODO: revalidate on account creation
+
+  return db.query.accounts.findMany();
 }
 
 export async function getAccountByProfileUsername(username: string) {
@@ -28,8 +32,10 @@ export async function getAccountByProfileUsername(username: string) {
 async function findAccountById(id: number) {
   "use cache";
   cacheTag(`findAccountById(${id})`);
+  cacheLife("hours");
+  // TODO - revalidate on account creation
 
-  return await db.query.accounts.findFirst({
+  return db.query.accounts.findFirst({
     where: eq(accounts.id, id),
   });
 }
@@ -37,12 +43,12 @@ async function findAccountById(id: number) {
 async function findProfilesByUsername(username: string) {
   "use cache";
   cacheTag(`findProfileByUsername(${username})`);
+  cacheLife("hours");
+  // TODO - revalidate on profile creation
 
-  const profile = await db.query.profiles.findFirst({
+  return db.query.profiles.findFirst({
     where: eq(profiles.username, username),
   });
-
-  return profile;
 }
 
 export async function getAccount(
@@ -51,7 +57,8 @@ export async function getAccount(
 ) {
   "use cache";
   cacheTag(`getAccount(${userId})`);
-
+  cacheLife("hours");
+  // TODO: revalidate on account creation
 
   const accountMeOptions = {
     // Cache key includes userId to prevent cross-user cache conflicts

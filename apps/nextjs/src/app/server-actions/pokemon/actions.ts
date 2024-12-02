@@ -1,14 +1,18 @@
 "use server";
 
+import { cacheLife } from "next/dist/server/use-cache/cache-life";
+import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+
 import { db } from "@battle-stadium/db";
 import { pokemon, pokemonTeams } from "@battle-stadium/db/schema";
-import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
 
 export async function getPokemonTeams() {
   "use cache";
   cacheTag("getPokemonTeams");
+  cacheLife("minutes");
+  // TODO: revalidate on team creation
 
   return await db.query.pokemonTeams.findMany();
 }
