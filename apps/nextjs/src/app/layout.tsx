@@ -84,11 +84,13 @@ export default function RootLayout({
               <div className="flex min-h-screen flex-col items-center">
                 <AwesomeParticles />
                   <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
-                    <TRPCReactProvider>
-                      <HydrateClient>
-                        {children}
-                      </HydrateClient>
-                    </TRPCReactProvider>
+                    <Suspense fallback={null}>
+                      <TRPCReactProvider>
+                        <HydrateClient>
+                          {children}
+                        </HydrateClient>
+                      </TRPCReactProvider>
+                    </Suspense>
                   </div>
               </div>
 
