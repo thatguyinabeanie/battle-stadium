@@ -7,6 +7,7 @@ import type { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import { ClerkProvider } from "@clerk/nextjs";
 import { GoogleAnalytics } from "@next/third-parties/google";
+
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import { SpeedInsights as VercelSpeedInsights } from "@vercel/speed-insights/next";
 import { GeistMono } from "geist/font/mono";
@@ -21,7 +22,7 @@ import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/server";
 
 const AwesomeParticles = dynamic(
-  () => import("~/components/awesome-particles"),
+  () => import("~/components/awesome-particles"), {ssr: false}
 );
 
 export const metadata: Metadata = {
@@ -93,8 +94,8 @@ export default function RootLayout({
 
                 <Suspense fallback={null}>
                   {cookies}
-                  <Analytics />
                 </Suspense>
+                <Analytics />
               </ThemeProvider>
             </TRPCReactProvider>
           </body>
