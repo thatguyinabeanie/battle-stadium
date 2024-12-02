@@ -1,6 +1,6 @@
 "use client";
 
-import type { ChangeEventHandler} from "react";
+import type { ChangeEventHandler } from "react";
 import { useCallback, useEffect, useState } from "react";
 import Form from "next/form";
 import Link from "next/link";
@@ -30,29 +30,33 @@ export function OrganizationsGrid({
     void fetchInitialOrganizations();
   }, []);
 
-  const getOrSearchOrganizationsActionWrapper = useCallback(async (formData?: FormData) => {
-    const orgs = await getOrSearchOrganizationsAction(formData);
-    setOrgs(orgs);
-    return orgs;
-  }, [getOrSearchOrganizationsAction]);
+  const getOrSearchOrganizationsActionWrapper = useCallback(
+    async (formData?: FormData) => {
+      const orgs = await getOrSearchOrganizationsAction(formData);
+      setOrgs(orgs);
+      return orgs;
+    },
+    [getOrSearchOrganizationsAction],
+  );
 
+  const onInputChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      e.preventDefault();
+      // Debounce search for better performance
+      const form = e.currentTarget.form;
+      if (!form) return;
 
-  const onInputChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-    e.preventDefault();
-    // Debounce search for better performance
-    const form = e.currentTarget.form;
-    if (!form) return;
+      const timeoutId = setTimeout(() => {
+        const formData = new FormData(form);
+        void getOrSearchOrganizationsActionWrapper(formData);
+      }, 300);
 
-    const timeoutId = setTimeout(() => {
-      const formData = new FormData(form);
-      void getOrSearchOrganizationsActionWrapper(formData);
-    }, 300);
-
-    return () => clearTimeout(timeoutId);
-  }, [getOrSearchOrganizationsActionWrapper]);
+      return () => clearTimeout(timeoutId);
+    },
+    [getOrSearchOrganizationsActionWrapper],
+  );
 
   return (
-
     <div className="flex flex-1 flex-col gap-4 p-4">
       {orgs.length === 0 ? (
         <OrganizationsGridSkeleton />
@@ -71,19 +75,31 @@ interface LoadedOrganizationsProps extends OrganizationsGridProps {
   onInputChange: ChangeEventHandler<HTMLInputElement>;
 }
 
-function LoadedOrganizations ({ orgs, onInputChange, getOrSearchOrganizationsAction  }: LoadedOrganizationsProps) {
+function LoadedOrganizations({
+  orgs,
+  onInputChange,
+  getOrSearchOrganizationsAction,
+}: LoadedOrganizationsProps) {
   return (
     <>
-      <Form className="flex flex-row w-full justify-start" action={ getOrSearchOrganizationsAction }>
+      <Form
+        className="flex w-full flex-row justify-start"
+        action={getOrSearchOrganizationsAction}
+      >
         <input
           name="query"
           type="text"
           placeholder="Search organizations..."
           className="mb-4 rounded border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
           aria-label="Search organizations"
-          onChange={ onInputChange }
+          onChange={onInputChange}
         />
-        <Button variant="outline" type="submit" className="mb-4 ml-2" aria-label="Submit search">
+        <Button
+          variant="outline"
+          type="submit"
+          className="mb-4 ml-2"
+          aria-label="Submit search"
+        >
           Search
         </Button>
       </Form>
@@ -93,7 +109,7 @@ function LoadedOrganizations ({ orgs, onInputChange, getOrSearchOrganizationsAct
         ))}
       </div>
     </>
-  )
+  );
 }
 
 export function SimpleOrgCard({ org }: { org: Organization }) {
@@ -116,28 +132,37 @@ export function SimpleOrgCard({ org }: { org: Organization }) {
   );
 }
 
-function OrganizationsGridSkeleton () {
+function OrganizationsGridSkeleton() {
   return (
     <>
-      <div className="flex flex-row w-full justify-start">
+      <div className="flex w-full flex-row justify-start">
         <input
           disabled
           name="query"
           type="text"
           placeholder="Search organizations..."
-          className="mb-4 rounded border p-2 focus:outline-none focus:ring-2 focus:ring-primary animate-pulse"
+          className="mb-4 animate-pulse rounded border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
         />
-        <Button variant="outline" type="submit" className="mb-4 ml-2 animate-pulse" aria-label="Submit search" disabled>
+        <Button
+          variant="outline"
+          type="submit"
+          className="mb-4 ml-2 animate-pulse"
+          aria-label="Submit search"
+          disabled
+        >
           Search
         </Button>
       </div>
       <div className="grid auto-rows-min grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        { Array.from({ length: 30 }).map((_, i) => (
-          <div key={ i } className=" flex aspect-square h-44 flex-col items-center justify-around rounded-xl bg-muted/50 md:h-60">
-            <div className="animate-pulse aspect-square h-28 w-28 bg-gray-300 rounded-2xl" />
-            <div className="animate-pulse w-20 h-4 bg-gray-300 rounded" />
+        {Array.from({ length: 30 }).map((_, i) => (
+          <div
+            key={i}
+            className="flex aspect-square h-44 flex-col items-center justify-around rounded-xl bg-muted/50 md:h-60"
+          >
+            <div className="aspect-square h-28 w-28 animate-pulse rounded-2xl bg-gray-300" />
+            <div className="h-4 w-20 animate-pulse rounded bg-gray-300" />
           </div>
-        )) }
+        ))}
       </div>
     </>
   );

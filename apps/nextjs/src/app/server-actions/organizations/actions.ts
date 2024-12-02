@@ -22,7 +22,6 @@ export async function searchOrganizations(query: string) {
   return orgs;
 }
 
-
 export async function getPartneredOrganizations() {
   const orgs = await db.query.organizations.findMany({
     where: eq(organizations.partner, true),
