@@ -132,7 +132,9 @@ export function SimpleOrgCard({ org }: { org: Organization }) {
           logoSize={140}
           className={TRANSITION_CLASSES}
         />
-        <CardFooter className={ `${TRANSITION_CLASSES} text-center text-lg text-primary">
+        <CardFooter
+          className={`${TRANSITION_CLASSES} text-center text-lg text-primary`}
+        >
           {org.name}
         </CardFooter>
       </Card>
