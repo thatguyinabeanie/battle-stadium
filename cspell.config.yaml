@@ -54,5 +54,6 @@ words:
   - cmdk
   - vaul
   - scrollback
+  - pokepaste
 ignoreWords: []
 import: []
