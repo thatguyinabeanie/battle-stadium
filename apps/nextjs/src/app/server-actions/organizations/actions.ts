@@ -1,6 +1,8 @@
 "use server";
 
-import { eq } from "@battle-stadium/db";
+import SqlString from "sqlstring";
+
+import { eq, lower } from "@battle-stadium/db";
 import { db, inArray } from "@battle-stadium/db/client";
 import { organizations } from "@battle-stadium/db/schema";
 
@@ -8,6 +10,19 @@ import { getAccountMe } from "../accounts/actions";
 
 export async function getOrganizations() {
   const orgs = await db.query.organizations.findMany();
+  return orgs;
+}
+
+export async function searchOrganizations(query: string) {
+  const sanitizedQuery = SqlString.escape(query).toLowerCase();
+
+  const orgs = await db.query.organizations.findMany({
+    where: (organizations, { or, like }) =>
+      or(
+        like(lower(organizations.name), `%${sanitizedQuery}%`),
+        like(lower(organizations.slug), `%${sanitizedQuery}%`),
+      ),
+  });
   return orgs;
 }
 

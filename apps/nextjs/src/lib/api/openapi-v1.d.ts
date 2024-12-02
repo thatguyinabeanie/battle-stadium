@@ -1255,7 +1255,10 @@ export interface operations {
   };
   postAccount: {
     parameters: {
-      query?: never;
+      query?: {
+        /** @description Username */
+        username?: string;
+      };
       header?: {
         /** @description Vercel OIDC Token */
         "X-Vercel-OIDC-Token"?: string;
@@ -1579,12 +1582,15 @@ export interface operations {
   };
   listOrganizations: {
     parameters: {
-      query: {
+      query?: {
         /** @description Page number for pagination */
-        page: number;
+        page?: number;
         /** @description Number of items per page for pagination */
-        per_page: number;
+        per_page?: number;
+        /** @description Filter by partner organizations */
         partner?: boolean;
+        /** @description Search query */
+        query?: string;
       };
       header?: {
         /** @description Vercel OIDC Token */
@@ -1595,7 +1601,7 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
-      /** @description successful */
+      /** @description Search Organizations */
       200: {
         headers: Record<string, unknown>;
         content: {
@@ -2047,7 +2053,7 @@ export interface operations {
         content?: never;
       };
       /** @description Already registered */
-      422: {
+      409: {
         headers: Record<string, unknown>;
         content: {
           "application/json": components["schemas"]["Error"];
@@ -2295,11 +2301,11 @@ export interface operations {
   };
   listTournaments: {
     parameters: {
-      query: {
+      query?: {
         /** @description Page number for pagination */
-        page: number;
+        page?: number;
         /** @description Number of items per page for pagination */
-        per_page: number;
+        per_page?: number;
       };
       header?: {
         /** @description Vercel OIDC Token */
