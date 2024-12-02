@@ -39,21 +39,22 @@ words:
   - adsbygoogle
   - adtest
   - battlestadium
+  - cmdk
   - Magnifer
   - navuser
   - nums
+  - pkmn
+  - pokepaste
+  - scrollback
   - slotnumber
+  - sqlstring
+  - teamlists
+  - Tera
   - thatguyinabeanie
   - UNPOOLED
   - Unreads
   - uploadthing
   - UTSSR
-  - teamlists
-  - pkmn
-  - Tera
-  - cmdk
   - vaul
-  - scrollback
-  - pokepaste
 ignoreWords: []
 import: []

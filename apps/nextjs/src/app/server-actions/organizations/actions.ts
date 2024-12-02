@@ -1,5 +1,7 @@
 "use server";
 
+import SqlString from "sqlstring";
+
 import { eq, lower } from "@battle-stadium/db";
 import { db, inArray } from "@battle-stadium/db/client";
 import { organizations } from "@battle-stadium/db/schema";
@@ -12,7 +14,7 @@ export async function getOrganizations() {
 }
 
 export async function searchOrganizations(query: string) {
-  const sanitizedQuery = query.replace(/[%_]/g, "\\$&").toLowerCase();
+  const sanitizedQuery = SqlString.escape(query).toLowerCase();
 
   const orgs = await db.query.organizations.findMany({
     where: (organizations, { or, like }) =>
