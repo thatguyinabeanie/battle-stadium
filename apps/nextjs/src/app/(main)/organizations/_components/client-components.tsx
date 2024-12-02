@@ -160,8 +160,8 @@ function OrganizationsGridSkeleton() {
             key={i}
             className="flex aspect-square h-44 flex-col items-center justify-around rounded-xl bg-muted/50 md:h-60"
           >
-            <div className="aspect-square h-28 w-28 animate-pulse rounded-2xl bg-gray-300" />
-            <div className="h-4 w-20 animate-pulse rounded bg-gray-300" />
+            <div className="aspect-square h-28 w-28 animate-pulse rounded-2xl bg-neutral-800" />
+            <div className="h-4 w-20 animate-pulse rounded bg-neutral-800" />
           </div>
         ))}
       </div>
