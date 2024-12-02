@@ -6,7 +6,7 @@ import Form from "next/form";
 import Link from "next/link";
 
 import type { Organization } from "@battle-stadium/db/schema";
-import { Button, Card, CardFooter, cn } from "@battle-stadium/ui";
+import { Button, Card, CardFooter } from "@battle-stadium/ui";
 
 import { getOrganizations } from "~/app/server-actions/organizations/actions";
 import OrganizationLogo from "~/components/organizations/organization-logo";
@@ -114,21 +114,25 @@ function LoadedOrganizations({
 }
 
 const TRANSITION_CLASSES = "transition-all duration-50 ease-in-out";
-const HOVER_CLASSES = "hover:z-50 hover:scale-105 hover:border hover:border-primary hover:font-bold";
-const LAYOUT_CLASSES = "flex aspect-square h-52 flex-col items-center justify-around rounded-xl  md:h-60";
+const HOVER_CLASSES =
+  "hover:z-50 hover:scale-105 hover:border hover:border-primary hover:font-bold";
+const LAYOUT_CLASSES =
+  "flex aspect-square h-52 flex-col items-center justify-around rounded-xl  md:h-60";
 export function SimpleOrgCard({ org }: { org: Organization }) {
   return (
     <Link
       href={`/organizations/${org.slug}`}
       aria-label={`View ${org.name} organization details`}
     >
-      <Card className={`bg-muted/50 font-normal ${TRANSITION_CLASSES} ${HOVER_CLASSES} ${LAYOUT_CLASSES}`}>
+      <Card
+        className={`bg-muted/50 font-normal ${TRANSITION_CLASSES} ${HOVER_CLASSES} ${LAYOUT_CLASSES}`}
+      >
         <OrganizationLogo
           organization={org}
           logoSize={140}
           className="transition-transform duration-300 ease-in-out"
         />
-        <CardFooter className="text-center text-lg text-primary transition-transform duration- ease-in-linear">
+        <CardFooter className="duration- ease-in-linear text-center text-lg text-primary transition-transform">
           {org.name}
         </CardFooter>
       </Card>
