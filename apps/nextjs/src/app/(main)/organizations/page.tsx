@@ -31,11 +31,10 @@ export default function OrganizationsPage() {
 export async function getOrSearchOrganizationsAction(formData?: FormData) {
   "use server";
   if (formData) {
-    const query = (formData.get("query") as string | null) ?? "";
-    if (!query.trim()) {
-      return await getOrganizations();
+    const query = ((formData.get("query") as string | null) ?? "").trim();
+    if (query) {
+      return await searchOrganizations(query);
     }
-    return await searchOrganizations(query);
   }
 
   return await getOrganizations();

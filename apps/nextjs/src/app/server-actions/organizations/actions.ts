@@ -9,7 +9,7 @@ import { db, inArray } from "@battle-stadium/db/client";
 import { organizations } from "@battle-stadium/db/schema";
 
 import { getAccount } from "../accounts/actions";
-import { Tokens } from "~/types";
+import type { Tokens } from "~/types";
 
 export async function getOrganizations() {
   "use cache";

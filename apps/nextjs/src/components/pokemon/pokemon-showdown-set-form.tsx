@@ -5,8 +5,6 @@ import { Button, Textarea } from "@battle-stadium/ui";
 
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
 // import { postPokemonTeam } from "~/app/server-actions/pokemon/actions";
-import { getAccount } from "~/app/server-actions/accounts/actions";
-import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 interface PokemonShowdownSetFormProps {
   validatedTeam: ValidatedPokemon[] | null;

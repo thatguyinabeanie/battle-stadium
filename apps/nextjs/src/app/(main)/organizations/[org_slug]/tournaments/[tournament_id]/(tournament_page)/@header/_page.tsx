@@ -32,8 +32,7 @@ export default function OrganizationTournamentHeaderSlot(
 async function OrganizationTournamentHeader(
   props: Readonly<OrganizationTournamentParams>,
 ) {
-  const params = await props.params;
-  const { org_slug, tournament_id } = params;
+  const { org_slug, tournament_id } = await props.params;
   const { organization, tournament } =
     await getSingleOrganizationSingleTournament(org_slug, tournament_id);
 
