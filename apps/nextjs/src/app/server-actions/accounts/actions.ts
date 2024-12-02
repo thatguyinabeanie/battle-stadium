@@ -52,6 +52,7 @@ export async function getAccount(
   "use cache";
   cacheTag(`getAccount(${userId})`);
 
+
   const accountMeOptions = {
     // Cache key includes userId to prevent cross-user cache conflicts
     ...defaultConfig(`getAccount-${userId}`),

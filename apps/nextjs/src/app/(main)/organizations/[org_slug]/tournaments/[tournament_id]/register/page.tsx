@@ -30,31 +30,33 @@ export default function RegisterSuspenseWrapper(
 async function Register(props: Readonly<OrganizationTournamentParams>) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
+  const { userId } = await auth();
+  if(!userId) {return null}
   return (
-    <>
-      <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
-        <div>
-          Register for {org_slug} tournament {tournament_id}
-        </div>
-
-        <TournamentRegistrationForm
-          {...params}
-          handleTournamentRegistration={handleTournamentRegistration}
-        >
-          <Input name="ign" />
-          <ProfileSelector />
-        </TournamentRegistrationForm>
+    <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
+      <div>
+        Register for {org_slug} tournament {tournament_id}
       </div>
-    </>
+
+      <TournamentRegistrationForm
+        {...params}
+        userId={userId}
+        handleTournamentRegistration={handleTournamentRegistration}
+      >
+        <Input name="ign" />
+        <ProfileSelector />
+      </TournamentRegistrationForm>
+    </div>
   );
 }
 
 async function handleTournamentRegistration(
   formData: FormData,
   tournament_id: number,
+  userId: string,
 ) {
   "use server";
-  const { userId } = await auth();
+
   const profiles = await getProfiles(userId);
 
   const in_game_name = formData.get("ign") as string;
