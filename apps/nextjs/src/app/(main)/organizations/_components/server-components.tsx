@@ -1,14 +1,9 @@
-import { memo } from "react";
 import Link from "next/link";
 
 import type { Organization } from "@battle-stadium/db/schema";
 import { Card, CardFooter } from "@battle-stadium/ui";
 
 import OrganizationLogo from "~/components/organizations/organization-logo";
-
-export const LoadingOrganizations = memo(() => (
-  <div>Loading organizations...</div>
-));
 
 export function SimpleOrgCard({ org }: { org: Organization }) {
   return (

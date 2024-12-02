@@ -25,7 +25,7 @@ export default function OrganizationsPage() {
 export async function getOrSearchOrganizationsAction(formData?: FormData) {
   "use server";
   if (formData) {
-    const query = formData.get("query") as string;
+    const query = (formData.get("query") as string | null) ?? "";
     if (!query.trim()) {
       return await getOrganizations();
     }
