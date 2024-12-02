@@ -9,6 +9,7 @@ import { db, inArray } from "@battle-stadium/db/client";
 import { organizations } from "@battle-stadium/db/schema";
 
 import { getAccount } from "../accounts/actions";
+import { Tokens } from "~/types";
 
 export async function getOrganizations() {
   "use cache";
@@ -57,13 +58,13 @@ export async function findOrganizationBySlug(slug: string) {
   });
 }
 
-export async function getUserOrganizations(userId: string) {
+export async function getUserOrganizations(userId: string, tokens: Tokens) {
   "use cache";
   cacheTag(`getUserOrganizations(${userId})`);
   cacheLife("hours");
   // TODO: revalidate on organization creation
 
-  const me = await getAccount(userId);
+  const me = await getAccount(userId, tokens);
 
   if (!me) {
     return {

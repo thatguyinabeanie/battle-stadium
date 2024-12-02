@@ -28,6 +28,7 @@ import {
 import { getAccount } from "~/app/server-actions/accounts/actions";
 import { SolarUserLinear } from "~/components/svg/icons";
 import { DropDownMenuContentMobile } from "./side-bar-client-components";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 export function NavUserComponent() {
   return (
@@ -105,8 +106,12 @@ export function SidebarNavUserDetailsAndAvatarSuspense() {
 
 const DEFAULT_AVATAR = "/images/solar-user-linear.svg";
 async function SidebarNavUserDetailsAndAvatar() {
-  const { userId } = await auth();
-  const me = await getAccount(userId);
+  const session = await auth();
+  const tokens = {
+    clerk: await session.getToken(),
+    oidc: await getVercelOidcToken(),
+  };
+  const me = await getAccount(session.userId, tokens);
   const user = await currentUser();
   return (
     <>

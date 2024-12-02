@@ -14,6 +14,7 @@ import { profiles } from "@battle-stadium/db/schema";
 import type { paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 import { getAccount } from "../accounts/actions";
+import type { Tokens } from "~/types";
 
 export async function getAllProfiles() {
   "use cache";
@@ -46,8 +47,8 @@ export async function getProfilesByAccountId(id: number) {
   });
 }
 
-export async function getProfiles(userId: string | null) {
-  const me = await getAccount(userId);
+export async function getProfiles(userId: string | null, tokens: Tokens) {
+  const me = await getAccount(userId, tokens);
   if (!me) {
     return [];
   }
@@ -62,6 +63,7 @@ export async function getProfiles(userId: string | null) {
 
 export async function createProfile(
   username: string,
+  tokens: Tokens,
   options?: FetchOptions<paths["/profiles"]["post"]>,
 ) {
   const profileOptions: FetchOptions<paths["/profiles"]["post"]> = {
@@ -75,7 +77,7 @@ export async function createProfile(
   };
 
   const resp = (
-    await BattleStadiumApiClient().POST("/profiles", profileOptions)
+    await BattleStadiumApiClient(tokens).POST("/profiles", profileOptions)
   ).data;
 
   return { success: true, resp };

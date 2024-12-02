@@ -14,6 +14,7 @@ import {
 
 import type { components, paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
+import type { Tokens } from "~/types";
 
 export async function getTournament(tournament_id: number) {
   "use cache";
@@ -72,6 +73,7 @@ export async function postTournamentRegistration(
     pokemonTeamId,
     showCountryFlag,
   }: TournamentRegistration,
+  tokens: Tokens,
   options?: FetchOptions<paths["/tournaments/{tournament_id}/players"]["post"]>,
 ) {
   const registrationOptions: FetchOptions<
@@ -92,7 +94,7 @@ export async function postTournamentRegistration(
     },
   };
 
-  const resp = await BattleStadiumApiClient().POST(
+  const resp = await BattleStadiumApiClient(tokens).POST(
     "/tournaments/{tournament_id}/players",
     registrationOptions,
   );

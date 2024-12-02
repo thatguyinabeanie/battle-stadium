@@ -9,6 +9,7 @@ import { accounts, profiles } from "@battle-stadium/db/schema";
 
 import type { paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
+import type { Tokens } from "~/types";
 
 export async function getAccounts() {
   "use cache";
@@ -53,6 +54,7 @@ async function findProfilesByUsername(username: string) {
 
 export async function getAccount(
   userId: string | null,
+  tokens: Tokens,
   options?: FetchOptions<paths["/accounts/me"]["get"]>,
 ) {
   "use cache";
@@ -66,7 +68,7 @@ export async function getAccount(
     ...options,
   };
 
-  const resp = await BattleStadiumApiClient().GET(
+  const resp = await BattleStadiumApiClient(tokens).GET(
     "/accounts/me",
     accountMeOptions,
   );

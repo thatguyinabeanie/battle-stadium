@@ -19,6 +19,8 @@ import {
   SolarUserLinear,
 } from "~/components/svg/icons";
 import UserMenuDropDown from "./user-menu/user-menu-dropdown";
+import type { Tokens } from "~/types";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 const sharedClassNames = "h-[28px] w-[28px]";
 
@@ -57,15 +59,19 @@ export default function RightMenu() {
 }
 
 async function UserMenu() {
-  const { userId } = await auth();
-  const me = await getAccount(userId);
+  const session = await auth();
+  const tokens: Tokens = {
+    clerk: await session.getToken(),
+    oidc: await getVercelOidcToken(),
+  }
+  const me = await getAccount(session.userId, tokens);
 
   return (
     <DropdownMenu aria-label="Profile Actions">
       <DropdownMenuTrigger>
         <SmartAvatar />
       </DropdownMenuTrigger>
-      <UserMenuDropDown isSignedIn={!!userId} me={me} />
+      <UserMenuDropDown isSignedIn={!!session.userId} me={me} />
     </DropdownMenu>
   );
 }

@@ -6,6 +6,7 @@ import { Button, Textarea } from "@battle-stadium/ui";
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
 // import { postPokemonTeam } from "~/app/server-actions/pokemon/actions";
 import { getAccount } from "~/app/server-actions/accounts/actions";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 interface PokemonShowdownSetFormProps {
   validatedTeam: ValidatedPokemon[] | null;
@@ -22,14 +23,12 @@ export async function PokemonShowdownSetForm({
   setInput,
   metaData,
 }: Readonly<PokemonShowdownSetFormProps>) {
-  const { userId } = await auth();
-  if (!userId) {
+  const session = await auth();
+
+  if(!session.userId) {
     return null;
   }
-  const me = await getAccount(userId);
-  if (!me) {
-    return null;
-  }
+
   return (
     <form action={handleSubmit} className="grid grid-cols-1">
       <div className="mb-4">

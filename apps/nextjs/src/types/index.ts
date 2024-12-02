@@ -43,3 +43,8 @@ export interface TabConfig {
     badge?: string;
   };
 }
+
+export interface Tokens {
+  oidc: string | null;
+  clerk: string | null;
+}

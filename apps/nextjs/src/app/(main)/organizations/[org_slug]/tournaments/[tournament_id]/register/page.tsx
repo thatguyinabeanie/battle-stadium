@@ -3,10 +3,11 @@ import { auth } from "@clerk/nextjs/server";
 
 import { Input } from "@battle-stadium/ui";
 
-import type { OrganizationTournamentParams } from "~/types";
+import type { OrganizationTournamentParams, Tokens } from "~/types";
 import { getProfiles } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 // import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
@@ -30,10 +31,16 @@ export default function RegisterSuspenseWrapper(
 async function Register(props: Readonly<OrganizationTournamentParams>) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
-  const { userId } = await auth();
-  if (!userId) {
+  const session = await auth();
+  if (!session.userId) {
     return null;
   }
+
+  const tokens: Tokens = {
+    clerk: await session.getToken(),
+    oidc: await getVercelOidcToken(),
+  }
+
   return (
     <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
       <div>
@@ -42,46 +49,47 @@ async function Register(props: Readonly<OrganizationTournamentParams>) {
 
       <TournamentRegistrationForm
         {...params}
-        userId={userId}
-        handleTournamentRegistration={handleTournamentRegistration}
+        userId={session.userId}
+        handleTournamentRegistration={handleTournamentRegistration(session.userId, tokens)}
       >
         <Input name="ign" />
-        <ProfileSelector />
+        <ProfileSelector userId={session.userId} tokens={tokens} />
       </TournamentRegistrationForm>
     </div>
   );
 }
 
-async function handleTournamentRegistration(
-  formData: FormData,
-  tournament_id: number,
-  userId: string,
-) {
-  "use server";
+function handleTournamentRegistration (userId: string, tokens: Tokens) {
+  return async (
+    formData: FormData,
+    tournament_id: number,
 
-  const profiles = await getProfiles(userId);
+  ) => {
+    "use server";
 
-  const in_game_name = formData.get("ign") as string;
-  const profile = formData.get("profile") as string;
-  const show_country_flag = (formData.get("country_flag") as string) === "true";
+    const profiles = await getProfiles(userId, tokens);
 
-  const profile_id = profiles.find((p) => p.username === profile)?.id;
+    const in_game_name = formData.get("ign") as string;
+    const profile = formData.get("profile") as string;
+    const show_country_flag = (formData.get("country_flag") as string) === "true";
 
-  if (!profile_id) {
-    throw new Error("Profile not found.");
+    const profile_id = profiles.find((p) => p.username === profile)?.id;
+
+    if (!profile_id) {
+      throw new Error("Profile not found.");
+    }
+
+    return postTournamentRegistration({
+      tournamentId: tournament_id,
+      inGameName: in_game_name,
+      profileId: Number(profile_id),
+      showCountryFlag: show_country_flag,
+    }, tokens);
   }
-
-  return postTournamentRegistration({
-    tournamentId: tournament_id,
-    inGameName: in_game_name,
-    profileId: Number(profile_id),
-    showCountryFlag: show_country_flag,
-  });
 }
 
-async function ProfileSelector() {
-  const { userId } = await auth();
-  const profiles = await getProfiles(userId);
+async function ProfileSelector({userId, tokens}: {userId: string, tokens: Tokens}) {
+  const profiles = await getProfiles(userId, tokens);
   return (
     <>
       <Input

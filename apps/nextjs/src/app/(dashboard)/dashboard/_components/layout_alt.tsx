@@ -3,9 +3,10 @@ import { auth } from "@clerk/nextjs/server";
 
 import { TabsContent as UiTabsContent } from "@battle-stadium/ui";
 
-import type { DashboardLayoutSlots } from "~/types";
+import type { DashboardLayoutSlots, Tokens } from "~/types";
 import { getAccount } from "~/app/server-actions/accounts/actions";
 import { Tabs, TabsList, TabsTrigger } from "~/components/tabs/tabs";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 const tabsList = [
   { key: "dashboard", title: "Dashboard" },
@@ -33,8 +34,12 @@ export default function DashboardLayout(slots: Readonly<DashboardLayoutSlots>) {
 }
 
 async function TabsContent(props: Readonly<DashboardLayoutSlots>) {
-  const { userId } = await auth();
-  const me = await getAccount(userId);
+  const session = await auth();
+  const tokens: Tokens = {
+    clerk: await session.getToken(),
+    oidc: await getVercelOidcToken(),
+  };
+  const me = await getAccount(session.userId, tokens);
   const tabsToRender = me?.admin ? [...tabsList, adminTab] : tabsList;
 
   return (
@@ -49,8 +54,13 @@ async function TabsContent(props: Readonly<DashboardLayoutSlots>) {
 }
 
 async function TabsTriggers() {
-  const { userId } = await auth();
-  const me = await getAccount(userId);
+  const session = await auth();
+  const tokens: Tokens = {
+    clerk: await session.getToken(),
+    oidc: await getVercelOidcToken(),
+  };
+
+  const me = await getAccount(session.userId, tokens);
   const tabsToRender = me?.admin ? [...tabsList, adminTab] : tabsList;
 
   return (
