@@ -1,7 +1,7 @@
+'use cache'
+
 import { cache, Suspense } from "react";
 import { notFound } from "next/navigation";
-
-import type { Organization, Tournament } from "@battle-stadium/db/schema";
 
 import { SingleOrgTournamentsTable } from "~/app/(main)/organizations/[org_slug]/_components/tournaments-table";
 import { getOrganizations } from "~/app/server-actions/organizations/actions";
@@ -27,7 +27,7 @@ const getOrganizationData = cache(async (slug: string) => {
   return data;
 });
 
-export default function OrganizationDetailPage({
+export default async function OrganizationDetailPage({
   params,
 }: OrganizationDetailPageProps) {
   return (
@@ -46,36 +46,21 @@ async function OrganizationDetails({ params }: OrganizationDetailPageProps) {
   }
 
   return (
-    <OrganizationContent
-      organization={organization}
-      tournaments={tournaments}
-    />
-  );
-}
-
-function OrganizationContent({
-  organization,
-  tournaments,
-}: {
-  organization: Organization;
-  tournaments: Tournament[];
-}) {
-  return (
     <>
       <OrganizationHeader
-        organization={organization}
-        classNames={{ wrapper: "my-8" }}
+        organization={ organization }
+        classNames={ { wrapper: "my-8" } }
       >
         <div className="mx-4 flex h-full w-full flex-col items-center justify-between py-2 text-center">
-          <h1 className="text-2xl font-semibold">{organization.name}</h1>
-          <p>{organization.description}</p>
+          <h1 className="text-2xl font-semibold">{ organization.name }</h1>
+          <p>{ organization.description }</p>
         </div>
       </OrganizationHeader>
 
       <SingleOrgTournamentsTable
         className="w-full px-4"
-        data={tournaments}
-        organization={organization}
+        data={ tournaments }
+        organization={ organization }
       />
     </>
   );

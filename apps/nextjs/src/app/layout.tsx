@@ -1,3 +1,5 @@
+"use cache";
+
 import type { ReactNode } from "react";
 import { StrictMode, Suspense } from "react";
 
@@ -63,7 +65,7 @@ export const viewport: Viewport = {
 interface RootLayoutSlots extends ChildrenProps {
   cookies: ReactNode;
 }
-export default function RootLayout({
+export default async function RootLayout({
   cookies,
   children,
 }: Readonly<RootLayoutSlots>) {
