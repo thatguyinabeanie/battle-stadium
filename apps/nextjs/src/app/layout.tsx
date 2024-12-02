@@ -18,7 +18,6 @@ import type { ChildrenProps } from "~/types";
 import { AdSenseScript } from "~/app/_components/ad-sense";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
-
 import { HydrateClient, TRPCReactProvider } from "~/trpc/server";
 
 const AwesomeParticles = dynamic(
@@ -83,15 +82,13 @@ export default function RootLayout({
             <ThemeProvider attribute="class" defaultTheme="dark">
               <div className="flex min-h-screen flex-col items-center">
                 <AwesomeParticles />
-                  <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
-                    <Suspense fallback={null}>
-                      <TRPCReactProvider>
-                        <HydrateClient>
-                          {children}
-                        </HydrateClient>
-                      </TRPCReactProvider>
-                    </Suspense>
-                  </div>
+                <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
+                  <Suspense fallback={null}>
+                    <TRPCReactProvider>
+                      <HydrateClient>{children}</HydrateClient>
+                    </TRPCReactProvider>
+                  </Suspense>
+                </div>
               </div>
 
               {cookies}
