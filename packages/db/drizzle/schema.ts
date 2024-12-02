@@ -58,7 +58,7 @@ export const accounts = pgTable(
     imageUrl: text("image_url"),
     admin: boolean().default(false).notNull(),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     defaultProfileId: integer("default_profile_id"),
     country: varchar(),
     timezone: varchar(),
@@ -92,7 +92,7 @@ export const accounts = pgTable(
 export const games = pgTable(
   "games",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     name: varchar(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -116,7 +116,7 @@ export const games = pgTable(
 export const formats = pgTable(
   "formats",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     name: varchar(),
     gameId: integer("game_id"),
     createdAt: timestamp("created_at", {
@@ -153,7 +153,7 @@ export const formats = pgTable(
 export const clerkUsers = pgTable(
   "clerk_users",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     clerkUserId: varchar("clerk_user_id").notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -192,7 +192,7 @@ export const clerkUsers = pgTable(
 export const matchGames = pgTable(
   "match_games",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     matchId: integer("match_id").notNull(),
     winnerId: integer("winner_id"),
     loserId: integer("loser_id"),
@@ -250,7 +250,7 @@ export const matchGames = pgTable(
 export const friendlyIdSlugs = pgTable(
   "friendly_id_slugs",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     slug: varchar().notNull(),
     sluggableId: integer("sluggable_id").notNull(),
     sluggableType: varchar("sluggable_type", { length: 50 }),
@@ -292,7 +292,7 @@ export const chatMessages = pgTable(
     content: text(),
     messageType: varchar("message_type"),
     sentAt: timestamp("sent_at", { precision: 6, mode: "string" }),
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     accountId: integer("account_id"),
     profileId: integer("profile_id").notNull(),
   },
@@ -342,7 +342,7 @@ export const chatMessages = pgTable(
 export const matches = pgTable(
   "matches",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     roundId: integer("round_id").notNull(),
     tableNumber: integer("table_number"),
     playerOneId: integer("player_one_id"),
@@ -456,7 +456,7 @@ export const matches = pgTable(
 export const organizationStaffMembers = pgTable(
   "organization_staff_members",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     organizationId: integer("organization_id").notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -493,7 +493,7 @@ export const organizationStaffMembers = pgTable(
 export const organizations = pgTable(
   "organizations",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     name: varchar().notNull(),
     description: text(),
     createdAt: timestamp("created_at", {
@@ -543,7 +543,7 @@ export const organizations = pgTable(
 export const phasePlayers = pgTable(
   "phase_players",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     playerId: integer("player_id").notNull(),
     phaseType: varchar("phase_type").notNull(),
     phaseId: integer("phase_id").notNull(),
@@ -577,7 +577,7 @@ export const phasePlayers = pgTable(
 export const phases = pgTable(
   "phases",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     tournamentId: integer("tournament_id").notNull(),
     numberOfRounds: integer("number_of_rounds"),
     createdAt: timestamp("created_at", {
@@ -626,7 +626,7 @@ export const phases = pgTable(
 export const players = pgTable(
   "players",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     tournamentId: integer("tournament_id").notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
@@ -753,7 +753,7 @@ export const players = pgTable(
 export const pokemon = pgTable(
   "pokemon",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     species: varchar(),
     ability: varchar(),
     teraType: varchar("tera_type"),
@@ -822,7 +822,7 @@ export const pokemon = pgTable(
 export const pokemonTeams = pgTable(
   "pokemon_teams",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",
@@ -898,7 +898,7 @@ export const profiles = pgTable(
     slug: varchar(),
     archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
     accountId: integer("account_id"),
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     default: boolean().default(false).notNull(),
     type: varchar().default("Profile").notNull(),
   },
@@ -968,7 +968,7 @@ export const rk9Tournaments = pgTable(
 );
 
 export const rounds = pgTable("rounds", {
-  id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+  id: bigserial({ mode: "number" }).primaryKey().notNull(),
   phaseId: integer("phase_id").notNull(),
   createdAt: timestamp("created_at", {
     precision: 6,
@@ -986,7 +986,7 @@ export const rounds = pgTable("rounds", {
 export const tournamentFormats = pgTable(
   "tournament_formats",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     tournamentId: integer("tournament_id").notNull(),
     formatId: integer("format_id").notNull(),
     createdAt: timestamp("created_at", {
@@ -1023,7 +1023,7 @@ export const tournamentFormats = pgTable(
 export const tournaments = pgTable(
   "tournaments",
   {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    id: bigserial({ mode: "number" }).primaryKey().notNull(),
     name: varchar(),
     startAt: timestamp("start_at", { precision: 6, mode: "string" }),
     createdAt: timestamp("created_at", {
@@ -1059,7 +1059,7 @@ export const tournaments = pgTable(
     endAt: timestamp("end_at", { precision: 6, mode: "string" }).default(
       sql`NULL`,
     ),
-    // You can use { mode: "bigint" } if numbers are exceeding js number limitations
+    // You can use { mode: "number" } if numbers are exceeding js number limitations
     limitlessId: bigint("limitless_id", { mode: "number" }),
     published: boolean().default(false).notNull(),
     currentPhaseId: integer("current_phase_id"),
