@@ -25,6 +25,9 @@ export async function searchOrganizations(query: string) {
 export async function getOrSearchOrganizationsAction(formData?: FormData) {
   if (formData) {
     const query = formData.get("query") as string;
+    if (!query?.trim()) {
+      return await getOrganizations();
+    }
     return await searchOrganizations(query);
   }
 
