@@ -8,8 +8,8 @@ import { eq, lower } from "@battle-stadium/db";
 import { db, inArray } from "@battle-stadium/db/client";
 import { organizations } from "@battle-stadium/db/schema";
 
-import { getAccount } from "../accounts/actions";
 import type { Tokens } from "~/types";
+import { getAccount } from "../accounts/actions";
 
 export async function getOrganizations() {
   "use cache";

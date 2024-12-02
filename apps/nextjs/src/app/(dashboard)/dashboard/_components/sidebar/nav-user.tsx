@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { SignOutButton } from "@clerk/nextjs";
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
 import {
   BadgeCheck,
   Bell,
@@ -28,7 +29,6 @@ import {
 import { getAccount } from "~/app/server-actions/accounts/actions";
 import { SolarUserLinear } from "~/components/svg/icons";
 import { DropDownMenuContentMobile } from "./side-bar-client-components";
-import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 export function NavUserComponent() {
   return (

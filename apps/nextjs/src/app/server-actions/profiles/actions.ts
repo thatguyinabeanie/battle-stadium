@@ -12,9 +12,9 @@ import { db, eq } from "@battle-stadium/db";
 import { profiles } from "@battle-stadium/db/schema";
 
 import type { paths } from "~/lib/api/openapi-v1";
+import type { Tokens } from "~/types";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 import { getAccount } from "../accounts/actions";
-import type { Tokens } from "~/types";
 
 export async function getAllProfiles() {
   "use cache";

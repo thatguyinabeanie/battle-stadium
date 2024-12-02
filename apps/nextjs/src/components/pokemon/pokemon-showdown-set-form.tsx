@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { Button, Textarea } from "@battle-stadium/ui";
 
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
+
 // import { postPokemonTeam } from "~/app/server-actions/pokemon/actions";
 
 interface PokemonShowdownSetFormProps {
@@ -23,7 +24,7 @@ export async function PokemonShowdownSetForm({
 }: Readonly<PokemonShowdownSetFormProps>) {
   const session = await auth();
 
-  if(!session.userId) {
+  if (!session.userId) {
     return null;
   }
 

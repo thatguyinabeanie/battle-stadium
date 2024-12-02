@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 import {
   Avatar,
@@ -11,6 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
 
+import type { Tokens } from "~/types";
 import MobileMenu from "~/app/(main)/@navbar/_navbar-components/navbar-mobile-menu";
 import { getAccount } from "~/app/server-actions/accounts/actions";
 import {
@@ -19,8 +21,6 @@ import {
   SolarUserLinear,
 } from "~/components/svg/icons";
 import UserMenuDropDown from "./user-menu/user-menu-dropdown";
-import type { Tokens } from "~/types";
-import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 const sharedClassNames = "h-[28px] w-[28px]";
 
@@ -63,7 +63,7 @@ async function UserMenu() {
   const tokens: Tokens = {
     clerk: await session.getToken(),
     oidc: await getVercelOidcToken(),
-  }
+  };
   const me = await getAccount(session.userId, tokens);
 
   return (

@@ -2,8 +2,8 @@ import type { Middleware } from "openapi-fetch";
 import createFetchClient from "openapi-fetch";
 
 import type { paths } from "~/lib/api/openapi-v1";
-import { env } from "~/env";
 import type { Tokens } from "~/types";
+import { env } from "~/env";
 
 export const DEFAULT_CACHE_TIMEOUT = 300;
 
@@ -20,10 +20,7 @@ export function getBaseUrl() {
   return `http://${env.LOCAL_DEV_BACKEND_HOST}:${env.LOCAL_DEV_BACKEND_PORT}`;
 }
 
-export function BattleStadiumApiClient(
-  tokens: Tokens,
-  skipClerkAuth = false,
-) {
+export function BattleStadiumApiClient(tokens: Tokens, skipClerkAuth = false) {
   const baseUrl = `${getBaseUrl()}/api/v1`;
   const fetchClient = createFetchClient<paths>({ baseUrl });
 

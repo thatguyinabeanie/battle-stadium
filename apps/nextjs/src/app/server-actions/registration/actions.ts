@@ -3,9 +3,9 @@
 
 import { auth } from "@clerk/nextjs/server";
 
+import type { Tokens } from "~/types";
 import { getProfiles } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
-import type { Tokens } from "~/types";
 
 export async function handleTournamentRegistration(
   formData: FormData,
@@ -25,14 +25,17 @@ export async function handleTournamentRegistration(
     throw new Error("Profile not found");
   }
 
-  return postTournamentRegistration({
-    tournamentId: tournament_id,
-    inGameName: in_game_name,
-    profileId: Number.isFinite(Number(profile_id))
-      ? Number(profile_id)
-      : (() => {
-          throw new Error("Invalid profile ID format");
-        })(),
-    showCountryFlag: show_country_flag,
-  }, tokens);
+  return postTournamentRegistration(
+    {
+      tournamentId: tournament_id,
+      inGameName: in_game_name,
+      profileId: Number.isFinite(Number(profile_id))
+        ? Number(profile_id)
+        : (() => {
+            throw new Error("Invalid profile ID format");
+          })(),
+      showCountryFlag: show_country_flag,
+    },
+    tokens,
+  );
 }

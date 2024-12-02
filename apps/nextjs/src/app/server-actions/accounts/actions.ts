@@ -8,8 +8,8 @@ import { db, eq } from "@battle-stadium/db";
 import { accounts, profiles } from "@battle-stadium/db/schema";
 
 import type { paths } from "~/lib/api/openapi-v1";
-import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 import type { Tokens } from "~/types";
+import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
 export async function getAccounts() {
   "use cache";

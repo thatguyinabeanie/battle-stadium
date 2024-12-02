@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { auth } from "@clerk/nextjs/server";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
 import {
   Building,
   Building2,
@@ -12,10 +13,9 @@ import {
 import { SidebarGroup, SidebarMenu } from "@battle-stadium/ui";
 
 import type { NavMainItem } from "./components";
+import type { Tokens } from "~/types";
 import { getUserOrganizations } from "~/app/server-actions/organizations/actions";
 import { CollapsibleMenuNavItem } from "./components";
-import { getVercelOidcToken } from "@vercel/functions/oidc";
-import { Tokens } from "~/types";
 
 const dashboardNavItem: NavMainItem = {
   title: "Dashboard",
@@ -62,12 +62,13 @@ export function NavMain() {
 
 async function OrganizationsCollapsibleMenuNavItem() {
   const session = await auth();
-  if (!session.userId) {return null;
+  if (!session.userId) {
+    return null;
   }
   const tokens: Tokens = {
     clerk: await session.getToken(),
     oidc: await getVercelOidcToken(),
-  }
+  };
   const { own, member } = await getUserOrganizations(session.userId, tokens);
 
   const item: NavMainItem = {

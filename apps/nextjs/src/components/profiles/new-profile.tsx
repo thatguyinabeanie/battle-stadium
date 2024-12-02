@@ -7,11 +7,10 @@ import { Button, Input } from "@battle-stadium/ui";
 interface NewProfileProps {
   createProfileAction: (formData: FormData) => Promise<void>;
 }
-export default function NewProfile (props: NewProfileProps) {
+export default function NewProfile(props: NewProfileProps) {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
-
     try {
       await props.createProfileAction(formData);
       router.push("/dashboard?tab=profiles");

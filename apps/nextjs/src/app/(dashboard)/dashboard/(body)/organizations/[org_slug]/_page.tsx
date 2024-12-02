@@ -9,16 +9,18 @@ interface OrganizationDashboardPageProps {
 //   }));
 // }
 
-export default function OrganizationDashboardPage(props: OrganizationDashboardPageProps) {
+export default function OrganizationDashboardPage(
+  props: OrganizationDashboardPageProps,
+) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <OrganizationDashboard { ...props } />
+      <OrganizationDashboard {...props} />
     </Suspense>
-  )
+  );
 }
 
-async function OrganizationDashboard (props: OrganizationDashboardPageProps) {
-  const {org_slug} = await props.params;
+async function OrganizationDashboard(props: OrganizationDashboardPageProps) {
+  const { org_slug } = await props.params;
   return (
     <div>
       <h1>Organization Dashboard</h1>

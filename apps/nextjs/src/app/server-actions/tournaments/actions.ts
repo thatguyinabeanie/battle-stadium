@@ -13,8 +13,8 @@ import {
 } from "@battle-stadium/db/schema";
 
 import type { components, paths } from "~/lib/api/openapi-v1";
-import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 import type { Tokens } from "~/types";
+import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
 export async function getTournament(tournament_id: number) {
   "use cache";
