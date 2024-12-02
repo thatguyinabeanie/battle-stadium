@@ -1,8 +1,7 @@
 import { pgTable, varchar, timestamp,  index, uniqueIndex, foreignKey, text, boolean, serial, integer, bigserial, numeric, date, bigint } from "drizzle-orm/pg-core"
-import type {AnyPgColumn, ForeignKeyBuilder, IndexBuilder} from "drizzle-orm/pg-core";
+import type { ForeignKeyBuilder, IndexBuilder} from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm"
-
-
+export type { AnyPgColumn } from "drizzle-orm/pg-core";
 
 export const schemaMigrations = pgTable("schema_migrations", {
 	version: varchar().primaryKey().notNull(),
