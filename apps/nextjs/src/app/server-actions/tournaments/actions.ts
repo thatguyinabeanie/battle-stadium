@@ -15,6 +15,9 @@ import type { components, paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
 export async function getTournament(tournament_id: number) {
+  "use cache";
+  cacheTag(`getTournament(${tournament_id})`);
+
   const result = await db
     .select()
     .from(tournaments)
