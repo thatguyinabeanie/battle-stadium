@@ -51,6 +51,7 @@ export const env = createEnv({
       )
       .optional(),
     SHOW_ADS: z.boolean().optional().default(false),
+    LOG_PERFORMANCE: z.boolean().optional().default(false),
   },
 
   /**
