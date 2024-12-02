@@ -1,4 +1,4 @@
-import { cache } from "react";
+import { cache, Suspense } from "react";
 import { headers } from "next/headers";
 import { connection } from "next/server";
 import { createHydrationHelpers } from "@trpc/react-query/rsc";
@@ -31,7 +31,17 @@ export const { trpc: api, HydrateClient } = createHydrationHelpers<AppRouter>(
   getQueryClient,
 );
 
-export async function TRPCReactProvider({ children }: ChildrenProps) {
+export function TRPCReactProvider({ children }: ChildrenProps) {
+  return (
+    <Suspense fallback={null}>
+      <TRPCReactProviderAsync>
+        <HydrateClient>{children}</HydrateClient>
+      </TRPCReactProviderAsync>
+    </Suspense>
+  );
+}
+
+async function TRPCReactProviderAsync({ children }: ChildrenProps) {
   await connection();
   return <TRPCReactProviderClient>{children}</TRPCReactProviderClient>;
 }

@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { StrictMode, Suspense } from "react";
+import { StrictMode } from "react";
 
 import "~/styles/globals.css";
 
@@ -18,7 +18,7 @@ import type { ChildrenProps } from "~/types";
 import { AdSenseScript } from "~/app/_components/ad-sense";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
-import { HydrateClient, TRPCReactProvider } from "~/trpc/server";
+import { TRPCReactProvider } from "~/trpc/server";
 
 const AwesomeParticles = dynamic(
   () => import("~/components/awesome-particles"),
@@ -79,23 +79,21 @@ export default function RootLayout({
               GeistMono.variable,
             )}
           >
-            <ThemeProvider attribute="class" defaultTheme="dark">
-              <div className="flex min-h-screen flex-col items-center">
-                <AwesomeParticles />
-                <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
-                  <Suspense fallback={null}>
-                    <TRPCReactProvider>
-                      <HydrateClient>{children}</HydrateClient>
-                    </TRPCReactProvider>
-                  </Suspense>
+            <TRPCReactProvider>
+              <ThemeProvider attribute="class" defaultTheme="dark">
+                <div className="flex min-h-screen flex-col items-center">
+                  <AwesomeParticles />
+                  <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
+                    {children}
+                  </div>
                 </div>
-              </div>
 
-              {cookies}
-              <VercelAnalytics />
-              {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
-              <GoogleAnalytics gaId={env.MEASUREMENT_ID} />
-            </ThemeProvider>
+                {cookies}
+                <VercelAnalytics />
+                {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
+                <GoogleAnalytics gaId={env.MEASUREMENT_ID} />
+              </ThemeProvider>
+            </TRPCReactProvider>
           </body>
         </html>
       </ClerkProvider>
