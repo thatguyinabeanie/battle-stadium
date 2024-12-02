@@ -22,17 +22,6 @@ export async function searchOrganizations(query: string) {
   return orgs;
 }
 
-export async function getOrSearchOrganizationsAction(formData?: FormData) {
-  if (formData) {
-    const query = formData.get("query") as string;
-    if (!query?.trim()) {
-      return await getOrganizations();
-    }
-    return await searchOrganizations(query);
-  }
-
-  return await getOrganizations();
-}
 
 export async function getPartneredOrganizations() {
   const orgs = await db.query.organizations.findMany({
