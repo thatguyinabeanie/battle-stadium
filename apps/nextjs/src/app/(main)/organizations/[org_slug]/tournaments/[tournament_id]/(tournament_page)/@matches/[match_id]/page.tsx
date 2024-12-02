@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import { getAllOrgTourMatches } from "~/app/server-actions/organizations/tournaments/matches/actions";
 
 interface MatchPageProps {
@@ -10,13 +11,15 @@ interface MatchPageProps {
 }
 
 export async function generateStaticParams() {
-  return (await getAllOrgTourMatches()).map( ({matches, tournaments, organizations}) => ({
-    params: {
-      org_slug: organizations?.slug,
-      tournament_id: tournaments?.id.toString(),
-      matchId: matches.id.toString(),
-    },
-  }));
+  return (await getAllOrgTourMatches()).map(
+    ({ matches, tournaments, organizations }) => ({
+      params: {
+        org_slug: organizations?.slug,
+        tournament_id: tournaments?.id.toString(),
+        matchId: matches.id.toString(),
+      },
+    }),
+  );
 }
 
 export default function MatchPage(props: Readonly<MatchPageProps>) {

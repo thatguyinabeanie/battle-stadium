@@ -20,9 +20,7 @@ async function TournamentRegistrations(
   const params = await props.params;
   const { tournament_id } = params;
 
-  return (
-    <TournamentsRegistrationTable tournament_id={tournament_id} />
-  );
+  return <TournamentsRegistrationTable tournament_id={tournament_id} />;
 }
 
 async function TournamentsRegistrationTable({

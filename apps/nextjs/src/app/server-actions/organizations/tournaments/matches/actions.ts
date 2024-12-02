@@ -33,7 +33,6 @@ export async function getAllOrgTourMatches() {
   return MatchesLeftJoinTournamentsLeftJoinOrganizations();
 }
 
-
 export async function getOrganizationTournamentMatches(
   org_slug: string,
   tournament_id: number,
