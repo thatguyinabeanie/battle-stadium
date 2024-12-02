@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
 import { memo, Suspense } from "react";
-import Link from "next/link";
 
-import type { Organization } from "@battle-stadium/db/schema";
-import { Card, CardFooter } from "@battle-stadium/ui";
-
-import { getOrganizations } from "~/app/server-actions/organizations/actions";
-import OrganizationLogo from "~/components/organizations/organization-logo";
+import { getOrSearchOrganizationsAction } from "~/app/server-actions/organizations/actions";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
+import { OrganizationsGrid } from "./_components/client-components";
 
 export const metadata: Metadata = {
   title: "Organizations",
@@ -18,42 +14,12 @@ const LoadingOrganizations = memo(() => <div>Loading organizations...</div>);
 export default function OrganizationsPage() {
   return (
     <>
+      <PartneredOrganizations />
       <Suspense fallback={<LoadingOrganizations />}>
-        <PartneredOrganizations />
-      </Suspense>
-      <Suspense fallback={<LoadingOrganizations />}>
-        <OrganizationsGridRSC />
+        <OrganizationsGrid
+          getOrSearchOrganizationsAction={getOrSearchOrganizationsAction}
+        />
       </Suspense>
     </>
-  );
-}
-
-async function OrganizationsGridRSC() {
-  const orgs = await getOrganizations();
-  return (
-    <div className="flex flex-1 flex-col gap-4 p-4">
-      <div className="grid auto-rows-min grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {orgs.map((org) => (
-          <SimpleOrgCard key={org.id} org={org} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function SimpleOrgCard({ org }: { org: Organization }) {
-  return (
-    <Link href={`/organizations/${org.slug}`}>
-      <Card className="flex aspect-square h-44 flex-col items-center justify-around rounded-xl bg-muted/50 md:h-60">
-        <OrganizationLogo
-          organization={org}
-          logoSize={140}
-          className="hover:z-50 hover:scale-105"
-        />
-        <CardFooter className="text-center text-lg font-bold text-primary hover:z-50 hover:scale-105">
-          {org.name}
-        </CardFooter>
-      </Card>
-    </Link>
   );
 }

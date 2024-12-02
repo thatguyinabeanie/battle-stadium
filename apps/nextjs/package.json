@@ -17,7 +17,8 @@
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "pnpm typecheck --watch",
     "vercel:pull": "vercel env pull .env.development.local",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "dotenv -e ../../.env --",
+    "generate:api": "openapi-typescript ../../../backend/openapi/v1/openapi.yaml  -o ./src/lib/api/openapi-v1.d.ts && pnpm fix"
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {

@@ -11,6 +11,26 @@ export async function getOrganizations() {
   return orgs;
 }
 
+export async function searchOrganizations(query: string) {
+  const orgs = await db.query.organizations.findMany({
+    where: (organizations, { or, like }) =>
+      or(
+        like(organizations.name, `%${query}%`),
+        like(organizations.slug, `%${query}%`),
+      ),
+  });
+  return orgs;
+}
+
+export async function getOrSearchOrganizationsAction(formData?: FormData) {
+  if (formData) {
+    const query = formData.get("query") as string;
+    return await searchOrganizations(query);
+  }
+
+  return await getOrganizations();
+}
+
 export async function getPartneredOrganizations() {
   const orgs = await db.query.organizations.findMany({
     where: eq(organizations.partner, true),

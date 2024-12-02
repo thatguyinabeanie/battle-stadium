@@ -160,9 +160,12 @@ export const organizations = pgTable(
   },
   (table) => {
     return {
-      indexOrganizationsOnName: uniqueIndex("index_organizations_on_name")
-        .using("btree", table.name.asc().nullsLast().op("text_ops"))
-        .where(sql`(name IS NOT NULL)`),
+      indexOrganizationsOnName: uniqueIndex(
+        "index_organizations_on_name",
+      ).using("btree", table.name.asc().nullsLast().op("text_ops")),
+      indexOrganizationsOnNameTrgm: index(
+        "index_organizations_on_name_trgm",
+      ).using("gin", table.name.asc().nullsLast().op("gin_trgm_ops")),
       indexOrganizationsOnOwnerId: index(
         "index_organizations_on_owner_id",
       ).using("btree", table.ownerId.asc().nullsLast().op("int8_ops")),
@@ -172,6 +175,9 @@ export const organizations = pgTable(
       indexOrganizationsOnSlug: uniqueIndex(
         "index_organizations_on_slug",
       ).using("btree", table.slug.asc().nullsLast().op("text_ops")),
+      indexOrganizationsOnSlugTrgm: index(
+        "index_organizations_on_slug_trgm",
+      ).using("gin", table.slug.asc().nullsLast().op("gin_trgm_ops")),
       fkRailsAb574863F6: foreignKey({
         columns: [table.ownerId],
         foreignColumns: [accounts.id],
