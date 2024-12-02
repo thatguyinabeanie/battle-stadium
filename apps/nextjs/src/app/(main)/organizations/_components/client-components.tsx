@@ -20,13 +20,16 @@ interface OrganizationsGridProps {
 export function OrganizationsGrid({
   getOrSearchOrganizationsAction,
 }: OrganizationsGridProps) {
-  const [orgs, setOrgs] = useState<Organization[]>([]);
+  const [mounted, setMounted] = useState(false);
+  const [orgs, setOrgs] = useState<Organization[] | undefined>(undefined);
 
   useEffect(() => {
     async function fetchInitialOrganizations() {
       const orgs = await getOrganizations();
       setOrgs(orgs);
+      setMounted(true);
     }
+
     void fetchInitialOrganizations();
   }, []);
 
@@ -58,7 +61,7 @@ export function OrganizationsGrid({
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
-      {orgs.length === 0 ? (
+      {!mounted ? (
         <OrganizationsGridSkeleton />
       ) : (
         <LoadedOrganizations
@@ -71,7 +74,7 @@ export function OrganizationsGrid({
   );
 }
 interface LoadedOrganizationsProps extends OrganizationsGridProps {
-  orgs: Organization[];
+  orgs?: Organization[];
   onInputChange: ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -104,7 +107,7 @@ function LoadedOrganizations({
         </Button>
       </Form>
       <div className="grid auto-rows-min grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {orgs.map((org) => (
+        {orgs?.map((org) => (
           <SimpleOrgCard key={org.id} org={org} />
         ))}
       </div>
