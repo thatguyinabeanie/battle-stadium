@@ -119,7 +119,7 @@ export function SimpleOrgCard({ org }: { org: Organization }) {
       href={`/organizations/${org.slug}`}
       aria-label={`View ${org.name} organization details`}
     >
-      <Card className="flex aspect-square h-52 flex-col items-center justify-around rounded-xl bg-muted/50 font-normal hover:z-50 hover:scale-105 hover:border-2 hover:border-primary hover:font-bold md:h-60">
+      <Card className="flex aspect-square h-52 flex-col items-center justify-around rounded-xl bg-muted/50 font-normal transition-all duration-300 ease-in-out hover:z-50 hover:scale-105 hover:border-2 hover:border-primary hover:font-bold md:h-60">
         <OrganizationLogo
           organization={org}
           logoSize={140}
