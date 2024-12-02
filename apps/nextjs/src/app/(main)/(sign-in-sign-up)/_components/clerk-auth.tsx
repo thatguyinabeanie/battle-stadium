@@ -1,12 +1,12 @@
 "use client";
 
-import { useUser, SignIn , SignUp} from "@clerk/nextjs";
+import { SignIn, SignUp, useUser } from "@clerk/nextjs";
 
 interface ClerkAuthProps {
   type: "sign-in" | "sign-up";
 }
 
-export function ClerkAuth ({type}: ClerkAuthProps) {
+export function ClerkAuth({ type }: ClerkAuthProps) {
   const { user } = useUser();
 
   if (user) {

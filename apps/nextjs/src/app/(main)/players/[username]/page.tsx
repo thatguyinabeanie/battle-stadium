@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import { getProfile } from "~/app/server-actions/profiles/actions";
 import ComingSoon from "~/components/coming-soon";
 
@@ -24,8 +25,7 @@ export default function PlayerProfilePage(
     <Suspense fallback={null}>
       <PlayerProfilePageSuspense {...props} />
     </Suspense>
-
-  )
+  );
 }
 
 async function PlayerProfilePageSuspense(props: PlayerProfilePageProps) {
@@ -33,7 +33,7 @@ async function PlayerProfilePageSuspense(props: PlayerProfilePageProps) {
   // const player = await getProfile(params.username);
 
   return (
-    <ComingSoon title={ `${params.username}'s Profile` }>
+    <ComingSoon title={`${params.username}'s Profile`}>
       <h2>The Player Profiles are under construction</h2>
     </ComingSoon>
   );
