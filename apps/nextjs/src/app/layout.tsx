@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
 
 import "~/styles/globals.css";
 
@@ -18,8 +18,8 @@ import type { ChildrenProps } from "~/types";
 import { AdSenseScript } from "~/app/_components/ad-sense";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
-import { TRPCReactProvider } from "~/trpc/react";
-import { HydrateClient } from "~/trpc/server";
+
+import { HydrateClient, TRPCReactProvider } from "~/trpc/server";
 
 const AwesomeParticles = dynamic(
   () => import("~/components/awesome-particles"),
@@ -81,16 +81,17 @@ export default function RootLayout({
             )}
           >
             <ThemeProvider attribute="class" defaultTheme="dark">
-              <TRPCReactProvider>
-                <div className="flex min-h-screen flex-col items-center">
-                  <AwesomeParticles />
-                  <HydrateClient>
-                    <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
-                      {children}
-                    </div>
-                  </HydrateClient>
-                </div>
-              </TRPCReactProvider>
+              <div className="flex min-h-screen flex-col items-center">
+                <AwesomeParticles />
+                  <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
+                    <TRPCReactProvider>
+                      <HydrateClient>
+                        {children}
+                      </HydrateClient>
+                    </TRPCReactProvider>
+                  </div>
+              </div>
+
               {cookies}
               <VercelAnalytics />
               {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}

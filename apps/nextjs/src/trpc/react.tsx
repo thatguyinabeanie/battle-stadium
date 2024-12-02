@@ -30,7 +30,7 @@ const getQueryClient = () => {
 
 export const api = createTRPCReact<AppRouter>();
 
-export function TRPCReactProvider(props: Readonly<{ children: ReactNode }>) {
+export function TRPCReactProviderClient(props: Readonly<{ children: ReactNode }>) {
   const queryClient = getQueryClient();
 
   const [trpcClient] = useState(() =>

@@ -4,6 +4,10 @@ import { createHydrationHelpers } from "@trpc/react-query/rsc";
 
 import type { AppRouter } from "@battle-stadium/api";
 import { createCaller, createTRPCContext } from "@battle-stadium/api";
+import { connection } from "next/server";
+import type { ChildrenProps } from "~/types";
+import { TRPCReactProviderClient } from "./react";
+
 
 import { createQueryClient } from "./query-client";
 
@@ -27,3 +31,13 @@ export const { trpc: api, HydrateClient } = createHydrationHelpers<AppRouter>(
   caller,
   getQueryClient,
 );
+
+
+export async function TRPCReactProvider ({ children }: ChildrenProps) {
+  await connection();
+  return (
+    <TRPCReactProviderClient>
+      { children }
+    </TRPCReactProviderClient>
+  )
+}
