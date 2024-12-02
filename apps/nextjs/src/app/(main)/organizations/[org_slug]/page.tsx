@@ -12,9 +12,9 @@ interface OrganizationDetailPageProps {
   params: Promise<{ org_slug: string }>;
 }
 
-// export async function generateStaticParams() {
-//   return (await getOrganizations()).map((org) => ({ org_slug: org.slug }));
-// }
+export async function generateStaticParams() {
+  return (await getOrganizations()).map((org) => ({ org_slug: org.slug }));
+}
 
 const getOrganizationData = cache(async (slug: string) => {
   "use server";
@@ -26,6 +26,32 @@ const getOrganizationData = cache(async (slug: string) => {
 
   return data;
 });
+
+export default function OrganizationDetailPage({
+  params,
+}: OrganizationDetailPageProps) {
+  return (
+    <Suspense fallback={null}>
+      <OrganizationDetails params={params} />
+    </Suspense>
+  );
+}
+
+async function OrganizationDetails({ params }: OrganizationDetailPageProps) {
+  const { org_slug } = await params;
+  const { organization, tournaments } = await getOrganizationData(org_slug);
+
+  if (!organization) {
+    notFound();
+  }
+
+  return (
+    <OrganizationContent
+      organization={organization}
+      tournaments={tournaments}
+    />
+  );
+}
 
 function OrganizationContent({
   organization,
@@ -52,31 +78,5 @@ function OrganizationContent({
         organization={organization}
       />
     </>
-  );
-}
-
-async function OrganizationDetails({ params }: OrganizationDetailPageProps) {
-  const { org_slug } = await params;
-  const { organization, tournaments } = await getOrganizationData(org_slug);
-
-  if (!organization) {
-    notFound();
-  }
-
-  return (
-    <OrganizationContent
-      organization={organization}
-      tournaments={tournaments}
-    />
-  );
-}
-
-export default function OrganizationDetailPage({
-  params,
-}: OrganizationDetailPageProps) {
-  return (
-    <Suspense fallback={null}>
-      <OrganizationDetails params={params} />
-    </Suspense>
   );
 }

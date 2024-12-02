@@ -1,14 +1,14 @@
+import { Suspense } from "react";
 import { auth } from "@clerk/nextjs/server";
 import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 import { Input } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentParams, Tokens } from "~/types";
+import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 import { getProfiles } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
-import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
-import { Suspense } from "react";
 
 export async function generateStaticParams() {
   const results = await getOrganizationTournamentsRaw();
@@ -18,7 +18,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function RegisterSuspenseWrapper (props: Readonly<OrganizationTournamentParams>) {
+export default function RegisterSuspenseWrapper(
+  props: Readonly<OrganizationTournamentParams>,
+) {
   return (
     <Suspense fallback={null}>
       <Register {...props} />
@@ -26,9 +28,7 @@ export default function RegisterSuspenseWrapper (props: Readonly<OrganizationTou
   );
 }
 
-async function Register(
-  props: Readonly<OrganizationTournamentParams>,
-) {
+async function Register(props: Readonly<OrganizationTournamentParams>) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
   const session = await auth();
