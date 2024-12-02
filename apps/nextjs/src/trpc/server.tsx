@@ -9,6 +9,7 @@ import { createCaller, createTRPCContext } from "@battle-stadium/api";
 import type { ChildrenProps } from "~/types";
 import { createQueryClient } from "./query-client";
 import { TRPCReactProviderClient } from "./react";
+import { performance } from "perf_hooks"; // Add this import
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -42,6 +43,9 @@ export function TRPCReactProvider({ children }: ChildrenProps) {
 }
 
 async function TRPCReactProviderAsync({ children }: ChildrenProps) {
+  const start = performance.now(); // Start performance marker
   await connection();
+  const end = performance.now(); // End performance marker
+  console.log(`Connection initialization took ${end - start}ms`); // Log the time taken
   return <TRPCReactProviderClient>{children}</TRPCReactProviderClient>;
 }
