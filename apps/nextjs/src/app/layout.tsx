@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
 
 import "~/styles/globals.css";
 
@@ -82,21 +82,34 @@ export default function RootLayout({
             <TRPCReactProvider>
               <ThemeProvider attribute="class" defaultTheme="dark">
                 <div className="flex min-h-screen flex-col items-center">
-                  <AwesomeParticles />
+                  <Suspense fallback={null}>
+                    <AwesomeParticles />
+                  </Suspense>
+
                   <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
                     {children}
                   </div>
                 </div>
 
-                {cookies}
-                <VercelAnalytics />
-                {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
-                <GoogleAnalytics gaId={env.MEASUREMENT_ID} />
+                <Suspense fallback={null}>
+                  {cookies}
+                  <Analytics />
+                </Suspense>
               </ThemeProvider>
             </TRPCReactProvider>
           </body>
         </html>
       </ClerkProvider>
     </StrictMode>
+  );
+}
+
+function Analytics() {
+  return (
+    <>
+      <VercelAnalytics />
+      {env.VERCEL_ENV === "production" && <VercelSpeedInsights />}
+      <GoogleAnalytics gaId={env.MEASUREMENT_ID} />
+    </>
   );
 }

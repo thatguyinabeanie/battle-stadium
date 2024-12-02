@@ -7,9 +7,9 @@ import type { AppRouter } from "@battle-stadium/api";
 import { createCaller, createTRPCContext } from "@battle-stadium/api";
 
 import type { ChildrenProps } from "~/types";
+import { env } from "~/env"; // Add this import
 import { createQueryClient } from "./query-client";
 import { TRPCReactProviderClient } from "./react";
-import { env } from "~/env"; // Add this import
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -47,7 +47,9 @@ async function TRPCReactProviderAsync({ children }: ChildrenProps) {
     const start = performance.now(); // Start performance marker
     await connection();
     const end = performance.now(); // End performance marker
-    console.log(`TRPCReactProvider Connection initialization took ${end - start}ms`);
+    console.log(
+      `TRPCReactProvider Connection initialization took ${end - start}ms`,
+    );
   } else {
     await connection();
   }
