@@ -107,9 +107,7 @@ function LoadedOrganizations({
         </Button>
       </Form>
       <div className="grid auto-rows-min grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {orgs?.map((org) => (
-          <SimpleOrgCard key={org.id} org={org} />
-        ))}
+        {orgs?.map((org) => <SimpleOrgCard key={org.id} org={org} />)}
       </div>
     </>
   );
