@@ -48,12 +48,12 @@ export function OrganizationsGrid({
             // Debounce search for better performance
             const form = e.currentTarget.form;
             if (!form) return;
-            
+
             const timeoutId = setTimeout(() => {
               const formData = new FormData(form);
               void getOrSearchOrganizationsActionWrapper(formData);
             }, 300);
-            
+
             return () => clearTimeout(timeoutId);
           }}
         />
@@ -72,7 +72,7 @@ export function OrganizationsGrid({
 
 export function SimpleOrgCard({ org }: { org: Organization }) {
   return (
-    <Link 
+    <Link
       href={`/organizations/${org.slug}`}
       aria-label={`View ${org.name} organization details`}
     >
@@ -81,7 +81,6 @@ export function SimpleOrgCard({ org }: { org: Organization }) {
           organization={org}
           logoSize={140}
           className="hover:z-50 hover:scale-105"
-          alt={`${org.name} logo`}
         />
         <CardFooter className="text-center text-lg font-bold text-primary hover:z-50 hover:scale-105">
           {org.name}
