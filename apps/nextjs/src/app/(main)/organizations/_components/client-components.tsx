@@ -22,12 +22,12 @@ export function OrganizationsGrid({
   const [orgs, setOrgs] = useState<Organization[]>([]);
 
   useEffect(() => {
-    async function doThing() {
+    async function fetchInitialOrganizations() {
       const orgs = await getOrganizations();
       setOrgs(orgs);
     }
-    void doThing();
-  }, [getOrSearchOrganizationsAction]);
+    void fetchInitialOrganizations();
+  }, []);
 
   async function getOrSearchOrganizationsActionWrapper(formData?: FormData) {
     const orgs = await getOrSearchOrganizationsAction(formData);
