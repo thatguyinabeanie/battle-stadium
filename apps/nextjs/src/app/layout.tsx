@@ -20,10 +20,7 @@ import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/server";
 
-const AwesomeParticles = dynamic(
-  () => import("~/components/awesome-particles"),
-  { ssr: false },
-);
+const AwesomeParticles = dynamic(() => import("~/components/awesome-particles"));
 
 export const metadata: Metadata = {
   metadataBase: new URL(
