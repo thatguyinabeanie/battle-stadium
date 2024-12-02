@@ -115,9 +115,9 @@ function LoadedOrganizations({
 
 const TRANSITION_CLASSES = "transition-all duration-50 ease-in-out";
 const HOVER_CLASSES =
-  "hover:z-50 hover:scale-105 hover:border hover:border-primary hover:font-bold";
+  "hover:z-50 hover:scale-105 hover:border hover:border-primary hover:brightness-110";
 const LAYOUT_CLASSES =
-  "flex aspect-square h-52 flex-col items-center justify-around rounded-xl  md:h-60";
+  "flex aspect-square h-52 flex-col items-center justify-around rounded-xl md:h-60";
 export function SimpleOrgCard({ org }: { org: Organization }) {
   return (
     <Link
@@ -125,7 +125,7 @@ export function SimpleOrgCard({ org }: { org: Organization }) {
       aria-label={`View ${org.name} organization details`}
     >
       <Card
-        className={`bg-muted/50 font-normal ${TRANSITION_CLASSES} ${HOVER_CLASSES} ${LAYOUT_CLASSES}`}
+        className={`bg-muted/50 font-medium ${TRANSITION_CLASSES} ${HOVER_CLASSES} ${LAYOUT_CLASSES}`}
       >
         <OrganizationLogo
           organization={org}
