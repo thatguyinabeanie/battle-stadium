@@ -14,9 +14,7 @@ interface PlayerProfilePageParams {
 }
 
 export async function generateStaticParams() {
-  return (await db.query.profiles.findMany()).map(({ username }) => ({
-    params: { username },
-  }));
+  return (await db.query.profiles.findMany()).map(({ username }) => ({username }));
 }
 
 export default function PlayerProfilePage(

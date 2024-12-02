@@ -13,9 +13,7 @@ interface OrganizationDetailPageProps {
 }
 
 export async function generateStaticParams() {
-  return (await db.query.organizations.findMany()).map((org) => ({
-    params: { org_slug: org.slug },
-  }));
+  return (await db.query.organizations.findMany()).map((org) => ({ org_slug: org.slug}));
 }
 
 export default function OrganizationDetailPage({

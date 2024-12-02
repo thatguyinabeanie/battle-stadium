@@ -5,10 +5,9 @@ export async function generateStaticParams() {
   const results = await getOrganizationTournamentsRaw(1, 500);
 
   return results.map(({ tournaments, organizations }) => ({
-    params: {
       org_slug: organizations?.slug,
       tournament_id: tournaments.id.toString(),
-    },
+
   }));
 }
 
