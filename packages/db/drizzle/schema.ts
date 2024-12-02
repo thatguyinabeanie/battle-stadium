@@ -16,6 +16,8 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
+export type { AnyPgColumn } from "drizzle-orm/pg-core";
+
 export const schemaMigrations = pgTable("schema_migrations", {
   version: varchar().primaryKey().notNull(),
 });
@@ -160,9 +162,12 @@ export const organizations = pgTable(
   },
   (table) => {
     return {
-      indexOrganizationsOnName: uniqueIndex(
-        "index_organizations_on_name",
-      ).using("btree", table.name.asc().nullsLast().op("text_ops")),
+      indexOrganizationsOnLowerName: uniqueIndex(
+        "index_organizations_on_lower_name",
+      ).using("btree", sql`lower((name)::text)`),
+      indexOrganizationsOnLowerSlug: uniqueIndex(
+        "index_organizations_on_lower_slug",
+      ).using("btree", sql`lower((slug)::text)`),
       indexOrganizationsOnNameTrgm: index(
         "index_organizations_on_name_trgm",
       ).using("gin", table.name.asc().nullsLast().op("gin_trgm_ops")),
@@ -172,9 +177,6 @@ export const organizations = pgTable(
       indexOrganizationsOnPartner: index(
         "index_organizations_on_partner",
       ).using("btree", table.partner.asc().nullsLast().op("bool_ops")),
-      indexOrganizationsOnSlug: uniqueIndex(
-        "index_organizations_on_slug",
-      ).using("btree", table.slug.asc().nullsLast().op("text_ops")),
       indexOrganizationsOnSlugTrgm: index(
         "index_organizations_on_slug_trgm",
       ).using("gin", table.slug.asc().nullsLast().op("gin_trgm_ops")),
