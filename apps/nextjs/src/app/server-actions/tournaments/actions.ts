@@ -1,6 +1,7 @@
 "use server";
 
 import type { FetchOptions } from "openapi-fetch";
+import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 import { count, db, eq } from "@battle-stadium/db";
 import {
@@ -88,6 +89,9 @@ export async function postTournamentRegistration(
 }
 
 export async function getTournamentPlayers(tournament_id: number) {
+  "use cache";
+  cacheTag(`getTournamentPlayers-${tournament_id}`);
+
   return await db
     .select()
     .from(players)

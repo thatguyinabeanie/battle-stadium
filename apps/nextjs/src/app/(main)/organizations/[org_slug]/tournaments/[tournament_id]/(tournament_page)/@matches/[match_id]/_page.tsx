@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 interface MatchPageProps {
   params: Promise<{
     org_slug: string;
@@ -6,7 +8,15 @@ interface MatchPageProps {
   }>;
 }
 
-export default async function MatchPage(props: Readonly<MatchPageProps>) {
+export default function MatchPage(props: Readonly<MatchPageProps>) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <MatchPageAsync {...props} />
+    </Suspense>
+  );
+}
+
+async function MatchPageAsync(props: Readonly<MatchPageProps>) {
   const { matchId } = await props.params;
   // return <ChatComponent channelName={"ChatChannel"} roomName={matchId} websocketUrl={websocketUrl()} />;
   return <div>Match Page {matchId}</div>;

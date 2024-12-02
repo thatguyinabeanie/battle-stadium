@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { auth } from "@clerk/nextjs/server";
 import {
   Building,
   Building2,
@@ -11,7 +12,7 @@ import {
 import { SidebarGroup, SidebarMenu } from "@battle-stadium/ui";
 
 import type { NavMainItem } from "./components";
-import { getMyOrganizations } from "~/app/server-actions/organizations/actions";
+import { getUserOrganizations } from "~/app/server-actions/organizations/actions";
 import { CollapsibleMenuNavItem } from "./components";
 
 const dashboardNavItem: NavMainItem = {
@@ -58,7 +59,9 @@ export function NavMain() {
 }
 
 async function OrganizationsCollapsibleMenuNavItem() {
-  const { own, member } = await getMyOrganizations();
+  const { userId } = await auth();
+  if (!userId) return null;
+  const { own, member } = await getUserOrganizations(userId);
 
   const item: NavMainItem = {
     title: "Organizations",

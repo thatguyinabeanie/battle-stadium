@@ -1,9 +1,10 @@
 import { Suspense } from "react";
+import { auth } from "@clerk/nextjs/server";
 
 import { TabsContent as UiTabsContent } from "@battle-stadium/ui";
 
 import type { DashboardLayoutSlots } from "~/types";
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
+import { getAccount } from "~/app/server-actions/accounts/actions";
 import { Tabs, TabsList, TabsTrigger } from "~/components/tabs/tabs";
 
 const tabsList = [
@@ -32,7 +33,8 @@ export default function DashboardLayout(slots: Readonly<DashboardLayoutSlots>) {
 }
 
 async function TabsContent(props: Readonly<DashboardLayoutSlots>) {
-  const me = await getAccountMe();
+  const { userId } = await auth();
+  const me = await getAccount(userId);
   const tabsToRender = me?.admin ? [...tabsList, adminTab] : tabsList;
 
   return (
@@ -47,7 +49,8 @@ async function TabsContent(props: Readonly<DashboardLayoutSlots>) {
 }
 
 async function TabsTriggers() {
-  const me = await getAccountMe();
+  const { userId } = await auth();
+  const me = await getAccount(userId);
   const tabsToRender = me?.admin ? [...tabsList, adminTab] : tabsList;
 
   return (

@@ -1,21 +1,33 @@
+import { Suspense } from "react";
+import { auth } from "@clerk/nextjs/server";
+
 import { Input } from "@battle-stadium/ui";
 
 import type { OrganizationTournamentParams } from "~/types";
-import { getProfilesMe } from "~/app/server-actions/profiles/actions";
+import { getProfiles } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
-import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
+
+// import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
 // export const revalidate = 300;
 // export const dynamicParams = true;
 
-export async function generateStaticParams() {
-  return await generateOrganizationTournamentsStaticParams();
-}
+// export async function generateStaticParams () {
+//   return await generateOrganizationTournamentsStaticParams();
+// }
 
-export default async function Register(
+export default function RegisterSuspenseWrapper(
   props: Readonly<OrganizationTournamentParams>,
 ) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Register {...props} />
+    </Suspense>
+  );
+}
+
+async function Register(props: Readonly<OrganizationTournamentParams>) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
   return (
@@ -42,7 +54,8 @@ async function handleTournamentRegistration(
   tournament_id: number,
 ) {
   "use server";
-  const profiles = await getProfilesMe();
+  const { userId } = await auth();
+  const profiles = await getProfiles(userId);
 
   const in_game_name = formData.get("ign") as string;
   const profile = formData.get("profile") as string;
@@ -63,7 +76,8 @@ async function handleTournamentRegistration(
 }
 
 async function ProfileSelector() {
-  const profiles = await getProfilesMe();
+  const { userId } = await auth();
+  const profiles = await getProfiles(userId);
   return (
     <>
       <Input

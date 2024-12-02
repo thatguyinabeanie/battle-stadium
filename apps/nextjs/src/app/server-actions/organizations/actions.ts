@@ -1,49 +1,59 @@
 "use server";
 
+import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 import SqlString from "sqlstring";
 
 import { eq, lower } from "@battle-stadium/db";
 import { db, inArray } from "@battle-stadium/db/client";
 import { organizations } from "@battle-stadium/db/schema";
 
-import { getAccountMe } from "../accounts/actions";
+import { getAccount } from "../accounts/actions";
 
 export async function getOrganizations() {
-  const orgs = await db.query.organizations.findMany();
-  return orgs;
+  "use cache";
+  cacheTag("getOrganizations");
+
+  return db.query.organizations.findMany();
 }
 
 export async function searchOrganizations(query: string) {
+  "use cache";
+  cacheTag(`searchOrganizations(${query})`);
+
   const sanitizedQuery = SqlString.escape(query).toLowerCase();
 
-  const orgs = await db.query.organizations.findMany({
+  return db.query.organizations.findMany({
     where: (organizations, { or, like }) =>
       or(
         like(lower(organizations.name), `%${sanitizedQuery}%`),
         like(lower(organizations.slug), `%${sanitizedQuery}%`),
       ),
   });
-  return orgs;
 }
 
 export async function getPartneredOrganizations() {
-  const orgs = await db.query.organizations.findMany({
+  "use cache";
+  cacheTag("getPartneredOrganizations");
+
+  return db.query.organizations.findMany({
     where: eq(organizations.partner, true),
   });
-
-  return orgs;
 }
 
-export async function getOrganization(slug: string) {
+export async function findOrganizationBySlug(slug: string) {
+  "use cache";
+  cacheTag(`findOrganizationBySlug(${slug})`);
   const org = await db.query.organizations.findFirst({
     where: eq(organizations.slug, slug),
   });
   return org;
 }
 
-export async function getMyOrganizations() {
-  // TODO: Optimize SQL queries
-  const me = await getAccountMe();
+export async function getUserOrganizations(userId: string) {
+  "use cache";
+  cacheTag(`getUserOrganizations(${userId})`);
+
+  const me = await getAccount(userId);
 
   if (!me) {
     return {
@@ -52,10 +62,9 @@ export async function getMyOrganizations() {
     };
   }
 
-  const own_orgs = await db.query.organizations.findMany({
+  const own_org = await db.query.organizations.findFirst({
     where: eq(organizations.ownerId, me.id),
   });
-  const own_orgs_ids = own_orgs.map((org) => org.id);
 
   const org_staff = await db.query.organizationStaffMembers.findMany({
     where: (organizationStaffMembers, { eq }) =>
@@ -64,14 +73,14 @@ export async function getMyOrganizations() {
 
   const org_staff_org_ids = org_staff
     .map((staff) => staff.organizationId)
-    .filter((id) => !own_orgs_ids.includes(id));
+    .filter((id) => own_org?.id !== id);
 
   const member_orgs = await db.query.organizations.findMany({
     where: inArray(organizations.id, org_staff_org_ids),
   });
 
   return {
-    own: own_orgs,
+    own: own_org ? [own_org] : [],
     member: member_orgs,
   };
 }

@@ -1,7 +1,7 @@
 "use server";
 
 import type { FetchOptions } from "openapi-fetch";
-import { auth } from "@clerk/nextjs/server";
+import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 import { db, eq } from "@battle-stadium/db";
 import { accounts, profiles } from "@battle-stadium/db/schema";
@@ -13,43 +13,52 @@ export async function getAccounts() {
   return await db.query.accounts.findMany();
 }
 
-export async function getAccount(username: string) {
+export async function getAccountByProfileUsername(username: string) {
+  const profile = await findProfilesByUsername(username);
+
+  if (profile?.accountId) {
+    return await findAccountById(profile.accountId);
+  }
+
+  return null;
+}
+
+async function findAccountById(id: number) {
+  "use cache";
+  cacheTag(`findAccountById(${id})`);
+
+  return await db.query.accounts.findFirst({
+    where: eq(accounts.id, id),
+  });
+}
+
+async function findProfilesByUsername(username: string) {
+  "use cache";
+  cacheTag(`findProfileByUsername(${username})`);
+
   const profile = await db.query.profiles.findFirst({
     where: eq(profiles.username, username),
   });
 
-  if (!profile?.accountId) {
-    return null;
-  }
-
-  return await db.query.accounts.findFirst({
-    where: eq(accounts.id, profile.accountId),
-  });
+  return profile;
 }
 
-export async function getAccountMe(
+export async function getAccount(
+  userId: string | null,
   options?: FetchOptions<paths["/accounts/me"]["get"]>,
 ) {
-  const { userId } = await auth();
+  "use cache";
+  cacheTag(`getAccount(${userId})`);
 
-  if (userId) {
-    const accountMeOptions = {
-      // Cache key includes userId to prevent cross-user cache conflicts
-      ...defaultConfig(`getAccountMe-${userId}`),
-      ...options,
-    };
+  const accountMeOptions = {
+    // Cache key includes userId to prevent cross-user cache conflicts
+    ...defaultConfig(`getAccount-${userId}`),
+    ...options,
+  };
 
-    try {
-      const resp = await BattleStadiumApiClient().GET(
-        "/accounts/me",
-        accountMeOptions,
-      );
-      return resp.data;
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
-  }
-
-  return null;
+  const resp = await BattleStadiumApiClient().GET(
+    "/accounts/me",
+    accountMeOptions,
+  );
+  return resp.data;
 }

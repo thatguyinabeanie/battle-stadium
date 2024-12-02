@@ -1,8 +1,11 @@
-import { getProfilesMe } from "~/app/server-actions/profiles/actions";
+import { auth } from "@clerk/nextjs/server";
+
+import { getProfiles } from "~/app/server-actions/profiles/actions";
 import NewProfile from "~/components/profiles/new-profile";
 
 export default async function Profiles() {
-  const profiles = await getProfilesMe();
+  const { userId } = await auth();
+  const profiles = await getProfiles(userId);
 
   return (
     <div>

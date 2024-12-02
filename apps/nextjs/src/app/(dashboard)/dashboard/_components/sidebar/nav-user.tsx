@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { SignOutButton } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import {
   BadgeCheck,
   Bell,
@@ -25,7 +25,7 @@ import {
   SidebarMenuItem,
 } from "@battle-stadium/ui";
 
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
+import { getAccount } from "~/app/server-actions/accounts/actions";
 import { SolarUserLinear } from "~/components/svg/icons";
 import { DropDownMenuContentMobile } from "./side-bar-client-components";
 
@@ -105,7 +105,8 @@ export function SidebarNavUserDetailsAndAvatarSuspense() {
 
 const DEFAULT_AVATAR = "/images/solar-user-linear.svg";
 async function SidebarNavUserDetailsAndAvatar() {
-  const me = await getAccountMe();
+  const { userId } = await auth();
+  const me = await getAccount(userId);
   const user = await currentUser();
   return (
     <>

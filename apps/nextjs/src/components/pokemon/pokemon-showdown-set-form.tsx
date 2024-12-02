@@ -1,10 +1,11 @@
 import type { Dispatch, SetStateAction } from "react";
+import { auth } from "@clerk/nextjs/server";
 
 import { Button, Textarea } from "@battle-stadium/ui";
 
 import type { PokePasteMetadata, ValidatedPokemon } from "~/lib/pokemon/common";
 // import { postPokemonTeam } from "~/app/server-actions/pokemon/actions";
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
+import { getAccount } from "~/app/server-actions/accounts/actions";
 
 interface PokemonShowdownSetFormProps {
   validatedTeam: ValidatedPokemon[] | null;
@@ -21,7 +22,11 @@ export async function PokemonShowdownSetForm({
   setInput,
   metaData,
 }: Readonly<PokemonShowdownSetFormProps>) {
-  const me = await getAccountMe();
+  const { userId } = await auth();
+  if (!userId) {
+    return null;
+  }
+  const me = await getAccount(userId);
   if (!me) {
     return null;
   }

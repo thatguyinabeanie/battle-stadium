@@ -1,5 +1,6 @@
 "use server";
 
+import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 import { count } from "drizzle-orm";
 
 import { and, db, desc, eq } from "@battle-stadium/db";
@@ -26,15 +27,15 @@ function tournamentsLeftJoinOrganizationsWithPlayerCounts() {
 }
 
 async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
-  const results = await tournamentsLeftJoinOrganizationsWithPlayerCounts()
+  return tournamentsLeftJoinOrganizationsWithPlayerCounts()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
-
-  return results;
 }
 
 export async function getOrganizationTournaments(page = 1, pageSize = 20) {
+  "use cache";
+  cacheTag(`getOrganizationTournaments(${page},${pageSize})`);
   return getOrganizationTournamentsRaw(page, pageSize);
 }
 
@@ -43,13 +44,14 @@ async function getSingleOrganizationTournamentsRaw(
   page = 1,
   pageSize = 20,
 ) {
-  const results = await tournamentsLeftJoinOrganizations()
+  "use cache";
+  cacheTag(`getSingleOrganizationTournamentsRaw(${slug},${page},${pageSize})`);
+
+  return tournamentsLeftJoinOrganizations()
     .where(eq(organizations.slug, slug))
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
-
-  return results;
 }
 
 export async function getSingleOrganizationTournaments(
@@ -57,6 +59,8 @@ export async function getSingleOrganizationTournaments(
   page = 1,
   pageSize = 20,
 ) {
+  "use cache";
+  cacheTag(`getSingleOrganizationTournaments(${slug},${page},${pageSize})`);
   const results = await getSingleOrganizationTournamentsRaw(
     slug,
     page,
@@ -72,18 +76,20 @@ async function getSingleOrganizationSingleTournamentRaw(
   slug: string,
   tournamentId: number,
 ) {
-  const results = await tournamentsLeftJoinOrganizations()
+  "use cache";
+  cacheTag(`getSingleOrganizationSingleTournamentRaw(${slug},${tournamentId})`);
+  return tournamentsLeftJoinOrganizations()
     .where(and(eq(organizations.slug, slug), eq(tournaments.id, tournamentId)))
     .orderBy(desc(tournaments.startAt))
     .limit(1);
-
-  return results;
 }
 
 export async function getSingleOrganizationSingleTournament(
   slug: string,
   tournamentId: number,
 ) {
+  "use cache";
+  cacheTag(`getSingleOrganizationSingleTournament(${slug},${tournamentId})`);
   const results = await getSingleOrganizationSingleTournamentRaw(
     slug,
     tournamentId,

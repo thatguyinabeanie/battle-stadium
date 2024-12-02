@@ -39,6 +39,9 @@
       "username": "postgres"
     }
   ],
+  "cSpell.enabled": true,
+  "cSpell.language": "en",
+  "cSpell.workspaceRootPath": "${workspaceFolder}/cspell.json",
   "cSpell.autoFormatConfigFile": true,
   "cSpell.ignorePaths": [
     "**/package.json",

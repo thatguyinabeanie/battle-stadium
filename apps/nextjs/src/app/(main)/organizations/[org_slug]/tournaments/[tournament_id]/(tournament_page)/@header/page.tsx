@@ -11,12 +11,13 @@ import type {
 } from "~/types";
 import { getSingleOrganizationSingleTournament } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
-import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
-export async function generateStaticParams() {
-  const staticParams = await generateOrganizationTournamentsStaticParams();
-  return staticParams;
-}
+// import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
+
+// export async function generateStaticParams () {
+//   const staticParams = await generateOrganizationTournamentsStaticParams();
+//   return staticParams;
+// }
 
 export default function OrganizationTournamentHeaderSlot(
   props: Readonly<OrganizationTournamentParams>,

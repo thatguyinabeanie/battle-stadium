@@ -12,7 +12,7 @@ import {
 } from "@battle-stadium/ui";
 
 import MobileMenu from "~/app/(main)/@navbar/_navbar-components/navbar-mobile-menu";
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
+import { getAccount } from "~/app/server-actions/accounts/actions";
 import {
   SolarMagniferLinear,
   SolarSettingsLinear,
@@ -57,15 +57,15 @@ export default function RightMenu() {
 }
 
 async function UserMenu() {
-  const clerkAuth = await auth();
-  const me = (await getAccountMe()) ?? undefined;
+  const { userId } = await auth();
+  const me = await getAccount(userId);
 
   return (
     <DropdownMenu aria-label="Profile Actions">
       <DropdownMenuTrigger>
         <SmartAvatar />
       </DropdownMenuTrigger>
-      <UserMenuDropDown isSignedIn={!!clerkAuth.userId} me={me} />
+      <UserMenuDropDown isSignedIn={!!userId} me={me} />
     </DropdownMenu>
   );
 }
