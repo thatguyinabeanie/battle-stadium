@@ -13,9 +13,9 @@ interface MatchPageProps {
 export async function generateStaticParams() {
   return (await getAllOrgTourMatches()).map(
     ({ matches, tournaments, organizations }) => ({
-        org_slug: organizations?.slug,
-        tournament_id: tournaments?.id.toString(),
-        match_id: matches.id.toString(),
+      org_slug: organizations?.slug,
+      tournament_id: tournaments?.id.toString(),
+      match_id: matches.id.toString(),
     }),
   );
 }
@@ -33,5 +33,5 @@ async function MatchPageAsync(props: Readonly<MatchPageProps>) {
 
   const { match_id } = await props.params;
   // return <ChatComponent channelName={"ChatChannel"} roomName={matchId} websocketUrl={websocketUrl()} />;
-  return <div>Match Page { match_id }</div>;
+  return <div>Match Page {match_id}</div>;
 }
