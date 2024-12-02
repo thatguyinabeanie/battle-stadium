@@ -8,9 +8,10 @@ import { env } from "~/env";
 
 export const DEFAULT_CACHE_TIMEOUT = 300;
 
-export function defaultConfig(tag: string, revalidate?: number) {
+export function defaultConfig(tag: string) {
   return {
-    next: { tags: [tag], revalidate: revalidate ?? DEFAULT_CACHE_TIMEOUT },
+    // next: { tags: [tag], revalidate: revalidate ?? DEFAULT_CACHE_TIMEOUT },
+    next: { tags: [tag] },
   };
 }
 
