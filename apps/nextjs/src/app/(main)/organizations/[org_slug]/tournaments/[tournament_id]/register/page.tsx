@@ -7,13 +7,26 @@ import type { OrganizationTournamentParams, Tokens } from "~/types";
 import { getProfiles } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
-import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
+import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
+import { Suspense } from "react";
 
 export async function generateStaticParams() {
-  return await generateOrganizationTournamentsStaticParams();
+  const results = await getOrganizationTournamentsRaw();
+  return results.map(({ tournaments, organizations }) => ({
+    org_slug: organizations?.slug,
+    tournament_id: tournaments.id.toString(),
+  }));
 }
 
-export default async function Register(
+export default function RegisterSuspenseWrapper (props: Readonly<OrganizationTournamentParams>) {
+  return (
+    <Suspense fallback={null}>
+      <Register {...props} />
+    </Suspense>
+  );
+}
+
+async function Register(
   props: Readonly<OrganizationTournamentParams>,
 ) {
   const params = await props.params;
@@ -27,6 +40,7 @@ export default async function Register(
     oidc: await getVercelOidcToken(),
     clerk: await session.getToken(),
   };
+
   return (
     <>
       <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">

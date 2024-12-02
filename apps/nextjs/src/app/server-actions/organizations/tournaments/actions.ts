@@ -27,7 +27,7 @@ function tournamentsLeftJoinOrganizationsWithPlayerCounts() {
     .groupBy(organizations.id, tournaments.id);
 }
 
-async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
+export async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
   return tournamentsLeftJoinOrganizationsWithPlayerCounts()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)

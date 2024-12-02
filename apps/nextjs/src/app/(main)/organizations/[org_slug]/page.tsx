@@ -12,9 +12,9 @@ interface OrganizationDetailPageProps {
   params: Promise<{ org_slug: string }>;
 }
 
-export async function generateStaticParams() {
-  return (await getOrganizations()).map((org) => ({ org_slug: org.slug }));
-}
+// export async function generateStaticParams() {
+//   return (await getOrganizations()).map((org) => ({ org_slug: org.slug }));
+// }
 
 const getOrganizationData = cache(async (slug: string) => {
   "use server";
