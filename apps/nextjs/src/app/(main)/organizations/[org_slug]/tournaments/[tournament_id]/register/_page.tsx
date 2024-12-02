@@ -6,18 +6,19 @@ import { Input } from "@battle-stadium/ui";
 
 import type { Tokens } from "~/types";
 import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
-import { getProfiles } from "~/app/server-actions/profiles/actions";
+import { getProfilesByClerkUserId } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
 
 export async function generateStaticParams() {
   const results = await getOrganizationTournamentsRaw();
-  return results.map(({ tournaments, organizations }) => ({params: {
-    org_slug: organizations?.slug,
-    tournament_id: tournaments.id.toString(),}
+  return results.map(({ tournaments, organizations }) => ({
+    params: {
+      org_slug: organizations?.slug,
+      tournament_id: tournaments.id.toString(),
+    },
   }));
 }
-
 
 interface OrganizationTournamentProps {
   org_slug: string;
@@ -28,13 +29,12 @@ interface OrganizationTournamentParams {
   params: Promise<OrganizationTournamentProps>;
 }
 
-
-export default function RegisterSuspenseWrapper(
-  {params}: OrganizationTournamentParams,
-) {
+export default function RegisterSuspenseWrapper({
+  params,
+}: OrganizationTournamentParams) {
   return (
     <Suspense fallback={null}>
-      <Register params={ params } />
+      <Register params={params} />
     </Suspense>
   );
 }
@@ -77,7 +77,7 @@ async function Register(props: Readonly<OrganizationTournamentParams>) {
 function handleTournamentRegistration(userId: string, tokens: Tokens) {
   return async (formData: FormData, tournament_id: number) => {
     "use server";
-    const profiles = await getProfiles(userId, tokens);
+    const profiles = await getProfilesByClerkUserId(userId, tokens);
 
     const in_game_name = formData.get("ign") as string;
     const profile = formData.get("profile") as string;
@@ -103,7 +103,7 @@ function handleTournamentRegistration(userId: string, tokens: Tokens) {
 }
 
 async function ProfileSelector(props: { userId: string; tokens: Tokens }) {
-  const profiles = await getProfiles(props.userId, props.tokens);
+  const profiles = await getProfilesByClerkUserId(props.userId, props.tokens);
   return (
     <>
       <Input

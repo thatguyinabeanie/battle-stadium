@@ -47,7 +47,10 @@ export async function getProfilesByAccountId(id: number) {
   });
 }
 
-export async function getProfiles(userId: string | null, tokens: Tokens) {
+export async function getProfilesByClerkUserId(
+  userId: string | null,
+  tokens: Tokens,
+) {
   const me = await getAccount(userId, tokens);
   if (!me) {
     return [];

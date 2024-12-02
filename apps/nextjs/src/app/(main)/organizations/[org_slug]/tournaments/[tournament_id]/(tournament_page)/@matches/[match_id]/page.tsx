@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { getAllOrgTourMatches } from "~/app/server-actions/organizations/tournaments/matches/actions";
 
 interface MatchPageProps {
   params: Promise<{
@@ -6,6 +7,16 @@ interface MatchPageProps {
     tournament_id: number;
     matchId: number;
   }>;
+}
+
+export async function generateStaticParams() {
+  return (await getAllOrgTourMatches()).map( ({matches, tournaments, organizations}) => ({
+    params: {
+      org_slug: organizations?.slug,
+      tournament_id: tournaments?.id.toString(),
+      matchId: matches.id.toString(),
+    },
+  }));
 }
 
 export default function MatchPage(props: Readonly<MatchPageProps>) {
@@ -17,6 +28,8 @@ export default function MatchPage(props: Readonly<MatchPageProps>) {
 }
 
 async function MatchPageAsync(props: Readonly<MatchPageProps>) {
+  "use cache";
+
   const { matchId } = await props.params;
   // return <ChatComponent channelName={"ChatChannel"} roomName={matchId} websocketUrl={websocketUrl()} />;
   return <div>Match Page {matchId}</div>;

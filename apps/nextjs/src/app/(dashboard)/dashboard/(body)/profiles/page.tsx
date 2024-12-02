@@ -1,22 +1,50 @@
+import { Suspense } from "react";
 import { auth } from "@clerk/nextjs/server";
 import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 import type { Tokens } from "~/types";
 import {
   createProfile,
-  getProfiles,
+  getProfilesByClerkUserId,
 } from "~/app/server-actions/profiles/actions";
 import NewProfile from "~/components/profiles/new-profile";
 
-export default async function Profiles() {
+export default function ProfilesPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Profiles />
+    </Suspense>
+  );
+}
+
+async function Profiles() {
   const session = await auth();
+
+  if (!session.userId) {
+    return null;
+  }
+
   const tokens: Tokens = {
     oidc: await getVercelOidcToken(),
     clerk: await session.getToken(),
   };
-  const profiles = await getProfiles(session.userId, tokens);
+
+  return <ProfilesCached userId={session.userId} tokens={tokens} />;
+}
+
+async function ProfilesCached({
+  userId,
+  tokens,
+}: {
+  userId: string;
+  tokens: Tokens;
+}) {
+  "use cache";
+
+  const profiles = await getProfilesByClerkUserId(userId, tokens);
 
   async function createProfileAction(formData: FormData) {
+    "use server";
     await createProfile(formData.get("profile") as string, tokens);
   }
 

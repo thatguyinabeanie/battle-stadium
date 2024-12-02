@@ -21,9 +21,7 @@ async function TournamentRegistrations(
   const { tournament_id } = params;
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <TournamentsRegistrationTable tournament_id={tournament_id} />
-    </Suspense>
+    <TournamentsRegistrationTable tournament_id={tournament_id} />
   );
 }
 
@@ -32,6 +30,7 @@ async function TournamentsRegistrationTable({
 }: {
   tournament_id: number;
 }) {
+  "use cache";
   const players = await getTournamentPlayers(tournament_id);
   return <RegistrationsTable players={players} />;
 }

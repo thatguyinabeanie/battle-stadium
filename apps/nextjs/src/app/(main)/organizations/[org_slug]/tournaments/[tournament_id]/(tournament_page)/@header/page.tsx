@@ -1,5 +1,6 @@
-import { Suspense } from "react";
+import { cache, Suspense } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { format, parseISO } from "date-fns";
 
 import type { Organization, Tournament } from "@battle-stadium/db/schema";
@@ -9,36 +10,71 @@ import type {
   OrganizationTournamentParams,
   OrganizationTournamentProps,
 } from "~/types";
-import { getSingleOrganizationSingleTournament } from "~/app/server-actions/organizations/tournaments/actions";
+import {
+  getOrganizationTournamentsRaw,
+  getSingleOrganizationSingleTournament,
+} from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 
-// import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
+export async function generateStaticParams() {
+  const results = await getOrganizationTournamentsRaw();
 
-// export async function generateStaticParams () {
-//   const staticParams = await generateOrganizationTournamentsStaticParams();
-//   return staticParams;
-// }
+  return results.map(({ tournaments, organizations }) => ({
+    params: {
+      org_slug: organizations?.slug,
+      tournament_id: tournaments.id.toString(),
+    },
+  }));
+}
 
 export default function OrganizationTournamentHeaderSlot(
   props: Readonly<OrganizationTournamentParams>,
 ) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <OrganizationTournamentHeader {...props} />
+      <OrganizationTournamentHeaderSuspense {...props} />
     </Suspense>
   );
 }
 
-async function OrganizationTournamentHeader(
+const getData = cache(
+  async ({ org_slug, tournament_id }: OrganizationTournamentProps) => {
+    const { organization, tournament } =
+      await getSingleOrganizationSingleTournament(org_slug, tournament_id);
+
+    if (!(organization && tournament)) {
+      return notFound();
+    }
+
+    return { organization, tournament };
+  },
+);
+
+async function OrganizationTournamentHeaderSuspense(
   props: Readonly<OrganizationTournamentParams>,
 ) {
-  const { org_slug, tournament_id } = await props.params;
-  const { organization, tournament } =
-    await getSingleOrganizationSingleTournament(org_slug, tournament_id);
+  "use cache";
 
-  if (!(organization && tournament)) {
-    return <div>404 - Not Found</div>;
-  }
+  const { org_slug, tournament_id } = await props.params;
+
+  return (
+    <OrganizationTournamentHeaderWrapped
+      org_slug={org_slug}
+      tournament_id={tournament_id}
+    />
+  );
+}
+
+async function OrganizationTournamentHeaderWrapped({
+  org_slug,
+  tournament_id,
+}: Readonly<OrganizationTournamentProps>) {
+  "use cache";
+
+  const { organization, tournament } = await getData({
+    org_slug,
+    tournament_id,
+  });
 
   return (
     <>

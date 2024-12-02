@@ -14,7 +14,27 @@ function MatchesLeftJoinTournamentsLeftJoinOrganizations() {
     .leftJoin(organizations, eq(tournaments.organizationId, organizations.id));
 }
 
-async function getOrganizationTournamentMatchesRaw(
+export async function getOrganizationTournamentMatchesRaw(
+  org_slug: string,
+  tournament_id: number,
+  page = 1,
+  pageSize = 20,
+) {
+  return MatchesLeftJoinTournamentsLeftJoinOrganizations()
+    .where(
+      and(eq(organizations.slug, org_slug), eq(tournaments.id, tournament_id)),
+    )
+    .orderBy(desc(matches.createdAt))
+    .limit(pageSize)
+    .offset((page - 1) * pageSize);
+}
+
+export async function getAllOrgTourMatches() {
+  return MatchesLeftJoinTournamentsLeftJoinOrganizations();
+}
+
+
+export async function getOrganizationTournamentMatches(
   org_slug: string,
   tournament_id: number,
   page = 1,
@@ -25,21 +45,6 @@ async function getOrganizationTournamentMatchesRaw(
   cacheLife("minutes");
   // TODO: revalidate on match updates
 
-  return MatchesLeftJoinTournamentsLeftJoinOrganizations()
-    .where(
-      and(eq(organizations.slug, org_slug), eq(tournaments.id, tournament_id)),
-    )
-    .orderBy(desc(matches.createdAt))
-    .limit(pageSize)
-    .offset((page - 1) * pageSize);
-}
-
-export async function getOrganizationTournamentMatches(
-  org_slug: string,
-  tournament_id: number,
-  page = 1,
-  pageSize = 20,
-) {
   return getOrganizationTournamentMatchesRaw(
     org_slug,
     tournament_id,
