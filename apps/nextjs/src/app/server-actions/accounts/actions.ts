@@ -10,6 +10,8 @@ import type { paths } from "~/lib/api/openapi-v1";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
 export async function getAccounts() {
+  "use cache";
+  cacheTag("getAccounts");
   return await db.query.accounts.findMany();
 }
 

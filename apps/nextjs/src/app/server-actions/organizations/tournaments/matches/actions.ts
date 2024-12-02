@@ -1,5 +1,7 @@
 "use server";
 
+import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+
 import { and, db, desc, eq } from "@battle-stadium/db";
 import { matches, organizations, tournaments } from "@battle-stadium/db/schema";
 
@@ -17,15 +19,16 @@ async function getOrganizationTournamentMatchesRaw(
   page = 1,
   pageSize = 20,
 ) {
-  const results = await MatchesLeftJoinTournamentsLeftJoinOrganizations()
+  "use cache";
+  cacheTag(`getOrganizationTournamentMatches(${org_slug}, ${tournament_id})`);
+
+  return MatchesLeftJoinTournamentsLeftJoinOrganizations()
     .where(
       and(eq(organizations.slug, org_slug), eq(tournaments.id, tournament_id)),
     )
     .orderBy(desc(matches.createdAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
-
-  return results;
 }
 
 export async function getOrganizationTournamentMatches(
@@ -34,7 +37,7 @@ export async function getOrganizationTournamentMatches(
   page = 1,
   pageSize = 20,
 ) {
-  return await getOrganizationTournamentMatchesRaw(
+  return getOrganizationTournamentMatchesRaw(
     org_slug,
     tournament_id,
     page,
