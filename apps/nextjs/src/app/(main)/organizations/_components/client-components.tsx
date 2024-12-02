@@ -36,22 +36,28 @@ export function OrganizationsGrid({
 
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
-      <Form className="flex flex-row" action={""}>
+      <Form className="flex flex-row" action={getOrSearchOrganizationsActionWrapper}>
         <input
           name="query"
           type="text"
           placeholder="Search organizations..."
-          className="mb-4 rounded border p-2"
+          className="mb-4 rounded border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+          aria-label="Search organizations"
           onChange={(e) => {
             e.preventDefault();
+            // Debounce search for better performance
             const form = e.currentTarget.form;
-            if (form) {
+            if (!form) return;
+            
+            const timeoutId = setTimeout(() => {
               const formData = new FormData(form);
               void getOrSearchOrganizationsActionWrapper(formData);
-            }
+            }, 300);
+            
+            return () => clearTimeout(timeoutId);
           }}
         />
-        <Button type="submit" className="mb-4 ml-2">
+        <Button type="submit" className="mb-4 ml-2" aria-label="Submit search">
           Search
         </Button>
       </Form>
