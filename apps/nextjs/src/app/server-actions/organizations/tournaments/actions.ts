@@ -50,7 +50,7 @@ async function getSingleOrganizationTournamentsRaw(
 ) {
   "use cache";
   cacheTag(`getSingleOrganizationTournamentsRaw(${slug},${page},${pageSize})`);
-  cacheLife("hours");
+  cacheLife("days");
   // TODO: revalidate on tournament creation
 
   return tournamentsLeftJoinOrganizations()
@@ -65,6 +65,11 @@ export async function getSingleOrganizationTournaments(
   page = 1,
   pageSize = 20,
 ) {
+  "use cache";
+  cacheTag(`getSingleOrganizationTournaments(${slug},${page},${pageSize})`);
+  cacheLife("days");
+  // TODO: revalidate on tournament creation
+
   const results = await getSingleOrganizationTournamentsRaw(
     slug,
     page,

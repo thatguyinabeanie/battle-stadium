@@ -15,7 +15,7 @@ export default withBundleAnalyzer({
   reactStrictMode: true,
 
   experimental: {
-    after: true,
+    // after: true,
     ppr: false,
     staleTimes: {
       dynamic: 5,
@@ -23,9 +23,9 @@ export default withBundleAnalyzer({
     },
     typedRoutes: true,
     dynamicIO: true,
-    staticGenerationRetryCount: 2,
-    staticGenerationMaxConcurrency: 8,
-    staticGenerationMinPagesPerWorker: 25,
+    // staticGenerationRetryCount: 2,
+    // staticGenerationMaxConcurrency: 8,
+    // staticGenerationMinPagesPerWorker: 25,
   },
 
   expireTime: 3600,
