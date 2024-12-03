@@ -24,9 +24,9 @@ export default function DashboardLayout({
           <Suspense fallback={<DashboardContentSkeleton />}>
             <main
               aria-label="dashboard content"
-              className="flex flex-1 flex-col gap-4 p-4 min-h-[100dvh] rounded-xl bg-neutral-900/50 md:min-h-min"
+              className="flex min-h-[100dvh] flex-1 flex-col gap-4 rounded-xl bg-neutral-900/50 p-4 md:min-h-min"
             >
-              { children }
+              {children}
             </main>
           </Suspense>
         </SidebarInset>
