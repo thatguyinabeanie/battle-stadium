@@ -7,7 +7,7 @@ import type { OrganizationTournamentParams, Tokens } from "~/types";
 import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 import { getProfilesByClerkUserId } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
-import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
+import { TournamentRegistrationForm } from "~/app/(main)/organizations/[org_slug]/tournaments/[tournament_id]/register/registration-form";
 
 // import { unstable_noStore as no_store } from "next/cache";
 

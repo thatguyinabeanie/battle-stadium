@@ -15,7 +15,7 @@ interface ModalProps {
   children: ReactNode;
 }
 
-export default function Modal({ children }: Readonly<ModalProps>) {
+export default function RegistrationModal({ children }: Readonly<ModalProps>) {
   const router = useRouter();
   return (
     <Dialog defaultOpen={true} open={true} onOpenChange={() => router.back()}>
