@@ -13,14 +13,14 @@ import {
 } from "@battle-stadium/ui";
 
 import type { Tokens } from "~/types";
-import MobileMenu from "~/app/(main)/@navbar/_navbar-components/navbar-mobile-menu";
+import MobileMenu from "~/app/(main)/@navbar/_components/navbar-mobile-menu";
 import { getAccount } from "~/app/server-actions/accounts/actions";
 import {
   SolarMagniferLinear,
   SolarSettingsLinear,
   SolarUserLinear,
 } from "~/components/svg/icons";
-import UserMenuDropDown from "./user-menu/user-menu-dropdown";
+import UserMenuDropDown from "./user-menu-dropdown";
 
 const sharedClassNames = "h-[28px] w-[28px]";
 
