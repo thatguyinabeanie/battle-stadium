@@ -12,7 +12,7 @@ import { TournamentRegistrationForm } from "~/components/tournaments/tournament-
 
 // import { unstable_noStore as no_store } from "next/cache";
 
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   try {
     const data = await getOrganizationTournamentsRaw();
     return data.map(({ tournaments, organizations }) => ({
