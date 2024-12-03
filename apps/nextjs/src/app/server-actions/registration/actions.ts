@@ -29,13 +29,18 @@ export async function handleTournamentRegistration(
     {
       tournamentId: tournament_id,
       inGameName: in_game_name,
-      profileId: Number.isFinite(Number(profile_id))
-        ? Number(profile_id)
-        : (() => {
-            throw new Error("Invalid profile ID format");
-          })(),
+      profileId: validateProfileId(profile_id),
       showCountryFlag: show_country_flag,
     },
     tokens,
   );
+}
+
+function validateProfileId(id: unknown): number {
+  const numId = Number(id);
+  if (!Number.isFinite(numId)) {
+    throw new Error(`Invalid profile ID format: ${id}`);
+  }
+  return numId;
+}
 }
