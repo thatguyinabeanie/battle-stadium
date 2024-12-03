@@ -31,8 +31,8 @@ const navMainItems: NavMainItem[] = [
     icon: UserRoundPen,
   },
   {
-    title: "Teams",
-    url: "#",
+    title: "Pokemon",
+    url: "/dashboard/pokemon",
     icon: FolderOpen,
   },
   {
