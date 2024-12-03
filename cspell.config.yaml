@@ -6,7 +6,7 @@ ignorePaths:
   - "**/.next/**"
   - "**/.turbo/**"
   - "**/.cache/**"
-  - "pnpm-lock.yaml"
+  - pnpm-lock.yaml
   - "**/package.json"
   - "**/.git/**"
   - "**/coverage/**"
@@ -14,13 +14,11 @@ ignorePaths:
   - "**/*.map"
   - "**/turbo.json"
   - "**/pnpm-workspace.yaml"
-  - "packages/db/drizzle/schema.ts"
-  - "code-rabbit-ai.yaml"
-  - ".env*"
-  - ".vscode/**"
-
+  - packages/db/drizzle/schema.ts
+  - code-rabbit-ai.yaml
+  - .env*
+  - .vscode/**
 dictionaryDefinitions: []
-
 dictionaries:
   - en_US
   - companies
@@ -36,37 +34,42 @@ dictionaries:
   - python
   - markdown
   - lorem-ipsum
-
 words:
   - adbanner
   - adsbygoogle
   - adtest
+  - alola
   - battlestadium
   - cmdk
+  - galar
+  - gmax
+  - hoenn
+  - johto
+  - kalos
+  - kanto
+  - limitlesstcg
   - Magnifer
+  - Metagame
   - navuser
   - nums
+  - paldea
   - pkmn
+  - pokedex
+  - pokepast
   - pokepaste
+  - randompic
   - scrollback
+  - sinnoh
   - slotnumber
   - sqlstring
   - teamlists
   - Tera
   - thatguyinabeanie
+  - unova
   - UNPOOLED
   - Unreads
   - uploadthing
   - UTSSR
   - vaul
-  - pokepast
-  - limitlesstcg
-  - adsbygoogle
-  - Metagame
-  - pokedex
-  - randompic
-  - kanto
-  - johto
-
 ignoreWords: []
 import: []
