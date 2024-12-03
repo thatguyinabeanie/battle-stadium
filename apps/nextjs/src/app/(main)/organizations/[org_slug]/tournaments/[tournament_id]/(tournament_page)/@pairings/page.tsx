@@ -1,4 +1,4 @@
-import type { OrganizationTournamentProps } from "~/types";
+import type { OrganizationTournamentParams } from "~/types";
 import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 
 export async function generateStaticParams() {
@@ -14,8 +14,14 @@ export async function generateStaticParams() {
   }
 }
 
-export default function Pairings(
-  _props: Readonly<OrganizationTournamentProps>,
-) {
-  return <p>Pairings content</p>;
+export default async function Pairings({params}: Readonly<OrganizationTournamentParams>) {
+  const { org_slug, tournament_id } = await params;
+
+  return (
+    <>
+      <p>pairings content</p>
+      <p>{ org_slug }</p>
+      <p>{ tournament_id }</p>
+    </>
+  );
 }

@@ -1,4 +1,4 @@
-import type { OrganizationTournamentProps } from "~/types";
+import type { OrganizationTournamentParams } from "~/types";
 import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 
 export async function generateStaticParams() {
@@ -14,8 +14,16 @@ export async function generateStaticParams() {
   }
 }
 
-export default function Metagame(
-  _props: Readonly<OrganizationTournamentProps>,
+export default async function Metagame(
+  {params}: Readonly<OrganizationTournamentParams>,
 ) {
-  return <p>Metagame content</p>;
+  const { org_slug, tournament_id } = await params;
+
+  return (
+    <>
+      <p>Metagame content</p>
+      <p>{ org_slug}</p>
+      <p>{ tournament_id}</p>
+    </>
+  );
 }

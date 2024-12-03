@@ -14,12 +14,14 @@ export async function generateStaticParams() {
   }
 }
 
-export default function OrganizationTournamentDetailsPage(
-  _props: Readonly<OrganizationTournamentParams>,
-) {
+export default async function OrganizationTournamentDetailsPage({params}: Readonly<OrganizationTournamentParams>) {
+  const { org_slug, tournament_id } = await params;
+
   return (
     <>
-      <p>Details and Rules and Things</p>
+      <p>Metagame content</p>
+      <p>{ org_slug }</p>
+      <p>{ tournament_id }</p>
     </>
   );
 }

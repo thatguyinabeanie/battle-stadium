@@ -4,7 +4,7 @@ import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 import { Input } from "@battle-stadium/ui";
 
-import type { Tokens } from "~/types";
+import type { OrganizationTournamentParams, Tokens } from "~/types";
 import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 import { getProfilesByClerkUserId } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
@@ -12,21 +12,17 @@ import { TournamentRegistrationForm } from "~/components/tournaments/tournament-
 
 // import { unstable_noStore as no_store } from "next/cache";
 
-export async function generateStaticParams() {
-  const results = await getOrganizationTournamentsRaw();
-  return results.map(({ tournaments, organizations }) => ({
-    org_slug: organizations?.slug,
-    tournament_id: tournaments.id.toString(),
-  }));
-}
-
-interface OrganizationTournamentProps {
-  org_slug: string;
-  tournament_id: number;
-}
-
-interface OrganizationTournamentParams {
-  params: Promise<OrganizationTournamentProps>;
+export async function generateStaticParams () {
+  try {
+    const data = await getOrganizationTournamentsRaw();
+    return data.map(({ tournaments, organizations }) => ({
+      org_slug: organizations?.slug,
+      tournament_id: tournaments.id.toString(),
+    }));
+  } catch (error) {
+    console.error("Error generating static params:", error);
+    return [];
+  }
 }
 
 export default function RegisterSuspenseWrapper({

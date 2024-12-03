@@ -62,10 +62,10 @@ async function OrganizationTournamentHeaderWrapped({
     await getSingleOrganizationSingleTournament(org_slug, tournament_id);
 
   if (!organization) {
-    return notFound();
+    notFound();
   }
   if (!tournament) {
-    return notFound();
+    notFound();
   }
 
   return (
