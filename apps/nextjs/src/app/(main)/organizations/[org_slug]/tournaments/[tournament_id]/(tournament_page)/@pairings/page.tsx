@@ -17,7 +17,7 @@ export default async function Pairings({
 
   return (
     <>
-      <p>pairings content</p>
+      <h1>Pairings content</h1>
       <p>{org_slug}</p>
       <p>{tournament_id}</p>
     </>
