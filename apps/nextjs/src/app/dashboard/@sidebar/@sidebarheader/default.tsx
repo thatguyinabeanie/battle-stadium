@@ -15,9 +15,9 @@ import {
 
 import { BattleStadiumLogoLink } from "~/components/battle-stadium";
 import { NavbarItemsConfigs } from "~/lib/config/site";
-import { DropDownMenuContentMobile } from "./side-bar-client-components";
+import { DropDownMenuContentMobile } from "../_components/side-bar-client-components";
 
-export function MainAppLinksMenu() {
+export default function SidebarHeaderSlot() {
   return (
     <div className="flex flex-row items-center justify-center gap-2">
       <div className="flex aspect-square size-8 items-center justify-center rounded-lg">

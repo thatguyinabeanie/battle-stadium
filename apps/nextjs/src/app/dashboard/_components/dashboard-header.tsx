@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { Separator } from "@battle-stadium/ui/separator";
 import { SidebarTrigger } from "@battle-stadium/ui/sidebar";
 
@@ -20,7 +22,9 @@ export default function DashboardHeader() {
           orientation="vertical"
           className={`mr-2 ${LAYOUT_CONSTANTS.SEPARATOR_HEIGHT}`}
         />
-        <Breadcrumbs />
+        <Suspense fallback={null}>
+          <Breadcrumbs />
+        </Suspense>
       </div>
     </header>
   );

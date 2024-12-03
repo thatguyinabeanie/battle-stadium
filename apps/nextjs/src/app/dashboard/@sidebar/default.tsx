@@ -12,10 +12,10 @@ import {
 
 import { SidebarGroup, SidebarMenu } from "@battle-stadium/ui";
 
-import type { NavMainItem } from "./components";
+import type { NavMainItem } from "./_components/components";
 import type { Tokens } from "~/types";
 import { getUserOrganizations } from "~/app/server-actions/organizations/actions";
-import { CollapsibleMenuNavItem } from "./components";
+import { CollapsibleMenuNavItem } from "./_components/components";
 
 const dashboardNavItem: NavMainItem = {
   title: "Dashboard",
@@ -31,8 +31,8 @@ const navMainItems: NavMainItem[] = [
     icon: UserRoundPen,
   },
   {
-    title: "Teams",
-    url: "#",
+    title: "Pokemon",
+    url: "/dashboard/pokemon",
     icon: FolderOpen,
   },
   {
@@ -42,7 +42,7 @@ const navMainItems: NavMainItem[] = [
   },
 ];
 
-export function NavMain() {
+export default function DashboardSideBar() {
   return (
     <SidebarGroup>
       <SidebarMenu>

@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { title } from "~/components/miscellaneous/primitives";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 import { env } from "~/env";
-import AdBanner from "../_components/ad-banner";
+import AdBanner from "../../components/google-adsense/ad-banner";
 
 export const metadata: Metadata = {
   title: "battlestadium.gg",
