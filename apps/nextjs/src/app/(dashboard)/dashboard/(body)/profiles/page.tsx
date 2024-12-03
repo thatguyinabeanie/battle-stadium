@@ -39,7 +39,7 @@ async function ProfilesCached({
   userId: string;
   tokens: Tokens;
 }) {
-  "use cache";
+  // "use cache";
 
   const profiles = await getProfilesByClerkUserId(userId, tokens);
 

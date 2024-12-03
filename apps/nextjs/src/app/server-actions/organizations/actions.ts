@@ -1,7 +1,7 @@
 "use server";
 
-import { cacheLife } from "next/dist/server/use-cache/cache-life";
-import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+// import { cacheLife } from "next/dist/server/use-cache/cache-life";
+// import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 import SqlString from "sqlstring";
 
 import { eq, lower } from "@battle-stadium/db";
@@ -12,18 +12,18 @@ import type { Tokens } from "~/types";
 import { getAccount } from "../accounts/actions";
 
 export async function getOrganizations() {
-  "use cache";
-  cacheTag("getOrganizations");
-  cacheLife("hours");
+  // "use cache";
+  // cacheTag("getOrganizations");
+  // cacheLife("hours");
   // TODO: revalidate on organization creation
 
   return db.query.organizations.findMany();
 }
 
 export async function searchOrganizations(query: string) {
-  "use cache";
-  cacheTag(`searchOrganizations(${query})`);
-  cacheLife("hours");
+  // "use cache";
+  // cacheTag(`searchOrganizations(${query})`);
+  // cacheLife("hours");
   // TODO: revalidate on organization creation
 
   const sanitizedQuery = SqlString.escape(query).toLowerCase();
@@ -37,9 +37,9 @@ export async function searchOrganizations(query: string) {
 }
 
 export async function getPartneredOrganizations() {
-  "use cache";
-  cacheTag("getPartneredOrganizations");
-  cacheLife("days");
+  // "use cache";
+  // cacheTag("getPartneredOrganizations");
+  // cacheLife("days");
   // TODO: revalidate on organization update => partner
 
   return db.query.organizations.findMany({
@@ -48,9 +48,9 @@ export async function getPartneredOrganizations() {
 }
 
 export async function findOrganizationBySlug(slug: string) {
-  "use cache";
-  cacheTag(`findOrganizationBySlug(${slug})`);
-  cacheLife("days");
+  // "use cache";
+  // cacheTag(`findOrganizationBySlug(${slug})`);
+  // cacheLife("days");
   // TODO: revalidate on organization update
 
   return db.query.organizations.findFirst({
@@ -59,9 +59,9 @@ export async function findOrganizationBySlug(slug: string) {
 }
 
 export async function getUserOrganizations(userId: string, tokens: Tokens) {
-  "use cache";
-  cacheTag(`getUserOrganizations(${userId})`);
-  cacheLife("hours");
+  // "use cache";
+  // cacheTag(`getUserOrganizations(${userId})`);
+  // cacheLife("hours");
   // TODO: revalidate on organization creation
 
   const me = await getAccount(userId, tokens);

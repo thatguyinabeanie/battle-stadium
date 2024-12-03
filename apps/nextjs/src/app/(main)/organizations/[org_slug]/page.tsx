@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 
-// import { db } from "@battle-stadium/db";
+import { db } from "@battle-stadium/db";
 
-// import { SingleOrgTournamentsTable } from "~/app/(main)/organizations/[org_slug]/_components/tournaments-table";
+import { SingleOrgTournamentsTable } from "~/app/(main)/organizations/[org_slug]/_components/tournaments-table";
 import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 
@@ -10,13 +10,13 @@ interface OrganizationDetailPageProps {
   params: Promise<{ org_slug: string }>;
 }
 
-// export async function generateStaticParams() {
-//   return (
-//     await db.query.organizations.findMany({
-//       where: (organizations, { isNotNull }) => isNotNull(organizations.slug),
-//     })
-//   ).map((org) => ({ org_slug: org.slug }));
-// }
+export async function generateStaticParams() {
+  return (
+    await db.query.organizations.findMany({
+      where: (organizations, { isNotNull }) => isNotNull(organizations.slug),
+    })
+  ).map((org) => ({ org_slug: org.slug }));
+}
 
 export default async function OrganizationDetailPage(props: OrganizationDetailPageProps) {
   const { org_slug } = await props.params;
@@ -25,7 +25,7 @@ export default async function OrganizationDetailPage(props: OrganizationDetailPa
 
 async function OrganizationContent({ org_slug }: { org_slug: string }) {
 
-  const { organization } = await getSingleOrganizationTournaments(org_slug);
+  const { organization, tournaments } = await getSingleOrganizationTournaments(org_slug);
   if (!organization) {
     notFound();
   }
@@ -42,11 +42,11 @@ async function OrganizationContent({ org_slug }: { org_slug: string }) {
         </div>
       </OrganizationHeader>
 
-      {/* <SingleOrgTournamentsTable
+      <SingleOrgTournamentsTable
         className="w-full px-4"
         data={tournaments}
         organization={organization}
-      /> */}
+      />
     </>
   );
 }

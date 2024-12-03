@@ -1,7 +1,7 @@
 "use server";
 
-import { cacheLife } from "next/dist/server/use-cache/cache-life";
-import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+// import { cacheLife } from "next/dist/server/use-cache/cache-life";
+// import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 import { and, db, desc, eq } from "@battle-stadium/db";
 import { matches, organizations, tournaments } from "@battle-stadium/db/schema";
@@ -39,9 +39,9 @@ export async function getOrganizationTournamentMatches(
   page = 1,
   pageSize = 20,
 ) {
-  "use cache";
-  cacheTag(`getOrganizationTournamentMatches(${org_slug}, ${tournament_id})`);
-  cacheLife("minutes");
+  // "use cache";
+  // cacheTag(`getOrganizationTournamentMatches(${org_slug}, ${tournament_id})`);
+  // cacheLife("minutes");
   // TODO: revalidate on match updates
 
   return getOrganizationTournamentMatchesRaw(

@@ -12,16 +12,11 @@ import { TournamentRegistrationForm } from "~/components/tournaments/tournament-
 // import { unstable_noStore as no_store } from "next/cache";
 
 export async function generateStaticParams() {
-  try {
-    const data = await getOrganizationTournamentsRaw();
-    return data.map(({ tournaments, organizations }) => ({
+  return (await getOrganizationTournamentsRaw())
+  .map(({ tournaments, organizations }) => ({
       org_slug: organizations?.slug,
       tournament_id: tournaments.id.toString(),
     }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
-  }
 }
 
 export default async function RegisterPage(props: OrganizationTournamentParams) {

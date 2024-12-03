@@ -1,8 +1,8 @@
 "use server";
 
 import type { FetchOptions } from "openapi-fetch";
-import { cacheLife } from "next/dist/server/use-cache/cache-life";
-import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+// import { cacheLife } from "next/dist/server/use-cache/cache-life";
+// import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 import { db, eq } from "@battle-stadium/db";
 import { accounts, profiles } from "@battle-stadium/db/schema";
@@ -12,9 +12,9 @@ import type { Tokens } from "~/types";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
 export async function getAccounts() {
-  "use cache";
-  cacheTag("getAccounts");
-  cacheLife("minutes");
+  // "use cache";
+  // cacheTag("getAccounts");
+  // cacheLife("minutes");
   // TODO: revalidate on account creation
 
   return db.query.accounts.findMany();
@@ -31,9 +31,9 @@ export async function getAccountByProfileUsername(username: string) {
 }
 
 async function findAccountById(id: number) {
-  "use cache";
-  cacheTag(`findAccountById(${id})`);
-  cacheLife("hours");
+  // "use cache";
+  // cacheTag(`findAccountById(${id})`);
+  // cacheLife("hours");
   // TODO - revalidate on account creation
 
   return db.query.accounts.findFirst({
@@ -42,9 +42,9 @@ async function findAccountById(id: number) {
 }
 
 async function findProfilesByUsername(username: string) {
-  "use cache";
-  cacheTag(`findProfileByUsername(${username})`);
-  cacheLife("hours");
+  // "use cache";
+  // cacheTag(`findProfileByUsername(${username})`);
+  // cacheLife("hours");
   // TODO - revalidate on profile creation
 
   return db.query.profiles.findFirst({

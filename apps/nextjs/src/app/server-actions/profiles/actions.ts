@@ -3,8 +3,8 @@
 import "server-only";
 
 import type { FetchOptions } from "openapi-fetch";
-import { cacheLife } from "next/dist/server/use-cache/cache-life";
-import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+// import { cacheLife } from "next/dist/server/use-cache/cache-life";
+// import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 // import { redirect } from "next/navigation";
 
@@ -17,9 +17,9 @@ import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 import { getAccount } from "../accounts/actions";
 
 export async function getAllProfiles() {
-  "use cache";
-  cacheTag("getAllProfiles");
-  cacheLife("hours");
+  // "use cache";
+  // cacheTag("getAllProfiles");
+  // cacheLife("hours");
   // TODO: revalidate on profile creation
 
   return await db.query.profiles.findMany();
@@ -32,9 +32,9 @@ export async function getProfile(username: string) {
 }
 
 export async function getProfilesByAccountId(id: number) {
-  "use cache";
-  cacheTag(`getProfilesByAccountId(${id})`);
-  cacheLife("hours");
+  // "use cache";
+  // cacheTag(`getProfilesByAccountId(${id})`);
+  // cacheLife("hours");
   // TODO: revalidate on profile creation
 
   return await db.query.profiles.findMany({

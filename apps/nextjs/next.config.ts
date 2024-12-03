@@ -24,7 +24,7 @@ export default withBundleAnalyzer({
       static: 180,
     },
     typedRoutes: false,
-    dynamicIO: true,
+    // dynamicIO: true,
     // staticGenerationRetryCount: 2,
     // staticGenerationMaxConcurrency: 8,
     // staticGenerationMinPagesPerWorker: 25,

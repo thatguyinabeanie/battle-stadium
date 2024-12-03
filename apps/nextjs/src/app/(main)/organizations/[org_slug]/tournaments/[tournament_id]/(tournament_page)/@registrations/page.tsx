@@ -3,17 +3,11 @@ import { getOrganizationTournamentsRaw } from "~/app/server-actions/organization
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
 import RegistrationsTable from "~/components/tournaments/registrations-table";
 
-export async function generateStaticParams() {
-  try {
-    const data = await getOrganizationTournamentsRaw();
-    return data.map(({ tournaments, organizations }) => ({
-      org_slug: organizations?.slug,
-      tournament_id: tournaments.id.toString(),
-    }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
-  }
+export async function generateStaticParams () {
+  return (await getOrganizationTournamentsRaw()).map(({ tournaments, organizations }) => ({
+    org_slug: organizations?.slug,
+    tournament_id: tournaments.id.toString(),
+  }));
 }
 
 export default async function TournamentRegistrationsPage(
@@ -28,7 +22,7 @@ async function TournamentsRegistrationTable({
 }: {
   tournament_id: number;
 }) {
-  "use cache";
+  // "use cache";
   const players = await getTournamentPlayers(tournament_id);
   return <RegistrationsTable players={players} />;
 }

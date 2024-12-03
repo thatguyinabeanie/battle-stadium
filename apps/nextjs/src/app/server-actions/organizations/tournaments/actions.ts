@@ -1,7 +1,7 @@
 "use server";
 
-import { cacheLife } from "next/dist/server/use-cache/cache-life";
-import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+// import { cacheLife } from "next/dist/server/use-cache/cache-life";
+// import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 import { count } from "drizzle-orm";
 
 import { and, db, desc, eq } from "@battle-stadium/db";
@@ -35,9 +35,9 @@ export async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
 }
 
 export async function getOrganizationTournaments(page = 1, pageSize = 20) {
-  "use cache";
-  cacheTag(`getOrganizationTournaments(${page},${pageSize})`);
-  cacheLife("days");
+  // "use cache";
+  // cacheTag(`getOrganizationTournaments(${page},${pageSize})`);
+  // cacheLife("days");
   // TODO: revalidate on tournament creation
 
   return getOrganizationTournamentsRaw(page, pageSize);
@@ -75,9 +75,9 @@ async function getSingleOrganizationSingleTournamentRaw(
   slug: string,
   tournamentId: number,
 ) {
-  "use cache";
-  cacheTag(`getSingleOrganizationSingleTournamentRaw(${slug},${tournamentId})`);
-  cacheLife("minutes");
+  // "use cache";
+  // cacheTag(`getSingleOrganizationSingleTournamentRaw(${slug},${tournamentId})`);
+  // cacheLife("minutes");
   // TODO: revalidate on tournament update
 
   return tournamentsLeftJoinOrganizations()

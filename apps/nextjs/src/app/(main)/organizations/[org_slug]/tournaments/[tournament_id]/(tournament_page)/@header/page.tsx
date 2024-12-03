@@ -16,16 +16,10 @@ import {
 import OrganizationHeader from "~/components/organizations/organization-header";
 
 export async function generateStaticParams() {
-  try {
-    const data = await getOrganizationTournamentsRaw();
-    return data.map(({ tournaments, organizations }) => ({
+  return (await getOrganizationTournamentsRaw()).map(({ tournaments, organizations }) => ({
       org_slug: organizations?.slug,
       tournament_id: tournaments.id.toString(),
     }));
-  } catch (error) {
-    console.error("Error generating static params:", error);
-    return [];
-  }
 }
 
 export default async function OrganizationTournamentHeaderSlot(props: Readonly<OrganizationTournamentParams>) {
@@ -43,7 +37,7 @@ async function OrganizationTournamentHeaderWrapped({
   org_slug,
   tournament_id,
 }: Readonly<OrganizationTournamentProps>) {
-  "use cache";
+  // "use cache";
 
   const { organization, tournament } =
     await getSingleOrganizationSingleTournament(org_slug, tournament_id);

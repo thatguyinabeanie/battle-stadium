@@ -1,8 +1,8 @@
 "use server";
 
 import type { FetchOptions } from "openapi-fetch";
-import { cacheLife } from "next/dist/server/use-cache/cache-life";
-import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+// import { cacheLife } from "next/dist/server/use-cache/cache-life";
+// import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 import { count, db, eq } from "@battle-stadium/db";
 import {
@@ -17,9 +17,9 @@ import type { Tokens } from "~/types";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
 export async function getTournament(tournament_id: number) {
-  "use cache";
-  cacheTag(`getTournament(${tournament_id})`);
-  cacheLife("hours");
+  // "use cache";
+  // cacheTag(`getTournament(${tournament_id})`);
+  // cacheLife("hours");
   // TODO: revalidate on tournament update
 
   const result = await db
@@ -38,9 +38,9 @@ export async function getTournament(tournament_id: number) {
 }
 
 export async function getTournaments(page = 1, pageSize = 20) {
-  "use cache";
-  cacheTag(`getTournaments(${page},${pageSize})`);
-  cacheLife("hours");
+  // "use cache";
+  // cacheTag(`getTournaments(${page},${pageSize})`);
+  // cacheLife("hours");
   // TODO: revalidate on tournament creation
 
   return db.query.tournaments.findMany({
@@ -102,9 +102,9 @@ export async function postTournamentRegistration(
 }
 
 export async function getTournamentPlayers(tournament_id: number) {
-  "use cache";
-  cacheTag(`getTournamentPlayers-${tournament_id}`);
-  cacheLife("minutes");
+  // "use cache";
+  // cacheTag(`getTournamentPlayers-${tournament_id}`);
+  // cacheLife("minutes");
   // TODO: revalidate on player registration
 
   return await db
@@ -116,9 +116,9 @@ export async function getTournamentPlayers(tournament_id: number) {
 }
 
 export async function getTournamentPlayerCount(tournament_id: number) {
-  "use cache";
-  cacheTag(`getTournamentPlayerCount-${tournament_id}`);
-  cacheLife("minutes");
+  // "use cache";
+  // cacheTag(`getTournamentPlayerCount-${tournament_id}`);
+  // cacheLife("minutes");
   // TODO: revalidate on player registration
 
   const result = await db

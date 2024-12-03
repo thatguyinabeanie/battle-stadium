@@ -22,7 +22,7 @@ import UserMenuDropDown from "./user-menu-dropdown";
 
 import { db, eq } from "@battle-stadium/db";
 import { accounts, clerkUsers } from "@battle-stadium/db/schema";
-import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+// import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 
 const sharedClassNames = "h-[28px] w-[28px]";
@@ -84,8 +84,8 @@ async function getUserData() {
 }
 
 async function getAccountQuery (userId: string) {
-  "use cache";
-  cacheTag(`getAccountQuery(${userId})`);
+  // "use cache";
+  // cacheTag(`getAccountQuery(${userId})`);
   return db.select({ clerkUsers, accounts })
     .from(accounts)
     .leftJoin(clerkUsers, eq(accounts.id, clerkUsers.accountId))
