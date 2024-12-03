@@ -16,19 +16,23 @@ import {
 import OrganizationHeader from "~/components/organizations/organization-header";
 
 export async function generateStaticParams() {
-  return (await getOrganizationTournamentsRaw()).map(({ tournaments, organizations }) => ({
+  return (await getOrganizationTournamentsRaw()).map(
+    ({ tournaments, organizations }) => ({
       org_slug: organizations?.slug,
       tournament_id: tournaments.id.toString(),
-    }));
+    }),
+  );
 }
 
-export default async function OrganizationTournamentHeaderSlot(props: Readonly<OrganizationTournamentParams>) {
+export default async function OrganizationTournamentHeaderSlot(
+  props: Readonly<OrganizationTournamentParams>,
+) {
   const { org_slug, tournament_id } = await props.params;
 
   return (
     <OrganizationTournamentHeaderWrapped
-      org_slug={ org_slug }
-      tournament_id={ tournament_id }
+      org_slug={org_slug}
+      tournament_id={tournament_id}
     />
   );
 }

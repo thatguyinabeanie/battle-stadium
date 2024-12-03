@@ -3,18 +3,20 @@ import { getOrganizationTournamentsRaw } from "~/app/server-actions/organization
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
 import RegistrationsTable from "~/components/tournaments/registrations-table";
 
-export async function generateStaticParams () {
-  return (await getOrganizationTournamentsRaw()).map(({ tournaments, organizations }) => ({
-    org_slug: organizations?.slug,
-    tournament_id: tournaments.id.toString(),
-  }));
+export async function generateStaticParams() {
+  return (await getOrganizationTournamentsRaw()).map(
+    ({ tournaments, organizations }) => ({
+      org_slug: organizations?.slug,
+      tournament_id: tournaments.id.toString(),
+    }),
+  );
 }
 
 export default async function TournamentRegistrationsPage(
   props: Readonly<OrganizationTournamentParams>,
 ) {
   const { tournament_id } = await props.params;
-  return <TournamentsRegistrationTable tournament_id={ tournament_id } />;
+  return <TournamentsRegistrationTable tournament_id={tournament_id} />;
 }
 
 async function TournamentsRegistrationTable({

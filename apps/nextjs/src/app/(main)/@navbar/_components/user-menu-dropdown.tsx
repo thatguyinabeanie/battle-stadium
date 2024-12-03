@@ -16,7 +16,7 @@ export default function UserMenuDropDown({
   isSignedIn,
   firstName,
   lastName,
-  isAdmin
+  isAdmin,
 }: Readonly<UserMenuDropDownProps>) {
   return (
     <DropdownMenuContent className="bg-background">
@@ -51,7 +51,7 @@ export default function UserMenuDropDown({
         key="admin"
         aria-label="Admin"
         className={cn("", {
-          hidden: !(isSignedIn) || !isAdmin,
+          hidden: !isSignedIn || !isAdmin,
         })}
       >
         <Link prefetch={true} href="/dashboard?tab=admin">
@@ -63,7 +63,7 @@ export default function UserMenuDropDown({
         key="settings"
         aria-label="Settings"
         className={cn("", {
-          hidden: !(isSignedIn),
+          hidden: !isSignedIn,
         })}
       >
         <Link prefetch={true} href="/dashboard?tab=settings">
@@ -81,7 +81,7 @@ export default function UserMenuDropDown({
         key="logout"
         aria-label="Sign Out"
         className={cn("", {
-          hidden: !(isSignedIn),
+          hidden: !isSignedIn,
         })}
         color="danger"
       >

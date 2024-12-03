@@ -14,9 +14,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function OrganizationDashboardPage(props: OrganizationDashboardPageParams) {
+export default async function OrganizationDashboardPage(
+  props: OrganizationDashboardPageParams,
+) {
   const { org_slug } = await props.params;
-  return <OrgDashboardContent org_slug={ org_slug } />;
+  return <OrgDashboardContent org_slug={org_slug} />;
 }
 
 function OrgDashboardContent({ org_slug }: { org_slug: string }) {

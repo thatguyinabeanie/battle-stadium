@@ -17,12 +17,14 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function PlayerProfilePage(props: Readonly<PlayerProfilePageParams>) {
+export default async function PlayerProfilePage(
+  props: Readonly<PlayerProfilePageParams>,
+) {
   const { username } = await props.params;
-  return <PlayerProfile username={ username } />;
+  return <PlayerProfile username={username} />;
 }
 
-async function PlayerProfile ({ username }: ProfilePageProps) {
+async function PlayerProfile({ username }: ProfilePageProps) {
   const profile = await getProfile(username);
   return (
     <ComingSoon title={`${profile?.username}'s Profile`}>

@@ -105,7 +105,7 @@ export function SidebarNavUserDetailsAndAvatarSuspense() {
 async function SidebarNavUserDetailsAndAvatar() {
   const user = await currentUser();
 
-  if(!user) {
+  if (!user) {
     return null;
   }
 

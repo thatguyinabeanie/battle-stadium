@@ -18,14 +18,16 @@ export async function generateStaticParams() {
   ).map((org) => ({ org_slug: org.slug }));
 }
 
-export default async function OrganizationDetailPage(props: OrganizationDetailPageProps) {
+export default async function OrganizationDetailPage(
+  props: OrganizationDetailPageProps,
+) {
   const { org_slug } = await props.params;
-  return <OrganizationContent org_slug={ org_slug } />;
+  return <OrganizationContent org_slug={org_slug} />;
 }
 
 async function OrganizationContent({ org_slug }: { org_slug: string }) {
-
-  const { organization, tournaments } = await getSingleOrganizationTournaments(org_slug);
+  const { organization, tournaments } =
+    await getSingleOrganizationTournaments(org_slug);
   if (!organization) {
     notFound();
   }

@@ -33,10 +33,8 @@ const DEFAULT_TAB = "details";
 export default function OrganizationTournamentsTournamentLayout(
   slots: Readonly<OrganizationTournamentsLayoutSlots>,
 ) {
-  const {
-    children,
-    header, standings, pairings, metagame, registrations
-  } = slots;
+  const { children, header, standings, pairings, metagame, registrations } =
+    slots;
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       {header}
