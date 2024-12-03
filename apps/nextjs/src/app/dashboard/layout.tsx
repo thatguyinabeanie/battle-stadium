@@ -22,18 +22,12 @@ export default function DashboardLayout({
         <SidebarInset className="border-l-[1px] bg-transparent">
           <DashboardHeader />
           <Suspense fallback={<DashboardContentSkeleton />}>
-            <section
-              role="status"
-              aria-label="Loading dashboard content"
-              className="flex flex-1 flex-col gap-4 p-4"
+            <main
+              aria-label="dashboard content"
+              className="flex flex-1 flex-col gap-4 p-4 min-h-[100dvh] rounded-xl bg-neutral-900/50 md:min-h-min"
             >
-              <div className="min-h-[100dvh] flex-1 rounded-xl bg-neutral-900/50 md:min-h-min">
-                { children }
-              </div>
-            </section>
-            <span className="sr-only" role="status" aria-live="polite">
-              Loading dashboard content, please wait...
-            </span>
+              { children }
+            </main>
           </Suspense>
         </SidebarInset>
       </SidebarProvider>
