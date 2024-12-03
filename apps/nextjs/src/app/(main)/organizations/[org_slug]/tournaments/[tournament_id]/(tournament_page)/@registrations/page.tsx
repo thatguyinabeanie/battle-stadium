@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import type { OrganizationTournamentParams } from "~/types";
 import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
@@ -21,18 +19,8 @@ export async function generateStaticParams() {
 export default function TournamentRegistrationsPage(
   props: Readonly<OrganizationTournamentParams>,
 ) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <TournamentRegistrations {...props} />
-    </Suspense>
-  );
-}
-
-async function TournamentRegistrations({
-  params,
-}: Readonly<OrganizationTournamentParams>) {
-  const { tournament_id } = await params;
-  return <TournamentsRegistrationTable tournament_id={tournament_id} />;
+  const { tournament_id } = await props.params;
+  return <TournamentsRegistrationTable tournament_id={ tournament_id } />;
 }
 
 async function TournamentsRegistrationTable({

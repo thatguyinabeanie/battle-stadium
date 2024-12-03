@@ -1,5 +1,3 @@
-import { Suspense } from "react";
-
 import { db } from "@battle-stadium/db";
 
 interface OrganizationDashboardPageParams {
@@ -16,21 +14,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function OrganizationDashboardPage({
-  params,
-}: OrganizationDashboardPageParams) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <OrganizationDashboard params={params} />
-    </Suspense>
-  );
-}
-
-async function OrganizationDashboard({
-  params,
-}: OrganizationDashboardPageParams) {
-  const { org_slug } = await params;
-  return <OrgDashboardContent org_slug={org_slug} />;
+export default async function OrganizationDashboardPage(props: OrganizationDashboardPageParams) {
+  const { org_slug } = await props.params;
+  return <OrgDashboardContent org_slug={ org_slug } />;
 }
 
 function OrgDashboardContent({ org_slug }: { org_slug: string }) {

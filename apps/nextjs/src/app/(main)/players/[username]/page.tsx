@@ -1,7 +1,3 @@
-// import { Suspense } from "react";
-
-import { Suspense } from "react";
-
 import { db } from "@battle-stadium/db";
 
 import { getProfile } from "~/app/server-actions/profiles/actions";
@@ -21,22 +17,12 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function PlayerProfilePage({
-  params,
-}: Readonly<PlayerProfilePageParams>) {
-  return (
-    <Suspense fallback={null}>
-      <PlayerProfileParamsUnwrap params={params} />
-    </Suspense>
-  );
+export default async function PlayerProfilePage(props: Readonly<PlayerProfilePageParams>) {
+  const { username } = await props.params;
+  return <PlayerProfile username={ username } />;
 }
 
-async function PlayerProfileParamsUnwrap({ params }: PlayerProfilePageParams) {
-  const { username } = await params;
-  return <PlayerProfileCached username={username} />;
-}
-
-async function PlayerProfileCached({ username }: ProfilePageProps) {
+async function PlayerProfile ({ username }: ProfilePageProps) {
   const profile = await getProfile(username);
   return (
     <ComingSoon title={`${profile?.username}'s Profile`}>

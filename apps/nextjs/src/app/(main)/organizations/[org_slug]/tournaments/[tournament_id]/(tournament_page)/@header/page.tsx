@@ -29,25 +29,13 @@ export async function generateStaticParams() {
   }
 }
 
-export default function OrganizationTournamentHeaderSlot({
-  params,
-}: Readonly<OrganizationTournamentParams>) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <OrganizationTournamentHeaderSuspense params={params} />
-    </Suspense>
-  );
-}
-
-async function OrganizationTournamentHeaderSuspense({
-  params,
-}: Readonly<OrganizationTournamentParams>) {
-  const { org_slug, tournament_id } = await params;
+export default async function OrganizationTournamentHeaderSlot(props: Readonly<OrganizationTournamentParams>) {
+  const { org_slug, tournament_id } = await props.params;
 
   return (
     <OrganizationTournamentHeaderWrapped
-      org_slug={org_slug}
-      tournament_id={tournament_id}
+      org_slug={ org_slug }
+      tournament_id={ tournament_id }
     />
   );
 }

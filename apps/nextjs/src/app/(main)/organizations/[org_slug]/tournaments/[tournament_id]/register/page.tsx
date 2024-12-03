@@ -25,21 +25,11 @@ export async function generateStaticParams() {
   }
 }
 
-export default function RegisterSuspenseWrapper({
-  params,
-}: OrganizationTournamentParams) {
-  return (
-    <Suspense fallback={null}>
-      <RegisterWrapper params={params} />
-    </Suspense>
-  );
-}
-
-async function RegisterWrapper(props: Readonly<OrganizationTournamentParams>) {
+export default async function RegisterPage(props: OrganizationTournamentParams) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
 
-  return <RegisterContent org_slug={org_slug} tournament_id={tournament_id} />;
+  return <RegisterContent org_slug={ org_slug } tournament_id={ tournament_id } />;
 }
 
 async function RegisterContent({
