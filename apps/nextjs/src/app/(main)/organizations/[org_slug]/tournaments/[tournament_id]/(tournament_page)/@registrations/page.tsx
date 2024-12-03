@@ -15,11 +15,9 @@ export default function TournamentRegistrationsPage(
 }
 
 async function TournamentRegistrations(
-  props: Readonly<OrganizationTournamentParams>,
+  { params }: Readonly<OrganizationTournamentParams>,
 ) {
-  const params = await props.params;
-  const { tournament_id } = params;
-
+  const { tournament_id } = await params;
   return <TournamentsRegistrationTable tournament_id={tournament_id} />;
 }
 

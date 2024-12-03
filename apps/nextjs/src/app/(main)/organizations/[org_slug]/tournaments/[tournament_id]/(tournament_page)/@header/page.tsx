@@ -1,4 +1,4 @@
-import { cache, Suspense } from "react";
+import { Suspense } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { format, parseISO } from "date-fns";
@@ -35,24 +35,9 @@ export default function OrganizationTournamentHeaderSlot(
   );
 }
 
-const getData = cache(
-  async ({ org_slug, tournament_id }: OrganizationTournamentProps) => {
-    const { organization, tournament } =
-      await getSingleOrganizationSingleTournament(org_slug, tournament_id);
-
-    if (!(organization && tournament)) {
-      return notFound();
-    }
-
-    return { organization, tournament };
-  },
-);
-
 async function OrganizationTournamentHeaderSuspense(
   props: Readonly<OrganizationTournamentParams>,
 ) {
-  "use cache";
-
   const { org_slug, tournament_id } = await props.params;
 
   return (
@@ -69,10 +54,12 @@ async function OrganizationTournamentHeaderWrapped({
 }: Readonly<OrganizationTournamentProps>) {
   "use cache";
 
-  const { organization, tournament } = await getData({
-    org_slug,
-    tournament_id,
-  });
+  const { organization, tournament } =
+    await getSingleOrganizationSingleTournament(org_slug, tournament_id);
+
+  if (!(organization && tournament)) {
+    return notFound();
+  }
 
   return (
     <>
@@ -145,6 +132,7 @@ function LeftRightGrid({
     </>
   );
 }
+
 function formatTimestamp(timestamp?: string | null, formatStr = "PPp") {
   if (!timestamp) {
     return "N/A";
@@ -152,9 +140,7 @@ function formatTimestamp(timestamp?: string | null, formatStr = "PPp") {
   return format(parseISO(timestamp), formatStr);
 }
 
-function TournamentDetailChips(props: Readonly<OrganizationTournamentProps>) {
-  const { org_slug, tournament_id } = props;
-
+function TournamentDetailChips ({ org_slug, tournament_id }: Readonly<OrganizationTournamentProps>) {
   return (
     <div className="flex w-full flex-row items-center justify-center gap-1">
       <Link

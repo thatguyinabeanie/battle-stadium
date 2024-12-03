@@ -29,9 +29,13 @@ export default function MatchPage(props: Readonly<MatchPageProps>) {
 }
 
 async function MatchPageAsync(props: Readonly<MatchPageProps>) {
-  "use cache";
-
   const { match_id } = await props.params;
   // return <ChatComponent channelName={"ChatChannel"} roomName={matchId} websocketUrl={websocketUrl()} />;
-  return <div>Match Page {match_id}</div>;
+  return (
+    <MatchPageContent match_id={match_id} />
+  )
+}
+
+function MatchPageContent ({ match_id }: { match_id: number }) {
+  return <div>Match: { match_id }</div>;
 }
