@@ -1,5 +1,8 @@
-import CookiesServerComponent from "./cookies-server-component";
+import { auth } from "@clerk/nextjs/server";
 
-export default function CookiesSlot() {
-  return <CookiesServerComponent />;
+import Cookies from "~/app/@cookies/cookies-client-component";
+
+export default async function CookiesServerComponent() {
+  const { userId, sessionId } = await auth();
+  return <Cookies isSignedIn={!!sessionId} userId={userId} />;
 }
