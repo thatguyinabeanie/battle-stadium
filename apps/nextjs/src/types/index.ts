@@ -43,3 +43,13 @@ export interface TabConfig {
     badge?: string;
   };
 }
+
+/**
+ * Interface for managing authentication tokens
+ * @property oidc - OpenID Connect token for authentication
+ * @property clerk - Clerk authentication token
+ */
+export interface Tokens {
+  oidc: string | null;
+  clerk: string | null;
+}

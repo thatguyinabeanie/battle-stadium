@@ -142,7 +142,7 @@ export function SimpleOrgCard({ org }: { org: Organization }) {
   );
 }
 
-function OrganizationsGridSkeleton() {
+export function OrganizationsGridSkeleton() {
   return (
     <>
       <div className="flex w-full flex-row justify-start">

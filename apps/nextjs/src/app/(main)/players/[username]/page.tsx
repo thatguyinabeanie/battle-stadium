@@ -1,29 +1,33 @@
+import { db } from "@battle-stadium/db";
+
 import { getProfile } from "~/app/server-actions/profiles/actions";
 import ComingSoon from "~/components/coming-soon";
 
-interface PlayerProfilePageProps {
-  params: Promise<{
-    username: string;
-  }>;
+interface ProfilePageProps {
+  username: string;
 }
 
-export async function generateMetadata(
-  props: Readonly<PlayerProfilePageProps>,
-) {
-  const params = await props.params;
-  const player = await getProfile(params.username);
+interface PlayerProfilePageParams {
+  params: Promise<ProfilePageProps>;
+}
 
-  return { title: player?.username ?? "Player" };
+export async function generateStaticParams() {
+  return (await db.query.profiles.findMany()).map(({ username }) => ({
+    username,
+  }));
 }
 
 export default async function PlayerProfilePage(
-  props: Readonly<PlayerProfilePageProps>,
+  props: Readonly<PlayerProfilePageParams>,
 ) {
-  const params = await props.params;
-  const player = await getProfile(params.username);
+  const { username } = await props.params;
+  return <PlayerProfile username={username} />;
+}
 
+async function PlayerProfile({ username }: ProfilePageProps) {
+  const profile = await getProfile(username);
   return (
-    <ComingSoon title={player?.username ?? "Player Profile"}>
+    <ComingSoon title={`${profile?.username}'s Profile`}>
       <h2>The Player Profiles are under construction</h2>
     </ComingSoon>
   );

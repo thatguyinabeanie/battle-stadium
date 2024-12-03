@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import {
   getOrganizations,
   searchOrganizations,
 } from "~/app/server-actions/organizations/actions";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
-import { OrganizationsGrid } from "./_components/client-components";
+import {
+  OrganizationsGrid,
+  OrganizationsGridSkeleton,
+} from "./_components/client-components";
 
 export const metadata: Metadata = {
   title: "Organizations",
@@ -14,10 +18,15 @@ export const metadata: Metadata = {
 export default function OrganizationsPage() {
   return (
     <>
-      <PartneredOrganizations />
-      <OrganizationsGrid
-        getOrSearchOrganizationsAction={getOrSearchOrganizationsAction}
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        <PartneredOrganizations />
+      </Suspense>
+
+      <Suspense fallback={<OrganizationsGridSkeleton />}>
+        <OrganizationsGrid
+          getOrSearchOrganizationsAction={getOrSearchOrganizationsAction}
+        />
+      </Suspense>
     </>
   );
 }
@@ -25,11 +34,14 @@ export default function OrganizationsPage() {
 export async function getOrSearchOrganizationsAction(formData?: FormData) {
   "use server";
   if (formData) {
-    const query = (formData.get("query") as string | null) ?? "";
-    if (!query.trim()) {
-      return await getOrganizations();
+    const rawQuery = (formData.get("query") as string | null) ?? "";
+    if (rawQuery.length > 100) {
+      throw new Error("Search query too long");
     }
-    return await searchOrganizations(query);
+    const query = rawQuery.trim().replace(/[^\w\s-]/g, "");
+    if (query) {
+      return await searchOrganizations(query);
+    }
   }
 
   return await getOrganizations();

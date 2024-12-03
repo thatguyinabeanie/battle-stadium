@@ -4,16 +4,15 @@ import { useRouter } from "next/navigation";
 
 import { Button, Input } from "@battle-stadium/ui";
 
-import { createProfile } from "~/app/server-actions/profiles/actions";
-
-export default function NewProfile() {
+interface NewProfileProps {
+  createProfileAction: (formData: FormData) => Promise<void>;
+}
+export default function NewProfile(props: NewProfileProps) {
   const router = useRouter();
 
   const handleSubmit = async (formData: FormData) => {
-    await createProfile(formData.get("profile") as string);
-    router.push("/dashboard?tab=profiles");
     try {
-      await createProfile(formData.get("profile") as string);
+      await props.createProfileAction(formData);
       router.push("/dashboard?tab=profiles");
     } catch (error: unknown) {
       console.error("Failed to create profile:", error);

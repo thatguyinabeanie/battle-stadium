@@ -3,16 +3,26 @@
 import "server-only";
 
 import type { FetchOptions } from "openapi-fetch";
-import { redirect } from "next/navigation";
+
+// import { cacheLife } from "next/dist/server/use-cache/cache-life";
+// import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+
+// import { redirect } from "next/navigation";
 
 import { db, eq } from "@battle-stadium/db";
 import { profiles } from "@battle-stadium/db/schema";
 
 import type { paths } from "~/lib/api/openapi-v1";
+import type { Tokens } from "~/types";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
-import { getAccountMe } from "../accounts/actions";
+import { getAccount } from "../accounts/actions";
 
-export async function getProfiles() {
+export async function getAllProfiles() {
+  // "use cache";
+  // cacheTag("getAllProfiles");
+  // cacheLife("hours");
+  // TODO: revalidate on profile creation
+
   return await db.query.profiles.findMany();
 }
 
@@ -23,19 +33,25 @@ export async function getProfile(username: string) {
 }
 
 export async function getProfilesByAccountId(id: number) {
+  // "use cache";
+  // cacheTag(`getProfilesByAccountId(${id})`);
+  // cacheLife("hours");
+  // TODO: revalidate on profile creation
+
   return await db.query.profiles.findMany({
     where: eq(profiles.accountId, id),
   });
 }
 
-type RedirectUrl = `/${string}`;
-export async function getProfilesMe({
-  redirectTo,
-}: { redirectTo?: RedirectUrl } = {}) {
-  const me = await getAccountMe();
-  if (!me) {
-    redirect(redirectTo ?? "/sign-in");
+export async function getProfilesByClerkUserId(
+  userId: string | null,
+  tokens: Tokens,
+) {
+  const me = await getAccount(userId, tokens);
+  if (!me?.id) {
+    return [];
   }
+
   try {
     return await getProfilesByAccountId(me.id);
   } catch (error) {
@@ -46,6 +62,7 @@ export async function getProfilesMe({
 
 export async function createProfile(
   username: string,
+  tokens: Tokens,
   options?: FetchOptions<paths["/profiles"]["post"]>,
 ) {
   const profileOptions: FetchOptions<paths["/profiles"]["post"]> = {
@@ -59,7 +76,7 @@ export async function createProfile(
   };
 
   const resp = (
-    await BattleStadiumApiClient().POST("/profiles", profileOptions)
+    await BattleStadiumApiClient(tokens).POST("/profiles", profileOptions)
   ).data;
 
   return { success: true, resp };

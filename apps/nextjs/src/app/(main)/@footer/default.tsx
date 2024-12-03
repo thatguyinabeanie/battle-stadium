@@ -1,5 +1,3 @@
-import Footer from "./footer";
+import FooterPage from "./page";
 
-export default function FooterPage() {
-  return <Footer />;
-}
+export default FooterPage;

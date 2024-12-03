@@ -1,5 +1,7 @@
 "use server";
 
+// import { cacheLife } from "next/dist/server/use-cache/cache-life";
+// import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 import { count } from "drizzle-orm";
 
 import { and, db, desc, eq } from "@battle-stadium/db";
@@ -25,16 +27,19 @@ function tournamentsLeftJoinOrganizationsWithPlayerCounts() {
     .groupBy(organizations.id, tournaments.id);
 }
 
-async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
-  const results = await tournamentsLeftJoinOrganizationsWithPlayerCounts()
+export async function getOrganizationTournamentsRaw(page = 1, pageSize = 20) {
+  return tournamentsLeftJoinOrganizationsWithPlayerCounts()
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
-
-  return results;
 }
 
 export async function getOrganizationTournaments(page = 1, pageSize = 20) {
+  // "use cache";
+  // cacheTag(`getOrganizationTournaments(${page},${pageSize})`);
+  // cacheLife("days");
+  // TODO: revalidate on tournament creation
+
   return getOrganizationTournamentsRaw(page, pageSize);
 }
 
@@ -43,13 +48,11 @@ async function getSingleOrganizationTournamentsRaw(
   page = 1,
   pageSize = 20,
 ) {
-  const results = await tournamentsLeftJoinOrganizations()
+  return tournamentsLeftJoinOrganizations()
     .where(eq(organizations.slug, slug))
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
-
-  return results;
 }
 
 export async function getSingleOrganizationTournaments(
@@ -72,12 +75,15 @@ async function getSingleOrganizationSingleTournamentRaw(
   slug: string,
   tournamentId: number,
 ) {
-  const results = await tournamentsLeftJoinOrganizations()
+  // "use cache";
+  // cacheTag(`getSingleOrganizationSingleTournamentRaw(${slug},${tournamentId})`);
+  // cacheLife("minutes");
+  // TODO: revalidate on tournament update
+
+  return tournamentsLeftJoinOrganizations()
     .where(and(eq(organizations.slug, slug), eq(tournaments.id, tournamentId)))
     .orderBy(desc(tournaments.startAt))
     .limit(1);
-
-  return results;
 }
 
 export async function getSingleOrganizationSingleTournament(

@@ -25,7 +25,6 @@ import {
   SidebarMenuItem,
 } from "@battle-stadium/ui";
 
-import { getAccountMe } from "~/app/server-actions/accounts/actions";
 import { SolarUserLinear } from "~/components/svg/icons";
 import { DropDownMenuContentMobile } from "./side-bar-client-components";
 
@@ -103,17 +102,20 @@ export function SidebarNavUserDetailsAndAvatarSuspense() {
   );
 }
 
-const DEFAULT_AVATAR = "/images/solar-user-linear.svg";
 async function SidebarNavUserDetailsAndAvatar() {
-  const me = await getAccountMe();
   const user = await currentUser();
+
+  if (!user) {
+    return null;
+  }
+
   return (
     <>
       <Avatar className="h-8 w-8 rounded-lg">
         <AvatarImage
           className="h-[30px] w-[30px]"
-          src={user?.imageUrl ?? me?.image_url ?? DEFAULT_AVATAR}
-          alt={me?.first_name}
+          src={user.imageUrl}
+          alt={user.username ?? undefined}
         />
 
         <AvatarFallback className="rounded-lg">
@@ -122,9 +124,9 @@ async function SidebarNavUserDetailsAndAvatar() {
       </Avatar>
 
       <div className="text-md grid flex-1 text-left leading-tight">
-        <span className="h-5 min-w-[6rem] max-w-[12rem] truncate font-semibold text-muted-foreground">{`${me?.first_name} ${me?.last_name}`}</span>
+        <span className="h-5 min-w-[6rem] max-w-[12rem] truncate font-semibold text-muted-foreground">{`${user.firstName} ${user.lastName}`}</span>
         <span className="h-5 min-w-[4rem] max-w-[10rem] truncate text-sm text-muted-foreground">
-          {me?.username}
+          {user.username}
         </span>
       </div>
     </>

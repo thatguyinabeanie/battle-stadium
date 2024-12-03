@@ -1,21 +1,25 @@
 import type { OrganizationTournamentParams } from "~/types";
-import { getOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
+import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 
 export async function generateStaticParams() {
-  const results = await getOrganizationTournaments(1, 500);
-
-  return results.map(({ tournaments, organizations }) => ({
-    org_slug: organizations?.slug,
-    tournament_id: tournaments.id.toString(),
-  }));
+  return (await getOrganizationTournamentsRaw()).map(
+    ({ tournaments, organizations }) => ({
+      org_slug: organizations?.slug,
+      tournament_id: tournaments.id.toString(),
+    }),
+  );
 }
 
-export default function OrganizationTournamentDetailsPage(
-  _props: Readonly<OrganizationTournamentParams>,
-) {
+export default async function OrganizationTournamentDetailsPage({
+  params,
+}: Readonly<OrganizationTournamentParams>) {
+  const { org_slug, tournament_id } = await params;
+
   return (
     <>
-      <p>Details and Rules and Things</p>
+      <h1>OrganizationTournamentDetailsPage</h1>
+      <p>{org_slug}</p>
+      <p>{tournament_id}</p>
     </>
   );
 }

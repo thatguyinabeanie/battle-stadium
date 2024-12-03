@@ -1,5 +1,5 @@
-import { Suspense } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { format, parseISO } from "date-fns";
 
 import type { Organization, Tournament } from "@battle-stadium/db/schema";
@@ -9,35 +9,48 @@ import type {
   OrganizationTournamentParams,
   OrganizationTournamentProps,
 } from "~/types";
-import { getSingleOrganizationSingleTournament } from "~/app/server-actions/organizations/tournaments/actions";
+import {
+  getOrganizationTournamentsRaw,
+  getSingleOrganizationSingleTournament,
+} from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
-import { generateOrganizationTournamentsStaticParams } from "~/lib/organization-tournaments-static-params";
 
 export async function generateStaticParams() {
-  const staticParams = await generateOrganizationTournamentsStaticParams();
-  return staticParams;
-}
-
-export default function OrganizationTournamentHeaderSlot(
-  props: Readonly<OrganizationTournamentParams>,
-) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <OrganizationTournamentHeader {...props} />
-    </Suspense>
+  return (await getOrganizationTournamentsRaw()).map(
+    ({ tournaments, organizations }) => ({
+      org_slug: organizations?.slug,
+      tournament_id: tournaments.id.toString(),
+    }),
   );
 }
 
-async function OrganizationTournamentHeader(
+export default async function OrganizationTournamentHeaderSlot(
   props: Readonly<OrganizationTournamentParams>,
 ) {
-  const params = await props.params;
-  const { org_slug, tournament_id } = params;
+  const { org_slug, tournament_id } = await props.params;
+
+  return (
+    <OrganizationTournamentHeaderWrapped
+      org_slug={org_slug}
+      tournament_id={tournament_id}
+    />
+  );
+}
+
+async function OrganizationTournamentHeaderWrapped({
+  org_slug,
+  tournament_id,
+}: Readonly<OrganizationTournamentProps>) {
+  // "use cache";
+
   const { organization, tournament } =
     await getSingleOrganizationSingleTournament(org_slug, tournament_id);
 
-  if (!(organization && tournament)) {
-    return <div>404 - Not Found</div>;
+  if (!organization) {
+    notFound();
+  }
+  if (!tournament) {
+    notFound();
   }
 
   return (
@@ -111,6 +124,7 @@ function LeftRightGrid({
     </>
   );
 }
+
 function formatTimestamp(timestamp?: string | null, formatStr = "PPp") {
   if (!timestamp) {
     return "N/A";
@@ -118,9 +132,10 @@ function formatTimestamp(timestamp?: string | null, formatStr = "PPp") {
   return format(parseISO(timestamp), formatStr);
 }
 
-function TournamentDetailChips(props: Readonly<OrganizationTournamentProps>) {
-  const { org_slug, tournament_id } = props;
-
+function TournamentDetailChips({
+  org_slug,
+  tournament_id,
+}: Readonly<OrganizationTournamentProps>) {
   return (
     <div className="flex w-full flex-row items-center justify-center gap-1">
       <Link

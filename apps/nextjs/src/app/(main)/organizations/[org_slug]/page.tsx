@@ -1,8 +1,8 @@
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 
+import { db } from "@battle-stadium/db";
+
 import { SingleOrgTournamentsTable } from "~/app/(main)/organizations/[org_slug]/_components/tournaments-table";
-import { getOrganizations } from "~/app/server-actions/organizations/actions";
 import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 
@@ -11,29 +11,23 @@ interface OrganizationDetailPageProps {
 }
 
 export async function generateStaticParams() {
-  const orgs = await getOrganizations();
-
-  return orgs.filter((org) => org.slug).map((org) => ({ org_slug: org.slug }));
-}
-
-export default function OrganizationDetailPage(
-  props: Readonly<OrganizationDetailPageProps>,
-) {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <OrganizationDetails {...props} />
-    </Suspense>
-  );
+    await db.query.organizations.findMany({
+      where: (organizations, { isNotNull }) => isNotNull(organizations.slug),
+    })
+  ).map((org) => ({ org_slug: org.slug }));
 }
 
-async function OrganizationDetails(
-  props: Readonly<OrganizationDetailPageProps>,
+export default async function OrganizationDetailPage(
+  props: OrganizationDetailPageProps,
 ) {
-  const params = await props.params;
-  const { organization, tournaments } = await getSingleOrganizationTournaments(
-    params.org_slug,
-  );
+  const { org_slug } = await props.params;
+  return <OrganizationContent org_slug={org_slug} />;
+}
 
+async function OrganizationContent({ org_slug }: { org_slug: string }) {
+  const { organization, tournaments } =
+    await getSingleOrganizationTournaments(org_slug);
   if (!organization) {
     notFound();
   }
