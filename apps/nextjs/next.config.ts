@@ -96,6 +96,6 @@ export default withBundleAnalyzer({
   ],
 
   /** We already do linting and typechecking as separate tasks in CI */
-  eslint: { ignoreDuringBuilds: true },
-  typescript: { ignoreBuildErrors: true },
+  eslint: { ignoreDuringBuilds: false },
+  typescript: { ignoreBuildErrors: false },
 } satisfies NextConfig);
