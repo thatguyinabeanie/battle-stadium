@@ -48,7 +48,7 @@ export async function getProfilesByClerkUserId(
   tokens: Tokens,
 ) {
   const me = await getAccount(userId, tokens);
-  if (!me) {
+  if (!me?.id) {
     return [];
   }
 
