@@ -17,7 +17,7 @@ export default async function Standings({
 
   return (
     <>
-      <p>Metagame content</p>
+      <p>Standings content</p>
       <p>{org_slug}</p>
       <p>{tournament_id}</p>
     </>
