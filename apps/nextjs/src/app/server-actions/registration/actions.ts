@@ -1,4 +1,3 @@
-// server-actions/registration/actions.ts
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
@@ -42,5 +41,4 @@ function validateProfileId(id: unknown): number {
     throw new Error(`Invalid profile ID format: ${id}`);
   }
   return numId;
-}
 }
