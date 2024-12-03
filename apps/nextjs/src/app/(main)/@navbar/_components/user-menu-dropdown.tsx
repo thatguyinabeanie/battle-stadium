@@ -30,7 +30,8 @@ export default function UserMenuDropDown({
           <span>
             <p className="text-default-400 font-normal">Signed in as</p>
             <p className="truncate font-semibold">
-              {[firstName, lastName].filter(Boolean).join(" ") || "Anonymous User"}
+              {[firstName, lastName].filter(Boolean).join(" ") ||
+                "Anonymous User"}
             </p>
           </span>
         </Link>
