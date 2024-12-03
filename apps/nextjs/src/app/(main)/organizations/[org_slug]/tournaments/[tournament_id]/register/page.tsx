@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { auth } from "@clerk/nextjs/server";
 import { getVercelOidcToken } from "@vercel/functions/oidc";
 

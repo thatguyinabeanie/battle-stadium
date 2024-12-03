@@ -1,7 +1,4 @@
-import { Suspense } from "react";
-
 import { getAllOrgTourMatches } from "~/app/server-actions/organizations/tournaments/matches/actions";
-
 interface MatchPageProps {
   params: Promise<{
     org_slug: string;

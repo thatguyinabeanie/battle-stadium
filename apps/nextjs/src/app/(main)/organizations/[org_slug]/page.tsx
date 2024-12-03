@@ -18,10 +18,8 @@ interface OrganizationDetailPageProps {
 //   ).map((org) => ({ org_slug: org.slug }));
 // }
 
-export default async function OrganizationDetailPage({
-  params,
-}: OrganizationDetailPageProps) {
-  const { org_slug } = await params;
+export default async function OrganizationDetailPage(props: OrganizationDetailPageProps) {
+  const { org_slug } = await props.params;
   return <OrganizationContent org_slug={ org_slug } />;
 }
 

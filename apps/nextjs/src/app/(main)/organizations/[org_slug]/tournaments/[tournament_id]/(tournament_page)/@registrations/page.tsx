@@ -16,7 +16,7 @@ export async function generateStaticParams() {
   }
 }
 
-export default function TournamentRegistrationsPage(
+export default async function TournamentRegistrationsPage(
   props: Readonly<OrganizationTournamentParams>,
 ) {
   const { tournament_id } = await props.params;
