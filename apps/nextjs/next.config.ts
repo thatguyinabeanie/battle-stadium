@@ -17,7 +17,7 @@ export default withBundleAnalyzer({
   experimental: {
     // after: true,
     reactCompiler: true,
-    ppr: true,
+    ppr: "incremental",
     staleTimes: {
       dynamic: 5,
       static: 180,

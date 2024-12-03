@@ -6,13 +6,15 @@ interface OrganizationDashboardPageParams {
 
 export async function generateStaticParams() {
   return (await db.query.organizations.findMany())
-  .filter(({slug})=> slug !== null)
-  .map((org) => ({
-    org_slug: org.slug,
-  }));
+    .filter(({ slug }) => slug !== null)
+    .map((org) => ({
+      org_slug: org.slug,
+    }));
 }
 
-export default async function OrganizationDashboard({params}: OrganizationDashboardPageParams) {
+export default async function OrganizationDashboard({
+  params,
+}: OrganizationDashboardPageParams) {
   "use cache";
 
   const { org_slug } = await params;

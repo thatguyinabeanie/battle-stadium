@@ -13,11 +13,11 @@ interface OrganizationDetailPageProps {
 }
 
 export async function generateStaticParams() {
-  return (await db.query.organizations.findMany({
-    where: (organizations, { isNotNull }) => isNotNull(organizations.slug),
-  }))
-    .map((org) => ({org_slug: org.slug,
-  }));
+  return (
+    await db.query.organizations.findMany({
+      where: (organizations, { isNotNull }) => isNotNull(organizations.slug),
+    })
+  ).map((org) => ({ org_slug: org.slug }));
 }
 
 export default async function OrganizationDetailPage({
@@ -40,19 +40,19 @@ export default async function OrganizationDetailPage({
   return (
     <>
       <OrganizationHeader
-        organization={ organization }
-        classNames={ { wrapper: "my-8" } }
+        organization={organization}
+        classNames={{ wrapper: "my-8" }}
       >
         <div className="mx-4 flex h-full w-full flex-col items-center justify-between py-2 text-center">
-          <h1 className="text-2xl font-semibold">{ organization.name }</h1>
-          <p>{ organization.description }</p>
+          <h1 className="text-2xl font-semibold">{organization.name}</h1>
+          <p>{organization.description}</p>
         </div>
       </OrganizationHeader>
 
       <SingleOrgTournamentsTable
         className="w-full px-4"
-        data={ tournaments }
-        organization={ organization }
+        data={tournaments}
+        organization={organization}
       />
     </>
   );

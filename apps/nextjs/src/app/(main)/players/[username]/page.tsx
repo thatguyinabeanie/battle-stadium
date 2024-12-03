@@ -19,23 +19,23 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function PlayerProfilePage(
-  {params}: Readonly<PlayerProfilePageParams>,
-) {
+export default async function PlayerProfilePage({
+  params,
+}: Readonly<PlayerProfilePageParams>) {
   const { username } = await params;
   const profile = await getProfile(username);
 
   return (
     // <Suspense fallback={null}>
-      // <PlayerProfileParamsUnwrap params={ params } />
+    // <PlayerProfileParamsUnwrap params={ params } />
     // </Suspense>
     // <PlayerProfileParamsUnwrap params={ params } />
 
     <>
-      <ComingSoon title={ `${profile?.username}'s Profile` }>
+      <ComingSoon title={`${profile?.username}'s Profile`}>
         <h2>The Player Profiles are under construction</h2>
       </ComingSoon>
-      </>
+    </>
   );
 }
 

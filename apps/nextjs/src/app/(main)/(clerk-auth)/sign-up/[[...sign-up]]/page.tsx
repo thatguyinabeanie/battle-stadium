@@ -1,16 +1,16 @@
 import { Suspense } from "react";
-import { ClerkProvider } from "@clerk/nextjs";
-
-import { SignUp } from "../../_components";
+import { ClerkProvider, SignedOut, SignUp } from "@clerk/nextjs";
 
 export default function SignUpPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ClerkProvider dynamic>
+    <ClerkProvider dynamic>
+      <SignedOut>
         <div className="flex h-full min-h-screen w-full items-center justify-center">
-          <SignUp />
+          <Suspense fallback={<div>Loading...</div>}>
+            <SignUp />
+          </Suspense>
         </div>
-      </ClerkProvider>
-    </Suspense>
+      </SignedOut>
+    </ClerkProvider>
   );
 }

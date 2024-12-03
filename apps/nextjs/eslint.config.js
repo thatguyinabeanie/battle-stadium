@@ -1,6 +1,10 @@
 import nextPlugin from "@next/eslint-plugin-next";
-import baseConfig, { restrictEnvAccess } from "@battle-stadium/eslint-config/base";
+
+import baseConfig, {
+  restrictEnvAccess,
+} from "@battle-stadium/eslint-config/base";
 import reactConfig from "@battle-stadium/eslint-config/react";
+
 // import nextjsConfig from "@battle-stadium/eslint-config/nextjs";
 
 export default [
