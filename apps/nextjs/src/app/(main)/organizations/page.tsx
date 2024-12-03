@@ -34,7 +34,11 @@ export default function OrganizationsPage() {
 export async function getOrSearchOrganizationsAction(formData?: FormData) {
   "use server";
   if (formData) {
-    const query = ((formData.get("query") as string | null) ?? "").trim();
+    const rawQuery = (formData.get("query") as string | null) ?? "";
+    if (rawQuery.length > 100) {
+      throw new Error("Search query too long");
+    }
+    const query = rawQuery.trim().replace(/[^\w\s-]/g, '');
     if (query) {
       return await searchOrganizations(query);
     }
