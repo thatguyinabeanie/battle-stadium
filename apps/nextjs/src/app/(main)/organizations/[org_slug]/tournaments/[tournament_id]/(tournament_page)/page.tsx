@@ -17,7 +17,7 @@ export default async function OrganizationTournamentDetailsPage({
 
   return (
     <>
-      <p>Metagame content</p>
+      <h1>OrganizationTournamentDetailsPage</h1>
       <p>{org_slug}</p>
       <p>{tournament_id}</p>
     </>
