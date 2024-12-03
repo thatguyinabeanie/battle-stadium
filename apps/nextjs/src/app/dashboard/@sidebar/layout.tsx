@@ -1,4 +1,4 @@
-import { cn } from "@battle-stadium/ui";
+import { cn, SidebarContent } from "@battle-stadium/ui";
 import {
   Sidebar,
   SidebarFooter,
@@ -22,7 +22,9 @@ export default function SideBar({
       <SidebarHeader className={SIDEBAR_DEFAULT_CLASSNAMES}>
         {sidebarheader}
       </SidebarHeader>
-      {children}
+      <SidebarContent className={cn(SIDEBAR_DEFAULT_CLASSNAMES, "mt-0")}>
+        {children}
+      </SidebarContent>
       <SidebarFooter className={cn(SIDEBAR_DEFAULT_CLASSNAMES, "mt-0")}>
         {sidebarfooter}
       </SidebarFooter>
