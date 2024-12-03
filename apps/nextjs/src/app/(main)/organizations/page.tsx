@@ -38,7 +38,7 @@ export async function getOrSearchOrganizationsAction(formData?: FormData) {
     if (rawQuery.length > 100) {
       throw new Error("Search query too long");
     }
-    const query = rawQuery.trim().replace(/[^\w\s-]/g, '');
+    const query = rawQuery.trim().replace(/[^\w\s-]/g, "");
     if (query) {
       return await searchOrganizations(query);
     }
