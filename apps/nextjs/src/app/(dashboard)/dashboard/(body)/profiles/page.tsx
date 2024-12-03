@@ -9,9 +9,7 @@ import {
 import NewProfile from "~/components/profiles/new-profile";
 
 export default function ProfilesPage() {
-  return (
-    <Profiles />
-  );
+  return <Profiles />;
 }
 
 async function Profiles() {

@@ -1,10 +1,20 @@
 import { SignedOut, SignUp } from "@clerk/nextjs";
+import { Suspense } from "react";
+import { ErrorBoundary } from "~/components/error-boundary";
 
 export default function SignUpPage() {
   return (
-    <div className="flex h-full min-h-screen w-full items-center justify-center">
+    <div
+      role="main"
+      aria-label="Sign in page"
+      className="flex h-full min-h-screen w-full items-center justify-center"
+    >
       <SignedOut>
-        <SignUp />
+        <ErrorBoundary>
+          <Suspense fallback={<div>Loading...</div>}>
+            <SignUp />
+          </Suspense>
+        </ErrorBoundary>
       </SignedOut>
     </div>
   );

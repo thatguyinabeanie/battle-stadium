@@ -6,7 +6,10 @@ import {
   searchOrganizations,
 } from "~/app/server-actions/organizations/actions";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
-import { OrganizationsGrid, OrganizationsGridSkeleton } from "./_components/client-components";
+import {
+  OrganizationsGrid,
+  OrganizationsGridSkeleton,
+} from "./_components/client-components";
 
 export const metadata: Metadata = {
   title: "Organizations",
@@ -19,7 +22,7 @@ export default function OrganizationsPage() {
         <PartneredOrganizations />
       </Suspense>
 
-      <Suspense fallback={ <OrganizationsGridSkeleton /> }>
+      <Suspense fallback={<OrganizationsGridSkeleton />}>
         <OrganizationsGrid
           getOrSearchOrganizationsAction={getOrSearchOrganizationsAction}
         />
