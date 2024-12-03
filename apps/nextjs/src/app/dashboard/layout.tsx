@@ -21,6 +21,7 @@ export default function DashboardLayout({
         {sidebar}
         <SidebarInset className="border-l-[1px] bg-transparent">
           <DashboardHeader />
+
           <Suspense fallback={<DashboardContentSkeleton />}>
             <main
               aria-label="dashboard content"
