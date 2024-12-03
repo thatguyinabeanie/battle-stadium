@@ -67,22 +67,26 @@ async function UserMenu() {
 
 async function getUserData() {
   const session = await auth();
-
-  if (session.userId) {
-    const clerkUser = await currentUser();
-    if (clerkUser) {
-      const accountQueryResults = await getAccountQuery(session.userId);
-      if (accountQueryResults.length > 0) {
-        const account = accountQueryResults[0];
-        return {
-          clerkUser,
-          isAdmin: account?.accounts.admin ?? false,
-          userId: session.userId,
-        };
-      }
-    }
+  if (!session.userId) {
+    return { clerkUser: null, isAdmin: false, userId: null };
   }
-  return { clerkUser: null, isAdmin: false, userId: null };
+
+  const clerkUser = await currentUser();
+  if (!clerkUser) {
+    return { clerkUser: null, isAdmin: false, userId: null };
+  }
+
+  const accountQueryResults = await getAccountQuery(session.userId);
+  if (!accountQueryResults.length) {
+    return { clerkUser, isAdmin: false, userId: session.userId };
+  }
+
+  const account = accountQueryResults[0];
+  return {
+    clerkUser,
+    isAdmin: account?.accounts.admin ?? false,
+    userId: session.userId,
+  };
 }
 
 async function getAccountQuery(userId: string) {
