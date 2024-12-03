@@ -23,4 +23,3 @@ jobs:
           # Show progress
           verbose: true
           suggestions: true
-          config: ./cspell.json
