@@ -6,8 +6,8 @@ import {
 } from "@battle-stadium/ui/sidebar";
 
 import type { ChildrenProps } from "~/types";
-import DashboardContentSkeleton from "~/app/(dashboard)/dashboard/_components/content/dashboard-content-skeleton";
-import DashboardHeader from "~/app/(dashboard)/dashboard/_components/content/dashboard-header";
+import DashboardContentSkeleton from "~/app/(dashboard)/dashboard/_components/dashboard-content-skeleton";
+import DashboardHeader from "~/app/(dashboard)/dashboard/_components/dashboard-header";
 import { BreadCrumbsProvider } from "~/components/breadcrumbs/context";
 
 interface DashboardLayoutProps extends ChildrenProps {
