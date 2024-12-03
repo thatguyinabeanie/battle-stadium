@@ -9,6 +9,7 @@ import { getOrganizationTournamentsRaw } from "~/app/server-actions/organization
 import { getProfilesByClerkUserId } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
+
 // import { unstable_noStore as no_store } from "next/cache";
 
 export async function generateStaticParams() {
@@ -38,12 +39,11 @@ export default function RegisterSuspenseWrapper({
   );
 }
 
-
 async function RegisterWrapper(props: Readonly<OrganizationTournamentParams>) {
   const params = await props.params;
   const { org_slug, tournament_id } = params;
 
-  return (<RegisterContent org_slug={org_slug} tournament_id={tournament_id} />);
+  return <RegisterContent org_slug={org_slug} tournament_id={tournament_id} />;
 }
 
 async function RegisterContent({
@@ -65,16 +65,19 @@ async function RegisterContent({
   return (
     <div className="border-small m-20 inline-block max-w-fit justify-center rounded-3xl border-neutral-500/40 bg-transparent p-10 text-center backdrop-blur">
       <div>
-        Register for { org_slug } tournament { tournament_id }
+        Register for {org_slug} tournament {tournament_id}
       </div>
 
       <TournamentRegistrationForm
-        tournament_id={ tournament_id }
-        org_slug={ org_slug }
-        handleTournamentRegistration={ handleTournamentRegistration(session.userId, tokens) }
+        tournament_id={tournament_id}
+        org_slug={org_slug}
+        handleTournamentRegistration={handleTournamentRegistration(
+          session.userId,
+          tokens,
+        )}
       >
         <Input name="ign" />
-        <ProfileSelector userId={ session.userId } tokens={ tokens } />
+        <ProfileSelector userId={session.userId} tokens={tokens} />
       </TournamentRegistrationForm>
     </div>
   );

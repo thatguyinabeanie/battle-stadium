@@ -17,7 +17,7 @@ export default function NavbarLinks() {
           label={label}
         />
       ))}
-      <Suspense fallback={ null }>
+      <Suspense fallback={null}>
         <DashboardNavLink />
       </Suspense>
     </div>

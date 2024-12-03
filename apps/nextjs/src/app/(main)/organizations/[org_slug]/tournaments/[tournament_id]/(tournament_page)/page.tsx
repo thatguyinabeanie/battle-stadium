@@ -1,8 +1,7 @@
 import type { OrganizationTournamentParams } from "~/types";
 import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 
-
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   try {
     const data = await getOrganizationTournamentsRaw();
     return data.map(({ tournaments, organizations }) => ({

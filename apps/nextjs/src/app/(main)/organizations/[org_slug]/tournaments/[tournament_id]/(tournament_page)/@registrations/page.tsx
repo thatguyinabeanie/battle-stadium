@@ -1,12 +1,11 @@
 import { Suspense } from "react";
 
 import type { OrganizationTournamentParams } from "~/types";
+import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
 import RegistrationsTable from "~/components/tournaments/registrations-table";
-import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 
-
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   try {
     const data = await getOrganizationTournamentsRaw();
     return data.map(({ tournaments, organizations }) => ({
@@ -29,9 +28,9 @@ export default function TournamentRegistrationsPage(
   );
 }
 
-async function TournamentRegistrations(
-  { params }: Readonly<OrganizationTournamentParams>,
-) {
+async function TournamentRegistrations({
+  params,
+}: Readonly<OrganizationTournamentParams>) {
   const { tournament_id } = await params;
   return <TournamentsRegistrationTable tournament_id={tournament_id} />;
 }

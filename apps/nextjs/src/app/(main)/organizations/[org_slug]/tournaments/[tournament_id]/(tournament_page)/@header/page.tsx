@@ -16,8 +16,7 @@ import {
 } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 
-
-export async function generateStaticParams () {
+export async function generateStaticParams() {
   try {
     const data = await getOrganizationTournamentsRaw();
     return data.map(({ tournaments, organizations }) => ({
@@ -30,9 +29,9 @@ export async function generateStaticParams () {
   }
 }
 
-export default function OrganizationTournamentHeaderSlot(
-  { params }: Readonly<OrganizationTournamentParams>,
-) {
+export default function OrganizationTournamentHeaderSlot({
+  params,
+}: Readonly<OrganizationTournamentParams>) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <OrganizationTournamentHeaderSuspense params={params} />
@@ -40,9 +39,9 @@ export default function OrganizationTournamentHeaderSlot(
   );
 }
 
-async function OrganizationTournamentHeaderSuspense(
-  { params }: Readonly<OrganizationTournamentParams>,
-) {
+async function OrganizationTournamentHeaderSuspense({
+  params,
+}: Readonly<OrganizationTournamentParams>) {
   const { org_slug, tournament_id } = await params;
 
   return (
@@ -148,7 +147,10 @@ function formatTimestamp(timestamp?: string | null, formatStr = "PPp") {
   return format(parseISO(timestamp), formatStr);
 }
 
-function TournamentDetailChips ({ org_slug, tournament_id }: Readonly<OrganizationTournamentProps>) {
+function TournamentDetailChips({
+  org_slug,
+  tournament_id,
+}: Readonly<OrganizationTournamentProps>) {
   return (
     <div className="flex w-full flex-row items-center justify-center gap-1">
       <Link

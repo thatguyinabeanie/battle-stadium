@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
+
 import { db } from "@battle-stadium/db";
+
 import { SingleOrgTournamentsTable } from "~/app/(main)/organizations/[org_slug]/_components/tournaments-table";
 import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
-import { Suspense } from "react";
 
 interface OrganizationDetailPageProps {
   params: Promise<{ org_slug: string }>;
@@ -35,7 +37,8 @@ async function OrganizationDetails({ params }: OrganizationDetailPageProps) {
 async function OrganizationContent({ org_slug }: { org_slug: string }) {
   "use cache";
 
-  const { organization, tournaments } = await getSingleOrganizationTournaments(org_slug);
+  const { organization, tournaments } =
+    await getSingleOrganizationTournaments(org_slug);
   if (!organization) {
     notFound();
   }

@@ -1,7 +1,8 @@
 // import { Suspense } from "react";
 
-import { db } from "@battle-stadium/db";
 import { Suspense } from "react";
+
+import { db } from "@battle-stadium/db";
 
 import { getProfile } from "~/app/server-actions/profiles/actions";
 import ComingSoon from "~/components/coming-soon";
@@ -20,10 +21,12 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function PlayerProfilePage({params}: Readonly<PlayerProfilePageParams>) {
+export default function PlayerProfilePage({
+  params,
+}: Readonly<PlayerProfilePageParams>) {
   return (
     <Suspense fallback={null}>
-      <PlayerProfileParamsUnwrap params={ params } />
+      <PlayerProfileParamsUnwrap params={params} />
     </Suspense>
   );
 }

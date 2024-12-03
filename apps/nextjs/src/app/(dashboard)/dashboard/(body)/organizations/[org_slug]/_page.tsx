@@ -1,24 +1,30 @@
-import { db } from "@battle-stadium/db";
 import { Suspense } from "react";
+
+import { db } from "@battle-stadium/db";
 
 interface OrganizationDashboardPageParams {
   params: Promise<{ org_slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return (await db.query.organizations.findMany({where: (org, {isNotNull}) => (isNotNull(org.slug))}))
-    .map((org) => ({
-      org_slug: org.slug,
-    }));
+  return (
+    await db.query.organizations.findMany({
+      where: (org, { isNotNull }) => isNotNull(org.slug),
+    })
+  ).map((org) => ({
+    org_slug: org.slug,
+  }));
 }
 
-export default function OrganizationDashboardPage ({params}: OrganizationDashboardPageParams){
+export default function OrganizationDashboardPage({
+  params,
+}: OrganizationDashboardPageParams) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <OrganizationDashboard params={params} />
     </Suspense>
-  )
-};
+  );
+}
 
 async function OrganizationDashboard({
   params,
@@ -28,7 +34,6 @@ async function OrganizationDashboard({
 }
 
 function OrgDashboardContent({ org_slug }: { org_slug: string }) {
-
   return (
     <div>
       <h1>Organization Dashboard</h1>
