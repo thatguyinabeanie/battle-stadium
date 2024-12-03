@@ -29,7 +29,9 @@ export default function UserMenuDropDown({
         <Link prefetch={true} aria-label="dashboard" href="/dashboard">
           <span>
             <p className="text-default-400 font-normal">Signed in as</p>
-            <p className="truncate font-semibold">{`${firstName} ${lastName}`}</p>{" "}
+            <p className="truncate font-semibold">
+              {[firstName, lastName].filter(Boolean).join(" ") || "Anonymous User"}
+            </p>
           </span>
         </Link>
       </DropdownMenuItem>
