@@ -1,11 +1,16 @@
 import ComingSoon from "~/components/coming-soon";
 
-export default function DashboardPokemon() {
+export default function DashboardDefault() {
   return (
-    <ComingSoon title="Pokemon">
-      <div className="flex flex-col items-center">
-        <h2>Pokemon Team Management is under construction</h2>
-      </div>
-    </ComingSoon>
+    <div className="m-4 flex flex-col px-4 py-8 sm:px-8 md:px-16 lg:px-80">
+      <ComingSoon title="Pokemon Team Management">
+        <section
+          className="flex flex-col items-center"
+          aria-label="Construction Status"
+        >
+          <h1 className="text-xl font-semibold">Under construction</h1>
+        </section>
+      </ComingSoon>
+    </div>
   );
 }
