@@ -8,6 +8,9 @@ interface MatchPageProps {
   }>;
 }
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   return (await getAllOrgTourMatches()).map(
     ({ matches, tournaments, organizations }) => ({

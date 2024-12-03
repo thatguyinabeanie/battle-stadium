@@ -1,11 +1,8 @@
-import { Suspense } from "react";
+import { auth } from "@clerk/nextjs/server";
 
-import CookiesServerComponent from "./cookies-server-component";
+import Cookies from "~/app/@cookies/cookies-client-component";
 
-export default function CookiesSlot() {
-  return (
-    <Suspense fallback={null}>
-      <CookiesServerComponent />
-    </Suspense>
-  );
+export default async function CookiesServerComponent() {
+  const { userId, sessionId } = await auth();
+  return <Cookies isSignedIn={!!sessionId} userId={userId} />;
 }

@@ -1,5 +1,8 @@
 import { db } from "@battle-stadium/db";
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
 interface OrganizationDashboardPageParams {
   params: Promise<{ org_slug: string }>;
 }

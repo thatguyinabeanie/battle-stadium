@@ -15,6 +15,9 @@ import {
 } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 
+export const revalidate = 60;
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   return (await getOrganizationTournamentsRaw()).map(
     ({ tournaments, organizations }) => ({
