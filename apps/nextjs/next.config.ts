@@ -17,16 +17,16 @@ export default withBundleAnalyzer({
   experimental: {
     after: true,
     reactCompiler: true,
-    ppr: "incremental",
+    ppr: true,
     staleTimes: {
       dynamic: 5,
       static: 180,
     },
     typedRoutes: false,
     // dynamicIO: true,
-    // staticGenerationRetryCount: 2,
-    // staticGenerationMaxConcurrency: 8,
-    // staticGenerationMinPagesPerWorker: 25,
+    staticGenerationRetryCount: 2,
+    staticGenerationMaxConcurrency: 8,
+    staticGenerationMinPagesPerWorker: 25,
   },
 
   expireTime: 3600,
