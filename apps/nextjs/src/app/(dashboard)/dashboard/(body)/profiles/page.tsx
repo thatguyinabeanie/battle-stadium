@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { auth } from "@clerk/nextjs/server";
 import { getVercelOidcToken } from "@vercel/functions/oidc";
 
@@ -11,9 +10,7 @@ import NewProfile from "~/components/profiles/new-profile";
 
 export default function ProfilesPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Profiles />
-    </Suspense>
+    <Profiles />
   );
 }
 
