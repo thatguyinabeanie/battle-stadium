@@ -5,7 +5,7 @@ import baseConfig, {
 } from "@battle-stadium/eslint-config/base";
 import reactConfig from "@battle-stadium/eslint-config/react";
 
-// import nextjsConfig from "@battle-stadium/eslint-config/nextjs";
+import nextjsConfig from "@battle-stadium/eslint-config/nextjs";
 
 export default [
   {
@@ -23,5 +23,6 @@ export default [
   },
   ...baseConfig,
   ...reactConfig,
+  ...nextjsConfig,
   ...restrictEnvAccess,
 ];
