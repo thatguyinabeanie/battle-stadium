@@ -3,6 +3,21 @@ import { Suspense } from "react";
 import type { OrganizationTournamentParams } from "~/types";
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
 import RegistrationsTable from "~/components/tournaments/registrations-table";
+import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
+
+
+export async function generateStaticParams () {
+  try {
+    const data = await getOrganizationTournamentsRaw();
+    return data.map(({ tournaments, organizations }) => ({
+      org_slug: organizations?.slug,
+      tournament_id: tournaments.id.toString(),
+    }));
+  } catch (error) {
+    console.error("Error generating static params:", error);
+    return [];
+  }
+}
 
 export default function TournamentRegistrationsPage(
   props: Readonly<OrganizationTournamentParams>,

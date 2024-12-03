@@ -16,29 +16,34 @@ import {
 } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 
-export async function generateStaticParams() {
-  const results = await getOrganizationTournamentsRaw();
 
-  return results.map(({ tournaments, organizations }) => ({
-    org_slug: organizations?.slug,
-    tournament_id: tournaments.id.toString(),
-  }));
+export async function generateStaticParams () {
+  try {
+    const data = await getOrganizationTournamentsRaw();
+    return data.map(({ tournaments, organizations }) => ({
+      org_slug: organizations?.slug,
+      tournament_id: tournaments.id.toString(),
+    }));
+  } catch (error) {
+    console.error("Error generating static params:", error);
+    return [];
+  }
 }
 
 export default function OrganizationTournamentHeaderSlot(
-  props: Readonly<OrganizationTournamentParams>,
+  { params }: Readonly<OrganizationTournamentParams>,
 ) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <OrganizationTournamentHeaderSuspense {...props} />
+      <OrganizationTournamentHeaderSuspense params={params} />
     </Suspense>
   );
 }
 
 async function OrganizationTournamentHeaderSuspense(
-  props: Readonly<OrganizationTournamentParams>,
+  { params }: Readonly<OrganizationTournamentParams>,
 ) {
-  const { org_slug, tournament_id } = await props.params;
+  const { org_slug, tournament_id } = await params;
 
   return (
     <OrganizationTournamentHeaderWrapped
@@ -57,7 +62,10 @@ async function OrganizationTournamentHeaderWrapped({
   const { organization, tournament } =
     await getSingleOrganizationSingleTournament(org_slug, tournament_id);
 
-  if (!(organization && tournament)) {
+  if (!organization) {
+    return notFound();
+  }
+  if (!tournament) {
     return notFound();
   }
 

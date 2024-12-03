@@ -13,11 +13,11 @@ import {
 
 interface OrganizationTournamentsLayoutSlots {
   children: ReactNode;
-  standings: ReactNode;
-  pairings: ReactNode;
-  metagame: ReactNode;
-  registrations: ReactNode;
-  header: ReactNode;
+  // standings: ReactNode;
+  // pairings: ReactNode;
+  // metagame: ReactNode;
+  // registrations: ReactNode;
+  // header: ReactNode;
 }
 
 const tabs: TabConfig[] = [
@@ -33,11 +33,12 @@ const DEFAULT_TAB = "details";
 export default function OrganizationTournamentsTournamentLayout(
   slots: Readonly<OrganizationTournamentsLayoutSlots>,
 ) {
-  const { children, header, standings, pairings, metagame, registrations } =
-    slots;
+  const { children,
+    //  header, standings, pairings, metagame, registrations
+    } = slots;
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
-      {header}
+      {/* {header} */}
 
       <Suspense fallback={<div>Loading...</div>}>
         <Tabs
@@ -60,10 +61,10 @@ export default function OrganizationTournamentsTournamentLayout(
 
           <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-0">
             <TabsContent value="details">{children}</TabsContent>
-            <TabsContent value="standings">{standings}</TabsContent>
-            <TabsContent value="pairings">{pairings}</TabsContent>
-            <TabsContent value="metagame">{metagame}</TabsContent>
-            <TabsContent value="registrations">{registrations}</TabsContent>
+            {/* <TabsContent value="standings">{standings}</TabsContent> */}
+            {/* <TabsContent value="pairings">{pairings}</TabsContent> */}
+            {/* <TabsContent value="metagame">{metagame}</TabsContent> */}
+            {/* <TabsContent value="registrations">{registrations}</TabsContent> */}
           </Card>
         </Tabs>
       </Suspense>

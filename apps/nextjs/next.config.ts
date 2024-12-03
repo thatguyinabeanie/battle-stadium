@@ -17,12 +17,13 @@ export default withBundleAnalyzer({
   experimental: {
     // after: true,
     reactCompiler: true,
-    ppr: "incremental",
+    // ppr: "incremental",
+    ppr: true,
     staleTimes: {
       dynamic: 5,
       static: 180,
     },
-    typedRoutes: true,
+    typedRoutes: false,
     dynamicIO: true,
     // staticGenerationRetryCount: 2,
     // staticGenerationMaxConcurrency: 8,
@@ -55,36 +56,36 @@ export default withBundleAnalyzer({
     ],
   },
 
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      const originalEntry = config.entry;
-      config.entry = async () => {
-        // Get the entries but handle possible promise
-        const entries = await (typeof originalEntry === "function"
-          ? originalEntry()
-          : Promise.resolve(originalEntry));
+  // webpack: (config, { isServer }) => {
+  //   if (!isServer) {
+  //     const originalEntry = config.entry;
+  //     config.entry = async () => {
+  //       // Get the entries but handle possible promise
+  //       const entries = await (typeof originalEntry === "function"
+  //         ? originalEntry()
+  //         : Promise.resolve(originalEntry));
 
-        // Handle different entry formats
-        if (typeof entries === "string") {
-          return ["./src/lib/polyfills/performance-now.ts", entries];
-        }
+  //       // Handle different entry formats
+  //       if (typeof entries === "string") {
+  //         return ["./src/lib/polyfills/performance-now.ts", entries];
+  //       }
 
-        if (Array.isArray(entries)) {
-          return ["./src/lib/polyfills/performance-now.ts", ...entries];
-        }
+  //       if (Array.isArray(entries)) {
+  //         return ["./src/lib/polyfills/performance-now.ts", ...entries];
+  //       }
 
-        // Object format
-        const mainEntry = entries.main || [];
-        return {
-          ...entries,
-          main: Array.isArray(mainEntry)
-            ? ["./src/lib/polyfills/performance-now.ts", ...mainEntry]
-            : ["./src/lib/polyfills/performance-now.ts", mainEntry],
-        };
-      };
-    }
-    return config;
-  },
+  //       // Object format
+  //       const mainEntry = entries.main || [];
+  //       return {
+  //         ...entries,
+  //         main: Array.isArray(mainEntry)
+  //           ? ["./src/lib/polyfills/performance-now.ts", ...mainEntry]
+  //           : ["./src/lib/polyfills/performance-now.ts", mainEntry],
+  //       };
+  //     };
+  //   }
+  //   return config;
+  // },
 
   /** Enables hot reloading for local packages without a build step */
   transpilePackages: [

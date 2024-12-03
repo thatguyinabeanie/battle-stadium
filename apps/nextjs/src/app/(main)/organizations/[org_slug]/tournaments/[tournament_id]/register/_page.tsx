@@ -9,7 +9,7 @@ import { getOrganizationTournamentsRaw } from "~/app/server-actions/organization
 import { getProfilesByClerkUserId } from "~/app/server-actions/profiles/actions";
 import { postTournamentRegistration } from "~/app/server-actions/tournaments/actions";
 import { TournamentRegistrationForm } from "~/components/tournaments/tournament-registration";
-import { unstable_noStore as no_store } from "next/cache";
+// import { unstable_noStore as no_store } from "next/cache";
 
 export async function generateStaticParams() {
   const results = await getOrganizationTournamentsRaw();
