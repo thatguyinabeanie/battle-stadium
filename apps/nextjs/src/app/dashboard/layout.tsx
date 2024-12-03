@@ -1,9 +1,6 @@
-import { Suspense } from "react";
-
 import { SidebarInset, SidebarProvider } from "@battle-stadium/ui/sidebar";
 
 import type { ChildrenProps } from "~/types";
-import DashboardContentSkeleton from "~/app/dashboard/_components/dashboard-content-skeleton";
 import DashboardHeader from "~/app/dashboard/_components/dashboard-header";
 import { BreadCrumbsProvider } from "~/components/breadcrumbs/context";
 
@@ -23,14 +20,12 @@ export default function DashboardLayout({
         <SidebarInset className="border-l-[1px] bg-transparent">
           <DashboardHeader />
 
-          <Suspense fallback={<DashboardContentSkeleton />}>
-            <main
-              aria-label="dashboard content"
-              className="flex min-h-[100dvh] flex-1 flex-col gap-4 rounded-xl bg-neutral-900/50 p-4 md:min-h-min"
-            >
-              {children}
-            </main>
-          </Suspense>
+          <main
+            aria-label="dashboard content"
+            className="flex min-h-[100dvh] flex-1 flex-col gap-4 rounded-xl bg-neutral-900/50 p-4 md:min-h-min"
+          >
+            {children}
+          </main>
         </SidebarInset>
       </SidebarProvider>
     </BreadCrumbsProvider>
