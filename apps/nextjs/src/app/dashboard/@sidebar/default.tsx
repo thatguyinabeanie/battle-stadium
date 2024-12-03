@@ -42,7 +42,7 @@ const navMainItems: NavMainItem[] = [
   },
 ];
 
-export default function DashboardSideBar() {
+export default function SidebarMainContent() {
   return (
     <SidebarGroup>
       <SidebarMenu>
