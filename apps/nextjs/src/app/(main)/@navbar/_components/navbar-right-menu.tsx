@@ -1,7 +1,7 @@
-import { Suspense } from "react";
 import Link from "next/link";
+import type { User } from "@clerk/nextjs/server";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { getVercelOidcToken } from "@vercel/functions/oidc";
+
 
 import {
   Avatar,
@@ -12,15 +12,18 @@ import {
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
 
-import type { Tokens } from "~/types";
 import MobileMenu from "~/app/(main)/@navbar/_components/navbar-mobile-menu";
-import { getAccount } from "~/app/server-actions/accounts/actions";
 import {
   SolarMagniferLinear,
   SolarSettingsLinear,
   SolarUserLinear,
 } from "~/components/svg/icons";
 import UserMenuDropDown from "./user-menu-dropdown";
+
+import { db, eq } from "@battle-stadium/db";
+import { accounts, clerkUsers } from "@battle-stadium/db/schema";
+import { cacheTag } from "next/dist/server/use-cache/cache-tag";
+
 
 const sharedClassNames = "h-[28px] w-[28px]";
 
@@ -40,18 +43,7 @@ export default function RightMenu() {
         </Button>
       </Link>
 
-      <Suspense
-        fallback={
-          <Avatar
-            aria-label="User's profile image"
-            className="bg-transparent p-1"
-          >
-            <SolarUserLinear className={solarUserLinearClassNames} />
-          </Avatar>
-        }
-      >
         <UserMenu />
-      </Suspense>
 
       <MobileMenu />
     </div>
@@ -59,29 +51,52 @@ export default function RightMenu() {
 }
 
 async function UserMenu() {
-  const session = await auth();
-  const tokens: Tokens = {
-    clerk: await session.getToken(),
-    oidc: await getVercelOidcToken(),
-  };
-  const me = await getAccount(session.userId, tokens);
 
+  const { clerkUser, isAdmin, userId } = await getUserData();
   return (
     <DropdownMenu aria-label="Profile Actions">
       <DropdownMenuTrigger>
-        <SmartAvatar />
+        <SmartAvatar clerkUser={clerkUser} />
       </DropdownMenuTrigger>
-      <UserMenuDropDown isSignedIn={!!session.userId} me={me} />
+      <UserMenuDropDown
+        firstName={ clerkUser?.firstName ?? "" }
+        lastName={ clerkUser?.lastName ?? "" }
+        isSignedIn={ !!userId }
+        isAdmin={ isAdmin } />
     </DropdownMenu>
   );
 }
 
-async function SmartAvatar() {
-  const user = await currentUser();
+async function getUserData() {
+  const session = await auth();
 
+  if (session.userId) {
+    const clerkUser = await currentUser();
+    if (clerkUser) {
+      const accountQueryResults = await getAccountQuery(session.userId);
+      if (accountQueryResults.length > 0 ) {
+        const account = accountQueryResults[0];
+        return { clerkUser, isAdmin: account?.accounts.admin ?? false, userId: session.userId };
+      }
+    }
+  }
+  return { clerkUser: null, isAdmin: false , userId: null };
+}
+
+async function getAccountQuery (userId: string) {
+  "use cache";
+  cacheTag(`getAccountQuery(${userId})`);
+  return db.select({ clerkUsers, accounts })
+    .from(accounts)
+    .leftJoin(clerkUsers, eq(accounts.id, clerkUsers.accountId))
+    .where(eq(clerkUsers.clerkUserId, userId)).limit(1);
+
+}
+
+function SmartAvatar({clerkUser}: {clerkUser?: User | null}) {
   return (
     <Avatar aria-label="User's profile image" className="bg-transparent p-1">
-      <AvatarImage src={user?.imageUrl} className={"h-[30px] w-[30px]"} />
+      <AvatarImage src={ clerkUser?.imageUrl} className={"h-[30px] w-[30px]"} />
       <AvatarFallback>
         <SolarUserLinear className={solarUserLinearClassNames} />
       </AvatarFallback>

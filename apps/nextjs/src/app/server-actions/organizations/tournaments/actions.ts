@@ -48,11 +48,6 @@ async function getSingleOrganizationTournamentsRaw(
   page = 1,
   pageSize = 20,
 ) {
-  "use cache";
-  cacheTag(`getSingleOrganizationTournamentsRaw(${slug},${page},${pageSize})`);
-  cacheLife("days");
-  // TODO: revalidate on tournament creation
-
   return tournamentsLeftJoinOrganizations()
     .where(eq(organizations.slug, slug))
     .orderBy(desc(tournaments.startAt))
@@ -65,11 +60,6 @@ export async function getSingleOrganizationTournaments(
   page = 1,
   pageSize = 20,
 ) {
-  "use cache";
-  cacheTag(`getSingleOrganizationTournaments(${slug},${page},${pageSize})`);
-  cacheLife("days");
-  // TODO: revalidate on tournament creation
-
   const results = await getSingleOrganizationTournamentsRaw(
     slug,
     page,

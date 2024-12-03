@@ -5,29 +5,31 @@ import { SignInButton, SignOutButton } from "@clerk/nextjs";
 
 import { cn, DropdownMenuContent, DropdownMenuItem } from "@battle-stadium/ui";
 
-import type { AccountMe } from "~/lib/api";
-
 interface UserMenuDropDownProps {
-  me?: AccountMe;
   isSignedIn: boolean;
+  firstName: string;
+  lastName: string;
+  isAdmin: boolean;
 }
 
 export default function UserMenuDropDown({
-  me,
   isSignedIn,
+  firstName,
+  lastName,
+  isAdmin
 }: Readonly<UserMenuDropDownProps>) {
   return (
     <DropdownMenuContent className="bg-background">
       <DropdownMenuItem
         key="profile"
         aria-label="dashboard"
-        className={cn("hidden", { "sm:flex": me && isSignedIn })}
+        className={cn("hidden", { "sm:flex": isSignedIn })}
         color="primary"
       >
         <Link prefetch={true} aria-label="dashboard" href="/dashboard">
           <span>
             <p className="text-default-400 font-normal">Signed in as</p>
-            <p className="truncate font-semibold">{`${me?.first_name} ${me?.last_name}`}</p>{" "}
+            <p className="truncate font-semibold">{`${firstName} ${lastName}`}</p>{" "}
           </span>
         </Link>
       </DropdownMenuItem>
@@ -49,7 +51,7 @@ export default function UserMenuDropDown({
         key="admin"
         aria-label="Admin"
         className={cn("", {
-          hidden: !(me && isSignedIn) || !me.admin,
+          hidden: !(isSignedIn) || !isAdmin,
         })}
       >
         <Link prefetch={true} href="/dashboard?tab=admin">
@@ -61,7 +63,7 @@ export default function UserMenuDropDown({
         key="settings"
         aria-label="Settings"
         className={cn("", {
-          hidden: !(me && isSignedIn),
+          hidden: !(isSignedIn),
         })}
       >
         <Link prefetch={true} href="/dashboard?tab=settings">
@@ -79,7 +81,7 @@ export default function UserMenuDropDown({
         key="logout"
         aria-label="Sign Out"
         className={cn("", {
-          hidden: !(me && isSignedIn),
+          hidden: !(isSignedIn),
         })}
         color="danger"
       >

@@ -26,11 +26,6 @@ export async function getAllProfiles() {
 }
 
 export async function getProfile(username: string) {
-  "use cache";
-  cacheTag(`getProfile(${username})`);
-  cacheLife("hours");
-  // TODO: revalidate on profile update
-
   return await db.query.profiles.findFirst({
     where: eq(profiles.username, username),
   });

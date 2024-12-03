@@ -52,16 +52,14 @@ async function findProfilesByUsername(username: string) {
   });
 }
 
+/**
+ * @deprecated Use drizzle instead
+ */
 export async function getAccount(
   userId: string | null,
   tokens: Tokens,
   options?: FetchOptions<paths["/accounts/me"]["get"]>,
 ) {
-  "use cache";
-  cacheTag(`getAccount(${userId})`);
-  cacheLife("hours");
-  // TODO: revalidate on account creation
-
   const accountMeOptions = {
     // Cache key includes userId to prevent cross-user cache conflicts
     ...defaultConfig(`getAccount-${userId}`),
