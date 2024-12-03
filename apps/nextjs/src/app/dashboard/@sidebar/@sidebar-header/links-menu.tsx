@@ -15,7 +15,7 @@ import {
 
 import { BattleStadiumLogoLink } from "~/components/battle-stadium";
 import { NavbarItemsConfigs } from "~/lib/config/site";
-import { DropDownMenuContentMobile } from "./side-bar-client-components";
+import { DropDownMenuContentMobile } from "../_components/side-bar-client-components";
 
 export function MainAppLinksMenu() {
   return (

@@ -19,6 +19,7 @@ export default function DashboardLayout({
     <BreadCrumbsProvider>
       <SidebarProvider className="border-[1px]">
         {sidebar}
+
         <SidebarInset className="border-l-[1px] bg-transparent">
           <DashboardHeader />
 
