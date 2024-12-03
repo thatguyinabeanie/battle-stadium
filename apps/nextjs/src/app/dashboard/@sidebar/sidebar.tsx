@@ -1,32 +1,29 @@
-import { cn, SidebarContent } from "@battle-stadium/ui";
 import {
+  cn,
   Sidebar,
+  SidebarContent,
   SidebarFooter,
   SidebarHeader,
-} from "@battle-stadium/ui/sidebar";
+} from "@battle-stadium/ui";
 
-interface SideBarSlots {
-  sidebarheader: React.ReactNode;
-  sidebarfooter: React.ReactNode;
-  children?: React.ReactNode;
-}
+import type { ChildrenProps } from "~/types";
+import Footer from "./footer";
+import Header from "./header";
 
 const SIDEBAR_DEFAULT_CLASSNAMES = "m-4 rounded-xl bg-neutral-900/50";
-export default function SideBar({
-  children,
-  sidebarfooter,
-  sidebarheader,
-}: SideBarSlots) {
+export default function SideBar({ children }: ChildrenProps) {
   return (
     <Sidebar variant="sidebar" collapsible="icon">
       <SidebarHeader className={SIDEBAR_DEFAULT_CLASSNAMES}>
-        {sidebarheader}
+        <Header />
       </SidebarHeader>
+
       <SidebarContent className={cn(SIDEBAR_DEFAULT_CLASSNAMES, "mt-0")}>
         {children}
       </SidebarContent>
+
       <SidebarFooter className={cn(SIDEBAR_DEFAULT_CLASSNAMES, "mt-0")}>
-        {sidebarfooter}
+        <Footer />
       </SidebarFooter>
     </Sidebar>
   );

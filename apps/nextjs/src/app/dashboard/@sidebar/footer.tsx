@@ -26,9 +26,9 @@ import {
 } from "@battle-stadium/ui";
 
 import { SolarUserLinear } from "~/components/svg/icons";
-import { DropDownMenuContentMobile } from "../_components/side-bar-client-components";
+import { DropDownMenuContentMobile } from "./_components/side-bar-client-components";
 
-export default function SidebarFooterSlot() {
+export default function Footer() {
   return (
     <SidebarMenu>
       <SidebarMenuItem>

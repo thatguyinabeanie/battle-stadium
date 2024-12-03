@@ -3,6 +3,7 @@ import { SidebarInset, SidebarProvider } from "@battle-stadium/ui/sidebar";
 import type { ChildrenProps } from "~/types";
 import DashboardHeader from "~/app/dashboard/_components/dashboard-header";
 import { BreadCrumbsProvider } from "~/components/breadcrumbs/context";
+import SideBar from "./@sidebar/sidebar";
 
 interface DashboardLayoutProps extends ChildrenProps {
   sidebar: React.ReactNode;
@@ -15,7 +16,7 @@ export default function DashboardLayout({
   return (
     <BreadCrumbsProvider>
       <SidebarProvider className="border-[1px]">
-        {sidebar}
+        <SideBar>{sidebar}</SideBar>
 
         <SidebarInset className="border-l-[1px] bg-transparent">
           <DashboardHeader />
