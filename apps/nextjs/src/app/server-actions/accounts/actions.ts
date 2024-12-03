@@ -54,7 +54,7 @@ async function findProfilesByUsername(username: string) {
 }
 
 /**
- * @deprecated Use drizzle queries instead. See examples in findAccountById() 
+ * @deprecated Use drizzle queries instead. See examples in findAccountById()
  * and findProfilesByUsername() functions for the recommended approach.
  */
 export async function getAccount(
