@@ -22,11 +22,8 @@ export const actionTypes = {
   REMOVE_TOAST: "REMOVE_TOAST",
 } as const;
 
-let count = 0;
-
 function genId() {
-  count = (count + 1) % Number.MAX_SAFE_INTEGER;
-  return count.toString();
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
 type ActionType = typeof actionTypes;
