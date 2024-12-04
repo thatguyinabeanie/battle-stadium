@@ -1,19 +1,21 @@
 "use client";
 
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, Trophy } from "lucide-react";
+
 import {
   Button,
+  // DatePicker,
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  Input,
+  Label,
+  RadioGroup,
+  RadioGroupItem,
 } from "@battle-stadium/ui";
-import { Input } from "@battle-stadium/ui";
-import { Label } from "@battle-stadium/ui";
-import { RadioGroup, RadioGroupItem } from "@battle-stadium/ui";
-import { DatePicker } from "@battle-stadium/ui";
-import { useState } from "react";
-import { ChevronLeft, ChevronRight, Trophy } from "lucide-react";
 
 const STEPS = [
   { id: 1, title: "Tournament Details" },
@@ -22,7 +24,7 @@ const STEPS = [
   { id: 4, title: "Registration" },
 ];
 
-export default function CreateTournamentDialog () {
+export default function CreateTournamentDialog() {
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -53,7 +55,7 @@ export default function CreateTournamentDialog () {
   };
 
   return (
-    <Dialog open={ open } onOpenChange={ setOpen }>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button>
           <Trophy className="mr-2 h-4 w-4" />
@@ -65,40 +67,44 @@ export default function CreateTournamentDialog () {
           <DialogTitle>Create New Tournament</DialogTitle>
         </DialogHeader>
 
-        {/* Step Progress */ }
-        <div className="flex justify-between mb-6">
-          { STEPS.map((step) => (
+        {/* Step Progress */}
+        <div className="mb-6 flex justify-between">
+          {STEPS.map((step) => (
             <div
-              key={ step.id }
-              className={ `flex items-center ${step.id === currentStep ? "text-primary" : "text-muted-foreground"
-                }` }
+              key={step.id}
+              className={`flex items-center ${
+                step.id === currentStep
+                  ? "text-primary"
+                  : "text-muted-foreground"
+              }`}
             >
               <div className="flex flex-col items-center">
                 <div
-                  className={ `w-8 h-8 rounded-full border-2 flex items-center justify-center ${step.id === currentStep ? "border-primary" : "border-muted"
-                    }` }
+                  className={`flex h-8 w-8 items-center justify-center rounded-full border-2 ${
+                    step.id === currentStep ? "border-primary" : "border-muted"
+                  }`}
                 >
-                  { step.id }
+                  {step.id}
                 </div>
-                <span className="text-xs mt-1">{ step.title }</span>
+                <span className="mt-1 text-xs">{step.title}</span>
               </div>
-              { step.id !== STEPS.length && (
-                <ChevronRight className="w-4 h-4 mx-2" />
-              ) }
+              {step.id !== STEPS.length && (
+                <ChevronRight className="mx-2 h-4 w-4" />
+              )}
             </div>
-          )) }
+          ))}
         </div>
 
-        {/* Step Content */ }
+        {/* Step Content */}
         <div className="py-4">
-          { currentStep === 1 && (
+          {currentStep === 1 && (
             <div className="space-y-4">
               <div>
                 <Label htmlFor="name">Tournament Name</Label>
                 <Input
                   id="name"
-                  value={ formData.name }
-                  onChange={ (e) =>
+                  value={formData.name}
+                  onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
                 />
@@ -106,8 +112,8 @@ export default function CreateTournamentDialog () {
               <div>
                 <Label>Tournament Format</Label>
                 <RadioGroup
-                  value={ formData.format }
-                  onValueChange={ (value) =>
+                  value={formData.format}
+                  onValueChange={(value) =>
                     setFormData({ ...formData, format: value })
                   }
                 >
@@ -127,37 +133,32 @@ export default function CreateTournamentDialog () {
               </div>
               <div>
                 <Label>Start Date</Label>
-                <DatePicker
-                  date={ formData.startDate }
-                  setDate={ (date) =>
-                    setFormData({ ...formData, startDate: date })
-                  }
-                />
+                {/* <DatePicker /> */}
               </div>
             </div>
-          ) }
+          )}
 
-          {/* Add other steps here */ }
+          {/* Add other steps here */}
         </div>
 
-        {/* Navigation */ }
-        <div className="flex justify-between mt-6">
+        {/* Navigation */}
+        <div className="mt-6 flex justify-between">
           <Button
             variant="outline"
-            onClick={ handleBack }
-            disabled={ currentStep === 1 }
+            onClick={handleBack}
+            disabled={currentStep === 1}
           >
-            <ChevronLeft className="w-4 h-4 mr-2" />
+            <ChevronLeft className="mr-2 h-4 w-4" />
             Back
           </Button>
-          { currentStep === STEPS.length ? (
-            <Button onClick={ handleSubmit }>Create Tournament</Button>
+          {currentStep === STEPS.length ? (
+            <Button onClick={handleSubmit}>Create Tournament</Button>
           ) : (
-            <Button onClick={ handleNext }>
+            <Button onClick={handleNext}>
               Next
-              <ChevronRight className="w-4 h-4 ml-2" />
+              <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
-          ) }
+          )}
         </div>
       </DialogContent>
     </Dialog>

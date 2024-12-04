@@ -37,6 +37,8 @@ export * from "./components/table";
 export * from "./components/tabs";
 export * from "./components/textarea";
 export * from "./components/theme";
+export * from "./components/toast";
+export * from "./components/toaster";
 export * from "./components/tooltip";
 export * from "./components/toggle";
 export * from "./utils";

@@ -16,15 +16,17 @@ interface BreadcrumbsProps {
   }[];
 }
 
-const defaultItems = [
-  { label: "Battle Stadium", href: "/" },
-  { label: "Dashboard", href: "/dashboard" },
-];
+const defaultItems = [{ label: "Dashboard", href: "/dashboard" }];
 
-export function Breadcrumbs({ items = defaultItems }: BreadcrumbsProps) {
+// TODO: Update Breadcrumbs to actually update when the route changes
+export default function Breadcrumbs({
+  items = defaultItems,
+}: BreadcrumbsProps) {
   return (
     <Breadcrumb aria-label="Navigation breadcrumbs">
       <BreadcrumbList>
+        <BreadcrumbItem></BreadcrumbItem>
+
         {items.map((item, index) => (
           <Fragment key={item.label}>
             <BreadcrumbItem

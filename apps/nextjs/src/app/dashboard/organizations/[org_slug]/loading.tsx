@@ -1,12 +1,22 @@
-
-import { Button, Tabs, TabsList, TabsTrigger, TabsContent, Card, CardHeader, CardTitle, CardContent } from "@battle-stadium/ui";
 import { Trophy } from "lucide-react";
 
-export default function OrgDashboardContentSkeleton () {
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@battle-stadium/ui";
+
+export default function OrgDashboardContentSkeleton() {
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      {/* Organization Header */ }
-      <div className="flex justify-between items-center">
+    <div className="container mx-auto space-y-6 p-6">
+      {/* Organization Header */}
+      <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Loading...</h1>
           <p className="text-muted-foreground">Organization Dashboard</p>
@@ -17,7 +27,7 @@ export default function OrgDashboardContentSkeleton () {
         </Button>
       </div>
 
-      {/* Main Content */ }
+      {/* Main Content */}
       <Tabs defaultValue="active" className="w-full">
         <TabsList>
           <TabsTrigger value="active">Active Tournaments</TabsTrigger>
@@ -33,7 +43,7 @@ export default function OrgDashboardContentSkeleton () {
 
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {/* Placeholder for tournament cards */ }
+                {/* Placeholder for tournament cards */}
                 <Card className="p-4">
                   <p className="text-sm text-muted-foreground">
                     No active tournaments
@@ -79,7 +89,7 @@ export default function OrgDashboardContentSkeleton () {
         </TabsContent>
       </Tabs>
 
-      {/* Quick Stats */ }
+      {/* Quick Stats */}
       <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader>

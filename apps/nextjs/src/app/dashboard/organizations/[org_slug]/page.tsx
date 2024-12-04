@@ -1,4 +1,5 @@
 import { db } from "@battle-stadium/db";
+
 import OrgDashboardContent from "./org-dashboard-content";
 
 export const revalidate = 60;

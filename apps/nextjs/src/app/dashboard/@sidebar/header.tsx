@@ -35,7 +35,7 @@ export default function Header() {
                 aria-haspopup="true"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               >
-                <BattleStadiumNaming />
+                <SimpleBattleStadiumNaming />
                 <ChevronsUpDown className="ml-auto" />
               </SidebarMenuButton>
             </DropdownMenuTrigger>
@@ -48,7 +48,7 @@ export default function Header() {
   );
 }
 
-function BattleStadiumNaming() {
+export function BattleStadiumNaming() {
   return (
     <div
       className="text-md grid flex-1 text-left leading-tight"
@@ -62,6 +62,19 @@ function BattleStadiumNaming() {
         aria-label="Company name"
       >
         Beanie LLC
+      </span>
+    </div>
+  );
+}
+
+export function SimpleBattleStadiumNaming() {
+  return (
+    <div
+      className="text-md grid flex-1 text-left leading-tight"
+      role="presentation"
+    >
+      <span className="truncate font-semibold text-primary">
+        Battle Stadium
       </span>
     </div>
   );
