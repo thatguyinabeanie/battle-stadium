@@ -40,7 +40,7 @@ export default async function OrgDashboardContent({
           <Link
             prefetch
             href={`/dashboard/organizations/${org.slug}/create`}
-            className="flex flex-row text-right"
+            className="flex flex-row text-right items-center"
           >
             <Trophy className="mr-2 h-4 w-4" />
             Create Tournament

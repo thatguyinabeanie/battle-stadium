@@ -13,18 +13,18 @@ import {
 
 export default function OrgDashboardContentSkeleton() {
   return (
-    <div className="container mx-auto space-y-6 p-6">
+    <div className="container mx-auto space-y-6 p-6 animate-pulse text-muted ">
       {/* Organization Header */}
       <div className="grid grid-cols-2 items-center justify-between">
         <div>
-          <div className="text-3xl font-bold">
-            <div className="h-9 w-3/4 animate-pulse rounded-xl bg-neutral-900" />
+          <div className="text-3xl font-bold text-muted-foreground">
+            Loading...
           </div>
-          <p className="text-muted-foreground">Organization Dashboard</p>
+          <p>Organization Dashboard</p>
         </div>
 
         <div className="flex justify-end">
-          <div className="flex flex-row text-right">
+          <div className="flex flex-row text-right items-center">
             <Trophy className="mr-2 h-4 w-4" />
             Create Tournament
           </div>
@@ -34,13 +34,13 @@ export default function OrgDashboardContentSkeleton() {
       {/* Main Content */}
       <Tabs defaultValue="active" className="w-full">
         <TabsList>
-          <TabsTrigger disabled value="active">
+          <TabsTrigger disabled value="active" className="animate-pulse text-muted ">
             Active Tournaments
           </TabsTrigger>
-          <TabsTrigger disabled value="upcoming">
+          <TabsTrigger disabled value="upcoming" className="animate-pulse text-muted ">
             Upcoming
           </TabsTrigger>
-          <TabsTrigger disabled value="past">
+          <TabsTrigger disabled value="past" className="animate-pulse text-muted ">
             Past
           </TabsTrigger>
         </TabsList>
@@ -55,7 +55,7 @@ export default function OrgDashboardContentSkeleton() {
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {/* Placeholder for tournament cards */}
                 <Card className="p-4">
-                  <p className="animate-pulse text-sm text-muted-foreground">
+                  <p className="text-sm">
                     No active tournaments
                   </p>
                 </Card>
@@ -72,7 +72,7 @@ export default function OrgDashboardContentSkeleton() {
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <Card className="p-4">
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm">
                     No upcoming tournaments scheduled
                   </p>
                 </Card>
@@ -89,7 +89,7 @@ export default function OrgDashboardContentSkeleton() {
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 <Card className="p-4">
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm">
                     No past tournaments found
                   </p>
                 </Card>
