@@ -1,7 +1,7 @@
 import { SidebarInset, SidebarProvider } from "@battle-stadium/ui/sidebar";
 
 import type { ChildrenProps } from "~/types";
-import DashboardHeader from "~/app/dashboard/_components/dashboard-breadcrumb-header";
+import DashboardHeader from "~/app/dashboard/breadcrumb-header";
 import { BreadCrumbsProvider } from "~/components/breadcrumbs/context";
 import SideBar from "./@sidebar/sidebar";
 
