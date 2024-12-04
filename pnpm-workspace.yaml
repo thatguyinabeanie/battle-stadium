@@ -12,6 +12,15 @@ catalog:
   zod: ^3
   superjson: ^2
   "dotenv-cli": ^7
+  "@uploadthing/react": ^7
+  "date-fns": ^4
+  geist: ^1
+  sqlstring: ^2
+  tweetnacl: ^1
+  "server-only": ^0.0.1
+  jiti: ^1
+  "@types/sqlstring": ^2
+
 
 catalogs:
   auth:

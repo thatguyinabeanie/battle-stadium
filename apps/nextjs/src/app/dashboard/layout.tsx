@@ -18,15 +18,15 @@ export default function DashboardLayout({
       <SidebarProvider className="border-[1px]">
         <SideBar>{sidebar}</SideBar>
 
-        <SidebarInset className="border-l-[1px] bg-transparent">
+        <SidebarInset className="border-none bg-transparent">
           <DashboardHeader />
 
-          <main
+          <div
             aria-label="dashboard content"
-            className="flex min-h-[100dvh] flex-1 flex-col gap-4 rounded-xl bg-neutral-900/50 p-4 md:min-h-min"
+            className="my-4 mr-4 flex min-h-[100dvh] flex-1 flex-col gap-4 rounded-xl bg-neutral-900/50 md:min-h-min"
           >
             {children}
-          </main>
+          </div>
         </SidebarInset>
       </SidebarProvider>
     </BreadCrumbsProvider>

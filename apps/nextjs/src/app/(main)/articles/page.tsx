@@ -7,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function ArticlesPage() {
-  return <ComingSoon title="Articles" />;
+  return (
+    <div className="flex h-full min-h-screen w-full flex-col">
+      <ComingSoon title="Articles" />
+    </div>
+  );
 }

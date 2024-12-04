@@ -20,7 +20,7 @@ const LAYOUT_CONSTANTS = {
 export default function DashboardBreadcrumbHeader() {
   return (
     <header
-      className={`flex ${LAYOUT_CONSTANTS.HEADER_HEIGHT} shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[data-collapsible=icon]/sidebar-wrapper:${LAYOUT_CONSTANTS.HEADER_HEIGHT_COLLAPSED} border-b-[1px]`}
+      className={`flex ${LAYOUT_CONSTANTS.HEADER_HEIGHT} shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[data-collapsible=icon]/sidebar-wrapper:${LAYOUT_CONSTANTS.HEADER_HEIGHT_COLLAPSED} mr-4 mt-4 rounded-xl border-none bg-neutral-900/50`}
     >
       <div className="flex items-center gap-2 px-4">
         <SidebarTrigger className="ml-1" aria-label="Open Sidebar" />
