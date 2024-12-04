@@ -7,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function PlayerProfilesPage() {
-  return <ComingSoon title="Player Profiles" />;
+  return (
+    <div className="flex h-full min-h-screen w-full flex-col" >
+      <ComingSoon title="Player Profiles" />
+    </div>
+  );
 }
