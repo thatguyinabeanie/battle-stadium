@@ -23,6 +23,7 @@ const STEPS = [
   { id: 5, title: "Phases" },
 ];
 
+// TODO: refactor to use enums for pairingSystem, bestOf, and advancement
 interface Phase {
   name: string;
   pairingSystem: string; // "Swiss" | "Single Elimination";
@@ -34,6 +35,7 @@ interface Phase {
   advancement: string; //"traditional" | "minimum-point" | "points-min-players";
 }
 
+// TODO: refactor to use an enum for registrationType
 interface TournamentForm {
   name: string;
   description: string;
