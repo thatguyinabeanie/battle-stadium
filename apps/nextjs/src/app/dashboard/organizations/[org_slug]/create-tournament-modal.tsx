@@ -27,6 +27,8 @@ const STEPS = [
 export default function CreateTournamentDialog() {
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+
+  // TODO: Replace with actual form state.  Using a form validation library like zod:
   const [formData, setFormData] = useState({
     name: "",
     format: "single-elimination",
