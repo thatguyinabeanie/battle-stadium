@@ -1,8 +1,5 @@
 import { Fragment, Suspense } from "react";
 
-import { Separator } from "@battle-stadium/ui/separator";
-import { SidebarTrigger } from "@battle-stadium/ui/sidebar";
-
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,6 +8,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@battle-stadium/ui/breadcrumb";
+import { Separator } from "@battle-stadium/ui/separator";
+import { SidebarTrigger } from "@battle-stadium/ui/sidebar";
 
 const LAYOUT_CONSTANTS = {
   HEADER_HEIGHT: "h-16",
@@ -49,32 +48,29 @@ const defaultItems = [
   { label: "Dashboard", href: "/dashboard" },
 ];
 
-function Breadcrumbs ({
-  items = defaultItems,
-}: BreadcrumbsProps) {
+function Breadcrumbs({ items = defaultItems }: BreadcrumbsProps) {
   return (
     <Breadcrumb aria-label="Navigation breadcrumbs">
       <BreadcrumbList>
-        { items.map((item, index) => (
-          <Fragment key={ item.label }>
+        {items.map((item, index) => (
+          <Fragment key={item.label}>
             <BreadcrumbItem
-              className={ index === 0 ? "hidden md:block" : undefined }
+              className={index === 0 ? "hidden md:block" : undefined}
             >
-              { item.href ? (
-                <BreadcrumbLink href={ item.href }>{ item.label }</BreadcrumbLink>
+              {item.href ? (
+                <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
               ) : (
-                <BreadcrumbPage>{ item.label }</BreadcrumbPage>
-              ) }
+                <BreadcrumbPage>{item.label}</BreadcrumbPage>
+              )}
             </BreadcrumbItem>
-            { index < items.length - 1 && (
+            {index < items.length - 1 && (
               <BreadcrumbSeparator
-                className={ index === 0 ? "hidden md:block" : undefined }
+                className={index === 0 ? "hidden md:block" : undefined}
               />
-            ) }
+            )}
           </Fragment>
-        )) }
+        ))}
       </BreadcrumbList>
     </Breadcrumb>
   );
 }
-
