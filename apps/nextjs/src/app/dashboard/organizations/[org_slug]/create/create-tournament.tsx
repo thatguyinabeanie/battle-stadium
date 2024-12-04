@@ -20,7 +20,7 @@ interface Phase  {
   matchCheckIn: boolean;
   checkInTime: number;
   advancement: "traditional" | "minimum-point" | "points-min-players";
-},
+}
 
 interface TournamentForm {
   name: string;
