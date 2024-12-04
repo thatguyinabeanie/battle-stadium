@@ -57,7 +57,7 @@ export function CollapsibleMenuNavItem({ item }: CollapsibleMenuNavItemProps) {
   );
 }
 
-export function SidebarMenuButtonCollapsibleTrigger({
+function SidebarMenuButtonCollapsibleTrigger({
   item,
 }: CollapsibleMenuNavItemProps) {
   if (!item.items?.length) {
@@ -105,9 +105,7 @@ function SidebarNavItemLink({ item }: CollapsibleMenuNavItemProps) {
   );
 }
 
-export function SidebarMenuCollapsibleContent({
-  item,
-}: CollapsibleMenuNavItemProps) {
+function SidebarMenuCollapsibleContent({ item }: CollapsibleMenuNavItemProps) {
   return (
     <CollapsibleContent id={`${item.title.toLowerCase()}-content`}>
       <SidebarMenuSub>
