@@ -1,8 +1,8 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Trophy } from "lucide-react";
 
 import {
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -35,10 +35,14 @@ export default async function OrgDashboardContent({
           <h1 className="text-3xl font-bold">{org.name}</h1>
           <p className="text-muted-foreground">Organization Dashboard</p>
         </div>
-        <Button>
+        <Link
+          prefetch
+          href={`/dashboard/organizations/${org.slug}/create`}
+          className="flex flex-row"
+        >
           <Trophy className="mr-2 h-4 w-4" />
           Create Tournament
-        </Button>
+        </Link>
       </div>
 
       {/* Main Content */}
