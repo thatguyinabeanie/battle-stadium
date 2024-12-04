@@ -23,11 +23,10 @@ export default function DashboardLayout({
 
           <div
             aria-label="dashboard content"
-            className="flex min-h-[100dvh] flex-1 flex-col gap-4 rounded-xl my-4 mr-4 bg-neutral-900/50 md:min-h-min"
+            className="my-4 mr-4 flex min-h-[100dvh] flex-1 flex-col gap-4 rounded-xl bg-neutral-900/50 md:min-h-min"
           >
             {children}
           </div>
-
         </SidebarInset>
       </SidebarProvider>
     </BreadCrumbsProvider>
