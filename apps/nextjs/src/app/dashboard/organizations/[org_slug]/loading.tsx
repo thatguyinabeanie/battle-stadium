@@ -11,7 +11,7 @@ import {
   TabsTrigger,
 } from "@battle-stadium/ui";
 
-export default function OrgDashboardContentSkeleton() {
+export default function OrgDashboardContentLoadingSkeleton() {
   return (
     <div className="container mx-auto animate-pulse space-y-6 p-6 text-muted">
       {/* Organization Header */}

@@ -38,9 +38,10 @@ export default async function OrgDashboardContent({
 
         <div className="flex justify-end">
           <Link
+            aria-label="Create new tournament"
             prefetch
             href={`/dashboard/organizations/${org.slug}/create`}
-            className="flex flex-row items-center text-right"
+            className="flex flex-row items-center text-right hover:text-primary transition-colors"
           >
             <Trophy className="mr-2 h-4 w-4" />
             Create Tournament
