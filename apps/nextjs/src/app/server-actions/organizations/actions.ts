@@ -47,9 +47,9 @@ export async function getPartneredOrganizations() {
   });
 }
 
-export async function findOrganizationBySlug(slug: string) {
+export async function getOrganizationBySlug(slug: string) {
   // "use cache";
-  // cacheTag(`findOrganizationBySlug(${slug})`);
+  // cacheTag(`getOrganizationBySlug(${slug})`);
   // cacheLife("days");
   // TODO: revalidate on organization update
 

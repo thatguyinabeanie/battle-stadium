@@ -1,25 +1,13 @@
 {
   "recommendations": [
     "dbaeumer.vscode-eslint",
-    "expo.vscode-expo-tools",
     "esbenp.prettier-vscode",
     "yoavbls.pretty-ts-errors",
     "bradlc.vscode-tailwindcss",
     "gruntfuggly.todo-tree",
-    "vscode-icons-team.vscode-icons",
     "rangav.vscode-thunder-client",
-    "mtxr.sqltools-driver-pg",
-    "mtxr.sqltools",
-    "suhelmakkad.shadcn-ui",
-    "christian-kohler.path-intellisense",
     "dionmunk.vscode-notes",
     "pkief.material-icon-theme",
-    "davidanson.vscode-markdownlint",
-    "ms-vscode.live-server",
-    "visualstudioexptteam.vscodeintellicode-insiders",
-    "visualstudioexptteam.vscodeintellicode-completions",
-    "visualstudioexptteam.intellicode-api-usage-examples",
-    "visualstudioexptteam.vscodeintellicode",
     "oderwat.indent-rainbow",
     "tedisagolli.hex-to-tailwind",
     "github.vscode-pull-request-github",
@@ -30,8 +18,6 @@
     "ryanluker.vscode-coverage-gutters",
     "formulahendry.auto-rename-tag",
     "streetsidesoftware.code-spell-checker",
-    "lokalise.i18n-ally",
-    "aaron-bond.better-comments",
     "dbcode.dbcode"
   ]
 }

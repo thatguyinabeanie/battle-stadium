@@ -1,8 +1,8 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Trophy } from "lucide-react";
 
 import {
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -13,7 +13,7 @@ import {
   TabsTrigger,
 } from "@battle-stadium/ui";
 
-import { findOrganizationBySlug } from "~/app/server-actions/organizations/actions";
+import { getOrganizationBySlug } from "~/app/server-actions/organizations/actions";
 
 export default async function OrgDashboardContent({
   org_slug,
@@ -22,7 +22,7 @@ export default async function OrgDashboardContent({
 }) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const org = await findOrganizationBySlug(org_slug);
+  const org = await getOrganizationBySlug(org_slug);
   if (!org) {
     notFound();
   }
@@ -30,15 +30,23 @@ export default async function OrgDashboardContent({
   return (
     <div className="container mx-auto space-y-6 p-6">
       {/* Organization Header */}
-      <div className="flex items-center justify-between">
+      <div className="grid grid-cols-2 items-center">
         <div>
           <h1 className="text-3xl font-bold">{org.name}</h1>
           <p className="text-muted-foreground">Organization Dashboard</p>
         </div>
-        <Button>
-          <Trophy className="mr-2 h-4 w-4" />
-          Create Tournament
-        </Button>
+
+        <div className="flex justify-end">
+          <Link
+            aria-label="Create new tournament"
+            prefetch
+            href={`/dashboard/organizations/${org.slug}/create`}
+            className="flex flex-row items-center text-right transition-colors hover:text-primary"
+          >
+            <Trophy className="mr-2 h-4 w-4" />
+            Create Tournament
+          </Link>
+        </div>
       </div>
 
       {/* Main Content */}
