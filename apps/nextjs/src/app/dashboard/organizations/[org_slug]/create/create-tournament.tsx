@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -48,7 +49,12 @@ interface TournamentForm {
   phases: Phase[];
 }
 
-export default function CreateTournamentPage() {
+interface OrganizationDashboardPageParams {
+  org_slug: string 
+}
+
+export default function CreateTournament({org_slug}: OrganizationDashboardPageParams) {
+
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<TournamentForm>({
     name: "",
@@ -105,7 +111,7 @@ export default function CreateTournamentPage() {
 
   return (
     <div className="container mx-auto space-y-6 p-6">
-      <h1 className="text-3xl font-bold">Create Tournament</h1>
+      <h1 className="text-3xl font-bold">Create Tournament for {org_slug}</h1>
 
       {/* Step Progress */}
       <div className="mb-6 flex justify-between">

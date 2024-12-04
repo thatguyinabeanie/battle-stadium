@@ -1,4 +1,5 @@
 import { db } from "@battle-stadium/db";
+import CreateTournament from "./create-tournament";
 
 interface OrganizationDashboardPageParams {
   params: Promise<{ org_slug: string }>;
@@ -19,5 +20,7 @@ export default async function CreateTournamentPage({
 }: OrganizationDashboardPageParams) {
   const { org_slug } = await params;
 
-  return <h1>Create TOurnament - {org_slug}</h1>;
+  return (
+    <CreateTournament org_slug={org_slug} />
+  )
 }
