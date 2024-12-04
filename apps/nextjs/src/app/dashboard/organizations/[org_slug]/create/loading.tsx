@@ -47,21 +47,21 @@ interface TournamentForm {
 }
 
 const formData: TournamentForm = {
-    name: "",
-    description: "",
-    startDate: new Date(),
-    requireCheckIn: false,
-    game: "",
-    format: "",
-    teamSheetRequired: true,
-    openTeamSheet: true,
-    registrationType: "Open",
-    playerCap: false,
-    maxPlayers: 0,
-    allowLateRegistration: false,
-    allowLateTeamSheet: false,
-    allowLateCheckIn: false,
-    phases: [],
+  name: "",
+  description: "",
+  startDate: new Date(),
+  requireCheckIn: false,
+  game: "",
+  format: "",
+  teamSheetRequired: true,
+  openTeamSheet: true,
+  registrationType: "Open",
+  playerCap: false,
+  maxPlayers: 0,
+  allowLateRegistration: false,
+  allowLateTeamSheet: false,
+  allowLateCheckIn: false,
+  phases: [],
 };
 
 const currentStep = 1;
@@ -98,44 +98,31 @@ export default function CreateTournament() {
 
       {/* Step Content */}
       <div className="py-4">
-        {(
+        {
           <div className="space-y-4">
             <div>
               <Label htmlFor="name">Tournament Name</Label>
-              <Input
-                name="name"
-                value={formData.name}
-              />
+              <Input name="name" value={formData.name} />
             </div>
             <div>
               <Label htmlFor="description">Description</Label>
-              <Textarea
-                name="description"
-                value={formData.description}
-              />
+              <Textarea name="description" value={formData.description} />
             </div>
             <div>
               <Label>Start Date and Time</Label>
-              <DatePicker
-                date={formData.startDate}
-              />
+              <DatePicker date={formData.startDate} />
             </div>
             <div>
               <Label>Require Check-In</Label>
-              <Switch
-                checked={formData.requireCheckIn}
-              />
+              <Switch checked={formData.requireCheckIn} />
             </div>
           </div>
-        )}
+        }
       </div>
 
       {/* Navigation */}
       <div className="mt-6 flex justify-between">
-        <Button
-          variant="outline"
-          disabled
-        >
+        <Button variant="outline" disabled>
           <ChevronLeft className="mr-2 h-4 w-4" />
           Back
         </Button>
