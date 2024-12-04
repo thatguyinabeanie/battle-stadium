@@ -13,6 +13,7 @@ export * from "./components/chip";
 export * from "./components/collapsible";
 export * from "./components/context-menu";
 export * from "./components/data-table";
+export * from "./components/date-picker";
 export * from "./components/dialog";
 export * from "./components/drawer";
 export * from "./components/dropdown-menu";

@@ -22,7 +22,7 @@ const STEPS = [
   { id: 4, title: "Registration" },
 ];
 
-function CreateTournamentDialog () {
+export default function CreateTournamentDialog () {
   const [open, setOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -49,6 +49,7 @@ function CreateTournamentDialog () {
     // TODO: Implement tournament creation
     setOpen(false);
     setCurrentStep(1);
+    await new Promise((resolve) => setTimeout(resolve, 500));
   };
 
   return (
