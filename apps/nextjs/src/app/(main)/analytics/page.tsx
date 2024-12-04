@@ -6,12 +6,8 @@ export const metadata: Metadata = {
   title: "Analytics",
 };
 
-export default function PlayersPage() {
+export default function AnalyticsPage () {
   return (
-    <ComingSoon title={"Analytics"}>
-      <div className="flex flex-col items-center">
-        <h2>Analytics is under construction</h2>
-      </div>
-    </ComingSoon>
+    <ComingSoon title="Analytics" />
   );
 }

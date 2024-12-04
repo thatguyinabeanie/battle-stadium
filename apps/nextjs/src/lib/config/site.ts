@@ -33,6 +33,11 @@ export const NavbarItemsConfigs: NavbarItemConfig[] = [
     logo: Bot,
   },
   {
+    value: "articles",
+    label: "Articles",
+    logo: GalleryVerticalEnd,
+  },
+  {
     value: "analytics",
     label: "Analytics",
     logo: PieChart,

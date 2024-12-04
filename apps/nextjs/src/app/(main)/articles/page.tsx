@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import ComingSoon from "~/components/coming-soon";
 
 export const metadata: Metadata = {
-  title: "Player Profiles",
+  title: "Articles",
 };
 
-export default function PlayerProfilesPage () {
+export default function ArticlesPage () {
   return (
-    <ComingSoon title="Player Profiles" />
+    <ComingSoon title="Articles" />
   );
 }

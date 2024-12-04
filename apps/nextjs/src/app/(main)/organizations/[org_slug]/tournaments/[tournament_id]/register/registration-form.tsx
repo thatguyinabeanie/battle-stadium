@@ -18,7 +18,7 @@ interface TournamentRegistrationProps {
     tournament_id: number,
   ) => Promise<PostTournamentRegistrationResponse | undefined>;
 }
-export function RegistrationForm(
+export default function RegistrationForm(
   props: Readonly<TournamentRegistrationProps>,
 ) {
   const { children } = props;
