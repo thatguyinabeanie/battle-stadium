@@ -1,6 +1,15 @@
 import { useState } from "react";
-import { Button, Input, Textarea, Select, Checkbox, Switch, Label } from "@battle-stadium/ui";
-import {ChevronRight, ChevronLeft} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+import {
+  Button,
+  Checkbox,
+  Input,
+  Label,
+  Select,
+  Switch,
+  Textarea,
+} from "@battle-stadium/ui";
 
 const STEPS = [
   { id: 1, title: "Tournament Information" },
@@ -10,7 +19,7 @@ const STEPS = [
   { id: 5, title: "Phases" },
 ];
 
-interface Phase  {
+interface Phase {
   name: string;
   pairingSystem: string; // "Swiss" | "Single Elimination";
   bestOf: number; //1 | 3 | 5 | 7;
@@ -31,17 +40,17 @@ interface TournamentForm {
   teamSheetRequired: boolean;
   openTeamSheet: boolean;
   registrationType: string; //| "Open" | "Entry Code" | "Single-Use Code" | "Invite Only",
-  playerCap: boolean,
-  maxPlayers: number,
+  playerCap: boolean;
+  maxPlayers: number;
   allowLateRegistration: boolean;
   allowLateTeamSheet: boolean;
   allowLateCheckIn: boolean;
-  phases: Phase[],
+  phases: Phase[];
 }
 
 export default function CreateTournamentPage() {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<TournamentForm>({   
+  const [formData, setFormData] = useState<TournamentForm>({
     name: "",
     description: "",
     startDate: new Date(),
@@ -95,11 +104,11 @@ export default function CreateTournamentPage() {
   };
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="container mx-auto space-y-6 p-6">
       <h1 className="text-3xl font-bold">Create Tournament</h1>
 
       {/* Step Progress */}
-      <div className="flex justify-between mb-6">
+      <div className="mb-6 flex justify-between">
         {STEPS.map((step) => (
           <div
             key={step.id}
@@ -109,16 +118,16 @@ export default function CreateTournamentPage() {
           >
             <div className="flex flex-col items-center">
               <div
-                className={`w-8 h-8 rounded-full border-2 flex items-center justify-center ${
+                className={`flex h-8 w-8 items-center justify-center rounded-full border-2 ${
                   step.id === currentStep ? "border-primary" : "border-muted"
                 }`}
               >
                 {step.id}
               </div>
-              <span className="text-xs mt-1">{step.title}</span>
+              <span className="mt-1 text-xs">{step.title}</span>
             </div>
             {step.id !== STEPS.length && (
-              <ChevronRight className="w-4 h-4 mx-2" />
+              <ChevronRight className="mx-2 h-4 w-4" />
             )}
           </div>
         ))}
@@ -203,7 +212,10 @@ export default function CreateTournamentPage() {
               <Switch
                 checked={formData.teamSheetRequired}
                 onCheckedChange={(checked) =>
-                  setFormData((prevFormData) => ({ ...prevFormData, teamSheetRequired: checked } ))
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    teamSheetRequired: checked,
+                  }))
                 }
               />
             </div>
@@ -227,7 +239,10 @@ export default function CreateTournamentPage() {
                 name="registrationType"
                 value={formData.registrationType}
                 onValueChange={(value) =>
-                  setFormData( (prevFormData) => ({ ...prevFormData, registrationType: value }))
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    registrationType: value,
+                  }))
                 }
               >
                 <option value="Open">Open Registration</option>
@@ -253,7 +268,10 @@ export default function CreateTournamentPage() {
                   type="number"
                   value={formData.maxPlayers}
                   onChange={(e) =>
-                    setFormData({ ...formData, maxPlayers: parseInt(e.target.value,10) })
+                    setFormData({
+                      ...formData,
+                      maxPlayers: parseInt(e.target.value, 10),
+                    })
                   }
                 />
               </div>
@@ -269,7 +287,7 @@ export default function CreateTournamentPage() {
                 onChange={() =>
                   setFormData((prevFormData) => ({
                     ...prevFormData,
-                    allowLateRegistration: !prevFormData.allowLateRegistration
+                    allowLateRegistration: !prevFormData.allowLateRegistration,
                   }))
                 }
               />
@@ -279,9 +297,9 @@ export default function CreateTournamentPage() {
               <Checkbox
                 checked={formData.allowLateTeamSheet}
                 onChange={() =>
-                  setFormData((prevFormData)=> ({
+                  setFormData((prevFormData) => ({
                     ...prevFormData,
-                    allowLateTeamSheet:!prevFormData.allowLateTeamSheet
+                    allowLateTeamSheet: !prevFormData.allowLateTeamSheet,
                   }))
                 }
               />
@@ -291,9 +309,9 @@ export default function CreateTournamentPage() {
               <Checkbox
                 checked={formData.allowLateCheckIn}
                 onChange={() =>
-                  setFormData((prevFormData)=> ({
+                  setFormData((prevFormData) => ({
                     ...prevFormData,
-                    allowLateCheckIn:!prevFormData.allowLateCheckIn
+                    allowLateCheckIn: !prevFormData.allowLateCheckIn,
                   }))
                 }
               />
@@ -308,9 +326,7 @@ export default function CreateTournamentPage() {
               <div key={index} className="space-y-4">
                 {index > 0 && (
                   <div>
-                    <Label htmlFor={`advancement-${index}`}>
-                      Advancement
-                    </Label>
+                    <Label htmlFor={`advancement-${index}`}>Advancement</Label>
                     <Select
                       name={`advancement-${index}`}
                       value={phase.advancement}
@@ -318,9 +334,7 @@ export default function CreateTournamentPage() {
                         setFormData({
                           ...formData,
                           phases: formData.phases.map((p, i) =>
-                            i === index
-                              ? { ...p, advancement: value }
-                              : p
+                            i === index ? { ...p, advancement: value } : p,
                           ),
                         })
                       }
@@ -344,7 +358,7 @@ export default function CreateTournamentPage() {
                       setFormData({
                         ...formData,
                         phases: formData.phases.map((p, i) =>
-                          i === index ? { ...p, name: e.target.value } : p
+                          i === index ? { ...p, name: e.target.value } : p,
                         ),
                       })
                     }
@@ -361,9 +375,7 @@ export default function CreateTournamentPage() {
                       setFormData({
                         ...formData,
                         phases: formData.phases.map((p, i) =>
-                          i === index
-                            ? { ...p, pairingSystem: value }
-                            : p
+                          i === index ? { ...p, pairingSystem: value } : p,
                         ),
                       })
                     }
@@ -383,7 +395,7 @@ export default function CreateTournamentPage() {
                       setFormData({
                         ...formData,
                         phases: formData.phases.map((p, i) =>
-                          i === index ? { ...p, bestOf: Number(value) } : p
+                          i === index ? { ...p, bestOf: Number(value) } : p,
                         ),
                       })
                     }
@@ -402,7 +414,7 @@ export default function CreateTournamentPage() {
                       setFormData({
                         ...formData,
                         phases: formData.phases.map((p, i) =>
-                          i === index ? { ...p, roundTimer: checked } : p
+                          i === index ? { ...p, roundTimer: checked } : p,
                         ),
                       })
                     }
@@ -419,7 +431,9 @@ export default function CreateTournamentPage() {
                         setFormData({
                           ...formData,
                           phases: formData.phases.map((p, i) =>
-                            i === index ? { ...p, roundTime: +e.target.value } : p
+                            i === index
+                              ? { ...p, roundTime: +e.target.value }
+                              : p,
                           ),
                         })
                       }
@@ -434,7 +448,7 @@ export default function CreateTournamentPage() {
                       setFormData({
                         ...formData,
                         phases: formData.phases.map((p, i) =>
-                          i === index ? { ...p, matchCheckIn: checked } : p
+                          i === index ? { ...p, matchCheckIn: checked } : p,
                         ),
                       })
                     }
@@ -453,7 +467,9 @@ export default function CreateTournamentPage() {
                         setFormData({
                           ...formData,
                           phases: formData.phases.map((p, i) =>
-                            i === index ? { ...p, checkInTime: +e.target.value } : p
+                            i === index
+                              ? { ...p, checkInTime: +e.target.value }
+                              : p,
                           ),
                         })
                       }
@@ -468,13 +484,13 @@ export default function CreateTournamentPage() {
       </div>
 
       {/* Navigation */}
-      <div className="flex justify-between mt-6">
+      <div className="mt-6 flex justify-between">
         <Button
           variant="outline"
           onClick={handleBack}
           disabled={currentStep === 1}
         >
-          <ChevronLeft className="w-4 h-4 mr-2" />
+          <ChevronLeft className="mr-2 h-4 w-4" />
           Back
         </Button>
         {currentStep === STEPS.length ? (
@@ -482,7 +498,7 @@ export default function CreateTournamentPage() {
         ) : (
           <Button onClick={handleNext}>
             Next
-            <ChevronRight className="w-4 h-4 ml-2" />
+            <ChevronRight className="ml-2 h-4 w-4" />
           </Button>
         )}
       </div>
