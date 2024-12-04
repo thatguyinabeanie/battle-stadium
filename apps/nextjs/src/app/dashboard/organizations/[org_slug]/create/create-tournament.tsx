@@ -1,10 +1,13 @@
 "use client";
+
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import type { Organization } from "@battle-stadium/db/schema";
 import {
   Button,
   Checkbox,
+  DatePicker,
   Input,
   Label,
   Select,
@@ -34,7 +37,7 @@ interface Phase {
 interface TournamentForm {
   name: string;
   description: string;
-  startDate: Date;
+  startDate?: Date;
   requireCheckIn: boolean;
   game: string;
   format: string;
@@ -49,13 +52,15 @@ interface TournamentForm {
   phases: Phase[];
 }
 
-interface OrganizationDashboardPageParams {
-  org_slug: string 
+interface OrganizationDashboardPageProps {
+  org: Organization;
 }
 
-export default function CreateTournament({org_slug}: OrganizationDashboardPageParams) {
-
+export default function CreateTournament({
+  org,
+}: OrganizationDashboardPageProps) {
   const [currentStep, setCurrentStep] = useState(1);
+  // TODO: replace with form library like react-hook-form
   const [formData, setFormData] = useState<TournamentForm>({
     name: "",
     description: "",
@@ -111,7 +116,7 @@ export default function CreateTournament({org_slug}: OrganizationDashboardPagePa
 
   return (
     <div className="container mx-auto space-y-6 p-6">
-      <h1 className="text-3xl font-bold">Create Tournament for {org_slug}</h1>
+      <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1>
 
       {/* Step Progress */}
       <div className="mb-6 flex justify-between">
@@ -166,12 +171,15 @@ export default function CreateTournament({org_slug}: OrganizationDashboardPagePa
             <div>
               <Label>Start Date and Time</Label>
 
-              {/* <DatePicker
+              <DatePicker
                 date={formData.startDate}
                 setDate={(date) =>
-                  setFormData({ ...formData, startDate: date })
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    startDate: date,
+                  }))
                 }
-              /> */}
+              />
             </div>
             <div>
               <Label>Require Check-In</Label>
@@ -276,7 +284,7 @@ export default function CreateTournament({org_slug}: OrganizationDashboardPagePa
                   onChange={(e) =>
                     setFormData({
                       ...formData,
-                      maxPlayers: parseInt(e.target.value, 10),
+                      maxPlayers: Number.parseInt(e.target.value, 10),
                     })
                   }
                 />

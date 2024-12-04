@@ -13,7 +13,7 @@ import {
   TabsTrigger,
 } from "@battle-stadium/ui";
 
-import { findOrganizationBySlug } from "~/app/server-actions/organizations/actions";
+import { getOrganizationBySlug } from "~/app/server-actions/organizations/actions";
 
 export default async function OrgDashboardContent({
   org_slug,
@@ -22,7 +22,7 @@ export default async function OrgDashboardContent({
 }) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const org = await findOrganizationBySlug(org_slug);
+  const org = await getOrganizationBySlug(org_slug);
   if (!org) {
     notFound();
   }
