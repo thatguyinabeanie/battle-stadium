@@ -12,13 +12,13 @@ const STEPS = [
 
 interface Phase  {
   name: string;
-  pairingSystem: "Swiss" | "Single Elimination";
-  bestOf: 1 | 3 | 5 | 7;
+  pairingSystem: string; // "Swiss" | "Single Elimination";
+  bestOf: number; //1 | 3 | 5 | 7;
   roundTimer: boolean;
   roundTime: number;
   matchCheckIn: boolean;
   checkInTime: number;
-  advancement: "traditional" | "minimum-point" | "points-min-players";
+  advancement: string; //"traditional" | "minimum-point" | "points-min-players";
 }
 
 interface TournamentForm {
@@ -28,9 +28,9 @@ interface TournamentForm {
   requireCheckIn: boolean;
   game: string;
   format: string;
-  teamSheetRequired: true,
-  openTeamSheet: true,
-  registrationType: "Open" | "Entry Code" | "Single-Use Code" | "Invite Only",
+  teamSheetRequired: boolean;
+  openTeamSheet: boolean;
+  registrationType: string; //| "Open" | "Entry Code" | "Single-Use Code" | "Invite Only",
   playerCap: boolean,
   maxPlayers: number,
   allowLateRegistration: boolean;
@@ -71,8 +71,7 @@ export default function CreateTournamentPage() {
     }
   };
 
-  const handleSubmit = async () => {
-    // TODO: Implement tournament creation
+  const handleSubmit = () => {
     console.log(formData);
   };
 
@@ -132,7 +131,7 @@ export default function CreateTournamentPage() {
             <div>
               <Label htmlFor="name">Tournament Name</Label>
               <Input
-                id="name"
+                name="name"
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
@@ -142,7 +141,7 @@ export default function CreateTournamentPage() {
             <div>
               <Label htmlFor="description">Description</Label>
               <Textarea
-                id="description"
+                name="description"
                 value={formData.description}
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
@@ -176,10 +175,10 @@ export default function CreateTournamentPage() {
             <div>
               <Label htmlFor="game">Game</Label>
               <Select
-                id="game"
+                name="game"
                 value={formData.game}
-                onChange={(e) =>
-                  setFormData({ ...formData, game: e.target.value })
+                onValueChange={(value) =>
+                  setFormData({ ...formData, game: value })
                 }
               >
                 <option value="game1">Game 1</option>
@@ -189,10 +188,10 @@ export default function CreateTournamentPage() {
             <div>
               <Label htmlFor="format">Format</Label>
               <Select
-                id="format"
+                name="format"
                 value={formData.format}
-                onChange={(e) =>
-                  setFormData({ ...formData, format: e.target.value })
+                onValueChange={(value) =>
+                  setFormData({ ...formData, format: value })
                 }
               >
                 <option value="single-elimination">Single Elimination</option>
@@ -204,7 +203,7 @@ export default function CreateTournamentPage() {
               <Switch
                 checked={formData.teamSheetRequired}
                 onCheckedChange={(checked) =>
-                  setFormData({ ...formData, teamSheetRequired: checked })
+                  setFormData((prevFormData) => ({ ...prevFormData, teamSheetRequired: checked } ))
                 }
               />
             </div>
@@ -225,10 +224,10 @@ export default function CreateTournamentPage() {
             <div>
               <Label htmlFor="registrationType">Registration Type</Label>
               <Select
-                id="registrationType"
+                name="registrationType"
                 value={formData.registrationType}
-                onChange={(e) =>
-                  setFormData({ ...formData, registrationType: e.target.value })
+                onValueChange={(value) =>
+                  setFormData( (prevFormData) => ({ ...prevFormData, registrationType: value }))
                 }
               >
                 <option value="Open">Open Registration</option>
@@ -250,11 +249,11 @@ export default function CreateTournamentPage() {
               <div>
                 <Label htmlFor="maxPlayers">Max Players</Label>
                 <Input
-                  id="maxPlayers"
+                  name="maxPlayers"
                   type="number"
                   value={formData.maxPlayers}
                   onChange={(e) =>
-                    setFormData({ ...formData, maxPlayers: +e.target.value })
+                    setFormData({ ...formData, maxPlayers: parseInt(e.target.value,10) })
                   }
                 />
               </div>
@@ -267,11 +266,11 @@ export default function CreateTournamentPage() {
             <div>
               <Checkbox
                 checked={formData.allowLateRegistration}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    allowLateRegistration: e.target.checked,
-                  })
+                onChange={() =>
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    allowLateRegistration: !prevFormData.allowLateRegistration
+                  }))
                 }
               />
               <Label>Allow Late Registration</Label>
@@ -279,11 +278,11 @@ export default function CreateTournamentPage() {
             <div>
               <Checkbox
                 checked={formData.allowLateTeamSheet}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    allowLateTeamSheet: e.target.checked,
-                  })
+                onChange={() =>
+                  setFormData((prevFormData)=> ({
+                    ...prevFormData,
+                    allowLateTeamSheet:!prevFormData.allowLateTeamSheet
+                  }))
                 }
               />
               <Label>Allow Late Team Sheet Submission</Label>
@@ -291,11 +290,11 @@ export default function CreateTournamentPage() {
             <div>
               <Checkbox
                 checked={formData.allowLateCheckIn}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    allowLateCheckIn: e.target.checked,
-                  })
+                onChange={() =>
+                  setFormData((prevFormData)=> ({
+                    ...prevFormData,
+                    allowLateCheckIn:!prevFormData.allowLateCheckIn
+                  }))
                 }
               />
               <Label>Allow Late Check-In</Label>
@@ -313,14 +312,14 @@ export default function CreateTournamentPage() {
                       Advancement
                     </Label>
                     <Select
-                      id={`advancement-${index}`}
+                      name={`advancement-${index}`}
                       value={phase.advancement}
-                      onChange={(e) =>
+                      onValueChange={(value) =>
                         setFormData({
                           ...formData,
                           phases: formData.phases.map((p, i) =>
                             i === index
-                              ? { ...p, advancement: e.target.value }
+                              ? { ...p, advancement: value }
                               : p
                           ),
                         })
@@ -356,14 +355,14 @@ export default function CreateTournamentPage() {
                     Pairing System
                   </Label>
                   <Select
-                    // id={`pairing-system-${index}`}
+                    name={`pairing-system-${index}`}
                     value={phase.pairingSystem}
-                    onChange={(e) =>
+                    onValueChange={(value) =>
                       setFormData({
                         ...formData,
                         phases: formData.phases.map((p, i) =>
                           i === index
-                            ? { ...p, pairingSystem: e.target.value }
+                            ? { ...p, pairingSystem: value }
                             : p
                         ),
                       })
@@ -378,13 +377,13 @@ export default function CreateTournamentPage() {
                 <div>
                   <Label htmlFor={`best-of-${index}`}>Best Of</Label>
                   <Select
-                    id={`best-of-${index}`}
-                    value={phase.bestOf}
-                    onChange={(e) =>
+                    name={`best-of-${index}`}
+                    value={String(phase.bestOf)}
+                    onValueChange={(value) =>
                       setFormData({
                         ...formData,
                         phases: formData.phases.map((p, i) =>
-                          i === index ? { ...p, bestOf: +e.target.value } : p
+                          i === index ? { ...p, bestOf: Number(value) } : p
                         ),
                       })
                     }
