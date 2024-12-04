@@ -17,8 +17,8 @@ export default function OrgDashboardContentSkeleton() {
       {/* Organization Header */}
       <div className="grid grid-cols-2 items-center justify-between">
         <div>
-          <div className="text-3xl font-bold"> 
-            <div className="w-3/4 h-9 bg-neutral-900 animate-pulse rounded-xl"/>
+          <div className="text-3xl font-bold">
+            <div className="h-9 w-3/4 animate-pulse rounded-xl bg-neutral-900" />
           </div>
           <p className="text-muted-foreground">Organization Dashboard</p>
         </div>
