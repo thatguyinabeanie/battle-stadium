@@ -1,4 +1,4 @@
-import { Separator } from "@battle-stadium/ui";
+import { cn, Separator } from "@battle-stadium/ui";
 import {
   SidebarInset,
   SidebarProvider,
@@ -16,7 +16,13 @@ const LAYOUT_CONSTANTS = {
 } as const;
 
 const HEADER_CLASSES = {
-  CONTAINER: cn(`flex shrink-0 items-center gap-2 transition-[width,height] ease-linear mr-4 mt-4 rounded-xl border-none bg-neutral-900/50`),
+  CONTAINER: cn(
+    "flex shrink-0 items-center gap-2",
+    "transition-[width,height] ease-linear",
+    "mr-4 mt-4 rounded-xl border-none bg-neutral-900/50",
+    LAYOUT_CONSTANTS.HEADER_HEIGHT,
+    `group-has-[data-collapsible=icon]/sidebar-wrapper:${LAYOUT_CONSTANTS.HEADER_HEIGHT_COLLAPSED}`,
+  ),
   INNER: `flex items-center gap-2 px-4`,
 } as const;
 
@@ -36,9 +42,7 @@ export default function DashboardLayout({
         <SideBar>{sidebar}</SideBar>
 
         <SidebarInset className="border-none bg-transparent">
-          <header
-            className={`${HEADER_CLASSES.CONTAINER} ${LAYOUT_CONSTANTS.HEADER_HEIGHT} group-has-[data-collapsible=icon]/sidebar-wrapper:${LAYOUT_CONSTANTS.HEADER_HEIGHT_COLLAPSED}`}
-          >
+          <header className={HEADER_CLASSES.CONTAINER}>
             <div className={HEADER_CLASSES.INNER}>
               <SidebarTrigger className="ml-1" aria-label="Open Sidebar" />
               <Separator
