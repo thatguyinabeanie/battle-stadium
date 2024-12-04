@@ -40,8 +40,10 @@ export default function DashboardLayout({
     <BreadCrumbsProvider>
       <SidebarProvider className="border-none">
         <SideBar>{sidebar}</SideBar>
+
         <SidebarInset className="border-none bg-transparent">
           <BreadCrumbsContainer>{breadcrumbs}</BreadCrumbsContainer>
+
           <div
             aria-label="dashboard content"
             className="my-4 mr-4 flex flex-1 flex-col gap-4 rounded-xl bg-neutral-900/50"
@@ -56,14 +58,15 @@ export default function DashboardLayout({
 
 function BreadCrumbsContainer({ children }: ChildrenProps) {
   return (
-    <header className={HEADER_CLASSES.CONTAINER}>
+    <header role="banner" className={HEADER_CLASSES.CONTAINER}>
       <div className={HEADER_CLASSES.INNER}>
         <SidebarTrigger className="ml-1" aria-label="Open Sidebar" />
         <Separator
+          aria-hidden="true"
           orientation="vertical"
           className={`mr-2 ${LAYOUT_CONSTANTS.SEPARATOR_HEIGHT}`}
         />
-        {children}
+        <nav aria-label="Breadcrumb navigation">{children}</nav>
       </div>
     </header>
   );

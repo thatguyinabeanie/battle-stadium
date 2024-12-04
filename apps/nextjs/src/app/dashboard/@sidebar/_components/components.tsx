@@ -46,8 +46,11 @@ export function CollapsibleMenuNavItem({ item }: CollapsibleMenuNavItemProps) {
       aria-label={`${item.title} navigation section`}
       aria-controls={`${item.title.toLowerCase()}-content`}
     >
-      <SidebarMenuItem>
-        <SidebarMenuButtonCollapsibleTrigger item={item} />
+      <SidebarMenuItem className="items-center">
+        <div className="flex items-center gap-2">
+          <SidebarNavItemLink item={item} />
+          <SidebarMenuButtonCollapsibleTrigger item={item} />
+        </div>
         <SidebarMenuCollapsibleContent item={item} />
       </SidebarMenuItem>
     </Collapsible>
@@ -57,46 +60,48 @@ export function CollapsibleMenuNavItem({ item }: CollapsibleMenuNavItemProps) {
 export function SidebarMenuButtonCollapsibleTrigger({
   item,
 }: CollapsibleMenuNavItemProps) {
+  if (!item.items?.length) {
+    return null;
+  }
+
+  return (
+    <CollapsibleTrigger asChild>
+      <SidebarMenuButton
+        className="flex items-center"
+        tooltip={item.title}
+        aria-current={item.isActive ? "page" : undefined}
+      >
+        <ChevronRight className="ml-auto text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+      </SidebarMenuButton>
+    </CollapsibleTrigger>
+  );
+}
+
+function SidebarNavItemLink({ item }: CollapsibleMenuNavItemProps) {
   const title = (
     <span className="max-w-[12rem] truncate text-primary">{item.title}</span>
   );
 
-  const hasItems = !!item.items?.length;
-
   return (
-    <div className="flex flex-row">
-      <Link
-        href={item.url}
-        className="text-md flex flex-row items-center justify-start gap-2 p-2"
-      >
-        {item.icon ? (
-          <item.icon aria-hidden="true" className="text-muted-foreground" />
-        ) : null}
+    <Link
+      href={item.url}
+      className="text-md flex flex-row items-center justify-start gap-2 p-2"
+    >
+      {item.icon ? (
+        <item.icon aria-hidden="true" className="text-muted-foreground" />
+      ) : null}
 
-        {item.title.length < 20 && title}
+      {item.title.length < 20 && title}
 
-        {item.title.length >= 20 && (
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>{title}</TooltipTrigger>
-              <TooltipContent>{item.title}</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        )}
-      </Link>
-
-      {hasItems && (
-        <CollapsibleTrigger asChild>
-          <SidebarMenuButton
-            className="flex items-center"
-            tooltip={item.title}
-            aria-current={item.isActive ? "page" : undefined}
-          >
-            <ChevronRight className="ml-auto text-muted-foreground transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-          </SidebarMenuButton>
-        </CollapsibleTrigger>
+      {item.title.length >= 20 && (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>{title}</TooltipTrigger>
+            <TooltipContent>{item.title}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )}
-    </div>
+    </Link>
   );
 }
 

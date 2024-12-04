@@ -33,9 +33,7 @@ export default async function OrgDashboardContent({
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">{org.name}</h1>
-          <p className="text-muted-foreground">
-            Organization Dashboard
-          </p>
+          <p className="text-muted-foreground">Organization Dashboard</p>
         </div>
         <Button>
           <Trophy className="mr-2 h-4 w-4" />
