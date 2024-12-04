@@ -29,6 +29,7 @@ export function DatePicker() {
     <Popover>
       <PopoverTrigger asChild>
         <Button
+          aria-label="Select date"
           variant={"outline"}
           className={cn(
             "w-[280px] justify-start text-left font-normal",
@@ -46,10 +47,16 @@ export function DatePicker() {
   );
 }
 
+const MAX_DATE = new Date();
+const MIN_DATE = new Date("1900-01-01");
+
 const FormSchema = z.object({
-  dob: z.date({
-    required_error: "A date of birth is required.",
-  }),
+  dob: z
+    .date({
+      required_error: "A date of birth is required.",
+    })
+    .min(MIN_DATE, "Date must be after 1900")
+    .max(MAX_DATE, "Date cannot be in the future"),
 });
 
 export function DatePickerForm() {
@@ -86,7 +93,6 @@ export function DatePickerForm() {
                         "w-[240px] pl-3 text-left font-normal",
                         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                         !field.value && "text-muted-foreground",
-                        "text-muted-foreground",
                       )}
                     >
                       {
@@ -106,9 +112,7 @@ export function DatePickerForm() {
                     mode="single"
                     selected={field.value}
                     onSelect={field.onChange}
-                    disabled={(date) =>
-                      date > new Date() || date < new Date("1900-01-01")
-                    }
+                    disabled={(date) => date > MAX_DATE || date < MIN_DATE}
                     autoFocus
                   />
                 </PopoverContent>
