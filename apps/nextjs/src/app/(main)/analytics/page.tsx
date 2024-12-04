@@ -6,8 +6,6 @@ export const metadata: Metadata = {
   title: "Analytics",
 };
 
-export default function AnalyticsPage () {
-  return (
-    <ComingSoon title="Analytics" />
-  );
+export default function AnalyticsPage() {
+  return <ComingSoon title="Analytics" />;
 }

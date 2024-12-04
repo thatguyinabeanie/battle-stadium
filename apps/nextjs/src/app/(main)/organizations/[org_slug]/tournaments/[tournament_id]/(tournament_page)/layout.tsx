@@ -54,9 +54,9 @@ export default function OrganizationTournamentsTournamentLayout(
                   title={title}
                   aria-controls={`${value}-tab`}
                   classNames={{
-                    tabsTrigger:
-                    "w-[8rem] px-0",
-                    badge: "md:text-md text-md w-[8rem] px-1 py-1 h-[2rem] justify-center",
+                    tabsTrigger: "w-[8rem] px-0",
+                    badge:
+                      "md:text-md text-md w-[8rem] px-1 py-1 h-[2rem] justify-center",
                   }}
                 />
               ))}

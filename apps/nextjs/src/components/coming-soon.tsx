@@ -1,9 +1,7 @@
 interface ComingSoonProps {
   title: string;
 }
-export default function ComingSoon({
-  title,
-}: Readonly<ComingSoonProps>) {
+export default function ComingSoon({ title }: Readonly<ComingSoonProps>) {
   return (
     <article className="m-4 flex flex-col px-4 py-8 sm:px-8 md:px-16 lg:px-80">
       <section className="animate-fade-in space-y-6 rounded-xl bg-white/10 p-8 text-center shadow-xl backdrop-blur-lg">
