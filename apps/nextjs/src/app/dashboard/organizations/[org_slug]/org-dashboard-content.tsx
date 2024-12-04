@@ -30,7 +30,7 @@ export default async function OrgDashboardContent({
   return (
     <div className="container mx-auto space-y-6 p-6">
       {/* Organization Header */}
-      <div className="items-center grid grid-cols-2">
+      <div className="grid grid-cols-2 items-center">
         <div>
           <h1 className="text-3xl font-bold">{org.name}</h1>
           <p className="text-muted-foreground">Organization Dashboard</p>

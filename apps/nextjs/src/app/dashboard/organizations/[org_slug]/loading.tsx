@@ -1,7 +1,6 @@
 import { Trophy } from "lucide-react";
 
 import {
-  Button,
   Card,
   CardContent,
   CardHeader,
@@ -11,23 +10,22 @@ import {
   TabsList,
   TabsTrigger,
 } from "@battle-stadium/ui";
-import Link from "next/link";
 
 export default function OrgDashboardContentSkeleton() {
   return (
     <div className="container mx-auto space-y-6 p-6">
       {/* Organization Header */}
-      <div className="items-center justify-between grid grid-cols-2">
+      <div className="grid grid-cols-2 items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Loading...</h1>
           <p className="text-muted-foreground">Organization Dashboard</p>
         </div>
 
         <div className="flex justify-end">
-        <div className="flex flex-row text-right">
-          <Trophy className="mr-2 h-4 w-4" />
-          Create Tournament
-        </div>
+          <div className="flex flex-row text-right">
+            <Trophy className="mr-2 h-4 w-4" />
+            Create Tournament
+          </div>
         </div>
       </div>
 
