@@ -14,7 +14,7 @@ export const MIN_DATE = new Date("1900-01-01");
 
 interface DatePickerProps {
   date: Date | undefined;
-  setDate: (date: Date | undefined) => void;
+  setDate?: (date: Date | undefined) => void;
 }
 
 export function DatePicker({ date, setDate }: DatePickerProps) {
