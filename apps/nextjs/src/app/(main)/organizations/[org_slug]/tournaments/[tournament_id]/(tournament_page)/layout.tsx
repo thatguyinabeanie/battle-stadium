@@ -45,7 +45,7 @@ export default function OrganizationTournamentsTournamentLayout(
           defaultValue={DEFAULT_TAB}
           aria-label="Tournament Information Tabs"
         >
-          <div className="flex w-full flex-col items-center overflow-auto">
+          <div className="flex w-full flex-col items-center justify-center overflow-auto">
             <TabsList className="border-x-0 border-t-2">
               {tabs.map(({ value, title }) => (
                 <TabsTrigger
@@ -53,6 +53,11 @@ export default function OrganizationTournamentsTournamentLayout(
                   value={value}
                   title={title}
                   aria-controls={`${value}-tab`}
+                  classNames={{
+                    tabsTrigger: "w-[8rem] px-0",
+                    badge:
+                      "md:text-md text-md w-[8rem] px-1 py-1 h-[2rem] justify-center",
+                  }}
                 />
               ))}
             </TabsList>

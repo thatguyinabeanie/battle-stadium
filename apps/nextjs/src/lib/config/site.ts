@@ -1,6 +1,12 @@
 import type { LucideProps } from "lucide-react";
 import type { ForwardRefExoticComponent, RefAttributes } from "react";
-import { Bot, Frame, GalleryVerticalEnd, PieChart } from "lucide-react";
+import {
+  Bot,
+  Frame,
+  GalleryVerticalEnd,
+  Newspaper,
+  PieChart,
+} from "lucide-react";
 
 export const siteConfig = {
   name: "Battle Stadium",
@@ -31,6 +37,11 @@ export const NavbarItemsConfigs: NavbarItemConfig[] = [
     value: "players",
     label: "Players",
     logo: Bot,
+  },
+  {
+    value: "articles",
+    label: "Articles",
+    logo: Newspaper,
   },
   {
     value: "analytics",
