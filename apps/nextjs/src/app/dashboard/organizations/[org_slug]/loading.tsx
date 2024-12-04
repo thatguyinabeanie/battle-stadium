@@ -2,9 +2,7 @@
 import { Button, Tabs, TabsList, TabsTrigger, TabsContent, Card, CardHeader, CardTitle, CardContent } from "@battle-stadium/ui";
 import { Trophy } from "lucide-react";
 
-
-
-export default async function OrgDashboardContent ({ org_slug }: { org_slug: string }) {
+export default function OrgDashboardContentSkeleton ({ org_slug }: { org_slug: string }) {
   return (
     <div className="container mx-auto p-6 space-y-6">
       {/* Organization Header */ }
