@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ArticlesPage() {
   return (
-    <div className="flex h-full min-h-screen w-full flex-col" >
+    <div className="flex h-full min-h-screen w-full flex-col">
       <ComingSoon title="Articles" />
     </div>
   );

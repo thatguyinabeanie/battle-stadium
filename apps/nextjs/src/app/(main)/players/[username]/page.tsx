@@ -27,8 +27,8 @@ export default async function PlayerProfilePage(
 async function PlayerProfile({ username }: ProfilePageProps) {
   const profile_username = (await getProfile(username))?.username ?? "Player";
   return (
-    <div className="flex h-full min-h-screen w-full flex-col" >
-      <ComingSoon title={ `${profile_username} Profile` } />;
+    <div className="flex h-full min-h-screen w-full flex-col">
+      <ComingSoon title={`${profile_username} Profile`} />;
     </div>
   );
 }
