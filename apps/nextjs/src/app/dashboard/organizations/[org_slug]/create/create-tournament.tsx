@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Textarea, Select, Checkbox, Toggle, Label, DatePicker } from "@battle-stadium/ui";
+import { Button, Input, Textarea, Select, Checkbox, Toggle, Label, DatePicker, Switch } from "@battle-stadium/ui";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@battle-stadium/ui";
 import {ChevronRight, ChevronLeft} from "lucide-react";
 
