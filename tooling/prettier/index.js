@@ -30,7 +30,8 @@ const config = {
     "^[./]",
   ],
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
-  importOrderTypeScriptVersion: "4.4.0",
+  importOrderTypeScriptVersion: "5.6.3",
+  printWidth: 80, // Set the desired maximum line length here
   overrides: [
     {
       files: "*.json.hbs",

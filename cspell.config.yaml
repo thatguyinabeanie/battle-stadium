@@ -45,10 +45,12 @@ words:
   - galar
   - gmax
   - hoenn
+  - ianvs
   - johto
   - kalos
   - kanto
   - limitlesstcg
+  - lintstaged
   - Magnifer
   - Metagame
   - navuser
@@ -74,5 +76,6 @@ words:
   - uploadthing
   - UTSSR
   - vaul
+  - Sonner
 ignoreWords: []
 import: []

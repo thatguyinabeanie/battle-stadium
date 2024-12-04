@@ -30,6 +30,8 @@
     "ryanluker.vscode-coverage-gutters",
     "formulahendry.auto-rename-tag",
     "streetsidesoftware.code-spell-checker",
-    "lokalise.i18n-ally"
+    "lokalise.i18n-ally",
+    "aaron-bond.better-comments",
+    "dbcode.dbcode"
   ]
 }

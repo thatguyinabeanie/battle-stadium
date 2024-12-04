@@ -54,7 +54,9 @@ export async function POST(request: NextRequest) {
   if (!env.DISCORD_APP_PUBLIC_KEY || !env.DISCORD_APP_ID) {
     return new NextResponse(
       "DISCORD_APP_PUBLIC_KEY or DISCORD_APP_ID not initialized",
-      { status: 500 },
+      {
+        status: 500,
+      },
     );
   }
 

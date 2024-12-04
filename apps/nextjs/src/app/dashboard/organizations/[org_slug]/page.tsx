@@ -1,5 +1,7 @@
 import { db } from "@battle-stadium/db";
 
+import OrgDashboardContent from "./org-dashboard-content";
+
 export const revalidate = 60;
 export const dynamicParams = true;
 
@@ -22,13 +24,4 @@ export default async function OrganizationDashboardPage(
 ) {
   const { org_slug } = await props.params;
   return <OrgDashboardContent org_slug={org_slug} />;
-}
-
-function OrgDashboardContent({ org_slug }: { org_slug: string }) {
-  return (
-    <div>
-      <h1>Organization Dashboard</h1>
-      <p>Organization: {org_slug}</p>
-    </div>
-  );
 }
