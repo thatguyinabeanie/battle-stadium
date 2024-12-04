@@ -102,11 +102,11 @@ export default function CreateTournament() {
           <div className="space-y-4">
             <div>
               <Label htmlFor="name">Tournament Name</Label>
-              <Input name="name" value={formData.name} />
+              <Input name="name" disabled />
             </div>
             <div>
               <Label htmlFor="description">Description</Label>
-              <Textarea name="description" value={formData.description} />
+              <Textarea name="description" disabled />
             </div>
             <div>
               <Label>Start Date and Time</Label>
@@ -114,7 +114,7 @@ export default function CreateTournament() {
             </div>
             <div>
               <Label>Require Check-In</Label>
-              <Switch checked={formData.requireCheckIn} />
+              <Switch disabled />
             </div>
           </div>
         }

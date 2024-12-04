@@ -15,9 +15,12 @@ export const MIN_DATE = new Date("1900-01-01");
 interface DatePickerProps {
   date: Date | undefined;
   setDate?: (date: Date | undefined) => void;
+  disabled?: boolean;
 }
 
-export function DatePicker({ date, setDate }: DatePickerProps) {
+// TODO: make popover content background not transparent
+
+export function DatePicker({ date, setDate, disabled }: DatePickerProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -28,6 +31,7 @@ export function DatePicker({ date, setDate }: DatePickerProps) {
             "w-[280px] justify-start text-left font-normal",
             !date && "text-muted-foreground",
           )}
+          disabled={disabled}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {date ? format(date, "PPP") : <span>Pick a date</span>}
