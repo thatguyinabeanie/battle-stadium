@@ -41,7 +41,7 @@ export default async function OrgDashboardContent({
             aria-label="Create new tournament"
             prefetch
             href={`/dashboard/organizations/${org.slug}/create`}
-            className="flex flex-row items-center text-right hover:text-primary transition-colors"
+            className="flex flex-row items-center text-right transition-colors hover:text-primary"
           >
             <Trophy className="mr-2 h-4 w-4" />
             Create Tournament
