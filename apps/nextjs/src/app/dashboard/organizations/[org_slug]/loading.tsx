@@ -9,7 +9,7 @@ export default function OrgDashboardContentSkeleton () {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold">Loading...</h1>
-          <p className="text-muted-foreground">Tournament Organization Dashboard</p>
+          <p className="text-muted-foreground">Organization Dashboard</p>
         </div>
         <Button>
           <Trophy className="mr-2 h-4 w-4" />
@@ -30,6 +30,7 @@ export default function OrgDashboardContentSkeleton () {
             <CardHeader>
               <CardTitle>Active Tournaments</CardTitle>
             </CardHeader>
+
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {/* Placeholder for tournament cards */ }
@@ -43,28 +44,36 @@ export default function OrgDashboardContentSkeleton () {
           </Card>
         </TabsContent>
 
-        <TabsContent value="upcoming">
+        <TabsContent value="upcoming" className="space-y-4">
           <Card>
             <CardHeader>
               <CardTitle>Upcoming Tournaments</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                No upcoming tournaments scheduled
-              </p>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <Card className="p-4">
+                  <p className="text-sm text-muted-foreground">
+                    No upcoming tournaments scheduled
+                  </p>
+                </Card>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="past">
+        <TabsContent value="past" className="space-y-4">
           <Card>
             <CardHeader>
               <CardTitle>Past Tournaments</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                No past tournaments found
-              </p>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <Card className="p-4">
+                  <p className="text-sm text-muted-foreground">
+                    No past tournaments found
+                  </p>
+                </Card>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
