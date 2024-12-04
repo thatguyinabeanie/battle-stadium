@@ -38,7 +38,13 @@ export function DatePicker({ date, setDate, disabled }: DatePickerProps) {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <Calendar mode="single" selected={date} onSelect={setDate} autoFocus />
+        <Calendar 
+          autoFocus 
+          mode="single" 
+          selected={date} 
+          onSelect={setDate} 
+          hidden={{before: MIN_DATE, after: MAX_DATE}}
+        />
       </PopoverContent>
     </Popover>
   );
