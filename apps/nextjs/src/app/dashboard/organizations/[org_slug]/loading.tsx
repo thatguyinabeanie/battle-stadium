@@ -21,7 +21,7 @@ export default function OrgDashboardContentSkeleton() {
           <h1 className="text-3xl font-bold">Loading...</h1>
           <p className="text-muted-foreground">Organization Dashboard</p>
         </div>
-        <Button>
+        <Button disabled>
           <Trophy className="mr-2 h-4 w-4" />
           Create Tournament
         </Button>
@@ -30,9 +30,15 @@ export default function OrgDashboardContentSkeleton() {
       {/* Main Content */}
       <Tabs defaultValue="active" className="w-full">
         <TabsList>
-          <TabsTrigger value="active">Active Tournaments</TabsTrigger>
-          <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
-          <TabsTrigger value="past">Past</TabsTrigger>
+          <TabsTrigger disabled value="active">
+            Active Tournaments
+          </TabsTrigger>
+          <TabsTrigger disabled value="upcoming">
+            Upcoming
+          </TabsTrigger>
+          <TabsTrigger disabled value="past">
+            Past
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="active" className="space-y-4">
