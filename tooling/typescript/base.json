@@ -26,5 +26,5 @@
     "moduleResolution": "Bundler",
     "noEmit": true
   },
-  "exclude": ["node_modules", "build", "dist", ".next", ".expo", ".yarn", ".cache", ".vscode", ".github", ".husky", ".lintstaged", ".prettierrc.js", "jest.config.js", "babel.config.js", "webpack.config.js", "rollup.config.js", "vite.config.js", "next.config.js", "tsconfig.json", "tsconfig.base.json", "tsconfig.build.json", "tsconfig.eslint.json", "tsconfig.jest.json", "tsconfig.prettier.json", "tsconfig.types.json", "tsconfig.webpack.json", "tsconfig.rollup.json", "tsconfig.vite.json", "tsconfig.next"]
+  "exclude": ["node_modules", "build", "dist", ".next", ".expo", ".yarn", ".cache", ".vscode", ".github", ".husky", ".lintstaged", ".lint-staged", ".prettierrc.js", "jest.config.js", "babel.config.js", "webpack.config.js", "rollup.config.js", "vite.config.js", "next.config.js", "tsconfig.json", "tsconfig.base.json", "tsconfig.build.json", "tsconfig.eslint.json", "tsconfig.jest.json", "tsconfig.prettier.json", "tsconfig.types.json", "tsconfig.webpack.json", "tsconfig.rollup.json", "tsconfig.vite.json", "tsconfig.next"]
 }
