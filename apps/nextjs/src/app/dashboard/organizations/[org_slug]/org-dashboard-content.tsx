@@ -34,7 +34,7 @@ export default async function OrgDashboardContent({
         <div>
           <h1 className="text-3xl font-bold">{org.name}</h1>
           <p className="text-muted-foreground">
-            Tournament Organization Dashboard
+            Organization Dashboard
           </p>
         </div>
         <Button>
