@@ -94,7 +94,9 @@ const columns: ColumnDef<OrganizationTournamentView>[] = [
         row.original.tournaments.startAt &&
         new Date(row.original.tournaments.startAt).toLocaleDateString(
           undefined,
-          { dateStyle: "medium" },
+          {
+            dateStyle: "medium",
+          },
         )
       );
     },
