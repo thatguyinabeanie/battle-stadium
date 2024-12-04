@@ -30,19 +30,22 @@ export default async function OrgDashboardContent({
   return (
     <div className="container mx-auto space-y-6 p-6">
       {/* Organization Header */}
-      <div className="flex items-center justify-between">
+      <div className="items-center grid grid-cols-2">
         <div>
           <h1 className="text-3xl font-bold">{org.name}</h1>
           <p className="text-muted-foreground">Organization Dashboard</p>
         </div>
-        <Link
-          prefetch
-          href={`/dashboard/organizations/${org.slug}/create`}
-          className="flex flex-row"
-        >
-          <Trophy className="mr-2 h-4 w-4" />
-          Create Tournament
-        </Link>
+
+        <div className="flex justify-end">
+          <Link
+            prefetch
+            href={`/dashboard/organizations/${org.slug}/create`}
+            className="flex flex-row text-right"
+          >
+            <Trophy className="mr-2 h-4 w-4" />
+            Create Tournament
+          </Link>
+        </div>
       </div>
 
       {/* Main Content */}
