@@ -45,7 +45,7 @@ export default function OrgDashboardContentSkeleton() {
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {/* Placeholder for tournament cards */}
                 <Card className="p-4">
-                  <p className="text-sm text-muted-foreground animate-pulse">
+                  <p className="animate-pulse text-sm text-muted-foreground">
                     No active tournaments
                   </p>
                 </Card>

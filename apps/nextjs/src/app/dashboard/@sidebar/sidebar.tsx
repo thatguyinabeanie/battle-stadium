@@ -8,7 +8,6 @@ import {
 
 import type { ChildrenProps } from "~/types";
 import Footer from "./footer";
-
 import Header from "./header";
 
 const SIDEBAR_DEFAULT_CLASSNAMES = "m-4 rounded-xl bg-neutral-900/50";
