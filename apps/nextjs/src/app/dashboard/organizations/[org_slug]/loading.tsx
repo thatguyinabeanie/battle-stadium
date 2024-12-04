@@ -2,13 +2,13 @@
 import { Button, Tabs, TabsList, TabsTrigger, TabsContent, Card, CardHeader, CardTitle, CardContent } from "@battle-stadium/ui";
 import { Trophy } from "lucide-react";
 
-export default function OrgDashboardContentSkeleton ({ org_slug }: { org_slug: string }) {
+export default function OrgDashboardContentSkeleton () {
   return (
     <div className="container mx-auto p-6 space-y-6">
       {/* Organization Header */ }
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">{ org_slug }</h1>
+          <h1 className="text-3xl font-bold">Loading...</h1>
           <p className="text-muted-foreground">Tournament Organization Dashboard</p>
         </div>
         <Button>

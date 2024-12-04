@@ -1,16 +1,25 @@
 
 import { Button, Tabs, TabsList, TabsTrigger, TabsContent, Card, CardHeader, CardTitle, CardContent } from "@battle-stadium/ui";
 import { Trophy } from "lucide-react";
-
+import { notFound } from "next/navigation";
+import { findOrganizationBySlug } from "~/app/server-actions/organizations/actions";
 
 
 export default async function OrgDashboardContent ({ org_slug }: { org_slug: string }) {
+
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  const org = await findOrganizationBySlug(org_slug);
+  if(!org) {
+    notFound();
+  }
+
   return (
     <div className="container mx-auto p-6 space-y-6">
       {/* Organization Header */ }
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">{ org_slug }</h1>
+          <h1 className="text-3xl font-bold">{ org.name }</h1>
           <p className="text-muted-foreground">Tournament Organization Dashboard</p>
         </div>
         <Button>
@@ -32,6 +41,7 @@ export default async function OrgDashboardContent ({ org_slug }: { org_slug: str
             <CardHeader>
               <CardTitle>Active Tournaments</CardTitle>
             </CardHeader>
+
             <CardContent>
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {/* Placeholder for tournament cards */ }
@@ -45,28 +55,36 @@ export default async function OrgDashboardContent ({ org_slug }: { org_slug: str
           </Card>
         </TabsContent>
 
-        <TabsContent value="upcoming">
+        <TabsContent value="upcoming" className="space-y-4">
           <Card>
             <CardHeader>
               <CardTitle>Upcoming Tournaments</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                No upcoming tournaments scheduled
-              </p>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <Card className="p-4">
+                <p className="text-sm text-muted-foreground">
+                  No upcoming tournaments scheduled
+                </p>
+                </Card>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="past">
+        <TabsContent value="past" className="space-y-4">
           <Card>
             <CardHeader>
               <CardTitle>Past Tournaments</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                No past tournaments found
-              </p>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                <Card className="p-4">
+                  <p className="text-sm text-muted-foreground">
+                    No past tournaments found
+                  </p>
+                </Card>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
