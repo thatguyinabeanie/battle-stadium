@@ -31,6 +31,7 @@
     "formulahendry.auto-rename-tag",
     "streetsidesoftware.code-spell-checker",
     "lokalise.i18n-ally",
-    "aaron-bond.better-comments"
+    "aaron-bond.better-comments",
+    "dbcode.dbcode"
   ]
 }
