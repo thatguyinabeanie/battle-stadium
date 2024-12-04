@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Button, Input, Textarea, Select, Checkbox, Toggle, Label, DatePicker, Switch } from "@battle-stadium/ui";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@battle-stadium/ui";
+import { Button, Input, Textarea, Select, Checkbox, Switch, Label } from "@battle-stadium/ui";
 import {ChevronRight, ChevronLeft} from "lucide-react";
 
 const STEPS = [
@@ -162,9 +161,9 @@ export default function CreateTournamentPage() {
             </div>
             <div>
               <Label>Require Check-In</Label>
-              <Toggle
+              <Switch
                 checked={formData.requireCheckIn}
-                onChange={(checked) =>
+                onCheckedChange={(checked) =>
                   setFormData({ ...formData, requireCheckIn: checked })
                 }
               />
@@ -202,18 +201,18 @@ export default function CreateTournamentPage() {
             </div>
             <div>
               <Label>Team Sheet Submission Required</Label>
-              <Toggle
+              <Switch
                 checked={formData.teamSheetRequired}
-                onChange={(checked) =>
+                onCheckedChange={(checked) =>
                   setFormData({ ...formData, teamSheetRequired: checked })
                 }
               />
             </div>
             <div>
               <Label>Open Team Sheet</Label>
-              <Toggle
+              <Switch
                 checked={formData.openTeamSheet}
-                onChange={(checked) =>
+                onCheckedChange={(checked) =>
                   setFormData({ ...formData, openTeamSheet: checked })
                 }
               />
@@ -240,9 +239,9 @@ export default function CreateTournamentPage() {
             </div>
             <div>
               <Label>Player Cap</Label>
-              <Toggle
+              <Switch
                 checked={formData.playerCap}
-                onChange={(checked) =>
+                onCheckedChange={(checked) =>
                   setFormData({ ...formData, playerCap: checked })
                 }
               />
@@ -398,9 +397,9 @@ export default function CreateTournamentPage() {
                 </div>
                 <div>
                   <Label>Round Timer</Label>
-                  <Toggle
+                  <Switch
                     checked={phase.roundTimer}
-                    onChange={(checked) =>
+                    onCheckedChange={(checked) =>
                       setFormData({
                         ...formData,
                         phases: formData.phases.map((p, i) =>
@@ -430,9 +429,9 @@ export default function CreateTournamentPage() {
                 )}
                 <div>
                   <Label>Match Check-In</Label>
-                  <Toggle
+                  <Switch
                     checked={phase.matchCheckIn}
-                    onChange={(checked) =>
+                    onCheckedChange={(checked) =>
                       setFormData({
                         ...formData,
                         phases: formData.phases.map((p, i) =>
