@@ -21,6 +21,10 @@ export interface DashboardLayoutSlots extends ChildrenProps {
   admin: ReactNode;
 }
 
+export interface OrganizationSlugProps {
+  org_slug: string;
+}
+
 export interface OrganizationTournamentProps {
   org_slug: string;
   tournament_id: number;
