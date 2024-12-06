@@ -66,14 +66,14 @@ catalogs:
     "expo-status-bar": ^2
     "expo-web-browser": ^14
 
-  next:
+  next-stable:
     next: ^15
     "@next/bundle-analyzer": ^15
     "@next/eslint-plugin-next": ^15
     "@next/third-parties": ^15
     
 
-  next-canary:
+  next:
     next: canary
     "@next/bundle-analyzer": canary
     "@next/eslint-plugin-next": canary
