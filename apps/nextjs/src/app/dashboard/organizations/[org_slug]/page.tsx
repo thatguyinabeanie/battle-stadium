@@ -40,7 +40,6 @@ export default async function OrganizationDashboardPage(
 }
 
 async function OrgDashboardContent({ org_slug }: OrganizationSlugProps) {
-  
   const org = await getOrganizationBySlug(org_slug);
   if (!org) {
     notFound();

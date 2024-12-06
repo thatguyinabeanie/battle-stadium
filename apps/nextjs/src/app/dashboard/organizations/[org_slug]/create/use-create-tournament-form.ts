@@ -2,6 +2,12 @@ import { useState } from "react";
 
 import type { Phase, TournamentForm } from "./_components/shared";
 import type { ValueOf } from "~/types";
+import {
+  Advancement,
+  BestOf,
+  PairingSystem,
+  RegistrationType,
+} from "./_components/shared";
 
 export const STEPS = [
   { id: 1, title: "Tournament Information" },
@@ -23,7 +29,7 @@ export function useCreateTournamentForm() {
     format: "",
     teamSheetRequired: true,
     openTeamSheet: true,
-    registrationType: "Open",
+    registrationType: RegistrationType.Open,
     playerCap: false,
     maxPlayers: 0,
     allowLateRegistration: false,
@@ -68,13 +74,13 @@ export function useCreateTournamentForm() {
         ...prevFormData.phases,
         {
           name: `Phase ${prevFormData.phases.length}`,
-          pairingSystem: "Swiss",
-          bestOf: 1,
+          pairingSystem: PairingSystem.Swiss,
+          bestOf: BestOf.One,
           roundTimer: false,
           roundTime: 0,
           matchCheckIn: false,
           checkInTime: 0,
-          advancement: "traditional",
+          advancement: Advancement.Traditional,
         },
       ],
     }));

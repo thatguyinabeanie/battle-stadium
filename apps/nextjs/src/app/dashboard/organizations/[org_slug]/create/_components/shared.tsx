@@ -17,19 +17,43 @@ import {
 
 import type { ChildrenProps, ValueOf } from "~/types";
 
-// TODO: refactor to use enums for pairingSystem, bestOf, and advancement
+export enum PairingSystem {
+  Swiss = "swiss",
+  SingleElimination = "single_elimination",
+}
+
+export enum BestOf {
+  One = 1,
+  Three = 3,
+  Five = 5,
+  Seven = 7,
+}
+
+export enum Advancement {
+  Traditional = "traditional",
+  MinimumPoint = "minimum-point",
+  PointsMinPlayers = "points-min-players",
+}
+
 export interface Phase {
   name: string;
-  pairingSystem: string; // "Swiss" | "Single Elimination";
-  bestOf: number; //1 | 3 | 5 | 7;
+  pairingSystem: PairingSystem;
+  bestOf: BestOf;
   roundTimer: boolean;
   roundTime: number;
   matchCheckIn: boolean;
   checkInTime: number;
-  advancement: string; //"traditional" | "minimum-point" | "points-min-players";
+  advancement: Advancement;
 }
 
 // TODO: refactor to use an enum for registrationType
+export enum RegistrationType {
+  Open = "open",
+  EntryCode = "entry_code",
+  SingleUseCode = "single_use_code",
+  InviteOnly = "invite_only",
+}
+
 export interface TournamentForm {
   name: string;
   description: string;
@@ -39,7 +63,7 @@ export interface TournamentForm {
   format: string;
   teamSheetRequired: boolean;
   openTeamSheet: boolean;
-  registrationType: string; //| "Open" | "Entry Code" | "Single-Use Code" | "Invite Only",
+  registrationType: RegistrationType;
   playerCap: boolean;
   maxPlayers: number;
   allowLateRegistration: boolean;
