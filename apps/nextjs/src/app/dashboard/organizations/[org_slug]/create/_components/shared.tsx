@@ -101,8 +101,8 @@ export function CardWrapper({
   disableCardContentWrapper,
 }: CardWrapperProps) {
   return (
-    <Card className={`space-y-0 p-4 ${classNames?.card}`}>
-      <CardHeader className={`flex py-4 pb-0 ${classNames?.header}`}>
+    <Card className={`space-y-0 ${classNames?.card}`}>
+      <CardHeader className={`flex pb-0 ${classNames?.header}`}>
         <CardTitle className={`text-lg font-bold ${classNames?.title}`}>
           {title}
         </CardTitle>
