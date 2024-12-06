@@ -1,49 +1,23 @@
-import {
-  Checkbox,
-  Input,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Switch,
-} from "@battle-stadium/ui";
+import { Checkbox, Input, Switch } from "@battle-stadium/ui";
 
-import type { TournamentFormProps } from "./shared";
-import { CardWrapper, InputWrapper } from "./shared";
+import type { SelectOptionItem, TournamentFormProps } from "./shared";
+import { CardWrapper, InputWrapper, Select } from "./shared";
 
+const registration_restrictions_options: SelectOptionItem[] = [
+  { value: "open", label: "Open Registration" },
+  { value: "entry-code", label: "Entry Code (Coming Soon)" },
+  { value: "single-use-code", label: "Single Use Code (Coming Soon)" },
+  { value: "invite", label: "Invite Only (Coming Soon)" },
+];
 export function Registration({ formData, setFormData }: TournamentFormProps) {
   return (
     <CardWrapper title="Registration">
-      <InputWrapper htmlFor="registration-type" label="Registration Type">
-        <div id="registration-type">
-          <Select
-            onValueChange={(value) =>
-              setFormData((prevFormData) => ({
-                ...prevFormData,
-                registrationType: value,
-              }))
-            }
-          >
-            <SelectTrigger className="w-[250px]">
-              <SelectValue placeholder="Registration..." />
-            </SelectTrigger>
-            <SelectContent className="bg-black p-2">
-              <SelectItem value="open-registration">
-                Open Registration
-              </SelectItem>
-              <SelectItem value="entry-code" disabled>
-                Entry Code (Coming Soon)
-              </SelectItem>
-              <SelectItem value="single-use-code" disabled>
-                Single-Use Code (Coming Soon)
-              </SelectItem>
-              <SelectItem value="invite-only" disabled>
-                Invite Only (Coming Soon)
-              </SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+      <InputWrapper htmlFor="registration-restrictions" label="Restrictions">
+        <Select
+          id="registration-restrictions"
+          placeholder="Select Restrictions"
+          options={registration_restrictions_options}
+        />
       </InputWrapper>
 
       <InputWrapper htmlFor="player-cap" label="Player Cap">

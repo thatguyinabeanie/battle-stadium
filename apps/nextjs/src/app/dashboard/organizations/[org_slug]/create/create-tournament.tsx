@@ -17,18 +17,15 @@ import { STEPS, useCreateTournamentForm } from "./use-create-tournament-form";
 export default function CreateTournament({
   org,
 }: OrganizationDashboardPageProps) {
-  const {
-    formData,
-    setFormData,
-    addPhase
-  } = useCreateTournamentForm();
+  const { formData, setFormData, addPhase } = useCreateTournamentForm();
+  console.log("org", org);
 
   return (
     <div className="flex max-h-dvh w-full flex-col items-center space-y-6 p-6">
       {/* <StepWizardProgress currentStep={currentStep} /> */}
 
       {/* Step Content */}
-      <div className="space-y-4 overflow-y-auto">
+      <div className="space-y-4">
         {/* <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1> */}
 
         <TournamentInformation formData={formData} setFormData={setFormData} />

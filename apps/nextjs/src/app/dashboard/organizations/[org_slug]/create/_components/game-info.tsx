@@ -1,15 +1,18 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Switch,
-} from "@battle-stadium/ui";
+import { Switch } from "@battle-stadium/ui";
 
-import type { TournamentFormProps } from "./shared";
-import { CardWrapper, InputWrapper } from "./shared";
+import type { SelectOptionItem, TournamentFormProps } from "./shared";
+import { CardWrapper, InputWrapper, Select } from "./shared";
 
+const game_options: SelectOptionItem[] = [
+  { value: "sv", label: "Scarlet & Violet" },
+  { value: "swsh", label: "Sword & Shield" },
+  { value: "sm", label: "Sun & Moon" },
+];
+
+const format_options: SelectOptionItem[] = [
+  { value: "rg", label: "Regulation G" },
+  { value: "s1", label: "Series 1" },
+];
 export function GameInformation({
   formData,
   setFormData,
@@ -17,33 +20,15 @@ export function GameInformation({
   return (
     <CardWrapper title="Game and Format">
       <InputWrapper htmlFor="game" label="Game">
-        <div id="game">
-          <Select>
-            <SelectTrigger className="w-[250px]">
-              <SelectValue placeholder="Select Game..." />
-            </SelectTrigger>
-            <SelectContent className="bg-black p-3">
-              <SelectItem value="sv">Scarlet and Violet</SelectItem>
-              <SelectItem value="swsh">Sword and Shield</SelectItem>
-              <SelectItem value="system">Sun and Moon</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+        <Select id="game" placeholder="Select Game..." options={game_options} />
       </InputWrapper>
 
       <InputWrapper htmlFor="format" label="Format">
-        <div id="format">
-          <Select>
-            <SelectTrigger className="w-[250px]">
-              <SelectValue placeholder="Select Format..." />
-            </SelectTrigger>
-            <SelectContent className="bg-black p-2">
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+        <Select
+          id="format"
+          placeholder="Select Format..."
+          options={format_options}
+        />
       </InputWrapper>
 
       <InputWrapper htmlFor="team-sheet-required" label="Team Sheet Required?">

@@ -13,7 +13,7 @@ export function TournamentInformation({
         <Input
           id="tournament-name"
           type="text"
-          className="w-[250px]"
+          // className="w-[250px]"
           placeholder="Enter Tournament Name..."
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -32,7 +32,7 @@ export function TournamentInformation({
           }
           classNames={{
             calendar: {
-              className: "w-[250px]",
+              className: "w-[250px] bg-black",
             },
           }}
         />

@@ -7,6 +7,11 @@ import {
   CardHeader,
   CardTitle,
   Label,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Select as UiSelect,
 } from "@battle-stadium/ui";
 
 import type { ChildrenProps } from "~/types";
@@ -98,5 +103,34 @@ export function CardWrapper({ title, classNames, children }: ShrugProps) {
         {children}
       </CardContent>
     </Card>
+  );
+}
+
+export interface SelectOptionItem {
+  label: string;
+  value: string;
+}
+
+export interface SelectProps {
+  id: string;
+  placeholder: string;
+  options: SelectOptionItem[];
+}
+export function Select({ id, placeholder, options }: SelectProps) {
+  return (
+    <div id={id}>
+      <UiSelect>
+        <SelectTrigger>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent className="bg-black p-3">
+          {options.map(({ value, label }) => (
+            <SelectItem key={value} value={value}>
+              {label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </UiSelect>
+    </div>
   );
 }
