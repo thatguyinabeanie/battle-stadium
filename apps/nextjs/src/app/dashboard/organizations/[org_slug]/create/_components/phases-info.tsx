@@ -20,21 +20,35 @@ export function TournamentPhases({
   setFormData,
   addPhase,
 }: TournamentFormProps) {
+  const phases_cards_list = formData.phases.map((phase, index) => (
+    <CardWrapper
+      key={phase.name}
+      title={`Phase ${index}`}
+      classNames={{
+        card: cn("rounded-none border-x-0", {
+          "border-t-1 !my-0": index > 0,
+        }),
+      }}
+    >
+      <PhaseContent
+        index={index}
+        phase={phase}
+        formData={formData}
+        setFormData={setFormData}
+      />
+    </CardWrapper>
+  ));
+
   return (
-    <CardWrapper disableCardContentWrapper title="Phases">
+    <CardWrapper
+      disableCardContentWrapper
+      title="Phases"
+      classNames={{
+        header: "pb-4",
+      }}
+    >
       {formData.phases.length > 0 && (
-        <CardContent className="space-y-4">
-          {formData.phases.map((phase, index) => (
-            <CardWrapper key={phase.name} title={`Phase ${index}`}>
-              <PhaseContent
-                index={index}
-                phase={phase}
-                formData={formData}
-                setFormData={setFormData}
-              />
-            </CardWrapper>
-          ))}
-        </CardContent>
+        <CardContent className="space-y-4">{phases_cards_list}</CardContent>
       )}
 
       <CardFooter className="flex w-full justify-end p-4">
