@@ -4,6 +4,7 @@ import * as React from "react";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 
+import type { CalendarProps } from "./calendar";
 import { cn } from "../utils";
 import { Button } from "./button";
 import { Calendar } from "./calendar";
@@ -17,20 +18,38 @@ interface DatePickerProps {
   date: Date | undefined;
   setDate?: (date: Date | undefined) => void;
   disabled?: boolean;
+  classNames?: {
+    wrapper?: string;
+    popover?: string;
+    popoverTrigger?: string;
+    button?: string;
+    popoverContent?: string;
+    calendar?: {
+      className?: CalendarProps["className"];
+      classNames?: CalendarProps["classNames"];
+    };
+  };
 }
 
 // TODO: make popover content background not transparent
-export function DatePicker({ date, setDate, disabled, id }: DatePickerProps) {
+export function DatePicker({
+  date,
+  setDate,
+  disabled,
+  id,
+  classNames,
+}: DatePickerProps) {
   return (
-    <div id={id}>
+    <div id={id} className={classNames?.wrapper}>
       <Popover>
-        <PopoverTrigger asChild>
+        <PopoverTrigger asChild className={classNames?.popoverTrigger}>
           <Button
             aria-label="Select date"
             variant={"outline"}
             className={cn(
               "w-[280px] justify-start text-left font-normal",
               !date && "text-muted-foreground",
+              classNames?.button,
             )}
             disabled={disabled}
           >
@@ -38,13 +57,17 @@ export function DatePicker({ date, setDate, disabled, id }: DatePickerProps) {
             {date ? format(date, "PPP") : <span>Pick a date</span>}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0">
+        <PopoverContent
+          className={cn("w-auto p-0", classNames?.popoverContent)}
+        >
           <Calendar
             autoFocus
             mode="single"
             selected={date}
             onSelect={setDate}
             hidden={{ before: MIN_DATE, after: MAX_DATE }}
+            className={classNames?.calendar?.className}
+            classNames={classNames?.calendar?.classNames}
           />
         </PopoverContent>
       </Popover>

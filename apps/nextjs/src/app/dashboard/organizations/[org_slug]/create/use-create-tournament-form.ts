@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { TournamentForm } from "./tournament-form";
+import type { TournamentForm } from "./_components/shared";
 
 export const STEPS = [
   { id: 1, title: "Tournament Information" },
