@@ -9,7 +9,7 @@ const registration_restrictions_options: SelectOptionItem[] = [
   { value: "single-use-code", label: "Single Use Code (Coming Soon)" },
   { value: "invite", label: "Invite Only (Coming Soon)" },
 ];
-export function Registration({ formData, setFormData }: TournamentFormProps) {
+export function Registration({ formData, setFormData, setFormKeyValue }: TournamentFormProps) {
   return (
     <CardWrapper title="Registration">
       <InputWrapper htmlFor="registration-restrictions" label="Restrictions">
@@ -24,9 +24,7 @@ export function Registration({ formData, setFormData }: TournamentFormProps) {
         <div id="player-cap">
           <Switch
             checked={formData.playerCap}
-            onCheckedChange={(checked) =>
-              setFormData({ ...formData, playerCap: checked })
-            }
+            onCheckedChange={ setFormKeyValue("playerCap") }
           />
         </div>
       </InputWrapper>
@@ -38,12 +36,7 @@ export function Registration({ formData, setFormData }: TournamentFormProps) {
             name="max-players"
             type="number"
             value={formData.maxPlayers}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                maxPlayers: Number.parseInt(e.target.value, 10),
-              })
-            }
+            onChange={({target:{value}}) => setFormKeyValue("maxPlayers")(Number.parseInt(value, 10))}
           />
         </InputWrapper>
       )}
@@ -63,12 +56,7 @@ export function Registration({ formData, setFormData }: TournamentFormProps) {
         <Checkbox
           id="late-registration"
           checked={formData.allowLateRegistration}
-          onChange={() =>
-            setFormData((prevFormData) => ({
-              ...prevFormData,
-              allowLateRegistration: !prevFormData.allowLateRegistration,
-            }))
-          }
+          onChange={()=> setFormKeyValue("allowLateRegistration")(!formData.allowLateCheckIn)}
         />
       </InputWrapper>
 
@@ -79,12 +67,7 @@ export function Registration({ formData, setFormData }: TournamentFormProps) {
         <Checkbox
           id="late-teamsheet-submission"
           checked={formData.allowLateTeamSheet}
-          onChange={() =>
-            setFormData((prevFormData) => ({
-              ...prevFormData,
-              allowLateTeamSheet: !prevFormData.allowLateTeamSheet,
-            }))
-          }
+          onChange={()=> setFormKeyValue("allowLateTeamSheet")(!formData.allowLateTeamSheet)  }
         />
       </InputWrapper>
 
@@ -92,12 +75,7 @@ export function Registration({ formData, setFormData }: TournamentFormProps) {
         <Checkbox
           id="late-checkin"
           checked={formData.allowLateCheckIn}
-          onChange={() =>
-            setFormData((prevFormData) => ({
-              ...prevFormData,
-              allowLateCheckIn: !prevFormData.allowLateCheckIn,
-            }))
-          }
+          onChange={()=> setFormKeyValue("allowLateCheckIn")(!formData.allowLateCheckIn)  }
         />
       </InputWrapper>
     </CardWrapper>

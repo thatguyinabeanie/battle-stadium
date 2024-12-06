@@ -15,7 +15,7 @@ const format_options: SelectOptionItem[] = [
 ];
 export function GameInformation({
   formData,
-  setFormData,
+  setFormKeyValue,
 }: TournamentFormProps) {
   return (
     <CardWrapper title="Game and Format">
@@ -25,9 +25,7 @@ export function GameInformation({
           placeholder="Select Game..."
           options={game_options}
           value={formData.game}
-          onValueChange={(value) =>
-            setFormData((prevFormData) => ({ ...prevFormData, game: value }))
-          }
+          onValueChange={setFormKeyValue("game")}
         />
       </InputWrapper>
 
@@ -37,9 +35,7 @@ export function GameInformation({
           placeholder="Select Format..."
           options={format_options}
           value={formData.format}
-          onValueChange={(value) =>
-            setFormData((prevFormData) => ({ ...prevFormData, format: value }))
-          }
+          onValueChange={setFormKeyValue("format")}
         />
       </InputWrapper>
 
@@ -47,12 +43,7 @@ export function GameInformation({
         <div id="team-sheet-required">
           <Switch
             checked={formData.teamSheetRequired}
-            onCheckedChange={(checked) =>
-              setFormData((prevFormData) => ({
-                ...prevFormData,
-                teamSheetRequired: checked,
-              }))
-            }
+            onCheckedChange={setFormKeyValue("teamSheetRequired")}
           />
         </div>
       </InputWrapper>
@@ -61,9 +52,7 @@ export function GameInformation({
         <div id="open-team-sheet">
           <Switch
             checked={formData.openTeamSheet}
-            onCheckedChange={(checked) =>
-              setFormData({ ...formData, openTeamSheet: checked })
-            }
+            onCheckedChange={setFormKeyValue("openTeamSheet")}
           />
         </div>
       </InputWrapper>

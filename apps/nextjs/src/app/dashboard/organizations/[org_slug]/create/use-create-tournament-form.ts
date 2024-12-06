@@ -8,8 +8,12 @@ import {
   PairingSystem,
   RegistrationType,
 } from "./_components/shared";
+interface FormStep {
+  id: number;
+  title: string;
+}
 
-export const STEPS = [
+export const STEPS: FormStep[] = [
   { id: 1, title: "Tournament Information" },
   { id: 2, title: "Game Information" },
   { id: 3, title: "Registration" },
