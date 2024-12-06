@@ -46,13 +46,13 @@ export default function CreateTournament({
   const { formData, setFormData, addPhase } = useCreateTournamentForm();
 
   return (
-    <div className="container mx-auto space-y-6 p-6">
+    <div className="container mx-auto max-h-dvh space-y-6 p-6">
       <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1>
 
       {/* <StepWizardProgress currentStep={currentStep} /> */}
 
       {/* Step Content */}
-      <div className="space-y-4">
+      <div className="space-y-4 overflow-y-auto">
         <TournamentInformation formData={formData} setFormData={setFormData} />
 
         <GameInformation formData={formData} setFormData={setFormData} />

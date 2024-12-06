@@ -20,7 +20,8 @@ catalog:
   "server-only": ^0.0.1
   jiti: ^1
   "@types/sqlstring": ^2
-
+  "@t3-oss/env-nextjs": 0.11.1
+  "babel-plugin-react-compiler": beta
 
 catalogs:
   auth:
@@ -66,12 +67,17 @@ catalogs:
     "expo-web-browser": ^14
 
   next:
+    next: ^15
+    "@next/bundle-analyzer": ^15
+    "@next/eslint-plugin-next": ^15
+    "@next/third-parties": ^15
+    
+
+  next-canary:
     next: canary
     "@next/bundle-analyzer": canary
     "@next/eslint-plugin-next": canary
     "@next/third-parties": canary
-    "@t3-oss/env-nextjs": ^0
-    "babel-plugin-react-compiler": beta
 
   particles:
     tsparticles: ^3.7
@@ -123,21 +129,13 @@ catalogs:
     "@rails/actioncable": ^7
     "@types/rails__actioncable": ^6
 
-  react18:
-    react: ^18
-    react-dom: ^18
-    "@types/react": ^18
-    "@types/react-dom": ^18
+  react:
+    react: ^19
+    react-dom: ^19
+    "@types/react": ^19
+    "@types/react-dom": ^19
     "eslint-plugin-react-hooks": ^5
     "eslint-plugin-react": ^7
-
-  react:
-    react: rc
-    react-dom: rc
-    "@types/react": "npm:types-react@rc"
-    "@types/react-dom": "npm:types-react-dom@rc"
-    "eslint-plugin-react-hooks": rc
-    "eslint-plugin-react": latest
     "eslint-plugin-react-compiler": beta
 
   react-native:

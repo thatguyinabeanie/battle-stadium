@@ -23,7 +23,7 @@
     "@auth/core": "catalog:auth",
     "@auth/drizzle-adapter": "catalog:auth",
     "@battle-stadium/db": "workspace:*",
-    "@t3-oss/env-nextjs": "catalog:next",
+    "@t3-oss/env-nextjs": "catalog:",
     "next": "catalog:next",
     "react": "catalog:react",
     "react-dom": "catalog:react",
