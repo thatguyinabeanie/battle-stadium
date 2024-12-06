@@ -38,7 +38,7 @@ export default function DashboardLayout({
 }: Readonly<DashboardLayoutProps>) {
   return (
     <BreadCrumbsProvider>
-      <SidebarProvider className="border-none">
+      <SidebarProvider className="border-none max-h-svh" >
         <SideBar>{sidebar}</SideBar>
 
         <SidebarInset className="border-none bg-transparent">

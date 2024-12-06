@@ -9,7 +9,7 @@ import type {
   TournamentFormProps,
 } from "./_components/shared";
 import { GameInformation } from "./_components/game-info";
-// import { TournamentPhases } from "./_components/phases-info";
+import { TournamentPhases } from "./_components/phases-info";
 import { Registration } from "./_components/registration-info";
 import { TournamentInformation } from "./_components/tournament-info";
 import { STEPS, useCreateTournamentForm } from "./use-create-tournament-form";
@@ -20,7 +20,7 @@ export default function CreateTournament({
   const {
     formData,
     setFormData,
-    // addPhase
+    addPhase
   } = useCreateTournamentForm();
 
   return (
@@ -29,7 +29,7 @@ export default function CreateTournament({
 
       {/* Step Content */}
       <div className="space-y-4 overflow-y-auto">
-        <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1>
+        {/* <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1> */}
 
         <TournamentInformation formData={formData} setFormData={setFormData} />
 
@@ -37,11 +37,11 @@ export default function CreateTournament({
 
         <Registration formData={formData} setFormData={setFormData} />
 
-        {/* <TournamentPhases
+        <TournamentPhases
           formData={formData}
           setFormData={setFormData}
           addPhase={addPhase}
-        /> */}
+        />
       </div>
 
       {/* <Navigation 

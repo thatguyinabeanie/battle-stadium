@@ -88,17 +88,15 @@ export interface ShrugProps extends ChildrenProps {
 export function CardWrapper({ title, classNames, children }: ShrugProps) {
   return (
     <Card className={`space-y-0 ${classNames?.card}`}>
-      <div className="grid grid-cols-4">
-        <CardHeader className={`col-span-1 flex pb-0 ${classNames?.header}`}>
-          <CardTitle className={`text-lg font-bold ${classNames?.title}`}>
-            {title}
-          </CardTitle>
-        </CardHeader>
+      <CardHeader className={`flex pb-0 ${classNames?.header}`}>
+        <CardTitle className={`text-lg font-bold ${classNames?.title}`}>
+          {title}
+        </CardTitle>
+      </CardHeader>
 
-        <CardContent className={`col-span-3 space-y-4 ${classNames?.content}`}>
-          {children}
-        </CardContent>
-      </div>
+      <CardContent className={`space-y-4 ${classNames?.content}`}>
+        {children}
+      </CardContent>
     </Card>
   );
 }
