@@ -1,4 +1,11 @@
-import { Button, cn, Input, Switch } from "@battle-stadium/ui";
+import {
+  Button,
+  CardContent,
+  CardFooter,
+  cn,
+  Input,
+  Switch,
+} from "@battle-stadium/ui";
 
 import type { Phase, SelectOptionItem, TournamentFormProps } from "./shared";
 import { CardWrapper, InputWrapper, Select } from "./shared";
@@ -8,51 +15,33 @@ interface PhaseFormProps extends TournamentFormProps {
   phase: Phase;
 }
 
-// function AdditionalPhase({index, formData, setFormData, phase}: AdditionalPhaseProps) {
-//   return (
-//     <InputWrapper label={`Phase ${index}`} htmlFor="">
-//     <div id={`phase-${index}`}>
-//       <Select
-//         name={`advancement-${index}`}
-//         value={phase.advancement}
-//         onValueChange={(value) =>
-//           setFormData({
-//             ...formData,
-//             phases: formData.phases.map((p, i) =>
-//               i === index ? { ...p, advancement: value } : p,
-//             ),
-//           })
-//         }
-//       >
-//         <option value="traditional">Traditional Cut</option>
-//         <option value="minimum-point">
-//           Minimum Points Requirement
-//         </option>
-//         <option value="points-min-players">Points + Min Players</option>
-//       </Select>
-//     </div>
-//   </InputWrapper>
-//   )
-// }
-
 export function TournamentPhases({
   formData,
   setFormData,
   addPhase,
 }: TournamentFormProps) {
   return (
-    <CardWrapper title="Phases">
-      {formData.phases.map((phase, index) => (
-        <CardWrapper key={index} title={`Phase ${index}`}>
-          <PhaseContent
-            index={index}
-            phase={phase}
-            formData={formData}
-            setFormData={setFormData}
-          />
-        </CardWrapper>
-      ))}
-      <Button onClick={addPhase}>Add Phase</Button>
+    <CardWrapper disableCardContentWrapper title="Phases">
+      {formData.phases.length > 0 && (
+        <CardContent className="space-y-4">
+          {formData.phases.map((phase, index) => (
+            <CardWrapper key={phase.name} title={`Phase ${index}`}>
+              <PhaseContent
+                index={index}
+                phase={phase}
+                formData={formData}
+                setFormData={setFormData}
+              />
+            </CardWrapper>
+          ))}
+        </CardContent>
+      )}
+
+      <CardFooter className="flex w-full justify-end p-4">
+        <Button variant="outline" onClick={addPhase}>
+          Add Phase
+        </Button>
+      </CardFooter>
     </CardWrapper>
   );
 }
@@ -101,6 +90,33 @@ function PhaseContent({ index, phase, formData, setFormData }: PhaseFormProps) {
     </>
   );
 }
+
+// function AdditionalPhase({index, formData, setFormData, phase}: AdditionalPhaseProps) {
+//   return (
+//     <InputWrapper label={`Phase ${index}`} htmlFor="">
+//     <div id={`phase-${index}`}>
+//       <Select
+//         name={`advancement-${index}`}
+//         value={phase.advancement}
+//         onValueChange={(value) =>
+//           setFormData({
+//             ...formData,
+//             phases: formData.phases.map((p, i) =>
+//               i === index ? { ...p, advancement: value } : p,
+//             ),
+//           })
+//         }
+//       >
+//         <option value="traditional">Traditional Cut</option>
+//         <option value="minimum-point">
+//           Minimum Points Requirement
+//         </option>
+//         <option value="points-min-players">Points + Min Players</option>
+//       </Select>
+//     </div>
+//   </InputWrapper>
+//   )
+// }
 
 function PhaseNameInput({
   index,

@@ -53,7 +53,7 @@ export function useCreateTournamentForm() {
       phases: [
         ...prevFormData.phases,
         {
-          name: "",
+          name: `Phase ${prevFormData.phases.length}`,
           pairingSystem: "Swiss",
           bestOf: 1,
           roundTimer: false,

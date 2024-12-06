@@ -1,4 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
+import React from "react";
 
 import type { Organization } from "@battle-stadium/db/schema";
 import {
@@ -80,28 +81,40 @@ export function InputWrapper({ children, htmlFor, label }: InputWrapperProps) {
   );
 }
 
-export interface ShrugProps extends ChildrenProps {
+export interface CardWrapperProps extends ChildrenProps {
+  disableCardContentWrapper?: boolean;
   title: string;
   classNames?: {
     card?: string;
     header?: string;
     title?: string;
     content?: string;
+    footer?: string;
   };
+  footer?: React.ReactNode;
 }
 
-export function CardWrapper({ title, classNames, children }: ShrugProps) {
+export function CardWrapper({
+  title,
+  classNames,
+  children,
+  disableCardContentWrapper,
+}: CardWrapperProps) {
   return (
-    <Card className={`space-y-0 ${classNames?.card}`}>
+    <Card className={`space-y-0 p-4 ${classNames?.card}`}>
       <CardHeader className={`flex pb-0 ${classNames?.header}`}>
         <CardTitle className={`text-lg font-bold ${classNames?.title}`}>
           {title}
         </CardTitle>
       </CardHeader>
 
-      <CardContent className={`space-y-4 ${classNames?.content}`}>
-        {children}
-      </CardContent>
+      {!disableCardContentWrapper && (
+        <CardContent className={`space-y-4 ${classNames?.content}`}>
+          {children}
+        </CardContent>
+      )}
+
+      {disableCardContentWrapper && <>{children} </>}
     </Card>
   );
 }
