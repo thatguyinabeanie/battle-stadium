@@ -28,6 +28,7 @@ export function TournamentPhases({
         card: cn("rounded-none border-x-0", {
           "border-t-1 !my-0": index > 0,
         }),
+        header: "pt-2"
       }}
     >
       <PhaseContent
