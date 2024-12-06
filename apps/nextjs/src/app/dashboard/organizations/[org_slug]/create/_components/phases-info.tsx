@@ -140,7 +140,7 @@ function PairingSystemSelect({
         placeholder="Select Pairing System"
         options={pairing_system_options}
         value={phase.pairingSystem}
-        onValueChange={setPhaseKeyValue(index, "name")}
+        onValueChange={setPhaseKeyValue(index, "pairingSystem")}
       />
     </InputWrapper>
   );
