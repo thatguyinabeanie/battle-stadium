@@ -182,6 +182,7 @@ function RoundTimerInput({ index, phase, setPhaseKeyValue }: PhaseFormProps) {
         id={`phase-${index}-round-time`}
         disabled={!phase.roundTimer}
         type="number"
+        min={20}
         value={phase.roundTime}
         className={cn("", { "text-muted": !phase.roundTimer })}
         onChange={({ target: { value } }) =>
@@ -221,6 +222,7 @@ function MatchCheckinTimerInput({
         id={`phase-${index}-match-checkin-timer`}
         disabled={!phase.matchCheckIn}
         type="number"
+        min={5}
         value={phase.checkInTime}
         className={cn("", { "text-muted": !phase.matchCheckIn })}
         onChange={({ target: { value } }) =>
