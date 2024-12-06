@@ -40,8 +40,7 @@ export default async function OrganizationDashboardPage(
 }
 
 async function OrgDashboardContent({ org_slug }: OrganizationSlugProps) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
+  
   const org = await getOrganizationBySlug(org_slug);
   if (!org) {
     notFound();
