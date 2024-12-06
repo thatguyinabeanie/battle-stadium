@@ -52,7 +52,7 @@ export default function DataTable<T extends RowData>({
 
   const table = useTanstackReactTable<T>(data, columns);
   return (
-    <DataTableContext.Provider
+    <DataTableContext
       value={{ table: table as ReactTable<unknown> | null }}
     >
       <div className={`${defaultWrapperClassNames} ${wrapper}`}>{children}</div>
@@ -67,7 +67,7 @@ export default function DataTable<T extends RowData>({
       <div className={`${defaultWrapperClassNames} ${wrapper}`}>
         {footer ? footer() : <DefaultFooter<T> />}
       </div>
-    </DataTableContext.Provider>
+    </DataTableContext>
   );
 }
 
