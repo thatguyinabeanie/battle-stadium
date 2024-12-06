@@ -20,26 +20,6 @@ export function TournamentPhases({
   setFormData,
   addPhase,
 }: TournamentFormProps) {
-  const phases_cards_list = formData.phases.map((phase, index) => (
-    <CardWrapper
-      key={phase.name}
-      title={`Phase ${index}`}
-      classNames={{
-        card: cn("rounded-none border-x-0", {
-          "border-t-1 !my-0": index > 0,
-        }),
-        header: "pt-2"
-      }}
-    >
-      <PhaseContent
-        index={index}
-        phase={phase}
-        formData={formData}
-        setFormData={setFormData}
-      />
-    </CardWrapper>
-  ));
-
   return (
     <CardWrapper
       disableCardContentWrapper
@@ -49,7 +29,16 @@ export function TournamentPhases({
       }}
     >
       {formData.phases.length > 0 && (
-        <CardContent className="space-y-4">{phases_cards_list}</CardContent>
+        <CardContent className="space-y-4">
+          {formData.phases.map((phase, index) => (
+            <PhaseDetailsNestedCard
+              phase={phase}
+              index={index}
+              formData={formData}
+              setFormData={setFormData}
+            />
+          ))}
+        </CardContent>
       )}
 
       <CardFooter className="flex w-full justify-end p-4">
@@ -61,9 +50,23 @@ export function TournamentPhases({
   );
 }
 
-function PhaseContent({ index, phase, formData, setFormData }: PhaseFormProps) {
+function PhaseDetailsNestedCard({
+  index,
+  phase,
+  formData,
+  setFormData,
+}: PhaseFormProps) {
   return (
-    <>
+    <CardWrapper
+      key={phase.name}
+      title={`Phase ${index}`}
+      classNames={{
+        card: cn("rounded-none border-x-0", {
+          "border-t-1 !my-0": index > 0,
+        }),
+        header: "pt-2",
+      }}
+    >
       <PhaseNameInput
         index={index}
         phase={phase}
@@ -102,7 +105,7 @@ function PhaseContent({ index, phase, formData, setFormData }: PhaseFormProps) {
         formData={formData}
         setFormData={setFormData}
       />
-    </>
+    </CardWrapper>
   );
 }
 
@@ -160,6 +163,8 @@ function PhaseNameInput({
 const pairing_system_options: SelectOptionItem[] = [
   { value: "swiss", label: "Swiss" },
   { value: "single_elimination_bracket", label: "Single Elimination Bracket" },
+  // { value: "double_elimination_bracket", label: "Double Elimination Bracket" },  
+  // { value: "round_robin", label: "Round Robin" }, 
 ];
 
 function PairingSystemSelect({ index }: { index: number }) {
@@ -186,8 +191,8 @@ function BestOfSelect({ index }: { index: number }) {
         options={[
           { value: "one", label: "1" },
           { value: "three", label: "3" },
-          { value: "five", label: "5" },
-          { value: "seven", label: "7" },
+          // { value: "five", label: "5" },
+          // { value: "seven", label: "7" },
         ]}
       />
     </InputWrapper>
