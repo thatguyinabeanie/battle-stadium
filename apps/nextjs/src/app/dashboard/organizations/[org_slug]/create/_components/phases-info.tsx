@@ -43,49 +43,62 @@ export function TournamentPhases({
   return (
     <CardWrapper title="Phases">
       {formData.phases.map((phase, index) => (
-        <div key={index} className="space-y-4">
-          <PhaseNameInput
+        <CardWrapper key={index} title={`Phase ${index}`}>
+          <PhaseContent
             index={index}
             phase={phase}
             formData={formData}
             setFormData={setFormData}
           />
-
-          <PairingSystemSelect index={index} />
-
-          <BestOfSelect index={index} />
-
-          <RoundTimerSwitch
-            index={index}
-            phase={phase}
-            formData={formData}
-            setFormData={setFormData}
-          />
-
-          <RoundTimerInput
-            index={index}
-            phase={phase}
-            formData={formData}
-            setFormData={setFormData}
-          />
-
-          <MatchCheckIn
-            index={index}
-            phase={phase}
-            formData={formData}
-            setFormData={setFormData}
-          />
-
-          <MatchCheckinTimerInput
-            index={index}
-            phase={phase}
-            formData={formData}
-            setFormData={setFormData}
-          />
-        </div>
+        </CardWrapper>
       ))}
       <Button onClick={addPhase}>Add Phase</Button>
     </CardWrapper>
+  );
+}
+
+function PhaseContent({ index, phase, formData, setFormData }: PhaseFormProps) {
+  return (
+    <>
+      <PhaseNameInput
+        index={index}
+        phase={phase}
+        formData={formData}
+        setFormData={setFormData}
+      />
+
+      <PairingSystemSelect index={index} />
+
+      <BestOfSelect index={index} />
+
+      <RoundTimerSwitch
+        index={index}
+        phase={phase}
+        formData={formData}
+        setFormData={setFormData}
+      />
+
+      <RoundTimerInput
+        index={index}
+        phase={phase}
+        formData={formData}
+        setFormData={setFormData}
+      />
+
+      <MatchCheckIn
+        index={index}
+        phase={phase}
+        formData={formData}
+        setFormData={setFormData}
+      />
+
+      <MatchCheckinTimerInput
+        index={index}
+        phase={phase}
+        formData={formData}
+        setFormData={setFormData}
+      />
+    </>
   );
 }
 
@@ -142,6 +155,8 @@ function BestOfSelect({ index }: { index: number }) {
         options={[
           { value: "one", label: "1" },
           { value: "three", label: "3" },
+          { value: "five", label: "5" },
+          { value: "seven", label: "7" },
         ]}
       />
     </InputWrapper>
