@@ -15,11 +15,7 @@ interface PhaseFormProps extends TournamentFormProps {
   phase: Phase;
 }
 
-export function TournamentPhases({
-  formData,
-  setFormData,
-  addPhase,
-}: TournamentFormProps) {
+export function TournamentPhases({ addPhase, ...props }: TournamentFormProps) {
   return (
     <CardWrapper
       disableCardContentWrapper
@@ -28,14 +24,14 @@ export function TournamentPhases({
         header: "pb-4",
       }}
     >
-      {formData.phases.length > 0 && (
+      {props.formData.phases.length > 0 && (
         <CardContent className="space-y-4">
-          {formData.phases.map((phase, index) => (
+          {props.formData.phases.map((phase, index) => (
             <PhaseDetailsNestedCard
+              {...props}
               phase={phase}
               index={index}
-              formData={formData}
-              setFormData={setFormData}
+              key={phase.name}
             />
           ))}
         </CardContent>
@@ -50,12 +46,9 @@ export function TournamentPhases({
   );
 }
 
-function PhaseDetailsNestedCard({
-  index,
-  phase,
-  formData,
-  setFormData,
-}: PhaseFormProps) {
+function PhaseDetailsNestedCard(props: PhaseFormProps) {
+  const { index, phase } = props;
+
   return (
     <CardWrapper
       key={phase.name}
@@ -67,44 +60,19 @@ function PhaseDetailsNestedCard({
         header: "pt-2",
       }}
     >
-      <PhaseNameInput
-        index={index}
-        phase={phase}
-        formData={formData}
-        setFormData={setFormData}
-      />
+      <PhaseNameInput {...props} />
 
-      <PairingSystemSelect index={index} />
+      <PairingSystemSelect {...props} />
 
-      <BestOfSelect index={index} />
+      <BestOfSelect {...props} />
 
-      <RoundTimerSwitch
-        index={index}
-        phase={phase}
-        formData={formData}
-        setFormData={setFormData}
-      />
+      <RoundTimerSwitch {...props} />
 
-      <RoundTimerInput
-        index={index}
-        phase={phase}
-        formData={formData}
-        setFormData={setFormData}
-      />
+      <RoundTimerInput {...props} />
 
-      <MatchCheckIn
-        index={index}
-        phase={phase}
-        formData={formData}
-        setFormData={setFormData}
-      />
+      <MatchCheckIn {...props} />
 
-      <MatchCheckinTimerInput
-        index={index}
-        phase={phase}
-        formData={formData}
-        setFormData={setFormData}
-      />
+      <MatchCheckinTimerInput {...props} />
     </CardWrapper>
   );
 }
@@ -136,24 +104,14 @@ function PhaseDetailsNestedCard({
 //   )
 // }
 
-function PhaseNameInput({
-  index,
-  phase,
-  formData,
-  setFormData,
-}: PhaseFormProps) {
+function PhaseNameInput({ index, phase, setPhaseKeyValue }: PhaseFormProps) {
   return (
     <InputWrapper htmlFor={`phase-${index}-name`} label="Phase Name">
       <Input
         id={`phase-${index}-name`}
         value={phase.name}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            phases: formData.phases.map((p, i) =>
-              i === index ? { ...p, name: e.target.value } : p,
-            ),
-          })
+        onChange={({ target: { value } }) =>
+          setPhaseKeyValue(index, "name")(value)
         }
       />
     </InputWrapper>
@@ -167,7 +125,11 @@ const pairing_system_options: SelectOptionItem[] = [
   // { value: "round_robin", label: "Round Robin" },
 ];
 
-function PairingSystemSelect({ index }: { index: number }) {
+function PairingSystemSelect({
+  index,
+  phase,
+  setPhaseKeyValue,
+}: PhaseFormProps) {
   return (
     <InputWrapper
       htmlFor={`phase-${index}-pairing-system`}
@@ -177,12 +139,14 @@ function PairingSystemSelect({ index }: { index: number }) {
         id={`phase-${index}-pairing-system`}
         placeholder="Select Pairing System"
         options={pairing_system_options}
+        value={phase.pairingSystem}
+        onValueChange={setPhaseKeyValue(index, "name")}
       />
     </InputWrapper>
   );
 }
 
-function BestOfSelect({ index }: { index: number }) {
+function BestOfSelect({ index, phase, setPhaseKeyValue }: PhaseFormProps) {
   return (
     <InputWrapper htmlFor={`phase-${index}-best-of`} label="Best of">
       <Select
@@ -191,44 +155,27 @@ function BestOfSelect({ index }: { index: number }) {
         options={[
           { value: "one", label: "1" },
           { value: "three", label: "3" },
-          // { value: "five", label: "5" },
-          // { value: "seven", label: "7" },
         ]}
+        value={String(phase.bestOf)}
+        onValueChange={setPhaseKeyValue(index, "bestOf")}
       />
     </InputWrapper>
   );
 }
 
-function RoundTimerSwitch({
-  index,
-  phase,
-  setFormData,
-  formData,
-}: PhaseFormProps) {
+function RoundTimerSwitch({ index, phase, setPhaseKeyValue }: PhaseFormProps) {
   return (
     <InputWrapper htmlFor={`phase-${index}-round-timer`} label="Round Timer">
       <Switch
         id={`phase-${index}-round-timer`}
         checked={phase.roundTimer}
-        onCheckedChange={(checked) =>
-          setFormData({
-            ...formData,
-            phases: formData.phases.map((p, i) =>
-              i === index ? { ...p, roundTimer: checked } : p,
-            ),
-          })
-        }
+        onCheckedChange={setPhaseKeyValue(index, "roundTimer")}
       />
     </InputWrapper>
   );
 }
 
-function RoundTimerInput({
-  index,
-  phase,
-  setFormData,
-  formData,
-}: PhaseFormProps) {
+function RoundTimerInput({ index, phase, setPhaseKeyValue }: PhaseFormProps) {
   return (
     <InputWrapper htmlFor={`phase-${index}-round-time`} label="Round Time">
       <Input
@@ -237,20 +184,15 @@ function RoundTimerInput({
         type="number"
         value={phase.roundTime}
         className={cn("", { "text-muted": !phase.roundTimer })}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            phases: formData.phases.map((p, i) =>
-              i === index ? { ...p, roundTime: +e.target.value } : p,
-            ),
-          })
+        onChange={({ target: { value } }) =>
+          setPhaseKeyValue(index, "roundTime")(value)
         }
       />
     </InputWrapper>
   );
 }
 
-function MatchCheckIn({ index, phase, setFormData, formData }: PhaseFormProps) {
+function MatchCheckIn({ index, phase, setPhaseKeyValue }: PhaseFormProps) {
   return (
     <InputWrapper
       htmlFor={`phase-${index}-match-checkin`}
@@ -259,14 +201,7 @@ function MatchCheckIn({ index, phase, setFormData, formData }: PhaseFormProps) {
       <Switch
         id={`phase-${index}-match-checkin`}
         checked={phase.matchCheckIn}
-        onCheckedChange={(checked) =>
-          setFormData({
-            ...formData,
-            phases: formData.phases.map((p, i) =>
-              i === index ? { ...p, matchCheckIn: checked } : p,
-            ),
-          })
-        }
+        onCheckedChange={setPhaseKeyValue(index, "matchCheckIn")}
       />
     </InputWrapper>
   );
@@ -275,8 +210,7 @@ function MatchCheckIn({ index, phase, setFormData, formData }: PhaseFormProps) {
 function MatchCheckinTimerInput({
   index,
   phase,
-  setFormData,
-  formData,
+  setPhaseKeyValue,
 }: PhaseFormProps) {
   return (
     <InputWrapper
@@ -289,13 +223,8 @@ function MatchCheckinTimerInput({
         type="number"
         value={phase.checkInTime}
         className={cn("", { "text-muted": !phase.matchCheckIn })}
-        onChange={(e) =>
-          setFormData({
-            ...formData,
-            phases: formData.phases.map((p, i) =>
-              i === index ? { ...p, checkInTime: +e.target.value } : p,
-            ),
-          })
+        onChange={({ target: { value } }) =>
+          setPhaseKeyValue(index, "checkInTime")(value)
         }
       />
     </InputWrapper>

@@ -17,7 +17,7 @@ import { STEPS, useCreateTournamentForm } from "./use-create-tournament-form";
 export default function CreateTournament({
   org,
 }: OrganizationDashboardPageProps) {
-  const { formData, setFormData, addPhase } = useCreateTournamentForm();
+  const { addPhase, ...rest } = useCreateTournamentForm();
   console.log("org", org);
 
   return (
@@ -28,17 +28,13 @@ export default function CreateTournament({
       <div className="space-y-4">
         {/* <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1> */}
 
-        <TournamentInformation formData={formData} setFormData={setFormData} />
+        <TournamentInformation {...rest} />
 
-        <GameInformation formData={formData} setFormData={setFormData} />
+        <GameInformation {...rest} />
 
-        <Registration formData={formData} setFormData={setFormData} />
+        <Registration {...rest} />
 
-        <TournamentPhases
-          formData={formData}
-          setFormData={setFormData}
-          addPhase={addPhase}
-        />
+        <TournamentPhases {...rest} addPhase={addPhase} />
       </div>
 
       {/* <Navigation 

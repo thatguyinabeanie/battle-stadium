@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import type { TournamentForm } from "./_components/shared";
+import type { Phase, TournamentForm } from "./_components/shared";
+import type { ValueOf } from "~/types";
 
 export const STEPS = [
   { id: 1, title: "Tournament Information" },
@@ -30,6 +31,19 @@ export function useCreateTournamentForm() {
     allowLateCheckIn: false,
     phases: [],
   });
+
+  const setFormKeyValue =
+    (key: keyof TournamentForm) => (value: ValueOf<TournamentForm>) =>
+      setFormData((prevFormData) => ({ ...prevFormData, [key]: value }));
+
+  const setPhaseKeyValue =
+    (phase_index: number, key: keyof Phase) => (value: ValueOf<Phase>) =>
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        phases: formData.phases.map((phase, index) =>
+          index === phase_index ? { ...phase, [key]: value } : phase,
+        ),
+      }));
 
   const handleNext = () => {
     if (currentStep < STEPS.length) {
@@ -70,6 +84,8 @@ export function useCreateTournamentForm() {
     currentStep,
     formData,
     setFormData,
+    setFormKeyValue,
+    setPhaseKeyValue,
     handleNext,
     handleBack,
     handleSubmit,

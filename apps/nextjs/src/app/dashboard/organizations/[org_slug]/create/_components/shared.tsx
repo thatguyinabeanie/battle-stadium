@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from "react";
+import type { ComponentProps, Dispatch, SetStateAction } from "react";
 import React from "react";
 
 import type { Organization } from "@battle-stadium/db/schema";
@@ -15,7 +15,7 @@ import {
   Select as UiSelect,
 } from "@battle-stadium/ui";
 
-import type { ChildrenProps } from "~/types";
+import type { ChildrenProps, ValueOf } from "~/types";
 
 // TODO: refactor to use enums for pairingSystem, bestOf, and advancement
 export interface Phase {
@@ -60,6 +60,13 @@ export interface TournamentFormProps {
   handleSubmit?: () => void;
   formData: TournamentForm;
   setFormData: Dispatch<SetStateAction<TournamentForm>>;
+  setFormKeyValue: (
+    key: keyof TournamentForm,
+  ) => (value: ValueOf<TournamentForm>) => void;
+  setPhaseKeyValue: (
+    phase_index: number,
+    key: keyof Phase,
+  ) => (value: ValueOf<Phase>) => void;
 }
 
 export interface InputWrapperProps extends ChildrenProps {
@@ -81,16 +88,14 @@ export function InputWrapper({ children, htmlFor, label }: InputWrapperProps) {
   );
 }
 
+export type CardClassNames = Partial<
+  Record<"card" | "header" | "title" | "content" | "footer", string>
+>;
+
 export interface CardWrapperProps extends ChildrenProps {
   disableCardContentWrapper?: boolean;
   title: string;
-  classNames?: {
-    card?: string;
-    header?: string;
-    title?: string;
-    content?: string;
-    footer?: string;
-  };
+  classNames?: CardClassNames;
   footer?: React.ReactNode;
 }
 
@@ -124,15 +129,15 @@ export interface SelectOptionItem {
   value: string;
 }
 
-export interface SelectProps {
+export interface SelectProps extends ComponentProps<typeof UiSelect> {
   id: string;
   placeholder: string;
   options: SelectOptionItem[];
 }
-export function Select({ id, placeholder, options }: SelectProps) {
+export function Select({ id, placeholder, options, ...props }: SelectProps) {
   return (
     <div id={id}>
-      <UiSelect>
+      <UiSelect {...props}>
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>

@@ -20,7 +20,15 @@ export function GameInformation({
   return (
     <CardWrapper title="Game and Format">
       <InputWrapper htmlFor="game" label="Game">
-        <Select id="game" placeholder="Select Game..." options={game_options} />
+        <Select
+          id="game"
+          placeholder="Select Game..."
+          options={game_options}
+          value={formData.game}
+          onValueChange={(value) =>
+            setFormData((prevFormData) => ({ ...prevFormData, game: value }))
+          }
+        />
       </InputWrapper>
 
       <InputWrapper htmlFor="format" label="Format">
@@ -28,6 +36,10 @@ export function GameInformation({
           id="format"
           placeholder="Select Format..."
           options={format_options}
+          value={formData.format}
+          onValueChange={(value) =>
+            setFormData((prevFormData) => ({ ...prevFormData, format: value }))
+          }
         />
       </InputWrapper>
 

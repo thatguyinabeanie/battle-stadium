@@ -5,7 +5,7 @@ import { CardWrapper, InputWrapper } from "./shared";
 
 export function TournamentInformation({
   formData,
-  setFormData,
+  setFormKeyValue,
 }: TournamentFormProps) {
   return (
     <CardWrapper title="Tournament Information">
@@ -16,7 +16,7 @@ export function TournamentInformation({
           // className="w-[250px]"
           placeholder="Enter Tournament Name..."
           value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          onChange={({ target: { value } }) => setFormKeyValue("name")(value)}
         />
       </InputWrapper>
 
@@ -24,12 +24,7 @@ export function TournamentInformation({
         <DatePicker
           id="start-date"
           date={formData.startDate}
-          setDate={(date) =>
-            setFormData((prevFormData) => ({
-              ...prevFormData,
-              startDate: date,
-            }))
-          }
+          setDate={setFormKeyValue("startDate")}
           classNames={{
             calendar: {
               className: "w-[250px] bg-black",
