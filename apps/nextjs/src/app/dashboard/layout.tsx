@@ -46,7 +46,7 @@ export default function DashboardLayout({
 
           <div
             aria-label="dashboard content"
-            className="my-4 mr-4 flex flex-1 flex-col gap-4 overflow-y-scroll rounded-xl bg-neutral-900/50"
+            className="scrollbar-gutter-stable my-4 mr-4 flex flex-1 flex-col gap-4 overflow-y-scroll rounded-xl bg-neutral-900/50"
           >
             {children}
           </div>
