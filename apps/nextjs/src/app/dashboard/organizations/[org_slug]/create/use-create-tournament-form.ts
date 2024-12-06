@@ -43,13 +43,19 @@ export function useCreateTournamentForm() {
       setFormData((prevFormData) => ({ ...prevFormData, [key]: value }));
 
   const setPhaseKeyValue =
-    (phase_index: number, key: keyof Phase) => (value: ValueOf<Phase>) =>
+    (phase_index: number, key: keyof Phase) => (value: ValueOf<Phase>) => {
+      if (phase_index < 0 || phase_index >= formData.phases.length) {
+        console.error("Invalid phase index");
+        return;
+      }
+
       setFormData((prevFormData) => ({
         ...prevFormData,
         phases: formData.phases.map((phase, index) =>
           index === phase_index ? { ...phase, [key]: value } : phase,
         ),
       }));
+    };
 
   const handleNext = () => {
     if (currentStep < STEPS.length) {
