@@ -157,7 +157,7 @@ function BestOfSelect({ index, phase, setPhaseKeyValue }: PhaseFormProps) {
           { value: "three", label: "3" },
         ]}
         value={String(phase.bestOf)}
-        onValueChange={(value) => setPhaseKeyValue(index, "bestOf")(parseInt(value, 10))}
+        onValueChange={(value) => setPhaseKeyValue(index, "bestOf")(Number.parseInt(value, 10))}
       />
     </InputWrapper>
   );
