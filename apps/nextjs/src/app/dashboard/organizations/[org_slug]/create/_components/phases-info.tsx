@@ -163,8 +163,8 @@ function PhaseNameInput({
 const pairing_system_options: SelectOptionItem[] = [
   { value: "swiss", label: "Swiss" },
   { value: "single_elimination_bracket", label: "Single Elimination Bracket" },
-  // { value: "double_elimination_bracket", label: "Double Elimination Bracket" },  
-  // { value: "round_robin", label: "Round Robin" }, 
+  // { value: "double_elimination_bracket", label: "Double Elimination Bracket" },
+  // { value: "round_robin", label: "Round Robin" },
 ];
 
 function PairingSystemSelect({ index }: { index: number }) {
