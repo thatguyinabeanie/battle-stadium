@@ -15,7 +15,7 @@ export function GameInformation({
   setFormData,
 }: TournamentFormProps) {
   return (
-    <CardWrapper title="Game">
+    <CardWrapper title="Game and Format">
       <InputWrapper htmlFor="game" label="Game">
         <div id="game">
           <Select>

@@ -9,7 +9,7 @@ import type {
   TournamentFormProps,
 } from "./_components/shared";
 import { GameInformation } from "./_components/game-info";
-import { TournamentPhases } from "./_components/phases-info";
+// import { TournamentPhases } from "./_components/phases-info";
 import { Registration } from "./_components/registration-info";
 import { TournamentInformation } from "./_components/tournament-info";
 import { STEPS, useCreateTournamentForm } from "./use-create-tournament-form";
@@ -17,7 +17,11 @@ import { STEPS, useCreateTournamentForm } from "./use-create-tournament-form";
 export default function CreateTournament({
   org,
 }: OrganizationDashboardPageProps) {
-  const { formData, setFormData, addPhase } = useCreateTournamentForm();
+  const {
+    formData,
+    setFormData,
+    // addPhase
+  } = useCreateTournamentForm();
 
   return (
     <div className="flex max-h-dvh w-full flex-col items-center space-y-6 p-6">
@@ -33,11 +37,11 @@ export default function CreateTournament({
 
         <Registration formData={formData} setFormData={setFormData} />
 
-        <TournamentPhases
+        {/* <TournamentPhases
           formData={formData}
           setFormData={setFormData}
           addPhase={addPhase}
-        />
+        /> */}
       </div>
 
       {/* <Navigation 

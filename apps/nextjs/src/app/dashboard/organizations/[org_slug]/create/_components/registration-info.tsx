@@ -1,7 +1,6 @@
 import {
   Checkbox,
   Input,
-  Label,
   Select,
   SelectContent,
   SelectItem,
@@ -75,9 +74,16 @@ export function Registration({ formData, setFormData }: TournamentFormProps) {
         </InputWrapper>
       )}
 
-      <div className="h-1 border-0 border-b-2" />
-
-      <Label className="my-8 py-8">Late Registration</Label>
+      <InputWrapper htmlFor="require-check-in" label="Check In Required?">
+        <div id="require-check-in">
+          <Switch
+            checked={formData.requireCheckIn}
+            onCheckedChange={(checked) =>
+              setFormData({ ...formData, requireCheckIn: checked })
+            }
+          />
+        </div>
+      </InputWrapper>
 
       <InputWrapper htmlFor="late-registration" label="Late Registration">
         <Checkbox

@@ -1,4 +1,4 @@
-import { DatePicker, Input, Switch } from "@battle-stadium/ui";
+import { DatePicker, Input } from "@battle-stadium/ui";
 
 import type { TournamentFormProps } from "./shared";
 import { CardWrapper, InputWrapper } from "./shared";
@@ -9,7 +9,7 @@ export function TournamentInformation({
 }: TournamentFormProps) {
   return (
     <CardWrapper title="Tournament Information">
-      <InputWrapper htmlFor="tournament-name" label="Tournament Name">
+      <InputWrapper htmlFor="tournament-name" label="Name">
         <Input
           id="tournament-name"
           type="text"
@@ -36,17 +36,6 @@ export function TournamentInformation({
             },
           }}
         />
-      </InputWrapper>
-
-      <InputWrapper htmlFor="require-check-in" label="Check In Required?">
-        <div id="require-check-in">
-          <Switch
-            checked={formData.requireCheckIn}
-            onCheckedChange={(checked) =>
-              setFormData({ ...formData, requireCheckIn: checked })
-            }
-          />
-        </div>
       </InputWrapper>
     </CardWrapper>
   );
