@@ -42,6 +42,7 @@ words:
   - alola
   - battlestadium
   - cmdk
+  - Embla
   - galar
   - gmax
   - hoenn
@@ -66,16 +67,17 @@ words:
   - sidebarheader
   - sinnoh
   - slotnumber
+  - Sonner
   - sqlstring
   - teamlists
   - Tera
   - thatguyinabeanie
+  - typesafe
   - unova
   - UNPOOLED
   - Unreads
   - uploadthing
   - UTSSR
   - vaul
-  - Sonner
 ignoreWords: []
 import: []
