@@ -2,15 +2,20 @@ import type { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
 export const PhaseSchema = z.object({
-  name: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  bestOf: z.number().int().min(1, { message: "Best of must be at least 1." }),
+  name: z.string().min(2, { 
+    message: "Phase name must be at least 2 characters long."
+  }),
+  bestOf: z.number().int().min(1, { 
+    message: "Best of X format must be at least 1 game."
+  }),
 });
 
 export const TournamentFormSchema = z.object({
   tournament_name: z.string().min(2, {
     message: "Tournament name must be at least 2 characters.",
   }),
-  startDate: z.date({ required_error: "Date is required." }),
+  startDate: z.string().date(),
+  startTime: z.string().time(),
   game: z.string().min(2, { message: "Game must be at least 2 characters." }),
   format: z
     .string()
@@ -26,6 +31,7 @@ export const TournamentFormSchema = z.object({
   lateRegistration: z.boolean().default(true),
   lateTeamSheet: z.boolean().default(true),
   lateCheckIn: z.boolean().default(true),
+  
 });
 
 export interface TournamentFormProps {
