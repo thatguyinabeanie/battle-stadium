@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import type { Phase, TournamentForm } from "./_components/shared";
-import type { ValueOf } from "~/types";
 import {
   Advancement,
   BestOf,
