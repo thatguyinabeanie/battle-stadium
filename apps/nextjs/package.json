@@ -66,6 +66,7 @@
     "pokedex-promise-v2": "catalog:pokemon",
     "react": "catalog:react",
     "react-dom": "catalog:react",
+    "react-hook-form": "catalog:",
     "server-only": "catalog:",
     "sqlstring": "catalog:",
     "superjson": "catalog:",

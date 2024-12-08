@@ -64,7 +64,7 @@
     "lucide-react": "^0.454.0",
     "next-themes": "^0",
     "react-day-picker": "^9",
-    "react-hook-form": "^7",
+    "react-hook-form": "catalog:",
     "react-resizable-panels": "^2",
     "recharts": "^2",
     "sonner": "^1",
