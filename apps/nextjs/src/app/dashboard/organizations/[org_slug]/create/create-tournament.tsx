@@ -24,6 +24,7 @@ export default function CreateTournament({
   });
 
   function onSubmit(data: z.infer<typeof TournamentFormSchema>) {
+    console.log("data", data);
     toast({
       title: "Tournament Created Successfully!",
       description: "Your tournament has been created and saved.",
