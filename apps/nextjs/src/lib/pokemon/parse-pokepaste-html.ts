@@ -61,7 +61,7 @@ export function parsePokePasteHTML(html: string, url: string): ParsedTeam {
         if (line.startsWith("Ability:")) {
           currentPokemon.ability = line.split(":")[1]?.trim() ?? "";
         } else if (line.startsWith("Level:")) {
-          currentPokemon.level = parseInt(
+          currentPokemon.level = Number.parseInt(
             line.split(":")[1]?.trim() ?? "100",
             10,
           );

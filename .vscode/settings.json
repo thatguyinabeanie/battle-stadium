@@ -61,4 +61,5 @@
   "githubPullRequests.experimental.chat": true,
   "githubPullRequests.experimental.notificationsView": true,
   "githubPullRequests.experimental.useQuickChat": true,
+  "editor.tabSize": 2,
 }

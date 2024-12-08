@@ -128,7 +128,7 @@ const Carousel = forwardRef<
     }, [api, onSelect]);
 
     return (
-      <CarouselContext.Provider
+      <CarouselContext
         value={{
           carouselRef,
           api: api,
@@ -150,7 +150,7 @@ const Carousel = forwardRef<
         >
           {children}
         </div>
-      </CarouselContext.Provider>
+      </CarouselContext>
     );
   },
 );

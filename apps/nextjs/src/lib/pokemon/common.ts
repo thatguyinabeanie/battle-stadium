@@ -77,7 +77,7 @@ export function parseStats(
     if (name && value) {
       const statKey = name.toLowerCase() as keyof StatsTable;
 
-      statsTable[statKey] = parseInt(value, 10);
+      statsTable[statKey] = Number.parseInt(value, 10);
     }
   });
 

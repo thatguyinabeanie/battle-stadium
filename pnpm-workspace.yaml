@@ -8,7 +8,7 @@ catalog:
   eslint: ^9
   postcss: ^8
   prettier: ^3
-  typescript: ^5
+  typescript: ^5.7
   zod: ^3
   superjson: ^2
   "dotenv-cli": ^7
@@ -20,7 +20,10 @@ catalog:
   "server-only": ^0.0.1
   jiti: ^1
   "@types/sqlstring": ^2
-
+  "@t3-oss/env-nextjs": 0.11.1
+  "babel-plugin-react-compiler": beta
+  "react-hook-form": ^7
+  "@hookform/resolvers": ^3
 
 catalogs:
   auth:
@@ -53,6 +56,10 @@ catalogs:
     "discord-interactions": ^4
     "discord.js": ^14
 
+  eslint:
+    "eslint-plugin-turbo": ^2
+    "typescript-eslint": ^8
+
   expo:
     "@expo/metro-config": ^0
     "expo": ^52
@@ -65,13 +72,18 @@ catalogs:
     "expo-status-bar": ^2
     "expo-web-browser": ^14
 
+  next-stable:
+    next: ^15
+    "@next/bundle-analyzer": ^15
+    "@next/eslint-plugin-next": ^15
+    "@next/third-parties": ^15
+    
+
   next:
     next: canary
     "@next/bundle-analyzer": canary
     "@next/eslint-plugin-next": canary
     "@next/third-parties": canary
-    "@t3-oss/env-nextjs": ^0
-    "babel-plugin-react-compiler": beta
 
   particles:
     tsparticles: ^3.7
@@ -123,21 +135,13 @@ catalogs:
     "@rails/actioncable": ^7
     "@types/rails__actioncable": ^6
 
-  react18:
-    react: ^18
-    react-dom: ^18
-    "@types/react": ^18
-    "@types/react-dom": ^18
+  react:
+    react: ^19
+    react-dom: ^19
+    "@types/react": ^19
+    "@types/react-dom": ^19
     "eslint-plugin-react-hooks": ^5
     "eslint-plugin-react": ^7
-
-  react:
-    react: rc
-    react-dom: rc
-    "@types/react": "npm:types-react@rc"
-    "@types/react-dom": "npm:types-react-dom@rc"
-    "eslint-plugin-react-hooks": rc
-    "eslint-plugin-react": latest
     "eslint-plugin-react-compiler": beta
 
   react-native:

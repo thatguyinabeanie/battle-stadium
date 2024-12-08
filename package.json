@@ -23,7 +23,7 @@
     "fix": "pnpm lint:fix && pnpm format:fix",
     "postinstall": "pnpm lint:ws",
     "typecheck": "turbo run typecheck",
-    "typecheck:watch": "turbo run typecheck:watch",
+    "typecheck:watch": "turbo run typecheck:watch --concurrency 11",
     "ui-add": "turbo run ui-add",
     "sort-packages": "turbo run sort-packages",
     "vercel:pull": "turbo run vercel:pull",

@@ -21,45 +21,13 @@ import {
   tournaments,
 } from "./schema";
 
-export const accountsRelations = relations(accounts, ({ one, many }) => ({
-  profile: one(profiles, {
-    fields: [accounts.defaultProfileId],
-    references: [profiles.id],
-    relationName: "accounts_defaultProfileId_profiles_id",
-  }),
-  clerkUsers: many(clerkUsers),
-  chatMessages: many(chatMessages),
-  matches: many(matches),
-  organizationStaffMembers: many(organizationStaffMembers),
-  organizations: many(organizations),
-  players: many(players),
-  profiles: many(profiles, {
-    relationName: "profiles_accountId_accounts_id",
-  }),
-}));
-
-export const profilesRelations = relations(profiles, ({ one, many }) => ({
-  accounts: many(accounts, {
-    relationName: "accounts_defaultProfileId_profiles_id",
-  }),
-  matchGames: many(matchGames),
-  chatMessages: many(chatMessages),
-  players: many(players),
-  pokemonTeams: many(pokemonTeams),
-  account: one(accounts, {
-    fields: [profiles.accountId],
-    references: [accounts.id],
-    relationName: "profiles_accountId_accounts_id",
-  }),
-}));
-
 export const formatsRelations = relations(formats, ({ one, many }) => ({
   game: one(games, {
     fields: [formats.gameId],
     references: [games.id],
   }),
-  pokemonTeams: many(pokemonTeams),
   tournamentFormats: many(tournamentFormats),
+  pokemonTeams: many(pokemonTeams),
 }));
 
 export const gamesRelations = relations(games, ({ many }) => ({
@@ -68,11 +36,36 @@ export const gamesRelations = relations(games, ({ many }) => ({
   tournaments: many(tournaments),
 }));
 
-export const clerkUsersRelations = relations(clerkUsers, ({ one }) => ({
-  account: one(accounts, {
-    fields: [clerkUsers.accountId],
-    references: [accounts.id],
+export const accountsRelations = relations(accounts, ({ one, many }) => ({
+  profile: one(profiles, {
+    fields: [accounts.defaultProfileId],
+    references: [profiles.id],
+    relationName: "accounts_defaultProfileId_profiles_id",
   }),
+  organizationStaffMembers: many(organizationStaffMembers),
+  clerkUsers: many(clerkUsers),
+  chatMessages: many(chatMessages),
+  profiles: many(profiles, {
+    relationName: "profiles_accountId_accounts_id",
+  }),
+  matches: many(matches),
+  organizations: many(organizations),
+  players: many(players),
+}));
+
+export const profilesRelations = relations(profiles, ({ one, many }) => ({
+  accounts: many(accounts, {
+    relationName: "accounts_defaultProfileId_profiles_id",
+  }),
+  matchGames: many(matchGames),
+  pokemonTeams: many(pokemonTeams),
+  chatMessages: many(chatMessages),
+  account: one(accounts, {
+    fields: [profiles.accountId],
+    references: [accounts.id],
+    relationName: "profiles_accountId_accounts_id",
+  }),
+  players: many(players),
 }));
 
 export const matchGamesRelations = relations(matchGames, ({ one }) => ({
@@ -144,6 +137,7 @@ export const playersRelations = relations(players, ({ one, many }) => ({
   matchGames_loserId: many(matchGames, {
     relationName: "matchGames_loserId_players_id",
   }),
+  phasePlayers: many(phasePlayers),
   matches_playerOneId: many(matches, {
     relationName: "matches_playerOneId_players_id",
   }),
@@ -156,7 +150,6 @@ export const playersRelations = relations(players, ({ one, many }) => ({
   matches_loserId: many(matches, {
     relationName: "matches_loserId_players_id",
   }),
-  phasePlayers: many(phasePlayers),
   account: one(accounts, {
     fields: [players.accountId],
     references: [accounts.id],
@@ -175,23 +168,7 @@ export const playersRelations = relations(players, ({ one, many }) => ({
   }),
 }));
 
-export const chatMessagesRelations = relations(chatMessages, ({ one }) => ({
-  account: one(accounts, {
-    fields: [chatMessages.accountId],
-    references: [accounts.id],
-  }),
-  match: one(matches, {
-    fields: [chatMessages.matchId],
-    references: [matches.id],
-  }),
-  profile: one(profiles, {
-    fields: [chatMessages.profileId],
-    references: [profiles.id],
-  }),
-}));
-
 export const phasesRelations = relations(phases, ({ one, many }) => ({
-  matches: many(matches),
   round: one(rounds, {
     fields: [phases.currentRoundId],
     references: [rounds.id],
@@ -201,23 +178,24 @@ export const phasesRelations = relations(phases, ({ one, many }) => ({
     references: [tournaments.id],
     relationName: "phases_tournamentId_tournaments_id",
   }),
+  matches: many(matches),
   tournaments: many(tournaments, {
     relationName: "tournaments_currentPhaseId_phases_id",
   }),
 }));
 
 export const roundsRelations = relations(rounds, ({ many }) => ({
-  matches: many(matches),
   phases: many(phases),
+  matches: many(matches),
 }));
 
 export const tournamentsRelations = relations(tournaments, ({ one, many }) => ({
-  matches: many(matches),
   phases: many(phases, {
     relationName: "phases_tournamentId_tournaments_id",
   }),
-  players: many(players),
   tournamentFormats: many(tournamentFormats),
+  matches: many(matches),
+  players: many(players),
   game: one(games, {
     fields: [tournaments.gameId],
     references: [games.id],
@@ -232,6 +210,20 @@ export const tournamentsRelations = relations(tournaments, ({ one, many }) => ({
     relationName: "tournaments_currentPhaseId_phases_id",
   }),
 }));
+
+export const tournamentFormatsRelations = relations(
+  tournamentFormats,
+  ({ one }) => ({
+    format: one(formats, {
+      fields: [tournamentFormats.formatId],
+      references: [formats.id],
+    }),
+    tournament: one(tournaments, {
+      fields: [tournamentFormats.tournamentId],
+      references: [tournaments.id],
+    }),
+  }),
+);
 
 export const organizationStaffMembersRelations = relations(
   organizationStaffMembers,
@@ -269,22 +261,44 @@ export const phasePlayersRelations = relations(phasePlayers, ({ one }) => ({
 export const pokemonTeamsRelations = relations(
   pokemonTeams,
   ({ one, many }) => ({
-    players: many(players),
-    pokemon: many(pokemon),
-    game: one(games, {
-      fields: [pokemonTeams.gameId],
-      references: [games.id],
-    }),
     format: one(formats, {
       fields: [pokemonTeams.formatId],
       references: [formats.id],
+    }),
+    game: one(games, {
+      fields: [pokemonTeams.gameId],
+      references: [games.id],
     }),
     profile: one(profiles, {
       fields: [pokemonTeams.profileId],
       references: [profiles.id],
     }),
+    players: many(players),
+    pokemon: many(pokemon),
   }),
 );
+
+export const clerkUsersRelations = relations(clerkUsers, ({ one }) => ({
+  account: one(accounts, {
+    fields: [clerkUsers.accountId],
+    references: [accounts.id],
+  }),
+}));
+
+export const chatMessagesRelations = relations(chatMessages, ({ one }) => ({
+  account: one(accounts, {
+    fields: [chatMessages.accountId],
+    references: [accounts.id],
+  }),
+  match: one(matches, {
+    fields: [chatMessages.matchId],
+    references: [matches.id],
+  }),
+  profile: one(profiles, {
+    fields: [chatMessages.profileId],
+    references: [profiles.id],
+  }),
+}));
 
 export const pokemonRelations = relations(pokemon, ({ one }) => ({
   pokemonTeam: one(pokemonTeams, {
@@ -292,17 +306,3 @@ export const pokemonRelations = relations(pokemon, ({ one }) => ({
     references: [pokemonTeams.id],
   }),
 }));
-
-export const tournamentFormatsRelations = relations(
-  tournamentFormats,
-  ({ one }) => ({
-    format: one(formats, {
-      fields: [tournamentFormats.formatId],
-      references: [formats.id],
-    }),
-    tournament: one(tournaments, {
-      fields: [tournamentFormats.tournamentId],
-      references: [tournaments.id],
-    }),
-  }),
-);

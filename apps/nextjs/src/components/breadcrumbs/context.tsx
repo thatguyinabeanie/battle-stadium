@@ -30,8 +30,8 @@ export function BreadCrumbsProvider({ children }: ChildrenProps) {
   const [breadCrumbs, setBreadCrumbs] = useState<string[]>([]);
 
   return (
-    <BreadCrumbsContext.Provider value={{ breadCrumbs, setBreadCrumbs }}>
+    <BreadCrumbsContext value={{ breadCrumbs, setBreadCrumbs }}>
       {children}
-    </BreadCrumbsContext.Provider>
+    </BreadCrumbsContext>
   );
 }

@@ -15,7 +15,7 @@ export default withBundleAnalyzer({
   reactStrictMode: true,
 
   experimental: {
-    after: true,
+    // after: true,
     reactCompiler: true,
     ppr: true,
     staleTimes: {

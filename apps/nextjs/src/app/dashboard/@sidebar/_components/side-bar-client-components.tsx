@@ -45,7 +45,7 @@ export const ProjectsDropDownMenuContentMobile = forwardRef<
     <DropdownMenuPrimitive.Portal>
       <DropdownMenuPrimitive.Content
         ref={ref}
-        className={`max-h-[300px] w-48 overflow-y-auto rounded-lg bg-background ${touchStyles} ${className}`}
+        className={`scrollbar-gutter-stable max-h-[300px] w-48 overflow-y-auto rounded-lg bg-background ${touchStyles} ${className}`}
         side={isMobile ? "bottom" : "right"}
         align={isMobile ? "end" : "start"}
         sideOffset={isMobile ? 8 : 2}
