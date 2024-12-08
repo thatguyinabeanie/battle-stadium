@@ -74,7 +74,7 @@ export default function RootLayout({
           <AdSenseScript />
           <body
             className={cn(
-              "min-h-screen bg-background font-sans text-foreground antialiased",
+              "min-h-screen bg-background font-sans text-foreground antialiased overflow-hidden",
               GeistSans.variable,
               GeistMono.variable,
             )}
