@@ -6,11 +6,11 @@ import { useForm } from "react-hook-form";
 
 import { Button, Form, useToast } from "@battle-stadium/ui";
 
-import { RegistrationType  } from "./_components/shared";
-import type {OrganizationDashboardPageProps} from "./_components/shared";
+import type { OrganizationDashboardPageProps } from "./_components/shared";
 import { GameInformation } from "./_components/game-info";
 import { TournamentPhases } from "./_components/phases-info";
 import { Registration } from "./_components/registration-info";
+import { RegistrationType } from "./_components/shared";
 import { TournamentInformation } from "./_components/tournament-info";
 import { TournamentFormSchema } from "./_components/zod-schema";
 
