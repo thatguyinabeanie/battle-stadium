@@ -1,13 +1,7 @@
 import { Button, CardFooter } from "@battle-stadium/ui";
 
 import type { TournamentFormProps } from "./zod-schema";
-// import type { Phase } from "./shared";
 import { CardWrapper } from "./shared";
-
-// interface PhaseFormProps extends TournamentFormProps {
-//   index: number;
-//   phase: Phase;
-// }
 
 export function TournamentPhases({ form }: TournamentFormProps) {
   console.log("form", form.getValues());
