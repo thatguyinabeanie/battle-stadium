@@ -64,45 +64,10 @@ export function Registration({ form }: TournamentFormProps) {
         control={form.control}
         name="playerCap"
         render={({ field }) => (
-          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <FormLabel className="text-base">Player Cap</FormLabel>
-              <FormDescription>
-                Set a maximum number of players that can register for this
-                tournament.
-              </FormDescription>
-            </div>
-            <FormControl>
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
-            </FormControl>
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="playerCap"
-        render={({ field }) => (
-          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <FormLabel className="text-base">Player Cap</FormLabel>
-              <FormDescription>Enable Player Cap.</FormDescription>
-            </div>
-            <FormControl>
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
-            </FormControl>
-          </FormItem>
-        )}
-      />
-
-      <FormField
-        control={form.control}
-        name="maxPlayers"
-        render={({ field }) => (
           <FormItem>
-            <FormLabel>Username</FormLabel>
+            <FormLabel>Player Cap</FormLabel>
             <FormControl>
-              <Input placeholder="Max Players..." {...field} />
+              <Input placeholder="Player Cap..." {...field} />
             </FormControl>
             <FormDescription>
               Set a maximum number of players that can register for this

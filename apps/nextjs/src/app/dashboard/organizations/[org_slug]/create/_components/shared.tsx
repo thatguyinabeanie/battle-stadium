@@ -54,9 +54,9 @@ export interface TournamentForm {
   registrationType: RegistrationType;
   playerCap: boolean;
   maxPlayers: number;
-  allowLateRegistration: boolean;
-  allowLateTeamSheet: boolean;
-  allowLateCheckIn: boolean;
+  lateRegistration: boolean;
+  lateTeamSheet: boolean;
+  lateCheckIn: boolean;
   phases: Phase[];
 }
 

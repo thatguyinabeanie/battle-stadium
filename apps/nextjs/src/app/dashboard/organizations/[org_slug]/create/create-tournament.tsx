@@ -2,25 +2,21 @@
 
 import type { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChevronRight } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { Button, Form, useToast } from "@battle-stadium/ui";
 
-import type { OrganizationDashboardPageProps } from "./_components/shared";
+import { RegistrationType  } from "./_components/shared";
+import type {OrganizationDashboardPageProps} from "./_components/shared";
 import { GameInformation } from "./_components/game-info";
 import { TournamentPhases } from "./_components/phases-info";
 import { Registration } from "./_components/registration-info";
 import { TournamentInformation } from "./_components/tournament-info";
 import { TournamentFormSchema } from "./_components/zod-schema";
-// import { STEPS, useCreateTournamentForm } from "./use-create-tournament-form";
-import { STEPS } from "./use-create-tournament-form";
 
 export default function CreateTournament({
   org,
 }: OrganizationDashboardPageProps) {
-  // const { addPhase, ...rest } = useCreateTournamentForm();
-
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof TournamentFormSchema>>({
@@ -34,12 +30,11 @@ export default function CreateTournament({
       format: "Regulation H",
       teamSheetRequired: true,
       openTeamSheet: true,
-      registrationType: "open",
-      playerCap: false,
-      maxPlayers: 0,
-      allowLateRegistration: true,
-      allowLateTeamSheet: true,
-      allowLateCheckIn: true,
+      registrationType: RegistrationType.Open,
+      playerCap: undefined,
+      lateRegistration: true,
+      lateTeamSheet: true,
+      lateCheckIn: true,
       phases: [],
     }),
   });
@@ -82,34 +77,34 @@ export default function CreateTournament({
   );
 }
 
-export function StepWizardProgress({ currentStep }: { currentStep: number }) {
-  return (
-    <div className="mb-6 flex justify-between">
-      {STEPS.map((step) => (
-        <div
-          key={step.id}
-          className={`flex items-center ${
-            step.id === currentStep ? "text-primary" : "text-muted-foreground"
-          }`}
-        >
-          <div className="flex flex-col items-center">
-            <div
-              className={`flex h-8 w-8 items-center justify-center rounded-full border-2 ${
-                step.id === currentStep ? "border-primary" : "border-muted"
-              }`}
-            >
-              {step.id}
-            </div>
-            <span className="mt-1 text-xs">{step.title}</span>
-          </div>
-          {step.id !== STEPS.length && (
-            <ChevronRight className="mx-2 h-4 w-4" />
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
+// export function StepWizardProgress({ currentStep }: { currentStep: number }) {
+//   return (
+//     <div className="mb-6 flex justify-between">
+//       {STEPS.map((step) => (
+//         <div
+//           key={step.id}
+//           className={`flex items-center ${
+//             step.id === currentStep ? "text-primary" : "text-muted-foreground"
+//           }`}
+//         >
+//           <div className="flex flex-col items-center">
+//             <div
+//               className={`flex h-8 w-8 items-center justify-center rounded-full border-2 ${
+//                 step.id === currentStep ? "border-primary" : "border-muted"
+//               }`}
+//             >
+//               {step.id}
+//             </div>
+//             <span className="mt-1 text-xs">{step.title}</span>
+//           </div>
+//           {step.id !== STEPS.length && (
+//             <ChevronRight className="mx-2 h-4 w-4" />
+//           )}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 
 // export function Navigation({
 //   currentStep,
