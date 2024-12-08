@@ -43,6 +43,8 @@ export function Registration({
             id="max-players"
             name="max-players"
             type="number"
+            min={1}
+            max={100}
             value={formData.maxPlayers}
             onChange={({ target: { value } }) =>
               setFormKeyValue("maxPlayers")(Number.parseInt(value, 10))
