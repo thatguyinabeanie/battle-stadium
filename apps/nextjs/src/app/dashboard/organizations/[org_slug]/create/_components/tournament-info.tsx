@@ -55,8 +55,8 @@ export function TournamentInformation({ form }: TournamentFormProps) {
               <FormDescription>
                 Select the tournament's start date. Participants will be notified of this date.  
               </FormDescription>
+              <FormMessage />
             </div>
-            <FormMessage />
           </FormItem>
         )}
       />

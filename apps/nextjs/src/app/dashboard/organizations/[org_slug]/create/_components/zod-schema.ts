@@ -14,7 +14,7 @@ export const TournamentFormSchema = z.object({
   tournament_name: z.string().min(2, {
     message: "Tournament name must be at least 2 characters.",
   }),
-  startDate: z.string().date(),
+  startDate: z.date(),
   startTime: z.string().time(),
   game: z.string().min(2, { message: "Game must be at least 2 characters." }),
   format: z

@@ -31,7 +31,6 @@ interface DatePickerProps {
   };
 }
 
-// TODO: make popover content background not transparent
 export function DatePicker({
   date,
   setDate,
