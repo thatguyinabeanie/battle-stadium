@@ -12,7 +12,7 @@ import { SpeedInsights as VercelSpeedInsights } from "@vercel/speed-insights/nex
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 
-import { cn, ThemeProvider } from "@battle-stadium/ui";
+import { cn, ThemeProvider, Toaster } from "@battle-stadium/ui";
 
 import type { ChildrenProps } from "~/types";
 import { AdSenseScript } from "~/components/google-adsense/ad-sense";
@@ -90,7 +90,7 @@ export default function RootLayout({
                     {children}
                   </div>
                 </div>
-
+                <Toaster />
                 <Suspense fallback={null}>{cookies}</Suspense>
                 <Analytics />
               </ThemeProvider>

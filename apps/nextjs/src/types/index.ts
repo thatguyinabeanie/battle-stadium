@@ -57,5 +57,3 @@ export interface Tokens {
   oidc: string | null;
   clerk: string | null;
 }
-
-export type ValueOf<T> = T[keyof T];

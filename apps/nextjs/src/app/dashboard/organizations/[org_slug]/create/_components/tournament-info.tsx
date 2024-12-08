@@ -1,37 +1,60 @@
-import { DatePicker, Input } from "@battle-stadium/ui";
+import {
+  DatePicker,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  Input,
+} from "@battle-stadium/ui";
 
-import type { TournamentFormProps } from "./shared";
-import { CardWrapper, InputWrapper } from "./shared";
+import type { TournamentFormProps } from "./zod-schema";
+import { CardWrapper } from "./shared";
 
-export function TournamentInformation({
-  formData,
-  setFormKeyValue,
-}: TournamentFormProps) {
+export function TournamentInformation({ form }: TournamentFormProps) {
   return (
     <CardWrapper title="Tournament Information">
-      <InputWrapper htmlFor="tournament-name" label="Name">
-        <Input
-          id="tournament-name"
-          type="text"
-          // className="w-[250px]"
-          placeholder="Enter Tournament Name..."
-          value={formData.name}
-          onChange={({ target: { value } }) => setFormKeyValue("name")(value)}
-        />
-      </InputWrapper>
+      <FormField
+        control={form.control}
+        name="tournament_name"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Username</FormLabel>
+            <FormControl>
+              <Input placeholder="shadcn" {...field} />
+            </FormControl>
+            <FormDescription>This is your public display name.</FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-      <InputWrapper label="Start Date and Time" htmlFor="start-date">
-        <DatePicker
-          id="start-date"
-          date={formData.startDate}
-          setDate={setFormKeyValue("startDate")}
-          classNames={{
-            calendar: {
-              className: "w-[250px]",
-            },
-          }}
-        />
-      </InputWrapper>
+      <FormField
+        control={form.control}
+        name="startDate"
+        render={({ field }) => (
+          <FormItem className="flex flex-col">
+            <FormLabel>Date</FormLabel>
+            <FormControl>
+              <DatePicker
+                id="date"
+                date={field.value}
+                setDate={field.onChange}
+                classNames={{
+                  calendar: {
+                    className: "w-[250px]",
+                  },
+                }}
+              />
+            </FormControl>
+            <FormDescription>
+              The date the tournament will start.
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     </CardWrapper>
   );
 }

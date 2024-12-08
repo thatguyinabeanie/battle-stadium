@@ -1,40 +1,73 @@
 "use client";
 
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ChevronRight } from "lucide-react";
+import { useForm } from "react-hook-form";
 
-import { Button } from "@battle-stadium/ui";
+import { Button, Form, useToast } from "@battle-stadium/ui";
 
-import type {
-  OrganizationDashboardPageProps,
-  TournamentFormProps,
-} from "./_components/shared";
+import type { OrganizationDashboardPageProps } from "./_components/shared";
 import { GameInformation } from "./_components/game-info";
 import { TournamentPhases } from "./_components/phases-info";
 import { Registration } from "./_components/registration-info";
 import { TournamentInformation } from "./_components/tournament-info";
-import { STEPS, useCreateTournamentForm } from "./use-create-tournament-form";
+import { TournamentFormSchema } from "./_components/zod-schema";
+// import { STEPS, useCreateTournamentForm } from "./use-create-tournament-form";
+import { STEPS } from "./use-create-tournament-form";
 
 export default function CreateTournament({
   org,
 }: OrganizationDashboardPageProps) {
-  const { addPhase, ...rest } = useCreateTournamentForm();
-  console.log("org", org);
+  // const { addPhase, ...rest } = useCreateTournamentForm();
+
+  const { toast } = useToast();
+
+  const form = useForm<z.infer<typeof TournamentFormSchema>>({
+    resolver: zodResolver(TournamentFormSchema),
+    defaultValues: TournamentFormSchema.parse({
+      tournament_name: "Tournament Name",
+      description: "Hello World",
+      startDate: new Date(),
+      requireCheckIn: true,
+      game: "Scarlet & Violet",
+      format: "Regulation H",
+      teamSheetRequired: true,
+      openTeamSheet: true,
+      registrationType: "open",
+      playerCap: false,
+      maxPlayers: 0,
+      allowLateRegistration: true,
+      allowLateTeamSheet: true,
+      allowLateCheckIn: true,
+      phases: [],
+    }),
+  });
+
+  function onSubmit(data: z.infer<typeof TournamentFormSchema>) {
+    toast({
+      title: "You submitted the following values:",
+      description: JSON.stringify(data),
+    });
+  }
 
   return (
     <div className="flex max-h-dvh w-full flex-col items-center space-y-6 p-6">
       {/* <StepWizardProgress currentStep={currentStep} /> */}
 
       {/* Step Content */}
-      <div className="space-y-4">
-        {/* <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1> */}
+      <div className="space-y-4 backdrop-filter-none">
+        <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1>
 
-        <TournamentInformation {...rest} />
-
-        <GameInformation {...rest} />
-
-        <Registration {...rest} />
-
-        <TournamentPhases {...rest} addPhase={addPhase} />
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <TournamentInformation form={form} />
+            <GameInformation form={form} />
+            <Registration form={form} />
+            <TournamentPhases form={form} />
+            <Button type="submit">Submit</Button>
+          </form>
+        </Form>
       </div>
 
       {/* <Navigation 
@@ -78,30 +111,30 @@ export function StepWizardProgress({ currentStep }: { currentStep: number }) {
   );
 }
 
-export function Navigation({
-  currentStep,
-  handleNext,
-  handleBack,
-  handleSubmit,
-}: TournamentFormProps) {
-  return (
-    <div className="mt-6 flex justify-between">
-      <Button
-        variant="outline"
-        onClick={handleBack}
-        disabled={currentStep === 1}
-      >
-        <ChevronLeft className="mr-2 h-4 w-4" />
-        Back
-      </Button>
-      {currentStep === STEPS.length ? (
-        <Button onClick={handleSubmit}>Create Tournament</Button>
-      ) : (
-        <Button onClick={handleNext}>
-          Next
-          <ChevronRight className="ml-2 h-4 w-4" />
-        </Button>
-      )}
-    </div>
-  );
-}
+// export function Navigation({
+//   currentStep,
+//   handleNext,
+//   handleBack,
+//   handleSubmit,
+// }: TournamentFormProps) {
+//   return (
+//     <div className="mt-6 flex justify-between">
+//       <Button
+//         variant="outline"
+//         onClick={handleBack}
+//         disabled={currentStep === 1}
+//       >
+//         <ChevronLeft className="mr-2 h-4 w-4" />
+//         Back
+//       </Button>
+//       {currentStep === STEPS.length ? (
+//         <Button onClick={handleSubmit}>Create Tournament</Button>
+//       ) : (
+//         <Button onClick={handleNext}>
+//           Next
+//           <ChevronRight className="ml-2 h-4 w-4" />
+//         </Button>
+//       )}
+//     </div>
+//   );
+// }

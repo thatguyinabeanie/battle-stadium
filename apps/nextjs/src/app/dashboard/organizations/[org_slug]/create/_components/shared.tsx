@@ -1,21 +1,9 @@
-import type { ComponentProps, Dispatch, SetStateAction } from "react";
 import React from "react";
 
 import type { Organization } from "@battle-stadium/db/schema";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Label,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Select as UiSelect,
-} from "@battle-stadium/ui";
+import { Card, CardContent, CardHeader, CardTitle } from "@battle-stadium/ui";
 
-import type { ChildrenProps, ValueOf } from "~/types";
+import type { ChildrenProps } from "~/types";
 
 export enum PairingSystem {
   Swiss = "swiss",
@@ -76,42 +64,6 @@ export interface OrganizationDashboardPageProps {
   org: Organization;
 }
 
-export interface TournamentFormProps {
-  currentStep?: number;
-  addPhase?: () => void;
-  handleNext?: () => void;
-  handleBack?: () => void;
-  handleSubmit?: () => void;
-  formData: TournamentForm;
-  setFormData: Dispatch<SetStateAction<TournamentForm>>;
-  setFormKeyValue: (
-    key: keyof TournamentForm,
-  ) => (value: ValueOf<TournamentForm>) => void;
-  setPhaseKeyValue: (
-    phase_index: number,
-    key: keyof Phase,
-  ) => (value: ValueOf<Phase>) => void;
-}
-
-export interface InputWrapperProps extends ChildrenProps {
-  htmlFor: string;
-  label: string;
-}
-
-export function InputWrapper({ children, htmlFor, label }: InputWrapperProps) {
-  return (
-    <div className="grid w-full grid-cols-3 items-center gap-2">
-      <Label
-        htmlFor={htmlFor}
-        className="col-span-1 text-right text-muted-foreground"
-      >
-        {label}
-      </Label>
-      <div className="col-span-2">{children}</div>
-    </div>
-  );
-}
-
 export type CardClassNames = Partial<
   Record<"card" | "header" | "title" | "content" | "footer", string>
 >;
@@ -152,28 +104,4 @@ export interface SelectOptionItem {
   label: string;
   value: string;
   disabled?: boolean;
-}
-
-export interface SelectProps extends ComponentProps<typeof UiSelect> {
-  id: string;
-  placeholder: string;
-  options: SelectOptionItem[];
-}
-export function Select({ id, placeholder, options, ...props }: SelectProps) {
-  return (
-    <div id={id}>
-      <UiSelect {...props}>
-        <SelectTrigger>
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent className="bg-black p-3">
-          {options.map(({ value, label, disabled }) => (
-            <SelectItem key={value} value={value} disabled={disabled}>
-              {label}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </UiSelect>
-    </div>
-  );
 }
