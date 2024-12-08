@@ -5,7 +5,7 @@ import { Link, Stack } from "expo-router";
 // import type { RouterOutputs } from "~/utils/api";
 // import { api } from "~/utils/api";
 import { useSignIn, useSignOut, useUser } from "~/utils/auth";
-
+import { Fragment } from "react";
 export function PostCard(
   props: Readonly<{
     onDelete: () => void;
@@ -34,7 +34,7 @@ function MobileAuth() {
   const signOut = useSignOut();
 
   return (
-    <>
+    <Fragment>
       <Text className="pb-2 text-center text-xl font-semibold text-white">
         {user ?? "Not logged in"}
       </Text>
@@ -43,7 +43,7 @@ function MobileAuth() {
         title={user ? "Sign Out" : "Sign In With Discord"}
         color={"#5B65E9"}
       />
-    </>
+    </Fragment>
   );
 }
 

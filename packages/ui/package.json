@@ -22,7 +22,8 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
     "sort-packages": "pnpx sort-package-json",
-    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "pnpm typecheck --watch",
     "ui-add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
   },
   "prettier": "@battle-stadium/prettier-config",
