@@ -34,27 +34,31 @@ export function GameInformation({ form }: TournamentFormProps) {
         control={form.control}
         name="game"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel>Game</FormLabel>
-            <Select value={field.value} onValueChange={field.onChange}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select Game..." />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent className="bg-black p-3">
-                {game_options.map(({ value, label, disabled }) => (
-                  <SelectItem key={value} value={value} disabled={disabled}>
-                    {label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right">Game</FormLabel>
 
-            <FormDescription>
-              Select the game that this tournament will be played on.
-            </FormDescription>
-            <FormMessage />
+            <div className="col-span-2">
+              <Select value={field.value} onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Game..." />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className="bg-background p-3">
+                  {game_options.map(({ value, label, disabled }) => (
+                    <SelectItem key={value} value={value} disabled={disabled}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <FormDescription>
+                Select the game that this tournament will be played on.
+              </FormDescription>
+
+              <FormMessage />
+            </div>
           </FormItem>
         )}
       />
@@ -63,27 +67,30 @@ export function GameInformation({ form }: TournamentFormProps) {
         control={form.control}
         name="format"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel>Format</FormLabel>
-            <Select value={field.value} onValueChange={field.onChange}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select Format..." />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent className="bg-black p-3">
-                {format_options.map(({ value, label, disabled }) => (
-                  <SelectItem key={value} value={value} disabled={disabled}>
-                    {label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right">Format</FormLabel>
 
-            <FormDescription>
-              Select the format that this tournament will be played on.
-            </FormDescription>
-            <FormMessage />
+            <div className="col-span-2">
+              <Select value={field.value} onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Format..." />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className="bg-background p-3">
+                  {format_options.map(({ value, label, disabled }) => (
+                    <SelectItem key={value} value={value} disabled={disabled}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <FormDescription>
+                Select the format that this tournament will be played on.
+              </FormDescription>
+              <FormMessage />
+            </div>
           </FormItem>
         )}
       />
@@ -92,16 +99,22 @@ export function GameInformation({ form }: TournamentFormProps) {
         control={form.control}
         name="teamSheetRequired"
         render={({ field }) => (
-          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <FormLabel className="text-base">Team Sheet Required</FormLabel>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right text-base">
+              Team Sheet Required
+            </FormLabel>
+
+            <div className="col-span-2">
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
               <FormDescription>
                 Require participants to submit a team sheet.
               </FormDescription>
             </div>
-            <FormControl>
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
-            </FormControl>
           </FormItem>
         )}
       />
@@ -110,16 +123,22 @@ export function GameInformation({ form }: TournamentFormProps) {
         control={form.control}
         name="openTeamSheet"
         render={({ field }) => (
-          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <FormLabel className="text-base">Team Sheet Required</FormLabel>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right text-base">
+              Open Team Sheet
+            </FormLabel>
+
+            <div className="col-span-2">
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
               <FormDescription>
                 Open team sheet to all participants.
               </FormDescription>
             </div>
-            <FormControl>
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
-            </FormControl>
           </FormItem>
         )}
       />

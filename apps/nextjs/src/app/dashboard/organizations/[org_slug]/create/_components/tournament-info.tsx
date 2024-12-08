@@ -19,12 +19,15 @@ export function TournamentInformation({ form }: TournamentFormProps) {
         control={form.control}
         name="tournament_name"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel>Username</FormLabel>
-            <FormControl>
-              <Input placeholder="shadcn" {...field} />
-            </FormControl>
-            <FormDescription>This is your public display name.</FormDescription>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="col-span-1 text-right">Name</FormLabel>
+            <div className="col-span-2">
+              <FormControl>
+                <Input placeholder="Tournament" {...field} />
+              </FormControl>
+              <FormDescription>Name of the Tournament</FormDescription>
+            </div>
+
             <FormMessage />
           </FormItem>
         )}
@@ -34,23 +37,25 @@ export function TournamentInformation({ form }: TournamentFormProps) {
         control={form.control}
         name="startDate"
         render={({ field }) => (
-          <FormItem className="flex flex-col">
-            <FormLabel>Date</FormLabel>
-            <FormControl>
-              <DatePicker
-                id="date"
-                date={field.value}
-                setDate={field.onChange}
-                classNames={{
-                  calendar: {
-                    className: "w-[250px]",
-                  },
-                }}
-              />
-            </FormControl>
-            <FormDescription>
-              The date the tournament will start.
-            </FormDescription>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right">Start Date</FormLabel>
+            <div className="col-span-2">
+              <FormControl>
+                <DatePicker
+                  id="date"
+                  date={field.value}
+                  setDate={field.onChange}
+                  classNames={{
+                    calendar: {
+                      className: "w-[250px]",
+                    },
+                  }}
+                />
+              </FormControl>
+              <FormDescription>
+                The date the tournament will start.
+              </FormDescription>
+            </div>
             <FormMessage />
           </FormItem>
         )}

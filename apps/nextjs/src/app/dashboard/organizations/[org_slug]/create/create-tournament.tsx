@@ -10,7 +10,7 @@ import type { OrganizationDashboardPageProps } from "./_components/shared";
 import { GameInformation } from "./_components/game-info";
 import { TournamentPhases } from "./_components/phases-info";
 import { Registration } from "./_components/registration-info";
-import { RegistrationType } from "./_components/shared";
+// import { RegistrationType } from "./_components/shared";
 import { TournamentInformation } from "./_components/tournament-info";
 import { TournamentFormSchema } from "./_components/zod-schema";
 
@@ -21,22 +21,6 @@ export default function CreateTournament({
 
   const form = useForm<z.infer<typeof TournamentFormSchema>>({
     resolver: zodResolver(TournamentFormSchema),
-    defaultValues: TournamentFormSchema.parse({
-      tournament_name: "Tournament Name",
-      description: "Hello World",
-      startDate: new Date(),
-      requireCheckIn: true,
-      game: "Scarlet & Violet",
-      format: "Regulation H",
-      teamSheetRequired: true,
-      openTeamSheet: true,
-      registrationType: RegistrationType.Open,
-      playerCap: undefined,
-      lateRegistration: true,
-      lateTeamSheet: true,
-      lateCheckIn: true,
-      phases: [],
-    }),
   });
 
   function onSubmit(data: z.infer<typeof TournamentFormSchema>) {

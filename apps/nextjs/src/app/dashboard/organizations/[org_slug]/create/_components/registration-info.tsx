@@ -35,27 +35,29 @@ export function Registration({ form }: TournamentFormProps) {
         control={form.control}
         name="registrationType"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel>Type</FormLabel>
-            <Select value={field.value} onValueChange={field.onChange}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select Registration Type..." />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent className="bg-black p-3">
-                {registration_types.map(({ value, label, disabled }) => (
-                  <SelectItem key={value} value={value} disabled={disabled}>
-                    {label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right">Type</FormLabel>
+            <div className="col-span-2">
+              <Select value={field.value} onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select Registration Type..." />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className="bg-background p-3">
+                  {registration_types.map(({ value, label, disabled }) => (
+                    <SelectItem key={value} value={value} disabled={disabled}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
-            <FormDescription>
-              Select the game that this tournament will be played on.
-            </FormDescription>
-            <FormMessage />
+              <FormDescription>
+                Select the game that this tournament will be played on.
+              </FormDescription>
+              <FormMessage />
+            </div>
           </FormItem>
         )}
       />
@@ -64,16 +66,19 @@ export function Registration({ form }: TournamentFormProps) {
         control={form.control}
         name="playerCap"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel>Player Cap</FormLabel>
-            <FormControl>
-              <Input placeholder="Player Cap..." {...field} />
-            </FormControl>
-            <FormDescription>
-              Set a maximum number of players that can register for this
-              tournament
-            </FormDescription>
-            <FormMessage />
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right">Player Cap</FormLabel>
+
+            <div className="col-span-2">
+              <FormControl>
+                <Input placeholder="Player Cap..." {...field} />
+              </FormControl>
+              <FormDescription>
+                Set a maximum number of players that can register for this
+                tournament
+              </FormDescription>
+              <FormMessage />
+            </div>
           </FormItem>
         )}
       />
@@ -82,16 +87,22 @@ export function Registration({ form }: TournamentFormProps) {
         control={form.control}
         name="requireCheckIn"
         render={({ field }) => (
-          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <FormLabel className="text-base">Require Check In</FormLabel>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right text-base">
+              Require Check In
+            </FormLabel>
+
+            <div className="col-span-2">
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
               <FormDescription>
                 Require participants to check in before the tournament starts.
               </FormDescription>
             </div>
-            <FormControl>
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
-            </FormControl>
           </FormItem>
         )}
       />
@@ -100,16 +111,23 @@ export function Registration({ form }: TournamentFormProps) {
         control={form.control}
         name="lateRegistration"
         render={({ field }) => (
-          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <FormLabel className="text-base">Late Registration</FormLabel>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right text-base">
+              Late Registration
+            </FormLabel>
+
+            <div className="col-span-2">
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+
               <FormDescription>
                 Allow participants to register after the tournament starts.
               </FormDescription>
             </div>
-            <FormControl>
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
-            </FormControl>
           </FormItem>
         )}
       />
@@ -118,19 +136,23 @@ export function Registration({ form }: TournamentFormProps) {
         control={form.control}
         name="lateTeamSheet"
         render={({ field }) => (
-          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <FormLabel className="text-base">
-                Late Team Sheet Submission
-              </FormLabel>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right text-base">
+              Late Team Sheet Submission
+            </FormLabel>
+            <div className="col-span-2">
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+
               <FormDescription>
                 Allow participants to submit a team sheet after the tournament
                 starts.
               </FormDescription>
             </div>
-            <FormControl>
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
-            </FormControl>
           </FormItem>
         )}
       />
@@ -139,16 +161,23 @@ export function Registration({ form }: TournamentFormProps) {
         control={form.control}
         name="lateCheckIn"
         render={({ field }) => (
-          <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-            <div className="space-y-0.5">
-              <FormLabel className="text-base">Late Check in</FormLabel>
+          <FormItem className="grid grid-cols-3 gap-4">
+            <FormLabel className="text-right text-base">
+              Late Check In{" "}
+            </FormLabel>
+
+            <div className="col-span-2">
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+
               <FormDescription>
                 Allow participants to check in after the tournament starts.
               </FormDescription>
             </div>
-            <FormControl>
-              <Switch checked={field.value} onCheckedChange={field.onChange} />
-            </FormControl>
           </FormItem>
         )}
       />
