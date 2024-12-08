@@ -28,7 +28,7 @@
   },
   "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
-    "@hookform/resolvers": "^3.9.1",
+    "@hookform/resolvers": "catalog:",
     "@radix-ui/react-accordion": "catalog:radix",
     "@radix-ui/react-alert-dialog": "catalog:radix",
     "@radix-ui/react-aspect-ratio": "catalog:radix",

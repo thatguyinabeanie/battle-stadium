@@ -23,6 +23,7 @@ catalog:
   "@t3-oss/env-nextjs": 0.11.1
   "babel-plugin-react-compiler": beta
   "react-hook-form": ^7
+  "@hookform/resolvers": ^3
 
 catalogs:
   auth:
