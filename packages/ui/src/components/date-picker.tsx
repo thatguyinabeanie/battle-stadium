@@ -58,14 +58,13 @@ export function DatePicker({
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className={cn("w-auto p-0 bg-popover", classNames?.popoverContent)}
+          className={cn("w-auto bg-popover p-0", classNames?.popoverContent)}
         >
           <Calendar
             autoFocus
             mode="single"
             selected={date}
             onSelect={setDate}
-            hidden={{ before: MIN_DATE, after: MAX_DATE }}
             className={classNames?.calendar?.className}
             classNames={classNames?.calendar?.classNames}
           />

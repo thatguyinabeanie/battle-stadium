@@ -27,7 +27,7 @@ export function TournamentInformation({
           setDate={setFormKeyValue("startDate")}
           classNames={{
             calendar: {
-              className: "w-[250px] bg-black",
+              className: "w-[250px]",
             },
           }}
         />
