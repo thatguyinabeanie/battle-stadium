@@ -41,6 +41,7 @@ words:
   - adtest
   - alola
   - battlestadium
+  - Bloodmoon
   - checkin
   - cmdk
   - Embla
@@ -74,11 +75,13 @@ words:
   - teamsheet
   - Tera
   - thatguyinabeanie
+  - tseslint
   - typesafe
   - unova
   - UNPOOLED
   - Unreads
   - uploadthing
+  - Ursaluna
   - UTSSR
   - vaul
 ignoreWords: []

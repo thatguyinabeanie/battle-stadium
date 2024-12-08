@@ -8,7 +8,7 @@ catalog:
   eslint: ^9
   postcss: ^8
   prettier: ^3
-  typescript: ^5
+  typescript: ^5.7
   zod: ^3
   superjson: ^2
   "dotenv-cli": ^7
@@ -53,6 +53,10 @@ catalogs:
     "discord-api-types": ^0
     "discord-interactions": ^4
     "discord.js": ^14
+
+  eslint:
+    "eslint-plugin-turbo": ^2
+    "typescript-eslint": ^8
 
   expo:
     "@expo/metro-config": ^0

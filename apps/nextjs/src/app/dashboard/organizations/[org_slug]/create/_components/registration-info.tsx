@@ -5,11 +5,15 @@ import { CardWrapper, InputWrapper, Select } from "./shared";
 
 const registration_restrictions_options: SelectOptionItem[] = [
   { value: "open", label: "Open Registration" },
-  { value: "entry-code", label: "Entry Code (Coming Soon)" },
-  { value: "single-use-code", label: "Single Use Code (Coming Soon)" },
-  { value: "invite", label: "Invite Only (Coming Soon)" },
+  { value: "entry-code", label: "Entry Code (Coming Soon)", disabled: true },
+  { value: "single-use-code", label: "Single Use Code (Coming Soon)"  ,disabled: true },
+  { value: "invite", label: "Invite Only (Coming Soon)" , disabled: true },
 ];
-export function Registration({ formData, setFormData, setFormKeyValue }: TournamentFormProps) {
+export function Registration({
+  formData,
+  setFormData,
+  setFormKeyValue,
+}: TournamentFormProps) {
   return (
     <CardWrapper title="Registration">
       <InputWrapper htmlFor="registration-restrictions" label="Restrictions">
@@ -24,7 +28,7 @@ export function Registration({ formData, setFormData, setFormKeyValue }: Tournam
         <div id="player-cap">
           <Switch
             checked={formData.playerCap}
-            onCheckedChange={ setFormKeyValue("playerCap") }
+            onCheckedChange={setFormKeyValue("playerCap")}
           />
         </div>
       </InputWrapper>
@@ -36,7 +40,9 @@ export function Registration({ formData, setFormData, setFormKeyValue }: Tournam
             name="max-players"
             type="number"
             value={formData.maxPlayers}
-            onChange={({target:{value}}) => setFormKeyValue("maxPlayers")(Number.parseInt(value, 10))}
+            onChange={({ target: { value } }) =>
+              setFormKeyValue("maxPlayers")(Number.parseInt(value, 10))
+            }
           />
         </InputWrapper>
       )}
@@ -56,7 +62,9 @@ export function Registration({ formData, setFormData, setFormKeyValue }: Tournam
         <Checkbox
           id="late-registration"
           checked={formData.allowLateRegistration}
-          onChange={()=> setFormKeyValue("allowLateRegistration")(!formData.allowLateCheckIn)}
+          onChange={() =>
+            setFormKeyValue("allowLateRegistration")(!formData.allowLateCheckIn)
+          }
         />
       </InputWrapper>
 
@@ -67,7 +75,9 @@ export function Registration({ formData, setFormData, setFormKeyValue }: Tournam
         <Checkbox
           id="late-teamsheet-submission"
           checked={formData.allowLateTeamSheet}
-          onChange={()=> setFormKeyValue("allowLateTeamSheet")(!formData.allowLateTeamSheet)  }
+          onChange={() =>
+            setFormKeyValue("allowLateTeamSheet")(!formData.allowLateTeamSheet)
+          }
         />
       </InputWrapper>
 
@@ -75,7 +85,9 @@ export function Registration({ formData, setFormData, setFormKeyValue }: Tournam
         <Checkbox
           id="late-checkin"
           checked={formData.allowLateCheckIn}
-          onChange={()=> setFormKeyValue("allowLateCheckIn")(!formData.allowLateCheckIn)  }
+          onChange={() =>
+            setFormKeyValue("allowLateCheckIn")(!formData.allowLateCheckIn)
+          }
         />
       </InputWrapper>
     </CardWrapper>

@@ -23,8 +23,8 @@
     "eslint-plugin-react": "catalog:react",
     "eslint-plugin-react-compiler": "catalog:react",
     "eslint-plugin-react-hooks": "catalog:react",
-    "eslint-plugin-turbo": "^2",
-    "typescript-eslint": "^8"
+    "eslint-plugin-turbo": "catalog:eslint",
+    "typescript-eslint": "catalog:eslint"
   },
   "devDependencies": {
     "@battle-stadium/prettier-config": "workspace:*",

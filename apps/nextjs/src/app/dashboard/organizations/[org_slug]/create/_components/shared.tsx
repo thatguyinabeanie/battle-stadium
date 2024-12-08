@@ -151,6 +151,7 @@ export function CardWrapper({
 export interface SelectOptionItem {
   label: string;
   value: string;
+  disabled?: boolean;
 }
 
 export interface SelectProps extends ComponentProps<typeof UiSelect> {
@@ -166,8 +167,8 @@ export function Select({ id, placeholder, options, ...props }: SelectProps) {
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent className="bg-black p-3">
-          {options.map(({ value, label }) => (
-            <SelectItem key={value} value={value}>
+          {options.map(({ value, label, disabled }) => (
+            <SelectItem key={value} value={value} disabled={disabled}>
               {label}
             </SelectItem>
           ))}

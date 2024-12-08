@@ -8,6 +8,7 @@ import {
   PairingSystem,
   RegistrationType,
 } from "./_components/shared";
+
 interface FormStep {
   id: number;
   title: string;
