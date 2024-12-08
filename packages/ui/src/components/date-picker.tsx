@@ -58,7 +58,7 @@ export function DatePicker({
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className={cn("w-auto p-0", classNames?.popoverContent)}
+          className={cn("w-auto p-0 bg-popover", classNames?.popoverContent)}
         >
           <Calendar
             autoFocus
