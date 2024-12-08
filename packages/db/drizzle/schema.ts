@@ -822,7 +822,7 @@ export const players = pgTable(
         "index_players_on_account_id_and_created_at",
       ).using(
         "btree",
-        table.accountId.asc().nullsLast().op("timestamp_ops"),
+        table.accountId.asc().nullsLast().op("int4_ops"),
         table.createdAt.asc().nullsLast().op("timestamp_ops"),
       ),
       indexPlayersOnCheckedInAt: index("index_players_on_checked_in_at").using(
