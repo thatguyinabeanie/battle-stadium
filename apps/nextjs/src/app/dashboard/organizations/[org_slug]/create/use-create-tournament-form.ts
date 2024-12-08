@@ -51,7 +51,9 @@ export function useCreateTournamentForm() {
   const setPhaseKeyValue =
     (phase_index: number, key: keyof Phase) => (value: ValueOf<Phase>) => {
       if (phase_index < 0 || phase_index >= formData.phases.length) {
-        console.error(`Invalid phase index: ${phase_index}. Valid range: 0-${formData.phases.length - 1}`);
+        console.error(
+          `Invalid phase index: ${phase_index}. Valid range: 0-${formData.phases.length - 1}`,
+        );
         return;
       }
 

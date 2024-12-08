@@ -67,7 +67,9 @@ export function Registration({
           id="late-registration"
           checked={formData.allowLateRegistration}
           onChange={() =>
-            setFormKeyValue("allowLateRegistration")(!formData.allowLateRegistration)
+            setFormKeyValue("allowLateRegistration")(
+              !formData.allowLateRegistration,
+            )
           }
         />
       </InputWrapper>

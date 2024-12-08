@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Button, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, Stack } from "expo-router";
@@ -5,7 +6,7 @@ import { Link, Stack } from "expo-router";
 // import type { RouterOutputs } from "~/utils/api";
 // import { api } from "~/utils/api";
 import { useSignIn, useSignOut, useUser } from "~/utils/auth";
-import { Fragment } from "react";
+
 export function PostCard(
   props: Readonly<{
     onDelete: () => void;
