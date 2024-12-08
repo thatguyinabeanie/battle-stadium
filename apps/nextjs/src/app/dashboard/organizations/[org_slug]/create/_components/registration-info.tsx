@@ -6,8 +6,12 @@ import { CardWrapper, InputWrapper, Select } from "./shared";
 const registration_restrictions_options: SelectOptionItem[] = [
   { value: "open", label: "Open Registration" },
   { value: "entry-code", label: "Entry Code (Coming Soon)", disabled: true },
-  { value: "single-use-code", label: "Single Use Code (Coming Soon)"  ,disabled: true },
-  { value: "invite", label: "Invite Only (Coming Soon)" , disabled: true },
+  {
+    value: "single-use-code",
+    label: "Single Use Code (Coming Soon)",
+    disabled: true,
+  },
+  { value: "invite", label: "Invite Only (Coming Soon)", disabled: true },
 ];
 export function Registration({
   formData,

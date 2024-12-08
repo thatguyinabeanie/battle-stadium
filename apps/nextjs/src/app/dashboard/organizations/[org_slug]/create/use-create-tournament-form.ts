@@ -44,8 +44,9 @@ export function useCreateTournamentForm() {
   });
 
   const setFormKeyValue =
-    (key: keyof TournamentForm) => (value: ValueOf<TournamentForm>) =>
-      setFormData((prevFormData) => ({ ...prevFormData, [key]: value }));
+    <K extends keyof TournamentForm>(key: K) =>
+    (value: TournamentForm[K]) =>
+      setFormData((prev) => ({ ...prev, [key]: value }));
 
   const setPhaseKeyValue =
     (phase_index: number, key: keyof Phase) => (value: ValueOf<Phase>) => {
