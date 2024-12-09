@@ -23,7 +23,7 @@ export function TournamentInformation({ form }: TournamentFormProps) {
             <FormLabel className="col-span-1 text-right">Name</FormLabel>
             <div className="col-span-2">
               <FormControl>
-                <Input placeholder="Enter Tournament Name..." {...field} />
+                <Input {...field} placeholder="Enter Tournament Name..."/>
               </FormControl>
               <FormDescription>
                 This will be displayed as the official tournament title.
@@ -44,7 +44,6 @@ export function TournamentInformation({ form }: TournamentFormProps) {
             <div className="col-span-2">
               <FormControl>
                 <DatePicker
-                  id="date"
                   date={field.value}
                   setDate={field.onChange}
                   classNames={{
@@ -59,7 +58,7 @@ export function TournamentInformation({ form }: TournamentFormProps) {
                 Select the tournament's start date. Participants will be
                 notified of this date.
               </FormDescription>
-              <FormMessage />
+              <FormMessage/>
             </div>
           </FormItem>
         )}
@@ -74,10 +73,9 @@ export function TournamentInformation({ form }: TournamentFormProps) {
             <div className="col-span-2">
               <FormControl>
                 <Input
+                  {...field}
                   type="time"
                   id="time"
-                  value={field.value}
-                  onChange={field.onChange}
                   className="w-full rounded border bg-background p-2"
                 />
               </FormControl>

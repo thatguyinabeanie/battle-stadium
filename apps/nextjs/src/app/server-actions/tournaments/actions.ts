@@ -16,6 +16,10 @@ import {
 import type { components, paths } from "~/lib/api/openapi-v1";
 import type { Tokens } from "~/types";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
+import type { z } from "zod";
+import type { TournamentFormSchema } from "~/app/dashboard/organizations/[org_slug]/create/_components/zod-schema";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
+import { auth } from "@clerk/nextjs/server";
 
 
 export async function getTournament(tournament_id: number) {
@@ -133,16 +137,24 @@ export async function getTournamentPlayerCount(tournament_id: number) {
   return result[0]?.count ?? 0;
 }
 
-
-export async function postTournament(formData: FormData) {
-  
-  const tournament = {
-    
+export async function postTournament(data: z.infer<typeof TournamentFormSchema>, org_slug: string) {
+  const session = await auth();
+  if (!session.userId) {
+    return null;
   }
+  const tokens: Tokens = {
+    oidc: await getVercelOidcToken(),
+    clerk: await session.getToken(),
+  };
 
-  const phases = formData.getAll("phases");
-  console.log('phases', phases);
+  const result = await BattleStadiumApiClient(tokens).POST("/organizations/{slug}/tournaments", {
+    params: {
+      path: {
+        slug: org_slug,
+      },
+      body: data,
+    }
+  });
 
-  // const result = await db.insert(tournaments).values(tournament).returning();
-  // return result[0];
+  return result.data;
 }

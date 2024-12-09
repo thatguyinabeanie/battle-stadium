@@ -8,11 +8,11 @@ import { Button, Form, useToast } from "@battle-stadium/ui";
 
 import type { OrganizationDashboardPageProps } from "./_components/shared";
 import { GameInformation } from "./_components/game-info";
-import { TournamentPhases } from "./_components/phases-info";
+// import { TournamentPhases } from "./_components/phases-info";
 import { Registration } from "./_components/registration-info";
-// import { RegistrationType } from "./_components/shared";
 import { TournamentInformation } from "./_components/tournament-info";
 import { TournamentFormSchema } from "./_components/zod-schema";
+import { postTournament } from "~/app/server-actions/tournaments/actions";
 
 export default function CreateTournament({
   org,
@@ -23,11 +23,19 @@ export default function CreateTournament({
     resolver: zodResolver(TournamentFormSchema),
     defaultValues: {
       tournamentName: "",
-      phases: [{ name: "Phase 0", bestOf: 3 }],
+      // phases: [{ name: "Phase 0", bestOf: 3, pairingSystem: "swiss", roundTimer: true, roundTime: 50, matchCheckIn: true, checkInTime: 10 }],
+      playerCap: 0,
+      startDate: new Date(),
+      startTime: "00:00",
+      game: "sv",
+      format: "rg",
+      registrationType: "open",
     },
   });
 
-  function onSubmit(_data: z.infer<typeof TournamentFormSchema>) {
+  async function onSubmit(data: z.infer<typeof TournamentFormSchema>) {
+    await postTournament(data, org.slug ?? "");
+    
     toast({
       title: "Tournament Created Successfully!",
       description: "Your tournament has been created and saved.",
@@ -36,9 +44,6 @@ export default function CreateTournament({
 
   return (
     <div className="flex max-h-dvh w-full flex-col items-center space-y-6 p-4">
-      {/* <StepWizardProgress currentStep={currentStep} /> */}
-
-      {/* Step Content */}
       <div className="space-y-4 backdrop-filter-none">
         <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1>
 
@@ -47,79 +52,13 @@ export default function CreateTournament({
             <TournamentInformation form={form} />
             <GameInformation form={form} />
             <Registration form={form} />
-            <TournamentPhases form={form} />
+            {/* <TournamentPhases form={form} /> */}
             <div className="flex justify-end">
             <Button variant="outline" type="submit">Create Tournament</Button>
             </div>
           </form>
         </Form>
       </div>
-
-      {/* <Navigation 
-        currentStep={currentStep} 
-        handleNext={handleNext} 
-        handleBack={handleBack} 
-        handleSubmit={handleSubmit} 
-        formData={formData} 
-        setFormData={setFormData} 
-      /> */}
     </div>
   );
 }
-
-// export function StepWizardProgress({ currentStep }: { currentStep: number }) {
-//   return (
-//     <div className="mb-6 flex justify-between">
-//       {STEPS.map((step) => (
-//         <div
-//           key={step.id}
-//           className={`flex items-center ${
-//             step.id === currentStep ? "text-primary" : "text-muted-foreground"
-//           }`}
-//         >
-//           <div className="flex flex-col items-center">
-//             <div
-//               className={`flex h-8 w-8 items-center justify-center rounded-full border-2 ${
-//                 step.id === currentStep ? "border-primary" : "border-muted"
-//               }`}
-//             >
-//               {step.id}
-//             </div>
-//             <span className="mt-1 text-xs">{step.title}</span>
-//           </div>
-//           {step.id !== STEPS.length && (
-//             <ChevronRight className="mx-2 h-4 w-4" />
-//           )}
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }
-
-// export function Navigation({
-//   currentStep,
-//   handleNext,
-//   handleBack,
-//   handleSubmit,
-// }: TournamentFormProps) {
-//   return (
-//     <div className="mt-6 flex justify-between">
-//       <Button
-//         variant="outline"
-//         onClick={handleBack}
-//         disabled={currentStep === 1}
-//       >
-//         <ChevronLeft className="mr-2 h-4 w-4" />
-//         Back
-//       </Button>
-//       {currentStep === STEPS.length ? (
-//         <Button onClick={handleSubmit}>Create Tournament</Button>
-//       ) : (
-//         <Button onClick={handleNext}>
-//           Next
-//           <ChevronRight className="ml-2 h-4 w-4" />
-//         </Button>
-//       )}
-//     </div>
-//   );
-// }

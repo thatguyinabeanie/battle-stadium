@@ -15,6 +15,7 @@ export const PhaseSchema = z.object({
   roundTime: z.number().int().optional(),
   matchCheckIn: z.boolean().default(false),
   checkInTime: z.number().int().optional(),
+  order: z.number().int().optional(),
 });
 
 export const TournamentFormSchema = z.object({
@@ -29,7 +30,7 @@ export const TournamentFormSchema = z.object({
     .min(2, { message: "Format must be at least 2 characters." }),
   teamSheetRequired: z.boolean().default(true),
   openTeamSheet: z.boolean().default(true),
-  phases: z.array(PhaseSchema),
+  // phases: z.array(PhaseSchema),
   registrationType: z
     .string()
     .min(2, { message: "Registration type must be at least 2 characters." }),
