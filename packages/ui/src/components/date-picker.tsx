@@ -46,7 +46,7 @@ export function DatePicker({
             aria-label="Select date"
             variant={"outline"}
             className={cn(
-              "w-[280px] justify-start text-left font-normal",
+              "min-w-[280px] justify-start text-left font-normal",
               !date && "text-muted-foreground",
               classNames?.button,
             )}

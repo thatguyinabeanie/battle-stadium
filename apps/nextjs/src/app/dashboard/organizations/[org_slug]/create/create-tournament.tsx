@@ -21,6 +21,10 @@ export default function CreateTournament({
 
   const form = useForm<z.infer<typeof TournamentFormSchema>>({
     resolver: zodResolver(TournamentFormSchema),
+    defaultValues: {
+      tournamentName: "",
+      phases: [{ name: "Phase 0", bestOf: 3 }],
+    },
   });
 
   function onSubmit(data: z.infer<typeof TournamentFormSchema>) {

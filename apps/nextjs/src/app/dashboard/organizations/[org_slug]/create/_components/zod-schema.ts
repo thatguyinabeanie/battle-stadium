@@ -8,10 +8,17 @@ export const PhaseSchema = z.object({
   bestOf: z.number().int().min(1, {
     message: "Best of X format must be at least 1 game.",
   }),
+  pairingSystem: z.string().min(2, {
+    message: "Pairing system must be at least 2 characters long.",
+  }),
+  roundTimer: z.boolean().default(false),
+  roundTime: z.number().int().optional(),
+  matchCheckIn: z.boolean().default(false),
+  checkInTime: z.number().int().optional(),
 });
 
 export const TournamentFormSchema = z.object({
-  tournament_name: z.string().min(2, {
+  tournamentName: z.string().min(2, {
     message: "Tournament name must be at least 2 characters.",
   }),
   startDate: z.date(),

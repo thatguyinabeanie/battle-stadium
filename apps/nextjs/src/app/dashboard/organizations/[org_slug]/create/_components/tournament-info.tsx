@@ -17,7 +17,7 @@ export function TournamentInformation({ form }: TournamentFormProps) {
     <CardWrapper title="Tournament Information">
       <FormField
         control={form.control}
-        name="tournament_name"
+        name="tournamentName"
         render={({ field }) => (
           <FormItem className="grid grid-cols-3 gap-4">
             <FormLabel className="col-span-1 text-right">Name</FormLabel>
@@ -48,8 +48,9 @@ export function TournamentInformation({ form }: TournamentFormProps) {
                   date={field.value}
                   setDate={field.onChange}
                   classNames={{
+                    button: "min-w-[250px] justify-start text-left font-normal",
                     calendar: {
-                      className: "w-[250px]",
+                      className: "min-w-[250px]",
                     },
                   }}
                 />
