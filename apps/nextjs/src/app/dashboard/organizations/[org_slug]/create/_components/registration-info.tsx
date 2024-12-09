@@ -54,7 +54,7 @@ export function Registration({ form }: TournamentFormProps) {
               </Select>
 
               <FormDescription>
-                Select the game that this tournament will be played on.
+                Select the registration method for participants.
               </FormDescription>
               <FormMessage />
             </div>
@@ -68,10 +68,9 @@ export function Registration({ form }: TournamentFormProps) {
         render={({ field }) => (
           <FormItem className="grid grid-cols-3 gap-4">
             <FormLabel className="text-right">Player Cap</FormLabel>
-
             <div className="col-span-2">
               <FormControl>
-                <Input placeholder="Player Cap..." {...field} />
+                <Input {...field} placeholder="Player Cap..." type="number"  />
               </FormControl>
               <FormDescription>
                 Set a maximum number of players that can register for this
