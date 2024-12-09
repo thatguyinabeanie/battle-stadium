@@ -23,7 +23,7 @@ export function TournamentInformation({ form }: TournamentFormProps) {
             <FormLabel className="col-span-1 text-right">Name</FormLabel>
             <div className="col-span-2">
               <FormControl>
-                <Input {...field} placeholder="Enter Tournament Name..."/>
+                <Input {...field} placeholder="Enter Tournament Name..." />
               </FormControl>
               <FormDescription>
                 This will be displayed as the official tournament title.
@@ -58,7 +58,7 @@ export function TournamentInformation({ form }: TournamentFormProps) {
                 Select the tournament's start date. Participants will be
                 notified of this date.
               </FormDescription>
-              <FormMessage/>
+              <FormMessage />
             </div>
           </FormItem>
         )}

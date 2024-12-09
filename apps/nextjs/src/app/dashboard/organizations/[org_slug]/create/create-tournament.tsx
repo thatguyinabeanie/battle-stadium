@@ -7,12 +7,12 @@ import { useForm } from "react-hook-form";
 import { Button, Form, useToast } from "@battle-stadium/ui";
 
 import type { OrganizationDashboardPageProps } from "./_components/shared";
+import { postTournament } from "~/app/server-actions/tournaments/actions";
 import { GameInformation } from "./_components/game-info";
 // import { TournamentPhases } from "./_components/phases-info";
 import { Registration } from "./_components/registration-info";
 import { TournamentInformation } from "./_components/tournament-info";
 import { TournamentFormSchema } from "./_components/zod-schema";
-import { postTournament } from "~/app/server-actions/tournaments/actions";
 
 export default function CreateTournament({
   org,
@@ -35,7 +35,7 @@ export default function CreateTournament({
 
   async function onSubmit(data: z.infer<typeof TournamentFormSchema>) {
     await postTournament(data, org.slug ?? "");
-    
+
     toast({
       title: "Tournament Created Successfully!",
       description: "Your tournament has been created and saved.",
@@ -48,13 +48,18 @@ export default function CreateTournament({
         <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pb-10">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-6 pb-10"
+          >
             <TournamentInformation form={form} />
             <GameInformation form={form} />
             <Registration form={form} />
             {/* <TournamentPhases form={form} /> */}
             <div className="flex justify-end">
-            <Button variant="outline" type="submit">Create Tournament</Button>
+              <Button variant="outline" type="submit">
+                Create Tournament
+              </Button>
             </div>
           </form>
         </Form>

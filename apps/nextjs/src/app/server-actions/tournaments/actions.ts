@@ -1,6 +1,9 @@
 "use server";
 
 import type { FetchOptions } from "openapi-fetch";
+import type { z } from "zod";
+import { auth } from "@clerk/nextjs/server";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 // import { cacheLife } from "next/dist/server/use-cache/cache-life";
 // import { cacheTag } from "next/dist/server/use-cache/cache-tag";
@@ -13,14 +16,10 @@ import {
   tournaments,
 } from "@battle-stadium/db/schema";
 
+import type { TournamentFormSchema } from "~/app/dashboard/organizations/[org_slug]/create/_components/zod-schema";
 import type { components, paths } from "~/lib/api/openapi-v1";
 import type { Tokens } from "~/types";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
-import type { z } from "zod";
-import type { TournamentFormSchema } from "~/app/dashboard/organizations/[org_slug]/create/_components/zod-schema";
-import { getVercelOidcToken } from "@vercel/functions/oidc";
-import { auth } from "@clerk/nextjs/server";
-
 
 export async function getTournament(tournament_id: number) {
   // "use cache";
@@ -137,7 +136,10 @@ export async function getTournamentPlayerCount(tournament_id: number) {
   return result[0]?.count ?? 0;
 }
 
-export async function postTournament(data: z.infer<typeof TournamentFormSchema>, org_slug: string) {
+export async function postTournament(
+  data: z.infer<typeof TournamentFormSchema>,
+  org_slug: string,
+) {
   const session = await auth();
   if (!session.userId) {
     return null;
@@ -147,14 +149,17 @@ export async function postTournament(data: z.infer<typeof TournamentFormSchema>,
     clerk: await session.getToken(),
   };
 
-  const result = await BattleStadiumApiClient(tokens).POST("/organizations/{slug}/tournaments", {
-    params: {
-      path: {
-        slug: org_slug,
+  const result = await BattleStadiumApiClient(tokens).POST(
+    "/organizations/{slug}/tournaments",
+    {
+      params: {
+        path: {
+          slug: org_slug,
+        },
+        body: data,
       },
-      body: data,
-    }
-  });
+    },
+  );
 
   return result.data;
 }
