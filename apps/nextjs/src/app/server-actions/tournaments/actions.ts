@@ -17,6 +17,7 @@ import type { components, paths } from "~/lib/api/openapi-v1";
 import type { Tokens } from "~/types";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
 
+
 export async function getTournament(tournament_id: number) {
   // "use cache";
   // cacheTag(`getTournament(${tournament_id})`);
@@ -130,4 +131,18 @@ export async function getTournamentPlayerCount(tournament_id: number) {
     .where(eq(players.tournamentId, tournament_id));
 
   return result[0]?.count ?? 0;
+}
+
+
+export async function postTournament(formData: FormData) {
+  
+  const tournament = {
+    
+  }
+
+  const phases = formData.getAll("phases");
+  console.log('phases', phases);
+
+  // const result = await db.insert(tournaments).values(tournament).returning();
+  // return result[0];
 }

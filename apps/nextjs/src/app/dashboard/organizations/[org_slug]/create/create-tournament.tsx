@@ -27,8 +27,7 @@ export default function CreateTournament({
     },
   });
 
-  function onSubmit(data: z.infer<typeof TournamentFormSchema>) {
-    console.log("data", data);
+  function onSubmit(_data: z.infer<typeof TournamentFormSchema>) {
     toast({
       title: "Tournament Created Successfully!",
       description: "Your tournament has been created and saved.",
@@ -36,7 +35,7 @@ export default function CreateTournament({
   }
 
   return (
-    <div className="flex max-h-dvh w-full flex-col items-center space-y-6 p-6">
+    <div className="flex max-h-dvh w-full flex-col items-center space-y-6 p-4">
       {/* <StepWizardProgress currentStep={currentStep} /> */}
 
       {/* Step Content */}
@@ -44,12 +43,14 @@ export default function CreateTournament({
         <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pb-10">
             <TournamentInformation form={form} />
             <GameInformation form={form} />
             <Registration form={form} />
             <TournamentPhases form={form} />
-            <Button type="submit">Submit</Button>
+            <div className="flex justify-end">
+            <Button variant="outline" type="submit">Create Tournament</Button>
+            </div>
           </form>
         </Form>
       </div>

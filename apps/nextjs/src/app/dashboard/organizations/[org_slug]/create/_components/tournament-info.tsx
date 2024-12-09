@@ -50,7 +50,7 @@ export function TournamentInformation({ form }: TournamentFormProps) {
                   classNames={{
                     button: "min-w-[250px] justify-start text-left font-normal",
                     calendar: {
-                      className: "min-w-[250px]",
+                      className: "min-w-[250px] bg-background",
                     },
                   }}
                 />
