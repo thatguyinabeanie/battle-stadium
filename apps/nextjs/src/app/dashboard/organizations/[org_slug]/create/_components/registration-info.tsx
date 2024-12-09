@@ -70,7 +70,7 @@ export function Registration({ form }: TournamentFormProps) {
             <FormLabel className="text-right">Player Cap</FormLabel>
             <div className="col-span-2">
               <FormControl>
-                <Input {...field} placeholder="Player Cap..." type="number"  />
+                <Input {...field} placeholder="Player Cap..." type="number" />
               </FormControl>
               <FormDescription>
                 Set a maximum number of players that can register for this
