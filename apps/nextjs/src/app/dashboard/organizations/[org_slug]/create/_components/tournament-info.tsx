@@ -28,9 +28,10 @@ export function TournamentInformation({ form }: TournamentFormProps) {
               <FormDescription>
                 This will be displayed as the official tournament title.
               </FormDescription>
+              <FormMessage />
             </div>
 
-            <FormMessage />
+            
           </FormItem>
         )}
       />

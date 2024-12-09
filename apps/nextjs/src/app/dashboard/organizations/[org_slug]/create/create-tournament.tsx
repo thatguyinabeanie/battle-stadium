@@ -26,7 +26,7 @@ export default function CreateTournament({
       // phases: [{ name: "Phase 0", bestOf: 3, pairingSystem: "swiss", roundTimer: true, roundTime: 50, matchCheckIn: true, checkInTime: 10 }],
       playerCap: 0,
       startDate: new Date(),
-      startTime: "00:00",
+      startTime: "00:00 PM",
       game: "sv",
       format: "rg",
       registrationType: "open",
