@@ -1,4 +1,8 @@
-import type { ForeignKeyBuilder, IndexBuilder } from "drizzle-orm/pg-core";
+import type {
+  AnyPgColumn,
+  ForeignKeyBuilder,
+  IndexBuilder,
+} from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import {
   bigint,
@@ -17,7 +21,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-export type { AnyPgColumn } from "drizzle-orm/pg-core";
+export type { AnyPgColumn };
 
 export const schemaMigrations = pgTable("schema_migrations", {
   version: varchar().primaryKey().notNull(),
@@ -35,55 +39,6 @@ export const arInternalMetadata = pgTable("ar_internal_metadata", {
     mode: "string",
   }).notNull(),
 });
-
-export const accounts = pgTable(
-  "accounts",
-  {
-    email: varchar().notNull(),
-    createdAt: timestamp("created_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    updatedAt: timestamp("updated_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    firstName: varchar("first_name"),
-    lastName: varchar("last_name"),
-    pronouns: varchar(),
-    imageUrl: text("image_url"),
-    admin: boolean().default(false).notNull(),
-    archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
-    id: serial().primaryKey().notNull(),
-    defaultProfileId: integer("default_profile_id"),
-    country: varchar(),
-    timezone: varchar(),
-  },
-  (table): Record<string, IndexBuilder | ForeignKeyBuilder> => {
-    return {
-      indexAccountsOnArchivedAt: index("index_accounts_on_archived_at").using(
-        "btree",
-        table.archivedAt.asc().nullsLast().op("timestamp_ops"),
-      ),
-      indexAccountsOnCreatedAt: index("index_accounts_on_created_at").using(
-        "btree",
-        table.createdAt.asc().nullsLast().op("timestamp_ops"),
-      ),
-      indexAccountsOnDefaultProfileId: uniqueIndex(
-        "index_accounts_on_default_profile_id",
-      ).using("btree", table.defaultProfileId.asc().nullsLast().op("int4_ops")),
-      indexAccountsOnEmail: uniqueIndex("index_accounts_on_email").using(
-        "btree",
-        table.email.asc().nullsLast().op("text_ops"),
-      ),
-      fkRailsCee78B4B7D: foreignKey({
-        columns: [table.defaultProfileId],
-        foreignColumns: [profiles.id],
-        name: "fk_rails_cee78b4b7d",
-      }),
-    };
-  },
-);
 
 export const games = pgTable(
   "games",
@@ -146,11 +101,10 @@ export const formats = pgTable(
   },
 );
 
-export const clerkUsers = pgTable(
-  "clerk_users",
+export const accounts = pgTable(
+  "accounts",
   {
-    id: serial().primaryKey().notNull(),
-    clerkUserId: varchar("clerk_user_id").notNull(),
+    email: varchar().notNull(),
     createdAt: timestamp("created_at", {
       precision: 6,
       mode: "string",
@@ -159,27 +113,38 @@ export const clerkUsers = pgTable(
       precision: 6,
       mode: "string",
     }).notNull(),
-    accountId: integer("account_id"),
+    firstName: varchar("first_name"),
+    lastName: varchar("last_name"),
+    pronouns: varchar(),
+    imageUrl: text("image_url"),
+    admin: boolean().default(false).notNull(),
+    archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
+    id: serial().primaryKey().notNull(),
+    defaultProfileId: integer("default_profile_id"),
+    country: varchar(),
+    timezone: varchar(),
   },
-  (table) => {
+  (table): Record<string, IndexBuilder | ForeignKeyBuilder> => {
     return {
-      indexClerkUsersOnAccountId: index(
-        "index_clerk_users_on_account_id",
-      ).using("btree", table.accountId.asc().nullsLast().op("int4_ops")),
-      indexClerkUsersOnAccountIdAndClerkUserId: uniqueIndex(
-        "index_clerk_users_on_account_id_and_clerk_user_id",
-      ).using(
+      indexAccountsOnArchivedAt: index("index_accounts_on_archived_at").using(
         "btree",
-        table.accountId.asc().nullsLast().op("text_ops"),
-        table.clerkUserId.asc().nullsLast().op("text_ops"),
+        table.archivedAt.asc().nullsLast().op("timestamp_ops"),
       ),
-      indexClerkUsersOnClerkUserId: uniqueIndex(
-        "index_clerk_users_on_clerk_user_id",
-      ).using("btree", table.clerkUserId.asc().nullsLast().op("text_ops")),
-      fkRails982E94E92D: foreignKey({
-        columns: [table.accountId],
-        foreignColumns: [accounts.id],
-        name: "fk_rails_982e94e92d",
+      indexAccountsOnCreatedAt: index("index_accounts_on_created_at").using(
+        "btree",
+        table.createdAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      indexAccountsOnDefaultProfileId: uniqueIndex(
+        "index_accounts_on_default_profile_id",
+      ).using("btree", table.defaultProfileId.asc().nullsLast().op("int4_ops")),
+      indexAccountsOnEmail: uniqueIndex("index_accounts_on_email").using(
+        "btree",
+        table.email.asc().nullsLast().op("text_ops"),
+      ),
+      fkRailsCee78B4B7D: foreignKey({
+        columns: [table.defaultProfileId],
+        foreignColumns: [profiles.id],
+        name: "fk_rails_cee78b4b7d",
       }),
     };
   },
@@ -243,55 +208,276 @@ export const matchGames = pgTable(
   },
 );
 
-export const chatMessages = pgTable(
-  "chat_messages",
+export const phases = pgTable(
+  "phases",
   {
-    matchId: integer("match_id").notNull(),
-    content: text(),
-    messageType: varchar("message_type"),
-    sentAt: timestamp("sent_at", { precision: 6, mode: "string" }),
     id: serial().primaryKey().notNull(),
-    accountId: integer("account_id"),
-    profileId: integer("profile_id").notNull(),
+    tournamentId: integer("tournament_id").notNull(),
+    numberOfRounds: integer("number_of_rounds"),
+    createdAt: timestamp("created_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    updatedAt: timestamp("updated_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    type: varchar().notNull(),
+    name: varchar().notNull(),
+    bestOf: integer("best_of").default(3).notNull(),
+    startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
+    endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
+    order: integer().default(0).notNull(),
+    currentRoundId: integer("current_round_id"),
+  },
+  (table): Record<string, IndexBuilder | ForeignKeyBuilder> => {
+    return {
+      indexPhasesOnTournamentIdAndOrder: index(
+        "index_phases_on_tournament_id_and_order",
+      ).using(
+        "btree",
+        table.tournamentId.asc().nullsLast().op("int4_ops"),
+        table.order.asc().nullsLast().op("int4_ops"),
+      ),
+      indexPhasesOnType: index("index_phases_on_type").using(
+        "btree",
+        table.type.asc().nullsLast().op("text_ops"),
+      ),
+      fkRails2909E41898: foreignKey({
+        columns: [table.currentRoundId],
+        foreignColumns: [rounds.id],
+        name: "fk_rails_2909e41898",
+      }),
+      fkRails75E775589E: foreignKey({
+        columns: [table.tournamentId],
+        foreignColumns: [tournaments.id],
+        name: "fk_rails_75e775589e",
+      }),
+    };
+  },
+);
+
+export const tournamentFormats = pgTable(
+  "tournament_formats",
+  {
+    id: serial().primaryKey().notNull(),
+    tournamentId: integer("tournament_id").notNull(),
+    formatId: integer("format_id").notNull(),
+    createdAt: timestamp("created_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    updatedAt: timestamp("updated_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
   },
   (table) => {
     return {
-      indexChatMessagesOnAccountId: index(
-        "index_chat_messages_on_account_id",
+      indexTournamentFormatsOnFormatId: index(
+        "index_tournament_formats_on_format_id",
+      ).using("btree", table.formatId.asc().nullsLast().op("int4_ops")),
+      indexTournamentFormatsOnTournamentId: index(
+        "index_tournament_formats_on_tournament_id",
+      ).using("btree", table.tournamentId.asc().nullsLast().op("int4_ops")),
+      fkRails08C15D3C37: foreignKey({
+        columns: [table.formatId],
+        foreignColumns: [formats.id],
+        name: "fk_rails_08c15d3c37",
+      }),
+      fkRailsC679052Dc0: foreignKey({
+        columns: [table.tournamentId],
+        foreignColumns: [tournaments.id],
+        name: "fk_rails_c679052dc0",
+      }),
+    };
+  },
+);
+
+export const organizationStaffMembers = pgTable(
+  "organization_staff_members",
+  {
+    id: serial().primaryKey().notNull(),
+    organizationId: integer("organization_id").notNull(),
+    createdAt: timestamp("created_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    updatedAt: timestamp("updated_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    accountId: integer("account_id"),
+  },
+  (table) => {
+    return {
+      indexOrganizationStaffMembersOnAccountId: index(
+        "index_organization_staff_members_on_account_id",
       ).using("btree", table.accountId.asc().nullsLast().op("int4_ops")),
-      indexChatMessagesOnMatchId: index(
-        "index_chat_messages_on_match_id",
-      ).using("btree", table.matchId.asc().nullsLast().op("int4_ops")),
-      indexChatMessagesOnMatchIdAndAccountIdAndSentAt: index(
-        "index_chat_messages_on_match_id_and_account_id_and_sent_at",
-      ).using(
-        "btree",
-        table.matchId.asc().nullsLast().op("int4_ops"),
-        table.accountId.asc().nullsLast().op("int4_ops"),
-        table.sentAt.asc().nullsLast().op("timestamp_ops"),
-      ),
-      indexChatMessagesOnMatchIdAndProfileIdAndSentAt: index(
-        "index_chat_messages_on_match_id_and_profile_id_and_sent_at",
-      ).using(
-        "btree",
-        table.matchId.asc().nullsLast().op("timestamp_ops"),
-        table.profileId.asc().nullsLast().op("int4_ops"),
-        table.sentAt.asc().nullsLast().op("int4_ops"),
-      ),
-      fkRails918Ef7Acc4: foreignKey({
+      indexOrganizationStaffMembersOnOrganizationId: index(
+        "index_organization_staff_members_on_organization_id",
+      ).using("btree", table.organizationId.asc().nullsLast().op("int4_ops")),
+      fkRails65Be078Ae6: foreignKey({
         columns: [table.accountId],
         foreignColumns: [accounts.id],
-        name: "fk_rails_918ef7acc4",
+        name: "fk_rails_65be078ae6",
       }),
-      fkRailsF9Ae4172Ee: foreignKey({
-        columns: [table.matchId],
-        foreignColumns: [matches.id],
-        name: "fk_rails_f9ae4172ee",
+      fkRails715Ab7F4Fe: foreignKey({
+        columns: [table.organizationId],
+        foreignColumns: [organizations.id],
+        name: "fk_rails_715ab7f4fe",
       }),
-      fkRailsF531Ed39E3: foreignKey({
+    };
+  },
+);
+
+export const rounds = pgTable("rounds", {
+  id: serial().primaryKey().notNull(),
+  phaseId: integer("phase_id").notNull(),
+  createdAt: timestamp("created_at", {
+    precision: 6,
+    mode: "string",
+  }).notNull(),
+  updatedAt: timestamp("updated_at", {
+    precision: 6,
+    mode: "string",
+  }).notNull(),
+  roundNumber: integer("round_number").default(1).notNull(),
+  startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
+  endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
+});
+
+export const phasePlayers = pgTable(
+  "phase_players",
+  {
+    id: serial().primaryKey().notNull(),
+    playerId: integer("player_id").notNull(),
+    phaseType: varchar("phase_type").notNull(),
+    phaseId: integer("phase_id").notNull(),
+    createdAt: timestamp("created_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    updatedAt: timestamp("updated_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+  },
+  (table) => {
+    return {
+      indexPhasePlayersOnPhaseIdAndPlayerId: index(
+        "index_phase_players_on_phase_id_and_player_id",
+      ).using(
+        "btree",
+        table.phaseId.asc().nullsLast().op("int4_ops"),
+        table.playerId.asc().nullsLast().op("int4_ops"),
+      ),
+      fkRailsF772A83198: foreignKey({
+        columns: [table.playerId],
+        foreignColumns: [players.id],
+        name: "fk_rails_f772a83198",
+      }),
+    };
+  },
+);
+
+export const pokemonTeams = pgTable(
+  "pokemon_teams",
+  {
+    id: serial().primaryKey().notNull(),
+    createdAt: timestamp("created_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    updatedAt: timestamp("updated_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    published: boolean().default(true).notNull(),
+    name: varchar(),
+    formatId: integer("format_id").notNull(),
+    gameId: integer("game_id").notNull(),
+    archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
+    pokepasteId: varchar("pokepaste_id"),
+    profileId: integer("profile_id"),
+  },
+  (table) => {
+    return {
+      indexPokemonTeamsOnFormatIdAndCreatedAt: index(
+        "index_pokemon_teams_on_format_id_and_created_at",
+      ).using(
+        "btree",
+        table.formatId.asc().nullsLast().op("int4_ops"),
+        table.createdAt.asc().nullsLast().op("int4_ops"),
+      ),
+      indexPokemonTeamsOnGameIdAndFormatIdAndCreatedAt: index(
+        "index_pokemon_teams_on_game_id_and_format_id_and_created_at",
+      ).using(
+        "btree",
+        table.gameId.asc().nullsLast().op("timestamp_ops"),
+        table.formatId.asc().nullsLast().op("int4_ops"),
+        table.createdAt.asc().nullsLast().op("int4_ops"),
+      ),
+      indexPokemonTeamsOnProfileIdAndArchivedAt: index(
+        "index_pokemon_teams_on_profile_id_and_archived_at",
+      ).using(
+        "btree",
+        table.profileId.asc().nullsLast().op("int4_ops"),
+        table.archivedAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      fkRails6E351688B8: foreignKey({
+        columns: [table.formatId],
+        foreignColumns: [formats.id],
+        name: "fk_rails_6e351688b8",
+      }),
+      fkRailsE0513D6A9C: foreignKey({
+        columns: [table.gameId],
+        foreignColumns: [games.id],
+        name: "fk_rails_e0513d6a9c",
+      }),
+      fkRails7Bf8C65391: foreignKey({
         columns: [table.profileId],
         foreignColumns: [profiles.id],
-        name: "fk_rails_f531ed39e3",
+        name: "fk_rails_7bf8c65391",
+      }),
+    };
+  },
+);
+
+export const clerkUsers = pgTable(
+  "clerk_users",
+  {
+    id: serial().primaryKey().notNull(),
+    clerkUserId: varchar("clerk_user_id").notNull(),
+    createdAt: timestamp("created_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    updatedAt: timestamp("updated_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    accountId: integer("account_id"),
+  },
+  (table) => {
+    return {
+      indexClerkUsersOnAccountId: index(
+        "index_clerk_users_on_account_id",
+      ).using("btree", table.accountId.asc().nullsLast().op("int4_ops")),
+      indexClerkUsersOnAccountIdAndClerkUserId: uniqueIndex(
+        "index_clerk_users_on_account_id_and_clerk_user_id",
+      ).using(
+        "btree",
+        table.accountId.asc().nullsLast().op("text_ops"),
+        table.clerkUserId.asc().nullsLast().op("int4_ops"),
+      ),
+      indexClerkUsersOnClerkUserId: uniqueIndex(
+        "index_clerk_users_on_clerk_user_id",
+      ).using("btree", table.clerkUserId.asc().nullsLast().op("text_ops")),
+      fkRails982E94E92D: foreignKey({
+        columns: [table.accountId],
+        foreignColumns: [accounts.id],
+        name: "fk_rails_982e94e92d",
       }),
     };
   },
@@ -331,6 +517,103 @@ export const friendlyIdSlugs = pgTable(
         table.sluggableType.asc().nullsLast().op("int4_ops"),
         table.sluggableId.asc().nullsLast().op("text_ops"),
       ),
+    };
+  },
+);
+
+export const chatMessages = pgTable(
+  "chat_messages",
+  {
+    matchId: integer("match_id").notNull(),
+    content: text(),
+    messageType: varchar("message_type"),
+    sentAt: timestamp("sent_at", { precision: 6, mode: "string" }),
+    id: serial().primaryKey().notNull(),
+    accountId: integer("account_id"),
+    profileId: integer("profile_id").notNull(),
+  },
+  (table) => {
+    return {
+      indexChatMessagesOnAccountId: index(
+        "index_chat_messages_on_account_id",
+      ).using("btree", table.accountId.asc().nullsLast().op("int4_ops")),
+      indexChatMessagesOnMatchId: index(
+        "index_chat_messages_on_match_id",
+      ).using("btree", table.matchId.asc().nullsLast().op("int4_ops")),
+      indexChatMessagesOnMatchIdAndAccountIdAndSentAt: index(
+        "index_chat_messages_on_match_id_and_account_id_and_sent_at",
+      ).using(
+        "btree",
+        table.matchId.asc().nullsLast().op("timestamp_ops"),
+        table.accountId.asc().nullsLast().op("int4_ops"),
+        table.sentAt.asc().nullsLast().op("timestamp_ops"),
+      ),
+      indexChatMessagesOnMatchIdAndProfileIdAndSentAt: index(
+        "index_chat_messages_on_match_id_and_profile_id_and_sent_at",
+      ).using(
+        "btree",
+        table.matchId.asc().nullsLast().op("timestamp_ops"),
+        table.profileId.asc().nullsLast().op("int4_ops"),
+        table.sentAt.asc().nullsLast().op("int4_ops"),
+      ),
+      fkRails918Ef7Acc4: foreignKey({
+        columns: [table.accountId],
+        foreignColumns: [accounts.id],
+        name: "fk_rails_918ef7acc4",
+      }),
+      fkRailsF9Ae4172Ee: foreignKey({
+        columns: [table.matchId],
+        foreignColumns: [matches.id],
+        name: "fk_rails_f9ae4172ee",
+      }),
+      fkRailsF531Ed39E3: foreignKey({
+        columns: [table.profileId],
+        foreignColumns: [profiles.id],
+        name: "fk_rails_f531ed39e3",
+      }),
+    };
+  },
+);
+
+export const profiles = pgTable(
+  "profiles",
+  {
+    username: varchar().notNull(),
+    createdAt: timestamp("created_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    updatedAt: timestamp("updated_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    imageUrl: varchar("image_url"),
+    slug: varchar(),
+    archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
+    accountId: integer("account_id"),
+    id: serial().primaryKey().notNull(),
+    default: boolean().default(false).notNull(),
+    type: varchar().default("Profile").notNull(),
+  },
+  (table) => {
+    return {
+      indexProfilesOnAccountId: index("index_profiles_on_account_id").using(
+        "btree",
+        table.accountId.asc().nullsLast().op("int4_ops"),
+      ),
+      indexProfilesOnSlug: uniqueIndex("index_profiles_on_slug").using(
+        "btree",
+        table.slug.asc().nullsLast().op("text_ops"),
+      ),
+      indexProfilesOnUsername: uniqueIndex("index_profiles_on_username").using(
+        "btree",
+        table.username.asc().nullsLast().op("text_ops"),
+      ),
+      fkRailsE424190865: foreignKey({
+        columns: [table.accountId],
+        foreignColumns: [accounts.id],
+        name: "fk_rails_e424190865",
+      }),
     };
   },
 );
@@ -398,7 +681,7 @@ export const matches = pgTable(
         "index_matches_on_tournament_id_and_created_at",
       ).using(
         "btree",
-        table.tournamentId.asc().nullsLast().op("timestamp_ops"),
+        table.tournamentId.asc().nullsLast().op("int4_ops"),
         table.createdAt.asc().nullsLast().op("timestamp_ops"),
       ),
       indexMatchesOnWinnerId: index("index_matches_on_winner_id").using(
@@ -444,43 +727,6 @@ export const matches = pgTable(
         columns: [table.tournamentId],
         foreignColumns: [tournaments.id],
         name: "fk_rails_700eaa2935",
-      }),
-    };
-  },
-);
-
-export const organizationStaffMembers = pgTable(
-  "organization_staff_members",
-  {
-    id: serial().primaryKey().notNull(),
-    organizationId: integer("organization_id").notNull(),
-    createdAt: timestamp("created_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    updatedAt: timestamp("updated_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    accountId: integer("account_id"),
-  },
-  (table) => {
-    return {
-      indexOrganizationStaffMembersOnAccountId: index(
-        "index_organization_staff_members_on_account_id",
-      ).using("btree", table.accountId.asc().nullsLast().op("int4_ops")),
-      indexOrganizationStaffMembersOnOrganizationId: index(
-        "index_organization_staff_members_on_organization_id",
-      ).using("btree", table.organizationId.asc().nullsLast().op("int4_ops")),
-      fkRails65Be078Ae6: foreignKey({
-        columns: [table.accountId],
-        foreignColumns: [accounts.id],
-        name: "fk_rails_65be078ae6",
-      }),
-      fkRails715Ab7F4Fe: foreignKey({
-        columns: [table.organizationId],
-        foreignColumns: [organizations.id],
-        name: "fk_rails_715ab7f4fe",
       }),
     };
   },
@@ -536,89 +782,6 @@ export const organizations = pgTable(
   },
 );
 
-export const phasePlayers = pgTable(
-  "phase_players",
-  {
-    id: serial().primaryKey().notNull(),
-    playerId: integer("player_id").notNull(),
-    phaseType: varchar("phase_type").notNull(),
-    phaseId: integer("phase_id").notNull(),
-    createdAt: timestamp("created_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    updatedAt: timestamp("updated_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-  },
-  (table) => {
-    return {
-      indexPhasePlayersOnPhaseIdAndPlayerId: index(
-        "index_phase_players_on_phase_id_and_player_id",
-      ).using(
-        "btree",
-        table.phaseId.asc().nullsLast().op("int4_ops"),
-        table.playerId.asc().nullsLast().op("int4_ops"),
-      ),
-      fkRailsF772A83198: foreignKey({
-        columns: [table.playerId],
-        foreignColumns: [players.id],
-        name: "fk_rails_f772a83198",
-      }),
-    };
-  },
-);
-
-export const phases = pgTable(
-  "phases",
-  {
-    id: serial().primaryKey().notNull(),
-    tournamentId: integer("tournament_id").notNull(),
-    numberOfRounds: integer("number_of_rounds"),
-    createdAt: timestamp("created_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    updatedAt: timestamp("updated_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    type: varchar().notNull(),
-    name: varchar(),
-    bestOf: integer("best_of").default(3).notNull(),
-    startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
-    endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
-    order: integer().default(0).notNull(),
-    currentRoundId: integer("current_round_id"),
-  },
-  (table): Record<string, IndexBuilder | ForeignKeyBuilder> => {
-    return {
-      indexPhasesOnTournamentIdAndOrder: index(
-        "index_phases_on_tournament_id_and_order",
-      ).using(
-        "btree",
-        table.tournamentId.asc().nullsLast().op("int4_ops"),
-        table.order.asc().nullsLast().op("int4_ops"),
-      ),
-      indexPhasesOnType: index("index_phases_on_type").using(
-        "btree",
-        table.type.asc().nullsLast().op("text_ops"),
-      ),
-      fkRails2909E41898: foreignKey({
-        columns: [table.currentRoundId],
-        foreignColumns: [rounds.id],
-        name: "fk_rails_2909e41898",
-      }),
-      fkRails75E775589E: foreignKey({
-        columns: [table.tournamentId],
-        foreignColumns: [tournaments.id],
-        name: "fk_rails_75e775589e",
-      }),
-    };
-  },
-);
-
 export const players = pgTable(
   "players",
   {
@@ -660,7 +823,7 @@ export const players = pgTable(
       ).using(
         "btree",
         table.accountId.asc().nullsLast().op("int4_ops"),
-        table.createdAt.asc().nullsLast().op("int4_ops"),
+        table.createdAt.asc().nullsLast().op("timestamp_ops"),
       ),
       indexPlayersOnCheckedInAt: index("index_players_on_checked_in_at").using(
         "btree",
@@ -673,7 +836,7 @@ export const players = pgTable(
         "index_players_on_profile_id_and_created_at",
       ).using(
         "btree",
-        table.profileId.asc().nullsLast().op("int4_ops"),
+        table.profileId.asc().nullsLast().op("timestamp_ops"),
         table.createdAt.asc().nullsLast().op("int4_ops"),
       ),
       indexPlayersOnTournamentAndAccount: uniqueIndex(
@@ -698,15 +861,15 @@ export const players = pgTable(
         "index_players_on_tournament_id_and_disqualified",
       ).using(
         "btree",
-        table.tournamentId.asc().nullsLast().op("bool_ops"),
-        table.disqualified.asc().nullsLast().op("int4_ops"),
+        table.tournamentId.asc().nullsLast().op("int4_ops"),
+        table.disqualified.asc().nullsLast().op("bool_ops"),
       ),
       indexPlayersOnTournamentIdAndDropped: index(
         "index_players_on_tournament_id_and_dropped",
       ).using(
         "btree",
         table.tournamentId.asc().nullsLast().op("bool_ops"),
-        table.dropped.asc().nullsLast().op("bool_ops"),
+        table.dropped.asc().nullsLast().op("int4_ops"),
       ),
       indexPlayersOnTournamentIdAndRoundWins: index(
         "index_players_on_tournament_id_and_round_wins",
@@ -815,69 +978,6 @@ export const pokemon = pgTable(
   },
 );
 
-export const pokemonTeams = pgTable(
-  "pokemon_teams",
-  {
-    id: serial().primaryKey().notNull(),
-    createdAt: timestamp("created_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    updatedAt: timestamp("updated_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    published: boolean().default(true).notNull(),
-    name: varchar(),
-    formatId: integer("format_id").notNull(),
-    gameId: integer("game_id").notNull(),
-    archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
-    pokepasteId: varchar("pokepaste_id"),
-    profileId: integer("profile_id"),
-  },
-  (table) => {
-    return {
-      indexPokemonTeamsOnFormatIdAndCreatedAt: index(
-        "index_pokemon_teams_on_format_id_and_created_at",
-      ).using(
-        "btree",
-        table.formatId.asc().nullsLast().op("int4_ops"),
-        table.createdAt.asc().nullsLast().op("int4_ops"),
-      ),
-      indexPokemonTeamsOnGameIdAndFormatIdAndCreatedAt: index(
-        "index_pokemon_teams_on_game_id_and_format_id_and_created_at",
-      ).using(
-        "btree",
-        table.gameId.asc().nullsLast().op("timestamp_ops"),
-        table.formatId.asc().nullsLast().op("int4_ops"),
-        table.createdAt.asc().nullsLast().op("int4_ops"),
-      ),
-      indexPokemonTeamsOnProfileIdAndArchivedAt: index(
-        "index_pokemon_teams_on_profile_id_and_archived_at",
-      ).using(
-        "btree",
-        table.profileId.asc().nullsLast().op("int4_ops"),
-        table.archivedAt.asc().nullsLast().op("timestamp_ops"),
-      ),
-      fkRailsE0513D6A9C: foreignKey({
-        columns: [table.gameId],
-        foreignColumns: [games.id],
-        name: "fk_rails_e0513d6a9c",
-      }),
-      fkRails6E351688B8: foreignKey({
-        columns: [table.formatId],
-        foreignColumns: [formats.id],
-        name: "fk_rails_6e351688b8",
-      }),
-      fkRails7Bf8C65391: foreignKey({
-        columns: [table.profileId],
-        foreignColumns: [profiles.id],
-        name: "fk_rails_7bf8c65391",
-      }),
-    };
-  },
-);
-
 export const rk9Tournaments = pgTable(
   "rk9_tournaments",
   {
@@ -916,102 +1016,6 @@ export const rk9Tournaments = pgTable(
       indexRk9TournamentsOnStartDate: index(
         "index_rk9_tournaments_on_start_date",
       ).using("btree", table.startDate.asc().nullsLast().op("date_ops")),
-    };
-  },
-);
-
-export const profiles = pgTable(
-  "profiles",
-  {
-    username: varchar().notNull(),
-    createdAt: timestamp("created_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    updatedAt: timestamp("updated_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    imageUrl: varchar("image_url"),
-    slug: varchar(),
-    archivedAt: timestamp("archived_at", { precision: 6, mode: "string" }),
-    accountId: integer("account_id"),
-    id: serial().primaryKey().notNull(),
-    default: boolean().default(false).notNull(),
-    type: varchar().default("Profile").notNull(),
-  },
-  (table) => {
-    return {
-      indexProfilesOnAccountId: index("index_profiles_on_account_id").using(
-        "btree",
-        table.accountId.asc().nullsLast().op("int4_ops"),
-      ),
-      indexProfilesOnSlug: uniqueIndex("index_profiles_on_slug").using(
-        "btree",
-        table.slug.asc().nullsLast().op("text_ops"),
-      ),
-      indexProfilesOnUsername: uniqueIndex("index_profiles_on_username").using(
-        "btree",
-        table.username.asc().nullsLast().op("text_ops"),
-      ),
-      fkRailsE424190865: foreignKey({
-        columns: [table.accountId],
-        foreignColumns: [accounts.id],
-        name: "fk_rails_e424190865",
-      }),
-    };
-  },
-);
-
-export const rounds = pgTable("rounds", {
-  id: serial().primaryKey().notNull(),
-  phaseId: integer("phase_id").notNull(),
-  createdAt: timestamp("created_at", {
-    precision: 6,
-    mode: "string",
-  }).notNull(),
-  updatedAt: timestamp("updated_at", {
-    precision: 6,
-    mode: "string",
-  }).notNull(),
-  roundNumber: integer("round_number").default(1).notNull(),
-  startedAt: timestamp("started_at", { precision: 6, mode: "string" }),
-  endedAt: timestamp("ended_at", { precision: 6, mode: "string" }),
-});
-
-export const tournamentFormats = pgTable(
-  "tournament_formats",
-  {
-    id: serial().primaryKey().notNull(),
-    tournamentId: integer("tournament_id").notNull(),
-    formatId: integer("format_id").notNull(),
-    createdAt: timestamp("created_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    updatedAt: timestamp("updated_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-  },
-  (table) => {
-    return {
-      indexTournamentFormatsOnFormatId: index(
-        "index_tournament_formats_on_format_id",
-      ).using("btree", table.formatId.asc().nullsLast().op("int4_ops")),
-      indexTournamentFormatsOnTournamentId: index(
-        "index_tournament_formats_on_tournament_id",
-      ).using("btree", table.tournamentId.asc().nullsLast().op("int4_ops")),
-      fkRails08C15D3C37: foreignKey({
-        columns: [table.formatId],
-        foreignColumns: [formats.id],
-        name: "fk_rails_08c15d3c37",
-      }),
-      fkRailsC679052Dc0: foreignKey({
-        columns: [table.tournamentId],
-        foreignColumns: [tournaments.id],
-        name: "fk_rails_c679052dc0",
-      }),
     };
   },
 );
@@ -1067,14 +1071,14 @@ export const tournaments = pgTable(
       ).using(
         "btree",
         table.formatId.asc().nullsLast().op("int4_ops"),
-        table.startAt.asc().nullsLast().op("int4_ops"),
+        table.startAt.asc().nullsLast().op("timestamp_ops"),
       ),
       indexTournamentsOnGameIdAndStartAt: index(
         "index_tournaments_on_game_id_and_start_at",
       ).using(
         "btree",
-        table.gameId.asc().nullsLast().op("int4_ops"),
-        table.startAt.asc().nullsLast().op("int4_ops"),
+        table.gameId.asc().nullsLast().op("timestamp_ops"),
+        table.startAt.asc().nullsLast().op("timestamp_ops"),
       ),
       indexTournamentsOnLimitlessId: uniqueIndex(
         "index_tournaments_on_limitless_id",

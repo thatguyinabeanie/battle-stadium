@@ -38,7 +38,7 @@ export default function DashboardLayout({
 }: Readonly<DashboardLayoutProps>) {
   return (
     <BreadCrumbsProvider>
-      <SidebarProvider className="border-none">
+      <SidebarProvider className="max-h-svh border-none">
         <SideBar>{sidebar}</SideBar>
 
         <SidebarInset className="border-none bg-transparent">
@@ -46,7 +46,7 @@ export default function DashboardLayout({
 
           <div
             aria-label="dashboard content"
-            className="my-4 mr-4 flex flex-1 flex-col gap-4 rounded-xl bg-neutral-900/50"
+            className="scrollbar-gutter-stable my-4 mr-4 flex flex-1 flex-col gap-4 overflow-y-scroll rounded-xl bg-neutral-900/50"
           >
             {children}
           </div>

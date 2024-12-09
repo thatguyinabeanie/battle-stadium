@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { Button, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, Stack } from "expo-router";
@@ -34,7 +35,7 @@ function MobileAuth() {
   const signOut = useSignOut();
 
   return (
-    <>
+    <Fragment>
       <Text className="pb-2 text-center text-xl font-semibold text-white">
         {user ?? "Not logged in"}
       </Text>
@@ -43,7 +44,7 @@ function MobileAuth() {
         title={user ? "Sign Out" : "Sign In With Discord"}
         color={"#5B65E9"}
       />
-    </>
+    </Fragment>
   );
 }
 

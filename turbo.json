@@ -28,8 +28,8 @@
     },
     "typecheck:watch": {
       "dependsOn": ["^topo", "^build"],
-      "cache": false,
-      "persistent": false
+      "cache": true,
+      "persistent": true
     },
     "clean": {
       "cache": false

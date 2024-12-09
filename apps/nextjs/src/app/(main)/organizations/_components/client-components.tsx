@@ -87,7 +87,9 @@ function LoadedOrganizations({
     <>
       <Form
         className="flex w-full flex-row justify-start"
-        action={getOrSearchOrganizationsAction}
+        action={(formData: FormData) => {
+          void getOrSearchOrganizationsAction(formData);
+        }}
       >
         <input
           name="query"

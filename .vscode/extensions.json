@@ -6,7 +6,6 @@
     "bradlc.vscode-tailwindcss",
     "gruntfuggly.todo-tree",
     "rangav.vscode-thunder-client",
-    "dionmunk.vscode-notes",
     "pkief.material-icon-theme",
     "oderwat.indent-rainbow",
     "tedisagolli.hex-to-tailwind",
@@ -14,8 +13,6 @@
     "github.copilot",
     "github.vscode-github-actions",
     "mikestead.dotenv",
-    "ms-azuretools.vscode-docker",
-    "ryanluker.vscode-coverage-gutters",
     "formulahendry.auto-rename-tag",
     "streetsidesoftware.code-spell-checker",
     "dbcode.dbcode"
