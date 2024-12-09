@@ -1,3 +1,6 @@
+import type { z } from "zod";
+import { useFormContext } from "react-hook-form";
+
 import {
   DatePicker,
   FormControl,
@@ -9,10 +12,12 @@ import {
   Input,
 } from "@battle-stadium/ui";
 
-import type { TournamentFormProps } from "./zod-schema";
+import type { TournamentFormSchema } from "./zod-schema";
 import { CardWrapper } from "./shared";
 
-export function TournamentInformation({ form }: TournamentFormProps) {
+export function TournamentInformation() {
+  const form = useFormContext<z.infer<typeof TournamentFormSchema>>();
+
   return (
     <CardWrapper title="Tournament Information">
       <FormField
@@ -30,8 +35,6 @@ export function TournamentInformation({ form }: TournamentFormProps) {
               </FormDescription>
               <FormMessage />
             </div>
-
-            
           </FormItem>
         )}
       />
@@ -65,7 +68,7 @@ export function TournamentInformation({ form }: TournamentFormProps) {
         )}
       />
 
-      <FormField
+      {/* <FormField
         control={form.control}
         name="startTime"
         render={({ field }) => (
@@ -88,7 +91,7 @@ export function TournamentInformation({ form }: TournamentFormProps) {
             </div>
           </FormItem>
         )}
-      />
+      /> */}
     </CardWrapper>
   );
 }

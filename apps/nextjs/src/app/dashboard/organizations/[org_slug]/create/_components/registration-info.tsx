@@ -1,4 +1,8 @@
+import type { z } from "zod";
+import { useFormContext } from "react-hook-form";
+
 import {
+  Checkbox,
   FormControl,
   FormDescription,
   FormField,
@@ -11,11 +15,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Switch,
 } from "@battle-stadium/ui";
 
 import type { SelectOptionItem } from "./shared";
-import type { TournamentFormProps } from "./zod-schema";
+import type { TournamentFormSchema } from "./zod-schema";
 import { CardWrapper } from "./shared";
 
 const registration_types: SelectOptionItem[] = [
@@ -28,7 +31,8 @@ const registration_types: SelectOptionItem[] = [
   },
   { value: "invite", label: "Invite Only (Coming Soon)", disabled: true },
 ];
-export function Registration({ form }: TournamentFormProps) {
+export function Registration() {
+  const form = useFormContext<z.infer<typeof TournamentFormSchema>>();
   return (
     <CardWrapper title="Registration">
       <FormField
@@ -93,7 +97,7 @@ export function Registration({ form }: TournamentFormProps) {
 
             <div className="col-span-2">
               <FormControl>
-                <Switch
+                <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
                 />
@@ -117,7 +121,7 @@ export function Registration({ form }: TournamentFormProps) {
 
             <div className="col-span-2">
               <FormControl>
-                <Switch
+                <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
                 />
@@ -141,7 +145,7 @@ export function Registration({ form }: TournamentFormProps) {
             </FormLabel>
             <div className="col-span-2">
               <FormControl>
-                <Switch
+                <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
                 />
@@ -167,7 +171,7 @@ export function Registration({ form }: TournamentFormProps) {
 
             <div className="col-span-2">
               <FormControl>
-                <Switch
+                <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
                 />

@@ -1,4 +1,8 @@
+import type { z } from "zod";
+import { useFormContext } from "react-hook-form";
+
 import {
+  Checkbox,
   FormControl,
   FormDescription,
   FormField,
@@ -10,44 +14,42 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Switch,
 } from "@battle-stadium/ui";
 
-import type { SelectOptionItem } from "./shared";
-import type { TournamentFormProps } from "./zod-schema";
+import type { TournamentFormSchema } from "./zod-schema";
+import type { getGames } from "~/app/server-actions/games/actions";
 import { CardWrapper } from "./shared";
 
-const game_options: SelectOptionItem[] = [
-  { value: "sv", label: "Scarlet & Violet" },
-  { value: "swsh", label: "Sword & Shield" },
-  { value: "sm", label: "Sun & Moon" },
-];
+interface GameInformationProps {
+  games: Awaited<ReturnType<typeof getGames>>;
+}
 
-const format_options: SelectOptionItem[] = [
-  { value: "rg", label: "Regulation G" },
-  { value: "s1", label: "Series 1" },
-];
-export function GameInformation({ form }: TournamentFormProps) {
+export function GameInformation({ games }: GameInformationProps) {
+  const form = useFormContext<z.infer<typeof TournamentFormSchema>>();
+
   return (
     <CardWrapper title="Game and Format">
       <FormField
         control={form.control}
-        name="game"
+        name="game_id"
         render={({ field }) => (
           <FormItem className="grid grid-cols-3 gap-4">
             <FormLabel className="text-right">Game</FormLabel>
 
             <div className="col-span-2">
-              <Select value={field.value} onValueChange={field.onChange}>
+              <Select
+                value={String(field.value)}
+                onValueChange={field.onChange}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select Game..." />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="bg-background p-3">
-                  {game_options.map(({ value, label, disabled }) => (
-                    <SelectItem key={value} value={value} disabled={disabled}>
-                      {label}
+                  {games.games.map(({ id, name }) => (
+                    <SelectItem key={id} value={String(id)} disabled={false}>
+                      {name}
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -65,21 +67,26 @@ export function GameInformation({ form }: TournamentFormProps) {
 
       <FormField
         control={form.control}
-        name="format"
+        name="format_id"
         render={({ field }) => (
           <FormItem className="grid grid-cols-3 gap-4">
             <FormLabel className="text-right">Format</FormLabel>
 
             <div className="col-span-2">
-              <Select value={field.value} onValueChange={field.onChange}>
+              <Select
+                value={String(field.value)}
+                onValueChange={field.onChange}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select Format..." />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="bg-background p-3">
-                  {format_options.map(({ value, label, disabled }) => (
-                    <SelectItem key={value} value={value} disabled={disabled}>
+                  {games.games_options_with_formats[
+                    form.getValues("game_id")
+                  ]?.map(({ id, label, disabled }) => (
+                    <SelectItem key={id} value={String(id)} disabled={disabled}>
                       {label}
                     </SelectItem>
                   ))}
@@ -106,7 +113,7 @@ export function GameInformation({ form }: TournamentFormProps) {
 
             <div className="col-span-2">
               <FormControl>
-                <Switch
+                <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
                 />
@@ -130,7 +137,7 @@ export function GameInformation({ form }: TournamentFormProps) {
 
             <div className="col-span-2">
               <FormControl>
-                <Switch
+                <Checkbox
                   checked={field.value}
                   onCheckedChange={field.onChange}
                 />

@@ -1157,8 +1157,6 @@ export interface components {
       player_cap: number | null;
       /** Format: date-time */
       registration_start_at: string | null;
-      /** Format: date-time */
-      registration_end_at: string | null;
       late_registration: boolean;
       /** Format: date-time */
       check_in_start_at: string | null;
@@ -1167,8 +1165,6 @@ export interface components {
     };
     /** Tournament Post Request */
     TournamentPostRequest: {
-      /** Format: int64 */
-      organization_id: number;
       name: string;
       /** Format: int64 */
       game_id: number;
@@ -1180,8 +1176,6 @@ export interface components {
       player_cap: number | null;
       /** Format: date-time */
       registration_start_at: string | null;
-      /** Format: date-time */
-      registration_end_at: string | null;
       late_registration: boolean;
       /** Format: date-time */
       check_in_start_at: string | null;
@@ -1816,7 +1810,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        "application/json": components["schemas"]["TournamentDetails"];
+        "application/json": components["schemas"]["TournamentPostRequest"];
       };
     };
     responses: {
@@ -1827,8 +1821,8 @@ export interface operations {
           "application/json": components["schemas"]["TournamentDetails"];
         };
       };
-      /** @description bad request */
-      400: {
+      /** @description unprocessable_entity */
+      422: {
         headers: Record<string, unknown>;
         content?: never;
       };

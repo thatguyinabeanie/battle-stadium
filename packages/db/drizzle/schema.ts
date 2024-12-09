@@ -40,30 +40,6 @@ export const arInternalMetadata = pgTable("ar_internal_metadata", {
   }).notNull(),
 });
 
-export const games = pgTable(
-  "games",
-  {
-    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
-    name: varchar(),
-    createdAt: timestamp("created_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-    updatedAt: timestamp("updated_at", {
-      precision: 6,
-      mode: "string",
-    }).notNull(),
-  },
-  (_table) => {
-    return {
-      indexGamesOnLowerName: uniqueIndex("index_games_on_lower_name").using(
-        "btree",
-        sql`lower((name)::text)`,
-      ),
-    };
-  },
-);
-
 export const formats = pgTable(
   "formats",
   {
@@ -97,6 +73,35 @@ export const formats = pgTable(
         foreignColumns: [games.id],
         name: "fk_rails_810725a016",
       }),
+    };
+  },
+);
+
+export const games = pgTable(
+  "games",
+  {
+    id: bigserial({ mode: "bigint" }).primaryKey().notNull(),
+    name: varchar(),
+    createdAt: timestamp("created_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    updatedAt: timestamp("updated_at", {
+      precision: 6,
+      mode: "string",
+    }).notNull(),
+    slug: varchar().notNull(),
+  },
+  (table) => {
+    return {
+      indexGamesOnLowerName: uniqueIndex("index_games_on_lower_name").using(
+        "btree",
+        sql`lower((name)::text)`,
+      ),
+      indexGamesOnSlug: uniqueIndex("index_games_on_slug").using(
+        "btree",
+        table.slug.asc().nullsLast().op("text_ops"),
+      ),
     };
   },
 );
@@ -822,7 +827,7 @@ export const players = pgTable(
         "index_players_on_account_id_and_created_at",
       ).using(
         "btree",
-        table.accountId.asc().nullsLast().op("int4_ops"),
+        table.accountId.asc().nullsLast().op("timestamp_ops"),
         table.createdAt.asc().nullsLast().op("timestamp_ops"),
       ),
       indexPlayersOnCheckedInAt: index("index_players_on_checked_in_at").using(

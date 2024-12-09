@@ -156,10 +156,26 @@ export async function postTournament(
         path: {
           slug: org_slug,
         },
-        body: data,
+      },
+      tournament: {
+        name: data.tournamentName,
+        autostart: false,
+        check_in_start_at: data.requireCheckIn
+          ? new Date(data.startDate.getTime() - 60 * 60 * 1000).toUTCString()
+          : null,
+        late_registration: data.lateRegistration,
+        teamlists_required: data.teamSheetRequired,
+        open_team_sheets: data.openTeamSheet,
+        player_cap: data.playerCap ?? null,
+        registration_start_at: data.startDate.toUTCString(),
+        game_id: data.game_id,
+        format_id: data.format_id,
+        registration_end_at: null,
       },
     },
   );
 
-  return result.data;
+  return {
+    tournament: result.data as components["schemas"]["Tournament"],
+  };
 }

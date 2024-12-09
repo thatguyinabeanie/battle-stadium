@@ -2,20 +2,20 @@
 
 import type { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 
-import { Button, Form, useToast } from "@battle-stadium/ui";
+import { Button, useToast } from "@battle-stadium/ui";
 
 import type { OrganizationDashboardPageProps } from "./_components/shared";
 import { postTournament } from "~/app/server-actions/tournaments/actions";
 import { GameInformation } from "./_components/game-info";
-// import { TournamentPhases } from "./_components/phases-info";
 import { Registration } from "./_components/registration-info";
 import { TournamentInformation } from "./_components/tournament-info";
 import { TournamentFormSchema } from "./_components/zod-schema";
 
 export default function CreateTournament({
   org,
+  games,
 }: OrganizationDashboardPageProps) {
   const { toast } = useToast();
 
@@ -23,18 +23,25 @@ export default function CreateTournament({
     resolver: zodResolver(TournamentFormSchema),
     defaultValues: {
       tournamentName: "",
-      // phases: [{ name: "Phase 0", bestOf: 3, pairingSystem: "swiss", roundTimer: true, roundTime: 50, matchCheckIn: true, checkInTime: 10 }],
       playerCap: 0,
       startDate: new Date(),
-      startTime: "00:00 PM",
-      game: "sv",
-      format: "rg",
+      // startTime: "05:00 PM",
+      game_id: 1,
+      format_id: 8,
       registrationType: "open",
+      requireCheckIn: true,
+      lateRegistration: true,
+      lateTeamSheet: true,
+      lateCheckIn: true,
+      openTeamSheet: true,
+      teamSheetRequired: true,
     },
   });
 
   async function onSubmit(data: z.infer<typeof TournamentFormSchema>) {
-    await postTournament(data, org.slug ?? "");
+    const res = await postTournament(data, org.slug ?? "");
+
+    console.log(res);
 
     toast({
       title: "Tournament Created Successfully!",
@@ -47,14 +54,14 @@ export default function CreateTournament({
       <div className="space-y-4 backdrop-filter-none">
         <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1>
 
-        <Form {...form}>
+        <FormProvider {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-6 pb-10"
           >
-            <TournamentInformation form={form} />
-            <GameInformation form={form} />
-            <Registration form={form} />
+            <TournamentInformation />
+            <GameInformation games={games} />
+            <Registration />
             {/* <TournamentPhases form={form} /> */}
             <div className="flex justify-end">
               <Button variant="outline" type="submit">
@@ -62,7 +69,7 @@ export default function CreateTournament({
               </Button>
             </div>
           </form>
-        </Form>
+        </FormProvider>
       </div>
     </div>
   );
