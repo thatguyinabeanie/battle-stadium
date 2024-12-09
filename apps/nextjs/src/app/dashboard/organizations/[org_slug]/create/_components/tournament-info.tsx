@@ -24,14 +24,14 @@ export function TournamentInformation() {
         control={form.control}
         name="tournamentName"
         render={({ field }) => (
-          <FormItem className="grid grid-cols-3 gap-4">
+          <FormItem className="grid grid-cols-3 items-center gap-4">
             <FormLabel className="col-span-1 text-right">Name</FormLabel>
             <div className="col-span-2">
               <FormControl>
                 <Input {...field} placeholder="Enter Tournament Name..." />
               </FormControl>
-              <FormDescription>
-                This will be displayed as the official tournament title.
+              <FormDescription className="text-sm">
+                Official tournament title.
               </FormDescription>
               <FormMessage />
             </div>
@@ -58,9 +58,8 @@ export function TournamentInformation() {
                   }}
                 />
               </FormControl>
-              <FormDescription>
-                Select the tournament's start date. Participants will be
-                notified of this date.
+              <FormDescription className="text-sm">
+                Select the tournament's start date.
               </FormDescription>
               <FormMessage />
             </div>

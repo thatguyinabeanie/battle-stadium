@@ -23,7 +23,8 @@ export default function CreateTournament({
     resolver: zodResolver(TournamentFormSchema),
     defaultValues: {
       tournamentName: "",
-      playerCap: 0,
+      playerCap: false,
+      maxPlayers: 4,
       startDate: new Date(),
       // startTime: "05:00 PM",
       game_id: 1,
@@ -39,14 +40,12 @@ export default function CreateTournament({
   });
 
   async function onSubmit(data: z.infer<typeof TournamentFormSchema>) {
-    const res = await postTournament(data, org.slug ?? "");
-
-    console.log(res);
-
+    await postTournament(data, org.slug ?? "");
     toast({
       title: "Tournament Created Successfully!",
       description: "Your tournament has been created and saved.",
     });
+    // TODO: Redirect after creation succeeded
   }
 
   return (

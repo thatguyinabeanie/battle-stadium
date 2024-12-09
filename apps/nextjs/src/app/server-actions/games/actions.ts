@@ -37,7 +37,7 @@ export async function getGames() {
       }
       return acc;
     },
-    {} as Record<number, SelectOptionItem[]>,
+    {} as Record<number, SelectOptionItem<number>[]>,
   );
 
   return {

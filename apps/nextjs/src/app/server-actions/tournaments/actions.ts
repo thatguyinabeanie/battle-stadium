@@ -157,16 +157,17 @@ export async function postTournament(
           slug: org_slug,
         },
       },
-      tournament: {
+      body: {
         name: data.tournamentName,
         autostart: false,
+        start_at: data.startDate.toUTCString(),
         check_in_start_at: data.requireCheckIn
           ? new Date(data.startDate.getTime() - 60 * 60 * 1000).toUTCString()
           : null,
         late_registration: data.lateRegistration,
         teamlists_required: data.teamSheetRequired,
         open_team_sheets: data.openTeamSheet,
-        player_cap: data.playerCap ?? null,
+        player_cap: data.playerCap ? data.maxPlayers : null,
         registration_start_at: data.startDate.toUTCString(),
         game_id: data.game_id,
         format_id: data.format_id,

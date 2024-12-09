@@ -30,7 +30,10 @@ export const TournamentFormSchema = z.object({
   registrationType: z
     .string()
     .min(2, { message: "Registration type must be at least 2 characters." }),
-  playerCap: z.number().int().optional(),
+  playerCap: z.boolean().default(false),
+  maxPlayers: z.number().int().min(4, {
+    message: "Player cap must be at least 4 players.",
+  }),
   requireCheckIn: z.boolean().default(true),
   lateRegistration: z.boolean().default(true),
   lateTeamSheet: z.boolean().default(true),

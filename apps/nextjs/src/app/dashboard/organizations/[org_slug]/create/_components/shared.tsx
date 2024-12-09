@@ -102,8 +102,8 @@ export function CardWrapper({
   );
 }
 
-export interface SelectOptionItem {
+export interface SelectOptionItem<T> {
   label: string;
-  id: number;
+  id: T;
   disabled?: boolean;
 }

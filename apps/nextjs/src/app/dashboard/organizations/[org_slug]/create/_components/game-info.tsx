@@ -110,17 +110,18 @@ export function GameInformation({ games }: GameInformationProps) {
             <FormLabel className="text-right text-base">
               Team Sheet Required
             </FormLabel>
-
             <div className="col-span-2">
               <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
+                <div className="flex flex-row items-center gap-4">
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <FormDescription>
+                    Require players to submit a team sheet.
+                  </FormDescription>
+                </div>
               </FormControl>
-              <FormDescription>
-                Require participants to submit a team sheet.
-              </FormDescription>
             </div>
           </FormItem>
         )}
@@ -137,14 +138,16 @@ export function GameInformation({ games }: GameInformationProps) {
 
             <div className="col-span-2">
               <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
+                <div className="flex flex-row items-center gap-4">
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <FormDescription>
+                    Open team sheet for all players.
+                  </FormDescription>
+                </div>
               </FormControl>
-              <FormDescription>
-                Open team sheet to all participants.
-              </FormDescription>
             </div>
           </FormItem>
         )}
