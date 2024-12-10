@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 
 export default function TournamentsSuspenseWrapper() {
   return (
-
     <section
       role="region"
       aria-label="Tournament Header"

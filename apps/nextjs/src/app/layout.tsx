@@ -15,12 +15,12 @@ import { GeistSans } from "geist/font/sans";
 import { cn, ThemeProvider, Toaster } from "@battle-stadium/ui";
 
 import type { ChildrenProps } from "~/types";
+import AwesomeParticles from "~/components/awesome-particles";
 import { AdSenseScript } from "~/components/google-adsense/ad-sense";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/server";
 import Navbar from "./@navbar/_components/navbar";
-import AwesomeParticles from "~/components/awesome-particles";
 
 export const metadata: Metadata = {
   metadataBase: new URL(

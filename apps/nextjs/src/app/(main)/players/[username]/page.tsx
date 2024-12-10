@@ -27,13 +27,12 @@ export default async function PlayerProfilePage(
 async function PlayerProfile({ username }: ProfilePageProps) {
   const profile_username = (await getProfile(username))?.username ?? "Player";
   return (
-        <section
-        role="region"
-        aria-label="Tournament Header"
-        className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
-      >
-        <ComingSoon title={`${profile_username} Profile`} />
-      </section>
-    
+    <section
+      role="region"
+      aria-label="Tournament Header"
+      className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
+    >
+      <ComingSoon title={`${profile_username} Profile`} />
+    </section>
   );
 }
