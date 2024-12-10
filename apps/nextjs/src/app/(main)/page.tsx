@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { title } from "~/components/miscellaneous/primitives";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
-// import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 import { env } from "~/env";
 import AdBanner from "../../components/google-adsense/ad-banner";
 
@@ -14,14 +13,14 @@ export default function Home() {
   return (
     <>
       <section
-        aria-label="Tournament Header"
+        aria-label="Partner Organizations"
         className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
       >
         <PartneredOrganizations />
       </section>
 
       <section
-        aria-label="Tournament Header"
+        aria-label="Front Page Text"
         className="z-0 m-4 mt-0 flex h-svh w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
       >
         <FrontPageText />
