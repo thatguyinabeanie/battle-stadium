@@ -38,7 +38,7 @@ export default function OrganizationTournamentsTournamentLayout(
   return (
     <>
       <section
-        role="region"
+       
         aria-label="Tournament Header"
         className="z-0 m-4 mt-2 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
       >
@@ -46,7 +46,7 @@ export default function OrganizationTournamentsTournamentLayout(
       </section>
 
       <section
-        role="region"
+       
         aria-label="Tournament Content"
         className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
       >

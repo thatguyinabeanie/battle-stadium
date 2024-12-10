@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <>
       <section
-        role="region"
+       
         aria-label="Tournament Header"
         className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
       >
@@ -22,7 +22,7 @@ export default function Home() {
       </section>
 
       <section
-        role="region"
+       
         aria-label="Tournament Header"
         className="z-0 m-4 mt-0 flex h-svh w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
       >

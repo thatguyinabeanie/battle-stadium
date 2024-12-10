@@ -15,7 +15,7 @@ export default function OrganizationsPage() {
   return (
     <>
       <section
-        role="region"
+       
         aria-label="Partnered Organization"
         className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950 py-4"
       >
@@ -23,7 +23,7 @@ export default function OrganizationsPage() {
       </section>
 
       <section
-        role="region"
+       
         aria-label="Organizations Index Grid"
         className="scrollbar-gutter-stable z-0 mt-0 w-full overflow-auto rounded-xl border-4 border-neutral-950 bg-neutral-950"
       >
