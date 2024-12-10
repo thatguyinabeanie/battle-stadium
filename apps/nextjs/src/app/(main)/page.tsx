@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+
 import { title } from "~/components/miscellaneous/primitives";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 import { env } from "~/env";
