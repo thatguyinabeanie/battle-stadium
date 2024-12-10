@@ -28,7 +28,7 @@ async function PlayerProfile({ username }: ProfilePageProps) {
   const profile_username = (await getProfile(username))?.username ?? "Player";
   return (
     <section
-      aria-label="Tournament Header"
+      aria-label="Player Profile Content"
       className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
     >
       <ComingSoon title={`${profile_username} Profile`} />
