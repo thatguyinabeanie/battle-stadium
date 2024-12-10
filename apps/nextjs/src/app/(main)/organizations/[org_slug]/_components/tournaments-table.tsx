@@ -4,7 +4,10 @@ import type { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
-import type { Organization, Tournament } from "@battle-stadium/db/schema";
+import type {
+  Organization,
+  TournamentWithPlayerCount,
+} from "@battle-stadium/db/schema";
 import {
   Button,
   DataTable,
@@ -17,7 +20,7 @@ import {
 } from "@battle-stadium/ui";
 
 interface SingleOrganizationTournamentsTableProps {
-  data: Tournament[];
+  data: TournamentWithPlayerCount[];
   organization: Organization;
   className?: string;
 }
@@ -27,7 +30,7 @@ export function SingleOrgTournamentsTable({
   organization,
   className,
 }: SingleOrganizationTournamentsTableProps) {
-  const preColumn: ColumnDef<Tournament>[] = [
+  const preColumn: ColumnDef<TournamentWithPlayerCount>[] = [
     {
       accessorKey: "name",
       header: "Name",
@@ -44,7 +47,10 @@ export function SingleOrgTournamentsTable({
 
   return (
     <div className={className}>
-      <DataTable<Tournament> data={data} columns={[...preColumn, ...columns]}>
+      <DataTable<TournamentWithPlayerCount>
+        data={data}
+        columns={[...preColumn, ...columns]}
+      >
         <SingleOrganizationTournamentsTableFiltering />
       </DataTable>
     </div>
@@ -52,7 +58,7 @@ export function SingleOrgTournamentsTable({
 }
 
 function SingleOrganizationTournamentsTableFiltering() {
-  const table = useDataTable<Tournament>();
+  const table = useDataTable<TournamentWithPlayerCount>();
 
   if (!table) return null;
 
@@ -94,22 +100,30 @@ function SingleOrganizationTournamentsTableFiltering() {
   );
 }
 
-const columns: ColumnDef<Tournament>[] = [
+const columns: ColumnDef<TournamentWithPlayerCount>[] = [
   {
-    accessorKey: "Start Date",
+    accessorKey: "tournaments.startAt",
     header: "Date",
-    cell: ({ row }) =>
-      row.original.startAt &&
-      new Date(row.original.startAt).toLocaleDateString(undefined, {
+    cell: ({
+      row: {
+        original: { startAt },
+      },
+    }) =>
+      startAt &&
+      new Date(startAt).toLocaleDateString(undefined, {
         dateStyle: "medium",
       }),
   },
   {
     accessorKey: "checkInStartAt",
     header: "Check In",
-    cell: ({ row }) =>
-      row.original.checkInStartAt &&
-      new Date(row.original.checkInStartAt).toLocaleTimeString([], {
+    cell: ({
+      row: {
+        original: { checkInStartAt },
+      },
+    }) =>
+      checkInStartAt &&
+      new Date(checkInStartAt).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       }),
@@ -117,21 +131,37 @@ const columns: ColumnDef<Tournament>[] = [
   {
     accessorKey: "Players",
     header: "Players",
-    cell: ({ row }) => row.original.playerCap,
+    cell: ({
+      row: {
+        original: { playerCount, playerCap },
+      },
+    }) => (playerCap !== null ? `${playerCount}/${playerCap}` : playerCount),
   },
   {
     accessorKey: "Late Registration",
     header: "Late Registration",
-    cell: ({ row }) => (row.original.lateRegistration ? "Yes" : "No"),
+    cell: ({
+      row: {
+        original: { lateRegistration },
+      },
+    }) => (lateRegistration ? "Yes" : "No"),
   },
   {
     accessorKey: "Team List Required?",
     header: "Teamlists Required",
-    cell: ({ row }) => (row.original.teamlistsRequired ? "Yes" : "No"),
+    cell: ({
+      row: {
+        original: { teamlistsRequired },
+      },
+    }) => (teamlistsRequired ? "Yes" : "No"),
   },
   {
     accessorKey: "openTeamSheets",
     header: "Open Team Sheets",
-    cell: ({ row }) => (row.original.openTeamSheets ? "Yes" : "No"),
+    cell: ({
+      row: {
+        original: { openTeamSheets },
+      },
+    }) => (openTeamSheets ? "Yes" : "No"),
   },
 ];

@@ -2,7 +2,7 @@
 
 // import { cacheLife } from "next/dist/server/use-cache/cache-life";
 // import { cacheTag } from "next/dist/server/use-cache/cache-tag";
-import { count } from "drizzle-orm";
+import { count, getTableColumns } from "drizzle-orm";
 
 import { and, db, desc, eq } from "@battle-stadium/db";
 import { organizations, players, tournaments } from "@battle-stadium/db/schema";
@@ -48,11 +48,36 @@ async function getSingleOrganizationTournamentsRaw(
   page = 1,
   pageSize = 20,
 ) {
-  return tournamentsLeftJoinOrganizations()
+  const orgs = await db
+    .select()
+    .from(organizations)
     .where(eq(organizations.slug, slug))
+    .limit(1);
+  const org = orgs[0];
+  if (!org) {
+    return {
+      tournaments: [],
+      organization: null,
+    };
+  }
+
+  const data = await db
+    .select({
+      ...getTableColumns(tournaments),
+      playerCount: count(players.id).as("playerCount"),
+    })
+    .from(tournaments)
+    .leftJoin(players, eq(players.tournamentId, tournaments.id))
+    .where(eq(tournaments.organizationId, org.id))
+    .groupBy(tournaments.id)
     .orderBy(desc(tournaments.startAt))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
+
+  return {
+    tournaments: data,
+    organization: org,
+  };
 }
 
 export async function getSingleOrganizationTournaments(
@@ -60,15 +85,7 @@ export async function getSingleOrganizationTournaments(
   page = 1,
   pageSize = 20,
 ) {
-  const results = await getSingleOrganizationTournamentsRaw(
-    slug,
-    page,
-    pageSize,
-  );
-  return {
-    tournaments: results.map(({ tournaments }) => tournaments),
-    organization: results[0]?.organizations,
-  };
+  return await getSingleOrganizationTournamentsRaw(slug, page, pageSize);
 }
 
 async function getSingleOrganizationSingleTournamentRaw(

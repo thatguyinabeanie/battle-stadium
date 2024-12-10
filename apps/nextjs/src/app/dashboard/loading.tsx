@@ -8,7 +8,7 @@ export default function Loading() {
         <DashboardContentSection />
         <DashboardContentSection />
       </div>
-      <main className="min-h-[100vh] flex-1 animate-pulse rounded-xl bg-neutral-900/50 md:min-h-min" />
+      <section className="min-h-[100vh] flex-1 animate-pulse rounded-xl bg-neutral-900/50 md:min-h-min" />
       <div className="sr-only" aria-live="polite">
         Loading dashboard content, please wait...
       </div>

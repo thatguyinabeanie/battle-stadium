@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 
 import { db } from "@battle-stadium/db";
 
+import { getGames } from "~/app/server-actions/games/actions";
 import { getOrganizationBySlug } from "~/app/server-actions/organizations/actions";
 import CreateTournament from "./create-tournament";
 
@@ -26,10 +27,11 @@ export default async function CreateTournamentPage({
   const { org_slug } = await params;
 
   const org = await getOrganizationBySlug(org_slug);
+  const games = await getGames();
 
   if (!org) {
     notFound();
   }
 
-  return <CreateTournament org={org} />;
+  return <CreateTournament org={org} games={games} />;
 }

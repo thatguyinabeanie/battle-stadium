@@ -18,6 +18,7 @@ ignorePaths:
   - code-rabbit-ai.yaml
   - .env*
   - .vscode/**
+  - LICENSE
 dictionaryDefinitions: []
 dictionaries:
   - en_US

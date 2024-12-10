@@ -3,6 +3,7 @@ import React from "react";
 import type { Organization } from "@battle-stadium/db/schema";
 import { Card, CardContent, CardHeader, CardTitle } from "@battle-stadium/ui";
 
+import type { getGames } from "~/app/server-actions/games/actions";
 import type { ChildrenProps } from "~/types";
 
 export enum PairingSystem {
@@ -62,6 +63,7 @@ export interface TournamentForm {
 
 export interface OrganizationDashboardPageProps {
   org: Organization;
+  games: Awaited<ReturnType<typeof getGames>>;
 }
 
 export type CardClassNames = Partial<
@@ -100,8 +102,8 @@ export function CardWrapper({
   );
 }
 
-export interface SelectOptionItem {
+export interface SelectOptionItem<T> {
   label: string;
-  value: string;
+  id: T;
   disabled?: boolean;
 }

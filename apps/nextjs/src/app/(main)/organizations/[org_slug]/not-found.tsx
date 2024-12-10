@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="flex h-screen items-center justify-center">
+    <section className="flex h-screen items-center justify-center">
       <div className="text-center">
         <h1 className="text-4xl font-bold" aria-label="404 - Page Not Found">
           404
@@ -18,6 +18,6 @@ export default function NotFound() {
           Return to Home
         </Link>
       </div>
-    </main>
+    </section>
   );
 }

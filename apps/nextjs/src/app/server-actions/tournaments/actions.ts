@@ -1,6 +1,9 @@
 "use server";
 
 import type { FetchOptions } from "openapi-fetch";
+import type { z } from "zod";
+import { auth } from "@clerk/nextjs/server";
+import { getVercelOidcToken } from "@vercel/functions/oidc";
 
 // import { cacheLife } from "next/dist/server/use-cache/cache-life";
 // import { cacheTag } from "next/dist/server/use-cache/cache-tag";
@@ -13,6 +16,7 @@ import {
   tournaments,
 } from "@battle-stadium/db/schema";
 
+import type { TournamentFormSchema } from "~/app/dashboard/organizations/[org_slug]/create/_components/zod-schema";
 import type { components, paths } from "~/lib/api/openapi-v1";
 import type { Tokens } from "~/types";
 import { BattleStadiumApiClient, defaultConfig } from "~/lib/api";
@@ -130,4 +134,49 @@ export async function getTournamentPlayerCount(tournament_id: number) {
     .where(eq(players.tournamentId, tournament_id));
 
   return result[0]?.count ?? 0;
+}
+
+export async function postTournament(
+  data: z.infer<typeof TournamentFormSchema>,
+  org_slug: string,
+) {
+  const session = await auth();
+  if (!session.userId) {
+    return null;
+  }
+  const tokens: Tokens = {
+    oidc: await getVercelOidcToken(),
+    clerk: await session.getToken(),
+  };
+
+  const result = await BattleStadiumApiClient(tokens).POST(
+    "/organizations/{slug}/tournaments",
+    {
+      params: {
+        path: {
+          slug: org_slug,
+        },
+      },
+      body: {
+        name: data.tournamentName,
+        autostart: false,
+        start_at: data.startDate.toUTCString(),
+        check_in_start_at: data.requireCheckIn
+          ? new Date(data.startDate.getTime() - 60 * 60 * 1000).toUTCString()
+          : null,
+        late_registration: data.lateRegistration,
+        teamlists_required: data.teamSheetRequired,
+        open_team_sheets: data.openTeamSheet,
+        player_cap: data.playerCap ? data.maxPlayers : null,
+        registration_start_at: data.startDate.toUTCString(),
+        game_id: data.game_id,
+        format_id: data.format_id,
+        registration_end_at: null,
+      },
+    },
+  );
+
+  return {
+    tournament: result.data as components["schemas"]["Tournament"],
+  };
 }
