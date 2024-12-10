@@ -4,7 +4,7 @@ import { StrictMode, Suspense } from "react";
 import "~/styles/globals.css";
 
 import type { Metadata, Viewport } from "next";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import { ClerkProvider } from "@clerk/nextjs";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
@@ -20,9 +20,9 @@ import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/server";
 
-const AwesomeParticles = dynamic(
-  () => import("~/components/awesome-particles"),
-);
+// const AwesomeParticles = dynamic(
+//   () => import("~/components/awesome-particles"),
+// );
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -82,11 +82,11 @@ export default function RootLayout({
             <TRPCReactProvider>
               <ThemeProvider attribute="class" defaultTheme="dark">
                 <div className="flex min-h-screen flex-col items-center">
-                  <Suspense fallback={null}>
+                  {/* <Suspense fallback={null}>
                     <AwesomeParticles />
-                  </Suspense>
+                  </Suspense> */}
 
-                  <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
+                  <div className="flex w-full flex-col items-center bg-neutral-900 shadow-lg dark:shadow-white/20">
                     {children}
                   </div>
                 </div>

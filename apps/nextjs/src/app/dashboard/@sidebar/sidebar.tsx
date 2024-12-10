@@ -13,7 +13,7 @@ import Header from "./header";
 const SIDEBAR_DEFAULT_CLASSNAMES = "m-4 rounded-xl bg-neutral-900/50";
 export default function SideBar({ children }: ChildrenProps) {
   return (
-    <Sidebar variant="sidebar" collapsible="icon">
+    <Sidebar className="hidden" variant="sidebar" collapsible="icon">
       <SidebarHeader className={SIDEBAR_DEFAULT_CLASSNAMES}>
         <Header />
       </SidebarHeader>

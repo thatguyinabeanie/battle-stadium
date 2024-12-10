@@ -56,10 +56,11 @@ export default function MainContentLayout({
   children,
 }: Readonly<RootLayoutSlots>) {
   return (
-    <div className="flex w-full shrink-0 flex-col items-center bg-neutral-950/75 shadow-md will-change-transform dark:shadow-white/10 lg:min-w-[1024px] lg:max-w-[1300px]">
+    <div className="flex w-full max-w-[1260px] shrink-0 flex-col items-center bg-neutral-950 shadow-md will-change-transform dark:shadow-white/10">
       {navbar}
 
       <main
+        id="main-content"
         className="flex min-h-screen w-full flex-col items-center"
       >
         <section

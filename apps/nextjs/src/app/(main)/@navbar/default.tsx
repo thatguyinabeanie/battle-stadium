@@ -24,7 +24,7 @@ export default function Navbar() {
 
 function NavbarLinks() {
   return (
-    <div className="hidden items-center justify-center md:flex">
+    <div className="hidden items-center justify-center md:col-span-3 md:flex">
       {NavbarItemsConfigs.map(({ label, value }) => (
         <NavbarLink
           key={value}

@@ -42,7 +42,7 @@ export default function BattleStadium() {
   return (
     <div
       aria-label="Battle Stadium Navigation"
-      className="flex flex-row gap-2 md:gap-4"
+      className="col-span-1 flex flex-row gap-2 md:gap-4"
     >
       <BattleStadiumLogoLink />
 

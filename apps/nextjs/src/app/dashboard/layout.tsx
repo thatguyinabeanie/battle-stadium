@@ -19,7 +19,7 @@ const HEADER_CLASSES = {
   CONTAINER: cn(
     "flex shrink-0 items-center gap-2",
     "transition-[width,height] ease-linear",
-    "mr-4 mt-4 rounded-xl border-none bg-neutral-900/50",
+    "mx-4 mt-4 rounded-xl border-none bg-neutral-950",
     LAYOUT_CONSTANTS.HEADER_HEIGHT,
     `group-has-[data-collapsible=icon]/sidebar-wrapper:${LAYOUT_CONSTANTS.HEADER_HEIGHT_COLLAPSED}`,
   ),
@@ -37,24 +37,24 @@ export default function DashboardLayout({
   breadcrumbs,
 }: Readonly<DashboardLayoutProps>) {
   return (
-    <main className="overflow-hidden min-h-screen min-w-screen max-w-screen max-h-screen w-full h-full">
-    <BreadCrumbsProvider>
-      <SidebarProvider className="max-h-svh border-none">
-        <SideBar>{sidebar}</SideBar>
+    <section className="min-w-screen max-w-screen h-full max-h-screen min-h-screen w-full overflow-hidden">
+      <BreadCrumbsProvider>
+        <SidebarProvider className="max-h-svh border-none">
+          <SideBar>{sidebar}</SideBar>
 
-        <SidebarInset className="border-none bg-transparent">
-          <BreadCrumbsContainer>{breadcrumbs}</BreadCrumbsContainer>
+          <SidebarInset className="border-none bg-transparent">
+            <BreadCrumbsContainer>{breadcrumbs}</BreadCrumbsContainer>
 
-          <div
-            aria-label="dashboard content"
-            className="scrollbar-gutter-stable my-4 mr-4 flex flex-1 flex-col gap-4 overflow-y-scroll rounded-xl bg-neutral-900/50"
-          >
-            {children}
-          </div>
-        </SidebarInset>
-      </SidebarProvider>
-    </BreadCrumbsProvider>
-    </main>
+            <div
+              aria-label="dashboard content"
+              className="scrollbar-gutter-stable m-4 flex flex-1 flex-col gap-4 overflow-y-scroll rounded-xl bg-neutral-950"
+            >
+              {children}
+            </div>
+          </SidebarInset>
+        </SidebarProvider>
+      </BreadCrumbsProvider>
+    </section>
   );
 }
 
