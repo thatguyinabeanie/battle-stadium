@@ -21,7 +21,7 @@ export default function NavbarContainer({
   return (
     <nav
       className={cn(
-        "sticky top-0 z-40 flex h-24 w-screen transform transition-transform duration-300",
+        "sticky top-0 z-40 flex h-24 w-full transform transition-transform duration-300",
         !isVisible && "-translate-y-full",
         className,
       )}

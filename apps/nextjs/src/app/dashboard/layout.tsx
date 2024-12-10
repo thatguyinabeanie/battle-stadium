@@ -15,7 +15,7 @@ export default function DashboardLayout({
   // breadcrumbs,
 }: Readonly<DashboardLayoutProps>) {
   return (
-    <section className="min-w-screen w-full overflow-hidden">
+    <section className="w-full min-w-full overflow-hidden">
       <BreadCrumbsProvider>
         <SidebarProvider className="border-none">
           <Sidebar

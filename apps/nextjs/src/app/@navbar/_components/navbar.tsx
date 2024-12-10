@@ -15,7 +15,7 @@ export default function Navbar() {
       disableHide
       className="light:bg-white/95 z-50 p-4 dark:bg-neutral-900"
     >
-      <div className="grid w-screen grid-cols-2 items-center rounded-xl px-8 dark:bg-neutral-950 md:grid-cols-5">
+      <div className="grid w-full grid-cols-2 items-center rounded-xl px-8 dark:bg-neutral-950 md:grid-cols-5">
         <BattleStadium />
         <NavbarLinks />
         <RightMenu />
