@@ -72,7 +72,11 @@ export default function OrganizationTournamentsTournamentLayout(
               </TabsList>
             </div>
 
-            <Card className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-0">
+            <Card
+              role="tabpanel"
+              aria-labelledby="active-tab"
+              className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-0"
+            >
               <TabsContent value="details">{children}</TabsContent>
               <TabsContent value="standings">{standings}</TabsContent>
               <TabsContent value="pairings">{pairings}</TabsContent>
