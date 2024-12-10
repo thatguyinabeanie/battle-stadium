@@ -37,6 +37,7 @@ export default function DashboardLayout({
   breadcrumbs,
 }: Readonly<DashboardLayoutProps>) {
   return (
+    <main className="overflow-hidden min-h-screen min-w-screen max-w-screen max-h-screen w-full h-full">
     <BreadCrumbsProvider>
       <SidebarProvider className="max-h-svh border-none">
         <SideBar>{sidebar}</SideBar>
@@ -53,6 +54,7 @@ export default function DashboardLayout({
         </SidebarInset>
       </SidebarProvider>
     </BreadCrumbsProvider>
+    </main>
   );
 }
 

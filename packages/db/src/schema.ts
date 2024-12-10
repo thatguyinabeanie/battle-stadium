@@ -68,3 +68,7 @@ export interface OrganizationTournament {
 export interface OrganizationTournamentView extends OrganizationTournament {
   playerCount?: number;
 }
+
+export interface TournamentWithPlayerCount extends Tournament {
+  playerCount: number;
+}

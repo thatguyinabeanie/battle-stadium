@@ -1,4 +1,3 @@
-import type { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 
 export const PhaseSchema = z.object({
@@ -15,6 +14,7 @@ export const PhaseSchema = z.object({
   roundTime: z.number().int().optional(),
   matchCheckIn: z.boolean().default(false),
   checkInTime: z.number().int().optional(),
+  order: z.number().int().optional(),
 });
 
 export const TournamentFormSchema = z.object({
@@ -22,24 +22,20 @@ export const TournamentFormSchema = z.object({
     message: "Tournament name must be at least 2 characters.",
   }),
   startDate: z.date(),
-  startTime: z.string().time(),
-  game: z.string().min(2, { message: "Game must be at least 2 characters." }),
-  format: z
-    .string()
-    .min(2, { message: "Format must be at least 2 characters." }),
+  game_id: z.number().int(),
+  format_id: z.number().int(),
   teamSheetRequired: z.boolean().default(true),
   openTeamSheet: z.boolean().default(true),
-  phases: z.array(PhaseSchema),
+  // phases: z.array(PhaseSchema),
   registrationType: z
     .string()
     .min(2, { message: "Registration type must be at least 2 characters." }),
-  playerCap: z.number().int().optional(),
+  playerCap: z.boolean().default(false),
+  maxPlayers: z.number().int().min(4, {
+    message: "Player cap must be at least 4 players.",
+  }),
   requireCheckIn: z.boolean().default(true),
   lateRegistration: z.boolean().default(true),
   lateTeamSheet: z.boolean().default(true),
   lateCheckIn: z.boolean().default(true),
 });
-
-export interface TournamentFormProps {
-  form: UseFormReturn<z.infer<typeof TournamentFormSchema>, unknown, undefined>;
-}

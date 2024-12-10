@@ -1,34 +1,56 @@
+import type { z } from "zod";
+import { useFormContext, useWatch } from "react-hook-form";
+
 import {
+  Checkbox,
+  cn,
   FormControl,
   FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-  Switch,
 } from "@battle-stadium/ui";
 
 import type { SelectOptionItem } from "./shared";
-import type { TournamentFormProps } from "./zod-schema";
+import type { TournamentFormSchema } from "./zod-schema";
 import { CardWrapper } from "./shared";
 
-const registration_types: SelectOptionItem[] = [
-  { value: "open", label: "Open Registration" },
-  { value: "entry-code", label: "Entry Code (Coming Soon)", disabled: true },
+const registration_types: SelectOptionItem<string>[] = [
+  { id: "open", label: "Open Registration" },
+  { id: "entry-code", label: "Entry Code (Coming Soon)", disabled: true },
   {
-    value: "single-use-code",
+    id: "single-use-code",
     label: "Single Use Code (Coming Soon)",
     disabled: true,
   },
-  { value: "invite", label: "Invite Only (Coming Soon)", disabled: true },
+  { id: "invite", label: "Invite Only (Coming Soon)", disabled: true },
 ];
-export function Registration({ form }: TournamentFormProps) {
+
+const maxPlayersOptions: SelectOptionItem<number>[] = [
+  { id: 4, label: "4 - 3 Swiss Rounds" },
+  { id: 8, label: "8 - 4 Swiss Rounds" },
+  { id: 16, label: "16 - 5 Swiss Rounds" },
+  { id: 32, label: "32 - 6 Swiss Rounds" },
+  { id: 64, label: "64 - 7 Swiss Rounds" },
+  { id: 128, label: "128 - 8 Swiss Rounds" },
+  { id: 256, label: "256 - 9 Swiss Rounds" },
+  { id: 512, label: "512 - 10 Swiss Rounds" },
+  { id: 1024, label: "1024 - 11 Swiss Rounds" },
+  { id: 2048, label: "2048 - 12 Swiss Rounds" },
+  { id: 4096, label: "4096 - 13 Swiss Rounds" },
+];
+
+export function Registration() {
+  const form = useFormContext<z.infer<typeof TournamentFormSchema>>();
+
+  const playerCapWatch = useWatch({ control: form.control, name: "playerCap" });
+
   return (
     <CardWrapper title="Registration">
       <FormField
@@ -45,8 +67,8 @@ export function Registration({ form }: TournamentFormProps) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent className="bg-background p-3">
-                  {registration_types.map(({ value, label, disabled }) => (
-                    <SelectItem key={value} value={value} disabled={disabled}>
+                  {registration_types.map(({ id, label, disabled }) => (
+                    <SelectItem key={id} value={id} disabled={disabled}>
                       {label}
                     </SelectItem>
                   ))}
@@ -67,15 +89,64 @@ export function Registration({ form }: TournamentFormProps) {
         name="playerCap"
         render={({ field }) => (
           <FormItem className="grid grid-cols-3 gap-4">
-            <FormLabel className="text-right">Player Cap</FormLabel>
+            <FormLabel className="text-right text-base">Player Cap</FormLabel>
+
             <div className="col-span-2">
               <FormControl>
-                <Input {...field} placeholder="Player Cap..." type="number" />
+                <div className="flex flex-row items-center gap-4">
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <FormDescription>
+                    Enable a player cap for this tournament.
+                  </FormDescription>
+                </div>
               </FormControl>
-              <FormDescription>
-                Set a maximum number of players that can register for this
-                tournament
+            </div>
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={form.control}
+        name="maxPlayers"
+        render={({ field }) => (
+          <FormItem className="grid grid-cols-3 items-center gap-4">
+            <FormLabel
+              className={cn("text-right", {
+                "text-muted-foreground": !playerCapWatch,
+              })}
+            >
+              Max Player Registrations
+            </FormLabel>
+
+            <div className="col-span-2">
+              <Select
+                disabled={!playerCapWatch}
+                value={String(field.value)}
+                onValueChange={field.onChange}
+              >
+                <FormControl>
+                  <SelectTrigger
+                    className={cn({ "text-muted-foreground": !playerCapWatch })}
+                  >
+                    <SelectValue placeholder="Enable Player Cap to select max players..." />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent className="bg-background p-3">
+                  {maxPlayersOptions.map(({ id, label }) => (
+                    <SelectItem key={id} value={String(id)}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <FormDescription className="text-sm">
+                Select the game that this tournament will be played on.
               </FormDescription>
+
               <FormMessage />
             </div>
           </FormItem>
@@ -90,17 +161,19 @@ export function Registration({ form }: TournamentFormProps) {
             <FormLabel className="text-right text-base">
               Require Check In
             </FormLabel>
-
             <div className="col-span-2">
               <FormControl>
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
+                <div className="flex flex-row items-center gap-4">
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <FormDescription>
+                    Require participants to check in before the tournament
+                    starts.
+                  </FormDescription>
+                </div>
               </FormControl>
-              <FormDescription>
-                Require participants to check in before the tournament starts.
-              </FormDescription>
             </div>
           </FormItem>
         )}
@@ -117,15 +190,16 @@ export function Registration({ form }: TournamentFormProps) {
 
             <div className="col-span-2">
               <FormControl>
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
+                <div className="flex flex-row items-center gap-4">
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <FormDescription>
+                    Allow participants to register after the tournament starts.
+                  </FormDescription>
+                </div>
               </FormControl>
-
-              <FormDescription>
-                Allow participants to register after the tournament starts.
-              </FormDescription>
             </div>
           </FormItem>
         )}
@@ -139,18 +213,20 @@ export function Registration({ form }: TournamentFormProps) {
             <FormLabel className="text-right text-base">
               Late Team Sheet Submission
             </FormLabel>
+
             <div className="col-span-2">
               <FormControl>
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
+                <div className="flex flex-row items-center gap-4">
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <FormDescription>
+                    Allow participants to submit a team sheet after the
+                    tournament starts.
+                  </FormDescription>
+                </div>
               </FormControl>
-
-              <FormDescription>
-                Allow participants to submit a team sheet after the tournament
-                starts.
-              </FormDescription>
             </div>
           </FormItem>
         )}
@@ -167,15 +243,16 @@ export function Registration({ form }: TournamentFormProps) {
 
             <div className="col-span-2">
               <FormControl>
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
+                <div className="flex flex-row items-center gap-4">
+                  <Checkbox
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                  <FormDescription>
+                    Allow participants to check in after the tournament starts.
+                  </FormDescription>
+                </div>
               </FormControl>
-
-              <FormDescription>
-                Allow participants to check in after the tournament starts.
-              </FormDescription>
             </div>
           </FormItem>
         )}
