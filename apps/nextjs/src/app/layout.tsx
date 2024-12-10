@@ -4,7 +4,7 @@ import { StrictMode, Suspense } from "react";
 import "~/styles/globals.css";
 
 import type { Metadata, Viewport } from "next";
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 import { ClerkProvider } from "@clerk/nextjs";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
@@ -15,14 +15,12 @@ import { GeistSans } from "geist/font/sans";
 import { cn, ThemeProvider, Toaster } from "@battle-stadium/ui";
 
 import type { ChildrenProps } from "~/types";
+import AwesomeParticles from "~/components/awesome-particles";
 import { AdSenseScript } from "~/components/google-adsense/ad-sense";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/server";
-
-const AwesomeParticles = dynamic(
-  () => import("~/components/awesome-particles"),
-);
+import Navbar from "./@navbar/_components/navbar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -60,12 +58,16 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
 };
+
 interface RootLayoutSlots extends ChildrenProps {
   cookies: ReactNode;
+  footer: ReactNode;
 }
+
 export default function RootLayout({
   cookies,
   children,
+  footer,
 }: Readonly<RootLayoutSlots>) {
   return (
     <StrictMode>
@@ -74,22 +76,20 @@ export default function RootLayout({
           <AdSenseScript />
           <body
             className={cn(
-              "min-h-screen bg-background font-sans text-foreground antialiased",
+              "h-svh bg-neutral-900 font-sans text-foreground antialiased",
               GeistSans.variable,
               GeistMono.variable,
             )}
           >
             <TRPCReactProvider>
               <ThemeProvider attribute="class" defaultTheme="dark">
-                <div className="flex min-h-screen flex-col items-center">
-                  <Suspense fallback={null}>
-                    <AwesomeParticles />
-                  </Suspense>
-
-                  <div className="flex w-full flex-col items-center shadow-lg backdrop-blur-md dark:shadow-white/20">
-                    {children}
-                  </div>
+                <AwesomeParticles />
+                <div className="flex w-full flex-col items-center rounded-xl bg-neutral-900 shadow-none">
+                  <Navbar />
+                  {children}
+                  {footer}
                 </div>
+
                 <Toaster />
                 <Suspense fallback={null}>{cookies}</Suspense>
                 <Analytics />

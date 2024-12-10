@@ -10,17 +10,19 @@ export const config = {
   ],
 };
 
-const protectedRoutes = createRouteMatcher([
-  "/api/(.*)",
-  "/server-actions/(.*)",
-  "/dashboard",
-  "/dashboard/(.*)",
-  "/pokemon(.*)",
-  "/organizations/:orgSlug/tournaments/:tournamentId/register",
-]);
+// const protectedRoutes = createRouteMatcher([
+//   "/api/(.*)",
+//   "/server-actions/(.*)",
+//   "/dashboard",
+//   "/dashboard/(.*)",
+//   "/pokemon(.*)",
+//   "/organizations/:orgSlug/tournaments/:tournamentId/register",
+// ]);
+
+const publicRoutes = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
 
 export default clerkMiddleware(async (auth, request) => {
-  if (protectedRoutes(request)) {
+  if (!publicRoutes(request)) {
     await auth.protect();
   }
 });
