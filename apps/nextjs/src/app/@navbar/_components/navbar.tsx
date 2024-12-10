@@ -4,7 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { cn } from "@battle-stadium/ui";
 
 import NavbarContainer from "~/app/@navbar/_components/navbar-container";
-import RightMenu from "~/app//@navbar/_components/navbar-right-menu";
+import RightMenu from "~/app/@navbar/_components/navbar-right-menu";
 import BattleStadium from "~/components/battle-stadium";
 import { NavbarItemsConfigs } from "~/lib/config/site";
 import NavbarLink from "./navbar-link";

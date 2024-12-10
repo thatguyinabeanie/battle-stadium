@@ -144,7 +144,6 @@ const Carousel = forwardRef<
           ref={ref}
           onKeyDownCapture={handleKeyDown}
           className={cn("relative", className)}
-         
           aria-roledescription="carousel"
           {...props}
         >
