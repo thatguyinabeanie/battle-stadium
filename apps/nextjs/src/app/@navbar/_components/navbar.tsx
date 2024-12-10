@@ -3,21 +3,23 @@ import { auth } from "@clerk/nextjs/server";
 
 import { cn } from "@battle-stadium/ui";
 
-import NavbarContainer from "~/app/(main)/@navbar/_components/navbar-container";
-import RightMenu from "~/app/(main)/@navbar/_components/navbar-right-menu";
+import NavbarContainer from "~/app/@navbar/_components/navbar-container";
+import RightMenu from "~/app//@navbar/_components/navbar-right-menu";
 import BattleStadium from "~/components/battle-stadium";
 import { NavbarItemsConfigs } from "~/lib/config/site";
-import NavbarLink from "./_components/navbar-link";
+import NavbarLink from "./navbar-link";
 
 export default function Navbar() {
   return (
     <NavbarContainer
       disableHide
-      className="bg-white/95 backdrop-blur-3xl dark:bg-neutral-950"
+      className="light:bg-white/95 z-50 p-4 dark:bg-neutral-900"
     >
-      <BattleStadium />
-      <NavbarLinks />
-      <RightMenu />
+      <div className="grid w-screen grid-cols-2 items-center rounded-xl px-8 dark:bg-neutral-950 md:grid-cols-5">
+        <BattleStadium />
+        <NavbarLinks />
+        <RightMenu />
+      </div>
     </NavbarContainer>
   );
 }

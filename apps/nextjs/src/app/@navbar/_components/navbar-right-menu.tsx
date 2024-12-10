@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@battle-stadium/ui";
 
-import MobileMenu from "~/app/(main)/@navbar/_components/navbar-mobile-menu";
+import MobileMenu from "~/app/@navbar/_components/navbar-mobile-menu";
 import {
   SolarMagniferLinear,
   SolarSettingsLinear,

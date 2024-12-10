@@ -6,7 +6,7 @@ import Form from "next/form";
 import Link from "next/link";
 
 import type { Organization } from "@battle-stadium/db/schema";
-import { Button, Card, CardFooter } from "@battle-stadium/ui";
+import { Button, Card, CardFooter, Input } from "@battle-stadium/ui";
 
 import { getOrganizations } from "~/app/server-actions/organizations/actions";
 import OrganizationLogo from "~/components/organizations/organization-logo";
@@ -60,7 +60,7 @@ export function OrganizationsGrid({
   );
 
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4">
+    <>
       {!mounted ? (
         <OrganizationsGridSkeleton />
       ) : (
@@ -70,7 +70,7 @@ export function OrganizationsGrid({
           getOrSearchOrganizationsAction={getOrSearchOrganizationsActionWrapper}
         />
       )}
-    </div>
+    </>
   );
 }
 interface LoadedOrganizationsProps extends OrganizationsGridProps {
@@ -81,35 +81,27 @@ interface LoadedOrganizationsProps extends OrganizationsGridProps {
 function LoadedOrganizations({
   orgs,
   onInputChange,
-  getOrSearchOrganizationsAction,
 }: LoadedOrganizationsProps) {
   return (
     <>
       <Form
-        className="flex w-full flex-row justify-start"
-        action={(formData: FormData) => {
-          void getOrSearchOrganizationsAction(formData);
-        }}
+        className="grid w-full grid-cols-2 justify-end p-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+        action={""}
       >
-        <input
+        <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-4" />
+        <Input
           name="query"
           type="text"
           placeholder="Search organizations..."
-          className="mb-4 rounded border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="mr-4 h-10 rounded border px-2 pr-4 focus:outline-none focus:ring-2 focus:ring-primary"
           aria-label="Search organizations"
           onChange={onInputChange}
         />
-        <Button
-          variant="outline"
-          type="submit"
-          className="mb-4 ml-2"
-          aria-label="Submit search"
-        >
-          Search
-        </Button>
       </Form>
-      <div className="grid auto-rows-min grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {orgs?.map((org) => <SimpleOrgCard key={org.id} org={org} />)}
+      <div className="flex flex-col overflow-y-scroll">
+        <div className="grid auto-rows-min grid-cols-2 items-center gap-4 p-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {orgs?.map((org) => <SimpleOrgCard key={org.id} org={org} />)}
+        </div>
       </div>
     </>
   );
@@ -153,7 +145,7 @@ export function OrganizationsGridSkeleton() {
           name="query"
           type="text"
           placeholder="Search organizations..."
-          className="mb-4 animate-pulse rounded border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="mb-4 animate-pulse rounded border p-2 px-2 focus:outline-none focus:ring-2 focus:ring-primary"
         />
         <Button
           variant="outline"

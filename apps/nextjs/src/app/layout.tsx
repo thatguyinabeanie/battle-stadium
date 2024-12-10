@@ -19,6 +19,7 @@ import { AdSenseScript } from "~/components/google-adsense/ad-sense";
 import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/server";
+import Navbar from "./@navbar/_components/navbar";
 
 // const AwesomeParticles = dynamic(
 //   () => import("~/components/awesome-particles"),
@@ -60,12 +61,16 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
 };
+
 interface RootLayoutSlots extends ChildrenProps {
   cookies: ReactNode;
+  footer: ReactNode;
 }
+
 export default function RootLayout({
   cookies,
   children,
+  footer,
 }: Readonly<RootLayoutSlots>) {
   return (
     <StrictMode>
@@ -74,22 +79,19 @@ export default function RootLayout({
           <AdSenseScript />
           <body
             className={cn(
-              "min-h-screen bg-background font-sans text-foreground antialiased",
+              "h-svh bg-neutral-900 font-sans text-foreground antialiased",
               GeistSans.variable,
               GeistMono.variable,
             )}
           >
             <TRPCReactProvider>
               <ThemeProvider attribute="class" defaultTheme="dark">
-                <div className="flex min-h-screen flex-col items-center">
-                  {/* <Suspense fallback={null}>
-                    <AwesomeParticles />
-                  </Suspense> */}
-
-                  <div className="flex w-full flex-col items-center bg-neutral-900 shadow-lg dark:shadow-white/20">
-                    {children}
-                  </div>
+                <div className="flex w-full flex-col items-center rounded-xl bg-neutral-900 shadow-none">
+                  <Navbar />
+                  {children}
+                  {footer}
                 </div>
+
                 <Toaster />
                 <Suspense fallback={null}>{cookies}</Suspense>
                 <Analytics />

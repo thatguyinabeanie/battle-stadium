@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 
 import {
   getOrganizations,
   searchOrganizations,
 } from "~/app/server-actions/organizations/actions";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
-import {
-  OrganizationsGrid,
-  OrganizationsGridSkeleton,
-} from "./_components/client-components";
+import { OrganizationsGrid } from "./_components/client-components";
 
 export const metadata: Metadata = {
   title: "Organizations",
@@ -18,15 +14,23 @@ export const metadata: Metadata = {
 export default function OrganizationsPage() {
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <section
+        role="region"
+        aria-label="Partnered Organization"
+        className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950 py-4"
+      >
         <PartneredOrganizations />
-      </Suspense>
+      </section>
 
-      <Suspense fallback={<OrganizationsGridSkeleton />}>
+      <section
+        role="region"
+        aria-label="Organizations Index Grid"
+        className="scrollbar-gutter-stable z-0 mt-0 w-full overflow-auto rounded-xl border-4 border-neutral-950 bg-neutral-950"
+      >
         <OrganizationsGrid
           getOrSearchOrganizationsAction={getOrSearchOrganizationsAction}
         />
-      </Suspense>
+      </section>
     </>
   );
 }

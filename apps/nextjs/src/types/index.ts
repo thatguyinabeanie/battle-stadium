@@ -25,6 +25,10 @@ export interface OrganizationSlugProps {
   org_slug: string;
 }
 
+export interface OrganizationSlugParams {
+  params: Promise<OrganizationSlugProps>;
+}
+
 export interface OrganizationTournamentProps {
   org_slug: string;
   tournament_id: number;

@@ -37,21 +37,33 @@ async function OrganizationContent({ org_slug }: { org_slug: string }) {
 
   return (
     <>
-      <OrganizationHeader
-        organization={organization}
-        classNames={{ wrapper: "my-8" }}
+      <section
+        role="region"
+        aria-label="Main content"
+        className="z-0 m-4 mt-2 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
       >
-        <div className="mx-4 flex h-full w-full flex-col items-center justify-between py-2 text-center">
-          <h1 className="text-2xl font-semibold">{organization.name}</h1>
-          <p>{organization.description}</p>
-        </div>
-      </OrganizationHeader>
+        <OrganizationHeader
+          organization={organization}
+          classNames={{ wrapper: "w-11/12 my-4" }}
+        >
+          <div className="mx-4 flex h-full w-full flex-col items-center justify-between py-2 text-center">
+            <h1 className="text-2xl font-semibold">{organization.name}</h1>
+            <p>{organization.description}</p>
+          </div>
+        </OrganizationHeader>
+      </section>
 
-      <SingleOrgTournamentsTable
-        className="w-full px-4"
-        data={tournaments}
-        organization={organization}
-      />
+      <section
+        role="region"
+        aria-label="Main content"
+        className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
+      >
+        <SingleOrgTournamentsTable
+          className="w-full px-4"
+          data={tournaments}
+          organization={organization}
+        />
+      </section>
     </>
   );
 }

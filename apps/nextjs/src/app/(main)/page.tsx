@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { title } from "~/components/miscellaneous/primitives";
 import PartneredOrganizations from "~/components/organizations/partnered-organizations";
+// import PartneredOrganizations from "~/components/organizations/partnered-organizations";
 import { env } from "~/env";
 import AdBanner from "../../components/google-adsense/ad-banner";
 
@@ -11,16 +12,29 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="min--h-screen flex flex-col items-center justify-between">
-      <PartneredOrganizations />
-      <FrontPageText />
-    </div>
+    <>
+      <section
+        role="region"
+        aria-label="Tournament Header"
+        className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
+      >
+        <PartneredOrganizations />
+      </section>
+
+      <section
+        role="region"
+        aria-label="Tournament Header"
+        className="z-0 m-4 mt-0 flex h-svh w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
+      >
+        <FrontPageText />
+      </section>
+    </>
   );
 }
 
 function FrontPageText() {
   return (
-    <div className="flex w-full max-w-fit flex-col items-center justify-center bg-transparent text-center">
+    <div className="flex w-full max-w-fit flex-col items-center justify-center p-8 text-center">
       <h1 className={title({ color: "violet", size: "xl" })}>
         battlestadium.gg
       </h1>
