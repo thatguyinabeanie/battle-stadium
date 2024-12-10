@@ -61,7 +61,8 @@ export default function OrganizationTournamentsTournamentLayout(
                     key={value}
                     value={value}
                     title={title}
-                    aria-controls={`${value}-tab`}
+                    aria-controls={`${value}-tab-content`}
+                    id={`${value}-tab`}
                     classNames={{
                       tabsTrigger: "w-[8rem] px-0",
                       badge:
@@ -71,7 +72,6 @@ export default function OrganizationTournamentsTournamentLayout(
                 ))}
               </TabsList>
             </div>
-
             <Card
               role="tabpanel"
               className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-0"
