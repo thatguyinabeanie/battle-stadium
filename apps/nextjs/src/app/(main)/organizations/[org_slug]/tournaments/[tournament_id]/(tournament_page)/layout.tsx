@@ -76,11 +76,41 @@ export default function OrganizationTournamentsTournamentLayout(
               role="tabpanel"
               className="flex h-full w-11/12 flex-col items-center justify-center rounded-none border-0"
             >
-              <TabsContent id="details-tab-content" value="details" aria-labelledby="details-tab">{children}</TabsContent>
-              <TabsContent id="standings-tab-content" value="standings" aria-labelledby="standings-tab">{standings}</TabsContent>
-              <TabsContent id="pairings-tab-content" value="pairings" aria-labelledby="pairings-tab">{pairings}</TabsContent>
-              <TabsContent id="metagame-tab-content" value="metagame" aria-labelledby="metagame-tab">{metagame}</TabsContent>
-              <TabsContent id="registrations-tab-content" value="registrations" aria-labelledby="registrations-tab">{registrations}</TabsContent>
+              <TabsContent
+                id="details-tab-content"
+                value="details"
+                aria-labelledby="details-tab"
+              >
+                {children}
+              </TabsContent>
+              <TabsContent
+                id="standings-tab-content"
+                value="standings"
+                aria-labelledby="standings-tab"
+              >
+                {standings}
+              </TabsContent>
+              <TabsContent
+                id="pairings-tab-content"
+                value="pairings"
+                aria-labelledby="pairings-tab"
+              >
+                {pairings}
+              </TabsContent>
+              <TabsContent
+                id="metagame-tab-content"
+                value="metagame"
+                aria-labelledby="metagame-tab"
+              >
+                {metagame}
+              </TabsContent>
+              <TabsContent
+                id="registrations-tab-content"
+                value="registrations"
+                aria-labelledby="registrations-tab"
+              >
+                {registrations}
+              </TabsContent>
             </Card>
           </Tabs>
         </Suspense>
