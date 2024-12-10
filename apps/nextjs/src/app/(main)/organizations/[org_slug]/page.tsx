@@ -38,7 +38,7 @@ async function OrganizationContent({ org_slug }: { org_slug: string }) {
   return (
     <>
       <section
-        aria-label="Main content"
+        aria-label="Organization Header"
         className="z-0 m-4 mt-2 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
       >
         <OrganizationHeader
@@ -53,7 +53,7 @@ async function OrganizationContent({ org_slug }: { org_slug: string }) {
       </section>
 
       <section
-        aria-label="Main content"
+        aria-label="Organization Tournaments"
         className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
       >
         <SingleOrgTournamentsTable
