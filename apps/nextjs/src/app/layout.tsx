@@ -20,10 +20,7 @@ import { env } from "~/env";
 import { siteConfig } from "~/lib/config/site";
 import { TRPCReactProvider } from "~/trpc/server";
 import Navbar from "./@navbar/_components/navbar";
-
-// const AwesomeParticles = dynamic(
-//   () => import("~/components/awesome-particles"),
-// );
+import AwesomeParticles from "~/components/awesome-particles";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -86,6 +83,7 @@ export default function RootLayout({
           >
             <TRPCReactProvider>
               <ThemeProvider attribute="class" defaultTheme="dark">
+                <AwesomeParticles />
                 <div className="flex w-full flex-col items-center rounded-xl bg-neutral-900 shadow-none">
                   <Navbar />
                   {children}
