@@ -1,28 +1,24 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-
+    "declaration": true,
+    "declarationMap": true,
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "noUncheckedIndexedAccess": true,
+    "resolveJsonModule": true,
+    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "target": "ES2022",
-    "lib": ["ES2022"],
+    "target": "ES2023",
+    "lib": ["ES2023",  "DOM", "DOM.Iterable"],
     "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
     "isolatedModules": true,
-
-
     "incremental": true,
     "disableSourceOfProjectReferenceRedirect": true,
     "tsBuildInfoFile": "${configDir}/.cache/tsbuildinfo.json",
-
-
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
     "checkJs": true,
-
-    "module": "Preserve",
-    "moduleResolution": "Bundler",
     "noEmit": true
   },
   "exclude": ["node_modules", "build", "dist", ".next", ".expo", ".yarn", ".cache", ".vscode", ".github", ".husky", ".lintstaged", ".lint-staged", ".prettierrc.js", "jest.config.js", "babel.config.js", "webpack.config.js", "rollup.config.js", "vite.config.js", "next.config.js", "tsconfig.json", "tsconfig.base.json", "tsconfig.build.json", "tsconfig.eslint.json", "tsconfig.jest.json", "tsconfig.prettier.json", "tsconfig.types.json", "tsconfig.webpack.json", "tsconfig.rollup.json", "tsconfig.vite.json", "tsconfig.next"]

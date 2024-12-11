@@ -51,10 +51,10 @@
   "devDependencies": {
     "@battle-stadium/eslint-config": "workspace:*",
     "@battle-stadium/prettier-config": "workspace:*",
-    "@battle-stadium/tsconfig": "workspace:*",
+    "@battle-stadium/typescript-config": "workspace:*",
     "dotenv-cli": "catalog:",
     "drizzle-kit": "catalog:db",
-    "eslint": "catalog:",
+    "eslint": "catalog:eslint",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },

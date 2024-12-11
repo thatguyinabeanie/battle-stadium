@@ -69,3 +69,8 @@ declare module '@battle-stadium/eslint-config/react' {
   const reactConfig: any[];
   export default reactConfig;
 }
+
+declare module '@battle-stadium/eslint-config/restrict-env-access' {
+  const restrictEnvAccess: any[];
+  export default restrictEnvAccess;
+}

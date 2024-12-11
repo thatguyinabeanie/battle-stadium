@@ -1,7 +1,7 @@
 {
-  "extends": "@battle-stadium/tsconfig/internal-package.json",
+  "extends": "@battle-stadium/typescript-config/internal-package.json",
   "compilerOptions": {
-    "lib": ["ES2022", "dom", "dom.iterable"],
+    "lib": ["dom", "dom.iterable"],
     "jsx": "preserve",
     "rootDir": "."
   },

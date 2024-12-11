@@ -1,6 +1,5 @@
-import baseConfig, {
-  restrictEnvAccess,
-} from "@battle-stadium/eslint-config/base";
+import baseConfig from "@battle-stadium/eslint-config/base";
+import restrictEnvAccess from "@battle-stadium/eslint-config/restrict-env-access";
 
 /** @type {import('typescript-eslint').Config} */
 export default [

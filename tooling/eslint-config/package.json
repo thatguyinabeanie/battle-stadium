@@ -6,7 +6,8 @@
   "exports": {
     "./base": "./base.js",
     "./nextjs": "./nextjs.js",
-    "./react": "./react.js"
+    "./react": "./react.js",
+    "./restrict-env-access": "./restrict-env-access.js"
   },
   "scripts": {
     "clean": "git clean -xdf .cache .turbo node_modules",
@@ -19,8 +20,9 @@
   "dependencies": {
     "@eslint/compat": "^1",
     "@next/eslint-plugin-next": "catalog:next",
-    "eslint-plugin-import": "^2",
-    "eslint-plugin-jsx-a11y": "^6",
+    "eslint-config-prettier": "catalog:eslint",
+    "eslint-plugin-import": "catalog:eslint",
+    "eslint-plugin-jsx-a11y": "catalog:eslint",
     "eslint-plugin-react": "catalog:react",
     "eslint-plugin-react-compiler": "catalog:react",
     "eslint-plugin-react-hooks": "catalog:react",
@@ -29,9 +31,9 @@
   },
   "devDependencies": {
     "@battle-stadium/prettier-config": "workspace:*",
-    "@battle-stadium/tsconfig": "workspace:*",
-    "@types/eslint__js": "^8",
-    "eslint": "catalog:",
+    "@battle-stadium/typescript-config": "workspace:*",
+    "@types/eslint__js": "catalog:eslint",
+    "eslint": "catalog:eslint",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },

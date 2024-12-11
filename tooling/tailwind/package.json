@@ -25,8 +25,8 @@
   "devDependencies": {
     "@battle-stadium/eslint-config": "workspace:*",
     "@battle-stadium/prettier-config": "workspace:*",
-    "@battle-stadium/tsconfig": "workspace:*",
-    "eslint": "catalog:",
+    "@battle-stadium/typescript-config": "workspace:*",
+    "eslint": "catalog:eslint",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },

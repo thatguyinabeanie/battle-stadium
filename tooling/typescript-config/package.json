@@ -1,10 +1,13 @@
 {
-  "name": "@battle-stadium/tsconfig",
+  "name": "@battle-stadium/typescript-config",
   "private": true,
   "version": "0.1.0",
   "files": [
     "*.json"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": "22.x"
   }
