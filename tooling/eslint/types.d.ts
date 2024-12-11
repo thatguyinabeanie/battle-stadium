@@ -53,3 +53,19 @@ declare module "eslint-plugin-react-compiler" {
 
   export const rules: Record<string, Rule.RuleModule>;
 }
+
+declare module '@battle-stadium/eslint-config/base' {
+  const baseConfig: any[];
+  export const restrictEnvAccess: any[];
+  export default baseConfig;
+}
+
+declare module '@battle-stadium/eslint-config/nextjs' {
+  const nextjsConfig: any[];
+  export default nextjsConfig;
+}
+
+declare module '@battle-stadium/eslint-config/react' {
+  const reactConfig: any[];
+  export default reactConfig;
+}

@@ -62,4 +62,6 @@
   "githubPullRequests.experimental.notificationsView": true,
   "githubPullRequests.experimental.useQuickChat": true,
   "editor.tabSize": 2,
+  "eslint.format.enable": true,
+  "eslint.useESLintClass": true,
 }

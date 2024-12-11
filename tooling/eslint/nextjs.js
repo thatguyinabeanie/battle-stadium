@@ -3,6 +3,7 @@ import nextPlugin from "@next/eslint-plugin-next";
 /** @type {Awaited<import('typescript-eslint').Config>} */
 export default [
   {
+    ignores: [".next/**"],
     files: ["**/*.ts", "**/*.tsx"],
     plugins: {
       "@next/next": nextPlugin,
@@ -10,7 +11,6 @@ export default [
     rules: {
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs["core-web-vitals"].rules,
-      // TypeError: context.getAncestors is not a function
       "@next/next/no-duplicate-head": "off",
     },
   },
