@@ -33,7 +33,7 @@
     "@battle-stadium/prettier-config": "workspace:*",
     "@turbo/gen": "catalog:turbo",
     "prettier": "catalog:",
-    "turbo": "^2.3.3",
+    "turbo": "catalog:turbo",
     "typescript": "catalog:"
   },
   "prettier": "@battle-stadium/prettier-config"
