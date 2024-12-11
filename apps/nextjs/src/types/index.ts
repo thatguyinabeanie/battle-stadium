@@ -44,6 +44,7 @@ export interface OrganizationTournamentParams {
  * @property title - Display text for the tab (optional)
  */
 export interface TabConfig {
+  id?: string;
   value: string;
   title?: string;
   classNames?: {

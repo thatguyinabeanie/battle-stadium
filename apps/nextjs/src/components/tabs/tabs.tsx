@@ -100,9 +100,10 @@ function useActiveTab(
 }
 
 export const TabsTrigger = memo(
-  ({ value, title, classNames }: Readonly<TabConfig>) => {
+  ({ value, title, classNames, id }: Readonly<TabConfig>) => {
     return (
       <UiTabsTrigger
+        id={id}
         key={value}
         value={value}
         title={title}
