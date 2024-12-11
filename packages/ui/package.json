@@ -81,6 +81,7 @@
     "prettier": "catalog:",
     "react": "catalog:react",
     "typescript": "catalog:",
+    "typescript-eslint": "catalog:eslint",
     "zod": "catalog:"
   },
   "peerDependencies": {

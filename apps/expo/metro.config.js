@@ -1,12 +1,13 @@
 // Learn more: https://docs.expo.dev/guides/monorepos/
-const { getDefaultConfig } = require("expo/metro-config");
-const { FileStore } = require("metro-cache");
-const { withNativeWind } = require("nativewind/metro");
+import { getDefaultConfig } from "expo/metro-config";
+import { FileStore } from "metro-cache";
+import { withNativeWind } from "nativewind/metro";
 
-const path = require("path");
+import { resolve, join } from "path";
 
 const config = withTurborepoManagedCache(
   withMonorepoPaths(
+    // eslint-disable-next-line no-undef
     withNativeWind(getDefaultConfig(__dirname), {
       input: "./src/styles.css",
       configPath: "./tailwind.config.ts",
@@ -18,7 +19,7 @@ const config = withTurborepoManagedCache(
 // https://github.com/expo/expo/issues/26926
 config.resolver.unstable_enablePackageExports = true;
 
-module.exports = config;
+export default config;
 
 /**
  * Add the monorepo paths to the Metro config.
@@ -29,16 +30,17 @@ module.exports = config;
  * @returns {import('expo/metro-config').MetroConfig}
  */
 function withMonorepoPaths(config) {
+  // eslint-disable-next-line no-undef
   const projectRoot = __dirname;
-  const workspaceRoot = path.resolve(projectRoot, "../..");
+  const workspaceRoot = resolve(projectRoot, "../..");
 
   // #1 - Watch all files in the monorepo
   config.watchFolders = [workspaceRoot];
 
   // #2 - Resolve modules within the project's `node_modules` first, then all monorepo modules
   config.resolver.nodeModulesPaths = [
-    path.resolve(projectRoot, "node_modules"),
-    path.resolve(workspaceRoot, "node_modules"),
+    resolve(projectRoot, "node_modules"),
+    resolve(workspaceRoot, "node_modules"),
   ];
 
   return config;
@@ -54,7 +56,8 @@ function withMonorepoPaths(config) {
  */
 function withTurborepoManagedCache(config) {
   config.cacheStores = [
-    new FileStore({ root: path.join(__dirname, ".cache/metro") }),
+    // eslint-disable-next-line no-undef
+    new FileStore({ root: join(__dirname, ".cache/metro") }),
   ];
   return config;
 }

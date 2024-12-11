@@ -60,7 +60,8 @@
     "eslint": "catalog:eslint",
     "prettier": "catalog:",
     "tailwindcss": "catalog:tailwind",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:eslint"
   },
   "engines": {
     "node": "22.x"

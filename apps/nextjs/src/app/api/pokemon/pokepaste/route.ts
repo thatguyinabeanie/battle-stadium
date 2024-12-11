@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
@@ -22,7 +21,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ data: text }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       { error: `Failed to fetch pokepaste ${error}` },
       { status: 500 },
     );

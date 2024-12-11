@@ -10,7 +10,6 @@ export const DataTableContext = createContext<{
 
 export function useDataTable<T extends RowData>() {
   const context = useContext(DataTableContext);
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (context === undefined) {
     throw new Error("useDataTable must be used within a DataTableProvider");
   }

@@ -18,8 +18,6 @@ function database_url() {
   return process.env.DATABASE_URL;
 }
 
-const isProd = process.env.NODE_ENV === "production";
-
 export default defineConfig({
   schema: "./drizzle/schema.ts",
   dialect: "postgresql",

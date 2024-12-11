@@ -7,7 +7,8 @@ createJiti(fileURLToPath(import.meta.url))("./src/env.ts");
 
 // To analyze bundle sizes, run with ANALYZE=true
 // Example: ANALYZE=true pnpm build
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
+import bundleAnalyzer from "@next/bundle-analyzer";
+const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 

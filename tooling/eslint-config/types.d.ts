@@ -50,13 +50,12 @@ declare module "@next/eslint-plugin-next" {
 // types.d.ts
 declare module "eslint-plugin-react-compiler" {
   import type { Rule } from "eslint";
-
+  import type { FlatConfig } from 'eslint/config';  
   export const rules: Record<string, Rule.RuleModule>;
 }
 
 declare module '@battle-stadium/eslint-config/base' {
-  const baseConfig: any[];
-  export const restrictEnvAccess: any[];
+  const baseConfig: FlatConfig.Config[];  
   export default baseConfig;
 }
 
@@ -71,6 +70,7 @@ declare module '@battle-stadium/eslint-config/react' {
 }
 
 declare module '@battle-stadium/eslint-config/restrict-env-access' {
-  const restrictEnvAccess: any[];
+  import type { FlatConfig } from 'eslint/config';  
+  export const restrictEnvAccess: FlatConfig.Config[];  
   export default restrictEnvAccess;
 }

@@ -18,7 +18,6 @@ export const BreadCrumbsContext = createContext<BreadCrumbsContext>({
 
 export function useBreadCrumbs() {
   const context = useContext(BreadCrumbsContext);
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!context) {
     throw new Error("useBreadCrumbs must be used within a BreadCrumbsProvider");
   }

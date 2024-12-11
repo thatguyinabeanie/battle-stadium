@@ -1,17 +1,29 @@
-import nextPlugin from "@next/eslint-plugin-next";
+import pluginReactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
+import pluginNext from "@next/eslint-plugin-next";
+// import  baseConfig from "./base.js";
+import tseslint from "typescript-eslint";
 
-/** @type {Awaited<import('typescript-eslint').Config>} */
-export default [
+/** @type {import('typescript-eslint').Config} */
+export default tseslint.config(
   {
-    ignores: [".next/**"],
+    ignores: [".next/**", "node_modules/**", "next.config.js"],
     files: ["**/*.ts", "**/*.tsx"],
-    plugins: {
-      "@next/next": nextPlugin,
+    languageOptions: {
+      globals: {
+        ...globals.serviceworker,
+      },
     },
+    plugins: {
+      "@next/next": pluginNext,
+    },
+    settings: { react: { version: "detect" } },
     rules: {
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
+      ...pluginNext.configs.recommended.rules,
+      ...pluginNext.configs["core-web-vitals"].rules,
+      ...pluginReactHooks.configs.recommended.rules,
+      "react/react-in-jsx-scope": "off",
       "@next/next/no-duplicate-head": "off",
     },
   },
-];
+);

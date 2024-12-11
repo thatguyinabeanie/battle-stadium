@@ -1,5 +1,5 @@
 /** @type {import("@babel/core").ConfigFunction} */
-module.exports = (api) => {
+export default (api) => {
   api.cache(true);
   return {
     presets: [

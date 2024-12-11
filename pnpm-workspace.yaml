@@ -5,7 +5,7 @@ packages:
 
 catalog:
   "@types/node": ^22
-  
+  globals: ^15
   postcss: ^8
   prettier: ^3
   typescript: ^5.7
@@ -66,6 +66,10 @@ catalogs:
     "@types/eslint__js": ^8
     "@types/eslint-config-prettier": ^6
     "@types/eslint__eslintrc": ^2
+    "@typescript-eslint/eslint-plugin": ^8
+    "@typescript-eslint/parser": ^8
+    "eslint-plugin-only-warn": ^1
+    "@eslint/compat": ^1
 
   expo:
     "@expo/metro-config": ^0

@@ -17,27 +17,29 @@
     "typecheck:watch": "pnpm typecheck --watch"
   },
   "prettier": "@battle-stadium/prettier-config",
-  "dependencies": {
-    "@eslint/compat": "^1",
+  "devDependencies": {
+    "@battle-stadium/prettier-config": "workspace:*",
+    "@battle-stadium/typescript-config": "workspace:*",
+    "@eslint/compat": "catalog:eslint",
     "@next/eslint-plugin-next": "catalog:next",
+    "@types/eslint-config-prettier": "catalog:eslint",
+    "@types/eslint__eslintrc": "catalog:eslint",
+    "@types/eslint__js": "catalog:eslint",
+    "@typescript-eslint/eslint-plugin": "catalog:eslint",
+    "@typescript-eslint/parser": "catalog:eslint",
+    "eslint": "catalog:eslint",
     "eslint-config-prettier": "catalog:eslint",
     "eslint-plugin-import": "catalog:eslint",
     "eslint-plugin-jsx-a11y": "catalog:eslint",
+    "eslint-plugin-only-warn": "catalog:eslint",
     "eslint-plugin-react": "catalog:react",
     "eslint-plugin-react-compiler": "catalog:react",
     "eslint-plugin-react-hooks": "catalog:react",
     "eslint-plugin-turbo": "catalog:eslint",
-    "typescript-eslint": "catalog:eslint"
-  },
-  "devDependencies": {
-    "@battle-stadium/prettier-config": "workspace:*",
-    "@battle-stadium/typescript-config": "workspace:*",
-    "@types/eslint-config-prettier": "catalog:eslint",
-    "@types/eslint__eslintrc": "catalog:eslint",
-    "@types/eslint__js": "catalog:eslint",
-    "eslint": "catalog:eslint",
+    "globals": "catalog:",
     "prettier": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:eslint"
   },
   "engines": {
     "node": "22.x"

@@ -6,7 +6,7 @@ import tseslint from "typescript-eslint";
  * All packages that leverage t3-env should use this rule
  */
 export default tseslint.config(
-  { ignores: ["**/env.ts"] },
+  { ignores: ["**/env.ts", "next.config.*s", ".next/**", ".expo/**"] },
   {
     files: ["**/*.js", "**/*.ts", "**/*.tsx"],
     rules: {
