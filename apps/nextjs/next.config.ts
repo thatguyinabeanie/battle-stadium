@@ -29,6 +29,25 @@ const nextConfig: NextConfig ={
     turbo: {
       treeShaking: true,
     },
+    webpackMemoryOptimizations: true,
+    optimizePackageImports: [
+      "@battle-stadium/api",
+      "@battle-stadium/auth",
+      "@battle-stadium/db",
+      "@battle-stadium/ui",
+      "@battle-stadium/validators",
+      "@clerk/backend",
+      "@clerk/clerk-react",
+      "@clerk/nextjs",
+      "@trpc/client",
+      "@trpc/react-query",
+      "@trpc/server",
+      "@uploadthing/react",
+      "react-hook-form",
+      "discord-api-types",
+      "discord-interactions",
+      "discord.js"
+    ]
   },
 
   expireTime: 3600,
