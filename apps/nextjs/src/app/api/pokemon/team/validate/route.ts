@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-// TODO: fix no unsafe assignment
-
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import Pokedex from "pokedex-promise-v2";
@@ -111,7 +108,7 @@ async function fetchPokemonData(pokemon: ParsedPokemon) {
       return await P.getPokemonByName(lowerCaseSpecies);
     }
   } catch (error) {
-    const message = `Error fetching Pokemon data for ${pokemon.species}: ${error}`;
+    const message = `Error fetching Pokemon data for ${pokemon.species}: ${error instanceof Error ? error.message : String(error)}`;
     console.error(message);
     return NextResponse.json({ message }, { status: 400 });
   }

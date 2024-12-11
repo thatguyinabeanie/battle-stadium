@@ -134,6 +134,12 @@ catalogs:
       specifier: ^14
       version: 14.16.3
   eslint:
+    '@types/eslint-config-prettier':
+      specifier: ^6
+      version: 6.11.3
+    '@types/eslint__eslintrc':
+      specifier: ^2
+      version: 2.1.2
     '@types/eslint__js':
       specifier: ^8
       version: 8.42.3
@@ -1191,6 +1197,12 @@ importers:
       '@battle-stadium/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      '@types/eslint-config-prettier':
+        specifier: catalog:eslint
+        version: 6.11.3
+      '@types/eslint__eslintrc':
+        specifier: catalog:eslint
+        version: 2.1.2
       '@types/eslint__js':
         specifier: catalog:eslint
         version: 8.42.3
@@ -4679,8 +4691,14 @@ packages:
   '@types/d3-timer@3.0.2':
     resolution: {integrity: sha512-Ps3T8E8dZDam6fUyNiMkekK3XUsaUEik+idO9/YjPtfj2qruF8tFBXS7XhtE4iIXBLxhmLjP3SXpLhVf21I9Lw==}
 
+  '@types/eslint-config-prettier@6.11.3':
+    resolution: {integrity: sha512-3wXCiM8croUnhg9LdtZUJQwNcQYGWxxdOWDjPe1ykCqJFPVpzAKfs/2dgSoCtAvdPeaponcWPI7mPcGGp9dkKQ==}
+
   '@types/eslint@9.6.1':
     resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
+
+  '@types/eslint__eslintrc@2.1.2':
+    resolution: {integrity: sha512-qXvzPFY7Rz05xD8ZApXJ3S8xStQD2Ibzu3EFIF0UMNOAfLY5xUu3H61q0JrHo2OXD6rcFG75yUxNQbkKtFKBSw==}
 
   '@types/eslint__js@8.42.3':
     resolution: {integrity: sha512-alfG737uhmPdnvkrLdZLcEKJ/B8s9Y4hrZ+YAdzUeoArBlSUERA2E87ROfOaS4jd/C45fzOoZzidLc1IPwLqOw==}
@@ -15117,10 +15135,16 @@ snapshots:
 
   '@types/d3-timer@3.0.2': {}
 
+  '@types/eslint-config-prettier@6.11.3': {}
+
   '@types/eslint@9.6.1':
     dependencies:
       '@types/estree': 1.0.6
       '@types/json-schema': 7.0.15
+
+  '@types/eslint__eslintrc@2.1.2':
+    dependencies:
+      '@types/eslint': 9.6.1
 
   '@types/eslint__js@8.42.3':
     dependencies:

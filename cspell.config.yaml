@@ -43,20 +43,26 @@ words:
   - adtest
   - alola
   - battlestadium
+  - blooddmoon
   - Bloodmoon
+  - bulu
   - checkin
   - cmdk
   - Embla
   - galar
   - gmax
+  - hearthflame
   - hoenn
   - ianvs
   - johto
   - kalos
   - kanto
+  - koko
+  - lele
   - limitlesstcg
   - lintstaged
   - Magnifer
+  - maushold
   - Metagame
   - nativewind
   - navuser
@@ -78,9 +84,11 @@ words:
   - slotnumber
   - Sonner
   - sqlstring
+  - tatsugiri
   - teamlists
   - teamsheet
   - Tera
+  - terastal
   - thatguyinabeanie
   - tseslint
   - typesafe

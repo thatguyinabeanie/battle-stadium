@@ -38,8 +38,7 @@ export async function handleTournamentRegistration(
 function validateProfileId(id: unknown): number {
   const numId = Number(id);
   if (!Number.isFinite(numId)) {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    throw new Error(`Invalid profile ID format: ${id}`);
+    throw new Error(`Invalid profile ID format: ${numId}`);
   }
   return numId;
 }

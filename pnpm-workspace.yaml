@@ -64,6 +64,8 @@ catalogs:
     "eslint-plugin-import": ^2
     "eslint-plugin-jsx-a11y": ^6
     "@types/eslint__js": ^8
+    "@types/eslint-config-prettier": ^6
+    "@types/eslint__eslintrc": ^2
 
   expo:
     "@expo/metro-config": ^0
