@@ -46,7 +46,22 @@ const nextConfig: NextConfig ={
       "react-hook-form",
       "discord-api-types",
       "discord-interactions",
-      "discord.js"
+      "discord.js",
+      "openapi-fetch",
+      "openapi-typescript-helpers",
+      "pokedex-promise-v2",
+      "@pkmn/sets",
+      "@pkmn/types",
+      "@rails/actioncable",
+      "@vercel/analytics",
+      "@vercel/flags",
+      "@vercel/functions",
+      "@vercel/kv",
+      "@vercel/speed-insights",
+      "@aws-sdk/credential-provider-web-identity",
+      "cookie",
+      "tweetnacl",
+      "zod"
     ]
   },
 
