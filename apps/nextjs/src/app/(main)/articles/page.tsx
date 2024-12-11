@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import ComingSoon from "~/components/coming-soon";
+import { PageSection } from "~/components/page-section";
 
 export const metadata: Metadata = {
   title: "Articles",
@@ -8,11 +9,8 @@ export const metadata: Metadata = {
 
 export default function ArticlesPage() {
   return (
-    <section
-      aria-label="Articles Content"
-      className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
-    >
+    <PageSection label="Articles">
       <ComingSoon title="Articles" />
-    </section>
+    </PageSection>
   );
 }

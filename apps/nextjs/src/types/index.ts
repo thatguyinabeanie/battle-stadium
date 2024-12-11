@@ -42,6 +42,7 @@ export interface OrganizationTournamentParams {
  * Configuration for tournament page navigation tabs
  * @property value - Unique identifier for the tab
  * @property title - Display text for the tab (optional)
+ * @property id - Optional identifier for accessibility purposes
  */
 export interface TabConfig {
   id?: string;
