@@ -11,7 +11,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-const nextConfig: NextConfig ={
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
     reactCompiler: true,
@@ -61,8 +61,8 @@ const nextConfig: NextConfig ={
       "@aws-sdk/credential-provider-web-identity",
       "cookie",
       "tweetnacl",
-      "zod"
-    ]
+      "zod",
+    ],
   },
 
   expireTime: 3600,

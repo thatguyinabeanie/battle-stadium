@@ -1,8 +1,9 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Unauthorized() {
-  const returnUrl = typeof window !== 'undefined' ? window.location.pathname : '';
-  const signInUrl = `/sign-in${returnUrl ? `?returnUrl=${encodeURIComponent(returnUrl)}` : ''}`;
+  const returnUrl =
+    typeof window !== "undefined" ? window.location.pathname : "";
+  const signInUrl = `/sign-in${returnUrl ? `?returnUrl=${encodeURIComponent(returnUrl)}` : ""}`;
 
   return (
     <ErrorPageLayout
@@ -10,7 +11,7 @@ export default function Unauthorized() {
       message="Please log in to access this page."
       actionLink={{
         href: signInUrl,
-        text: "Go to Login"
+        text: "Go to Login",
       }}
     />
   );
@@ -26,9 +27,17 @@ interface ErrorPageLayoutProps {
   children?: React.ReactNode;
 }
 
-function ErrorPageLayout({ title, message, actionLink, children }: ErrorPageLayoutProps) {
+function ErrorPageLayout({
+  title,
+  message,
+  actionLink,
+  children,
+}: ErrorPageLayoutProps) {
   return (
-    <main role="main" className="flex min-h-screen flex-col items-center justify-center text-center">
+    <main
+      role="main"
+      className="flex min-h-screen flex-col items-center justify-center text-center"
+    >
       <div className="container mx-auto px-4">
         <h2>{title}</h2>
         <p>{message}</p>
