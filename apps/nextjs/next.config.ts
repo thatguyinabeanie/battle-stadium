@@ -11,7 +11,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-export default withBundleAnalyzer({
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
     reactCompiler: true,
@@ -26,6 +26,43 @@ export default withBundleAnalyzer({
     staticGenerationRetryCount: 2,
     staticGenerationMaxConcurrency: 8,
     staticGenerationMinPagesPerWorker: 25,
+    turbo: {
+      treeShaking: true,
+    },
+    webpackMemoryOptimizations: true,
+    optimizePackageImports: [
+      "@battle-stadium/api",
+      "@battle-stadium/auth",
+      "@battle-stadium/db",
+      "@battle-stadium/ui",
+      "@battle-stadium/validators",
+      "@clerk/backend",
+      "@clerk/clerk-react",
+      "@clerk/nextjs",
+      "@trpc/client",
+      "@trpc/react-query",
+      "@trpc/server",
+      "@uploadthing/react",
+      "react-hook-form",
+      "discord-api-types",
+      "discord-interactions",
+      "discord.js",
+      "openapi-fetch",
+      "openapi-typescript-helpers",
+      "pokedex-promise-v2",
+      "@pkmn/sets",
+      "@pkmn/types",
+      "@rails/actioncable",
+      "@vercel/analytics",
+      "@vercel/flags",
+      "@vercel/functions",
+      "@vercel/kv",
+      "@vercel/speed-insights",
+      "@aws-sdk/credential-provider-web-identity",
+      "cookie",
+      "tweetnacl",
+      "zod",
+    ],
   },
 
   expireTime: 3600,
@@ -66,4 +103,6 @@ export default withBundleAnalyzer({
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: false },
   typescript: { ignoreBuildErrors: false },
-} satisfies NextConfig);
+};
+
+export default withBundleAnalyzer(nextConfig);
