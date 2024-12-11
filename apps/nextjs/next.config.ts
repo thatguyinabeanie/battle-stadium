@@ -11,7 +11,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-export default withBundleAnalyzer({
+const nextConfig: NextConfig ={
   reactStrictMode: true,
   experimental: {
     reactCompiler: true,
@@ -26,6 +26,9 @@ export default withBundleAnalyzer({
     staticGenerationRetryCount: 2,
     staticGenerationMaxConcurrency: 8,
     staticGenerationMinPagesPerWorker: 25,
+    turbo: {
+      treeShaking: true,
+    },
   },
 
   expireTime: 3600,
@@ -66,4 +69,6 @@ export default withBundleAnalyzer({
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: false },
   typescript: { ignoreBuildErrors: false },
-} satisfies NextConfig);
+};
+
+export default withBundleAnalyzer(nextConfig);
