@@ -100,13 +100,15 @@ function useActiveTab(
 }
 
 export const TabsTrigger = memo(
-  ({ value, title, classNames }: Readonly<TabConfig>) => {
+  ({ value, title, classNames, id }: Readonly<TabConfig>) => {
     return (
       <UiTabsTrigger
+        id={id}
         key={value}
         value={value}
         title={title}
         aria-label={`Select ${title} tab`}
+        aria-controls={`${value}-tab`}
         className={cn(
           "w-[6rem] py-1 transition-colors data-[state=active]:text-primary lg:w-[7.5rem]",
           classNames?.tabsTrigger,

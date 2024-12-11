@@ -5,10 +5,9 @@ import { ErrorBoundary } from "~/components/error-boundary";
 
 export default function SignInPage() {
   return (
-    <div
-      role="main"
-      aria-label="Sign in page"
-      className="flex h-full min-h-screen w-full items-center justify-center"
+    <section
+      aria-label="Sign In Page"
+      className="z-0 m-4 mt-0 flex h-svh w-full flex-col items-center justify-around gap-4 rounded-xl bg-neutral-950"
     >
       <SignedOut>
         <ErrorBoundary>
@@ -17,6 +16,6 @@ export default function SignInPage() {
           </Suspense>
         </ErrorBoundary>
       </SignedOut>
-    </div>
+    </section>
   );
 }

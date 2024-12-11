@@ -2,7 +2,7 @@
 
 import type { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
+import { Form, useForm } from "react-hook-form";
 
 import { Button, useToast } from "@battle-stadium/ui";
 
@@ -53,7 +53,7 @@ export default function CreateTournament({
       <div className="space-y-4 backdrop-filter-none">
         <h1 className="text-3xl font-bold">Create Tournament for {org.name}</h1>
 
-        <FormProvider {...form}>
+        <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-6 pb-10"
@@ -68,7 +68,7 @@ export default function CreateTournament({
               </Button>
             </div>
           </form>
-        </FormProvider>
+        </Form>
       </div>
     </div>
   );

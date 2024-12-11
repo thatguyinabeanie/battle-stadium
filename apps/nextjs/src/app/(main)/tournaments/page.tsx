@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 
 import type { OrganizationTournament } from "@battle-stadium/db/schema";
 
@@ -12,9 +11,12 @@ export const metadata: Metadata = {
 
 export default function TournamentsSuspenseWrapper() {
   return (
-    <Suspense fallback={<div>Loading tournaments...</div>}>
+    <section
+      aria-label="Tournaments List"
+      className="z-0 m-4 mt-0 flex h-full w-full flex-col items-center gap-4 rounded-xl bg-neutral-950"
+    >
       <Tournaments />
-    </Suspense>
+    </section>
   );
 }
 
