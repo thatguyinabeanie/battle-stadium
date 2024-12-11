@@ -22,7 +22,9 @@ reviews:
     - !packages/db/drizzle/relations.ts
     - !packages/db/drizzle/schema.ts
 
-  path_instructions: []
+  path_instructions:
+    - path: "./apps/nextjs/**/*.*"
+      instructions: "Review the Next.js 15 App Router application. Make sure the code is clean and follows best practices. Try to optimize for performance and security, as well as partial pre-rendering."
   abort_on_close: true
   auto_review:
     enabled: true
