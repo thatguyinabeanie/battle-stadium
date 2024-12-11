@@ -13,10 +13,9 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 export default withBundleAnalyzer({
   reactStrictMode: true,
-
   experimental: {
-    // after: true,
     reactCompiler: true,
+    authInterrupts: true,
     ppr: true,
     staleTimes: {
       dynamic: 5,
