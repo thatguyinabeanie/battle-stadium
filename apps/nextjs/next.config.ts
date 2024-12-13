@@ -26,8 +26,7 @@ const nextConfig: NextConfig = {
     staticGenerationRetryCount: 2,
     staticGenerationMaxConcurrency: 8,
     staticGenerationMinPagesPerWorker: 25,
-    turbo: {
-    },
+    turbo: {},
   },
 
   expireTime: 3600,
