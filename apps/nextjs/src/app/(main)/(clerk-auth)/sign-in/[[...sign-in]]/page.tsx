@@ -2,8 +2,11 @@ import { Suspense } from "react";
 import { SignedOut, SignIn } from "@clerk/nextjs";
 
 import { ErrorBoundary } from "~/components/error-boundary";
+import { connection } from "next/server";
 
-export default function SignInPage() {
+export default async function SignInPage() {
+  await connection();
+  
   return (
     <section
       aria-label="Sign In Page"
