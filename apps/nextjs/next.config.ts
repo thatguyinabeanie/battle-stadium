@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
     authInterrupts: true,
     ppr: true,
     staleTimes: {
-      dynamic: 5,
+      dynamic: 30,
       static: 180,
     },
     typedRoutes: false,
@@ -27,7 +27,6 @@ const nextConfig: NextConfig = {
     staticGenerationMaxConcurrency: 8,
     staticGenerationMinPagesPerWorker: 25,
     turbo: {
-      unstablePersistentCaching: true,
     },
   },
 
