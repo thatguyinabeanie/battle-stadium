@@ -1,11 +1,11 @@
 import { Suspense } from "react";
-import { connection } from "next/server";
+// import { connection } from "next/server";
 import { SignedOut, SignIn } from "@clerk/nextjs";
 
 import { ErrorBoundary } from "~/components/error-boundary";
 
 export default async function SignInPage() {
-  await connection();
+  // await connection();
 
   return (
     <section

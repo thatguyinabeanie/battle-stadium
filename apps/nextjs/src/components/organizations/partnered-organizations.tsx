@@ -4,6 +4,8 @@ import OrganizationCard from "./organization-card";
 export default async function PartneredOrganizations() {
   const orgs = await getPartneredOrganizations();
 
+  console.log('partnered orgs', orgs);
+
   return (
     <div className="item-center flex h-full min-h-40 w-full flex-row justify-center bg-transparent">
       {orgs.map((organization) => (
