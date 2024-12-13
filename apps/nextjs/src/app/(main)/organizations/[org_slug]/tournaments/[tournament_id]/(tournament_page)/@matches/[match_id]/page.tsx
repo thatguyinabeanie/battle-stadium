@@ -8,7 +8,6 @@ interface MatchPageProps {
   }>;
 }
 
-
 export async function generateStaticParams() {
   return (await getAllOrgTourMatches()).map(
     ({ matches, tournaments, organizations }) => ({

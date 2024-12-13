@@ -17,7 +17,6 @@ import {
 import type { OrganizationSlugProps } from "~/types";
 import { getOrganizationBySlug } from "~/app/server-actions/organizations/actions";
 
-
 interface OrganizationDashboardPageParams {
   params: Promise<OrganizationSlugProps>;
 }

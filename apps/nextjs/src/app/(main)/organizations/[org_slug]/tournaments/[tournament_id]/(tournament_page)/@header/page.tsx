@@ -15,7 +15,6 @@ import {
 } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 
-
 export async function generateStaticParams() {
   return (await getOrganizationTournamentsRaw()).map(
     ({ tournaments, organizations }) => ({

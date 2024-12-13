@@ -1,8 +1,8 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import { SignedOut, SignUp } from "@clerk/nextjs";
 
 import { ErrorBoundary } from "~/components/error-boundary";
-import { connection } from "next/server";
 
 export default async function SignUpPage() {
   await connection();
