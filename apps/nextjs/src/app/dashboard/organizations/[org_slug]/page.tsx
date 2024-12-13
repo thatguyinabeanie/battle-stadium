@@ -17,8 +17,6 @@ import {
 import type { OrganizationSlugProps } from "~/types";
 import { getOrganizationBySlug } from "~/app/server-actions/organizations/actions";
 
-export const revalidate = 60;
-export const dynamicParams = true;
 
 interface OrganizationDashboardPageParams {
   params: Promise<OrganizationSlugProps>;

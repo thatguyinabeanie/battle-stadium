@@ -1,8 +1,6 @@
 import type { OrganizationTournamentParams } from "~/types";
 import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 
-export const revalidate = 60;
-export const dynamicParams = true;
 
 export async function generateStaticParams() {
   return (await getOrganizationTournamentsRaw()).map(
