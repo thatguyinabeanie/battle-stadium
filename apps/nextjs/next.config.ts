@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
     authInterrupts: true,
     ppr: true,
     staleTimes: {
-      dynamic: 30,
+      dynamic: 5,
       static: 180,
     },
     typedRoutes: false,
