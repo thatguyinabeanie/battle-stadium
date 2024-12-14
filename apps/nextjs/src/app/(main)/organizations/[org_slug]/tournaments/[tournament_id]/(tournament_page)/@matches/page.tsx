@@ -4,9 +4,6 @@ import type { OrganizationTournamentParams } from "~/types";
 import { getOrganizationTournamentsRaw } from "~/app/server-actions/organizations/tournaments/actions";
 import { ErrorBoundary } from "~/components/error-boundary";
 
-export const revalidate = 30;
-export const dynamicParams = true;
-
 export async function generateStaticParams() {
   return (await getOrganizationTournamentsRaw()).map(
     ({ tournaments, organizations }) => ({
