@@ -1,4 +1,4 @@
-"use client";
+"use cache";
 import { Suspense } from "react";
 import { SignedOut, SignIn } from "@clerk/nextjs";
 

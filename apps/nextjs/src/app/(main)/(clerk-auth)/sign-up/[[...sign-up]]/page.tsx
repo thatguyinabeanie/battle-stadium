@@ -1,4 +1,4 @@
-"use client";
+"use cache";
 import { Suspense } from "react";
 import { SignedOut, SignUp } from "@clerk/nextjs";
 import { ErrorBoundary } from "~/components/error-boundary";
