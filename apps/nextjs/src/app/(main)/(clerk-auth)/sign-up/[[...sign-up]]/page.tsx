@@ -1,11 +1,9 @@
+"use client";
 import { Suspense } from "react";
 import { SignedOut, SignUp } from "@clerk/nextjs";
-
 import { ErrorBoundary } from "~/components/error-boundary";
-import { connection } from "next/server";
 
-export default async function SignUpPage() {
-  await connection();
+export default function SignUpPage() {
   return (
     <section
       aria-label="Sign Up Page"
