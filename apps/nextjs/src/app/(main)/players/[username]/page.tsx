@@ -1,3 +1,5 @@
+"use cache";
+
 import { db } from "@battle-stadium/db";
 
 import { getProfile } from "~/app/server-actions/profiles/actions";
