@@ -12,9 +12,9 @@ export default function SignInPage() {
           className="z-0 m-4 mt-0 flex h-svh w-full flex-col items-center justify-around gap-4 rounded-xl bg-neutral-950"
         >
           <SignedOut>
-              <Suspense fallback={<div>Loading...</div>}>
-                <SignIn />
-              </Suspense>
+            <Suspense fallback={<div>Loading...</div>}>
+              <SignIn />
+            </Suspense>
           </SignedOut>
         </section>
       </Suspense>
