@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
       static: 180,
     },
     typedRoutes: false,
-    dynamicIO: true,
+    dynamicIO: false,
     staticGenerationRetryCount: 2,
     staticGenerationMaxConcurrency: 8,
     staticGenerationMinPagesPerWorker: 25,
