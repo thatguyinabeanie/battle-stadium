@@ -18,11 +18,11 @@ const nextConfig: NextConfig = {
     authInterrupts: true,
     ppr: true,
     staleTimes: {
-      dynamic: 30,
+      dynamic: 5,
       static: 180,
     },
     typedRoutes: false,
-    // dynamicIO: true,
+    dynamicIO: false,
     staticGenerationRetryCount: 2,
     staticGenerationMaxConcurrency: 8,
     staticGenerationMinPagesPerWorker: 25,

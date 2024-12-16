@@ -6,9 +6,6 @@ import { SingleOrgTournamentsTable } from "~/app/(main)/organizations/[org_slug]
 import { getSingleOrganizationTournaments } from "~/app/server-actions/organizations/tournaments/actions";
 import OrganizationHeader from "~/components/organizations/organization-header";
 
-export const revalidate = 60;
-export const dynamicParams = true;
-
 interface OrganizationDetailPageProps {
   params: Promise<{ org_slug: string }>;
 }

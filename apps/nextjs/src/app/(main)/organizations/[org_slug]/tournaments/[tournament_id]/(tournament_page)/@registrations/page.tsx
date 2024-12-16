@@ -3,9 +3,6 @@ import { getOrganizationTournamentsRaw } from "~/app/server-actions/organization
 import { getTournamentPlayers } from "~/app/server-actions/tournaments/actions";
 import RegistrationsTable from "~/components/tournaments/registrations-table";
 
-export const revalidate = 60;
-export const dynamicParams = true;
-
 export async function generateStaticParams() {
   return (await getOrganizationTournamentsRaw()).map(
     ({ tournaments, organizations }) => ({
