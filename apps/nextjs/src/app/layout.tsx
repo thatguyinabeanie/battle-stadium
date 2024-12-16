@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode} from "react";
 import { StrictMode, Suspense } from "react";
 
 import "~/styles/globals.css";

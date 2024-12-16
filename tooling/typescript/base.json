@@ -21,7 +21,7 @@
     "noUncheckedIndexedAccess": true,
     "checkJs": true,
 
-    "module": "Preserve",
+    "module": "NodeNext",
     "moduleResolution": "Bundler",
     "noEmit": true
   },
