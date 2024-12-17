@@ -77,7 +77,6 @@ catalogs:
     "@next/bundle-analyzer": ^15
     "@next/eslint-plugin-next": ^15
     "@next/third-parties": ^15
-    
 
   next:
     next: canary
