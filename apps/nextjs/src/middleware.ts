@@ -23,7 +23,7 @@ const publicRoutes = createRouteMatcher([
   "/",
   "/sign-in(.*)",
   "/sign-up(.*)",
-  "/images(.*)",
+  "/images/(.*)",
   "/ads.txt",
 ]);
 
