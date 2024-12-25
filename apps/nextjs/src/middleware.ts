@@ -19,7 +19,13 @@ export const config = {
 //   "/organizations/:orgSlug/tournaments/:tournamentId/register",
 // ]);
 
-const publicRoutes = createRouteMatcher(["/", "/sign-in(.*)", "/sign-up(.*)"]);
+const publicRoutes = createRouteMatcher([
+  "/",
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/images/(.*)",
+  "/ads.txt",
+]);
 
 export default clerkMiddleware(async (auth, request) => {
   if (!publicRoutes(request)) {
