@@ -4,6 +4,7 @@ packages:
   - tooling/*
 
 catalog:
+  biome: ^1
   "@types/node": ^20
   eslint: ^9
   postcss: ^8
@@ -77,7 +78,6 @@ catalogs:
     "@next/bundle-analyzer": ^15
     "@next/eslint-plugin-next": ^15
     "@next/third-parties": ^15
-    
 
   next:
     next: canary
