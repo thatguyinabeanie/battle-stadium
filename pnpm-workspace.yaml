@@ -74,7 +74,7 @@ catalogs:
     "expo-web-browser": ^14
 
   next-stable:
-    next: ^15
+    next: canary.3.0-canary.17
     "@next/bundle-analyzer": ^15
     "@next/eslint-plugin-next": ^15
     "@next/third-parties": ^15
