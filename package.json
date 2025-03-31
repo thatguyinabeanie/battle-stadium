@@ -34,7 +34,8 @@
     "@turbo/gen": "catalog:turbo",
     "prettier": "catalog:",
     "turbo": "catalog:turbo",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "typescript-language-server": "catalog:"
   },
   "prettier": "@battle-stadium/prettier-config"
 }
