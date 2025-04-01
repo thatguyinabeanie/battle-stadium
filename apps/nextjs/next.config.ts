@@ -10,10 +10,7 @@ const config: NextConfig = {
 
   experimental: {
     // ppr: 'incremental',
-    after: true,
-    cssChunking: "loose", // default
-    // reactCompiler: true,
-    ppr: true,
+    reactCompiler: true,
     staleTimes: {
       dynamic: 5,
       static: 180,
