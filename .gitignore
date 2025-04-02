@@ -42,9 +42,9 @@ yarn-error.log*
 .env.*
 .env*.local
 log/
-# vercel
+vercel
 .vercel
-
+*/.vercel
 # typescript
 dist/
 .cache
