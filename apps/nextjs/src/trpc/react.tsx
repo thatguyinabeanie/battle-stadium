@@ -20,10 +20,7 @@ const getQueryClient = () => {
     // Server: always make a new query client
     return createQueryClient();
   } else {
-    // Browser: use singleton pattern to keep the same query client
-    if (!clientQueryClientSingleton) {
-      clientQueryClientSingleton = createQueryClient();
-    }
+    clientQueryClientSingleton ??= createQueryClient();
     return clientQueryClientSingleton;
   }
 };
