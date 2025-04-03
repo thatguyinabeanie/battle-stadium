@@ -11,10 +11,14 @@ export async function handleTournamentRegistration(
   tournament_id: number,
   tokens: Tokens,
 ) {
-  const in_game_name = formData.get("in_game_name")?.toString() ?? "";
-  const profile_username = formData.get("profile")?.toString() ?? "";
-  const show_country_flag = formData.get("show_country_flag") === "on";
+  const inGameNameValue = formData.get("in_game_name");
+  const in_game_name =
+    typeof inGameNameValue === "string" ? inGameNameValue : "";
 
+  const profileValue = formData.get("profile");
+  const profile_username = typeof profileValue === "string" ? profileValue : "";
+
+  const show_country_flag = formData.get("show_country_flag") === "on";
   const { userId } = await auth();
   const profiles = await getProfilesByClerkUserId(userId, tokens);
   const profile = profiles.find((p) => p.username === profile_username);
@@ -38,8 +42,7 @@ export async function handleTournamentRegistration(
 function validateProfileId(id: unknown): number {
   const numId = Number(id);
   if (!Number.isFinite(numId)) {
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    throw new Error(`Invalid profile ID format: ${id}`);
+    throw new Error(`Invalid profile ID format: ${String(id)}`);
   }
   return numId;
 }

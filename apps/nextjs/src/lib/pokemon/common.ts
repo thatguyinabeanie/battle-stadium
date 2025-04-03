@@ -92,9 +92,7 @@ export function parseStats(
     ];
 
     allStats.forEach((stat) => {
-      if (statsTable[stat] === undefined) {
-        statsTable[stat] = defaultValue;
-      }
+      statsTable[stat] ??= defaultValue;
     });
   }
 
