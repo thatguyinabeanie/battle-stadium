@@ -44,7 +44,7 @@ yarn-error.log*
 log/
 vercel
 .vercel
-*/.vercel
+**/.vercel
 # typescript
 dist/
 .cache
