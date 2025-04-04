@@ -44,8 +44,7 @@ export default function TermsOfService() {
 
       <section className="mb-6">
         <h3 className="mb-4 text-xl font-semibold">5. Legal Disclaimers</h3>
-        {asIsDisclaimer}
-        <p className="text-base"></p>
+        <p className="text-base">{asIsDisclaimer}</p>
       </section>
 
       <section className="mb-6">
