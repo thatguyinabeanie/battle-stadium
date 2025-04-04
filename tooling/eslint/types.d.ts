@@ -53,3 +53,22 @@ declare module "eslint-plugin-react-compiler" {
 
   export const rules: Record<string, Rule.RuleModule>;
 }
+
+declare module "@battle-stadium/eslint-config/base" {
+  import type { FlatConfig } from "eslint";
+  const config: FlatConfig.Config[];
+  export const restrictEnvAccess: FlatConfig.Config[];
+  export default config;
+}
+
+declare module "@battle-stadium/eslint-config/nextjs" {
+  import type { FlatConfig } from "eslint";
+  const config: FlatConfig.Config[];
+  export default config;
+}
+
+declare module "@battle-stadium/eslint-config/react" {
+  import type { FlatConfig } from "eslint";
+  const config: FlatConfig.Config[];
+  export default config;
+}
