@@ -1,4 +1,4 @@
-const asis =
+const asIsDisclaimer =
   'The service is provided on an "as is" and "as available" basis without any warranties of any kind.';
 export default function TermsOfService() {
   return (
@@ -44,7 +44,7 @@ export default function TermsOfService() {
 
       <section className="mb-6">
         <h3 className="mb-4 text-xl font-semibold">5. Legal Disclaimers</h3>
-        {asis}
+        {asIsDisclaimer}
         <p className="text-base"></p>
       </section>
 
