@@ -1,39 +1,39 @@
 {
-  "name": "battle-stadium",
-  "private": true,
-  "engines": {
-    "node": "22.x"
-  },
-  "packageManager": "pnpm@10.7.1",
-  "scripts": {
-    "build": "turbo run build",
-    "clean": "git clean -xdf node_modules",
-    "clean:workspaces": "turbo run clean",
-    "db:push": "turbo -F @battle-stadium/db push",
-    "db:pull": "turbo -F @battle-stadium/db pull",
-    "db:studio": "turbo -F @battle-stadium/db studio",
-    "dev": "turbo watch dev --continue",
-    "dev:next": "turbo watch dev -F @battle-stadium/nextjs...",
-    "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
-    "format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
-    "lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
-    "lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
-    "lint:ws": "pnpm dlx sherif@latest",
-    "fix": "pnpm lint:fix && pnpm format:fix",
-    "postinstall": "pnpm lint:ws",
-    "typecheck": "turbo run typecheck",
-    "typecheck:watch": "turbo run typecheck:watch --concurrency 11",
-    "ui-add": "turbo run ui-add",
-    "sort-packages": "turbo run sort-packages",
-    "vercel:pull": "turbo run vercel:pull",
-    "turbo:update": "pnpm add turbo@latest --save-dev -w"
-  },
-  "devDependencies": {
-    "@battle-stadium/prettier-config": "workspace:*",
-    "@turbo/gen": "catalog:turbo",
-    "prettier": "catalog:",
-    "turbo": "catalog:turbo",
-    "typescript": "catalog:"
-  },
-  "prettier": "@battle-stadium/prettier-config"
+	"name": "battle-stadium",
+	"private": true,
+	"engines": {
+		"node": "22.x"
+	},
+	"packageManager": "pnpm@10.7.1",
+	"scripts": {
+		"build": "turbo run build",
+		"clean": "git clean -xdf node_modules",
+		"clean:workspaces": "turbo run clean",
+		"db:push": "turbo -F @battle-stadium/db push",
+		"db:pull": "turbo -F @battle-stadium/db pull",
+		"db:studio": "turbo -F @battle-stadium/db studio",
+		"dev": "turbo watch dev --continue",
+		"dev:next": "turbo watch dev -F @battle-stadium/nextjs...",
+		"format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
+		"format:fix": "turbo run format --continue -- --write --cache --cache-location .cache/.prettiercache",
+		"lint": "turbo run lint --continue -- --cache --cache-location .cache/.eslintcache",
+		"lint:fix": "turbo run lint --continue -- --fix --cache --cache-location .cache/.eslintcache",
+		"lint:ws": "pnpm dlx sherif@latest",
+		"fix": "pnpm lint:fix && pnpm format:fix",
+		"postinstall": "pnpm lint:ws",
+		"typecheck": "turbo run typecheck",
+		"typecheck:watch": "turbo run typecheck:watch --concurrency 11",
+		"ui-add": "turbo run ui-add",
+		"sort-packages": "turbo run sort-packages",
+		"vercel:pull": "turbo run vercel:pull",
+		"turbo:update": "pnpm add turbo@latest --save-dev -w"
+	},
+	"devDependencies": {
+		"@battle-stadium/prettier-config": "workspace:*",
+		"@turbo/gen": "catalog:turbo",
+		"prettier": "catalog:",
+		"turbo": "catalog:turbo",
+		"typescript": "catalog:"
+	},
+	"prettier": "@battle-stadium/prettier-config"
 }
