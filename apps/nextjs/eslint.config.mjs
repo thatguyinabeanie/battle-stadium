@@ -20,8 +20,9 @@ const compat = new FlatCompat({
 
 const nextjsIntegration = compat.extends(
   "plugin:@next/next/recommended",
-  "plugin:@next/next/core-web-vitals"
-
+  "plugin:@next/next/core-web-vitals",
+  "next/core-web-vitals",
+  "next/typescript",
 );
 
 const eslintConfig = [
