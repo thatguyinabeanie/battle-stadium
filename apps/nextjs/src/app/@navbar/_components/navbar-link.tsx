@@ -32,6 +32,8 @@ export const NavbarLink = forwardRef<
   </Link>
 ));
 
+NavbarLink.displayName = "NavbarLink";
+
 const BASE_CLASSNAMES =
   "rounded-md px-1 py-2 font-medium transition-colors text-lg";
 const ACTIVE_CLASSNAMES = "bg-primary/10 text-primary";

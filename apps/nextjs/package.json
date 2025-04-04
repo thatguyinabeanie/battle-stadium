@@ -92,6 +92,8 @@
     "@types/sqlstring": "catalog:",
     "dotenv-cli": "catalog:",
     "eslint": "catalog:",
+    "eslint-config-next": "catalog:next",
+    "eslint-config-prettier": "catalog:eslint",
     "jiti": "catalog:",
     "prettier": "catalog:",
     "tailwindcss": "catalog:tailwind",

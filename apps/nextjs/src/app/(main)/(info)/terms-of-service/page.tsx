@@ -1,3 +1,5 @@
+const asis =
+  'The service is provided on an "as is" and "as available" basis without any warranties of any kind.';
 export default function TermsOfService() {
   return (
     <div className="container mx-auto px-4 py-8">
@@ -42,10 +44,8 @@ export default function TermsOfService() {
 
       <section className="mb-6">
         <h3 className="mb-4 text-xl font-semibold">5. Legal Disclaimers</h3>
-        <p className="text-base">
-          The service is provided on an "as is" and "as available" basis without
-          any warranties of any kind.
-        </p>
+        {asis}
+        <p className="text-base"></p>
       </section>
 
       <section className="mb-6">

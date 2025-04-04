@@ -4,7 +4,7 @@ import js from "@eslint/js";
 import baseConfig, {
   restrictEnvAccess,
 } from "@battle-stadium/eslint-config/base";
-import nextjsConfig from "@battle-stadium/eslint-config/nextjs";
+// import nextjsConfig from "@battle-stadium/eslint-config/nextjs";
 import reactConfig from "@battle-stadium/eslint-config/react";
 
 const compat = new FlatCompat({
@@ -15,15 +15,18 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.config({
-    extends: ["eslint:recommended", "plugin:@next/next/recommended"],
+    extends: [
+      "next/core-web-vitals",
+      "next/typescript",
+      "eslint:recommended",
+      "plugin:@next/next/recommended",
+      "prettier",
+      "next",
+    ],
   }),
-
-  {
-    files: ["**/*.ts", "**/*.tsx"],
-  },
   ...baseConfig,
   ...reactConfig,
-  ...nextjsConfig,
   ...restrictEnvAccess,
 ];
 export default eslintConfig;
+
