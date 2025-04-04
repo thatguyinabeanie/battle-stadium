@@ -14,7 +14,7 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
-    reactCompiler: true,
+    reactCompiler: false,
     authInterrupts: true,
     ppr: true,
     staleTimes: {

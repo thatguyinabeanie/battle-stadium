@@ -11,7 +11,7 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "format:fix": "prettier --write . --ignore-path ../../.gitignore",
     "generate:api": "openapi-typescript ../../../backend/openapi/v1/openapi.yaml  -o ./src/lib/api/openapi-v1.d.ts && pnpm fix",
-    "lint": "eslint",
+    "lint": "pnpm with-env next lint",
     "lint:fix": "pnpm lint --fix",
     "sort-packages": "pnpx sort-package-json",
     "start": "pnpm with-env next start",

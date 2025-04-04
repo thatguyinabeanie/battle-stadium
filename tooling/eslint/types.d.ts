@@ -61,6 +61,12 @@ declare module "@battle-stadium/eslint-config/base" {
   export default config;
 }
 
+declare module "@battle-stadium/eslint-config/restrict-env-access" {
+  import type { FlatConfig } from "eslint";
+  const config: FlatConfig.Config[];
+  export default config;
+}
+
 declare module "@battle-stadium/eslint-config/nextjs" {
   import type { FlatConfig } from "eslint";
   const config: FlatConfig.Config[];
