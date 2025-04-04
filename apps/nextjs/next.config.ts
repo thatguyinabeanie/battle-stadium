@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
     authInterrupts: true,
-    ppr: true,
+    // ppr: true,
     staleTimes: {
       dynamic: 5,
       static: 180,
@@ -26,7 +26,6 @@ const nextConfig: NextConfig = {
     staticGenerationRetryCount: 2,
     staticGenerationMaxConcurrency: 8,
     staticGenerationMinPagesPerWorker: 25,
-    turbo: {},
   },
 
   expireTime: 3600,
