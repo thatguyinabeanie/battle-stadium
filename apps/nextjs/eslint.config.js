@@ -30,7 +30,9 @@ export default [
       "@next/next/no-duplicate-head": "off",
     },
   },
+  // Order matters: base config first, then specialized configs
   ...baseConfig,
+  // Make Next.js config load after React config to ensure proper rule precedence
   ...reactConfig,
   ...nextjsConfig,
   ...restrictEnvAccess,
