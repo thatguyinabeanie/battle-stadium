@@ -1,12 +1,9 @@
 import path from "path";
 import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
 
 import nextPlugin from "@next/eslint-plugin-next";
 import baseConfig from "@battle-stadium/eslint-config/base";
-// import nextjsConfig from "@battle-stadium/eslint-config/nextjs";
-// import reactConfig from "@battle-stadium/eslint-config/react";
 import restrictEnvAccess from "@battle-stadium/eslint-config/restrict-env-access";
 
 // Set up proper directory paths
