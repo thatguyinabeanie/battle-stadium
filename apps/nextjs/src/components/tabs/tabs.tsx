@@ -84,7 +84,6 @@ export const TabsList = forwardRef<
 });
 TabsList.displayName = "TabsList";
 
-
 function useActiveTab(
   defaultValue?: string | number | readonly (string | number)[],
 ): readonly [string, URLSearchParams] {
