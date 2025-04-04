@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
     authInterrupts: true,
-    // ppr: true,
+    ppr: true,
     staleTimes: {
       dynamic: 5,
       static: 180,
