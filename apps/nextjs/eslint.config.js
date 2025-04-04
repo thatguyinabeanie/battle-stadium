@@ -1,4 +1,5 @@
 import nextPlugin from "@next/eslint-plugin-next";
+import { FlatCompat } from "@eslint/eslintrc";
 
 import baseConfig, {
   restrictEnvAccess,
@@ -6,7 +7,20 @@ import baseConfig, {
 import nextjsConfig from "@battle-stadium/eslint-config/nextjs";
 import reactConfig from "@battle-stadium/eslint-config/react";
 
+const compat = new FlatCompat({
+  baseDirectory: import.meta.dirname,
+});
+
 export default [
+  // Include Next.js config in a way that Next.js can detect
+  ...compat.config({
+    extends: ["next/core-web-vitals"],
+    settings: {
+      next: {
+        rootDir: "apps/nextjs",
+      },
+    },
+  }),
   {
     ignores: [".next/**"],
     files: ["**/*.ts", "**/*.tsx"],
@@ -18,22 +32,13 @@ export default [
         project: true,
       },
     },
-    settings: {
-      next: {
-        rootDir: "apps/nextjs",
-      },
-    },
     rules: {
-      ...nextPlugin.configs.recommended.rules,
-      ...nextPlugin.configs["core-web-vitals"].rules,
-      // TypeError: context.getAncestors is not a function
-      "@next/next/no-duplicate-head": "off",
+      "@next/next/no-duplicate-head": "off", // TypeError: context.getAncestors is not a function
     },
   },
-  // Order matters: base config first, then specialized configs
   ...baseConfig,
-  // Make Next.js config load after React config to ensure proper rule precedence
   ...reactConfig,
   ...nextjsConfig,
   ...restrictEnvAccess,
 ];
+
