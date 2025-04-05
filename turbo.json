@@ -17,6 +17,10 @@
     "format": {
       "outputs": [".cache/.prettiercache"],
       "outputLogs": "new-only"
+    }, 
+    "format:fix": {
+      "outputs": [".cache/.prettiercache"],
+      "outputLogs": "new-only"
     },
     "lint": {
       "dependsOn": ["^topo", "^build"],
