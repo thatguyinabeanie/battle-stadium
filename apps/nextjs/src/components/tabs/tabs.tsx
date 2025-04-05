@@ -62,6 +62,8 @@ export const Tabs = forwardRef<
   },
 );
 
+Tabs.displayName = "Tabs";
+
 export const TabsList = forwardRef<
   ComponentRef<typeof UiTabsList>,
   ComponentPropsWithoutRef<typeof UiTabsList>
@@ -80,6 +82,7 @@ export const TabsList = forwardRef<
     />
   );
 });
+TabsList.displayName = "TabsList";
 
 function useActiveTab(
   defaultValue?: string | number | readonly (string | number)[],
@@ -128,6 +131,8 @@ export const TabsTrigger = memo(
   },
 );
 
+TabsTrigger.displayName = "TabsTrigger";
+
 export const TabsContent = memo(
   ({
     value,
@@ -161,3 +166,5 @@ export const TabsContent = memo(
     );
   },
 );
+
+TabsContent.displayName = "TabsContent";

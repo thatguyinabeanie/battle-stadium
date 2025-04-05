@@ -81,3 +81,5 @@ export const ProjectsSidebarMenuAction = forwardRef<
     </SidebarMenuAction>
   );
 });
+
+ProjectsSidebarMenuAction.displayName = "ProjectsSidebarMenuAction";

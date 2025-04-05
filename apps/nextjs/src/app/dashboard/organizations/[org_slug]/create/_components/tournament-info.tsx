@@ -15,6 +15,7 @@ import {
 import type { TournamentFormSchema } from "./zod-schema";
 import { CardWrapper } from "./shared";
 
+const selectStartDate = "Select the tournament's start date.";
 export function TournamentInformation() {
   const form = useFormContext<z.infer<typeof TournamentFormSchema>>();
 
@@ -59,7 +60,7 @@ export function TournamentInformation() {
                 />
               </FormControl>
               <FormDescription className="text-sm">
-                Select the tournament's start date.
+                {selectStartDate}
               </FormDescription>
               <FormMessage />
             </div>

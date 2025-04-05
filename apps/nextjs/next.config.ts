@@ -64,7 +64,7 @@ const nextConfig: NextConfig = {
   ],
 
   /** We already do linting and typechecking as separate tasks in CI */
-  eslint: { ignoreDuringBuilds: false },
+  eslint: { ignoreDuringBuilds: false, dirs: ["."] },
   typescript: { ignoreBuildErrors: false },
 };
 

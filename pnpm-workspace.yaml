@@ -52,6 +52,7 @@ catalogs:
     discord-interactions: ^4
     discord.js: ^14
   eslint:
+    eslint-config-prettier: ^10
     eslint-plugin-turbo: ^2
     typescript-eslint: ^8
   expo:
@@ -69,11 +70,13 @@ catalogs:
     next: ^15
     '@next/bundle-analyzer': ^15
     '@next/eslint-plugin-next': ^15
+    eslint-config-next: ^15
     '@next/third-parties': ^15
   next:
     next: canary
     '@next/bundle-analyzer': canary
     '@next/eslint-plugin-next': canary
+    eslint-config-next: canary
     '@next/third-parties': canary
   particles:
     tsparticles: ^3.7

@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "eslintConfig": {
+    "root": true
+  },
+  "packageManager": "pnpm@10.7.1",
+  "prettier": "@battle-stadium/prettier-config",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "build": "pnpm with-env next build",
     "clean": "git clean -xdf .cache .next .turbo node_modules",
@@ -11,7 +19,7 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "format:fix": "prettier --write . --ignore-path ../../.gitignore",
     "generate:api": "openapi-typescript ../../../backend/openapi/v1/openapi.yaml  -o ./src/lib/api/openapi-v1.d.ts && pnpm fix",
-    "lint": "eslint",
+    "lint": "pnpm with-env next lint",
     "lint:fix": "pnpm lint --fix",
     "sort-packages": "pnpx sort-package-json",
     "start": "pnpm with-env next start",
@@ -20,7 +28,6 @@
     "vercel:pull": "vercel env pull .env.development.local",
     "with-env": "dotenv -e ../../.env --"
   },
-  "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "@aws-sdk/credential-provider-web-identity": "catalog:vercel",
     "@battle-stadium/api": "workspace:*",
@@ -92,12 +99,11 @@
     "@types/sqlstring": "catalog:",
     "dotenv-cli": "catalog:",
     "eslint": "catalog:",
+    "eslint-config-next": "catalog:next",
+    "eslint-config-prettier": "catalog:eslint",
     "jiti": "catalog:",
     "prettier": "catalog:",
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:"
-  },
-  "engines": {
-    "node": "22.x"
   }
 }
