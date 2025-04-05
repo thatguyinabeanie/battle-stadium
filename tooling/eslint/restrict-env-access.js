@@ -1,4 +1,3 @@
-
 /// <reference types="./types.d.ts" />
 import tseslint from "typescript-eslint";
 
