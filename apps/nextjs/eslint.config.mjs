@@ -1,7 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
-
 import nextPlugin from "@next/eslint-plugin-next";
+
 import baseConfig from "@battle-stadium/eslint-config/base";
 import restrictEnvAccess from "@battle-stadium/eslint-config/restrict-env-access";
 
@@ -15,14 +15,14 @@ const eslintConfig = [
   {
     files: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
     plugins: {
-      "@next/next": nextPlugin
+      "@next/next": nextPlugin,
     },
     settings: {
       next: {
         rootDir: __dirname,
       },
-    }
-  }
+    },
+  },
 ];
 
 export default eslintConfig;
