@@ -6,6 +6,11 @@
   "eslintConfig": {
     "root": true
   },
+  "packageManager": "pnpm@10.7.1",
+  "prettier": "@battle-stadium/prettier-config",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "build": "pnpm with-env next build",
     "clean": "git clean -xdf .cache .next .turbo node_modules",
@@ -23,7 +28,6 @@
     "vercel:pull": "vercel env pull .env.development.local",
     "with-env": "dotenv -e ../../.env --"
   },
-  "prettier": "@battle-stadium/prettier-config",
   "dependencies": {
     "@aws-sdk/credential-provider-web-identity": "catalog:vercel",
     "@battle-stadium/api": "workspace:*",
@@ -101,8 +105,5 @@
     "prettier": "catalog:",
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:"
-  },
-  "engines": {
-    "node": "22.x"
   }
 }
