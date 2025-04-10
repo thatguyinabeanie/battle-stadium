@@ -1,6 +1,7 @@
+import type { NextConfig } from "next";
+
 import path from "path";
 import { fileURLToPath } from "url";
-import type { NextConfig } from "next";
 import createJiti from "jiti";
 
 // Import env files to validate at build time. Use jiti so we can load .ts files in here.
@@ -38,9 +39,6 @@ const nextConfig: NextConfig = {
     },
   },
 
-  turbopack: {
-    root: path.join(__dirname, ".."),
-  },
   images: {
     remotePatterns: [
       {
