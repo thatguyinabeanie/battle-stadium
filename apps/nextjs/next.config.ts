@@ -1,3 +1,4 @@
+import path from "path";
 import { fileURLToPath } from "url";
 import type { NextConfig } from "next";
 import createJiti from "jiti";
@@ -38,7 +39,7 @@ const nextConfig: NextConfig = {
   },
 
   turbopack: {
-
+    root: path.join(__dirname, ".."),
   },
   images: {
     remotePatterns: [
