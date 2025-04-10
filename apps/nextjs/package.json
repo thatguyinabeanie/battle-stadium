@@ -12,7 +12,7 @@
     "node": "22.x"
   },
   "scripts": {
-    "build": "pnpm with-env next build",
+    "build": "pnpm with-env next build --turbopack",
     "clean": "git clean -xdf .cache .next .turbo node_modules",
     "dev": "pnpm with-env next dev --turbopack",
     "fix": "pnpm lint:fix && pnpm format:fix",
