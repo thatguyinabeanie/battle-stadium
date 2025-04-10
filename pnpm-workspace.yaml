@@ -166,3 +166,4 @@ catalogs:
     vercel: latest
 ignoredBuiltDependencies:
   - '@vercel/speed-insights'
+  - sharp
