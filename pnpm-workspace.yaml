@@ -154,7 +154,7 @@ catalogs:
     '@trpc/server': next
     '@trpc/next': next
   turbo:
-    turbo: ^2.5.0
+    turbo: ^2
     '@turbo/gen': ^2
   vercel:
     '@aws-sdk/credential-provider-web-identity': ^3
