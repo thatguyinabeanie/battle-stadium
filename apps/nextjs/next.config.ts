@@ -39,6 +39,8 @@ const nextConfig: NextConfig = {
     },
   },
 
+  turbopack: {
+  },
   images: {
     remotePatterns: [
       {
