@@ -67,6 +67,7 @@
   },
   "globalEnv": [
     "DATABASE_URL",
+    "ENABLE_EXPERIMENTAL_COREPACK",
     "DATABASE_URL_UNPOOLED",
     "AUTH_DISCORD_ID",
     "AUTH_DISCORD_SECRET",
@@ -86,6 +87,7 @@
     "VERCEL",
     "VERCEL_ENV",
     "VERCEL_URL",
-    "npm_lifecycle_event"
+    "npm_lifecycle_event",
+    "ENABLE_EXPERIMENTAL_COREPACK"
   ]
 }
